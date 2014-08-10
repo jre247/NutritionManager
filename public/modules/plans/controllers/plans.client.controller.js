@@ -1,13 +1,35 @@
 'use strict';
 
+var meal =  function(model){
+    if (model) {
+        var self = this;
+        self.name = model.name;
+        self.type = model.type;
+        self.totalCalories = model.totalCalories;
+        self.totalCarbohydrates = model.totalCarbohydrates;
+        self.totalProtein = model.totalProtein;
+        self.totalGrams = model.totalGrams;
+        self.totalFat = model.totalFat;
+        self.servings = model.servings;
+        self.isEditable = model.isEditable;
+
+        return self;
+    }
+};
+
 angular.module('plans').controller('PlansController', ['$scope', '$stateParams', '$location', 'Authentication', 'Plans',
 	function($scope, $stateParams, $location, Authentication, Plans) {
-		$scope.authentication = Authentication;
+		window.scope = $scope;
+        window.plans = $scope.plans;
+
+        $scope.authentication = Authentication;
+        $scope.meals = [];
 
 		$scope.create = function() {
 			var plan = new Plans({
 				name: this.name,
-				planDate: this.planDate
+				planDate: this.planDate,
+                meals: $scope.meals
 			});
             plan.$save(function(response) {
 				$location.path('plans/' + response._id);
@@ -17,7 +39,35 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
 
 			this.name = '';
 			this.planDate = '';
+            this.meals = [];
 		};
+
+        $scope.createMeal = function(){
+            var model = {
+                name: '',
+                type: '',
+                servings: 0,
+                totalCalories: 0,
+                totalGrams: 0,
+                totalProtein: 0,
+                totalCarbohydrates: 0,
+                totalFat: 0,
+                isEditable: true
+                //food: this.food
+            };
+
+            //var mealItem = new meal(model);
+
+            $scope.meals.push(model);
+        };
+
+        $scope.saveMeal = function(meal){
+            meal.isEditable = false;
+        };
+
+        $scope.editMeal = function(meal){
+            meal.isEditable = true;
+        };
 
 		$scope.remove = function(plan) {
 			if (plan) {

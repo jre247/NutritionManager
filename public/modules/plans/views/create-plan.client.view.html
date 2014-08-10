@@ -14,9 +14,41 @@
 				<div class="form-group">
 					<label class="control-label" for="planDate">Plan Date</label>
 					<div class="controls">
-						<input data-ng-model="planDate" id="planDate" class="form-control" cols="30" rows="10" placeholder="Plan Date"></input>
+						<input data-ng-model="planDate" id="planDate" class="form-control" cols="5" rows="10" placeholder="Plan Date"></input>
 					</div>
 				</div>
+
+                <input type="button" data-ng-click="createMeal();" value="Create Meal"/>
+
+                <div class="form-group" data-ng-repeat="meal in meals">
+                    <label class="control-label" for="name">Meal Name</label>
+                    <div class="controls">
+                        <input data-ng-model="meal.name" data-ng-show="meal.isEditable" id="mealName" class="form-control" cols="3" rows="3" placeholder="Meal Name"></input>
+
+                        <span ng-show="meal.isEditable == false" data-ng-bind="meal.name"></span>
+                    </div>
+
+                    <label class="control-label" for="name">Meal Type</label>
+                    <div class="controls">
+                        <input data-ng-model="meal.type" ng-show="meal.isEditable" id="mealType" class="form-control" cols="3" rows="3" placeholder="Meal Type"></input>
+
+                        <span data-ng-show="meal.isEditable == false" data-ng-bind="meal.type"></span>
+                    </div>
+
+                    <label class="control-label" for="name">Meal Servings</label>
+                    <div class="controls">
+                        <input data-ng-model="meal.servings" data-ng-show="meal.isEditable" id="servings" class="form-control" cols="3" rows="3" placeholder="Servings"></input>
+
+                        <span data-ng-show="meal.isEditable == false" data-ng-bind="meal.servings"></span>
+                    </div>
+
+
+                    <input type="button" data-ng-show="meal.isEditable == true" value="Save" data-ng-click="saveMeal(meal);"/>
+                    <br/>
+                    <input type="button" data-ng-show="meal.isEditable == false" value="Edit" data-ng-click="editMeal(meal);"/>
+
+                </div>
+
 				<div class="form-group">
 					<input type="submit" class="btn btn-default">
 				</div>
