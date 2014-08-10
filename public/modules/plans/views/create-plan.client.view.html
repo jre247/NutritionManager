@@ -6,56 +6,104 @@
 		<form class="form-horizontal" data-ng-submit="create()" novalidate>
 			<fieldset>
 				<div class="form-group">
-					<label class="control-label" for="name">Name</label>
-					<div class="controls">
-						<input type="text" data-ng-model="name" id="name" class="form-control" placeholder="Name" required>
-					</div>
-				</div>
-				<div class="form-group">
-					<label class="control-label" for="planDate">Plan Date</label>
-					<div class="controls">
-						<input data-ng-model="planDate" id="planDate" class="form-control" cols="5" rows="10" placeholder="Plan Date"></input>
-					</div>
-				</div>
-
-                <input type="button" data-ng-click="createMeal();" value="Create Meal"/>
-
-                <div class="form-group" data-ng-repeat="meal in meals">
-                    <label class="control-label" for="name">Meal Name</label>
-                    <div class="controls">
-                        <input data-ng-model="meal.name" data-ng-show="meal.isEditable" id="mealName" class="form-control" cols="3" rows="3" placeholder="Meal Name"></input>
-
-                        <span ng-show="meal.isEditable == false" data-ng-bind="meal.name"></span>
+                    <div class="planDetailsSection" style="display: inline-block">
+                        <label class="control-label" for="name">Name</label>
+                        <div class="controls">
+                            <input type="text" style="width: 150px;" data-ng-model="name" id="name" class="form-control" placeholder="Name" required />
+                        </div>
                     </div>
 
-                    <label class="control-label" for="name">Meal Type</label>
-                    <div class="controls">
-                        <input data-ng-model="meal.type" ng-show="meal.isEditable" id="mealType" class="form-control" cols="3" rows="3" placeholder="Meal Type"></input>
-
-                        <span data-ng-show="meal.isEditable == false" data-ng-bind="meal.type"></span>
-                    </div>
-
-                    <label class="control-label" for="name">Meal Servings</label>
-                    <div class="controls">
-                        <input data-ng-model="meal.servings" data-ng-show="meal.isEditable" id="servings" class="form-control" cols="3" rows="3" placeholder="Servings"></input>
-
-                        <span data-ng-show="meal.isEditable == false" data-ng-bind="meal.servings"></span>
+                    <div class="planDetailsSection" style="display: inline-block">
+                        <label class="control-label" for="planDate">Plan Date</label>
+                        <div class="controls">
+                            <input data-ng-model="planDate" style="width: 150px;" id="planDate" class="form-control" cols="5" rows="10" placeholder="Plan Date"/>
+                        </div>
                     </div>
 
 
-                    <input type="button" data-ng-show="meal.isEditable == true" value="Save" data-ng-click="saveMeal(meal);"/>
-                    <br/>
-                    <input type="button" data-ng-show="meal.isEditable == false" value="Edit" data-ng-click="editMeal(meal);"/>
+                    <div class=" planDetailsSection" style="display: inline-block; float: right;">
+                        <input type="submit" class="btn btn-default">
+                    </div>
+                </div>
+            </fieldset>
+
+            <fieldset style="padding-top: 15px;">
+                <div class="form-group">
+                    <input type="button" data-ng-click="createMeal();" value="Create Meal"/>
+
+                    <div ng-show="meals.length > 0" style="padding-top: 15px;">
+                        <div >
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th width="200px">Name</th>
+                                        <th width="200px">Type</th>
+                                        <th width="90">Servings</th>
+                                        <th>&nbsp;</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr data-ng-show="meal.isEditable == false" height="35px"
+                                        data-ng-repeat="meal in meals">
+                                        <td>
+                                            <div class="controls">
+                                                <span data-ng-bind="meal.name"></span>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="controls">
+                                                <span data-ng-bind="meal.type"></span>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="controls">
+                                                <span data-ng-bind="meal.servings"></span>
+                                            </div>
+                                       </td>
+                                       <td width="15px">
+                                           <input style="margin-left: 15px;" type="button" value="Edit" data-ng-click="editMeal(meal);"/>
+                                       </td>
+                                        <td>
+                                            <input style="margin-left: 15px;" type="button" value="Delete" data-ng-click="deleteMeal(meal);"/>
+                                        </td>
+                                    </tr>
+
+                                    <tr data-ng-show="meal.isEditable" height="35px"
+                                        data-ng-repeat="meal in meals">
+                                        <td>
+                                            <div class="controls">
+                                                <input  data-ng-model="meal.name" id="mealName" class="form-control" cols="3" rows="3" placeholder="Meal Name"/>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="controls">
+                                                <input data-ng-model="meal.type" id="mealType" class="form-control" cols="3" rows="3" placeholder="Meal Type"/>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="controls">
+                                                <input data-ng-model="meal.servings" id="servings" class="form-control" cols="3" rows="3" placeholder="Servings"/>
+                                            </div>
+                                        </td>
+                                        <td width="15px">
+                                            <input type="button" style="margin-left: 15px;" value="Save" data-ng-click="saveMeal(meal);"/>
+                                        </td>
+                                        <td>
+                                            <input style="margin-left: 15px;" type="button" value="Delete" data-ng-click="deleteMeal(meal);"/>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
 
                 </div>
+            </fieldset>
 
-				<div class="form-group">
-					<input type="submit" class="btn btn-default">
-				</div>
-				<div data-ng-show="error" class="text-danger">
-					<strong data-ng-bind="error"></strong>
-				</div>
-			</fieldset>
+            <div data-ng-show="error" class="text-danger">
+                <strong data-ng-bind="error"></strong>
+            </div>
+
 		</form>
 	</div>
 </section>

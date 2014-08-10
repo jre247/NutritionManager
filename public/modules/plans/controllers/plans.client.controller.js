@@ -56,8 +56,6 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
                 //food: this.food
             };
 
-            //var mealItem = new meal(model);
-
             $scope.meals.push(model);
         };
 
@@ -68,6 +66,14 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
         $scope.editMeal = function(meal){
             meal.isEditable = true;
         };
+
+        $scope.deleteMeal = function(meal){
+            for (var i in $scope.meals) {
+                if ($scope.meals[i] === meal) {
+                    $scope.meals.splice(i, 1);
+                }
+            }
+        }
 
 		$scope.remove = function(plan) {
 			if (plan) {
