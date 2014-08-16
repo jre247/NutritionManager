@@ -10,13 +10,12 @@
 			<i class="glyphicon glyphicon-trash"></i>
 		</a>
 	</div>
-	<small>
-		<em class="text-muted">
-			Posted on
-			<span data-ng-bind="plan.created | date:'mediumDate'"></span>
-			by
-			<span data-ng-bind="plan.user.displayName"></span>
-		</em>
-	</small>
-	<p class="lead" data-ng-bind="plan.planDate| date:'mediumDate'"></p>
+
+    <h4 class="list-group-item-heading" data-ng-bind="food.name"></h4>
+    <p class="list-group-item-text" data-ng-bind="food.type"></p>
+    <p class="list-group-item-text" data-ng-bind="food.calories"></p>
+    <p class="list-group-item-text" data-ng-bind="food.protein"></p>
+    <p class="list-group-item-text" data-ng-bind="food.fat"></p>
+    <p class="list-group-item-text" data-ng-bind="food.carbohydates"></p>
+    <p class="list-group-item-text" data-ng-bind="food.grams"></p>
 </section>

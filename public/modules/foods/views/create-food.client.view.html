@@ -1,0 +1,64 @@
+<section data-ng-controller="FoodsController">
+    <div class="page-header">
+        <h1>New Food</h1>
+    </div>
+    <div class="col-md-12">
+        <form class="form-horizontal" data-ng-submit="create()" novalidate>
+            <fieldset>
+                <div class="form-group">
+                    <label class="control-label" for="name">Name</label>
+                    <div class="controls">
+                        <input data-ng-model="name"  id="name" class="form-control" cols="5" rows="10" placeholder="Name"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="type">Type</label>
+                    <div class="controls">
+                        <input data-ng-model="type" id="type" class="form-control" cols="5" rows="10" placeholder="Type"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="calories">Calories</label>
+                    <div class="controls">
+                        <input data-ng-model="calories" id="calories" class="form-control" cols="5" rows="10" placeholder="Calories"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="protein">Protein</label>
+                    <div class="controls">
+                        <input data-ng-model="protein"  id="protein" class="form-control" cols="5" rows="10" placeholder="Protein"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="fat">Fat</label>
+                    <div class="controls">
+                        <input data-ng-model="fat"  id="fat" class="form-control" cols="5" rows="10" placeholder="Fat"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="carbohydrates">Carbohydrates</label>
+                    <div class="controls">
+                        <input data-ng-model="carbohydrates"  id="carbohydrates" class="form-control" cols="5" rows="10" placeholder="Carbohydrates"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="grams">Grams</label>
+                    <div class="controls">
+                        <input data-ng-model="grams"  id="grams" class="form-control" cols="5" rows="10" placeholder="Grams"/>
+                    </div>
+                </div>
+
+
+            </fieldset>
+
+
+            <input type="submit" class="btn btn-default">
+
+
+            <div data-ng-show="error" class="text-danger">
+                <strong data-ng-bind="error"></strong>
+            </div>
+
+        </form>
+    </div>
+</section>

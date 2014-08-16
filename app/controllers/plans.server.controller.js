@@ -5,6 +5,7 @@
  */
 var mongoose = require('mongoose'),
 	Plan = mongoose.model('Plan'),
+    Food = mongoose.model('Food'),
 	_ = require('lodash');
 
 /**
@@ -37,6 +38,10 @@ var getErrorMessage = function(err) {
 exports.create = function(req, res) {
 	var plan = new Plan(req.body);
     plan.user = req.user;
+
+
+   // array.forEach(function(item) {
+   // });
 
     plan.save(function(err) {
 		if (err) {
@@ -114,8 +119,30 @@ exports.planByID = function(req, res, next, id) {
 	Plan.findById(id).populate('user', 'displayName').exec(function(err, plan) {
 		if (err) return next(err);
 		if (!plan) return next(new Error('Failed to load plan ' + id));
-		req.plan = plan;
-		next();
+
+        Food.find().sort('name').exec(function(err, foods) {
+            if (err) {
+                return res.send(400, {
+                    message: getErrorMessage(err)
+                });
+            } else {
+                var foodsArray = [];
+                for(var i = 0; i < foods.length; i++){
+                    var foodModel = {};
+                    foodModel.id = foods[i].id;
+                    foodModel.name = foods[i].name;
+
+                    foodsArray.push(foodModel);
+                }
+
+                plan.allFoods = foodsArray;
+                req.plan = plan;
+                next();
+            }
+        });
+
+
+
 	});
 };
 

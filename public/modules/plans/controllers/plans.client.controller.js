@@ -1,22 +1,5 @@
 'use strict';
 
-var meal =  function(model){
-    if (model) {
-        var self = this;
-        self.name = model.name;
-        self.type = model.type;
-        self.totalCalories = model.totalCalories;
-        self.totalCarbohydrates = model.totalCarbohydrates;
-        self.totalProtein = model.totalProtein;
-        self.totalGrams = model.totalGrams;
-        self.totalFat = model.totalFat;
-        self.servings = model.servings;
-        self.isEditable = model.isEditable;
-
-        return self;
-    }
-};
-
 angular.module('plans').controller('PlansController', ['$scope', '$stateParams', '$location', 'Authentication', 'Plans',
 	function($scope, $stateParams, $location, Authentication, Plans) {
 		window.scope = $scope;
@@ -46,18 +29,14 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
             var model = {
                 name: '',
                 type: '',
-                servings: 0,
-                totalCalories: 0,
-                totalGrams: 0,
-                totalProtein: 0,
-                totalCarbohydrates: 0,
-                totalFat: 0,
+                foods: [],
                 isEditable: true
-                //food: this.food
             };
 
             $scope.meals.push(model);
         };
+
+
 
         $scope.saveMeal = function(meal){
             meal.isEditable = false;
@@ -73,6 +52,44 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
                     $scope.meals.splice(i, 1);
                 }
             }
+        }
+
+        $scope.createFood = function(meal){
+            var model = {
+                name: '',
+                type: '',
+                servings: 0,
+                totalCalories: 0,
+                totalGrams: 0,
+                totalProtein: 0,
+                totalCarbohydrates: 0,
+                totalFat: 0,
+                isEditable: true
+            };
+
+            meal.foods.push(model);
+        };
+
+        $scope.saveFood = function(food){
+            food.isEditable = false;
+        };
+
+        $scope.editFood = function(food){
+            food.isEditable = true;
+        };
+
+        $scope.deleteFood = function(food, meal){
+            for(var nMeal = 0; nMeal < $scope.meals.length; nMeal++){
+                if ($scope.meals[nMeal] === meal){
+                    for (var nFood = 0; nFood < meal.foods.length; nFood++){
+                        if (meal.foods[nFood] === food) {
+                            meal.foods.splice(nFood, 1);
+                        }
+                    }
+                }
+            }
+
+
         }
 
 		$scope.remove = function(plan) {

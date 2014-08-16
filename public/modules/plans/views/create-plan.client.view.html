@@ -22,74 +22,146 @@
 
 
                     <div class=" planDetailsSection" style="display: inline-block; float: right;">
-                        <input type="submit" class="btn btn-default">
+                        <input type="button" class="btn btn-default" style="margin-right: 30px;" data-ng-click="createMeal();" value="Create Meal"/>
+
+                        <input type="submit"  class="btn btn-default">
                     </div>
                 </div>
             </fieldset>
 
             <fieldset style="padding-top: 15px;">
                 <div class="form-group">
-                    <input type="button" data-ng-click="createMeal();" value="Create Meal"/>
 
-                    <div ng-show="meals.length > 0" style="padding-top: 15px;">
-                        <div >
-                            <table>
+
+                    <div ng-show="meals.length > 0" style="...">
+                        <div data-ng-repeat="meal in meals" style="border: 1px solid lightgray; margin-bottom: 30px; padding: 10px; border-radius: 5px;">
+                            <div data-ng-show="meal.isEditable == true">
+                                Name: <input data-ng-model="meal.name" type="text"/>
+
+                                Type: <input data-ng-model="meal.type" type="text"/>
+
+                                <input style="margin-left: 15px;" type="button" value="Save" data-ng-click="saveMeal(meal);"/>
+
+                                <input style="margin-left: 15px;" type="button" value="Delete" data-ng-click="deleteMeal(meal);"/>
+
+                            </div>
+                            <div data-ng-show="meal.isEditable == false">
+                                <span>Name:</span>
+                                <span data-ng-bind="meal.name"></span>
+
+                                Type: <span data-ng-bind="meal.type"></span>
+
+                                <input style="margin-left: 15px;" type="button" value="Edit" data-ng-click="editMeal(meal);"/>
+
+                                <input style="margin-left: 15px;" type="button" value="Delete" data-ng-click="deleteMeal(meal);"/>
+
+                            </div>
+
+                            <div style="margin-top: 15px;">
+                                <input type="button" data-ng-click="createFood(meal);" value="Create Food"/>
+                            </div>
+
+                            <table data-ng-show="meal.foods.length > 0">
                                 <thead>
                                     <tr>
                                         <th width="200px">Name</th>
-                                        <th width="200px">Type</th>
-                                        <th width="90">Servings</th>
+                                        <th width="130px">Type</th>
+                                        <th width="50">Servings</th>
+                                        <th width="90">Carbs</th>
+                                        <th width="90">Protein</th>
+                                        <th width="90">Fat</th>
+                                        <th width="90">Grams</th>
                                         <th>&nbsp;</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr data-ng-show="meal.isEditable == false" height="35px"
-                                        data-ng-repeat="meal in meals">
+                                    <tr data-ng-show="food.isEditable == false" height="35px"
+                                        data-ng-repeat="food in meal.foods">
                                         <td>
                                             <div class="controls">
-                                                <span data-ng-bind="meal.name"></span>
+                                                <span data-ng-bind="food.name"></span>
                                             </div>
                                         </td>
                                         <td>
                                             <div class="controls">
-                                                <span data-ng-bind="meal.type"></span>
+                                                <span data-ng-bind="food.type"></span>
                                             </div>
                                         </td>
                                         <td>
                                             <div class="controls">
-                                                <span data-ng-bind="meal.servings"></span>
+                                                <span data-ng-bind="food.servings"></span>
                                             </div>
                                        </td>
+                                        <td>
+                                            <div class="controls">
+                                                <span data-ng-bind="food.totalCalories"></span>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="controls">
+                                                <span data-ng-bind="food.totalProtein"></span>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="controls">
+                                                <span data-ng-bind="food.totalFat"></span>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="controls">
+                                                <span data-ng-bind="food.totalGrams"></span>
+                                            </div>
+                                        </td>
                                        <td width="15px">
-                                           <input style="margin-left: 15px;" type="button" value="Edit" data-ng-click="editMeal(meal);"/>
+                                           <input style="margin-left: 15px;" type="button" value="Edit" data-ng-click="editFood(food);"/>
                                        </td>
                                         <td>
-                                            <input style="margin-left: 15px;" type="button" value="Delete" data-ng-click="deleteMeal(meal);"/>
+                                            <input style="margin-left: 15px;" type="button" value="Delete" data-ng-click="deleteFood(food, meal);"/>
                                         </td>
                                     </tr>
 
-                                    <tr data-ng-show="meal.isEditable" height="35px"
-                                        data-ng-repeat="meal in meals">
+                                    <tr data-ng-show="food.isEditable" height="35px"
+                                        data-ng-repeat="food in meal.foods">
                                         <td>
                                             <div class="controls">
-                                                <input  data-ng-model="meal.name" id="mealName" class="form-control" cols="3" rows="3" placeholder="Meal Name"/>
+                                                <input data-ng-model="food.name" id="foodName" class="form-control" cols="3" rows="3" placeholder="Food Name"/>
                                             </div>
                                         </td>
                                         <td>
                                             <div class="controls">
-                                                <input data-ng-model="meal.type" id="mealType" class="form-control" cols="3" rows="3" placeholder="Meal Type"/>
+                                                <input data-ng-model="food.type" id="foodType" class="form-control" cols="3" rows="3" placeholder="Food Type"/>
                                             </div>
                                         </td>
                                         <td>
                                             <div class="controls">
-                                                <input data-ng-model="meal.servings" id="servings" class="form-control" cols="3" rows="3" placeholder="Servings"/>
+                                                <input data-ng-model="food.servings" id="servings" class="form-control" cols="3" rows="3" placeholder="Servings"/>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="controls">
+                                                <span data-ng-bind="food.totalCalories"></span>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="controls">
+                                                <span data-ng-bind="food.totalProtein"></span>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="controls">
+                                                <span data-ng-bind="food.totalFat"></span>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="controls">
+                                                <span data-ng-bind="food.totalGrams"></span>
                                             </div>
                                         </td>
                                         <td width="15px">
-                                            <input type="button" style="margin-left: 15px;" value="Save" data-ng-click="saveMeal(meal);"/>
+                                            <input type="button" style="margin-left: 15px;" value="Save" data-ng-click="saveFood(food);"/>
                                         </td>
                                         <td>
-                                            <input style="margin-left: 15px;" type="button" value="Delete" data-ng-click="deleteMeal(meal);"/>
+                                            <input style="margin-left: 15px;" type="button" value="Delete" data-ng-click="deleteFood(food, meal);"/>
                                         </td>
                                     </tr>
                                 </tbody>

@@ -1,0 +1,49 @@
+<section data-ng-controller="FoodsController" data-ng-init="find()">
+    <div class="page-header">
+        <h1>Foods</h1>
+    </div>
+    <div class="list-group">
+        <div data-ng-repeat="food in foods">
+            <div style="display: inline-block;">
+                <a data-ng-href="#!/foods/{{food._id}}" class="list-group-item">
+                    <h4 class="list-group-item-heading" data-ng-bind="food.name"></h4>
+
+                    <div class="foodItem">
+                        Type: <span class="list-group-item-text" data-ng-bind="food.type"></span>
+                    </div>
+                    <div class="foodItem">
+                        Calories: <span class="list-group-item-text" data-ng-bind="food.calories"></span>
+                    </div>
+                    <div class="foodItem">
+                        Fat: <span class="list-group-item-text" data-ng-bind="food.fat"></span>
+                    </div>
+                    <div class="foodItem">
+                        Protein: <span class="list-group-item-text" data-ng-bind="food.protein"></span>
+                    </div>
+                    <div class="foodItem">
+                        Carbs: <span class="list-group-item-text" data-ng-bind="food.carbohydrates"></span>
+                    </div>
+                    <div class="foodItem">
+                        Grams: <span class="list-group-item-text" data-ng-bind="food.grams"></span>
+                    </div>
+
+
+
+                </a>
+
+
+            </div>
+            <div style="display: inline-block;">
+                <a class="btn btn-primary" data-ng-href="/#!/foods/{{food._id}}/edit">
+                    <i class="glyphicon glyphicon-edit"></i>
+                </a>
+                <a class="btn btn-primary" data-ng-click="remove(food);">
+                    <i class="glyphicon glyphicon-trash"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="alert alert-warning text-center" data-ng-if="foods.$resolved && !foods.length">
+        No Foods yet, why don't you <a href="/#!/foods/create">create one</a>?
+    </div>
+</section>
