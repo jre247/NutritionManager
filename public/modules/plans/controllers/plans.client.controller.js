@@ -1,12 +1,36 @@
 'use strict';
 
-angular.module('plans').controller('PlansController', ['$scope', '$stateParams', '$location', 'Authentication', 'Plans',
-	function($scope, $stateParams, $location, Authentication, Plans) {
+angular.module('plans').controller('PlansController', ['$scope', '$stateParams', '$location', 'Authentication', 'Plans', 'Foods',
+	function($scope, $stateParams, $location, Authentication, Plans, Foods) {
 		window.scope = $scope;
         window.plans = $scope.plans;
 
         $scope.authentication = Authentication;
         $scope.meals = [];
+
+        $scope.allFoods = Foods.query();
+
+        $scope.mealTypes = [
+            {id: 1, name: 'Breakfast'},
+            {id: 2, name: 'Lunch'},
+            {id: 3, name: 'Dinner'},
+            {id: 4, name: 'Snack'}
+        ];
+
+        $scope.open = function($event) {
+            $event.preventDefault();
+            $event.stopPropagation();
+
+            $scope.opened = true;
+        };
+
+        $scope.dateOptions = {
+            formatYear: 'yy',
+            startingDay: 1
+        };
+
+        $scope.initDate = new Date('2016-15-20');
+
 
 		$scope.create = function() {
 			var plan = new Plans({
@@ -28,7 +52,7 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
         $scope.createMeal = function(){
             var model = {
                 name: '',
-                type: '',
+                type: 1,
                 foods: [],
                 isEditable: true
             };
@@ -37,14 +61,14 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
         };
 
 
-
-        $scope.saveMeal = function(meal){
-            meal.isEditable = false;
-        };
-
-        $scope.editMeal = function(meal){
-            meal.isEditable = true;
-        };
+//
+//        $scope.saveMeal = function(meal){
+//            meal.isEditable = false;
+//        };
+//
+//        $scope.editMeal = function(meal){
+//            meal.isEditable = true;
+//        };
 
         $scope.deleteMeal = function(meal){
             for (var i in $scope.meals) {
@@ -58,12 +82,12 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
             var model = {
                 name: '',
                 type: '',
-                servings: 0,
-                totalCalories: 0,
-                totalGrams: 0,
-                totalProtein: 0,
-                totalCarbohydrates: 0,
-                totalFat: 0,
+                servings: 1,
+                calories: 0,
+                grams: 0,
+                protein: 0,
+                carbohydrates: 0,
+                fat: 0,
                 isEditable: true
             };
 
@@ -120,6 +144,17 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
 
 		$scope.find = function() {
 			$scope.plans = Plans.query();
+//                .$promise.then(
+//                function(data){
+//
+//                    console.log("query", this);
+//
+//                    $scope.plans = data[0].plans;
+//                    $scope.allShortFoods = data[0].allShortFoods;
+//                    $scope.allDetailedFoods = data[0].allDetailedFoods;
+//                });
+
+
 		};
 
 		$scope.findOne = function() {
@@ -127,5 +162,37 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
                 planId: $stateParams.planId
 			});
 		};
+
+        $scope.foodSelectionChange = function(food){
+            //food.servings = food.servings;
+            food.type = food.selectedFood.type;
+            food.calories = food.servings * food.selectedFood.calories;
+            food.fat = food.servings * food.selectedFood.fat;
+            food.protein = food.servings * food.selectedFood.protein;
+            food.carbohydrates = food.servings * food.selectedFood.carbohydrates;
+            food.grams = food.servings * food.selectedFood.grams;
+
+            food.name = food.selectedFood.name;
+        };
+
+        $scope.foodServingsChange = function(food){
+
+            food.calories = food.servings * food.selectedFood.calories;
+            food.fat = food.servings * food.selectedFood.fat;
+            food.protein = food.servings * food.selectedFood.protein;
+            food.carbohydrates = food.servings * food.selectedFood.carbohydrates;
+            food.grams = food.servings * food.selectedFood.grams;
+        };
+
+//        // Use the old watch() with default object equality,
+//        // which defaults to use object REFERENCE checks.
+//        $scope.$watch(
+//            "collection",
+//            function( newValue, oldValue ) {
+//
+//                addLogItem( $scope.watchLog );
+//
+//            }
+//        );
 	}
 ]);

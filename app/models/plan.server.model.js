@@ -16,28 +16,10 @@ var PlanSchema = new Schema({
 		type: Date,
 		default: Date.now
 	},
-	name: {
-		type: String,
-		default: '',
-		trim: true,
-		required: 'Name cannot be blank'
-	},
 	planDate: {
 		type: Date,
         required: 'Plan Date cannot be blank'
 	},
-    allFoods: [
-        {
-            id:{
-              type: String
-            },
-            name:{
-                type: String,
-                trim: true,
-                default: ''
-            }
-        }
-    ],
 	user: {
 		type: Schema.ObjectId,
 		ref: 'User'
@@ -45,15 +27,8 @@ var PlanSchema = new Schema({
     meals:
         [
             {
-                name: {
-                    type: String,
-                    trim: true,
-                    default: ''
-                },
                 type: {
-                    type: String,
-                    trim: true,
-                    default: ''
+                    type: Number
                 },
                 foods: [{
                     food: {
@@ -64,23 +39,23 @@ var PlanSchema = new Schema({
                         type: Number,
                         default: 0
                     },
-                    totalCalories:{
+                    calories:{
                         type: Number,
                         default: 0
                     },
-                    totalCarbohydrates:{
+                    carbohydrates:{
                         type: Number,
                         default: 0
                     },
-                    totalFat:{
+                    fat:{
                         type: Number,
                         default: 0
                     },
-                    totalProtein:{
+                    protein:{
                         type: Number,
                         default: 0
                     },
-                    totalGrams:{
+                    grams:{
                         type: Number,
                         default: 0
                     },

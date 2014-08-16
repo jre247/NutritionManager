@@ -15,11 +15,13 @@ angular.module('plans').config(['$stateProvider',
 		}).
 		state('viewPlan', {
 			url: '/plans/:planId',
-			templateUrl: 'modules/plans/views/view-plan.client.view.html'
+			//templateUrl: 'modules/plans/views/view-plan.client.view.html'
+                templateUrl: 'modules/plans/views/view-plan.client.view.html'
 		}).
 		state('editPlan', {
 			url: '/plans/:planId/edit',
-			templateUrl: 'modules/plans/views/edit-plan.client.view.html'
+			//templateUrl: 'modules/plans/views/edit-plan.client.view.html'
+                templateUrl: 'modules/plans/views/create-plan.client.view.html'
 		});
 	}
 ]);

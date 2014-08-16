@@ -38,10 +38,7 @@ var getErrorMessage = function(err) {
 exports.create = function(req, res) {
 	var plan = new Plan(req.body);
     plan.user = req.user;
-
-
-   // array.forEach(function(item) {
-   // });
+;
 
     plan.save(function(err) {
 		if (err) {
@@ -107,7 +104,10 @@ exports.list = function(req, res) {
 				message: getErrorMessage(err)
 			});
 		} else {
-			res.jsonp(plans);
+            res.jsonp(plans);
+
+
+
 		}
 	});
 };
@@ -120,26 +120,43 @@ exports.planByID = function(req, res, next, id) {
 		if (err) return next(err);
 		if (!plan) return next(new Error('Failed to load plan ' + id));
 
-        Food.find().sort('name').exec(function(err, foods) {
-            if (err) {
-                return res.send(400, {
-                    message: getErrorMessage(err)
-                });
-            } else {
-                var foodsArray = [];
-                for(var i = 0; i < foods.length; i++){
-                    var foodModel = {};
-                    foodModel.id = foods[i].id;
-                    foodModel.name = foods[i].name;
+//        Food.find().sort('name').exec(function(err, foods) {
+//            if (err) {
+//                return res.send(400, {
+//                    message: getErrorMessage(err)
+//                });
+//            } else {
+//                var foodsDetailedArray = [];
+//                var foodsShortArray = [];
+//
+//                for(var i = 0; i < foods.length; i++){
+//                    var foodDetailedModel = {};
+//                    foodDetailedModel.id = foods[i].id;
+//                    foodDetailedModel.name = foods[i].name;
+//                    foodDetailedModel.calories = foods[i].calories;
+//                    foodDetailedModel.fat = foods[i].fat;
+//                    foodDetailedModel.protein = foods[i].protein;
+//                    foodDetailedModel.carbohydrates = foods[i].carbohydrates;
+//                    foodDetailedModel.grams = foods[i].grams;
+//
+//                    var foodShortModel = {};
+//                    foodShortModel.id = foods[i].id;
+//                    foodShortModel.name = foods[i].name;
+//
+//                    foodsShortArray.push(foodShortModel);
+//                    foodsDetailedArray.push(foodDetailedModel);
+//                }
+//
+//                plan.allDetailedFoods = foodsDetailedArray;
+//                plan.allShortFoods = foodsShortArray;
 
-                    foodsArray.push(foodModel);
-                }
+           //     req.plan = plan;
+           //     next();
+           // }
+      //  });
 
-                plan.allFoods = foodsArray;
-                req.plan = plan;
-                next();
-            }
-        });
+        req.plan = plan;
+        next();
 
 
 
