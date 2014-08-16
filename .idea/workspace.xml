@@ -1,14 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="99afd44b-0014-4bff-855e-4d01f0b1305f" name="Default" comment="create food server model, added meals and foods inputs to plan page. Still need to wire up saving meals and foods in the backend.">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/modules/plans/views/create-plan.client.view.html" afterPath="$PROJECT_DIR$/public/modules/plans/views/create-plan.client.view.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/modules/foods/views/edit-food.client.view.html" afterPath="$PROJECT_DIR$/public/modules/foods/views/edit-food.client.view.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/plan.server.model.js" afterPath="$PROJECT_DIR$/app/models/plan.server.model.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/modules/plans/controllers/plans.client.controller.js" afterPath="$PROJECT_DIR$/public/modules/plans/controllers/plans.client.controller.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/modules/plans/config/plans.client.routes.js" afterPath="$PROJECT_DIR$/public/modules/plans/config/plans.client.routes.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/plans.server.controller.js" afterPath="$PROJECT_DIR$/app/controllers/plans.server.controller.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/modules/plans/views/view-plan.client.view.html" afterPath="$PROJECT_DIR$/public/modules/plans/views/view-plan.client.view.html" />
+    <list default="true" id="99afd44b-0014-4bff-855e-4d01f0b1305f" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="NutritionManager.iws" />
@@ -598,7 +591,11 @@
       <created>1408209980299</created>
       <updated>1408209980299</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="create plan page is close to finished. Now trying to wire up view/edit plan page. Trying to make it all common html.">
+      <created>1408224228622</created>
+      <updated>1408224228622</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -642,7 +639,8 @@
       <TodoPanelSettings />
     </option>
     <MESSAGE value="create food server model, added meals and foods inputs to plan page. Still need to wire up saving meals and foods in the backend." />
-    <option name="LAST_COMMIT_MESSAGE" value="create food server model, added meals and foods inputs to plan page. Still need to wire up saving meals and foods in the backend." />
+    <MESSAGE value="create plan page is close to finished. Now trying to wire up view/edit plan page. Trying to make it all common html." />
+    <option name="LAST_COMMIT_MESSAGE" value="create plan page is close to finished. Now trying to wire up view/edit plan page. Trying to make it all common html." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
