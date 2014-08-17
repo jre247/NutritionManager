@@ -250,7 +250,7 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
             var carbsTotal = 0, fatTotal = 0, proteinTotal = 0, caloriesTotal = 0;
 
             for (var i = 0; i < plan.meals.length; i++){
-                carbsTotal += plan.meals[i].totalCarbs;
+                carbsTotal += plan.meals[i].totalCarbohydrates;
                 fatTotal += plan.meals[i].totalFat;
                 proteinTotal += plan.meals[i].totalProtein;
                 caloriesTotal += plan.meals[i].totalCalories;

@@ -191,34 +191,48 @@
                         </div>
                     </div>
 
-                    <table>
-                        <thead>
-                           <tr>
-                               <th width="200px">&nbsp;</th>
-                               <th width="100px">&nbsp;</th>
-                               <th width="90px">&nbsp;</th>
-                               <th width="90px">Calories </th>
-                               <th width="90px">Carbs</th>
-                               <th width="90px">Protein</th>
-                               <th width="90px">Fat</th>
-                           </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>
-                                    <span>Totals:</span>
-                                </td>
-                                <td>&nbsp;</td>
-                                <td>&nbsp;</td>
-                                <td>
-                                    <span data-ng-bind="plan.totalPlanCalories"></span>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+
 
 
                 </div>
+
+
+                <table style="border-top: 1px solid lightgray;">
+                    <thead>
+                        <tr>
+                            <th width="160px">&nbsp;</th>
+                            <th width="100px">&nbsp;</th>
+                            <th width="90px">&nbsp;</th>
+                            <th width="90px">Calories </th>
+                            <th width="82px">Carbs</th>
+                            <th width="82px">Protein</th>
+                            <th width="90px">Fat</th>
+                            <th width="90px">&nbsp;</th>
+                            <th width="90px">&nbsp;</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                               <span style="font-weight:bold;">Totals:</span>
+                            </td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>
+                                <span data-ng-bind="plan.totalPlanCalories"></span>
+                            </td>
+                            <td>
+                                <span data-ng-bind="plan.totalPlanCarbs"></span>
+                            </td>
+                            <td>
+                                <span data-ng-bind="plan.totalPlanProtein"></span>
+                            </td>
+                            <td>
+                                <span data-ng-bind="plan.totalPlanFat"></span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
             </fieldset>
 
             <div data-ng-show="error" class="text-danger">
