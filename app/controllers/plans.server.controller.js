@@ -120,43 +120,44 @@ exports.planByID = function(req, res, next, id) {
 		if (err) return next(err);
 		if (!plan) return next(new Error('Failed to load plan ' + id));
 
-//        Food.find().sort('name').exec(function(err, foods) {
-//            if (err) {
-//                return res.send(400, {
-//                    message: getErrorMessage(err)
-//                });
-//            } else {
-//                var foodsDetailedArray = [];
-//                var foodsShortArray = [];
-//
-//                for(var i = 0; i < foods.length; i++){
-//                    var foodDetailedModel = {};
-//                    foodDetailedModel.id = foods[i].id;
-//                    foodDetailedModel.name = foods[i].name;
-//                    foodDetailedModel.calories = foods[i].calories;
-//                    foodDetailedModel.fat = foods[i].fat;
-//                    foodDetailedModel.protein = foods[i].protein;
-//                    foodDetailedModel.carbohydrates = foods[i].carbohydrates;
-//                    foodDetailedModel.grams = foods[i].grams;
-//
-//                    var foodShortModel = {};
-//                    foodShortModel.id = foods[i].id;
-//                    foodShortModel.name = foods[i].name;
-//
-//                    foodsShortArray.push(foodShortModel);
-//                    foodsDetailedArray.push(foodDetailedModel);
-//                }
-//
-//                plan.allDetailedFoods = foodsDetailedArray;
-//                plan.allShortFoods = foodsShortArray;
+       // var isDone = false;
 
-           //     req.plan = plan;
-           //     next();
-           // }
-      //  });
+//        for(var i = 0; i < plan.meals.length; i++){
+//            for (var j = 0; j < plan.meals[i].foods.length; j++){
+//                var mealFood = plan.meals[i].foods[j];
+//
+//                Food.findById(mealFood.id).exec(function(err, food){
+//                    plan.meals[i].foods[j] = food;
+//
+//                    if (i == plan.meals.length - 1 && j == plan.meals[i].foods.length - 1){
+//                        isDone = true;
+//                    }
+//
+//                    if (isDone){
+//                        req.plan = plan;
+//                        next();
+//                    }
+//                });
+//
+//
+//            }
+//        }
 
         req.plan = plan;
         next();
+
+//
+//
+//        Food.populate(plan, {
+//            path: 'author.phone',
+//            select: 'name',
+//            model: Phone // <== We are populating phones so we need to use the correct model, not User
+//        }, function(){
+//            req.plan = plan;
+//            next();
+//        });
+
+
 
 
 

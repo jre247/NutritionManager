@@ -57,23 +57,28 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
                 isEditable: true
             };
 
-            $scope.meals.push(model);
+            if (!$scope.plan) {
+                $scope.meals.push(model);
+            }
+            else{
+                $scope.plan.meals.push(model);
+            }
         };
 
-
-//
-//        $scope.saveMeal = function(meal){
-//            meal.isEditable = false;
-//        };
-//
-//        $scope.editMeal = function(meal){
-//            meal.isEditable = true;
-//        };
-
         $scope.deleteMeal = function(meal){
-            for (var i in $scope.meals) {
-                if ($scope.meals[i] === meal) {
-                    $scope.meals.splice(i, 1);
+            if (!$scope.plan) {
+
+                for (var i in $scope.meals) {
+                    if ($scope.meals[i] === meal) {
+                        $scope.meals.splice(i, 1);
+                    }
+                }
+            }
+            else{
+                for (var i in $scope.plan.meals) {
+                    if ($scope.plan.meals[i] === meal) {
+                        $scope.plan.meals.splice(i, 1);
+                    }
                 }
             }
         }
@@ -88,6 +93,7 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
                 protein: 0,
                 carbohydrates: 0,
                 fat: 0,
+                foodId: '',
                 isEditable: true
             };
 
@@ -103,15 +109,30 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
         };
 
         $scope.deleteFood = function(food, meal){
-            for(var nMeal = 0; nMeal < $scope.meals.length; nMeal++){
-                if ($scope.meals[nMeal] === meal){
-                    for (var nFood = 0; nFood < meal.foods.length; nFood++){
-                        if (meal.foods[nFood] === food) {
-                            meal.foods.splice(nFood, 1);
+            if (!$scope.plan){
+                for(var nMeal = 0; nMeal < $scope.meals.length; nMeal++){
+                    if ($scope.meals[nMeal] === meal){
+                        for (var nFood = 0; nFood < meal.foods.length; nFood++){
+                            if (meal.foods[nFood] === food) {
+                                meal.foods.splice(nFood, 1);
+                            }
                         }
                     }
                 }
             }
+            else{
+                for(var nMeal = 0; nMeal < $scope.plan.meals.length; nMeal++){
+                    if ($scope.plan.meals[nMeal] === meal){
+                        for (var nFood = 0; nFood < meal.foods.length; nFood++){
+                            if (meal.foods[nFood] === food) {
+                                meal.foods.splice(nFood, 1);
+                            }
+                        }
+                    }
+                }
+            }
+
+
 
 
         }
@@ -136,7 +157,14 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
 			var plan = $scope.plan;
 
             plan.$update(function() {
-				$location.path('plans/' + plan._id);
+				//$location.path('plans/' + plan._id);
+                for (var i = 0; i < $scope.plan.meals.length; i++){
+                    for (var j = 0; j < $scope.plan.meals[i].foods.length; j++){
+                        $scope.plan.meals[i].foods[j].name = $scope.plan.meals[i].foods[j].selectedFood.name;
+                        $scope.plan.meals[i].foods[j].type = $scope.plan.meals[i].foods[j].selectedFood.type;
+                        $scope.plan.meals[i].foods[j].foodId = $scope.plan.meals[i].foods[j].selectedFood.foodId;
+                    }
+                }
 			}, function(errorResponse) {
 				$scope.error = errorResponse.data.message;
 			});
@@ -160,7 +188,15 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
 		$scope.findOne = function() {
 			$scope.plan = Plans.get({
                 planId: $stateParams.planId
-			});
+			}, function(u, getResponseHeaders){
+                for (var i = 0; i < $scope.plan.meals.length; i++){
+                    for (var j = 0; j < $scope.plan.meals[i].foods.length; j++){
+                        $scope.plan.meals[i].foods[j].name = $scope.plan.meals[i].foods[j].selectedFood.name;
+                        $scope.plan.meals[i].foods[j].type = $scope.plan.meals[i].foods[j].selectedFood.type;
+                        $scope.plan.meals[i].foods[j].foodId = $scope.plan.meals[i].foods[j].selectedFood.foodId;
+                    }
+                }
+            });
 		};
 
         $scope.foodSelectionChange = function(food){
@@ -172,7 +208,18 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
             food.carbohydrates = food.servings * food.selectedFood.carbohydrates;
             food.grams = food.servings * food.selectedFood.grams;
 
+            //food.selectedFoodId = food.selectedFood.id;
+
             food.name = food.selectedFood.name;
+            food.selectedFood.foodId = food.selectedFood._id;
+            food.type = food.selectedFood.type;
+
+            food.foodId = food.selectedFood._id;
+//            food.selectedFood.calories = food.selectedFood.calories;
+//            food.selectedFood.fat = food.selectedFood.fat;
+//            food.selectedFood.protein = food.selectedFood.protein;
+//            food.selectedFood.carbohydrates = food.selectedFood.carbohydrates;
+//            food.selectedFood.grams = food.selectedFood.grams;
         };
 
         $scope.foodServingsChange = function(food){

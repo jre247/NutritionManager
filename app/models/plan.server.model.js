@@ -31,9 +31,36 @@ var PlanSchema = new Schema({
                     type: Number
                 },
                 foods: [{
-                    food: {
-                        type: Schema.ObjectId,
-                        ref: 'Food'
+                    selectedFood: {
+                        foodId: {
+                          type: String
+                        },
+                        name: {
+                          type: String
+                        },
+                        type:{
+                          type: String
+                        },
+                        calories:{
+                            type: Number,
+                            default: 0
+                        },
+                        carbohydrates:{
+                            type: Number,
+                            default: 0
+                        },
+                        fat:{
+                            type: Number,
+                            default: 0
+                        },
+                        protein:{
+                            type: Number,
+                            default: 0
+                        },
+                        grams:{
+                            type: Number,
+                            default: 0
+                        }
                     },
                     servings:{
                         type: Number,

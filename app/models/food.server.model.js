@@ -10,6 +10,9 @@ var mongoose = require('mongoose'),
  * Food Schema
  */
 var FoodSchema = new Schema({
+    foodId:{
+        type: String
+    },
 	created: {
 		type: Date,
 		default: Date.now

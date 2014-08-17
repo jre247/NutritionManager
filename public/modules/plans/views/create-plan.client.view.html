@@ -6,13 +6,6 @@
 		<form class="form-horizontal" data-ng-submit="create()" novalidate>
 			<fieldset>
 				<div class="form-group">
-                    <!--<div class="planDetailsSection" style="display:inline-block;">-->
-                        <!--<label class="control-label" for="name">Name</label>-->
-                        <!--<div class="controls">-->
-                            <!--<input type="text" style="width: 150px;" data-ng-model="name" id="name" class="form-control" placeholder="Name" required />-->
-                        <!--</div>-->
-                    <!--</div>-->
-
                     <div class="planDetailsSection" style="display:inline-block;vertical-align: top;">
                         <label class="control-label" for="planDate">Plan Date</label>
 
@@ -43,7 +36,7 @@
 
                     <div ng-show="meals.length > 0" style="...">
                         <div data-ng-repeat="meal in meals" style="border: 1px solid lightgray; margin-bottom: 30px; padding: 10px; border-radius: 5px;">
-                            <select ng-model="meal.selectedMealType" ng-options="t.id as t.name for t in mealTypes"></select>
+                            <select ng-model="meal.type" ng-options="t.id as t.name for t in mealTypes"></select>
                             <input style="margin-left: 15px;float:right;" type="button" value="Delete" data-ng-click="deleteMeal(meal);"/>
 
                             <div style="margin-top: 15px;">
