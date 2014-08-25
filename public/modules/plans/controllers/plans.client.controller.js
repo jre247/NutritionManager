@@ -1,12 +1,14 @@
 'use strict';
 
-angular.module('plans').controller('PlansController', ['$scope', '$stateParams', '$location', 'Authentication', 'Plans', 'Foods',
-	function($scope, $stateParams, $location, Authentication, Plans, Foods) {
+angular.module('plans').controller('PlansController', ['$scope', '$stateParams', '$location', 'Authentication', '$modal', '$log', 'Plans', 'Foods',
+	function($scope, $stateParams, $location, Authentication, $modal, $log, Plans, Foods) {
 		window.scope = $scope;
         window.plans = $scope.plans;
+        $scope.showTotalsAsPercent = false;
 
         $scope.authentication = Authentication;
         $scope.meals = [];
+
 
         $scope.allFoods = Foods.query();
 
@@ -56,10 +58,25 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
                 totalCarbohydrates: 0,
                 totalFat: 0,
                 totalProtein: 0,
-                isEditable: true
+                isEditable: true,
+                isVisible: true
             };
 
             $scope.plan.meals.push(model);
+
+            var meal = $scope.plan.meals[$scope.plan.meals.length - 1];
+
+            $scope.createFood(meal);
+        };
+
+        $scope.editMeal = function(meal){
+            meal.isEditable = true;
+            meal.isVisible = !meal.isVisible;
+        };
+
+        $scope.saveMeal = function(meal){
+            meal.isEditable = false;
+            meal.isVisible = !meal.isVisible;
         };
 
         $scope.deleteMeal = function(meal){
@@ -91,6 +108,14 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
 
         $scope.saveFood = function(food){
             food.isEditable = false;
+        };
+
+        $scope.saveAll = function(meal){
+            for(var food = 0; food < meal.foods.length; food++){
+                meal.foods[food].isEditable = false;
+            }
+
+            meal.isEditable = false;
         };
 
         $scope.editFood = function(food){
@@ -260,7 +285,83 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
             plan.totalPlanFat = fatTotal;
             plan.totalPlanProtein = proteinTotal;
             plan.totalPlanCalories = caloriesTotal;
+
+            //calculate totals as percent
+            var macroTotals = carbsTotal + fatTotal + proteinTotal + caloriesTotal;
+            plan.totalPlanCarbsAsPercent = (carbsTotal / macroTotals) * 100;
+            plan.totalPlanFatAsPercent = (fatTotal / macroTotals) * 100;
+            plan.totalPlanProteinAsPercent = (proteinTotal / macroTotals) * 100;
         };
+
+        $scope.toggleTotalsAsPercent = function(){
+          $scope.showTotalsAsPercent = !$scope.showTotalsAsPercent;
+        };
+
+        $scope.toggleMealVisibility = function(meal){
+            meal.isVisible = !meal.isVisible;
+        };
+
+        $scope.getMealTypeName = function(type){
+            var mealTypeName;
+
+            for (var i = 0; i < $scope.mealTypes.length; i++){
+                var mealType = $scope.mealTypes[i];
+
+                if (mealType.id == type){
+                    mealTypeName = mealType.name;
+                    break;
+                }
+            }
+
+            return mealTypeName;
+        };
+
+
+
+
+        //dialog code
+        $scope.items = ['item1', 'item2', 'item3'];
+        $scope.openDialog = function (size) {
+
+            var modalInstance = $modal.open({
+                templateUrl: 'myModalContent.html',
+                controller: ModalInstanceCtrl,
+                size: size,
+                resolve: {
+                    items: function () {
+                        return $scope.items;
+                    }
+                }
+            });
+
+            modalInstance.result.then(function (selectedItem) {
+                $scope.selected = selectedItem;
+            }, function () {
+                $log.info('Modal dismissed at: ' + new Date());
+            });
+        };
+
+        //accordian code
+//        $scope.groups = [
+//            {
+//                title: 'Dynamic Group Header - 1',
+//                content: 'Dynamic Group Body - 1'
+//            },
+//            {
+//                title: 'Dynamic Group Header - 2',
+//                content: 'Dynamic Group Body - 2'
+//            }
+//        ];
+//
+//        $scope.items = ['Item 1', 'Item 2', 'Item 3'];
+//        $scope.addItem = function() {
+//            var newItemNo = $scope.items.length + 1;
+//            $scope.items.push('Item ' + newItemNo);
+//        };
+//        $scope.status = {
+//            isFirstOpen: true,
+//            isFirstDisabled: false
+//        };
 
 
 
@@ -276,3 +377,20 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
 //        );
 	}
 ]);
+
+
+var ModalInstanceCtrl = function ($scope, $modalInstance, items) {
+
+    $scope.items = items;
+    $scope.selected = {
+        item: $scope.items[0]
+    };
+
+    $scope.ok = function () {
+        $modalInstance.close($scope.selected.item);
+    };
+
+    $scope.cancel = function () {
+        $modalInstance.dismiss('cancel');
+    };
+};

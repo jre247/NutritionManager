@@ -30,73 +30,84 @@ var PlanSchema = new Schema({
                 type: {
                     type: Number
                 },
-                foods: [{
-                    selectedFood: {
-                        foodId: {
-                          type: String
+                foods: [
+                    {
+                        selectedFood: {
+                            foodId: {
+                                type: String
+                            },
+                            name: {
+                                type: String
+                            },
+                            type: {
+                                type: String
+                            },
+                            calories: {
+                                type: Number,
+                                default: 0
+                            },
+                            carbohydrates: {
+                                type: Number,
+                                default: 0
+                            },
+                            fat: {
+                                type: Number,
+                                default: 0
+                            },
+                            protein: {
+                                type: Number,
+                                default: 0
+                            },
+                            grams: {
+                                type: Number,
+                                default: 0
+                            }
                         },
-                        name: {
-                          type: String
-                        },
-                        type:{
-                          type: String
-                        },
-                        calories:{
+                        servings: {
                             type: Number,
                             default: 0
                         },
-                        carbohydrates:{
+                        calories: {
                             type: Number,
                             default: 0
                         },
-                        fat:{
+                        carbohydrates: {
                             type: Number,
                             default: 0
                         },
-                        protein:{
+                        fat: {
                             type: Number,
                             default: 0
                         },
-                        grams:{
+                        protein: {
                             type: Number,
                             default: 0
+                        },
+                        grams: {
+                            type: Number,
+                            default: 0
+                        },
+                        isEditable: {
+                            type: Boolean,
+                            default: false
                         }
-                    },
-                    servings:{
-                        type: Number,
-                        default: 0
-                    },
-                    calories:{
-                        type: Number,
-                        default: 0
-                    },
-                    carbohydrates:{
-                        type: Number,
-                        default: 0
-                    },
-                    fat:{
-                        type: Number,
-                        default: 0
-                    },
-                    protein:{
-                        type: Number,
-                        default: 0
-                    },
-                    grams:{
-                        type: Number,
-                        default: 0
-                    },
-                    isEditable:{
-                        type: Boolean,
-                        default: false
+
                     }
-                }],
+                ],
 
                 isActive: {
                     type: Boolean,
                     default: true
-                }
+                },
+                isVisible: {
+                    type: Boolean,
+                    default: true
 
+                },
+                isEditable: {
+                    type: Boolean,
+                    default: true
+                }
             }
         ]
 
