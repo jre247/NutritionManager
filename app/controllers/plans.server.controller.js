@@ -36,19 +36,49 @@ var getErrorMessage = function(err) {
  * Create a plan
  */
 exports.create = function(req, res) {
-	var plan = new Plan(req.body);
-    plan.user = req.user;
-;
+    var planClient = req.body;
+    var planClientPlanDate = new Date(planClient.planDate);
 
-    plan.save(function(err) {
-		if (err) {
-			return res.send(400, {
-				message: getErrorMessage(err)
-			});
-		} else {
-			res.jsonp(plan);
-		}
-	});
+    var planDateMonth = planClientPlanDate.getMonth();
+    var planDateDay = planClientPlanDate.getDate();
+    var planDateYear = planClientPlanDate.getFullYear();
+
+    var planDate = new Date(planDateYear, planDateMonth, planDateDay);
+
+    //check if already existing plan in database for this plan date
+    //if so, just update the plan, not create new one
+    Plan.findOne({'planDate': planDate}).exec(function(err, planDb) {
+        if (err) {
+            return res.send(400, {
+                message: getErrorMessage(err)
+            });
+        } else {
+            var planToSave = planDb;
+
+            if (planDb) {
+                for(var i = 0; i < planClient.meals.length; i++){
+                    planDb.meals.push(planClient.meals[i]);
+                }
+            }
+            else{
+                var plan = new Plan(req.body);
+                plan.user = req.user;
+
+                planToSave = plan;
+
+            }
+
+            planToSave.save(function(err) {
+                if (err) {
+                    return res.send(400, {
+                        message: getErrorMessage(err)
+                    });
+                } else {
+                    res.jsonp(planToSave);
+                }
+            });
+        }
+    });
 };
 
 /**

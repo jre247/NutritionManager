@@ -54,7 +54,7 @@
                 </div>
             </accordion-heading>
 
-            <div style="padding: 5px; width: 100vh;">
+            <div style="padding: 5px; min-width: 100vh;">
 
                 <div style="display: inline-block;vertical-align: top">
                     <input type="button"  data-ng-click="createFood(meal);" value="Create Food"/>
@@ -68,24 +68,24 @@
                 <!--Edit-->
                 <!--</div>-->
                 <!---->
-                <table data-ng-show="meal.foods.length > 0" style="margin-top: 6px;overflow-x:scroll;">
+                <table data-ng-show="meal.foods.length > 0" style="margin-top: 6px;overflow-x:scroll;width:100%;">
                     <thead>
                     <tr>
-                        <th width="140px">Name</th>
-                        <th width="90px">Type</th>
-                        <th width="90">Servings</th>
-                        <th width="90">Calories</th>
-                        <th width="90">Carbs</th>
-                        <th width="90">Protein</th>
-                        <th width="90">Fat</th>
-                        <th width="90">Grams</th>
+                        <th width="20%">Name</th>
+                        <th>Type</th>
+                        <th>Servings</th>
+                        <th>Calories</th>
+                        <th>Carbs</th>
+                        <th>Protein</th>
+                        <th>Fat</th>
+                        <th>Grams</th>
                         <th>&nbsp;</th>
                     </tr>
                     </thead>
                     <tbody>
 
                     <tr height="35px" data-ng-repeat="food in meal.foods">
-                        <td>
+                        <td style="padding-right: 10px;">
                             <div class="controls" data-ng-show="food.isEditable">
                                 <select data-ng-model="food.selectedFood" data-ng-change="foodSelectionChange(food)" ng-options="f as f.name for f in allFoods"></select>
 
@@ -102,7 +102,7 @@
                         </td>
                         <td>
                             <div class="controls" data-ng-show="food.isEditable">
-                                <input data-ng-change="foodServingsChange(food, meal)" data-ng-model="food.servings" id="servings" class="form-control" cols="3" rows="3"/>
+                                <input data-ng-change="foodServingsChange(food, meal)" style="width: 60px;" data-ng-model="food.servings" id="servings" class="form-control" cols="3" rows="3"/>
                             </div>
 
                             <div class="controls" data-ng-show="food.isEditable == false" data-ng-click="editFoodClick(food)">
