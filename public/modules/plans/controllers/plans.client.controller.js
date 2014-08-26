@@ -237,7 +237,8 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
                             calories: $scope.plans[i].totalPlanCalories,
                             protein: $scope.plans[i].totalPlanProtein,
                             carbs: $scope.plans[i].totalPlanCarbs,
-                            fat: $scope.plans[i].totalPlanFat
+                            fat: $scope.plans[i].totalPlanFat,
+                            _id: $scope.plans[i]._id
                         }
 
                         $scope.plansCollection.push(planModel);
