@@ -439,12 +439,27 @@ var ModalInstanceCtrl = function ($scope, $modalInstance, parentScope, dialogMea
     };
 
     $scope.selected = {
-        meals: $scope.dialogMealsDetailed,
+        meals: [$scope.dialogMealsShort[0].id],
         planDate: $scope.copyPlanDate
     };
 
     $scope.selectAllMeals = function(){
-        $scope.selected.meals = dialogMealsDetailed;
+        for (var i = 0; i < dialogMealsShort.length; i++){
+            var isFound = false;
+
+            for(var j = 0; j < $scope.selected.meals.length; j++){
+                if ($scope.selected.meals[j] === dialogMealsShort[i].id){
+                    isFound = true;
+                    break;
+                }
+            }
+
+            if(!isFound) {
+                $scope.selected.meals.push(dialogMealsShort[i].id);
+            }
+        }
+
+       // $scope.selected.meals = dialogMealsShort;
     };
 
     $scope.ok = function () {
