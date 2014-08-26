@@ -3,7 +3,7 @@
 <!--<h1>New Plan</h1>-->
 <!--</div>-->
 <div class="col-md-12">
-<form class="form-horizontal" data-ng-init="findOne()" data-ng-submit="savePlan()" novalidate>
+<form class="form-horizontal" data-ng-init="findOne()" novalidate>
 <fieldset>
     <div class="form-group">
         <div class="planDetailsSection" style="display:inline-block;vertical-align: top;">
@@ -27,7 +27,7 @@
 
             <button class="btn btn-default" style="margin-right: 12px;" ng-click="openCopyPlanDialog()">Copy</button>
 
-            <input type="submit"  class="btn btn-default">
+            <input type="submit" data-ng-click="savePlan()"  class="btn btn-default">
         </div>
     </div>
 
