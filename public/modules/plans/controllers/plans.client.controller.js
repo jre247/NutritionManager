@@ -98,7 +98,7 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
                 }
             }
 
-            calculatePlanTotalCalories($scope.plan);
+            calculatePlanTotalMacros($scope.plan);
         };
 
         $scope.createFood = function(meal){
@@ -166,7 +166,7 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
 
             doMealTotaling(meal);
 
-            calculatePlanTotalCalories($scope.plan);
+            calculatePlanTotalMacros($scope.plan);
 
         };
 
@@ -210,7 +210,7 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
                     doMealTotaling($scope.plan.meals[i]);
                 }
 
-                calculatePlanTotalCalories($scope.plan);
+                calculatePlanTotalMacros($scope.plan);
 
                 $scope.success = true;
 
@@ -222,7 +222,30 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
 		};
 
 		$scope.find = function() {
-			$scope.plans = Plans.query();
+			$scope.plans = Plans.query(
+                function(u, getResponseHeaders)
+                {
+                    for(var i = 0; i < $scope.plans.length; i++) {
+                        for (var nMeal = 0; nMeal < $scope.plans[i].meals.length; nMeal++){
+                            doMealTotaling($scope.plans[i].meals[nMeal]);
+                        }
+
+                        calculatePlanTotalMacros($scope.plans[i]);
+
+                        var planModel = {
+                            planDate: $scope.plans[i].planDate,
+                            calories: $scope.plans[i].totalPlanCalories,
+                            protein: $scope.plans[i].totalPlanProtein,
+                            carbs: $scope.plans[i].totalPlanCarbs,
+                            fat: $scope.plans[i].totalPlanFat
+                        }
+
+                        $scope.plansCollection.push(planModel);
+                    }
+                }
+            );
+
+
 		};
 
 		$scope.findOne = function() {
@@ -251,7 +274,7 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
                         $scope.plan.meals[i].totalProtein = proteinTotal;
                         $scope.plan.meals[i].totalFat = fatTotal;
 
-                        calculatePlanTotalCalories($scope.plan);
+                        calculatePlanTotalMacros($scope.plan);
                     }
                 });
             }
@@ -286,7 +309,7 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
 
             doMealTotaling(meal);
 
-            calculatePlanTotalCalories($scope.plan);
+            calculatePlanTotalMacros($scope.plan);
         };
 
         var doMealTotaling = function(meal){
@@ -307,7 +330,7 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
             meal.totalFat = fatTotal;
         };
 
-        var calculatePlanTotalCalories = function(plan){
+        var calculatePlanTotalMacros = function(plan){
             var carbsTotal = 0, fatTotal = 0, proteinTotal = 0, caloriesTotal = 0;
 
             for (var i = 0; i < plan.meals.length; i++){
@@ -351,6 +374,13 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
 
             return mealTypeName;
         };
+
+        //sorting code
+        // data
+        $scope.orderByField = 'planDate';
+        $scope.reverseSort = false;
+        scope.plansCollection = [];
+
 
 
 
