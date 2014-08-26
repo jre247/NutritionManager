@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('plans').controller('PlansController', ['$scope', '$stateParams', '$location', 'Authentication', '$modal', '$log', 'Plans', 'Foods',
-	function($scope, $stateParams, $location, Authentication, $modal, $log, Plans, Foods) {
+angular.module('plans').controller('PlansController', ['$scope', '$stateParams', '$location', '$timeout', 'Authentication', '$modal', '$log', 'Plans', 'Foods',
+	function($scope, $stateParams, $location, $timeout, Authentication, $modal, $log, Plans, Foods) {
 		window.scope = $scope;
         window.plans = $scope.plans;
         $scope.showTotalsAsPercent = false;
@@ -48,6 +48,18 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
 			$scope.plan.planDate = '';
             $scope.plan.meals = [];
 		};
+
+        $scope.copyPlan = function(planCopyModel){
+            var plan = new Plans({
+                planDate: planCopyModel.planDate,
+                meals: planCopyModel.meals
+            });
+            plan.$save(function(response) {
+                $location.path('plans/' + response._id);
+            }, function(errorResponse) {
+                $scope.error = errorResponse.data.message;
+            });
+        };
 
         $scope.createMeal = function(){
             var model = {
@@ -180,6 +192,11 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
                 }
 
                 calculatePlanTotalCalories($scope.plan);
+
+                $scope.success = true;
+
+                $timeout(function(){$scope.success = false;}, 3000);
+
 			}, function(errorResponse) {
 				$scope.error = errorResponse.data.message;
 			});
@@ -287,7 +304,7 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
             plan.totalPlanCalories = caloriesTotal;
 
             //calculate totals as percent
-            var macroTotals = carbsTotal + fatTotal + proteinTotal + caloriesTotal;
+            var macroTotals = carbsTotal + fatTotal + proteinTotal;
             plan.totalPlanCarbsAsPercent = (carbsTotal / macroTotals) * 100;
             plan.totalPlanFatAsPercent = (fatTotal / macroTotals) * 100;
             plan.totalPlanProteinAsPercent = (proteinTotal / macroTotals) * 100;
@@ -320,26 +337,53 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
 
 
         //dialog code
-        $scope.items = ['item1', 'item2', 'item3'];
-        $scope.openDialog = function (size) {
+        //$scope.items = ['item1', 'item2', 'item3'];
+        $scope.openCopyPlanDialog = function (size) {
 
             var modalInstance = $modal.open({
                 templateUrl: 'myModalContent.html',
                 controller: ModalInstanceCtrl,
                 size: size,
                 resolve: {
-                    items: function () {
-                        return $scope.items;
+                    dialogMealsShort: function () {
+                        var mealsAry = [];
+
+                        for(var i = 0; i < $scope.plan.meals.length; i++){
+                            var mealModel = {};
+                            mealModel.id = $scope.plan.meals[i]._id;
+
+                            var mealType = $scope.mealTypes[$scope.plan.meals[i].type - 1];
+
+                            if (mealType && mealType.id >= 0) {
+                                mealModel.type = mealType.name;
+                            }
+                            else{
+                                mealModel.type = 'N/A';
+                            }
+
+                            mealsAry.push(mealModel);
+                        }
+
+                        return mealsAry;
+                    },
+                    dialogMealsDetailed: function () {
+                        return $scope.plan.meals;
+                    },
+                    parentScope: function(){
+                        return $scope;
                     }
                 }
             });
 
-            modalInstance.result.then(function (selectedItem) {
-                $scope.selected = selectedItem;
+            modalInstance.result.then(function (planCopyModel) {
+                //$scope.dialogSelectedMealType = selectedItem;
+                $scope.copyPlan(planCopyModel);
+
             }, function () {
                 $log.info('Modal dismissed at: ' + new Date());
             });
         };
+
 
         //accordian code
 //        $scope.groups = [
@@ -379,15 +423,65 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
 ]);
 
 
-var ModalInstanceCtrl = function ($scope, $modalInstance, items) {
+var ModalInstanceCtrl = function ($scope, $modalInstance, parentScope, dialogMealsDetailed, dialogMealsShort) {
+    $scope.selectedMealTypes = dialogMealsDetailed[0];
+    $scope.dialogMealsDetailed = dialogMealsDetailed;
+    $scope.dialogMealsShort = dialogMealsShort;
+    $scope.copyPlanDate = new Date();
+    $scope.parentScope = parentScope;
 
-    $scope.items = items;
+    $scope.dialogOpenCopyPlanDate = function($event, datepicker) {
+
+        //if (!$scope[datepicker]) {
+            $event.preventDefault();
+            $event.stopPropagation();
+       // }
+
+        $scope.parentScope.opened = false;
+        $scope[datepicker] = false;
+
+        $scope[datepicker] = true;
+    };
+
+    $scope.copyPlanDateOptions = {
+        formatYear: 'yy',
+        startingDay: 1
+    };
+
+    $scope.initDate = new Date('2016-15-20');
+
+
+    $scope.copyPlanDateChange = function(){
+      alert("changed!");
+    };
+
     $scope.selected = {
-        item: $scope.items[0]
+        meals: $scope.dialogMealsDetailed,
+        planDate: $scope.copyPlanDate
+    };
+
+    $scope.selectAllMeals = function(){
+        $scope.selected.meals = dialogMealsDetailed;
     };
 
     $scope.ok = function () {
-        $modalInstance.close($scope.selected.item);
+        var selectedMeals = $scope.selected.meals;
+
+        if (typeof selectedMeals[0] === "string"){
+            var selectedMealsDetailed = [];
+
+            for (var i = 0; i < selectedMeals.length; i++){
+                for (var j = 0; j < dialogMealsDetailed.length; j++) {
+                    if (selectedMeals[i] === dialogMealsDetailed[j]._id) {
+                        selectedMealsDetailed.push(dialogMealsDetailed[j]);
+                    }
+                }
+            }
+
+            $scope.selected.meals = selectedMealsDetailed;
+        }
+
+        $modalInstance.close($scope.selected);
     };
 
     $scope.cancel = function () {

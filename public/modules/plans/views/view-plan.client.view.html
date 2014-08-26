@@ -12,10 +12,10 @@
             <div class="row">
                 <div class="col-md-6" style="width: 170px;">
                     <p class="input-group">
-                        <input type="text" class="form-control" id="planDate" datepicker-popup="{{format}}" ng-model="plan.planDate" is-open="opened" min-date="minDate" max-date="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
-                                      <span class="input-group-btn">
-                                        <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
-                                      </span>
+                       <input type="text" class="form-control" id="planDate" datepicker-popup="{{format}}" ng-model="plan.planDate" is-open="opened" min-date="minDate" max-date="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
+                      <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                      </span>
                     </p>
                 </div>
             </div>
@@ -23,31 +23,38 @@
 
 
         <div class=" planDetailsSection" style="display: inline-block; margin-top: 25px;float:right;">
-            <input type="button" class="btn btn-default" style="margin-right: 12px;" data-ng-click="createMeal();" value="Create Meal"/>
+            <input type="button" class="btn btn-default" style="margin-right: 12px;" data-ng-click="createMeal();" value="+"/>
+
+            <button class="btn btn-default" style="margin-right: 12px;" ng-click="openCopyPlanDialog()">Copy</button>
 
             <input type="submit"  class="btn btn-default">
         </div>
+    </div>
+
+    <div data-ng-show="success" style="color: green; font-weight: bold; margin-bottom: 10px;opacity: 1;transition: opacity .25s ease-in-out;-moz-transition: opacity .25s ease-in-out;-webkit-transition: opacity .25s ease-in-out;" >
+        <strong>Your changes have been saved!</strong>
     </div>
 </fieldset>
 
 
 <fieldset>
-<div class="form-group" style="height: 72vh; overflow: auto;margin-bottom: 3px;">
-    <accordion ng-show="plan.meals.length > 0" style="..." close-others="oneAtATime">
+<div class="form-group" style="height: 72vh; overflow-y: scroll;overflow-x:hidden; margin-bottom: 3px;">
+    <accordion ng-show="plan.meals.length > 0" class="plansAccordion" style="..." close-others="oneAtATime">
 
-        <accordion-group is-open="meal.isVisible" data-ng-repeat="meal in plan.meals" style="min-width: 103vh;">
+        <accordion-group is-open="meal.isVisible" data-ng-repeat="meal in plan.meals" >
             <accordion-heading>
-                <span data-ng-show="meal.isEditable == false" data-ng-bind="getMealTypeName(meal.type)"></span>
+                <div style="height: 28px;">
+                    <span style="width: 80px;" data-ng-show="meal.isEditable == false" data-ng-bind="getMealTypeName(meal.type)"></span>
 
-                <select ng-model="meal.type" data-ng-click="meal.isVisible = !meal.isVisible" data-ng-show="meal.isEditable" ng-options="t.id as t.name for t in mealTypes" style="font-size: 16px;vertical-align: top;"></select>
+                    <select ng-model="meal.type" data-ng-click="meal.isVisible = !meal.isVisible" data-ng-show="meal.isEditable" ng-options="t.id as t.name for t in mealTypes" style="font-size: 16px;vertical-align: top;"></select>
 
-                <input style="margin-left: 15px;float:right;" type="button" value="Save" data-ng-show="meal.isEditable" data-ng-click="saveMeal(meal);"/>
+                    <input style="margin-left: 15px;float:right;" type="button" value="Save" data-ng-show="meal.isEditable" data-ng-click="saveMeal(meal);"/>
 
-                <input style="margin-left: 15px;float:right;" type="button" value="Edit" data-ng-show="meal.isEditable == false" data-ng-click="editMeal(meal);"/>
-
+                    <input style="margin-left: 15px;float:right;" type="button" value="Edit" data-ng-show="meal.isEditable == false" data-ng-click="editMeal(meal);"/>
+                </div>
             </accordion-heading>
 
-            <div style="padding: 5px;">
+            <div style="padding: 5px; width: 100vh;">
 
                 <div style="display: inline-block;vertical-align: top">
                     <input type="button"  data-ng-click="createFood(meal);" value="Create Food"/>
@@ -57,7 +64,11 @@
 
                 <input style="margin-left: 15px;float:right;" type="button" value="Delete Meal" data-ng-click="deleteMeal(meal);"/>
 
-                <table data-ng-show="meal.foods.length > 0" style="margin-top: 6px;">
+                <!--<div class="hidden-desktop hidden-tablet visible-phone">-->
+                <!--Edit-->
+                <!--</div>-->
+                <!---->
+                <table data-ng-show="meal.foods.length > 0" style="margin-top: 6px;overflow-x:scroll;">
                     <thead>
                     <tr>
                         <th width="140px">Name</th>
@@ -72,9 +83,11 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr data-ng-show="food.isEditable == false" height="35px"
+                    <tr data-ng-show="food.isEditable == false" height="35px" data-ng-click="food.isEditable = true"
                         data-ng-repeat="food in meal.foods">
                         <td>
+
+
                             <div class="controls">
                                 <span data-ng-bind="food.name"></span>
                             </div>
@@ -245,26 +258,26 @@
             <span style="font-weight:bold;">Totals:</span>
         </td>
         <td style="color: rgb(33, 51, 184);">
-            <span data-ng-bind="plan.totalPlanCalories | number"></span>
+            <span data-ng-bind="plan.totalPlanCalories | number"></span>g
         </td>
         <td style="color: rgb(33, 51, 184);">
-            <span data-ng-bind="plan.totalPlanCarbsAsPercent | number"></span>%
+            <span data-ng-bind="plan.totalPlanCarbsAsPercent | number:2"></span>%
         </td>
         <td style="color: rgb(33, 51, 184);">
-            <span data-ng-bind="plan.totalPlanProteinAsPercent | number"></span>%
+            <span data-ng-bind="plan.totalPlanProteinAsPercent | number:2"></span>%
         </td>
         <td style="color: rgb(33, 51, 184);">
-            <span data-ng-bind="plan.totalPlanFatAsPercent | number"></span>%
+            <span data-ng-bind="plan.totalPlanFatAsPercent | number:2"></span>%
         </td>
 
     </tr>
     </tbody>
 </table>
 <div style="display:inline-block; position:relative; bottom:6px;margin-top:10px">
-    <label for="radioBtnShowPercent">Totals %</label>
+    <label for="radioBtnShowPercent">%</label>
     <input type="radio" id="radioBtnShowPercent" name="totalsRadioBtn" style="margin-right: 20px;" data-ng-click="toggleTotalsAsPercent()"/>
 
-    <label for="radioBtnHidePercent">Totals Regular</label>
+    <label for="radioBtnHidePercent">Grams</label>
     <input type="radio" id="radioBtnHidePercent" name="totalsRadioBtn" data-ng-click="toggleTotalsAsPercent()" checked="checked"/>
 </div>
 </fieldset>
@@ -301,24 +314,48 @@
     <!--</accordion-group>-->
 <!--</accordion>-->
 
-<button class="btn btn-default" ng-click="openDialog()">Open me!</button>
-<button class="btn btn-default" ng-click="openDialog('lg')">Large modal</button>
-<button class="btn btn-default" ng-click="openDialog('sm')">Small modal</button>
-<div ng-show="selected">Selection from a modal: {{ selected }}</div>
+
+<!--<button class="btn btn-default" ng-click="openDialog('lg')">Large modal</button>-->
+<!--<button class="btn btn-default" ng-click="openDialog('sm')">Small modal</button>-->
+<!--<div ng-show="selected">Selection from a modal: {{ selected }}</div>-->
 
 <script type="text/ng-template" id="myModalContent.html">
     <div class="modal-header">
-        <h3 class="modal-title">I'm a modal!</h3>
+        <h3 class="modal-title">Choose options to clone plan</h3>
     </div>
     <div class="modal-body">
-        <ul>
-            <li ng-repeat="item in items">
-                <a ng-click="selected.item = item">{{ item }}</a>
-            </li>
-        </ul>
-        Selected: <b>{{ selected.item }}</b>
+
+        <div >
+            <div style="display:inline-block; width: 100px;">
+                Select Meals:
+            </div>
+
+            <div style="display:inline-block">
+                <select data-ng-model="selected.meals" multiple="multiple" ng-options="t.id as t.type for t in dialogMealsShort" style="font-size: 16px;vertical-align: top;"></select>
+            </div>
+        </div>
+
+
+        <div style="margin-top: 30px;">
+
+            <div style="display:inline-block; width: 100px;vertical-align: top;padding-top:5px;">
+               Plan Date:
+            </div>
+
+            <div style="display: inline-block; width: 170px;">
+                <p class="input-group">
+                  <input type="text" class="form-control" id="copyPlanDate" datepicker-popup="{{format}}" data-ng-model="selected.planDate" data-ng-change="copyPlanDateChange" is-open="dialogPlanDateOpened" min-date="minDate" max-date="'2015-06-22'" datepicker-options="copyPlanDateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
+                  <span class="input-group-btn">
+                    <button type="button" class="btn btn-default" ng-click="dialogOpenCopyPlanDate($event, 'dialogPlanDateOpened')"><i class="glyphicon glyphicon-calendar"></i></button>
+                  </span>
+                </p>
+            </div>
+        </div>
+
+
     </div>
     <div class="modal-footer">
+        <button style="float: left;" class="btn btn-primary" ng-click="selectAllMeals()">Select All Meals</button>
         <button class="btn btn-primary" ng-click="ok()">OK</button>
         <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
     </div>

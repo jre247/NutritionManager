@@ -1,7 +1,7 @@
 {
-	"name": "meanjs",
+	"name": "nutritionManager",
 	"version": "0.3.1",
-	"description": "Fullstack JavaScript with MongoDB, Express, AngularJS, and Node.js.",
+	"description": "Manages Nutrition Tracking.",
 	"dependencies": {
 		"bootstrap": "~3",
 		"angular": "~1.2",
