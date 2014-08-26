@@ -122,6 +122,23 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
             food.isEditable = false;
         };
 
+        $scope.editFoodClick = function(food){
+            food.isEditable = true;
+
+            setSelectedFood(food);
+        };
+
+        var setSelectedFood = function(food){
+            if (!food.selectedFood._id){
+                for(var i = 0; i < $scope.allFoods.length; i++){
+                    if (food.selectedFood.foodId === $scope.allFoods[i]._id){
+                        food.selectedFood = $scope.allFoods[i];
+                        break;
+                    }
+                }
+            }
+        };
+
         $scope.saveAll = function(meal){
             for(var food = 0; food < meal.foods.length; food++){
                 meal.foods[food].isEditable = false;
@@ -132,6 +149,8 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
 
         $scope.editFood = function(food){
             food.isEditable = true;
+
+            setSelectedFood(food);
         };
 
         $scope.deleteFood = function(food, meal){
