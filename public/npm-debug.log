@@ -1,0 +1,106 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'node', '/usr/local/bin/npm', 'install', 'ngmin' ]
+2 info using npm@1.4.14
+3 info using node@v0.10.29
+4 verbose readDependencies using package.json deps
+5 verbose cache add [ 'ngmin', null ]
+6 verbose cache add name=undefined spec="ngmin" args=["ngmin",null]
+7 verbose parsed url { protocol: null,
+7 verbose parsed url   slashes: null,
+7 verbose parsed url   auth: null,
+7 verbose parsed url   host: null,
+7 verbose parsed url   port: null,
+7 verbose parsed url   hostname: null,
+7 verbose parsed url   hash: null,
+7 verbose parsed url   search: null,
+7 verbose parsed url   query: null,
+7 verbose parsed url   pathname: 'ngmin',
+7 verbose parsed url   path: 'ngmin',
+7 verbose parsed url   href: 'ngmin' }
+8 silly lockFile 8678e52b-ngmin ngmin
+9 verbose lock ngmin /Users/jason/.npm/8678e52b-ngmin.lock
+10 silly lockFile 8678e52b-ngmin ngmin
+11 silly lockFile 8678e52b-ngmin ngmin
+12 verbose addNamed [ 'ngmin', '' ]
+13 verbose addNamed [ null, '*' ]
+14 silly lockFile 19e9c11e-ngmin ngmin@
+15 verbose lock ngmin@ /Users/jason/.npm/19e9c11e-ngmin.lock
+16 silly addNameRange { name: 'ngmin', range: '*', hasData: false }
+17 verbose url raw ngmin
+18 verbose url resolving [ 'https://registry.npmjs.org/', './ngmin' ]
+19 verbose url resolved https://registry.npmjs.org/ngmin
+20 info trying registry request attempt 1 at 22:57:21
+21 verbose etag "D0ODMKGVQJWR7HLJOBMEK4KWC"
+22 http GET https://registry.npmjs.org/ngmin
+23 http 304 https://registry.npmjs.org/ngmin
+24 silly registry.get cb [ 304,
+24 silly registry.get   { date: 'Thu, 28 Aug 2014 02:57:22 GMT',
+24 silly registry.get     server: 'Apache',
+24 silly registry.get     via: '1.1 varnish',
+24 silly registry.get     'last-modified': 'Thu, 28 Aug 2014 02:57:22 GMT',
+24 silly registry.get     'cache-control': 'max-age=60',
+24 silly registry.get     etag: '"D0ODMKGVQJWR7HLJOBMEK4KWC"',
+24 silly registry.get     'x-served-by': 'cache-iad2131-IAD',
+24 silly registry.get     'x-cache': 'HIT',
+24 silly registry.get     'x-cache-hits': '1',
+24 silly registry.get     'x-timer': 'S1409194642.037349,VS0,VE0',
+24 silly registry.get     vary: 'Accept',
+24 silly registry.get     'content-length': '0',
+24 silly registry.get     'keep-alive': 'timeout=10, max=50',
+24 silly registry.get     connection: 'Keep-Alive' } ]
+25 verbose etag ngmin from cache
+26 silly addNameRange number 2 { name: 'ngmin', range: '*', hasData: true }
+27 silly addNameRange versions [ 'ngmin',
+27 silly addNameRange   [ '0.0.1',
+27 silly addNameRange     '0.0.2',
+27 silly addNameRange     '0.0.3',
+27 silly addNameRange     '0.0.4',
+27 silly addNameRange     '0.2.0',
+27 silly addNameRange     '0.3.0',
+27 silly addNameRange     '0.3.1',
+27 silly addNameRange     '0.3.2',
+27 silly addNameRange     '0.3.3',
+27 silly addNameRange     '0.3.4',
+27 silly addNameRange     '0.3.5',
+27 silly addNameRange     '0.3.6',
+27 silly addNameRange     '0.3.7',
+27 silly addNameRange     '0.3.8',
+27 silly addNameRange     '0.4.0',
+27 silly addNameRange     '0.4.1',
+27 silly addNameRange     '0.5.0' ] ]
+28 verbose addNamed [ 'ngmin', '0.5.0' ]
+29 verbose addNamed [ '0.5.0', '0.5.0' ]
+30 silly lockFile 634c2aa9-ngmin-0-5-0 ngmin@0.5.0
+31 verbose lock ngmin@0.5.0 /Users/jason/.npm/634c2aa9-ngmin-0-5-0.lock
+32 warn deprecated ngmin@0.5.0: use ng-annotate instead
+33 silly lockFile 41472eb3--npmjs-org-ngmin-ngmin-0-5-0-tgz https://registry.npmjs.org/ngmin/-/ngmin-0.5.0.tgz
+34 verbose lock https://registry.npmjs.org/ngmin/-/ngmin-0.5.0.tgz /Users/jason/.npm/41472eb3--npmjs-org-ngmin-ngmin-0-5-0-tgz.lock
+35 verbose addRemoteTarball [ 'https://registry.npmjs.org/ngmin/-/ngmin-0.5.0.tgz',
+35 verbose addRemoteTarball   '66566eca178a9b578d727c030032d87c83db446a' ]
+36 info retry fetch attempt 1 at 22:57:22
+37 verbose fetch to= /var/folders/0r/9bd7sy1j0dsfxc627rblp8m40000gn/T/npm-14639-hxQBOJNS/registry.npmjs.org/ngmin/-/ngmin-0.5.0.tgz
+38 http GET https://registry.npmjs.org/ngmin/-/ngmin-0.5.0.tgz
+39 http 200 https://registry.npmjs.org/ngmin/-/ngmin-0.5.0.tgz
+40 silly lockFile 41472eb3--npmjs-org-ngmin-ngmin-0-5-0-tgz https://registry.npmjs.org/ngmin/-/ngmin-0.5.0.tgz
+41 silly lockFile 41472eb3--npmjs-org-ngmin-ngmin-0-5-0-tgz https://registry.npmjs.org/ngmin/-/ngmin-0.5.0.tgz
+42 silly lockFile 634c2aa9-ngmin-0-5-0 ngmin@0.5.0
+43 silly lockFile 634c2aa9-ngmin-0-5-0 ngmin@0.5.0
+44 silly lockFile 19e9c11e-ngmin ngmin@
+45 silly lockFile 19e9c11e-ngmin ngmin@
+46 error Error: EACCES, mkdir '/Users/jason/.npm/ngmin/0.5.0'
+46 error  { [Error: EACCES, mkdir '/Users/jason/.npm/ngmin/0.5.0']
+46 error   errno: 3,
+46 error   code: 'EACCES',
+46 error   path: '/Users/jason/.npm/ngmin/0.5.0',
+46 error   parent: 'nutritionManager' }
+47 error Please try running this command again as root/Administrator.
+48 error System Darwin 13.2.0
+49 error command "node" "/usr/local/bin/npm" "install" "ngmin"
+50 error cwd /Users/jason/GitHub/NutritionManager/public
+51 error node -v v0.10.29
+52 error npm -v 1.4.14
+53 error path /Users/jason/.npm/ngmin/0.5.0
+54 error code EACCES
+55 error errno 3
+56 error stack Error: EACCES, mkdir '/Users/jason/.npm/ngmin/0.5.0'
+57 verbose exit [ 3, true ]

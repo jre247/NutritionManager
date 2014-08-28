@@ -41,98 +41,579 @@ angular.element(document).ready(function () {
   angular.bootstrap(document, [ApplicationConfiguration.applicationModuleName]);
 });'use strict';
 // Use Applicaion configuration module to register a new module
-ApplicationConfiguration.registerModule('articles');'use strict';
+ApplicationConfiguration.registerModule('plans');'use strict';
+// Use Applicaion configuration module to register a new module
+ApplicationConfiguration.registerModule('foods');'use strict';
 // Use Applicaion configuration module to register a new module
 ApplicationConfiguration.registerModule('core');'use strict';
 // Use Applicaion configuration module to register a new module
 ApplicationConfiguration.registerModule('users');'use strict';
-// Configuring the Articles module
-angular.module('articles').run([
-  'Menus',
-  function (Menus) {
-    // Set top bar menu items
-    Menus.addMenuItem('topbar', 'Articles', 'articles', 'dropdown', '/articles(/create)?');
-    Menus.addSubMenuItem('topbar', 'articles', 'List Articles', 'articles');
-    Menus.addSubMenuItem('topbar', 'articles', 'New Article', 'articles/create');
-  }
+// Configuring the Plans module
+angular.module('plans').run(['Menus',
+    function(Menus) {
+        // Set top bar menu items
+        Menus.addMenuItem('topbar', 'Plans', 'plans', 'dropdown', '/plans(/create)?');
+        Menus.addSubMenuItem('topbar', 'plans', 'List Plans', 'plans');
+        Menus.addSubMenuItem('topbar', 'plans', 'New Plan', 'plans/create');
+    }
 ]);'use strict';
 // Setting up route
-angular.module('articles').config([
-  '$stateProvider',
-  function ($stateProvider) {
-    // Articles state routing
-    $stateProvider.state('listArticles', {
-      url: '/articles',
-      templateUrl: 'modules/articles/views/list-articles.client.view.html'
-    }).state('createArticle', {
-      url: '/articles/create',
-      templateUrl: 'modules/articles/views/create-article.client.view.html'
-    }).state('viewArticle', {
-      url: '/articles/:articleId',
-      templateUrl: 'modules/articles/views/view-article.client.view.html'
-    }).state('editArticle', {
-      url: '/articles/:articleId/edit',
-      templateUrl: 'modules/articles/views/edit-article.client.view.html'
-    });
-  }
+angular.module('plans').config(['$stateProvider',
+    function($stateProvider) {
+        // Plans state routing
+        $stateProvider.
+            state('listPlans', {
+                url: '/plans',
+                templateUrl: 'modules/plans/views/list-plans.client.view.html'
+            }).
+            state('createPlan', {
+                url: '/plans/create',
+                templateUrl: 'modules/plans/views/view-plan.client.view.html'
+            }).
+            state('viewPlan', {
+                url: '/plans/:planId',
+                //templateUrl: 'modules/plans/views/view-plan.client.view.html'
+                templateUrl: 'modules/plans/views/view-plan.client.view.html'
+            }).
+            state('editPlan', {
+                url: '/plans/:planId/edit',
+                //templateUrl: 'modules/plans/views/edit-plan.client.view.html'
+                templateUrl: 'modules/plans/views/create-plan.client.view.html'
+            });
+    }
 ]);'use strict';
-angular.module('articles').controller('ArticlesController', [
-  '$scope',
-  '$stateParams',
-  '$location',
-  'Authentication',
-  'Articles',
-  function ($scope, $stateParams, $location, Authentication, Articles) {
-    $scope.authentication = Authentication;
-    $scope.create = function () {
-      var article = new Articles({
-          title: this.title,
-          content: this.content
-        });
-      article.$save(function (response) {
-        $location.path('articles/' + response._id);
-      }, function (errorResponse) {
-        $scope.error = errorResponse.data.message;
-      });
-      this.title = '';
-      this.content = '';
+'use strict';
+
+angular.module('plans').controller('PlansController', ['$scope', '$stateParams', '$location', '$timeout', 'Authentication', '$modal', '$log', 'Plans', 'Foods',
+    function($scope, $stateParams, $location, $timeout, Authentication, $modal, $log, Plans, Foods) {
+        window.scope = $scope;
+        window.plans = $scope.plans;
+        $scope.showTotalsAsPercent = false;
+
+        $scope.authentication = Authentication;
+        $scope.meals = [];
+
+
+        $scope.allFoods = Foods.query();
+
+        $scope.mealTypes = [
+            {id: 1, name: 'Breakfast'},
+            {id: 2, name: 'Lunch'},
+            {id: 3, name: 'Dinner'},
+            {id: 4, name: 'Snack'}
+        ];
+
+        $scope.open = function($event) {
+            $event.preventDefault();
+            $event.stopPropagation();
+
+            $scope.opened = true;
+        };
+
+        $scope.dateOptions = {
+            formatYear: 'yy',
+            startingDay: 1
+        };
+
+        $scope.initDate = new Date('2016-15-20');
+
+
+        $scope.create = function() {
+            var plan = new Plans({
+                planDate: $scope.plan.planDate,
+                meals: $scope.plan.meals
+            });
+            plan.$save(function(response) {
+                $location.path('plans/' + response._id);
+            }, function(errorResponse) {
+                $scope.error = errorResponse.data.message;
+            });
+
+            $scope.plan.planDate = '';
+            $scope.plan.meals = [];
+        };
+
+        $scope.copyPlan = function(planCopyModel){
+            var plan = new Plans({
+                planDate: planCopyModel.planDate,
+                meals: planCopyModel.meals
+            });
+            plan.$save(function(response) {
+                $location.path('plans/' + response._id);
+            }, function(errorResponse) {
+                $scope.error = errorResponse.data.message;
+            });
+        };
+
+        $scope.createMeal = function(){
+            var model = {
+                name: '',
+                type: 1,
+                foods: [],
+                totalCalories: 0,
+                totalCarbohydrates: 0,
+                totalFat: 0,
+                totalProtein: 0,
+                isEditable: true,
+                isVisible: true
+            };
+
+            $scope.plan.meals.push(model);
+
+            var meal = $scope.plan.meals[$scope.plan.meals.length - 1];
+
+            $scope.createFood(meal);
+        };
+
+        $scope.editMeal = function(meal){
+            meal.isEditable = true;
+            meal.isVisible = !meal.isVisible;
+        };
+
+        $scope.saveMeal = function(meal){
+            meal.isEditable = false;
+            meal.isVisible = !meal.isVisible;
+        };
+
+        $scope.deleteMeal = function(meal){
+            for (var i in $scope.plan.meals) {
+                if ($scope.plan.meals[i] === meal) {
+                    $scope.plan.meals.splice(i, 1);
+                }
+            }
+
+            calculatePlanTotalMacros($scope.plan);
+        };
+
+        $scope.createFood = function(meal){
+            var model = {
+                name: '',
+                type: '',
+                servings: 1,
+                calories: 0,
+                grams: 0,
+                protein: 0,
+                carbohydrates: 0,
+                fat: 0,
+                foodId: '',
+                isEditable: true
+            };
+
+            meal.foods.push(model);
+        };
+
+        $scope.saveFood = function(food){
+            food.isEditable = false;
+        };
+
+        $scope.editFoodClick = function(food){
+            food.isEditable = true;
+
+            setSelectedFood(food);
+        };
+
+        var setSelectedFood = function(food){
+            if (!food.selectedFood._id){
+                for(var i = 0; i < $scope.allFoods.length; i++){
+                    if (food.selectedFood.foodId === $scope.allFoods[i]._id){
+                        food.selectedFood = $scope.allFoods[i];
+                        break;
+                    }
+                }
+            }
+        };
+
+        $scope.saveAll = function(meal){
+            for(var food = 0; food < meal.foods.length; food++){
+                meal.foods[food].isEditable = false;
+            }
+
+            meal.isEditable = false;
+        };
+
+        $scope.editFood = function(food){
+            food.isEditable = true;
+
+            setSelectedFood(food);
+        };
+
+        $scope.deleteFood = function(food, meal){
+            for(var nMeal = 0; nMeal < $scope.plan.meals.length; nMeal++){
+                if ($scope.plan.meals[nMeal] === meal){
+                    for (var nFood = 0; nFood < meal.foods.length; nFood++){
+                        if (meal.foods[nFood] === food) {
+                            meal.foods.splice(nFood, 1);
+                        }
+                    }
+                }
+            }
+
+            doMealTotaling(meal);
+
+            calculatePlanTotalMacros($scope.plan);
+
+        };
+
+        $scope.remove = function(plan) {
+            if (plan) {
+                plan.$remove();
+
+                for (var i in $scope.plans) {
+                    if ($scope.plans[i] === plan) {
+                        $scope.plans.splice(i, 1);
+                    }
+                }
+            } else {
+                $scope.plan.$remove(function() {
+                    $location.path('plans');
+                });
+            }
+        };
+
+        $scope.savePlan = function(){
+            if (!$scope.plan._id){
+                $scope.create();
+            }
+            else{
+                $scope.update();
+            }
+        };
+
+        $scope.update = function() {
+            var plan = $scope.plan;
+
+            plan.$update(function() {
+                //$location.path('plans/' + plan._id);
+                for (var i = 0; i < $scope.plan.meals.length; i++){
+                    for (var j = 0; j < $scope.plan.meals[i].foods.length; j++){
+                        $scope.plan.meals[i].foods[j].name = $scope.plan.meals[i].foods[j].selectedFood.name;
+                        $scope.plan.meals[i].foods[j].type = $scope.plan.meals[i].foods[j].selectedFood.type;
+                        $scope.plan.meals[i].foods[j].foodId = $scope.plan.meals[i].foods[j].selectedFood.foodId;
+                    }
+
+                    doMealTotaling($scope.plan.meals[i]);
+                }
+
+                calculatePlanTotalMacros($scope.plan);
+
+                $scope.success = true;
+
+                $timeout(function(){$scope.success = false;}, 3000);
+
+            }, function(errorResponse) {
+                $scope.error = errorResponse.data.message;
+            });
+        };
+
+        $scope.find = function() {
+            $scope.plans = Plans.query(
+                function(u, getResponseHeaders)
+                {
+                    for(var i = 0; i < $scope.plans.length; i++) {
+                        for (var nMeal = 0; nMeal < $scope.plans[i].meals.length; nMeal++){
+                            doMealTotaling($scope.plans[i].meals[nMeal]);
+                        }
+
+                        calculatePlanTotalMacros($scope.plans[i]);
+
+                        var planModel = {
+                            planDate: $scope.plans[i].planDate,
+                            calories: $scope.plans[i].totalPlanCalories,
+                            protein: $scope.plans[i].totalPlanProtein,
+                            carbs: $scope.plans[i].totalPlanCarbs,
+                            fat: $scope.plans[i].totalPlanFat,
+                            _id: $scope.plans[i]._id
+                        }
+
+                        $scope.plansCollection.push(planModel);
+                    }
+                }
+            );
+
+
+        };
+
+        $scope.findOne = function() {
+            if ($stateParams.planId) {
+                $scope.plan = Plans.get({
+                    planId: $stateParams.planId
+                }, function (u, getResponseHeaders) {
+                    for (var i = 0; i < $scope.plan.meals.length; i++) {
+                        var carbsTotal = 0, proteinTotal = 0, caloriesTotal = 0, fatTotal = 0;
+
+                        for (var j = 0; j < $scope.plan.meals[i].foods.length; j++) {
+                            $scope.plan.meals[i].foods[j].name = $scope.plan.meals[i].foods[j].selectedFood.name;
+                            $scope.plan.meals[i].foods[j].type = $scope.plan.meals[i].foods[j].selectedFood.type;
+                            $scope.plan.meals[i].foods[j].foodId = $scope.plan.meals[i].foods[j].selectedFood.foodId;
+
+                            var carbs = $scope.plan.meals[i].foods[j].carbohydrates;
+
+                            carbsTotal += carbs;
+                            proteinTotal += $scope.plan.meals[i].foods[j].protein;
+                            fatTotal += $scope.plan.meals[i].foods[j].fat;
+                            caloriesTotal += $scope.plan.meals[i].foods[j].calories;
+                        }
+
+                        $scope.plan.meals[i].totalCarbohydrates = carbsTotal;
+                        $scope.plan.meals[i].totalCalories = caloriesTotal;
+                        $scope.plan.meals[i].totalProtein = proteinTotal;
+                        $scope.plan.meals[i].totalFat = fatTotal;
+
+                        calculatePlanTotalMacros($scope.plan);
+                    }
+                });
+            }
+            else{
+                $scope.plan =  {data: null, meals: null};
+                $scope.plan.meals = [];
+            }
+        };
+
+        $scope.foodSelectionChange = function(food){
+            food.type = food.selectedFood.type;
+            food.calories = food.servings * food.selectedFood.calories;
+            food.fat = food.servings * food.selectedFood.fat;
+            food.protein = food.servings * food.selectedFood.protein;
+            food.carbohydrates = food.servings * food.selectedFood.carbohydrates;
+            food.grams = food.servings * food.selectedFood.grams;
+
+            food.name = food.selectedFood.name;
+            food.selectedFood.foodId = food.selectedFood._id;
+            food.type = food.selectedFood.type;
+
+            food.foodId = food.selectedFood._id;
+        };
+
+        $scope.foodServingsChange = function(food, meal){
+
+            food.calories = food.servings * food.selectedFood.calories;
+            food.fat = food.servings * food.selectedFood.fat;
+            food.protein = food.servings * food.selectedFood.protein;
+            food.carbohydrates = food.servings * food.selectedFood.carbohydrates;
+            food.grams = food.servings * food.selectedFood.grams;
+
+            doMealTotaling(meal);
+
+            calculatePlanTotalMacros($scope.plan);
+        };
+
+        var doMealTotaling = function(meal){
+            var carbsTotal = 0, fatTotal = 0, proteinTotal = 0, caloriesTotal = 0;
+
+            for(var i = 0; i < meal.foods.length; i++){
+                var foodCarbs = meal.foods[i].carbohydrates;
+
+                carbsTotal += foodCarbs;
+                fatTotal += meal.foods[i].fat;
+                proteinTotal += meal.foods[i].protein;
+                caloriesTotal += meal.foods[i].calories;
+            }
+
+            meal.totalCarbohydrates = carbsTotal;
+            meal.totalProtein = proteinTotal;
+            meal.totalCalories = caloriesTotal;
+            meal.totalFat = fatTotal;
+        };
+
+        var calculatePlanTotalMacros = function(plan){
+            var carbsTotal = 0, fatTotal = 0, proteinTotal = 0, caloriesTotal = 0;
+
+            for (var i = 0; i < plan.meals.length; i++){
+                carbsTotal += plan.meals[i].totalCarbohydrates;
+                fatTotal += plan.meals[i].totalFat;
+                proteinTotal += plan.meals[i].totalProtein;
+                caloriesTotal += plan.meals[i].totalCalories;
+            }
+
+            plan.totalPlanCarbs = carbsTotal;
+            plan.totalPlanFat = fatTotal;
+            plan.totalPlanProtein = proteinTotal;
+            plan.totalPlanCalories = caloriesTotal;
+
+            //calculate totals as percent
+            var macroTotals = carbsTotal + fatTotal + proteinTotal;
+            plan.totalPlanCarbsAsPercent = (carbsTotal / macroTotals) * 100;
+            plan.totalPlanFatAsPercent = (fatTotal / macroTotals) * 100;
+            plan.totalPlanProteinAsPercent = (proteinTotal / macroTotals) * 100;
+        };
+
+        $scope.toggleTotalsAsPercent = function(){
+            $scope.showTotalsAsPercent = !$scope.showTotalsAsPercent;
+        };
+
+        $scope.toggleMealVisibility = function(meal){
+            meal.isVisible = !meal.isVisible;
+        };
+
+        $scope.getMealTypeName = function(type){
+            var mealTypeName;
+
+            for (var i = 0; i < $scope.mealTypes.length; i++){
+                var mealType = $scope.mealTypes[i];
+
+                if (mealType.id == type){
+                    mealTypeName = mealType.name;
+                    break;
+                }
+            }
+
+            return mealTypeName;
+        };
+
+        //sorting code
+        // data
+        $scope.orderByField = 'planDate';
+        $scope.reverseSort = false;
+        scope.plansCollection = [];
+
+
+
+
+
+        //dialog code
+        //$scope.items = ['item1', 'item2', 'item3'];
+        $scope.openCopyPlanDialog = function (size) {
+
+            var modalInstance = $modal.open({
+                templateUrl: 'myModalContent.html',
+                controller: ModalInstanceCtrl,
+                size: size,
+                resolve: {
+                    dialogMealsShort: function () {
+                        var mealsAry = [];
+
+                        for(var i = 0; i < $scope.plan.meals.length; i++){
+                            var mealModel = {};
+                            mealModel.id = $scope.plan.meals[i]._id;
+
+                            var mealType = $scope.mealTypes[$scope.plan.meals[i].type - 1];
+
+                            if (mealType && mealType.id >= 0) {
+                                mealModel.type = mealType.name;
+                            }
+                            else{
+                                mealModel.type = 'N/A';
+                            }
+
+                            mealsAry.push(mealModel);
+                        }
+
+                        return mealsAry;
+                    },
+                    dialogMealsDetailed: function () {
+                        return $scope.plan.meals;
+                    },
+                    parentScope: function(){
+                        return $scope;
+                    }
+                }
+            });
+
+            modalInstance.result.then(function (planCopyModel) {
+                //$scope.dialogSelectedMealType = selectedItem;
+                $scope.copyPlan(planCopyModel);
+
+            }, function () {
+                $log.info('Modal dismissed at: ' + new Date());
+            });
+        };
+    }
+]);
+
+
+var ModalInstanceCtrl = function ($scope, $modalInstance, parentScope, dialogMealsDetailed, dialogMealsShort) {
+    $scope.selectedMealTypes = dialogMealsDetailed[0];
+    $scope.dialogMealsDetailed = dialogMealsDetailed;
+    $scope.dialogMealsShort = dialogMealsShort;
+    $scope.copyPlanDate = new Date();
+    $scope.parentScope = parentScope;
+
+    $scope.dialogOpenCopyPlanDate = function($event, datepicker) {
+
+        //if (!$scope[datepicker]) {
+        $event.preventDefault();
+        $event.stopPropagation();
+        // }
+
+        $scope.parentScope.opened = false;
+        $scope[datepicker] = false;
+
+        $scope[datepicker] = true;
     };
-    $scope.remove = function (article) {
-      if (article) {
-        article.$remove();
-        for (var i in $scope.articles) {
-          if ($scope.articles[i] === article) {
-            $scope.articles.splice(i, 1);
-          }
+
+    $scope.copyPlanDateOptions = {
+        formatYear: 'yy',
+        startingDay: 1
+    };
+
+    $scope.initDate = new Date('2016-15-20');
+
+
+    $scope.copyPlanDateChange = function(){
+        alert("changed!");
+    };
+
+    $scope.selected = {
+        meals: [$scope.dialogMealsShort[0].id],
+        planDate: $scope.copyPlanDate
+    };
+
+    $scope.selectAllMeals = function(){
+        for (var i = 0; i < dialogMealsShort.length; i++){
+            var isFound = false;
+
+            for(var j = 0; j < $scope.selected.meals.length; j++){
+                if ($scope.selected.meals[j] === dialogMealsShort[i].id){
+                    isFound = true;
+                    break;
+                }
+            }
+
+            if(!isFound) {
+                $scope.selected.meals.push(dialogMealsShort[i].id);
+            }
         }
-      } else {
-        $scope.article.$remove(function () {
-          $location.path('articles');
+
+        // $scope.selected.meals = dialogMealsShort;
+    };
+
+    $scope.ok = function () {
+        var selectedMeals = $scope.selected.meals;
+
+        if (typeof selectedMeals[0] === "string"){
+            var selectedMealsDetailed = [];
+
+            for (var i = 0; i < selectedMeals.length; i++){
+                for (var j = 0; j < dialogMealsDetailed.length; j++) {
+                    if (selectedMeals[i] === dialogMealsDetailed[j]._id) {
+                        selectedMealsDetailed.push(dialogMealsDetailed[j]);
+                    }
+                }
+            }
+
+            $scope.selected.meals = selectedMealsDetailed;
+        }
+
+        $modalInstance.close($scope.selected);
+    };
+
+    $scope.cancel = function () {
+        $modalInstance.dismiss('cancel');
+    };
+};'use strict';
+'use strict';
+
+//Plans service used for communicating with the plans REST endpoints
+angular.module('plans').factory('Plans', ['$resource',
+    function($resource) {
+        return $resource('plans/:planId', {
+            planId: '@_id'
+        }, {
+            update: {
+                method: 'PUT'
+            }
         });
-      }
-    };
-    $scope.update = function () {
-      var article = $scope.article;
-      article.$update(function () {
-        $location.path('articles/' + article._id);
-      }, function (errorResponse) {
-        $scope.error = errorResponse.data.message;
-      });
-    };
-    $scope.find = function () {
-      $scope.articles = Articles.query();
-    };
-    $scope.findOne = function () {
-      $scope.article = Articles.get({ articleId: $stateParams.articleId });
-    };
-  }
-]);'use strict';
-//Articles service used for communicating with the articles REST endpoints
-angular.module('articles').factory('Articles', [
-  '$resource',
-  function ($resource) {
-    return $resource('articles/:articleId', { articleId: '@_id' }, { update: { method: 'PUT' } });
-  }
+    }
 ]);'use strict';
 // Setting up route
 angular.module('core').config([
@@ -458,4 +939,124 @@ angular.module('users').factory('Users', [
   function ($resource) {
     return $resource('users', {}, { update: { method: 'PUT' } });
   }
+]);
+/**
+ * Created by jason on 8/10/14.
+ */
+'use strict';
+
+// Setting up route
+angular.module('foods').config(['$stateProvider',
+    function($stateProvider) {
+        // Foods state routing
+        $stateProvider.
+            state('listFoods', {
+                url: '/foods',
+                templateUrl: 'modules/foods/views/list-foods.client.view.html'
+            }).
+            state('createFood', {
+                url: '/foods/create',
+                templateUrl: 'modules/foods/views/create-food.client.view.html'
+            }).
+            state('viewFood', {
+                url: '/foods/:foodId',
+                templateUrl: 'modules/foods/views/view-food.client.view.html'
+            }).
+            state('editFood', {
+                url: '/foods/:foodId/edit',
+                templateUrl: 'modules/foods/views/edit-food.client.view.html'
+            });
+    }
+]);
+/**
+ * Created by jason on 8/10/14.
+ */
+'use strict';
+
+angular.module('foods').controller('FoodsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Foods',
+    function($scope, $stateParams, $location, Authentication, Foods) {
+        window.scope = $scope;
+
+        // $scope.authentication = Authentication;
+
+        $scope.create = function() {
+            var food = new Foods({
+                name: this.name,
+                calories: this.calories,
+                protein: $scope.protein,
+                fat: $scope.fat,
+                carbohydrates: $scope.carbohydrates,
+                grams: $scope.grams,
+                type: $scope.type
+                //milliliters: $scope.milliliters
+            });
+            food.$save(function(response) {
+                $location.path('foods');
+            }, function(errorResponse) {
+                $scope.error = errorResponse.data.message;
+            });
+
+            this.name = '';
+            this.calories = '';
+            this.protein = '';
+            this.fat = '';
+            this.carbohydrates = '';
+            this.grams = '';
+            this.type = '';
+            //this.milliliters = '';
+        };
+
+        $scope.update = function() {
+            var food = $scope.food;
+
+            food.$update(function() {
+                $location.path('foods');
+            }, function(errorResponse) {
+                $scope.error = errorResponse.data.message;
+            });
+        };
+
+        $scope.remove = function(food) {
+            if (food) {
+                food.$remove();
+
+                for (var i in $scope.foods) {
+                    if ($scope.foods[i] === food) {
+                        $scope.foods.splice(i, 1);
+                    }
+                }
+            } else {
+                $scope.food.$remove(function() {
+                    $location.path('foods');
+                });
+            }
+        };
+
+        $scope.find = function() {
+            $scope.foods = Foods.query();
+        };
+
+        $scope.findOne = function() {
+            $scope.food = Foods.get({
+                foodId: $stateParams.foodId
+            });
+        };
+    }
+]);
+/**
+ * Created by jason on 8/10/14.
+ */
+'use strict';
+
+//Foods service used for communicating with the foods REST endpoints
+angular.module('foods').factory('Foods', ['$resource',
+    function($resource) {
+        return $resource('foods/:foodId', {
+            foodId: '@_id'
+        }, {
+            update: {
+                method: 'PUT'
+            }
+        });
+    }
 ]);
