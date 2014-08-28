@@ -2,7 +2,7 @@
 // Init the application configuration module for AngularJS application
 var ApplicationConfiguration = function () {
     // Init module configuration options
-    var applicationModuleName = ‘nutrition-manager’;
+    var applicationModuleName = 'nutrition-manager';
     var applicationModuleVendorDependencies = [
         'ngResource',
         'ngAnimate',
@@ -55,6 +55,15 @@ angular.module('plans').run(['Menus',
         Menus.addMenuItem('topbar', 'Plans', 'plans', 'dropdown', '/plans(/create)?');
         Menus.addSubMenuItem('topbar', 'plans', 'List Plans', 'plans');
         Menus.addSubMenuItem('topbar', 'plans', 'New Plan', 'plans/create');
+    }
+]);
+// Configuring the Articles module
+angular.module('foods').run(['Menus',
+    function(Menus) {
+        // Set top bar menu items
+        Menus.addMenuItem('topbar', 'Foods', 'foods', 'dropdown', '/foods(/create)?');
+        Menus.addSubMenuItem('topbar', 'foods', 'List Foods', 'foods');
+        Menus.addSubMenuItem('topbar', 'foods', 'New Food', 'foods/create');
     }
 ]);'use strict';
 // Setting up route
