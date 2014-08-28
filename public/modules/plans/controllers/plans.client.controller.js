@@ -285,7 +285,7 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
             }
 		};
 
-        $scope.foodSelectionChange = function(food){
+        $scope.foodSelectionChange = function(food, meal){
             food.type = food.selectedFood.type;
             food.calories = food.servings * food.selectedFood.calories;
             food.fat = food.servings * food.selectedFood.fat;
@@ -298,6 +298,10 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
             food.type = food.selectedFood.type;
 
             food.foodId = food.selectedFood._id;
+
+            doMealTotaling(meal);
+
+            calculatePlanTotalMacros($scope.plan);
         };
 
         $scope.foodServingsChange = function(food, meal){
