@@ -38,7 +38,7 @@
 
 
 <fieldset id="wrapper">
-<div id="content" class="form-group" style="height: 72vh; overflow-y: scroll;overflow-x:hidden; margin-bottom: 3px;">
+<div id="content" class="form-group" style="height: 72vh; overflow-y: auto;overflow-x:hidden; margin-bottom: 3px;">
     <accordion ng-show="plan.meals.length > 0" class="plansAccordion" style="..." close-others="oneAtATime">
 
         <accordion-group is-open="meal.isVisible" data-ng-repeat="meal in plan.meals" >
@@ -54,125 +54,177 @@
                 </div>
             </accordion-heading>
 
-                <div style="padding: 5px; min-width: 110vh;">
+                <div  class="planMealDesktop">
 
-                <div style="display: inline-block;vertical-align: top">
-                    <input type="button"  data-ng-click="createFood(meal);" value="+"/>
+                    <div style="display: inline-block;vertical-align: top">
+                        <input type="button"  data-ng-click="createFood(meal);" value="+"/>
 
-                    <input type="button" style="margin-left:10px;"  data-ng-click="saveAll(meal);" value="Save All"/>
+                        <input type="button" style="margin-left:10px;"  data-ng-click="saveAll(meal);" value="Save All"/>
+                    </div>
+
+                    <input style="margin-left: 15px;float:right;" type="button" value="Delete Meal" data-ng-click="deleteMeal(meal);"/>
+
+
+
+                    <div class="plansMobileGrid">
+                        <ul>
+                            <li data-ng-repeat="food in meal.foods">
+                                <div data-ng-show="food.isEditable">
+                                    <div class="controls">
+                                        <select data-ng-model="food.selectedFood"  data-ng-change="foodSelectionChange(food, meal)" ng-options="f as f.name for f in allFoods"></select>
+                                    </div>
+
+                                    <div class="controls" style="padding-top: 3px;">
+                                        <label>Servings:</label>
+                                        <div style="display:inline-block; color: rgb(211, 139, 12)">
+                                            <input data-ng-change="foodServingsChange(food, meal)" style="width: 60px;" data-ng-model="food.servings" id="servings_mobile" class="form-control" cols="3" rows="3"/>
+                                        </div>
+                                   </div>
+                                </div>
+                                <div data-ng-show="food.isEditable == false">
+                                    <div class="controls"   data-ng-click="editFoodClick(food)" style="font-weight: bold; font-size: 15px;">
+                                        <span data-ng-bind="food.name"></span>
+                                    </div>
+                                    <div class="controls" data-ng-click="editFoodClick(food)" style="color: rgb(211, 139, 12);padding-top: 3px;">
+                                        Servings: <span data-ng-bind="food.servings"></span>
+                                    </div>
+
+                                </div>
+
+                                <div style="font-size: 12px">
+                                    <div>
+                                        <span data-ng-bind="food.calories"></span> Calories,
+                                        <span data-ng-bind="food.carbohydrates"></span>g Carbs,
+                                        <span data-ng-bind="food.protein"></span>g Protein,
+
+                                    </div>
+                                    <div>
+                                        <span data-ng-bind="food.fat"></span>g Fat,
+                                        <span data-ng-bind="food.grams"></span>g Grams
+                                    </div>
+                                </div>
+
+                                <div style="padding-top: 9px; padding-top: 3px;color: rgb(66, 66, 207); font-weight: bold;font-size: 12px;">
+                                    Totals:
+                                    <span data-ng-bind="meal.totalCalories"></span> Calories,
+                                    <span data-ng-bind="meal.totalCarbohydrates"></span>g Carbs,
+                                    <span data-ng-bind="meal.totalProtein"></span>g Protein,
+
+                                    <span data-ng-bind="meal.totalFat"></span>g Fat
+                                </div>
+
+                            </li>
+                        </ul>
+
+
+
+                    </div>
+
+                    <table data-ng-show="meal.foods.length > 0" class="plansDesktopGrid" style="margin-top: 6px;width:100%;">
+                        <thead>
+                        <tr>
+                            <th width="20%">Name</th>
+                            <!--<th width="7%">Type</th>-->
+                            <th style="min-width: 40px;"> Servings</th>
+                            <th style="min-width: 40px;">Calories</th>
+                            <th style="min-width: 40px;">Carbs</th>
+                            <th style="min-width: 40px;">Protein</th>
+                            <th style="min-width: 40px;">Fat</th>
+                            <th style="min-width: 40px;">Grams</th>
+                            <th>&nbsp;</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        <tr height="35px" data-ng-repeat="food in meal.foods">
+                            <td style="padding-right: 10px;">
+                                <div class="controls" data-ng-show="food.isEditable">
+                                    <select data-ng-model="food.selectedFood" style="max-width: 160px;" data-ng-change="foodSelectionChange(food, meal)" ng-options="f as f.name for f in allFoods"></select>
+
+                                </div>
+
+                                <div class="controls" style="width: 160px;" data-ng-show="food.isEditable == false" data-ng-click="editFoodClick(food)">
+                                    <span data-ng-bind="food.name"></span>
+                                </div>
+                            </td>
+                            <!--<td>-->
+                                <!--<div class="controls" style="width: 60px;">-->
+                                    <!--<span data-ng-bind="food.type" id="foodType"  />-->
+                                <!--</div>-->
+                            <!--</td>-->
+                            <td>
+                                <div class="controls" style="width: 70px;" data-ng-show="food.isEditable">
+                                    <input data-ng-change="foodServingsChange(food, meal)" style="width: 60px;" data-ng-model="food.servings" id="servings" class="form-control" cols="3" rows="3"/>
+                                </div>
+
+                                <div class="controls" style="width: 70px;" data-ng-show="food.isEditable == false" data-ng-click="editFoodClick(food)">
+                                    <span data-ng-bind="food.servings"></span>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="controls" style="width: 60px;">
+                                    <span data-ng-bind="food.calories"></span>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="controls" style="width: 60px;">
+                                    <span data-ng-bind="food.carbohydrates"></span>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="controls" style="width: 60px;">
+                                    <span data-ng-bind="food.protein"></span>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="controls" style="width: 60px;">
+                                    <span data-ng-bind="food.fat"></span>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="controls" style="width: 60px;">
+                                    <span data-ng-bind="food.grams"></span>
+                                </div>
+                            </td>
+                            <td width="15px">
+                                <input style="margin-left: 15px;" data-ng-show="food.isEditable == false" type="button" value="Edit" data-ng-click="editFood(food);"/>
+
+                                <input data-ng-show="food.isEditable" type="button" style="margin-left: 15px;" value="Save" data-ng-click="saveFood(food);"/>
+                            </td>
+                            <td>
+                                <input style="margin-left: 15px;" type="button" value="Delete" data-ng-click="deleteFood(food, meal);"/>
+                            </td>
+                        </tr>
+
+                        <tr style="font-weight: bold;color: rgb(33, 51, 184);border-top: 1px solid lightgray;">
+                            <td>
+                                Totals:
+                            </td>
+                            <td>
+                                &nbsp;
+                            </td>
+                            <!--<td>-->
+                                <!--&nbsp;-->
+                            <!--</td>-->
+                            <td>
+                                <span data-ng-bind="meal.totalCalories"></span>
+                            </td>
+                            <td>
+                                <span data-ng-bind="meal.totalCarbohydrates"></span>
+                            </td>
+                            <td>
+                                <span data-ng-bind="meal.totalProtein"></span>
+                            </td>
+                            <td>
+                                <span data-ng-bind="meal.totalFat"></span>
+                            </td>
+                            <td>
+                                &nbsp;
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
                 </div>
-
-                <input style="margin-left: 15px;float:right;" type="button" value="Delete Meal" data-ng-click="deleteMeal(meal);"/>
-
-                <!--<div class="hidden-desktop hidden-tablet visible-phone">-->
-                <!--Edit-->
-                <!--</div>-->
-                <!---->
-                <table data-ng-show="meal.foods.length > 0" style="margin-top: 6px;overflow-x:scroll;width:100%;">
-                    <thead>
-                    <tr>
-                        <th width="20%">Name</th>
-                        <!--<th width="7%">Type</th>-->
-                        <th style="min-width: 40px;"> Servings</th>
-                        <th style="min-width: 40px;">Calories</th>
-                        <th style="min-width: 40px;">Carbs</th>
-                        <th style="min-width: 40px;">Protein</th>
-                        <th style="min-width: 40px;">Fat</th>
-                        <th style="min-width: 40px;">Grams</th>
-                        <th>&nbsp;</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-
-                    <tr height="35px" data-ng-repeat="food in meal.foods">
-                        <td style="padding-right: 10px;">
-                            <div class="controls" data-ng-show="food.isEditable">
-                                <select data-ng-model="food.selectedFood" style="max-width: 160px;" data-ng-change="foodSelectionChange(food, meal)" ng-options="f as f.name for f in allFoods"></select>
-
-                            </div>
-
-                            <div class="controls" style="width: 160px;" data-ng-show="food.isEditable == false" data-ng-click="editFoodClick(food)">
-                                <span data-ng-bind="food.name"></span>
-                            </div>
-                        </td>
-                        <!--<td>-->
-                            <!--<div class="controls" style="width: 60px;">-->
-                                <!--<span data-ng-bind="food.type" id="foodType"  />-->
-                            <!--</div>-->
-                        <!--</td>-->
-                        <td>
-                            <div class="controls" style="width: 70px;" data-ng-show="food.isEditable">
-                                <input data-ng-change="foodServingsChange(food, meal)" style="width: 60px;" data-ng-model="food.servings" id="servings" class="form-control" cols="3" rows="3"/>
-                            </div>
-
-                            <div class="controls" style="width: 70px;" data-ng-show="food.isEditable == false" data-ng-click="editFoodClick(food)">
-                                <span data-ng-bind="food.servings"></span>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="controls" style="width: 60px;">
-                                <span data-ng-bind="food.calories"></span>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="controls" style="width: 60px;">
-                                <span data-ng-bind="food.carbohydrates"></span>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="controls" style="width: 60px;">
-                                <span data-ng-bind="food.protein"></span>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="controls" style="width: 60px;">
-                                <span data-ng-bind="food.fat"></span>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="controls" style="width: 60px;">
-                                <span data-ng-bind="food.grams"></span>
-                            </div>
-                        </td>
-                        <td width="15px">
-                            <input style="margin-left: 15px;" data-ng-show="food.isEditable == false" type="button" value="Edit" data-ng-click="editFood(food);"/>
-
-                            <input data-ng-show="food.isEditable" type="button" style="margin-left: 15px;" value="Save" data-ng-click="saveFood(food);"/>
-                        </td>
-                        <td>
-                            <input style="margin-left: 15px;" type="button" value="Delete" data-ng-click="deleteFood(food, meal);"/>
-                        </td>
-                    </tr>
-
-                    <tr style="font-weight: bold;color: rgb(33, 51, 184);border-top: 1px solid lightgray;">
-                        <td>
-                            Totals:
-                        </td>
-                        <td>
-                            &nbsp;
-                        </td>
-                        <!--<td>-->
-                            <!--&nbsp;-->
-                        <!--</td>-->
-                        <td>
-                            <span data-ng-bind="meal.totalCalories"></span>
-                        </td>
-                        <td>
-                            <span data-ng-bind="meal.totalCarbohydrates"></span>
-                        </td>
-                        <td>
-                            <span data-ng-bind="meal.totalProtein"></span>
-                        </td>
-                        <td>
-                            <span data-ng-bind="meal.totalFat"></span>
-                        </td>
-                        <td>
-                            &nbsp;
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
 
         </accordion-group>
     </accordion>

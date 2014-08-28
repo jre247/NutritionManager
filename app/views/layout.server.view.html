@@ -48,6 +48,30 @@
         }
 
 
+        @media (max-width: 1000px) {
+            .plansMobileGrid {
+                display: block;
+            }
+            .plansDesktopGrid {
+                display: none;
+            }
+            .planMealDesktop{
+                width:100%;
+            }
+        }
+
+        @media (min-width: 1001px) {
+            .plansDesktopGrid {
+                display: block;
+                padding: 5px;
+            }
+            .plansMobileGrid {
+                display: none;
+            }
+            .planMealDesktop{
+                min-width: 110vh;
+            }
+        }
 
         /*#wrapper {*/
             /*min-height:100%;*/
