@@ -17,6 +17,7 @@
 		"postinstall": "bower install --config.interactive=false"
 	},
 	"dependencies": {
+        "eventemitter3": "*",
 		"express": "~4.2.0",
 		"express-session": "~1.1.0",
 		"body-parser": "~1.2.0",
