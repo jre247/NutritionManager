@@ -110,12 +110,22 @@
                         </ul>
 
                         <div style="padding-top: 9px; padding-top: 3px;color: rgb(66, 66, 207); font-weight: bold;font-size: 12px;">
-                            Totals:
-                            <span style="padding-left: 6px;" data-ng-bind="meal.totalCalories"></span> Calories,
-                            <span data-ng-bind="meal.totalCarbohydrates"></span>g Carbs,
-                            <span data-ng-bind="meal.totalProtein"></span>g Protein,
 
-                            <span data-ng-bind="meal.totalFat"></span>g Fat
+                            <div style="width: 42px; display:inline-block;">Totals:</div>
+
+                            <div style="display:inline-block;">
+
+                                <span  data-ng-bind="meal.totalCalories"></span> Calories,
+                                <span data-ng-bind="meal.totalCarbohydrates"></span>g Carbs,
+
+                            </div>
+
+                            <div >
+                                <div style="width: 42px; display:inline-block;">&nbsp;</div>
+                                <span data-ng-bind="meal.totalProtein"></span>g Protein,
+
+                                <span data-ng-bind="meal.totalFat"></span>g Fat
+                            </div>
                         </div>
 
 
