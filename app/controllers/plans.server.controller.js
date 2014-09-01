@@ -74,6 +74,11 @@ exports.create = function(req, res) {
                         message: getErrorMessage(err)
                     });
                 } else {
+                    var testPlanDateDb = planDate;
+                    var testPlanUserIdDb = req.user.id;
+                    planToSave.testPlanDateDb = testPlanDateDb;
+                    planToSave.testPlanUserIdDb = testPlanUserIdDb;
+
                     res.jsonp(planToSave);
                 }
             });

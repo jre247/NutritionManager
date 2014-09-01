@@ -12,6 +12,12 @@ var mongoose = require('mongoose'),
  * Plan Schema
  */
 var PlanSchema = new Schema({
+    testPlanDateDb:{
+        type: Date
+    },
+    testPlanUserIdDb:{
+        type: String
+    },
 	created: {
 		type: Date,
 		default: Date.now
