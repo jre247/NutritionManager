@@ -5,12 +5,12 @@
 <div class="col-md-12">
 <form class="form-horizontal" data-ng-init="findOne()" novalidate>
 <fieldset>
-    <div class="form-group">
+    <div class="form-group" style="margin-bottom: 1px;">
         <div class="planDetailsSection" style="display:inline-block;vertical-align: top;">
-            <label class="control-label" for="planDate">Plan Date</label>
+            <!--<label class="control-label" for="planDate">Plan Date</label>-->
 
             <div class="row">
-                <div class="col-md-6" style="width: 153px;">
+                <div class="col-md-6" style="width: 153px;padding-top: 8px;">
                     <p class="input-group">
                        <input type="text" class="form-control" style="padding: 4px 8px;" id="planDate" datepicker-popup="{{format}}" ng-model="plan.planDate" is-open="opened" min-date="minDate" max-date="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
                       <span class="input-group-btn">
@@ -22,7 +22,7 @@
         </div>
 
 
-        <div class=" planDetailsSection" style="display: inline-block; margin-top: 25px;float: right;">
+        <div class=" planDetailsSection" style="display: inline-block; margin-top: 9px;float: right;">
             <input type="button" class="btn btn-default" style="margin-right: 5px; padding: 4px 9px;" data-ng-click="createMeal();" value="+"/>
 
             <button class="btn btn-default" style="margin-right: 5px; padding: 4px 9px;" ng-click="openCopyPlanDialog()">Copy</button>
@@ -48,30 +48,30 @@
 
                     <select ng-model="meal.type" data-ng-click="meal.isVisible = !meal.isVisible" data-ng-show="meal.isEditable" ng-options="t.id as t.name for t in mealTypes" style="font-size: 16px;vertical-align: top;"></select>
 
-                    <input style="margin-left: 15px;float:right;" type="button" value="Save" data-ng-show="meal.isEditable" data-ng-click="saveMeal(meal);"/>
+                    <!--<input style="margin-left: 15px;float:right;" type="button" value="Save" data-ng-show="meal.isEditable" data-ng-click="saveMeal(meal);"/>-->
 
                     <input style="margin-left: 15px;float:right;" type="button" value="Edit" data-ng-show="meal.isEditable == false" data-ng-click="editMeal(meal);"/>
                 </div>
             </accordion-heading>
 
-                <div  class="planMealDesktop">
+                <div class="planMealDesktop">
 
                     <div style="display: inline-block;vertical-align: top">
                         <input type="button"  data-ng-click="createFood(meal);" value="+"/>
 
-                        <input type="button" style="margin-left:10px;"  data-ng-click="saveAll(meal);" value="Save All"/>
+                        <!--<input type="button" style="margin-left:10px;"  data-ng-click="saveAll(meal);" value="Save All"/>-->
                     </div>
 
                     <input style="margin-left: 15px;float:right;" type="button" value="Delete Meal" data-ng-click="deleteMeal(meal);"/>
 
 
 
-                    <div class="plansMobileGrid">
+                    <div class="plansMobileGrid" style="margin-top: 5px;">
                         <ul>
                             <li data-ng-repeat="food in meal.foods">
                                 <div data-ng-show="food.isEditable">
                                     <div class="controls">
-                                        <select data-ng-model="food.selectedFood"  data-ng-change="foodSelectionChange(food, meal)" ng-options="f as f.name for f in allFoods"></select>
+                                        <select data-ng-model="food.selectedFood" data-ng-click="foodClick(food)"  data-ng-change="foodSelectionChange(food, meal)" data-ng-blur="foodBlur(food)" ng-options="f as f.name for f in allFoods"></select>
 
                                         <span tooltip="Delete" class="deleteBtn" data-ng-click="deleteFood(food, meal);">x</span>
                                     </div>
@@ -79,7 +79,7 @@
                                     <div class="controls" style="padding-top: 3px;">
                                         <label>Servings:</label>
                                         <div style="display:inline-block; color: rgb(211, 139, 12)">
-                                            <input data-ng-change="foodServingsChange(food, meal)" style="width: 60px;" data-ng-model="food.servings" id="servings_mobile" class="form-control" cols="3" rows="3"/>
+                                            <input data-ng-focus="food.hasFocus==true" data-ng-change="foodServingsChange(food, meal)" data-ng-click="foodClick(food)" data-ng-blur="foodBlur(food)" style="width: 60px;" data-ng-model="food.servings" id="servings_mobile" class="form-control" cols="3" rows="3"/>
                                         </div>
                                    </div>
                                 </div>
@@ -89,13 +89,13 @@
                                         <span tooltip="Delete" class="deleteBtn" data-ng-click="deleteFood(food, meal);">x</span>
 
                                     </div>
-                                    <div class="controls" data-ng-click="editFoodClick(food)" style="color: rgb(211, 139, 12);padding-top: 3px;">
-                                        Servings: <span data-ng-bind="food.servings"></span>
+                                    <div class="controls" data-ng-click="editFoodClick(food)" ng-blur="food.isEditable=false" style="color: rgb(211, 139, 12);padding-top: 3px;">
+                                        Servings: <span data-ng-click="food.hasFocus=true" data-ng-bind="food.servings"></span>
                                     </div>
 
                                 </div>
 
-                                <div style="font-size: 12px">
+                                <div style="font-size: 12.5px" class="text-muted">
                                     <div>
                                         <span data-ng-bind="food.calories | number:1"></span> Calories,
                                         <span data-ng-bind="food.carbohydrates | number:1"></span>g Carbs,
@@ -113,7 +113,7 @@
                             </li>
                         </ul>
 
-                        <div style="padding-top: 9px; padding-top: 3px;color: rgb(66, 66, 207); font-weight: bold;font-size: 12px;">
+                        <div style="padding-top: 9px; padding-top: 3px;color: rgb(66, 66, 207); font-weight: bold;font-size: 12.5px;">
 
                             <div style="width: 42px; display:inline-block;">Totals:</div>
 
@@ -155,7 +155,7 @@
                         <tr height="35px" data-ng-repeat="food in meal.foods">
                             <td style="padding-right: 10px;">
                                 <div class="controls" data-ng-show="food.isEditable">
-                                    <select data-ng-model="food.selectedFood" data-ng-change="foodSelectionChange(food, meal)" ng-options="f as f.name for f in allFoods"></select>
+                                    <select data-ng-model="food.selectedFood" data-ng-change="foodSelectionChange(food, meal)" data-ng-click="foodClick(food)"  ng-blur="foodBlur(food)" ng-options="f as f.name for f in allFoods"></select>
 
                                 </div>
 
@@ -170,7 +170,7 @@
                             <!--</td>-->
                             <td>
                                 <div class="controls" style="width: 70px;" data-ng-show="food.isEditable">
-                                    <input data-ng-change="foodServingsChange(food, meal)" style="width: 60px;" data-ng-model="food.servings" id="servings" class="form-control" cols="3" rows="3"/>
+                                    <input  data-ng-change="foodServingsChange(food, meal)" data-ng-click="foodClick(food)" style="width: 60px;" data-ng-model="food.servings" id="servings" ng-blur="foodBlur(food)" class="form-control" cols="3" rows="3"/>
                                 </div>
 
                                 <div class="controls" style="width: 70px;" data-ng-show="food.isEditable == false" data-ng-click="editFoodClick(food)">
@@ -205,7 +205,7 @@
                             <td width="15px">
                                 <input style="margin-left: 15px;" data-ng-show="food.isEditable == false" type="button" value="Edit" data-ng-click="editFood(food);"/>
 
-                                <input data-ng-show="food.isEditable" type="button" style="margin-left: 15px;" value="Save" data-ng-click="saveFood(food);"/>
+                                <!--<input data-ng-show="food.isEditable" type="button" style="margin-left: 15px;" value="Save" data-ng-click="saveFood(food);"/>-->
                             </td>
                             <td>
                                 <input style="margin-left: 15px;" type="button" value="Delete" data-ng-click="deleteFood(food, meal);"/>
@@ -334,11 +334,11 @@
         </div>
 
 
-        <div style="margin-top: 30px;">
+        <div style="margin-top: 30px;padding-top: 8px;">
 
-            <div style="display:inline-block; width: 100px;vertical-align: top;padding-top:5px;">
-               Plan Date:
-            </div>
+            <!--<div style="display:inline-block; width: 100px;vertical-align: top;padding-top:5px;">-->
+               <!--Plan Date:-->
+            <!--</div>-->
 
             <div style="display: inline-block; width: 170px;">
                 <p class="input-group">

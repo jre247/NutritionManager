@@ -92,18 +92,20 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
         };
 
         $scope.deleteMeal = function(meal){
-            for (var i in $scope.plan.meals) {
-                if ($scope.plan.meals[i] === meal) {
-                    $scope.plan.meals.splice(i, 1);
+            if (confirm("Are you sure you want to delete this meal?")) {
+                for (var i in $scope.plan.meals) {
+                    if ($scope.plan.meals[i] === meal) {
+                        $scope.plan.meals.splice(i, 1);
+                    }
                 }
-            }
 
-            calculatePlanTotalMacros($scope.plan);
+                calculatePlanTotalMacros($scope.plan);
+            }
         };
 
         $scope.createFood = function(meal){
             var model = {
-                name: '',
+                name: $scope.allFoods[0].name,
                 type: '',
                 servings: 1,
                 calories: 0,
@@ -112,10 +114,53 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
                 carbohydrates: 0,
                 fat: 0,
                 foodId: '',
+                selectedFood: $scope.allFoods[0],
                 isEditable: true
             };
 
             meal.foods.push(model);
+        };
+
+        //TODO: fix this logic
+        $scope.foodClick = function(food){
+           // food.hasFocus = false;
+
+
+            if (food.foodBlurClicked) {
+
+               // food.foodBlurClicked = false;
+                food.foodClicked = true;
+            }
+            else{
+                food.foodClicked = false;
+            }
+
+            food.isEditable = true;
+            food.hasFocus = true;
+
+           // else{
+            //    food.foodClicked = false;
+            //}
+
+
+        };
+        //TODO: fix this logic
+        $scope.foodBlur = function(food){
+            //food.hasFocus = false;
+
+            //if (food.hasFocus === true) {
+
+            //}
+            food.foodBlurClicked = true;
+
+            $timeout(function() {
+                if (!food.foodClicked) {
+                    food.isEditable = false;
+                    food.hasFocus = false;
+
+                }
+                food.foodBlurClicked = false;
+            }, 10);
         };
 
         $scope.saveFood = function(food){
@@ -139,13 +184,13 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
             }
         };
 
-        $scope.saveAll = function(meal){
-            for(var food = 0; food < meal.foods.length; food++){
-                meal.foods[food].isEditable = false;
-            }
-
-            meal.isEditable = false;
-        };
+//        $scope.saveAll = function(meal){
+//            for(var food = 0; food < meal.foods.length; food++){
+//                meal.foods[food].isEditable = false;
+//            }
+//
+//            meal.isEditable = false;
+//        };
 
         $scope.editFood = function(food){
             food.isEditable = true;
@@ -154,19 +199,21 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
         };
 
         $scope.deleteFood = function(food, meal){
-            for(var nMeal = 0; nMeal < $scope.plan.meals.length; nMeal++){
-                if ($scope.plan.meals[nMeal] === meal){
-                    for (var nFood = 0; nFood < meal.foods.length; nFood++){
-                        if (meal.foods[nFood] === food) {
-                            meal.foods.splice(nFood, 1);
+            if (confirm("Are you sure you want to delete this food?")) {
+                for (var nMeal = 0; nMeal < $scope.plan.meals.length; nMeal++) {
+                    if ($scope.plan.meals[nMeal] === meal) {
+                        for (var nFood = 0; nFood < meal.foods.length; nFood++) {
+                            if (meal.foods[nFood] === food) {
+                                meal.foods.splice(nFood, 1);
+                            }
                         }
                     }
                 }
+
+                doMealTotaling(meal);
+
+                calculatePlanTotalMacros($scope.plan);
             }
-
-            doMealTotaling(meal);
-
-            calculatePlanTotalMacros($scope.plan);
 
         };
 
@@ -187,6 +234,18 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
 		};
 
         $scope.savePlan = function(){
+          for(var i = 0; i < $scope.plan.meals.length; i++){
+              var meal = $scope.plan.meals[i];
+
+              meal.isEditable = false;
+
+              for (var j = 0; j < meal.foods.length; j++){
+                  var food = meal.foods[j];
+
+                  food.isEditable = false;
+              }
+          }
+
           if (!$scope.plan._id){
               $scope.create();
           }
@@ -521,3 +580,26 @@ var ModalInstanceCtrl = function ($scope, $modalInstance, parentScope, dialogMea
         $modalInstance.dismiss('cancel');
     };
 };
+
+//TODO: put this directive on global project, not plans module
+angular.module('plans').directive('ngBlur', ['$parse', function($parse) {
+    return function(scope, element, attr) {
+        var fn = $parse(attr['ngBlur']);
+        element.on('blur', function(event) {
+            scope.$apply(function() {
+                fn(scope, {$event:event});
+            });
+        });
+    };
+}]);
+//TODO: put this directive on global project, not plans module
+angular.module('plans').directive('ngFocus', ['$parse', function($parse) {
+    return function(scope, element, attr) {
+        var fn = $parse(attr['ngFocus']);
+        element.on('focus', function(event) {
+            scope.$apply(function() {
+                fn(scope, {$event:event});
+            });
+        });
+    };
+}])
