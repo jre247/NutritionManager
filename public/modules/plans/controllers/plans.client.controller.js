@@ -119,48 +119,51 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
             };
 
             meal.foods.push(model);
+
+            //foodServingsChange()
+            //doMealTotaling(meal);
         };
 
         //TODO: fix this logic
         $scope.foodClick = function(food){
-           // food.hasFocus = false;
-
-
-            if (food.foodBlurClicked) {
-
-               // food.foodBlurClicked = false;
-                food.foodClicked = true;
-            }
-            else{
-                food.foodClicked = false;
-            }
-
-            food.isEditable = true;
-            food.hasFocus = true;
-
-           // else{
-            //    food.foodClicked = false;
-            //}
+//           // food.hasFocus = false;
+//
+//
+//            if (food.foodBlurClicked) {
+//
+//               // food.foodBlurClicked = false;
+//                food.foodClicked = true;
+//            }
+//            else{
+//                food.foodClicked = false;
+//            }
+//
+//            food.isEditable = true;
+//            food.hasFocus = true;
+//
+//           // else{
+//            //    food.foodClicked = false;
+//            //}
 
 
         };
         //TODO: fix this logic
         $scope.foodBlur = function(food){
-            //food.hasFocus = false;
-
-            //if (food.hasFocus === true) {
-
-            //}
-            food.foodBlurClicked = true;
-
-            $timeout(function() {
-                if (!food.foodClicked) {
-                    food.isEditable = false;
-                    food.hasFocus = false;
-
-                }
-                food.foodBlurClicked = false;
-            }, 10);
+//            //food.hasFocus = false;
+//
+//            //if (food.hasFocus === true) {
+//
+//            //}
+//            food.foodBlurClicked = true;
+//
+//            $timeout(function() {
+//                if (!food.foodClicked) {
+//                    food.isEditable = false;
+//                    food.hasFocus = false;
+//
+//                }
+//                food.foodBlurClicked = false;
+//            }, 10);
         };
 
         $scope.saveFood = function(food){
@@ -464,6 +467,7 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
                         for(var i = 0; i < $scope.plan.meals.length; i++){
                             var mealModel = {};
                             mealModel.id = $scope.plan.meals[i]._id;
+                            mealModel.selected = true;
 
                             var mealType = $scope.mealTypes[$scope.plan.meals[i].type - 1];
 

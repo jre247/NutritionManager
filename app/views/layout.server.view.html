@@ -73,6 +73,7 @@
             .planMealDesktop{
                 width:100%;
             }
+
         }
 
         @media (min-width: 1001px) {
@@ -85,6 +86,20 @@
             }
             .planMealDesktop{
                 min-width: 110vh;
+            }
+
+        }
+
+        @media (min-height: 461px) {
+
+            .planContent{
+                height: 72vh;
+            }
+        }
+        @media (max-height: 460px) {
+
+            .planContent{
+                height: 49vh;
             }
         }
 
@@ -115,7 +130,9 @@
         }
     </style>
 
-	<!-- HTML5 Shim -->
+    <link rel="stylesheet" href="modules/core/css/angular-multi-select.css">
+
+    <!-- HTML5 Shim -->
 	<!--[if lt IE 9]>
 		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 	<![endif]-->
@@ -143,6 +160,8 @@
 	<script type="text/javascript" src="http://localhost:35729/livereload.js"></script>
 
 	{% endif %}
+
+    <script src="modules/core/angular-multi-select.js"></script>
 </body>
 
 </html>

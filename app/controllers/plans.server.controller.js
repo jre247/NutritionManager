@@ -47,7 +47,7 @@ exports.create = function(req, res) {
 
     //check if already existing plan in database for this plan date
     //if so, just update the plan, not create new one
-    Plan.findOne({'planDate': planDate}).exec(function(err, planDb) {
+    Plan.findOne({'planDate': planDate, 'user': req.user.id}).exec(function(err, planDb) {
         if (err) {
             return res.send(400, {
                 message: getErrorMessage(err)
