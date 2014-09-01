@@ -27,7 +27,7 @@
 
                     <button class="btn btn-default" style="margin-right: 5px; padding: 4px 9px;" ng-click="openCopyPlanDialog()">Copy</button>
 
-                    <input type="submit" style="padding: 4px 9px;" data-ng-click="savePlan()"  class="btn btn-default">
+                    <input type="submit" value="Save" style="padding: 4px 9px;" data-ng-click="savePlan()"  class="btn btn-default">
                 </div>
             </div>
 
@@ -157,14 +157,14 @@
                                     </thead>
                                     <tbody>
 
-                                    <tr height="35px" data-ng-repeat="food in meal.foods">
+                                    <tr height="35px" data-ng-repeat="food in meal.foods" data-ng-click="editFoodClick(food)">
                                         <td style="padding-right: 10px;">
                                             <div class="controls" data-ng-show="food.isEditable">
                                                 <select data-ng-model="food.selectedFood" data-ng-change="foodSelectionChange(food, meal)" data-ng-click="foodClick(food)"  ng-blur="foodBlur(food)" ng-options="f as f.name for f in allFoods"></select>
 
                                             </div>
 
-                                            <div class="controls"  data-ng-show="food.isEditable == false" data-ng-click="editFoodClick(food)">
+                                            <div class="controls"  data-ng-show="food.isEditable == false" >
                                                 <span data-ng-bind="food.name"></span>
                                             </div>
                                         </td>
@@ -178,7 +178,7 @@
                                                 <input  data-ng-change="foodServingsChange(food, meal)" data-ng-click="foodClick(food)" style="width: 60px;" data-ng-model="food.servings" id="servings" ng-blur="foodBlur(food)" class="form-control" cols="3" rows="3"/>
                                             </div>
 
-                                            <div class="controls" style="width: 70px;" data-ng-show="food.isEditable == false" data-ng-click="editFoodClick(food)">
+                                            <div class="controls" style="width: 70px;" data-ng-show="food.isEditable == false">
                                                 <span data-ng-bind="food.servings"></span>
                                             </div>
                                         </td>
