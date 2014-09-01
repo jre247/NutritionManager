@@ -104,16 +104,18 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
         };
 
         $scope.createFood = function(meal){
+            var defaultFood = $scope.allFoods[0];
+
             var model = {
-                name: $scope.allFoods[0].name,
-                type: '',
+                name: defaultFood.name,
+                type: defaultFood.type,
                 servings: 1,
-                calories: 0,
-                grams: 0,
-                protein: 0,
-                carbohydrates: 0,
-                fat: 0,
-                foodId: '',
+                calories: defaultFood.calories,
+                grams: defaultFood.grams,
+                protein: defaultFood.protein,
+                carbohydrates: defaultFood.carbohydrates,
+                fat: defaultFood.fat,
+                foodId: defaultFood.foodId,
                 selectedFood: $scope.allFoods[0],
                 isEditable: true
             };
@@ -121,7 +123,8 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
             meal.foods.push(model);
 
             //foodServingsChange()
-            //doMealTotaling(meal);
+            doMealTotaling(meal);
+            calculatePlanTotalMacros($scope.plan);
         };
 
         //TODO: fix this logic
