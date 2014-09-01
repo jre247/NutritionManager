@@ -98,7 +98,7 @@ exports.delete = function(req, res) {
  * List of Foods
  */
 exports.list = function(req, res) {
-    Food.find().sort('-created').exec(function(err, foods) {
+    Food.find().sort('name').exec(function(err, foods) {
         if (err) {
             return res.send(400, {
                 message: getErrorMessage(err)

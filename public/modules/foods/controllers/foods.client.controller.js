@@ -9,6 +9,7 @@ angular.module('foods').controller('FoodsController', ['$scope', '$stateParams',
 
        // $scope.authentication = Authentication;
 
+
         $scope.create = function() {
             var food = new Foods({
                 name: this.name,
