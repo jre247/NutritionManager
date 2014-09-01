@@ -620,6 +620,7 @@ angular.module('plans').directive('ngFocus', ['$parse', function($parse) {
         });
     };
 }]);
+//TODO: put this directive on global project
 angular.module('plans').directive('checklistModel', ['$parse', '$compile', function($parse, $compile) {
         // contains
         function contains(arr, item) {
