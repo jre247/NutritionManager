@@ -157,7 +157,7 @@
                                     </thead>
                                     <tbody>
 
-                                    <tr height="35px" data-ng-repeat="food in meal.foods" data-ng-click="editFoodClick(food)">
+                                    <tr height="35px"  data-ng-repeat="food in meal.foods" data-ng-click="editFoodClick(food)">
                                         <td style="padding-right: 10px;">
                                             <div class="controls" data-ng-show="food.isEditable">
                                                 <select data-ng-model="food.selectedFood" data-ng-change="foodSelectionChange(food, meal)" data-ng-click="foodClick(food)"  ng-blur="foodBlur(food)" ng-options="f as f.name for f in allFoods"></select>
@@ -327,22 +327,26 @@
 
 
 
-<script type="text/ng-template" id="myModalContent.html">
+    <script type="text/ng-template" id="myModalContent.html">
     <div class="modal-header" style="font-family: segui;">
-        <h3 class="modal-title">Choose options to clone plan</h3>
+        <h3 class="modal-title">Choose options to copy plan</h3>
     </div>
     <div class="modal-body" style="font-family: segui;">
 
-        <div >
-            <div style="display:inline-block; width: 100px;">
-                Select Meals:
+        <div style="font-weight: bold;">
+            Select Meals:
+        </div>
+        <div style="border: 1px solid lightgray;width: 49%;">
+            <div class="plansMobileGrid">
+                <div data-ng-repeat="mealType in dialogMealsShort">
+                    <input type="checkbox" checklist-model="selected.meals" checklist-value="mealType.id"> {{mealType.type}}
+                </div>
             </div>
 
-            <div style="display:inline-block">
+            <div class="plansDesktopGrid">
                 <select data-ng-model="selected.meals" multiple="multiple" ng-options="t.id as t.type for t in dialogMealsShort" style="font-size: 16px;vertical-align: top;width: 170px;"></select>
-
-
             </div>
+
         </div>
 
 
@@ -351,8 +355,8 @@
             <!--<div style="display:inline-block; width: 100px;vertical-align: top;padding-top:5px;">-->
                <!--Plan Date:-->
             <!--</div>-->
-
-            <div style="display: inline-block; width: 170px;">
+           <span style="font-weight: bold;"> Plan Date:</span>
+            <div style="width: 170px;">
                 <p class="input-group">
                   <input type="text" class="form-control" id="copyPlanDate" datepicker-popup="{{format}}" data-ng-model="selected.planDate" data-ng-change="copyPlanDateChange" is-open="dialogPlanDateOpened" min-date="minDate" max-date="'2015-06-22'" datepicker-options="copyPlanDateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
                   <span class="input-group-btn">
