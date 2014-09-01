@@ -4,6 +4,7 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
 	function($scope, $stateParams, $location, $timeout, Authentication, $modal, $log, Plans, Foods) {
 		window.scope = $scope;
         window.plans = $scope.plans;
+        $scope.showPlanEditableErrorMsg = false;
         $scope.showTotalsAsPercent = false;
 
         $scope.authentication = Authentication;
@@ -249,7 +250,9 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
 			}
 		};
 
-        $scope.savePlan = function(){
+        $scope.savePlan = function(callback){
+          $scope.showPlanEditableErrorMsg = false;
+
           for(var i = 0; i < $scope.plan.meals.length; i++){
               var meal = $scope.plan.meals[i];
 
@@ -268,6 +271,8 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
             else{
               $scope.update();
           }
+
+            //callback();
         };
 
 		$scope.update = function() {
@@ -455,6 +460,28 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
             return mealTypeName;
         };
 
+
+
+        var checkIfPlanEditable = function(){
+            var isPlanEditable = false;
+
+            for(var i = 0; i < $scope.plan.meals.length; i++){
+                for (var j = 0; j < $scope.plan.meals[i].foods.length; j++){
+                    var planMeal = $scope.plan.meals[i];
+                    var mealFood = planMeal.foods[j];
+
+                    if (planMeal.isEditable || mealFood.isEditable){
+                        isPlanEditable = true;
+                        break;
+                    }
+
+
+                }
+            }
+
+            return isPlanEditable;
+        };
+
         //sorting code
         // data
         $scope.orderByField = 'planDate';
@@ -466,53 +493,62 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
 
 
         //dialog code
-        //$scope.items = ['item1', 'item2', 'item3'];
         $scope.openCopyPlanDialog = function (size) {
+            var isPlanEditable = checkIfPlanEditable();
 
-            var modalInstance = $modal.open({
-                templateUrl: 'myModalContent.html',
-                controller: ModalInstanceCtrl,
-                size: size,
-                resolve: {
-                    dialogMealsShort: function () {
-                        var mealsAry = [];
+            if (!isPlanEditable) {
+                $scope.showPlanEditableErrorMsg = false;
 
-                        for(var i = 0; i < $scope.plan.meals.length; i++){
-                            var mealModel = {};
-                            mealModel.id = $scope.plan.meals[i]._id;
-                            mealModel.selected = true;
+                var modalInstance = $modal.open({
+                    templateUrl: 'myModalContent.html',
+                    controller: ModalInstanceCtrl,
+                    //size: size,
+                    resolve: {
+                        dialogMealsShort: function () {
+                            var mealsAry = [];
 
-                            var mealType = $scope.mealTypes[$scope.plan.meals[i].type - 1];
+                            for (var i = 0; i < $scope.plan.meals.length; i++) {
+                                var mealModel = {};
+                                mealModel.id = $scope.plan.meals[i]._id;
+                                mealModel.selected = true;
 
-                            if (mealType && mealType.id >= 0) {
-                                mealModel.type = mealType.name;
+                                var mealType = $scope.mealTypes[$scope.plan.meals[i].type - 1];
+
+                                if (mealType && mealType.id >= 0) {
+                                    mealModel.type = mealType.name;
+                                }
+                                else {
+                                    mealModel.type = 'N/A';
+                                }
+
+                                mealsAry.push(mealModel);
                             }
-                            else{
-                                mealModel.type = 'N/A';
-                            }
 
-                            mealsAry.push(mealModel);
+                            return mealsAry;
+                        },
+                        dialogMealsDetailed: function () {
+                            return $scope.plan.meals;
+                        },
+                        parentScope: function () {
+                            return $scope;
                         }
-
-                        return mealsAry;
-                    },
-                    dialogMealsDetailed: function () {
-                        return $scope.plan.meals;
-                    },
-                    parentScope: function(){
-                        return $scope;
                     }
-                }
-            });
+                });
 
-            modalInstance.result.then(function (planCopyModel) {
-                //$scope.dialogSelectedMealType = selectedItem;
-                $scope.copyPlan(planCopyModel);
+                modalInstance.result.then(function (planCopyModel) {
+                    //$scope.dialogSelectedMealType = selectedItem;
+                    $scope.copyPlan(planCopyModel);
 
-            }, function () {
-                $log.info('Modal dismissed at: ' + new Date());
-            });
+                }, function () {
+                    $log.info('Modal dismissed at: ' + new Date());
+                });
+            }
+            else{
+                $scope.showPlanEditableErrorMsg = true;
+            }
         };
+
+
 	}
 ]);
 
@@ -603,6 +639,7 @@ var ModalInstanceCtrl = function ($scope, $modalInstance, parentScope, dialogMea
         $modalInstance.dismiss('cancel');
     };
 };
+
 
 //TODO: put this directive on global project, not plans module
 angular.module('plans').directive('ngBlur', ['$parse', function($parse) {

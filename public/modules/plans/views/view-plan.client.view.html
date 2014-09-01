@@ -34,6 +34,10 @@
             <div data-ng-show="success" style="color: green; font-weight: bold; margin-bottom: 10px;opacity: 1;transition: opacity .25s ease-in-out;-moz-transition: opacity .25s ease-in-out;-webkit-transition: opacity .25s ease-in-out;" >
                 <strong>Your changes have been saved!</strong>
             </div>
+
+            <div data-ng-show="showPlanEditableErrorMsg" style="color: red; font-weight: bold; margin-bottom: 10px;">
+                <strong>Please save the plan before copying it.</strong>
+            </div>
         </fieldset>
 
 
@@ -337,8 +341,8 @@
             Select Meals:
         </div>
         <div style="border: 1px solid lightgray;width: 49%;">
-            <div class="plansMobileGrid">
-                <div data-ng-repeat="mealType in dialogMealsShort">
+            <div class="plansMobileGrid" style="max-height: 140px; overflow:auto;">
+                <div data-ng-repeat="mealType in dialogMealsShort" >
                     <input type="checkbox" checklist-model="selected.meals" checklist-value="mealType.id"> {{mealType.type}}
                 </div>
             </div>
@@ -369,7 +373,7 @@
 
     </div>
     <div class="modal-footer">
-        <button style="float: left;" class="btn btn-primary plansDesktopGrid" ng-click="selectAllMeals()">All Meals</button>
+        <button style="float: left;" class="btn btn-primary" ng-click="selectAllMeals()">All Meals</button>
         <button class="btn btn-primary" ng-click="ok()">OK</button>
         <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
     </div>
