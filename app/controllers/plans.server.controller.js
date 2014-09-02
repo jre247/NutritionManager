@@ -32,12 +32,19 @@ var getErrorMessage = function(err) {
 	return message;
 };
 
+var createDateAsUTC = function(date) {
+    return new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate(), date.getHours(), date.getMinutes(), date.getSeconds()));
+}
+
 /**
  * Create a plan
  */
 exports.create = function(req, res) {
     var planClient = req.body;
     var planClientPlanDate = new Date(planClient.planDate);
+
+    //convert both database date and client date to UTC
+    planClientPlanDate = createDateAsUTC(planClientPlanDate);
 
     var planDateMonth = planClientPlanDate.getMonth();
     var planDateDay = planClientPlanDate.getDate();
@@ -63,6 +70,7 @@ exports.create = function(req, res) {
             else{
                 var plan = new Plan(req.body);
                 plan.user = req.user;
+               // plan.planDate = planDate;
 
                 planToSave = plan;
 
