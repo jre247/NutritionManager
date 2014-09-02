@@ -93,6 +93,8 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
             meal.isVisible = !meal.isVisible;
         };
 
+
+
         $scope.deleteMeal = function(meal){
             if (confirm("Are you sure you want to delete this meal?")) {
                 for (var i in $scope.plan.meals) {
@@ -274,6 +276,17 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
           }
 
             //callback();
+        };
+
+        $scope.deletePlan = function(plan){
+            if (confirm("Are you sure you want to delete this plan?")) {
+                plan.$delete(function () {
+                    console.log("plan deleted");
+                    $location.path('plans');
+                }, function (errorResponse) {
+                    $scope.error = errorResponse.data.message;
+                });
+            }
         };
 
 		$scope.update = function() {

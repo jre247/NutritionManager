@@ -106,6 +106,17 @@ exports.read = function(req, res) {
  */
 exports.update = function(req, res) {
 	var plan = req.plan;
+//    var planClientPlanDate = new Date(plan.planDate);
+//
+//    //convert both database date and client date to UTC
+//    planClientPlanDate = createDateAsUTC(planClientPlanDate);
+//
+//    var planDateMonth = planClientPlanDate.getMonth();
+//    var planDateDay = planClientPlanDate.getDate();
+//    var planDateYear = planClientPlanDate.getFullYear();
+//
+//    var planDateUtc = new Date(planDateYear, planDateMonth, planDateDay);
+//    plan.planDate = planDateUtc;
 
     plan = _.extend(plan, req.body);
 

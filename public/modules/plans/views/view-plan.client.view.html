@@ -4,6 +4,9 @@
 <!--</div>-->
 <div class="col-md-12">
     <form class="form-horizontal" data-ng-init="findOne()" novalidate>
+
+
+    <br/>
         <fieldset>
             <div class="form-group" style="margin-bottom: 1px;">
                 <div class="planDetailsSection" style="display:inline-block;vertical-align: top;">
@@ -26,6 +29,10 @@
                     <input type="button" class="btn btn-default" style="margin-right: 5px; padding: 4px 9px;" data-ng-click="createMeal();" value="+"/>
 
                     <button class="btn btn-default" style="margin-right: 5px; padding: 4px 9px;" ng-click="openCopyPlanDialog()">Copy</button>
+
+                    <div class="plansDesktopBtn">
+                        <button class="btn btn-default " style="margin-right: 5px; padding: 4px 9px !important;background-image: linear-gradient(to bottom, #fff 0%, rgb(247, 170, 170) 100%);" data-ng-click="deletePlan(plan);">Delete</button>
+                    </div>
 
                     <input type="submit" value="Save" style="padding: 4px 9px;" data-ng-click="savePlan()"  class="btn btn-default">
                 </div>
