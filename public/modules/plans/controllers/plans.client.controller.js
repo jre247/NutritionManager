@@ -37,10 +37,11 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
 
 		$scope.create = function() {
 			var plan = new Plans({
-				planDate: $scope.plan.planDate,
+				planDate: $scope.plan.planDateNonUtc,
                 meals: $scope.plan.meals
 			});
             plan.$save(function(response) {
+                plan.planDateNonUtc = response.planDateNonUtc;
 				$location.path('plans/' + response._id);
 			}, function(errorResponse) {
 				$scope.error = errorResponse.data.message;
@@ -313,7 +314,7 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
                         calculatePlanTotalMacros($scope.plans[i]);
 
                         var planModel = {
-                            planDate: $scope.plans[i].planDate,
+                            planDateNonUtc: $scope.plans[i].planDateNonUtc || $scope.plans[i].planDate,
                             calories: $scope.plans[i].totalPlanCalories,
                             protein: $scope.plans[i].totalPlanProtein,
                             carbs: $scope.plans[i].totalPlanCarbs,
@@ -334,6 +335,10 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
                 $scope.plan = Plans.get({
                     planId: $stateParams.planId
                 }, function (u, getResponseHeaders) {
+                    if (!$scope.plan.planDateNonUtc){
+                        $scope.plan.planDateNonUtc = $scope.plan.planDate;
+                    }
+
                     for (var i = 0; i < $scope.plan.meals.length; i++) {
                         var carbsTotal = 0, proteinTotal = 0, caloriesTotal = 0, fatTotal = 0;
 

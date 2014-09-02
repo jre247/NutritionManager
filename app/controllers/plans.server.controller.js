@@ -70,8 +70,8 @@ exports.create = function(req, res) {
             else{
                 var plan = new Plan(req.body);
                 plan.user = req.user;
-               // plan.planDate = planDate;
-
+                plan.planDate = planDate;
+                plan.planDateNonUtc = planClient.planDate;
                 planToSave = plan;
 
             }
@@ -82,10 +82,10 @@ exports.create = function(req, res) {
                         message: getErrorMessage(err)
                     });
                 } else {
-                    var testPlanDateDb = planDate;
+                    //var testPlanDateDb = planDate;
                     var testPlanUserIdDb = req.user.id;
-                    planToSave.testPlanDateDb = testPlanDateDb;
-                    planToSave.testPlanUserIdDb = testPlanUserIdDb;
+                   // planToSave.planDateNonUtc = planClient.planDate;
+                    //planToSave.testPlanUserIdDb = testPlanUserIdDb;
 
                     res.jsonp(planToSave);
                 }

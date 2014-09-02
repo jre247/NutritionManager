@@ -12,19 +12,16 @@ var mongoose = require('mongoose'),
  * Plan Schema
  */
 var PlanSchema = new Schema({
-    testPlanDateDb:{
+    planDateNonUtc:{
         type: Date
-    },
-    testPlanUserIdDb:{
-        type: String
     },
 	created: {
 		type: Date,
 		default: Date.now
 	},
 	planDate: {
-		type: Date,
-        required: 'Plan Date cannot be blank'
+		type: Date
+        //required: 'Plan Date cannot be blank'
 	},
 	user: {
 		type: Schema.ObjectId,
