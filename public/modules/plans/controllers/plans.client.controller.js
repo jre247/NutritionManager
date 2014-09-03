@@ -366,7 +366,15 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
             food.carbohydrates = food.servings * food.selectedFood.carbohydrates;
             food.grams = food.servings * food.selectedFood.grams;
             food.sodium = food.servings * food.selectedFood.sodium;
-
+            food.fiber = food.servings * food.selectedFood.fiber;
+            food.sugar = food.servings * food.selectedFood.sugar;
+            food.saturatedFat = food.servings * food.selectedFood.saturatedFat;
+            food.vitaminA = food.servings * food.selectedFood.vitaminA;
+            food.vitaminC = food.servings * food.selectedFood.vitaminC;
+            food.calcium = food.servings * food.selectedFood.calcium;
+            food.iron = food.servings * food.selectedFood.iron;
+            food.transfat = food.servings * food.selectedFood.transfat;
+            food.cholesterol = food.servings * food.selectedFood.cholesterol;
             food.name = food.selectedFood.name;
             food.selectedFood.foodId = food.selectedFood._id;
             food.type = food.selectedFood.type;
