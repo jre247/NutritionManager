@@ -9,7 +9,7 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
 
         $scope.authentication = Authentication;
         $scope.meals = [];
-
+        //$scope.displaySyncBtn = false;
 
         $scope.allFoods = Foods.query();
 
@@ -34,6 +34,13 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
 
         $scope.initDate = new Date('2016-15-20');
 
+//        $scope.syncAllFoods = function(plan){
+//            plan.$syncPlanFoods(function(response) {
+//                alert("plan foods synced!");
+//            }, function(errorResponse) {
+//                $scope.error = errorResponse.data.message;
+//            });
+//        };
 
 		$scope.create = function() {
 			var plan = new Plans({
@@ -319,7 +326,7 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
                     }
 
                     for (var i = 0; i < $scope.plan.meals.length; i++) {
-                        var carbsTotal = 0, proteinTotal = 0, caloriesTotal = 0, fatTotal = 0;
+                        var carbsTotal = 0, proteinTotal = 0, caloriesTotal = 0, fatTotal = 0, sodiumTotal = 0;
 
                         for (var j = 0; j < $scope.plan.meals[i].foods.length; j++) {
                             $scope.plan.meals[i].foods[j].name = $scope.plan.meals[i].foods[j].selectedFood.name;
@@ -329,6 +336,7 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
                             var carbs = $scope.plan.meals[i].foods[j].carbohydrates;
 
                             carbsTotal += carbs;
+                            sodiumTotal += $scope.plan.meals[i].foods[j].sodium;
                             proteinTotal += $scope.plan.meals[i].foods[j].protein;
                             fatTotal += $scope.plan.meals[i].foods[j].fat;
                             caloriesTotal += $scope.plan.meals[i].foods[j].calories;
@@ -338,6 +346,7 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
                         $scope.plan.meals[i].totalCalories = caloriesTotal;
                         $scope.plan.meals[i].totalProtein = proteinTotal;
                         $scope.plan.meals[i].totalFat = fatTotal;
+                        $scope.plan.meals[i].totalSodium = sodiumTotal;
 
                         calculatePlanTotalMacros($scope.plan);
                     }
@@ -356,6 +365,7 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
             food.protein = food.servings * food.selectedFood.protein;
             food.carbohydrates = food.servings * food.selectedFood.carbohydrates;
             food.grams = food.servings * food.selectedFood.grams;
+            food.sodium = food.servings * food.selectedFood.sodium;
 
             food.name = food.selectedFood.name;
             food.selectedFood.foodId = food.selectedFood._id;
@@ -374,6 +384,7 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
             food.fat = food.servings * food.selectedFood.fat;
             food.protein = food.servings * food.selectedFood.protein;
             food.carbohydrates = food.servings * food.selectedFood.carbohydrates;
+            food.sodium = food.servings * food.selectedFood.sodium;
             food.grams = food.servings * food.selectedFood.grams;
 
             doMealTotaling(meal);
@@ -382,7 +393,7 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
         };
 
         var doMealTotaling = function(meal){
-            var carbsTotal = 0, fatTotal = 0, proteinTotal = 0, caloriesTotal = 0;
+            var carbsTotal = 0, fatTotal = 0, proteinTotal = 0, caloriesTotal = 0, sodiumTotal = 0;
 
             for(var i = 0; i < meal.foods.length; i++){
                 var foodCarbs = meal.foods[i].carbohydrates;
@@ -391,12 +402,14 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
                 fatTotal += meal.foods[i].fat;
                 proteinTotal += meal.foods[i].protein;
                 caloriesTotal += meal.foods[i].calories;
+                sodiumTotal += meal.foods[i].sodium;
             }
 
             meal.totalCarbohydrates = carbsTotal;
             meal.totalProtein = proteinTotal;
             meal.totalCalories = caloriesTotal;
             meal.totalFat = fatTotal;
+            meal.totalSodium = sodiumTotal;
         };
 
         var calculatePlanTotalMacros = function(plan){

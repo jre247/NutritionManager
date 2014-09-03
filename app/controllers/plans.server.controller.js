@@ -101,23 +101,26 @@ exports.read = function(req, res) {
 	res.jsonp(req.plan);
 };
 
+//exports.syncPlanFoods = function(req, res) {
+//    var plan = req.plan;
+//    plan = _.extend(plan, req.body);
+////
+////    plan.save(function(err) {
+////        if (err) {
+////            return res.send(400, {
+////                message: getErrorMessage(err)
+////            });
+////        } else {
+////            res.jsonp(plan);
+////        }
+////    });
+//};
+
 /**
  * Update a plan
  */
 exports.update = function(req, res) {
 	var plan = req.plan;
-//    var planClientPlanDate = new Date(plan.planDate);
-//
-//    //convert both database date and client date to UTC
-//    planClientPlanDate = createDateAsUTC(planClientPlanDate);
-//
-//    var planDateMonth = planClientPlanDate.getMonth();
-//    var planDateDay = planClientPlanDate.getDate();
-//    var planDateYear = planClientPlanDate.getFullYear();
-//
-//    var planDateUtc = new Date(planDateYear, planDateMonth, planDateDay);
-//    plan.planDate = planDateUtc;
-
     plan = _.extend(plan, req.body);
 
     plan.save(function(err) {

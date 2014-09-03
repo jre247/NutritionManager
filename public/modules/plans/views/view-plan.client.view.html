@@ -102,7 +102,9 @@
                                             <div data-ng-show="food.isEditable == false">
                                                 <div class="controls"   data-ng-click="editFoodClick(food)" style="font-weight: bold; font-size: 15px;">
                                                     <span data-ng-bind="food.name"></span>
-                                                    <span  class="deleteBtn" data-ng-click="deleteFood(food, meal);">x</span>
+                                                    <div>
+                                                        <span  class="deleteBtn" style="font-size: 16px;" data-ng-click="deleteFood(food, meal);">x</span>
+                                                    </div>
 
                                                 </div>
                                                 <div class="controls" data-ng-click="editFoodClick(food)" ng-blur="food.isEditable=false" style="color: rgb(211, 139, 12);padding-top: 3px;">
@@ -113,7 +115,7 @@
 
                                             <div style="font-size: 12.5px" class="text-muted">
                                                 <div>
-                                                    <span data-ng-bind="food.calories | number:1"></span> Calories,
+                                                    <span data-ng-bind="food.calories | number:0"></span> Calories,
                                                     <span data-ng-bind="food.carbohydrates | number:1"></span>g Carbs,
                                                     <span data-ng-bind="food.protein | number:1"></span>g Protein,
 
@@ -135,7 +137,7 @@
 
                                         <div style="display:inline-block;">
 
-                                            <span  data-ng-bind="meal.totalCalories | number:1"></span> Calories,
+                                            <span  data-ng-bind="meal.totalCalories | number:0"></span> Calories,
                                             <span data-ng-bind="meal.totalCarbohydrates | number:1"></span>g Carbs,
 
                                         </div>
@@ -155,13 +157,14 @@
                                 <table data-ng-show="meal.foods.length > 0" class="plansDesktopGrid" style="margin-top: 6px;width:100%;">
                                     <thead>
                                     <tr>
-                                        <th width="40%">Name</th>
+                                        <th width="30%">Name</th>
                                         <!--<th width="7%">Type</th>-->
                                         <th style="min-width: 40px;width: 10%;"> Servings</th>
                                         <th style="min-width: 40px;width: 10%;">Calories</th>
                                         <th style="min-width: 40px;width: 10%;">Carbs</th>
                                         <th style="min-width: 40px;width: 10%;">Protein</th>
                                         <th style="min-width: 40px;width: 10%;">Fat</th>
+                                        <th style="min-width: 40px;width: 10%;">Sodium</th>
                                         <th style="min-width: 40px;width: 10%;">Grams</th>
                                         <th>&nbsp;</th>
                                     </tr>
@@ -177,6 +180,7 @@
 
                                             <div class="controls"  data-ng-show="food.isEditable == false" >
                                                 <span data-ng-bind="food.name"></span>
+                                                <!--<a data-ng-href="#!/foods/{{food.foodId}}">Food Details</a>-->
                                             </div>
                                         </td>
                                         <!--<td>-->
@@ -195,7 +199,7 @@
                                         </td>
                                         <td>
                                             <div class="controls" style="width: 60px;">
-                                                <span data-ng-bind="food.calories | number:1"></span>
+                                                <span data-ng-bind="food.calories | number:0"></span>
                                             </div>
                                         </td>
                                         <td>
@@ -215,13 +219,19 @@
                                         </td>
                                         <td>
                                             <div class="controls" style="width: 60px;">
+                                                <span data-ng-bind="food.sodium | number:0"></span>mg
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="controls" style="width: 60px;">
                                                 <span data-ng-bind="food.grams | number:1"></span>g
                                             </div>
                                         </td>
 
                                         <td>
-                                            <span tooltip="Delete Food" class="deleteBtn" data-ng-click="deleteFood(food, meal);">x</span>
-
+                                            <div>
+                                                <span tooltip="Delete Food" class="deleteBtn" data-ng-click="deleteFood(food, meal);">x</span>
+                                            </div>
                                         </td>
                                     </tr>
 
@@ -236,7 +246,7 @@
                                             <!--&nbsp;-->
                                         <!--</td>-->
                                         <td>
-                                            <span data-ng-bind="meal.totalCalories | number:1"></span>
+                                            <span data-ng-bind="meal.totalCalories | number:0"></span>
                                         </td>
                                         <td>
                                             <span data-ng-bind="meal.totalCarbohydrates | number:1"></span>g
@@ -246,6 +256,9 @@
                                         </td>
                                         <td>
                                             <span data-ng-bind="meal.totalFat | number:1"></span>g
+                                        </td>
+                                        <td>
+                                            <span data-ng-bind="meal.totalSodium | number:0"></span>mg
                                         </td>
                                         <td>
                                             &nbsp;
@@ -291,7 +304,7 @@
                     <span style="font-weight:bold;">Totals:</span>
                 </td>
                 <td style="color: rgb(33, 51, 184);">
-                    <span data-ng-bind="plan.totalPlanCalories | number:1"></span>
+                    <span data-ng-bind="plan.totalPlanCalories | number:0"></span>
                 </td>
                 <td style="color: rgb(33, 51, 184);">
                     <span data-ng-bind="plan.totalPlanCarbs | number:1"></span>g
@@ -309,7 +322,7 @@
                     <span style="font-weight:bold;">Totals:</span>
                 </td>
                 <td style="color: rgb(33, 51, 184);">
-                    <span data-ng-bind="plan.totalPlanCalories | number:1"></span>
+                    <span data-ng-bind="plan.totalPlanCalories | number:0"></span>
                 </td>
                 <td style="color: rgb(33, 51, 184);">
                     <span data-ng-bind="plan.totalPlanCarbsAsPercent | number:1"></span>%

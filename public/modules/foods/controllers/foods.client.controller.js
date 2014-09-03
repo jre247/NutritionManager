@@ -115,6 +115,8 @@ angular.module('foods').controller('FoodsController', ['$scope', '$stateParams',
 
         $scope.find = function() {
             $scope.foods = Foods.query();
+
+
         };
 
         $scope.findOne = function() {
