@@ -41,6 +41,46 @@ var FoodSchema = new Schema({
         type: Number,
         default: 0
     },
+    saturatedFat:{
+        type: Number,
+        default: 0
+    },
+    fiber:{
+        type: Number,
+        default: 0
+    },
+    transfat:{
+        type: Number,
+        default: 0
+    },
+    cholesterol:{
+        type: Number,
+        default: 0
+    },
+    sugar:{
+        type: Number,
+        default: 0
+    },
+    sodium:{
+        type: Number,
+        default: 0
+    },
+    vitaminA:{
+        type: Number,
+        default: 0
+    },
+    vitaminC:{
+        type: Number,
+        default: 0
+    },
+    calcium:{
+        type: Number,
+        default: 0
+    },
+    iron:{
+        type: Number,
+        default: 0
+    },
     carbohydrates: {
         type: Number,
         default: 0

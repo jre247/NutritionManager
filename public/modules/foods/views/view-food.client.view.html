@@ -2,7 +2,11 @@
     <div class="page-header">
         <h1 data-ng-bind="food.name"></h1>
     </div>
-    <div class="pull-right">
+    <div style="display:inline-block;width: 50%;">
+        Servings:
+        <input type="text" data-ng-model="servings" data-ng-change="servingsChange(food)"/>
+    </div>
+    <div style="padding-left: 10px;width: 30%;display:inline-block;">
         <a class="btn btn-primary" href="/#!/foods/{{food._id}}/edit">
             <i class="glyphicon glyphicon-edit"></i>
         </a>
@@ -10,50 +14,238 @@
             <i class="glyphicon glyphicon-trash"></i>
         </a>
     </div>
-    <div>
-        <small>
-            <em class="text-muted">
-                Type: {{food.type}}
-            </em>
 
-        </small>
+    <div style="border: 1px solid lightgray; width: 300px;padding: 5px;margin-top:20px;">
+        <div style="border-bottom: 3px solid black;">
+            <span style="font-size: 24px;">Nutrition Facts</span>
+
+            <div>
+                <small>
+                    <span style="font-weight:bold;">Serving Size: </span>
+                    <em class="text-muted">
+                        {{food.gramsDisplay}} grams
+                    </em>
+                </small>
+
+            </div>
+        </div>
+        <div style="border-bottom: 1px solid lightgray">
+            <span style="font-size: 12px;font-weight: bold;">Amount Per Serving</span>
+        </div>
+        <div style="border-bottom: 1px solid lightgray;">
+            <small>
+                <span style="font-weight:bold;">Calories: </span>
+                <em class="text-muted">
+                    {{food.caloriesDisplay}}
+                </em>
+
+            </small>
+        </div>
+        <div style="border-bottom: 1px solid lightgray;">
+            <span style="padding-left: 204px;font-size: 12px;font-weight: bold;">% Daily Value*</span>
+        </div>
+        <div style="border-bottom: 1px solid lightgray;">
+            <small>
+                <span style="font-weight:bold;">Total Fat: </span>
+                <em class="text-muted">
+                    {{food.fatDisplay}}g
+                </em>
+
+            </small>
+
+            <small style="float:right">
+                <em class="text-muted">
+                    {{totalFatDailyPercentageDisplay | number:0}}%
+                </em>
+
+            </small>
+        </div>
+        <div style="border-bottom: 1px solid lightgray">
+            <small style="padding-left: 15px;">
+                <span >Saturated Fat: </span>
+                <em class="text-muted">
+                    {{food.saturatedFatDisplay}}g
+                </em>
+
+            </small>
+
+            <small style="float:right">
+                <em class="text-muted">
+                    {{saturatedFatDailyPercentageDisplay | number:0}}%
+                </em>
+
+            </small>
+        </div>
+        <div style="border-bottom: 1px solid lightgray">
+            <small style="padding-left: 15px;">
+                <span >Trans Fat:</span>
+                <em class="text-muted">
+                    {{food.transfatDisplay}}g
+                </em>
+
+            </small>
+
+
+        </div>
+        <div style="border-bottom: 1px solid lightgray">
+            <small>
+                <span style="font-weight:bold;">Cholesterol:</span>
+                <em class="text-muted">
+                    {{food.cholesterolDisplay}}mg
+                </em>
+
+            </small>
+
+            <small style="float:right">
+                <em class="text-muted">
+                    {{cholesterolDailyPercentageDisplay | number:0}}%
+                </em>
+
+            </small>
+        </div>
+        <div style="border-bottom: 1px solid lightgray">
+            <small>
+                <span style="font-weight:bold;">Sodium:</span>
+                <em class="text-muted">
+
+                    {{food.sodiumDisplay}}mg
+                </em>
+
+            </small>
+
+            <small style="float:right">
+                <em class="text-muted">
+                    {{sodiumDailyPercentageDisplay | number:0}}%
+                </em>
+
+            </small>
+        </div>
+        <div style="border-bottom: 1px solid lightgray">
+            <small>
+                <span style="font-weight:bold;">Total Carbohydrates:</span>
+                <em class="text-muted">
+                    {{food.carbohydratesDisplay}}g
+                </em>
+
+            </small>
+
+            <small style="float:right">
+                <em class="text-muted">
+                    {{totalCarbohydratesDailyPercentageDisplay | number:0}}%
+                </em>
+
+            </small>
+        </div>
+        <div style="border-bottom: 1px solid lightgray">
+            <small style="padding-left: 15px;">
+                <span >Dietary Fiber:</span>
+                <em class="text-muted">
+                    {{food.fiberDisplay}}g
+                </em>
+
+            </small>
+
+            <small style="float:right">
+                <em class="text-muted">
+                    {{fiberDailyPercentageDisplay | number:0}}%
+                </em>
+
+            </small>
+        </div>
+        <div style="border-bottom: 1px solid lightgray">
+            <small style="padding-left: 15px;">
+                <span >Sugars:</span>
+                <em class="text-muted">
+                    {{food.sugarDisplay}}g
+                </em>
+
+            </small>
+
+
+        </div>
+        <div style="border-bottom: 3px solid black;">
+            <small>
+                <span style="font-weight:bold;">Protein:</span>
+                <em class="text-muted">
+                    {{food.proteinDisplay}}g
+                </em>
+
+            </small>
+
+
+        </div>
+        <div style="border-bottom: 1px solid lightgray">
+            <div style="display:inline-block;width: 60px;">
+                <small >
+                    <em class="text-muted">
+                        Vitamin A:
+                    </em>
+
+                </small>
+            </div>
+
+            <small style="padding-left: 40px;">
+                <em class="text-muted">
+                    {{food.vitaminADisplay}}%
+                </em>
+
+            </small>
+
+            <small style="padding-left: 35px;">
+                <em class="text-muted">
+                    Vitamin C:
+                </em>
+
+            </small>
+
+            <small style="float:right;">
+                <em class="text-muted">
+                    {{food.vitaminCDisplay}}%
+                </em>
+
+            </small>
+        </div>
+        <div style="border-bottom: 1px solid lightgray">
+            <div style="display:inline-block;width: 60px;">
+                <small >
+                    <em class="text-muted">
+                       Calcium:
+                    </em>
+
+                </small>
+            </div>
+
+            <small style="padding-left:40px;">
+                <em class="text-muted">
+                    {{food.calciumDisplay}}%
+                </em>
+
+            </small>
+
+            <small style="padding-left: 35px;">
+                <em class="text-muted">
+                    Iron:
+                </em>
+
+            </small>
+
+            <small style="float:right;">
+                <em class="text-muted">
+                    {{food.ironDisplay}}%
+                </em>
+
+            </small>
+        </div>
+        <div>
+            <p style="font-size: 10px; font-weight:bold;">
+                *Percent Daily Values are based on a 2,000 calories diet.
+                Your daily values may be higher or lower depending on your
+                calories needs.
+            </p>
+        </div>
     </div>
-    <div>
-        <small>
-            <em class="text-muted">
-               calories: {{food.calories}}
-            </em>
-
-        </small>
-    </div>
 
 
 
-    <div>
-        <small>
-            <em class="text-muted">
-                Protein: {{food.protein}}
-            </em>
-
-        </small>
-    </div>
-
-    <div>
-        <small>
-            <em class="text-muted">
-                Carbs: {{food.carbohydrates}}
-            </em>
-
-        </small>
-    </div>
-
-    <div>
-        <small>
-            <em class="text-muted">
-                Fat: {{food.fat}}
-            </em>
-
-        </small>
-    </div>
 
 </section>

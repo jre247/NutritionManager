@@ -119,6 +119,16 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
                 protein: defaultFood.protein,
                 carbohydrates: defaultFood.carbohydrates,
                 fat: defaultFood.fat,
+                sodium: defaultFood.sodium,
+                fiber: defaultFood.fiber,
+                transfat: defaultFood.transfat,
+                saturatedFat: defaultFood.saturatedFat,
+                sugar: defaultFood.sugar,
+                cholesterol: defaultFood.cholesterol,
+                vitaminA: defaultFood.vitaminA,
+                vitaminC: defaultFood.vitaminC,
+                calcium: defaultFood.calcium,
+                iron: defaultFood.iron,
                 foodId: defaultFood.foodId,
                 selectedFood: $scope.allFoods[0],
                 isEditable: true
@@ -130,50 +140,6 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
             doMealTotaling(meal);
             calculatePlanTotalMacros($scope.plan);
         };
-
-        //TODO: fix this logic
-        $scope.foodClick = function(food){
-//           // food.hasFocus = false;
-//
-//
-//            if (food.foodBlurClicked) {
-//
-//               // food.foodBlurClicked = false;
-//                food.foodClicked = true;
-//            }
-//            else{
-//                food.foodClicked = false;
-//            }
-//
-//            food.isEditable = true;
-//            food.hasFocus = true;
-//
-//           // else{
-//            //    food.foodClicked = false;
-//            //}
-
-
-        };
-        //TODO: fix this logic
-        $scope.foodBlur = function(food){
-//            //food.hasFocus = false;
-//
-//            //if (food.hasFocus === true) {
-//
-//            //}
-//            food.foodBlurClicked = true;
-//
-//            $timeout(function() {
-//                if (!food.foodClicked) {
-//                    food.isEditable = false;
-//                    food.hasFocus = false;
-//
-//                }
-//                food.foodBlurClicked = false;
-//            }, 10);
-        };
-
-
 
         $scope.saveFood = function(food){
             food.isEditable = false;
