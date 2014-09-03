@@ -96,18 +96,20 @@ angular.module('foods').controller('FoodsController', ['$scope', '$stateParams',
         };
 
         $scope.remove = function(food) {
-            if (food) {
-                food.$remove();
+            if (confirm("Are you sure you want to delete this food?")) {
+                if (food) {
+                    food.$remove();
 
-                for (var i in $scope.foods) {
-                    if ($scope.foods[i] === food) {
-                        $scope.foods.splice(i, 1);
+                    for (var i in $scope.foods) {
+                        if ($scope.foods[i] === food) {
+                            $scope.foods.splice(i, 1);
+                        }
                     }
+                } else {
+                    $scope.food.$remove(function () {
+                        $location.path('foods');
+                    });
                 }
-            } else {
-                $scope.food.$remove(function() {
-                    $location.path('foods');
-                });
             }
         };
 
