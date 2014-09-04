@@ -1,0 +1,45 @@
+<section data-ng-controller="NutritionProfileController" data-ng-init="findOne()">
+    <div class="page-header">
+        <h1>Edit Nutrition Profile</h1>
+    </div>
+    <div class="col-md-12">
+        <form class="form-horizontal" data-ng-submit="update()" novalidate>
+            <fieldset>
+                <div class="form-group">
+                    <label class="control-label" for="averageCaloriesTarget">Calories Target:</label>
+                    <div class="controls">
+                        <input type="text" data-ng-model="nutritionProfile.averageCaloriesTarget" id="averageCaloriesTarget" class="form-control" placeholder="Calories Target" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="proteinPercentageTarget">Protein % Target:</label>
+                    <div class="controls">
+                        <input type="text" data-ng-model="nutritionProfile.proteinPercentageTarget" id="proteinPercentageTarget" class="form-control" placeholder="Protein % Target" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="carbohydratesPercentageTarget">Carbs % Target:</label>
+                    <div class="controls">
+                        <input type="text" data-ng-model="nutritionProfile.carbohydratesPercentageTarget" id="carbohydratesPercentageTarget" class="form-control" placeholder="Carbs % Target" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="fatPercentageTarget">Fat % Target:</label>
+                    <div class="controls">
+                        <input type="text" data-ng-model="nutritionProfile.fatPercentageTarget" id="fatPercentageTarget" class="form-control" placeholder="Fat % Target" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <input type="submit" value="Update" class="btn btn-default">
+                </div>
+                <div data-ng-show="success" class="text-success">
+                    <strong>Nutrition Profile Saved Successfully!</strong>
+                </div>
+                <div data-ng-show="error" class="text-danger">
+                    <strong data-ng-bind="error"></strong>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</section>

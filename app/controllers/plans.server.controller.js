@@ -169,18 +169,7 @@ exports.list = function(req, res) {
 
         }
     });
-//	Plan.find({"user": req.user.id}).sort('planDate').populate('user', 'displayName').exec(function(err, plans) {
-//		if (err) {
-//			return res.send(400, {
-//				message: getErrorMessage(err)
-//			});
-//		} else {
-//            res.jsonp(plans);
-//
-//
-//
-//		}
-//	});
+
 };
 
 /**
