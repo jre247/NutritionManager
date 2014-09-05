@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('plans').controller('PlansController', ['$scope', '$stateParams', '$location', '$timeout', 'Authentication', '$modal', '$log', 'Plans', 'Foods',
-	function($scope, $stateParams, $location, $timeout, Authentication, $modal, $log, Plans, Foods) {
+angular.module('plans').controller('PlansController', ['$scope', '$stateParams', '$location', '$timeout', 'Authentication', '$modal', '$log', 'Plans', 'Foods', 'NutritionProfile',
+	function($scope, $stateParams, $location, $timeout, Authentication, $modal, $log, Plans, Foods, NutritionProfile) {
 		window.scope = $scope;
         window.plans = $scope.plans;
         $scope.showPlanEditableErrorMsg = false;
@@ -12,6 +12,8 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
         //$scope.displaySyncBtn = false;
 
         $scope.allFoods = Foods.query();
+
+        $scope.nutritionProfile = NutritionProfile.get();
 
         $scope.mealTypes = [
             {id: 1, name: 'Breakfast'},
