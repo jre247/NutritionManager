@@ -40,8 +40,6 @@ var getErrorMessage = function(err) {
  * Create a nutrition profile
  */
 exports.create = function(req, res) {
-    //var nutritionProfile = req.body;
-
     var nutritionProfile = new NutritionProfile(req.body);
     nutritionProfile.user = req.user;
 
@@ -81,24 +79,6 @@ exports.read = function(req, res) {
  * Update a profile
  */
 exports.update = function(req, res) {
-    var nutritionProfile = req.body;
-   // nutritionProfile = _.extend(nutritionProfile, req.body);
-
-   // var nutritionProfile = new NutritionProfile(req.body);
-   // nutritionProfile.user = req.user;
-
-//    nutritionProfile.save(function(err) {
-//        if (err) {
-//            return res.send(400, {
-//                message: getErrorMessage(err)
-//            });
-//        } else {
-//            res.jsonp(nutritionProfile);
-//        }
-//    });
-
-
-
     NutritionProfile.findOne({
         user:req.user.id // Search Filters
     }).exec(function(err, nutritionProfile) {

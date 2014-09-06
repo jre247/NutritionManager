@@ -5,11 +5,10 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
 		window.scope = $scope;
         window.plans = $scope.plans;
         $scope.showPlanEditableErrorMsg = false;
-        $scope.showTotalsAsPercent = false;
+        $scope.showTotalsAsPercent = true;
 
         $scope.authentication = Authentication;
         $scope.meals = [];
-        //$scope.displaySyncBtn = false;
 
         $scope.allFoods = Foods.query();
 
@@ -35,14 +34,6 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
         };
 
         $scope.initDate = new Date('2016-15-20');
-
-//        $scope.syncAllFoods = function(plan){
-//            plan.$syncPlanFoods(function(response) {
-//                alert("plan foods synced!");
-//            }, function(errorResponse) {
-//                $scope.error = errorResponse.data.message;
-//            });
-//        };
 
 		$scope.create = function() {
 			var plan = new Plans({
@@ -178,14 +169,6 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
                 }
             }
         };
-
-//        $scope.saveAll = function(meal){
-//            for(var food = 0; food < meal.foods.length; food++){
-//                meal.foods[food].isEditable = false;
-//            }
-//
-//            meal.isEditable = false;
-//        };
 
         $scope.editFood = function(food){
             food.isEditable = true;
@@ -555,10 +538,113 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
             }
         };
 
+        $scope.openSuggestionsDialog = function (meal) {
+            var modalInstance = $modal.open({
+                templateUrl: 'suggestionsModalContent.html',
+                controller: SuggestionsModalInstanceCtrl,
+                //size: size,
+                resolve: {
+
+                    suggestedFoods: function () {
+                        //figure out which foods to add to suggested foods based on nutrition profile targets
+                        var proteinTarget = $scope.nutritionProfile.proteinPercentageTarget;
+                        var carbsTarget = $scope.nutritionProfile.carbohydratesPercentageTarget;
+                        var fatTarget = $scope.nutritionProfile.fatPercentageTarget;
+                        var caloriesTarget = $scope.nutritionProfile.averageCaloriesTarget;
+
+                        var planTotalCalories = $scope.plan.totalPlanCalories;
+                        var planTotalCarbs = $scope.plan.totalPlanCarbsAsPercent;
+                        var planTotalProtein = $scope.plan.totalPlanProteinAsPercent;
+                        var planTotalFat = $scope.plan.totalPlanFatAsPercent;
+
+
+
+                        var suggestedFoodsAry = [];
+
+                        for (var i = 0; i < $scope.allFoods.length; i++) {
+                            var foodToCheck = $scope.allFoods[i];
+                            var score = 0;
+
+                            var macrosTotal = ($scope.plan.totalPlanFat + foodToCheck.fat) +
+                                ($scope.plan.totalPlanProtein + foodToCheck.protein) +
+                                ($scope.plan.totalPlanCarbs + foodToCheck.carbohydrates);
+
+                            var newProteinTarget = (($scope.plan.totalPlanProtein + foodToCheck.protein) / macrosTotal) * 100;
+                            var newCarbsTarget = (($scope.plan.totalPlanCarbs + foodToCheck.carbohydrates) / macrosTotal) * 100;
+                            var newFatTarget = (($scope.plan.totalPlanFat + foodToCheck.fat) / macrosTotal) * 100;
+                            var newCaloriesTarget = planTotalCalories + foodToCheck.calories;
+
+                            var caloriesTargetDiff = (caloriesTarget - newCaloriesTarget) / caloriesTarget;
+                            var proteinTargetDiff = (proteinTarget - newProteinTarget) / proteinTarget;
+                            var carbsTargetDiff = (carbsTarget - newCarbsTarget) / carbsTarget;
+                            var fatTargetDiff = (fatTarget - newFatTarget) / fatTarget;
+
+                            if (caloriesTargetDiff < 0){
+                                caloriesTargetDiff = -caloriesTargetDiff;
+                            }
+                            if (proteinTargetDiff < 0){
+                                proteinTargetDiff = -proteinTargetDiff;
+                            }
+                            if (carbsTargetDiff < 0){
+                                carbsTargetDiff = -carbsTargetDiff;
+                            }
+                            if (fatTargetDiff < 0){
+                                fatTargetDiff = -fatTargetDiff;
+                            }
+
+                            score = (caloriesTargetDiff * 3) + proteinTargetDiff + carbsTargetDiff + fatTargetDiff;
+
+                            foodToCheck.score = score;
+
+
+
+                            suggestedFoodsAry.push(foodToCheck);
+                        }
+
+                        suggestedFoodsAry.sort(function compare(a,b) {
+                            if (a.score < b.score)
+                                return -1;
+                            if (a.score > b.score)
+                                return 1;
+                            return 0;
+                        });
+
+                        //suggestedFoodsAry.reverse();
+
+                        var suggestedFoodsTop5 = [];
+
+                        for(i = 0; i < 5; i++){
+                            var suggestedFood = suggestedFoodsAry[i];
+
+                            suggestedFoodsTop5.push(suggestedFood);
+                        }
+
+                        return suggestedFoodsTop5;
+                    },
+                    mealForSuggestion: function(){
+                        return meal;
+                    },
+                    parentScope: function () {
+                        return $scope;
+                    }
+                }
+            });
+
+            modalInstance.result.then(function (mealForSuggestion) {
+                //$scope.dialogSelectedMealType = selectedItem;
+               // $scope.copyPlan(planCopyModel);
+                meal = mealForSuggestion;
+
+            }, function () {
+                $log.info('Modal dismissed at: ' + new Date());
+            });
+        }
+
+
+
 
 	}
 ]);
-
 
 var ModalInstanceCtrl = function ($scope, $modalInstance, parentScope, dialogMealsDetailed, dialogMealsShort) {
     $scope.selectedMealTypes = dialogMealsDetailed[0];
@@ -640,6 +726,56 @@ var ModalInstanceCtrl = function ($scope, $modalInstance, parentScope, dialogMea
         }
 
         $modalInstance.close($scope.selected);
+    };
+
+    $scope.cancel = function () {
+        $modalInstance.dismiss('cancel');
+    };
+};
+
+var SuggestionsModalInstanceCtrl = function ($scope, $modalInstance, parentScope, $timeout, suggestedFoods, mealForSuggestion) {
+    $scope.parentScope = parentScope;
+    $scope.suggestedFoods = suggestedFoods;
+    $scope.mealForSuggestion = mealForSuggestion;
+    $scope.selectedFood = $scope.suggestedFoods[0];
+
+    $scope.selectedFoodClick = function(suggestedFood){
+        $scope.selectedFood = suggestedFood;
+    };
+
+    $scope.ok = function () {
+        $scope.selectedFood.IsSuggested = true;
+        $scope.selectedFood.servings = 1;
+        $scope.selectedFood.isEditable = false;
+        $scope.selectedFood.foodId = $scope.selectedFood._id;
+
+        $scope.selectedFood.selectedFood =
+        {
+            calcium: $scope.selectedFood.calcium,
+            calories: $scope.selectedFood.calories,
+            carbohydrates: $scope.selectedFood.carbohydrates,
+            cholesterol: $scope.selectedFood.cholesterol,
+            fat: $scope.selectedFood.fat,
+            fiber: $scope.selectedFood.fiber,
+            foodId: $scope.selectedFood._id,
+            grams: $scope.selectedFood.cholesterol.grams,
+            iron: $scope.selectedFood.iron,
+            name: $scope.selectedFood.name,
+            protein: $scope.selectedFood.protein,
+            saturatedFat: $scope.selectedFood.saturatedFat,
+            sodium: $scope.selectedFood.sodium,
+            sugar: $scope.selectedFood.sugar,
+            transfat: $scope.selectedFood.transfat,
+            type: $scope.selectedFood.type,
+            vitaminA: $scope.selectedFood.vitaminA,
+            vitaminC: $scope.selectedFood.vitaminC
+        };
+
+        mealForSuggestion.foods.push($scope.selectedFood);
+
+        $timeout(function(){$scope.selectedFood.IsSuggested = false;}, 3000);
+
+        $modalInstance.close(mealForSuggestion);
     };
 
     $scope.cancel = function () {
