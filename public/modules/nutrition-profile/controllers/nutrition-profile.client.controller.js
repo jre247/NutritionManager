@@ -24,23 +24,15 @@ angular.module('nutritionProfile').controller('NutritionProfileController', ['$s
                 bodyFatPercentage: $scope.nutritionProfile.bodyFatPercentage
             });
             nutritionProfile.$save(function(response) {
-               // $location.path('foods');
-                $scope.nutritionProfile.nutritionProfileId = response._id;
+
+                $scope.nutritionProfile = response;
+
+                $scope.success = true;
+
+                $timeout(function(){$scope.success = false;}, 3000);
             }, function(errorResponse) {
                 $scope.error = errorResponse.data.message;
             });
-
-//            this.proteinPercentageTarget = '';
-//            this.carbohydratesPercentageTarget = '';
-//            this.saturatedFat = '';
-//            this.fatPercentageTarget = '';
-//            this.averageCaloriesTarget = '';
-//            this.age = '';
-//            this.sex = '';
-//            this.weight = '';
-//            this.height = '';
-//            this.restingHeartRate = '';
-//            this.bodyFatPercentage = '';
         };
 
         $scope.update = function() {
