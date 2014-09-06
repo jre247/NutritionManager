@@ -635,6 +635,10 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
                // $scope.copyPlan(planCopyModel);
                 meal = mealForSuggestion;
 
+                doMealTotaling(meal);
+
+                calculatePlanTotalMacros($scope.plan);
+
             }, function () {
                 $log.info('Modal dismissed at: ' + new Date());
             });
