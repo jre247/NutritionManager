@@ -777,7 +777,7 @@ var SuggestionsModalInstanceCtrl = function ($scope, $modalInstance, parentScope
 
         mealForSuggestion.foods.push($scope.selectedFood);
 
-        $timeout(function(){$scope.selectedFood.IsSuggested = false;}, 3000);
+        $timeout(function(){$scope.selectedFood.IsSuggested = false;}, 5000);
 
         $modalInstance.close(mealForSuggestion);
     };
