@@ -35,6 +35,24 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
 
         $scope.initDate = new Date('2016-15-20');
 
+        $scope.sortableStartCallback = function(e, ui) {
+            ui.item.data('start', ui.item.index());
+        };
+        $scope.sortableUpdateCallback = function(e, ui) {
+            var start = ui.item.data('start'),
+                end = ui.item.index();
+
+            $scope.plan.meals.splice(end, 0,
+                $scope.plan.meals.splice(start, 1)[0]);
+
+            $scope.$apply();
+        };
+
+        $scope.sortableOptions = {
+            start: $scope.sortableStartCallback,
+            update: $scope.sortableUpdateCallback
+        };
+
 		$scope.create = function() {
 			var plan = new Plans({
 				planDate: $scope.plan.planDateNonUtc,
@@ -81,6 +99,8 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
             var meal = $scope.plan.meals[$scope.plan.meals.length - 1];
 
             $scope.createFood(meal);
+
+            //sortableEle.refresh();
         };
 
         $scope.editMeal = function(meal){
@@ -109,6 +129,9 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
 
         $scope.createFood = function(meal){
             var defaultFood = $scope.allFoods[0];
+
+           // var selectedFood = $scope.allFoods[0];
+            //selectedFood.foodId = defaultFood.foodId;
 
             var model = {
                 name: defaultFood.name,
@@ -777,7 +800,7 @@ var SuggestionsModalInstanceCtrl = function ($scope, $modalInstance, parentScope
 
         mealForSuggestion.foods.push($scope.selectedFood);
 
-        $timeout(function(){$scope.selectedFood.IsSuggested = false;}, 5000);
+        $timeout(function(){$scope.selectedFood.IsSuggested = false;}, 4000);
 
         $modalInstance.close(mealForSuggestion);
     };
@@ -787,120 +810,3 @@ var SuggestionsModalInstanceCtrl = function ($scope, $modalInstance, parentScope
     };
 };
 
-
-//TODO: put this directive on global project, not plans module
-angular.module('plans').directive('ngBlur', ['$parse', function($parse) {
-    return function(scope, element, attr) {
-        var fn = $parse(attr['ngBlur']);
-        element.on('blur', function(event) {
-            scope.$apply(function() {
-                fn(scope, {$event:event});
-            });
-        });
-    };
-}]);
-//TODO: put this directive on global project, not plans module
-angular.module('plans').directive('ngFocus', ['$parse', function($parse) {
-    return function(scope, element, attr) {
-        var fn = $parse(attr['ngFocus']);
-        element.on('focus', function(event) {
-            scope.$apply(function() {
-                fn(scope, {$event:event});
-            });
-        });
-    };
-}]);
-//TODO: put this directive on global project
-angular.module('plans').directive('checklistModel', ['$parse', '$compile', function($parse, $compile) {
-        // contains
-        function contains(arr, item) {
-            if (angular.isArray(arr)) {
-                for (var i = 0; i < arr.length; i++) {
-                    if (angular.equals(arr[i], item)) {
-                        return true;
-                    }
-                }
-            }
-            return false;
-        }
-
-        // add
-        function add(arr, item) {
-            arr = angular.isArray(arr) ? arr : [];
-            for (var i = 0; i < arr.length; i++) {
-                if (angular.equals(arr[i], item)) {
-                    return arr;
-                }
-            }
-            arr.push(item);
-            return arr;
-        }
-
-        // remove
-        function remove(arr, item) {
-            if (angular.isArray(arr)) {
-                for (var i = 0; i < arr.length; i++) {
-                    if (angular.equals(arr[i], item)) {
-                        arr.splice(i, 1);
-                        break;
-                    }
-                }
-            }
-            return arr;
-        }
-
-        // http://stackoverflow.com/a/19228302/1458162
-        function postLinkFn(scope, elem, attrs) {
-            // compile with `ng-model` pointing to `checked`
-            $compile(elem)(scope);
-
-            // getter / setter for original model
-            var getter = $parse(attrs.checklistModel);
-            var setter = getter.assign;
-
-            // value added to list
-            var value = $parse(attrs.checklistValue)(scope.$parent);
-
-            // watch UI checked change
-            scope.$watch('checked', function(newValue, oldValue) {
-                if (newValue === oldValue) {
-                    return;
-                }
-                var current = getter(scope.$parent);
-                if (newValue === true) {
-                    setter(scope.$parent, add(current, value));
-                } else {
-                    setter(scope.$parent, remove(current, value));
-                }
-            });
-
-            // watch original model change
-            scope.$parent.$watch(attrs.checklistModel, function(newArr, oldArr) {
-                scope.checked = contains(newArr, value);
-            }, true);
-        }
-
-        return {
-            restrict: 'A',
-            priority: 1000,
-            terminal: true,
-            scope: true,
-            compile: function(tElement, tAttrs) {
-                if (tElement[0].tagName !== 'INPUT' || !tElement.attr('type', 'checkbox')) {
-                    throw 'checklist-model should be applied to `input[type="checkbox"]`.';
-                }
-
-                if (!tAttrs.checklistValue) {
-                    throw 'You should provide `checklist-value`.';
-                }
-
-                // exclude recursion
-                tElement.removeAttr('checklist-model');
-
-                // local scope var storing individual checkbox model
-                tElement.attr('ng-model', 'checked');
-
-                return postLinkFn;
-            }
-        };
-    }]);

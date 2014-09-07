@@ -47,10 +47,9 @@
         </fieldset>
 
 
-        <fieldset id="wrapper">
+        <fieldset id="wrapper" >
             <div id="content" class="form-group planContent" style="overflow-y: auto;overflow-x:hidden; margin-bottom: 3px;">
-                <accordion ng-show="plan.meals.length > 0" class="plansAccordion" style="..." close-others="oneAtATime">
-
+                <accordion sortable="sortableOptions" updateCallback="sortableUpdateCallback" startCallback="sortableStartCallback" rootSortableElement=".panel-group" ng-show="plan.meals.length > 0"  class="plansAccordion" style="..." close-others="oneAtATime">
                     <accordion-group is-open="meal.isVisible" data-ng-repeat="meal in plan.meals" >
                         <accordion-heading>
                             <div style="height: 28px;">

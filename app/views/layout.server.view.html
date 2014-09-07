@@ -143,6 +143,11 @@
             background:white;
         }
 
+        .panel-heading{
+            /*cursor: move;*/
+        }
+
+
         .suggestedFood:hover {
             background-color: #D2DFFA;
             cursor: pointer;
@@ -155,7 +160,6 @@
             border: 1px solid lightgray;
         }
 
-
         .mealSuggestedHighlight {
             background-color: rgb(218, 241, 218);
 
@@ -163,9 +167,6 @@
             -moz-animation: fadein 3s; /* Firefox */
             -webkit-animation: fadein 3s; /* Safari and Chrome */
             -o-animation: fadein 3s; /* Opera */
-
-
-
         }
 
         @keyframes fadein {
@@ -200,6 +201,7 @@
                 opacity: 1;
             }
         }
+
 
 
 
@@ -261,6 +263,8 @@
 		var user = {{ user | json | safe }};
 	</script>
 
+
+
 	<!--Application JavaScript Files-->
 	{% for jsFile in jsFiles %}<script type="text/javascript" src="{{jsFile}}"></script>
 	{% endfor %} 
@@ -271,7 +275,6 @@
 
 	{% endif %}
 
-    <script src="modules/core/angular-multi-select.js"></script>
 </body>
 
 </html>
