@@ -10,6 +10,15 @@ angular.module('nutritionProfile').controller('NutritionProfileController', ['$s
     function($scope, $stateParams, $location, Authentication, NutritionProfile, $timeout) {
         window.scope = $scope;
 
+        $scope.sexOptions = [
+            'Male',
+            'Female'
+        ];
+
+        $scope.heightFeetOptions = [ 1, 2, 3, 4, 5, 6, 7, 8];
+        $scope.heightInchesOptions = [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
+
+
         $scope.create = function() {
             var nutritionProfile = new NutritionProfile({
                 proteinPercentageTarget: $scope.nutritionProfile.proteinPercentageTarget,

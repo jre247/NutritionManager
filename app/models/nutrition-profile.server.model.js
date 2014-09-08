@@ -40,7 +40,10 @@ var NutritionProfileSchema = new Schema({
     weight: {
         type: Number
     },
-    height: {
+    heightFeet: {
+        type: Number
+    },
+    heightInches: {
         type: Number
     },
     restingHeartRate: {
