@@ -28,7 +28,8 @@ angular.module('nutritionProfile').controller('NutritionProfileController', ['$s
                 age: $scope.nutritionProfile.age,
                 sex: $scope.nutritionProfile.sex,
                 weight: $scope.nutritionProfile.weight,
-                height: $scope.nutritionProfile.height,
+                heightFeet: $scope.nutritionProfile.heightFeet,
+                heightInches: $scope.nutritionProfile.heightInches,
                 restingHeartRate: $scope.nutritionProfile.restingHeartRate,
                 bodyFatPercentage: $scope.nutritionProfile.bodyFatPercentage
             });
