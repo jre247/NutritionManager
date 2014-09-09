@@ -6,7 +6,6 @@
 var mongoose = require('mongoose'),
 	Schema = mongoose.Schema,
     FoodSchema = mongoose.model('Food');
-  //  FoodSchema = require('Food');
 
 /**
  * Plan Schema

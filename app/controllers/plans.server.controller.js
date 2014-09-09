@@ -82,11 +82,6 @@ exports.create = function(req, res) {
                         message: getErrorMessage(err)
                     });
                 } else {
-                    //var testPlanDateDb = planDate;
-                    var testPlanUserIdDb = req.user.id;
-                   // planToSave.planDateNonUtc = planClient.planDate;
-                    //planToSave.testPlanUserIdDb = testPlanUserIdDb;
-
                     res.jsonp(planToSave);
                 }
             });
@@ -100,21 +95,6 @@ exports.create = function(req, res) {
 exports.read = function(req, res) {
 	res.jsonp(req.plan);
 };
-
-//exports.syncPlanFoods = function(req, res) {
-//    var plan = req.plan;
-//    plan = _.extend(plan, req.body);
-////
-////    plan.save(function(err) {
-////        if (err) {
-////            return res.send(400, {
-////                message: getErrorMessage(err)
-////            });
-////        } else {
-////            res.jsonp(plan);
-////        }
-////    });
-//};
 
 /**
  * Update a plan

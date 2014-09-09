@@ -1,0 +1,40 @@
+<section data-ng-controller="ActivitiesController" style="font-family: segui;">
+
+    <div class="col-md-12">
+        <form class="form-horizontal" data-ng-init="findOne()" novalidate>
+
+
+            <fieldset>
+                <div class="form-group" style="margin-bottom: 1px;">
+                    <div class="activityDetailsSection" style="display:inline-block;vertical-align: top;">
+
+                        <div class="row">
+                            <div class="col-md-6" style="width: 153px;padding-top: 8px;">
+                                <p class="input-group">
+                                   <input type="text" class="form-control" style="padding: 4px 8px;" id="activityDate" datepicker-popup="{{format}}" ng-model="activity.activityDateNonUtc" is-open="opened" min-date="minDate" max-date="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
+                                      <span class="input-group-btn">
+                                        <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                                      </span>
+                                </p>
+                            </div>
+                        </div>
+
+                        Steps: <input data-ng-model="activity.steps" type="text"/>
+                    </div>
+
+
+
+                    <input type="submit" value="Save" style="padding: 4px 9px;" data-ng-click="saveActivity()"  class="btn btn-default">
+
+                </div>
+
+                <div data-ng-show="success" style="color: green; font-weight: bold; margin-bottom: 10px;opacity: 1;transition: opacity .25s ease-in-out;-moz-transition: opacity .25s ease-in-out;-webkit-transition: opacity .25s ease-in-out;" >
+                    <strong>Your changes have been saved!</strong>
+                </div>
+
+
+            </fieldset>
+        </form>
+    </div>
+
+</section>
