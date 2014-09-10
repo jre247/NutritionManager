@@ -8,6 +8,7 @@ angular.module('core').directive('sortable', ['$parse', '$compile', function($pa
             start: '@',
             startcallback: '=',
             update: '@',
+            disableallelementsbydefault: '=',
             updatecallback: '=',
             rootsortableelement:'@'
         },
@@ -23,9 +24,17 @@ angular.module('core').directive('sortable', ['$parse', '$compile', function($pa
 
             var sortableElement = jQuery(element).find(scope.rootsortableelement);
 
+//            jQuery(document).loaded(function(){
+//                if(scope.disableallelementsbydefault === true){
+//                    jQuery('.ui-sortable').find('.panel-default').addClass('disabled');
+//                }
+//            });
+
+
             jQuery(sortableElement).sortable({
                 start: scope.startEvent,
-                update: scope.updateEvent
+                update: scope.updateEvent,
+                cancel:".disabled"
             });
 
         }

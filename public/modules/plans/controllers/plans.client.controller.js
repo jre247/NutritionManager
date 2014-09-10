@@ -6,6 +6,10 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
         window.plans = $scope.plans;
         $scope.showPlanEditableErrorMsg = false;
         $scope.showTotalsAsPercent = true;
+        $scope.isSortingEnabled = false;
+        var sortingBtnTxtOptions = ['Enable Sorting', 'Disable Sorting'];
+        $scope.sortingBtnTxt = sortingBtnTxtOptions[0];
+        var isSortingEnabled = false;
 
         $scope.authentication = Authentication;
         $scope.meals = [];
@@ -20,6 +24,19 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
             {id: 3, name: 'Dinner'},
             {id: 4, name: 'Snack'}
         ];
+
+        $scope.toggleSorting = function(){
+            if (!isSortingEnabled){
+                $('.panel-group').find('.panel-default').removeClass('disabled');
+                isSortingEnabled = true;
+                $scope.sortingBtnTxt = sortingBtnTxtOptions[1];
+            }
+            else{
+                $('.panel-group').find('.panel-default').addClass('disabled');
+                isSortingEnabled = false;
+                $scope.sortingBtnTxt = sortingBtnTxtOptions[0];
+            }
+        };
 
         $scope.open = function($event) {
             $event.preventDefault();
@@ -175,7 +192,6 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
                 }
             }
 
-
             food.isEditable = true;
 
 
@@ -314,9 +330,11 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
                             carbs: $scope.plans[i].totalPlanCarbs,
                             fat: $scope.plans[i].totalPlanFat,
                             _id: $scope.plans[i]._id
-                        }
+                        };
 
                         $scope.plansCollection.push(planModel);
+
+
                     }
                 }
             );
