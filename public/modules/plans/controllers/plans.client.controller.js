@@ -11,6 +11,8 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
         $scope.sortingBtnTxt = sortingBtnTxtOptions[0];
         var isSortingEnabled = false;
 
+
+
         $scope.authentication = Authentication;
         $scope.meals = [];
 
@@ -350,6 +352,8 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
                     if (!$scope.plan.planDateNonUtc){
                         $scope.plan.planDateNonUtc = $scope.plan.planDate;
                     }
+
+                    $scope.isUserAdmin = $scope.plan.userRoles && $scope.plan.userRoles.indexOf('admin') !== -1 ? true : false;
 
                     for (var i = 0; i < $scope.plan.meals.length; i++) {
                         var carbsTotal = 0, proteinTotal = 0, caloriesTotal = 0, fatTotal = 0, sodiumTotal = 0;

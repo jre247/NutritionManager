@@ -66,10 +66,13 @@ exports.create = function(req, res) {
                 for(var i = 0; i < planClient.meals.length; i++){
                     planDb.meals.push(planClient.meals[i]);
                 }
+
+                planToSave.userRoles = req.user.roles;
             }
             else{
                 var plan = new Plan(req.body);
                 plan.user = req.user;
+                plan.userRoles = req.user.roles;
                 plan.planDate = planDate;
                 plan.planDateNonUtc = planClient.planDate;
                 planToSave = plan;
@@ -182,7 +185,7 @@ exports.planByID = function(req, res, next, id) {
 //
 //            }
 //        }
-
+        plan.userRoles = req.user.roles;
         req.plan = plan;
         next();
 

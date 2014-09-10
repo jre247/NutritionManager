@@ -22,6 +22,13 @@ var PlanSchema = new Schema({
 		type: Date
         //required: 'Plan Date cannot be blank'
 	},
+    userRoles: {
+        type: [{
+            type: String,
+            enum: ['user', 'admin']
+        }],
+        default: ['user']
+    },
 	user: {
 		type: Schema.ObjectId,
 		ref: 'User'
