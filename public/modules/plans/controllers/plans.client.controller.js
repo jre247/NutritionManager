@@ -113,6 +113,9 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
                 isVisible: true
             };
 
+            $timeout(function(){$scope.setSorting();}, 100);
+
+
             $scope.plan.meals.push(model);
 
             var meal = $scope.plan.meals[$scope.plan.meals.length - 1];
@@ -308,6 +311,7 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
                 $scope.success = true;
 
                 $timeout(function(){$scope.success = false;}, 3000);
+                $timeout(function(){$scope.setSorting();}, 100);
 
 			}, function(errorResponse) {
 				$scope.error = errorResponse.data.message;
@@ -523,7 +527,14 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
         $scope.reverseSort = false;
         scope.plansCollection = [];
 
+        $scope.setSorting = function(){
+            if (!isSortingEnabled){
+                $('.panel-group').find('.panel-default').addClass('disabled');
+                isSortingEnabled = false;
 
+            }
+
+        };
 
 
 

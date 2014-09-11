@@ -4,36 +4,26 @@
     </div>
 
     <div class="list-group">
-        <div style="font-weight: bold;">
-            <div style="width: 16%; display: inline-block;padding-left:16px;"
-                 data-ng-click="orderByField='activityDateNonUtc'; reverseSort = !reverseSort">
-                Date
-            </div>
-            <div style="width: 17%; display: inline-block;text-align:right;"
-                 data-ng-click="orderByField='activityType'; reverseSort = !reverseSort">
-                Activity Type
-            </div>
-            <div style="width: 20%; display: inline-block;text-align:right;"
-                 data-ng-click="orderByField='steps'; reverseSort = !reverseSort">
-                Steps
-            </div>
 
-
-        </div>
 
         <div style="overflow: auto;height: 66vh;">
-            <a data-ng-repeat="activity in activities | orderBy:orderByField:reverseSort" data-ng-href="#!/activities/{{activity._id}}" class="list-group-item">
+            <a data-ng-repeat="plan in activities | orderBy:orderByField:reverseSort" data-ng-href="#!/activities/{{plan._id}}" class="list-group-item">
                 <div>
-                    <div style="font-weight:bold;">
-                        <div style="width: 16%;display:inline-block;">
-                            <span data-ng-bind="activity.activityDateNonUtc | date:'shortDate'"></span>
+                    <div style="font-weight:bold;display:inline-block;width: 8%;" >
+                        <span data-ng-bind="plan.planDateNonUtc | date:'shortDate'"></span>
+                    </div>
+                    <div style="display:inline-block;">
+                        <div data-ng-repeat="activity in plan.activities" style="display:inline-block;">
+                            <div style="display:inline-block; margin-left: 40px;">
+                                <div style="color: rgb(33, 51, 184);display:inline-block; font-weight:bold;" >
+                                    <span data-ng-bind="activityTypesDictionary[activity.activityType]"></span>:
+                                </div>
 
-                        </div>
-                        <div style="color: rgb(33, 51, 184);width:20%;display:inline-block;text-align: right;" >
-                            <span data-ng-bind="activity.activityType"></span>
-                        </div>
-                        <div style="color: rgb(33, 51, 184);width:17%;display:inline-block;text-align: right;margin-left: 7px;">
-                            <span data-ng-bind="activity.steps | number:0"></span>
+                                <div class="list-group-item-text text-muted" style="display:inline-block;padding-left: 10px;">
+                                    <span data-ng-bind="activity.steps | number:0"></span> Steps
+                                </div>
+
+                            </div>
                         </div>
                     </div>
                 </div>

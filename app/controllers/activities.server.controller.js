@@ -42,48 +42,53 @@ var createDateAsUTC = function(date) {
  * Create an Activity
  */
 exports.create = function(req, res) {
-    var activityClient = req.body;
-    var activityClientDate = new Date(activityClient.activityDate);
+    var planClient = req.body;
+
+    var planClientDate = new Date(planClient.planDate);
 
     //convert both database date and client date to UTC
-    activityClientDate = createDateAsUTC(activityClientDate);
+    planClientDate = createDateAsUTC(planClientDate);
 
-    var activityDateMonth = activityClientDate.getMonth();
-    var activityDateDay = activityClientDate.getDate();
-    var activityDateYear = activityClientDate.getFullYear();
+    var planDateMonth = planClientDate.getMonth();
+    var planDateDay = planClientDate.getDate();
+    var planDateYear = planClientDate.getFullYear();
 
-    var activityDate = new Date(activityDateYear, activityDateMonth, activityDateDay);
+    var planDate = new Date(planDateYear, planDateMonth, planDateDay);
 
     //check if already existing activity in database for this activity date
     //if so, just update the activity, not create new one
-    Activity.findOne({'activityDate': activityDate, 'user': req.user.id}).exec(function(err, activityDb) {
+    Activity.findOne({'planDate': planDate, 'user': req.user.id}).exec(function(err, planDb) {
         if (err) {
             return res.send(400, {
                 message: getErrorMessage(err)
             });
         } else {
-            var activityToSave = activityDb;
+            var planToSave = planDb;
 
-            if (activityDb) {
-                activityDb.steps = activityClient.steps;
-                activityDb.activityType = activityClient.activityType;
+
+
+            if (planDb) {
+                planDb.steps = planClient.steps;
+                planDb.activityType = planClient.activityType;
+                planDb.activities = planClient.activities;
             }
             else{
-                var activity = new Activity(req.body);
-                activity.user = req.user;
-                activity.activityDate = activityDate;
-                activity.activityDateNonUtc = activityClient.activityDate;
-                activityToSave = activity;
+                var plan = new Activity(req.body);
+                plan.user = req.user;
+                plan.planDate = planDate;
+                plan.planDateNonUtc = planClient.planDate;
+                plan.activities  = planClient.activities;
+                planToSave = plan;
 
             }
 
-            activityToSave.save(function(err) {
+            planToSave.save(function(err) {
                 if (err) {
                     return res.send(400, {
                         message: getErrorMessage(err)
                     });
                 } else {
-                    res.jsonp(activityToSave);
+                    res.jsonp(planToSave);
                 }
             });
         }
@@ -140,7 +145,7 @@ exports.list = function(req, res) {
     Activity.find(
         {
             user:req.user.id
-        }).sort('activityDate').populate('user', 'displayName').exec(function(err, activities) {
+        }).sort('planDate').populate('user', 'displayName').exec(function(err, activities) {
         if (err) {
             return res.send(400, {
                 message: getErrorMessage(err)
