@@ -20,8 +20,15 @@
                                 </div>
 
                                 <div class="list-group-item-text text-muted" style="display:inline-block;padding-left: 10px;">
-                                    <span data-ng-bind="activity.steps | number:0"></span> Steps
+                                    <div data-ng-show="activity.steps > 0">
+                                        <span  data-ng-bind="activity.steps | number:0"></span> Steps,
+                                    </div>
+
                                 </div>
+
+
+                                <span  data-ng-bind="activity.duration | number:0"></span> Minutes
+
 
                             </div>
                         </div>

@@ -69,7 +69,7 @@ exports.create = function(req, res) {
 
             if (planDb) {
                 planDb.steps = planClient.steps;
-                planDb.activityType = planClient.activityType;
+               // planDb.activityType = planClient.activityType;
                 planDb.activities = planClient.activities;
             }
             else{
