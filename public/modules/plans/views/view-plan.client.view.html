@@ -27,8 +27,9 @@
                 <div class=" planDetailsSection" style="display: inline-block; margin-top: 9px;float: right;">
                     <input type="button" class="btn btn-default" style="margin-right: 5px; padding: 4px 9px;" data-ng-click="createMeal();" value="+"/>
 
-                    <input type="button" class="btn btn-default" style="margin-right: 5px; padding: 4px 9px;" value="{{sortingBtnTxt}}" data-ng-click="toggleSorting();"/>
-
+                    <div class="plansDesktopBtn">
+                        <input type="button" class="btn btn-default" style="margin-right: 5px; padding: 4px 9px;" value="{{sortingBtnTxt}}" data-ng-click="toggleSorting();"/>
+                    </div>
                     <button class="btn btn-default" style="margin-right: 5px; padding: 4px 9px;" ng-click="openCopyPlanDialog()">Copy</button>
 
                     <div class="plansDesktopBtn" data-ng-show="isUserAdmin">
