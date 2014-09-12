@@ -16,7 +16,7 @@
                         <div data-ng-repeat="activity in plan.activities" style="display:inline-block;">
                             <div style="display:inline-block; margin-left: 40px;">
                                 <div style="color: rgb(33, 51, 184);display:inline-block; font-weight:bold;" >
-                                    <span data-ng-bind="activityTypesDictionary[activity.activityType]"></span>:
+                                    <span data-ng-bind="activityTypesDictionary[activity.activityType].name"></span>:
                                 </div>
 
                                 <div class="list-group-item-text text-muted" style="display:inline-block;padding-left: 10px;">

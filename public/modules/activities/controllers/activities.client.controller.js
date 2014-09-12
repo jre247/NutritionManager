@@ -15,14 +15,57 @@ angular.module('activities').controller('ActivitiesController', ['$scope', '$sta
 
         $scope.authentication = Authentication;
 
+        $scope.activityTypeCategories = [
+          'Endurance', 'Strength', 'Balance', 'Flexibility'
+        ];
+
 
         $scope.activityTypes = [
-            {id: 0, name: 'Cardiovascular'},
-            {id: 1, name: 'Weight Lifting'},
-            {id: 2, name: 'Stretching'},
-            {id: 3, name: 'Yoga'},
-            {id: 4, name: 'Meditation'}
+            {id: 0, type: 0, name: 'Ballet'},
+            {id: 1, type: 0, name: 'Baseball'},
+            {id: 2, type: 0, name: 'Basketball'},
+            {id: 3, type: 0, name: 'Biking'},
+            {id: 4, type: 0, name: 'Boxing'},
+            {id: 5, type: 0, name: 'Canoeing, Kayaking, or other Rowing'},
+            {id: 6, type: 0, name: 'Crossfit'},
+            {id: 7, type: 0, name: 'Diving'},
+            {id: 8, type: 0, name: 'Football'},
+            {id: 9, type: 0, name: 'Hiking'},
+            {id: 10, type: 0, name: 'Hockey'},
+            {id: 11, type: 0, name: 'Jumping rope'},
+            {id: 12, type: 0, name: 'Martial Arts'},
+            {id: 13, type: 2, name: 'Meditation'},
+            {id: 14, type: 1, name: 'Powerlifting'},
+            {id: 15, type: 1, name: 'Rock Climbing'},
+            {id: 16, type: 0, name: 'Running'},
+            {id: 17, type: 0, name: 'Skateboarding'},
+            {id: 18, type: 0, name: 'Skating (Ice or Roller)'},
+            {id: 19, type: 0, name: 'Skiing or Snowboarding'},
+            {id: 20, type: 0, name: 'Soccer'},
+            {id: 21, type: 0, name: 'Stairmaster'},
+            {id: 22, type: 3, name: 'Stretching'},
+            {id: 23, type: 0, name: 'Surfing'},
+            {id: 24, type: 0, name: 'Swimming'},
+            {id: 25, type: 0, name: 'Tai Chi'},
+            {id: 26, type: 0, name: 'Tennis or other Racket sport'},
+            {id: 27, type: 0, name: 'Volleyball'},
+            {id: 28, type: 0, name: 'Walking'},
+            {id: 29, type: 0, name: 'Water Aerobics'},
+            {id: 30, type: 1, name: 'Weight Lifting'},
+            {id: 31, type: 0, name: 'Wrestling'},
+            {id: 32, type: 3, name: 'Yoga'}
+
         ];
+
+        $scope.activityTypesDictionary = [];
+        for(var i = 0; i < $scope.activityTypes.length; i++) {
+            var activityTypeDictModel = {
+                name: $scope.activityTypes[i].name,
+                type: $scope.activityTypes[i].type
+            };
+
+            $scope.activityTypesDictionary.push(activityTypeDictModel);
+        }
 
         $scope.environments = [
             {id: 0, name: 'Outdoors'},
@@ -33,43 +76,21 @@ angular.module('activities').controller('ActivitiesController', ['$scope', '$sta
             0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
         ];
 
-//        $scope.muscleGroups = [
-//            {id: 0, name: 'Hamstrings'},
-//            {id: 1, name: 'Lats (Latissimus Dorsi)'},
-//            {id: 2, name: 'Quadriceps'},
-//            {id: 3, name: 'Abs (Rectus Abdominus)'},
-//            {id: 4, name: 'Obliques'},
-//            {id: 5, name: 'Shoulders (Deltoids)'},
-//            {id: 6, name: 'Neck'},
-//            {id: 7, name: 'Traps (Trapezius)'},
-//            {id: 8, name: 'Biceps (Biceps Brachii)'},
-//            {id: 9, name: 'Forearm (Brachioradialis)'},
-//            {id: 10, name: 'Chest (Pectoralis)'},
-//            {id: 11, name: 'Traps (Trapezius)'},
-//            {id: 12, name: 'Triceps (Triceps Brachii)'},
-//            {id: 13, name: 'Middle Back (Rhomboids)'},
-//            {id: 14, name: 'Lower Back'},
-//            {id: 15, name: 'Gluts (Gluteus Maximus and Medius'},
-//            {id: 16, name: 'Calves (Gastrocnemius'},
-//        ];
-//
-//        $scope.exerciseList = [
-//            {id: 0, name: 'Lat Pulldown'},
-//            {id: 1, name: 'Lats (Latissimus Dorsi)'},
-//            {id: 2, name: 'Quadriceps'},
-//            {id: 3, name: 'Abs (Rectus Abdominus)'},
-//            {id: 4, name: 'Obliques'},
-//            {id: 5, name: 'Shoulders (Deltoids)'},
-//            {id: 6, name: 'Neck'}
-//        ];
+        $scope.isActivityEndurance = function(activity){
+            var activityTypeId = activity.activityType;
 
-        $scope.activityTypesDictionary = [
-            'Cardiovascular',
-            'Weight Lifting',
-            'Stretching',
-            'Yoga',
-            'Meditation'
-        ];
+            var type = $scope.activityTypesDictionary[activityTypeId].type;
+
+            return type === 0;
+        };
+
+        $scope.isActivityDistanceRelated = function(activity){
+            var activityTypeId = activity.activityType;
+
+            var type = $scope.activityTypesDictionary[activityTypeId].name;
+
+            return type === 'Running' || type === 'Walking';
+        };
 
         $scope.toggleSorting = function(){
             if (!isSortingEnabled){
@@ -126,8 +147,10 @@ angular.module('activities').controller('ActivitiesController', ['$scope', '$sta
         };
 
         $scope.create = function() {
+            var planDateAsString = $scope.plan.planDateNonUtc.toUTCString();
+
             var plan = new Activities({
-                planDate: $scope.plan.planDateNonUtc,
+                planDateForDB: planDateAsString,
                 activities: $scope.plan.activities
             });
             plan.$save(function(response) {
@@ -156,18 +179,17 @@ angular.module('activities').controller('ActivitiesController', ['$scope', '$sta
         $scope.createActivity = function(){
             var model = {
                 name: '',
-                activityType: 0,
-                activityName: 'Cardiovascular',
+                activityType: 28,
+                activityName: 'Walking',
                 steps: 0,
+                intensity: 1,
+                distance: 0,
                 equipment: 0,
                 duration: 0,
                 averageSpeed: 0,
                 reps: 0,
                 sets: 0,
                 weight: 0,
-                //environment: 0,
-               // environmentName: 'Outdoors',
-                //exercises: [],
                 isVisible: true,
                 isEditable: true
             };
@@ -176,24 +198,6 @@ angular.module('activities').controller('ActivitiesController', ['$scope', '$sta
 
             $timeout(function(){$scope.setSorting();}, 100);
         };
-
-//        $scope.createExercise = function(activity){
-//            var exercises = [];
-//
-//            var newExercise = {
-//                reps: 0,
-//                weight: 0,
-//                sets: 0,
-//                name: $scope.exerciseList[0].name,
-//                exerciseId: $scope.exerciseList[0].id,
-//                primaryMuscleGroupId: $scope.muscleGroups[0].id,
-//                secondaryMuscleGroupId: $scope.muscleGroups[1].id,
-//                primaryMuscleGroupName: $scope.muscleGroups[0].name,
-//                secondaryMuscleGroupName: $scope.muscleGroups[1].name,
-//                exerciseType: $scope.activityTypes[0].exerciseType
-//            }
-//        };
-
 
         $scope.editActivity = function(activity){
             activity.isEditable = true;

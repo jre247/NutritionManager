@@ -16,6 +16,10 @@ var ActivitySchema = new Schema({
     planDateNonUtc: {
         type: Date
     },
+    planDateForDB: {
+        type: String
+        //required: 'Plan Date cannot be blank'
+    },
     created: {
         type: Date,
         default: Date.now
@@ -48,6 +52,10 @@ var ActivitySchema = new Schema({
                 default: 0
             },
             duration: {
+                type: Number,
+                default: 0
+            },
+            distance: {
                 type: Number,
                 default: 0
             },

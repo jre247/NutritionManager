@@ -42,22 +42,25 @@ var createDateAsUTC = function(date) {
  * Create an Activity
  */
 exports.create = function(req, res) {
+//    var planClient = req.body;
+//
+//    var planClientDate = new Date(planClient.planDate);
+//
+//    //convert both database date and client date to UTC
+//    planClientDate = createDateAsUTC(planClientDate);
+//
+//    var planDateMonth = planClientDate.getMonth();
+//    var planDateDay = planClientDate.getDate();
+//    var planDateYear = planClientDate.getFullYear();
+//
+//    var planDate = new Date(planDateYear, planDateMonth, planDateDay);
+
     var planClient = req.body;
-
-    var planClientDate = new Date(planClient.planDate);
-
-    //convert both database date and client date to UTC
-    planClientDate = createDateAsUTC(planClientDate);
-
-    var planDateMonth = planClientDate.getMonth();
-    var planDateDay = planClientDate.getDate();
-    var planDateYear = planClientDate.getFullYear();
-
-    var planDate = new Date(planDateYear, planDateMonth, planDateDay);
+    var planClientPlanDate = planClient.planDateForDB;
 
     //check if already existing activity in database for this activity date
     //if so, just update the activity, not create new one
-    Activity.findOne({'planDate': planDate, 'user': req.user.id}).exec(function(err, planDb) {
+    Activity.findOne({'planDateAsUtc': planClientPlanDate, 'user': req.user.id}).exec(function(err, planDb) {
         if (err) {
             return res.send(400, {
                 message: getErrorMessage(err)
@@ -65,22 +68,21 @@ exports.create = function(req, res) {
         } else {
             var planToSave = planDb;
 
-
-
             if (planDb) {
                 planDb.steps = planClient.steps;
-               // planDb.activityType = planClient.activityType;
                 planDb.activities = planClient.activities;
             }
             else{
                 var plan = new Activity(req.body);
                 plan.user = req.user;
-                plan.planDate = planDate;
-                plan.planDateNonUtc = planClient.planDate;
+                plan.planDateAsUtc = planClientPlanDate;
+                plan.planDateNonUtc = planClient.planDateForDB;
                 plan.activities  = planClient.activities;
                 planToSave = plan;
 
             }
+
+            planToSave.planDateForDB = planClient.planDateForDB;
 
             planToSave.save(function(err) {
                 if (err) {
