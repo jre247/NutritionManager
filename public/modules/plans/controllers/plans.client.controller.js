@@ -93,7 +93,7 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
 
         $scope.copyPlan = function(planCopyModel){
             var plan = new Plans({
-                planDate: planCopyModel.planDate,
+                planDateForDB: planCopyModel.planDate,
                 meals: planCopyModel.meals
             });
             plan.$save(function(response) {
