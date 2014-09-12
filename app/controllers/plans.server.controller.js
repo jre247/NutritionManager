@@ -52,11 +52,6 @@ exports.create = function(req, res) {
     //convert both database date and client date to UTC
     planDate = createDateAsUTC(planDate);
 
-
-
-
-    //planDate = createDateAsUTC(planDate);
-
     //check if already existing plan in database for this plan date
     //if so, just update the plan, not create new one
     Plan.findOne({'planDate': planDate, 'user': req.user.id}).exec(function(err, planDb) {
