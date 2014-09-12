@@ -68,6 +68,7 @@ exports.create = function(req, res) {
                 }
 
                 planToSave.userRoles = req.user.roles;
+                planToSave.isUpdate = true;
             }
             else{
                 var plan = new Plan(req.body);
@@ -77,6 +78,7 @@ exports.create = function(req, res) {
                 plan.planDateNonUtc = planClient.planDateForDB;
 
                 planToSave = plan;
+                planToSave.isUpdate = false;
 
             }
 

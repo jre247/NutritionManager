@@ -26,6 +26,10 @@ var PlanSchema = new Schema({
         type: String
         //required: 'Plan Date cannot be blank'
     },
+    isUpdate:{
+        type: Boolean,
+        default: false
+    },
     userRoles: {
         type: [{
             type: String,
