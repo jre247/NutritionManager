@@ -76,6 +76,13 @@ angular.module('activities').controller('ActivitiesController', ['$scope', '$sta
             0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
         ];
 
+        $scope.directionList = ['Ascending', 'Descending'];
+
+//        $scope.activityFieldsList = ['planDate', 'steps', 'weight', 'duration', 'distance', 'averageHeartRate',
+//            'activityType', 'averageSpeed', 'intensity', ];
+
+        $scope.selectedDirection = 'Ascending';
+
         $scope.isActivityEndurance = function(activity){
             var activityTypeId = activity.activityType;
 
@@ -246,6 +253,14 @@ angular.module('activities').controller('ActivitiesController', ['$scope', '$sta
                 var activity = $scope.plan.activities[i];
 
                 activity.isEditable = false;
+
+                var isStrengthActivity = $scope.activityTypesDictionary[activity.activityType].type === 1;
+
+                if (isStrengthActivity){
+                    activity.steps = 0;
+                    activity.averageSpeed = 0;
+                    activity.distance = 0;
+                }
             }
 
             if (!$scope.plan._id){
