@@ -80,7 +80,7 @@ exports.create = function(req, res) {
 
             }
 
-            plan.planDateForDB = planClient.planDateForDB;
+            planToSave.planDateForDB = planClient.planDateForDB;
 
             planToSave.save(function(err) {
                 if (err) {
