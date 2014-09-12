@@ -16,7 +16,7 @@
                     <div >
                         <div data-ng-repeat="activity in plan.activities" style="display:inline-block;">
                             <div style="display:inline-block; margin-left: 40px;">
-                                <div style="color: rgb(224, 161, 27);display:inline-block; font-weight:bold;" >
+                                <div style="display:inline-block; font-weight:bold;color:rgb(105, 97, 97)" >
                                     <span data-ng-bind="activityTypesDictionary[activity.activityType].name"></span>:
                                 </div>
 
@@ -27,10 +27,11 @@
 
                                 </div>
 
+                                <div style="display:inline-block;color:gray">
+                                    <span  data-ng-bind="activity.duration | number:0"></span> Minutes,
 
-                                <span  data-ng-bind="activity.duration | number:0"></span> Minutes,
-
-                                <span  data-ng-bind="activity.caloriesBurned | number:0"></span> Calories
+                                    <span  data-ng-bind="activity.caloriesBurned | number:0"></span> Calories
+                                </div>
                             </div>
                         </div>
                     </div>
