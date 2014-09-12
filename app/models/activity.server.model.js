@@ -28,12 +28,20 @@ var ActivitySchema = new Schema({
         type: Schema.ObjectId,
         ref: 'User'
     },
+    totalCaloriesBurned:{
+        type: Number,
+        default: 0
+    },
     planDate: {
         type: Date,
         default: Date.now
     },
     activities: [{
             activityType: {
+                type: Number,
+                default: 0
+            },
+            caloriesBurned:{
                 type: Number,
                 default: 0
             },

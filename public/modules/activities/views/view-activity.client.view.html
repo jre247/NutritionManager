@@ -81,7 +81,7 @@
             </div>
 
             <div style="display:inline-block;width: 100px">
-                Duration (minutes):<br/> <input style="width: 60px;" data-ng-model="activity.duration" type="text"/>
+                Duration (minutes):<br/> <input style="width: 60px;" data-ng-model="activity.duration" data-ng-change="calculateCalories(activity)" type="text"/>
             </div>
 
             <div style="display:inline-block;width: 100px" data-ng-show="isActivityDistanceRelated(activity)">
@@ -99,13 +99,13 @@
             </div>
 
             <div style="display:inline-block;width: 100px">
-                Avg. Heart Rate:<br/> <input style="width: 60px;" data-ng-model="activity.averageHeartRate" type="text"/>
+                Avg. Heart Rate:<br/> <input style="width: 60px;" data-ng-model="activity.averageHeartRate" data-ng-change="calculateCalories(activity)" type="text"/>
             </div>
         </div>
 
         <div data-ng-show="isActivityEndurance(activity) === false">
             <div style="display:inline-block;width: 100px">
-                Duration (minutes):<br/> <input style="width: 60px;" data-ng-model="activity.duration" type="text"/>
+                Duration (minutes):<br/> <input style="width: 60px;" data-ng-model="activity.duration" data-ng-change="calculateCalories(activity)" type="text"/>
             </div>
 
             <div style="display:inline-block;width: 100px">
@@ -115,14 +115,22 @@
             </div>
 
             <div style="display:inline-block;width: 100px">
-                Avg. Heart Rate:<br/> <input style="width: 60px;" data-ng-model="activity.averageHeartRate" type="text"/>
+                Avg. Heart Rate:<br/> <input style="width: 60px;" data-ng-model="activity.averageHeartRate" data-ng-change="calculateCalories(activity)" type="text"/>
             </div>
 
+        </div>
+
+        <div style="font-weight:bold;margin-top: 15px;color: rgb(66, 66, 207);font-weight: bold;font-size: 12.5px;">
+            Calories Burned: <span data-ng-bind="activity.caloriesBurned | number:0"></span>
         </div>
     </div>
 </div>
 </accordion-group>
 </accordion>
+
+<div style="font-weight:bold;margin-top: 15px;color: rgb(66, 66, 207);font-weight: bold;font-size: 12.5px;">
+    Total Calories Burned: <span data-ng-bind="plan.totalCaloriesBurned | number:0"></span>
+</div>
 
 
 

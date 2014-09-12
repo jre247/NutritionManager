@@ -31,26 +31,32 @@ var NutritionProfileSchema = new Schema({
         ref: 'User'
     },
     age: {
-        type: Number
+        type: Number,
+        default: 30
     },
     sex: {
         type: String,
         default: 'Female'
     },
     weight: {
-        type: Number
+        type: Number,
+        default: 0
     },
     heightFeet: {
-        type: Number
+        type: Number,
+        default: 5
     },
     heightInches: {
-        type: Number
+        type: Number,
+        default: 1
     },
     restingHeartRate: {
-        type: Number
+        type: Number,
+        default: 0
     },
     bodyFatPercentage: {
-        type: Number
+        type: Number,
+        default: 0
     },
     created: {
         type: Date,

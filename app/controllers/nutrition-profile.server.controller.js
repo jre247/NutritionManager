@@ -93,6 +93,7 @@ exports.update = function(req, res) {
             nutritionProfile.proteinPercentageTarget = req.body.proteinPercentageTarget;
 
             nutritionProfile.age = req.body.age;
+            nutritionProfile.weight = req.body.weight;
             nutritionProfile.heightInches = req.body.heightInches;
             nutritionProfile.heightFeet = req.body.heightFeet;
             nutritionProfile.sex = req.body.sex;

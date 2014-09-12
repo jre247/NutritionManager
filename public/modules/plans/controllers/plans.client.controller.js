@@ -11,8 +11,6 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
         $scope.sortingBtnTxt = sortingBtnTxtOptions[0];
         var isSortingEnabled = false;
 
-
-
         $scope.authentication = Authentication;
         $scope.meals = [];
 

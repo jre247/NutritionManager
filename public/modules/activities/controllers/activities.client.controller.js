@@ -4,8 +4,8 @@
 
 'use strict';
 
-angular.module('activities').controller('ActivitiesController', ['$scope', '$stateParams', '$timeout', '$location', 'Authentication', 'Activities',
-    function($scope, $stateParams, $timeout, $location, Authentication, Activities) {
+angular.module('activities').controller('ActivitiesController', ['$scope', '$stateParams', '$timeout', '$location', 'Authentication', 'Activities', 'NutritionProfile',
+    function($scope, $stateParams, $timeout, $location, Authentication, Activities, NutritionProfile) {
         window.scope = $scope;
         $scope.showPlanEditableErrorMsg = false;
         $scope.isSortingEnabled = false;
@@ -14,6 +14,7 @@ angular.module('activities').controller('ActivitiesController', ['$scope', '$sta
         var isSortingEnabled = false;
 
         $scope.authentication = Authentication;
+        $scope.nutritionProfile = NutritionProfile.get();
 
         $scope.activityTypeCategories = [
           'Endurance', 'Strength', 'Balance', 'Flexibility'
@@ -82,6 +83,51 @@ angular.module('activities').controller('ActivitiesController', ['$scope', '$sta
 //            'activityType', 'averageSpeed', 'intensity', ];
 
         $scope.selectedDirection = 'Ascending';
+
+        $scope.calculateTotalCaloriesBurned = function(){
+            var total = 0;
+
+            for(var i = 0; i < $scope.plan.activities.length; i++){
+                var activity = $scope.plan.activities[i];
+                var calories = activity.caloriesBurned;
+
+                total += calories;
+            }
+
+            $scope.plan.totalCaloriesBurned = total;
+        };
+
+        //formulate for calculating calories burned for men:
+        // [(Age x 0.2017) — (Weight x 0.09036) + (Heart Rate x 0.6309) — 55.0969] x Time / 4.184.
+        //formulate for calculating calories burned for women:
+        // [(Age x 0.074) — (Weight x 0.05741) + (Heart Rate x 0.4472) — 20.4022] x Time / 4.184.
+        $scope.calculateCalories = function(activity){
+            var age = $scope.nutritionProfile.age;
+            var weight = $scope.nutritionProfile.weight;
+            var heightFeet = $scope.nutritionProfile.heightFeet;
+            var heightInches = $scope.nutritionProfile.heightInches;
+            var totalHeight = (heightFeet * 12) + heightInches;
+            var gender = $scope.nutritionProfile.sex;
+
+            var averageHeartRate = parseInt(activity.averageHeartRate || 120);
+            var duration = parseInt(activity.duration);
+
+            var caloriesBurned = 0;
+
+            if(duration > 0) {
+                if (gender === 'Male') {
+                    caloriesBurned = (((age * 0.2017) - (weight * 0.09036) + (averageHeartRate * 0.6309) - 55.0969) * duration) / 4.184;
+                }
+                else {
+                    caloriesBurned = (((age * 0.074) - (weight * 0.05741) + (averageHeartRate * 0.4472) - 20.4022) * duration) / 4.184;
+
+                }
+            }
+
+            activity.caloriesBurned = caloriesBurned;
+
+            $scope.calculateTotalCaloriesBurned();
+        };
 
         $scope.isActivityEndurance = function(activity){
             var activityTypeId = activity.activityType;
@@ -158,6 +204,7 @@ angular.module('activities').controller('ActivitiesController', ['$scope', '$sta
 
             var plan = new Activities({
                 planDateForDB: planDateAsString,
+                totalCaloriesBurned: $scope.plan.totalCaloriesBurned,
                 activities: $scope.plan.activities
             });
             plan.$save(function(response) {
@@ -168,6 +215,7 @@ angular.module('activities').controller('ActivitiesController', ['$scope', '$sta
             });
 
             $scope.plan.planDate = '';
+            $scope.plan.totalCaloriesBurned = 0;
             $scope.plan.activities = [];
         };
 
@@ -193,6 +241,8 @@ angular.module('activities').controller('ActivitiesController', ['$scope', '$sta
                 distance: 0,
                 equipment: 0,
                 duration: 0,
+                averageHeartRate: 0,
+                caloriesBurned: 0,
                 averageSpeed: 0,
                 reps: 0,
                 sets: 0,
@@ -202,6 +252,8 @@ angular.module('activities').controller('ActivitiesController', ['$scope', '$sta
             };
 
             $scope.plan.activities.push(model);
+
+            $scope.calculateCalories(model);
 
             $timeout(function(){$scope.setSorting();}, 100);
         };
@@ -318,6 +370,9 @@ angular.module('activities').controller('ActivitiesController', ['$scope', '$sta
                     }
 
                     $scope.isUserAdmin = $scope.plan.userRoles && $scope.plan.userRoles.indexOf('admin') !== -1 ? true : false;
+
+                    $scope.calculateTotalCaloriesBurned();
+
                 });
             }
             else{

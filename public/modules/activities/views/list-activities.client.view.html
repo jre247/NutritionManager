@@ -8,15 +8,15 @@
     <select data-ng-model="selectedDirection" ng-options="t for t in directionList" data-ng-change="reverseSort = selectedDirection === 'Descending'" style="font-size: 16px;vertical-align: top;"></select>
 
     <div class="list-group" style="margin-top: 20px;">
-        <div style="overflow: auto;height: 66vh;">
+        <div>
             <a data-ng-repeat="plan in activities | orderBy:orderByField:reverseSort" data-ng-href="#!/activities/{{plan._id}}" class="list-group-item">
                 <div>
 
                     <h4 class="list-group-item-heading" data-ng-bind="plan.planDateNonUtc | date:'shortDate'"></h4>
-                    <div>
+                    <div >
                         <div data-ng-repeat="activity in plan.activities" style="display:inline-block;">
                             <div style="display:inline-block; margin-left: 40px;">
-                                <div style="color: rgb(33, 51, 184);display:inline-block; font-weight:bold;" >
+                                <div style="color: rgb(224, 161, 27);display:inline-block; font-weight:bold;" >
                                     <span data-ng-bind="activityTypesDictionary[activity.activityType].name"></span>:
                                 </div>
 
@@ -28,12 +28,16 @@
                                 </div>
 
 
-                                <span  data-ng-bind="activity.duration | number:0"></span> Minutes
+                                <span  data-ng-bind="activity.duration | number:0"></span> Minutes,
 
-
+                                <span  data-ng-bind="activity.caloriesBurned | number:0"></span> Calories
                             </div>
                         </div>
                     </div>
+                    <div style="color: rgb(33, 51, 184);font-weight:bold;margin-left: 40px;margin-top: 18px;">
+                        Total Calories Burned: <span data-ng-bind="plan.totalCaloriesBurned | number:0"></span>
+                    </div>
+
                 </div>
             </a>
         </div>
