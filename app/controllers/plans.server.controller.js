@@ -62,7 +62,7 @@ exports.create = function(req, res) {
         } else {
             var planToSave = planDb;
 
-            if (planDb) {
+            if (planDb !== null && planDb !== 'undefined' && planDb !== undefined) {
                 for(var i = 0; i < planClient.meals.length; i++){
                     planDb.meals.push(planClient.meals[i]);
                 }
@@ -75,10 +75,12 @@ exports.create = function(req, res) {
                 plan.userRoles = req.user.roles;
                 plan.planDate = planDate;
                 plan.planDateNonUtc = planClient.planDateForDB;
-                plan.planDateForDB = planClient.planDateForDB;
+
                 planToSave = plan;
 
             }
+
+            plan.planDateForDB = planClient.planDateForDB;
 
             planToSave.save(function(err) {
                 if (err) {
