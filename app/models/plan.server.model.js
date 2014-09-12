@@ -14,6 +14,9 @@ var PlanSchema = new Schema({
     planDateNonUtc:{
         type: Date
     },
+    planDateAsUtc:{
+        type: String
+    },
 	created: {
 		type: Date,
 		default: Date.now

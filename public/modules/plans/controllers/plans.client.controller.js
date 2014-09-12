@@ -73,7 +73,7 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
         };
 
 		$scope.create = function() {
-            var planDateAsString = $scope.plan.planDateNonUtc.toLocaleDateString();
+            var planDateAsString = $scope.plan.planDateNonUtc.toUTCString();
 
 			var plan = new Plans({
 				//planDate: planDateAsString,
