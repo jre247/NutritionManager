@@ -75,6 +75,7 @@ exports.create = function(req, res) {
                 plan.userRoles = req.user.roles;
                 plan.planDate = planDate;
                 plan.planDateNonUtc = planClient.planDateForDB;
+                plan.planDateForDB = planClient.planDateForDB;
                 planToSave = plan;
 
             }
