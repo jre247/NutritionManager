@@ -22,6 +22,10 @@ var PlanSchema = new Schema({
 		type: Date
         //required: 'Plan Date cannot be blank'
 	},
+    planDateForDB: {
+        type: String
+        //required: 'Plan Date cannot be blank'
+    },
     userRoles: {
         type: [{
             type: String,

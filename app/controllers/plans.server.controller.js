@@ -41,7 +41,7 @@ var createDateAsUTC = function(date) {
  */
 exports.create = function(req, res) {
     var planClient = req.body;
-    var planClientPlanDate = new Date(planClient.planDate);
+    var planClientPlanDate = new Date(planClient.planDateForDB);
 
     var planDateMonth = planClientPlanDate.getMonth();
     var planDateDay = planClientPlanDate.getDate();
@@ -79,7 +79,7 @@ exports.create = function(req, res) {
                 plan.user = req.user;
                 plan.userRoles = req.user.roles;
                 plan.planDate = planDate;
-                plan.planDateNonUtc = planClient.planDate;
+                plan.planDateNonUtc = planClient.planDateForDB;
                 planToSave = plan;
 
             }
