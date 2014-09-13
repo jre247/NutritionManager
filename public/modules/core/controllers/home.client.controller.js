@@ -66,19 +66,22 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
 
         $scope.getDailyDashboardData = function() {
             CoreService.getDailyDashboardData(planDate).then(function(data){
-                if (data.nutritionPlan !== 'null' && data.activityPlan !== 'null'){
-                       $scope.bmr = calculateBmr();
+                if (data.nutritionPlan !== 'null'){
+                    var plan = data.nutritionPlan;
+                   for (var nMeal = 0; nMeal < plan.meals.length; nMeal++){
+                        doMealTotaling(plan.meals[nMeal]);
+                   }
 
-                       $scope.activityPlan = data.activityPlan;
-                       var plan = data.nutritionPlan;
+                   calculatePlanTotalMacros(plan);
 
-                       for (var nMeal = 0; nMeal < plan.meals.length; nMeal++){
-                            doMealTotaling(plan.meals[nMeal]);
-                       }
+                   $scope.nutritionPlan = plan;
+                }
 
-                       calculatePlanTotalMacros(plan);
+                if(data.activityPlan !== 'null'){
+                    $scope.bmr = calculateBmr();
 
-                       $scope.nutritionPlan = plan;
+                    $scope.activityPlan = data.activityPlan;
+
                 }
             });
         };

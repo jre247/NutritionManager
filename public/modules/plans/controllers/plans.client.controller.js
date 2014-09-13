@@ -311,6 +311,16 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
 		$scope.update = function() {
 			var plan = $scope.plan;
 
+            var planDateAsString = $scope.plan.planDateNonUtc.toUTCString();
+            var planDate = new Date(planDateAsString);
+            var planDateYear = planDate.getFullYear();
+            var planDateMonth = planDate.getMonth();
+            var planDateDay = planDate.getDate();
+
+            plan.planDateYear = planDateYear;
+            plan.planDateMonth = planDateMonth;
+            plan.planDateDay = planDateDay;
+
             plan.$update(function() {
 				//$location.path('plans/' + plan._id);
                 for (var i = 0; i < $scope.plan.meals.length; i++){

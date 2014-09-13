@@ -360,6 +360,16 @@ angular.module('activities').controller('ActivitiesController', ['$scope', '$sta
         $scope.update = function() {
             var plan = $scope.plan;
 
+            var planDateAsString = $scope.plan.planDateNonUtc.toUTCString();
+            var planDate = new Date(planDateAsString);
+            var planDateYear = planDate.getFullYear();
+            var planDateMonth = planDate.getMonth();
+            var planDateDay = planDate.getDate();
+
+            plan.planDateYear = planDateYear;
+            plan.planDateMonth = planDateMonth;
+            plan.planDateDay = planDateDay;
+
             plan.$update(function() {
                 $scope.success = true;
 
