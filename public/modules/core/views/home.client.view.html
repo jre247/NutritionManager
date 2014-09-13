@@ -1,48 +1,31 @@
 <section data-ng-controller="HomeController">
-	<div class="jumbotron text-center">
-		<div class="row">
-			<div class="col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 col-xs-12">
-				<img alt="MEAN.JS" class="img-responsive text-center" src="modules/core/img/brand/home-page-fruits-img.png" />
-			</div>
-		</div>
-		<br>
-		<div class="row">
-			<p class="lead">
-				Fit2Create!
-			</p>
-		</div>
+	<!--<div class="jumbotron text-center">-->
 		<!--<div class="row">-->
-			<!--<p>-->
-				<!--<a class="btn btn-primary btn-lg" href="http://meanjs.org" target="_blank">Learn more</a>-->
+			<!--<div class="col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 col-xs-12">-->
+				<!--<img  class="img-responsive text-center" src="modules/core/img/brand/home-page-fruits-img.png" />-->
+			<!--</div>-->
+		<!--</div>-->
+		<!--<br>-->
+		<!--<div class="row">-->
+			<!--<p class="lead">-->
+				<!--Fit2Create!-->
 			<!--</p>-->
 		<!--</div>-->
-	</div>
-	<div>
-		<h2>Get ready for the most state-of-the-art Nutrition Manager product on the international market!</h2>
-		<p>To get started, please log in or register. Then after being logged in you can click on the "Plans" menu item to see a list of existing plans, or click on "New Plan" under the "Plans" menu drop down to create a new plan. Enjoy! Tell all your friends because I have no marketing department yet to do that for me!</p>
-		<!--<p>This sample application tracks users and articles.</p>-->
-		<!--<ul>-->
-			<!--<li>-->
-				<!--Click-->
-				<!--<em>Signup</em>-->
-				<!--to get started.-->
-			<!--</li>-->
-			<!--<li>-->
-				<!--Configure your app to work with your social accounts, by editing the-->
-				<!--<em>/config/env/*.js</em>-->
-				<!--files.-->
-			<!--</li>-->
-			<!--<li>-->
-				<!--Edit your users module.-->
-			<!--</li>-->
-			<!--<li>-->
-				<!--Add new CRUD modules.-->
-			<!--</li>-->
-			<!--<li>-->
-				<!--Have fun...-->
-			<!--</li>-->
-		<!--</ul>-->
-	</div>
+		<!--&lt;!&ndash;<div class="row">&ndash;&gt;-->
+			<!--&lt;!&ndash;<p>&ndash;&gt;-->
+				<!--&lt;!&ndash;<a class="btn btn-primary btn-lg" href="http://meanjs.org" target="_blank">Learn more</a>&ndash;&gt;-->
+			<!--&lt;!&ndash;</p>&ndash;&gt;-->
+		<!--&lt;!&ndash;</div>&ndash;&gt;-->
+	<!--</div>-->
+    <h2>Today's Activities:</h2>
+	<ul data-ng-show="activityPlan" data-ng-repeat="activity in activityPlan.activities">
+        <li>
+            <span style="font-weight:bold;" data-ng-bind="activityTypesDictionary[activity.activityType].name"></span>:
+            <span data-ng-bind="activity.steps"></span> Steps,
+            <span data-ng-bind="activity.caloriesBurned | number:0"></span> Calories Burned,
+            <span data-ng-bind="activity.duration | number:0"></span> Minutes
+        </li>
+	</ul>
 	<!--<div class="row">-->
 		<!--<div class="col-md-3">-->
 			<!--<h2>-->

@@ -22,6 +22,16 @@ module.exports = function(app) {
         .put(users.requiresLogin, activities.hasAuthorization, activities.update)
         .delete(users.requiresLogin, activities.hasAuthorization, activities.delete);
 
+
+    app.route('/activities/:activityDate/:dateRange')
+        .get(activities.activityByDate);
+
+
+
+
+
     // Finish by binding the article middleware
     app.param('activityId', activities.activityByID);
+
+    app.param('activityDate', activities.activityByDate);
 };

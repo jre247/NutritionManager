@@ -42,25 +42,16 @@ var createDateAsUTC = function(date) {
  * Create an Activity
  */
 exports.create = function(req, res) {
-//    var planClient = req.body;
-//
-//    var planClientDate = new Date(planClient.planDate);
-//
-//    //convert both database date and client date to UTC
-//    planClientDate = createDateAsUTC(planClientDate);
-//
-//    var planDateMonth = planClientDate.getMonth();
-//    var planDateDay = planClientDate.getDate();
-//    var planDateYear = planClientDate.getFullYear();
-//
-//    var planDate = new Date(planDateYear, planDateMonth, planDateDay);
 
     var planClient = req.body;
     var planClientPlanDate = planClient.planDateForDB;
+    var planDateYear = planClient.planDateYear;
+    var planDateMonth = planClient.planDateMonth;
+    var planDateDay = planClient.planDateDay;
 
     //check if already existing activity in database for this activity date
     //if so, just update the activity, not create new one
-    Activity.findOne({'planDateAsUtc': planClientPlanDate, 'user': req.user.id}).exec(function(err, planDb) {
+    Activity.findOne({'planDateYear': planDateYear, 'planDateMonth': planDateMonth, 'planDateDay': planDateDay, 'user': req.user.id}).exec(function(err, planDb) {
         if (err) {
             return res.send(400, {
                 message: getErrorMessage(err)
@@ -70,7 +61,12 @@ exports.create = function(req, res) {
 
             if (planDb) {
                 planDb.steps = planClient.steps;
-                planDb.activities = planClient.activities;
+
+                for(var i = 0; i < planClient.activities.length; i++){
+                    planDb.activities.push(planClient.activities[i]);
+                }
+
+
             }
             else{
                 var plan = new Activity(req.body);
@@ -79,6 +75,9 @@ exports.create = function(req, res) {
                 plan.planDateAsUtc = planClientPlanDate;
                 plan.planDateNonUtc = planClient.planDateForDB;
                 plan.activities  = planClient.activities;
+                plan.planDateYear = planClient.planDateYear;
+                plan.planDateMonth = planClient.planDateMonth;
+                plan.planDateDay = planClient.planDateDay;
                 planToSave = plan;
 
             }
@@ -168,6 +167,19 @@ exports.activityByID = function(req, res, next, id) {
         if (!activity) return next(new Error('Failed to load activity ' + id));
         req.activity = activity;
         next();
+    });
+};
+
+exports.activityByDate = function(req, res, next, activityDate, dateRange) {
+    var split = activityDate.split('_');
+    var month = parseInt(split[0]);
+    var day = parseInt(split[1]);
+    var year = parseInt(split[2]);
+
+    Activity.findOne({'planDateYear': year, 'planDateMonth': month, 'planDateDay': day, 'user': req.user.id}).exec(function(err, activity) {
+        if (err) return next(err);
+        //if (!activity) return next(new Error('Failed to load activity with date: ' + activityDate));
+        res.jsonp(activity);
     });
 };
 

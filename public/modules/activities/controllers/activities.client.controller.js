@@ -201,9 +201,16 @@ angular.module('activities').controller('ActivitiesController', ['$scope', '$sta
 
         $scope.create = function() {
             var planDateAsString = $scope.plan.planDateNonUtc.toUTCString();
+            var planDate = new Date(planDateAsString);
+            var planDateYear = planDate.getFullYear();
+            var planDateMonth = planDate.getMonth();
+            var planDateDay = planDate.getDate();
 
             var plan = new Activities({
                 planDateForDB: planDateAsString,
+                planDateYear: planDateYear,
+                planDateMonth: planDateMonth,
+                planDateDay: planDateDay,
                 totalCaloriesBurned: $scope.plan.totalCaloriesBurned,
                 activities: $scope.plan.activities
             });

@@ -10,7 +10,7 @@ var mongoose = require('mongoose'),
     Schema = mongoose.Schema;
 
 /**
- * Food Schema
+ * activity Schema
  */
 var ActivitySchema = new Schema({
     planDateNonUtc: {
@@ -19,6 +19,15 @@ var ActivitySchema = new Schema({
     planDateForDB: {
         type: String
         //required: 'Plan Date cannot be blank'
+    },
+    planDateYear:{
+        type: Number
+    },
+    planDateMonth:{
+        type: Number
+    },
+    planDateDay:{
+        type: Number
     },
     created: {
         type: Date,
