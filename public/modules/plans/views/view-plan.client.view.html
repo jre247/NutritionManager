@@ -32,12 +32,12 @@
                     </div>
                     <button class="btn btn-default" style="margin-right: 5px; padding: 4px 9px;" ng-click="openCopyPlanDialog()">Copy</button>
 
-                    <!--<div class="plansDesktopBtn" data-ng-show="isUserAdmin">-->
-                        <!--<button class="btn btn-default " style="margin-right: 5px; padding: 4px 9px !important;background-image: linear-gradient(to bottom, #fff 0%, rgb(247, 170, 170) 100%);" data-ng-click="deletePlan(plan);">Delete Plan</button>-->
-                    <!--</div>-->
-                    <div class="plansDesktopBtn">
+                    <div class="plansDesktopBtn" data-ng-show="isUserAdmin">
                         <button class="btn btn-default " style="margin-right: 5px; padding: 4px 9px !important;background-image: linear-gradient(to bottom, #fff 0%, rgb(247, 170, 170) 100%);" data-ng-click="deletePlan(plan);">Delete Plan</button>
                     </div>
+                    <!--<div class="plansDesktopBtn">-->
+                        <!--<button class="btn btn-default " style="margin-right: 5px; padding: 4px 9px !important;background-image: linear-gradient(to bottom, #fff 0%, rgb(247, 170, 170) 100%);" data-ng-click="deletePlan(plan);">Delete Plan</button>-->
+                    <!--</div>-->
 
                     <input type="submit" value="Save" style="padding: 4px 9px;" data-ng-click="savePlan()"  class="btn btn-default">
                 </div>
