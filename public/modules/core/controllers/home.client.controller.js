@@ -1,10 +1,13 @@
 'use strict';
 
 
-angular.module('core').controller('HomeController', ['$scope', 'Authentication', 'Activities', 'CoreService',
-	function($scope, Authentication, Activities, CoreService) {
+angular.module('core').controller('HomeController', ['$scope', 'Authentication', 'Activities', 'CoreService', 'NutritionProfile',
+	function($scope, Authentication, Activities, CoreService, NutritionProfile) {
 		// This provides Authentication context.
 		$scope.authentication = Authentication;
+        window.scope = $scope;
+
+        $scope.nutritionProfile = NutritionProfile.get();
 
         $scope.activityTypes = [
             {id: 0, type: 0, name: 'Ballet'},
@@ -43,6 +46,14 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
 
         ];
 
+        var todaysDate = (new Date()).toUTCString();
+        var dt = new Date(todaysDate);
+        var year = dt.getFullYear();
+        var month = dt.getMonth();
+        var day = dt.getDate();
+
+        var planDate = month + '_' + day + '_' + year;
+
         $scope.activityTypesDictionary = [];
         for(var i = 0; i < $scope.activityTypes.length; i++) {
             var activityTypeDictModel = {
@@ -53,25 +64,107 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
             $scope.activityTypesDictionary.push(activityTypeDictModel);
         }
 
-        $scope.findActivitiesForToday = function() {
-            var todaysDate = (new Date()).toUTCString();
-            var dt = new Date(todaysDate);
-            var year = dt.getFullYear();
-            var month = dt.getMonth();
-            var day = dt.getDate();
+        $scope.getDailyDashboardData = function() {
+            CoreService.getDailyDashboardData(planDate).then(function(data){
+               $scope.bmr = calculateBmr();
 
-            var planDate = month + '_' + day + '_' + year;
+               $scope.activityPlan = data.activityPlan;
+               var plan = data.nutritionPlan;
 
-            CoreService.getActivityPlanByDate(planDate).then(function(data){
-               $scope.activityPlan = data;
+               for (var nMeal = 0; nMeal < plan.meals.length; nMeal++){
+                    doMealTotaling(plan.meals[nMeal]);
+               }
+
+               calculatePlanTotalMacros(plan);
+
+               $scope.nutritionPlan = plan;
             });
-
-
-
         };
 
-        $scope.findActivitiesForToday();
+        $scope.calculateDeficit = function(){
+            if($scope.activityPlan && $scope.nutritionPlan) {
+                var caloriesOut = $scope.activityPlan.totalCaloriesBurned + $scope.bmr;
+                var caloriesIn = $scope.nutritionPlan.totalPlanCalories;
+
+                var additionalCaloriesExpended = 300;
+
+                return caloriesIn - caloriesOut - additionalCaloriesExpended;
+            }
+        };
 
 
+        var doMealTotaling = function(meal){
+            var carbsTotal = 0, fatTotal = 0, proteinTotal = 0, caloriesTotal = 0, sodiumTotal = 0;
+
+            for(var i = 0; i < meal.foods.length; i++){
+                var foodCarbs = meal.foods[i].carbohydrates;
+
+                carbsTotal += foodCarbs;
+                fatTotal += meal.foods[i].fat;
+                proteinTotal += meal.foods[i].protein;
+                caloriesTotal += meal.foods[i].calories;
+                sodiumTotal += meal.foods[i].sodium;
+            }
+
+            meal.totalCarbohydrates = carbsTotal;
+            meal.totalProtein = proteinTotal;
+            meal.totalCalories = caloriesTotal;
+            meal.totalFat = fatTotal;
+            meal.totalSodium = sodiumTotal;
+        };
+
+        var calculatePlanTotalMacros = function(plan){
+            var carbsTotal = 0, fatTotal = 0, proteinTotal = 0, caloriesTotal = 0;
+
+            for (var i = 0; i < plan.meals.length; i++){
+                carbsTotal += plan.meals[i].totalCarbohydrates;
+                fatTotal += plan.meals[i].totalFat;
+                proteinTotal += plan.meals[i].totalProtein;
+                caloriesTotal += plan.meals[i].totalCalories;
+            }
+
+            plan.totalPlanCarbs = carbsTotal;
+            plan.totalPlanFat = fatTotal;
+            plan.totalPlanProtein = proteinTotal;
+            plan.totalPlanCalories = caloriesTotal;
+
+            //calculate totals as percent
+            var macroTotals = carbsTotal + fatTotal + proteinTotal;
+            plan.totalPlanCarbsAsPercent = (carbsTotal / macroTotals) * 100;
+            plan.totalPlanFatAsPercent = (fatTotal / macroTotals) * 100;
+            plan.totalPlanProteinAsPercent = (proteinTotal / macroTotals) * 100;
+        };
+
+        //BMR for Men = 66 + (13.8 x weight in kg.) + (5 x height in cm) - (6.8 x age in years)
+        //BMR for Women = 655 + (9.6 x weight in kg.) + (1.8 x height in cm) - (4.7 x age in years).
+        var calculateBmr = function(){
+            var age = $scope.nutritionProfile.age;
+            var weightInLbs = $scope.nutritionProfile.weight;
+            var heightFeet = $scope.nutritionProfile.heightFeet;
+            var heightInches = $scope.nutritionProfile.heightInches;
+            var totalHeight = (heightFeet * 12) + heightInches;
+            var gender = $scope.nutritionProfile.sex;
+
+            //convert weight from lbs to kg:
+            // kg = (weight in lbs) * .454
+            var weightInKg = weightInLbs * .454;
+
+            //convert height from inches to cms
+            //height in cms = (height in inches * 2.54)
+            var heightInCms = totalHeight * 2.54
+
+            var bmr = 0;
+
+            //BMR for Men = 66.47 + (13.75 x weight in kg.) + (5 x height in cm) - (6.75 x age in years)
+            if(gender == "Male"){
+                bmr = 66.47 + (13.75 * weightInKg) + (5 * heightInCms) - (6.75 * age);
+            }
+            //BMR for Women = 655 + (9.6 x weight in kg.) + (1.8 x height in cm) - (4.7 x age in years).
+            else{
+                bmr = 655.09 + (9.56 * weightInKg) + (1.84 * heightInCms) - (4.67 * age);
+            }
+
+            return bmr;
+        }
 	}
 ]);

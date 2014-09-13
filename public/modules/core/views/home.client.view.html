@@ -1,4 +1,4 @@
-<section data-ng-controller="HomeController">
+<section data-ng-controller="HomeController" data-ng-init="getDailyDashboardData()">
 	<!--<div class="jumbotron text-center">-->
 		<!--<div class="row">-->
 			<!--<div class="col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 col-xs-12">-->
@@ -26,6 +26,59 @@
             <span data-ng-bind="activity.duration | number:0"></span> Minutes
         </li>
 	</ul>
+
+    <h2 style="margin-top: 40px;">Today's Nutrition Stats:</h2>
+    <div data-ng-show="nutritionPlan">
+        <div style="display:inline-block;font-weight:bold;">
+            <div style="margin-top:10px;">
+                 Caloric Intake:
+            </div>
+            <div style="margin-top:10px;">
+                 Caloric Expenditure:
+            </div>
+            <div style="margin-top:10px;">
+                 BMR:
+            </div>
+            <div style="margin-top:10px;">
+                 Deficit:
+            </div>
+        </div>
+
+
+        <div style="display:inline-block;margin-left: 20px;">
+            <div>
+                <div style="margin-top:10px; width: 80px; text-align: right;display:inline-block;padding-right: 15px;">
+                    <span data-ng-bind="nutritionPlan.totalPlanCalories | number:0"></span>
+                </div>
+                <span>Calories</span>
+            </div>
+
+            <div>
+                <div style="margin-top:10px; width: 80px; text-align: right;display:inline-block;padding-right: 15px;">
+
+                    <span data-ng-bind="activityPlan.totalCaloriesBurned | number:0"></span>
+                </div>
+                <span>Calories</span>
+            </div>
+
+            <div>
+                <div style="margin-top:10px; width: 80px; text-align: right;display:inline-block;padding-right: 15px;">
+                    <span style="margin-top:10px;margin-right: 5px;">-</span>
+                    <span data-ng-bind="bmr | number:0"></span>
+                </div>
+                <span>Calories</span>
+            </div>
+            <div style="color: rgb(33, 51, 184);font-weight: bold;">
+                <div style="border-top: 1px solid black; padding-top:10px; width: 80px; text-align: right;padding-right: 15px;display:inline-block;">
+                    <span data-ng-bind="calculateDeficit() | number:0"></span>
+                </div>
+                <span>Calories</span>
+            </div>
+        </div>
+
+    </div>
+
+
 	<!--<div class="row">-->
 		<!--<div class="col-md-3">-->
 			<!--<h2>-->

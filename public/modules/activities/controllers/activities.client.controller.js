@@ -109,18 +109,33 @@ angular.module('activities').controller('ActivitiesController', ['$scope', '$sta
             var totalHeight = (heightFeet * 12) + heightInches;
             var gender = $scope.nutritionProfile.sex;
 
-            var averageHeartRate = parseInt(activity.averageHeartRate || 120);
+            var averageHeartRate = parseInt(activity.averageHeartRate);
             var duration = parseInt(activity.duration);
 
             var caloriesBurned = 0;
 
             if(duration > 0) {
+                if (!averageHeartRate){
+                    averageHeartRate = 120;
+                }
+
                 if (gender === 'Male') {
                     caloriesBurned = (((age * 0.2017) - (weight * 0.09036) + (averageHeartRate * 0.6309) - 55.0969) * duration) / 4.184;
                 }
                 else {
                     caloriesBurned = (((age * 0.074) - (weight * 0.05741) + (averageHeartRate * 0.4472) - 20.4022) * duration) / 4.184;
 
+                }
+            }
+            else{
+                if(!averageHeartRate || averageHeartRate <= 0){
+                    var steps = activity.steps;
+                    if(steps > 0) {
+                        var caloriesBurnedInMile = 0.57 * weight;
+                        var stepsInMiles = steps / 2000;
+
+                        caloriesBurned = stepsInMiles * caloriesBurnedInMile;
+                    }
                 }
             }
 

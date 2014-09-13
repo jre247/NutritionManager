@@ -165,48 +165,26 @@ exports.planByID = function(req, res, next, id) {
 		if (err) return next(err);
 		if (!plan) return next(new Error('Failed to load plan ' + id));
 
-       // var isDone = false;
-
-//        for(var i = 0; i < plan.meals.length; i++){
-//            for (var j = 0; j < plan.meals[i].foods.length; j++){
-//                var mealFood = plan.meals[i].foods[j];
-//
-//                Food.findById(mealFood.id).exec(function(err, food){
-//                    plan.meals[i].foods[j] = food;
-//
-//                    if (i == plan.meals.length - 1 && j == plan.meals[i].foods.length - 1){
-//                        isDone = true;
-//                    }
-//
-//                    if (isDone){
-//                        req.plan = plan;
-//                        next();
-//                    }
-//                });
-//
-//
-//            }
-//        }
         plan.userRoles = req.user.roles;
         req.plan = plan;
         next();
 
-//
-//
-//        Food.populate(plan, {
-//            path: 'author.phone',
-//            select: 'name',
-//            model: Phone // <== We are populating phones so we need to use the correct model, not User
-//        }, function(){
-//            req.plan = plan;
-//            next();
-//        });
-
-
-
-
 
 	});
+};
+
+
+exports.planByDate = function(req, res, next, planDate, dateRange) {
+    var split = planDate.split('_');
+    var month = parseInt(split[0]);
+    var day = parseInt(split[1]);
+    var year = parseInt(split[2]);
+
+    Plan.findOne({'planDateYear': year, 'planDateMonth': month, 'planDateDay': day, 'user': req.user.id}).exec(function(err, plan) {
+        if (err) return next(err);
+        //if (!activity) return next(new Error('Failed to load activity with date: ' + activityDate));
+        res.jsonp(plan);
+    });
 };
 
 /**

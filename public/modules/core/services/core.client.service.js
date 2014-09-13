@@ -6,9 +6,12 @@ angular.module('core').service(
     "CoreService",
     function( $http, $q ) {
 
+        var planDate;
+        var dailyDashboardData = {};
+
         // Return public API.
         return({
-            getActivityPlanByDate: getActivityPlanByDate
+            getDailyDashboardData: getDailyDashboardData
         });
 
 
@@ -16,22 +19,21 @@ angular.module('core').service(
         // PUBLIC METHODS.
         // ---
 
-        // I get all of the friends in the remote collection.
-        function getActivityPlanByDate(activityDate) {
-
-            //activityDate = '04_05_2014';
+        function getDailyDashboardData(planDateIn) {
+            planDate = planDateIn;
 
             var request = $http({
                 method: "get",
-                url: "/activities/" + activityDate + '/' + 1,
+                url: "/plans/" + planDate + '/' + 1,
                 params: {
                     action: "get"
                 }
             });
 
-            return( request.then( handleSuccess, handleError ) );
-
+            return( request.then( handleNutritionPlanSuccess, handleError ) );
         }
+
+
 
 
 
@@ -39,6 +41,31 @@ angular.module('core').service(
         // ---
         // PRIVATE METHODS.
         // ---
+
+
+        // I transform the successful response, unwrapping the application data
+        // from the API response payload.
+        function handleNutritionPlanSuccess( response ) {
+
+            dailyDashboardData.nutritionPlan = response.data;
+
+            var request = $http({
+                method: "get",
+                url: "/activities/" + planDate + '/' + 1,
+                params: {
+                    action: "get"
+                }
+            });
+
+            return( request.then( handleActivityPlanSuccess, handleError ) );
+        }
+
+        function handleActivityPlanSuccess( response ) {
+
+            dailyDashboardData.activityPlan = response.data;
+
+            return dailyDashboardData;
+        }
 
 
         // I transform the error response, unwrapping the application dta from
@@ -63,14 +90,6 @@ angular.module('core').service(
 
         }
 
-
-        // I transform the successful response, unwrapping the application data
-        // from the API response payload.
-        function handleSuccess( response ) {
-
-            return( response.data );
-
-        }
 
     }
 );

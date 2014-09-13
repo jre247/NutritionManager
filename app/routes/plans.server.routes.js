@@ -17,6 +17,11 @@ module.exports = function(app) {
 		.put(users.requiresLogin, plans.hasAuthorization, plans.update)
 		.delete(users.requiresLogin, plans.hasAuthorization, plans.delete);
 
+    app.route('/plans/:planDate/:dateRange')
+        .get(plans.planByDate);
+
 	// Finish by binding the article middleware
 	app.param('planId', plans.planByID);
+
+    app.param('planDate', plans.planByDate);
 };
