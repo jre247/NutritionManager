@@ -72,10 +72,17 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
 
 		$scope.create = function() {
             var planDateAsString = $scope.plan.planDateNonUtc.toUTCString();
+            var planDate = new Date(planDateAsString);
+            var planDateYear = planDate.getFullYear();
+            var planDateMonth = planDate.getMonth();
+            var planDateDay = planDate.getDate();
 
 			var plan = new Plans({
 				//planDate: planDateAsString,
                 planDateForDB: planDateAsString,
+                planDateYear: planDateYear,
+                planDateMonth: planDateMonth,
+                planDateDay: planDateDay,
                 meals: $scope.plan.meals
 			});
             plan.$save(function(response) {
@@ -90,8 +97,17 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
 		};
 
         $scope.copyPlan = function(planCopyModel){
+            var planDateAsString = planCopyModel.planDate.toUTCString();
+            var planDate = new Date(planDateAsString);
+            var planDateYear = planDate.getFullYear();
+            var planDateMonth = planDate.getMonth();
+            var planDateDay = planDate.getDate();
+
             var plan = new Plans({
                 planDateForDB: planCopyModel.planDate,
+                planDateYear: planDateYear,
+                planDateMonth: planDateMonth,
+                planDateDay: planDateDay,
                 meals: planCopyModel.meals
             });
             plan.$save(function(response) {

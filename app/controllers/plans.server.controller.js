@@ -40,24 +40,15 @@ var createDateAsUTC = function(date) {
  * Create a plan
  */
 exports.create = function(req, res) {
-    //var planClientPlanDate = new Date(planClient.planDateForDB);
-//    var planDateMonth = planClientPlanDate.getMonth();
-//    var planDateDay = planClientPlanDate.getDate();
-//    var planDateYear = planClientPlanDate.getFullYear();
-//
-//    var planDate = new Date(planDateYear, planDateMonth, planDateDay);
-
-    //convert both database date and client date to UTC
-    //var planDate = createDateAsUTC(planClientPlanDate);
-   // var planDateAsUtc = planClientPlanDate.toUTCString();
-    //planDate = new Date(planDate);
-
     var planClient = req.body;
     var planClientPlanDate = planClient.planDateForDB;
+    var planDateYear = planClient.planDateYear;
+    var planDateMonth = planClient.planDateMonth;
+    var planDateDay = planClient.planDateDay;
 
     //check if already existing plan in database for this plan date
     //if so, just update the plan, not create new one
-    Plan.findOne({'planDateAsUtc': planClientPlanDate, 'user': req.user.id}).exec(function(err, planDb) {
+    Plan.findOne({'planDateYear': planDateYear, 'planDateMonth': planDateMonth, 'planDateDay': planDateDay, 'user': req.user.id}).exec(function(err, planDb) {
         if (err) {
             return res.send(400, {
                 message: getErrorMessage(err)
@@ -79,6 +70,9 @@ exports.create = function(req, res) {
                 plan.userRoles = req.user.roles;
                 plan.planDateAsUtc = planClientPlanDate;
                 plan.planDateNonUtc = planClient.planDateForDB;
+                plan.planDateYear = planClient.planDateYear;
+                plan.planDateMonth = planClient.planDateMonth;
+                plan.planDateDay = planClient.planDateDay;
 
                 planToSave = plan;
                 planToSave.isUpdate = false;

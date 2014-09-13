@@ -2,16 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="99afd44b-0014-4bff-855e-4d01f0b1305f" name="Default" comment="create plan page is close to finished. Now trying to wire up view/edit plan page. Trying to make it all common html.">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/modules/core/services/core.client.service.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/modules/activities/controllers/activities.client.controller.js" afterPath="$PROJECT_DIR$/public/modules/activities/controllers/activities.client.controller.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/activities.server.controller.js" afterPath="$PROJECT_DIR$/app/controllers/activities.server.controller.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/activity.server.model.js" afterPath="$PROJECT_DIR$/app/models/activity.server.model.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/routes/activity.server.routes.js" afterPath="$PROJECT_DIR$/app/routes/activity.server.routes.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/dist/application.min.js" afterPath="$PROJECT_DIR$/public/dist/application.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/core.server.controller.js" afterPath="$PROJECT_DIR$/app/controllers/core.server.controller.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/modules/core/controllers/home.client.controller.js" afterPath="$PROJECT_DIR$/public/modules/core/controllers/home.client.controller.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/modules/core/views/home.client.view.html" afterPath="$PROJECT_DIR$/public/modules/core/views/home.client.view.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/plan.server.model.js" afterPath="$PROJECT_DIR$/app/models/plan.server.model.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/modules/plans/controllers/plans.client.controller.js" afterPath="$PROJECT_DIR$/public/modules/plans/controllers/plans.client.controller.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/plans.server.controller.js" afterPath="$PROJECT_DIR$/app/controllers/plans.server.controller.js" />
     </list>
     <ignored path="NutritionManager.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -34,6 +28,20 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
+      <file leaf-file-name="plans.client.controller.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/modules/plans/controllers/plans.client.controller.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-1.1538461" vertical-offset="0" max-vertical-offset="210">
+              <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="724" selection-end-column="0" />
+              <folding>
+                <element signature="e#69#26536#0" expanded="false" />
+                <element signature="e#26650#29033#0" expanded="false" />
+                <element signature="e#29163#30939#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="home.client.view.html" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/modules/core/views/home.client.view.html">
           <provider selected="true" editor-type-id="text-editor">
@@ -59,31 +67,74 @@
       <file leaf-file-name="activities.client.controller.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/modules/activities/controllers/activities.client.controller.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="162" max-vertical-offset="6390">
-              <caret line="20" column="10" selection-start-line="0" selection-start-column="0" selection-end-line="420" selection-end-column="3" />
+            <state vertical-scroll-proportion="-8.961538" vertical-offset="2947" max-vertical-offset="6390">
+              <caret line="212" column="41" selection-start-line="210" selection-start-column="16" selection-end-line="212" selection-end-column="41" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="core.client.service.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/modules/core/services/core.client.service.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1215">
-              <caret line="23" column="33" selection-start-line="0" selection-start-column="0" selection-end-line="75" selection-end-column="2" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="application.min.js" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="application.min.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/dist/application.min.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="7.993007" vertical-offset="25431" max-vertical-offset="28950">
-              <caret line="2405" column="3" selection-start-line="2405" selection-start-column="3" selection-end-line="2405" selection-end-column="3" />
+            <state vertical-scroll-proportion="-54.653847" vertical-offset="12949" max-vertical-offset="36375">
+              <caret line="958" column="0" selection-start-line="958" selection-start-column="0" selection-end-line="958" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="core.client.service.js" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/public/modules/core/services/core.client.service.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.11910112" vertical-offset="97" max-vertical-offset="1215">
+              <caret line="10" column="56" selection-start-line="10" selection-start-column="56" selection-end-line="10" selection-end-column="56" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="activities.server.controller.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/controllers/activities.server.controller.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="658" max-vertical-offset="3030">
+              <caret line="79" column="58" selection-start-line="77" selection-start-column="16" selection-end-line="79" selection-end-column="58" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="plans.server.controller.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/controllers/plans.server.controller.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="619" max-vertical-offset="3405">
+              <caret line="50" column="0" selection-start-line="50" selection-start-column="0" selection-end-line="50" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="plan.server.model.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/models/plan.server.model.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="268" max-vertical-offset="990">
+              <caret line="39" column="6" selection-start-line="39" selection-start-column="6" selection-end-line="39" selection-end-column="6" />
               <folding>
-                <element signature="e#65842#68285#0" expanded="false" />
-                <element signature="e#70430#84445#0" expanded="false" />
+                <element signature="e#946#6720#0" expanded="false" />
+                <element signature="e#1123#3867#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="activity.server.model.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/models/activity.server.model.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="153" max-vertical-offset="840">
+              <caret line="30" column="6" selection-start-line="22" selection-start-column="4" selection-end-line="30" selection-end-column="6" />
+              <folding>
+                <element signature="e#798#3788#0" expanded="false" />
+                <element signature="e#1952#1978#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -135,9 +186,6 @@
         <option value="$PROJECT_DIR$/public/modules/activities/services/activities.client.service.js" />
         <option value="$PROJECT_DIR$/public/modules/activities/config/activities.client.routes.js" />
         <option value="$PROJECT_DIR$/public/modules/core/all-custom-directives/sortable.js" />
-        <option value="$PROJECT_DIR$/app/models/plan.server.model.js" />
-        <option value="$PROJECT_DIR$/app/controllers/plans.server.controller.js" />
-        <option value="$PROJECT_DIR$/public/modules/plans/controllers/plans.client.controller.js" />
         <option value="$PROJECT_DIR$/app/models/nutrition-profile.server.model.js" />
         <option value="$PROJECT_DIR$/app/controllers/nutrition-profile.server.controller.js" />
         <option value="$PROJECT_DIR$/public/modules/nutrition-profile/views/edit-nutritionProfile.client.view.html" />
@@ -152,6 +200,9 @@
         <option value="$PROJECT_DIR$/app/controllers/activities.server.controller.js" />
         <option value="$PROJECT_DIR$/public/modules/core/controllers/home.client.controller.js" />
         <option value="$PROJECT_DIR$/public/modules/core/views/home.client.view.html" />
+        <option value="$PROJECT_DIR$/app/controllers/plans.server.controller.js" />
+        <option value="$PROJECT_DIR$/app/models/plan.server.model.js" />
+        <option value="$PROJECT_DIR$/public/modules/plans/controllers/plans.client.controller.js" />
         <option value="$PROJECT_DIR$/public/dist/application.min.js" />
       </list>
     </option>
@@ -244,6 +295,54 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="modules" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="NutritionManager" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="NutritionManager" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="public" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="modules" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="plans" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="NutritionManager" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="NutritionManager" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="public" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="modules" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="plans" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="controllers" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -698,12 +797,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/app/controllers/plans.server.controller.js</url>
-          <line>59</line>
+          <line>50</line>
           <option name="timeStamp" value="77" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/app/controllers/plans.server.controller.js</url>
-          <line>60</line>
+          <line>51</line>
           <option name="timeStamp" value="80" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
@@ -803,12 +902,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/app/controllers/plans.server.controller.js</url>
-          <line>221</line>
+          <line>215</line>
           <option name="timeStamp" value="143" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/app/controllers/plans.server.controller.js</url>
-          <line>223</line>
+          <line>217</line>
           <option name="timeStamp" value="144" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
@@ -818,47 +917,27 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/app/controllers/plans.server.controller.js</url>
-          <line>79</line>
-          <option name="timeStamp" value="146" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/app/controllers/plans.server.controller.js</url>
-          <line>72</line>
-          <option name="timeStamp" value="147" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/app/controllers/plans.server.controller.js</url>
-          <line>67</line>
-          <option name="timeStamp" value="148" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/app/controllers/plans.server.controller.js</url>
-          <line>76</line>
-          <option name="timeStamp" value="154" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/app/controllers/plans.server.controller.js</url>
-          <line>87</line>
+          <line>81</line>
           <option name="timeStamp" value="155" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/app/controllers/plans.server.controller.js</url>
-          <line>69</line>
+          <line>60</line>
           <option name="timeStamp" value="156" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/public/modules/plans/controllers/plans.client.controller.js</url>
-          <line>92</line>
+          <line>105</line>
           <option name="timeStamp" value="157" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/app/controllers/plans.server.controller.js</url>
-          <line>113</line>
+          <line>107</line>
           <option name="timeStamp" value="158" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/app/controllers/plans.server.controller.js</url>
-          <line>116</line>
+          <line>110</line>
           <option name="timeStamp" value="159" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
@@ -886,8 +965,18 @@
           <line>68</line>
           <option name="timeStamp" value="167" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/public/modules/plans/controllers/plans.client.controller.js</url>
+          <line>87</line>
+          <option name="timeStamp" value="170" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/app/controllers/plans.server.controller.js</url>
+          <line>76</line>
+          <option name="timeStamp" value="171" />
+        </line-breakpoint>
       </breakpoints>
-      <option name="time" value="169" />
+      <option name="time" value="172" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
@@ -1096,16 +1185,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/models/plan.server.model.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-10.423077" vertical-offset="134" max-vertical-offset="2265">
-          <caret line="27" column="4" selection-start-line="27" selection-start-column="4" selection-end-line="30" selection-end-column="6" />
-          <folding>
-            <element signature="e#982#3726#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/modules/foods/views/list-foods.client.view.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-5.0" vertical-offset="60" max-vertical-offset="870">
@@ -1137,17 +1216,6 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1185">
           <caret line="31" column="66" selection-start-line="0" selection-start-column="0" selection-end-line="75" selection-end-column="3" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/modules/plans/controllers/plans.client.controller.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="10785">
-          <caret line="3" column="116" selection-start-line="3" selection-start-column="98" selection-end-line="3" selection-end-column="116" />
-          <folding>
-            <element signature="e#25886#28269#0" expanded="false" />
-            <element signature="e#28399#30175#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1257,14 +1325,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/plans.server.controller.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="484" max-vertical-offset="3495">
-          <caret line="41" column="0" selection-start-line="41" selection-start-column="0" selection-end-line="41" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/modules/core/services/menus.client.service.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.076271184" vertical-offset="0" max-vertical-offset="2460">
@@ -1286,17 +1346,6 @@
         <state vertical-scroll-proportion="-0.011235955" vertical-offset="35" max-vertical-offset="630">
           <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/models/activity.server.model.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.69213486" vertical-offset="127" max-vertical-offset="840">
-          <caret line="29" column="20" selection-start-line="29" selection-start-column="20" selection-end-line="29" selection-end-column="20" />
-          <folding>
-            <element signature="e#798#3788#0" expanded="false" />
-            <element signature="e#1952#1978#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1328,14 +1377,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/activities.server.controller.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-4.6923075" vertical-offset="2593" max-vertical-offset="3030">
-          <caret line="181" column="0" selection-start-line="181" selection-start-column="0" selection-end-line="181" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/modules/core/views/home.client.view.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-15.0" vertical-offset="0" max-vertical-offset="1245">
@@ -1343,22 +1384,6 @@
           <folding>
             <element signature="n#style#0;n#span#0;n#li#0;n#ul#0;n#section#0;n#!!top" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/modules/core/services/core.client.service.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1215">
-          <caret line="23" column="33" selection-start-line="0" selection-start-column="0" selection-end-line="75" selection-end-column="2" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/modules/activities/controllers/activities.client.controller.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="162" max-vertical-offset="6390">
-          <caret line="20" column="10" selection-start-line="0" selection-start-column="0" selection-end-line="420" selection-end-column="3" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1370,14 +1395,77 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/public/modules/activities/controllers/activities.client.controller.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-8.961538" vertical-offset="2947" max-vertical-offset="6390">
+          <caret line="212" column="41" selection-start-line="210" selection-start-column="16" selection-end-line="212" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/activities.server.controller.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="808" max-vertical-offset="3030">
+          <caret line="79" column="58" selection-start-line="77" selection-start-column="16" selection-end-line="79" selection-end-column="58" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/plans.server.controller.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="619" max-vertical-offset="3405">
+          <caret line="50" column="0" selection-start-line="50" selection-start-column="0" selection-end-line="50" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/models/activity.server.model.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="153" max-vertical-offset="840">
+          <caret line="30" column="6" selection-start-line="22" selection-start-column="4" selection-end-line="30" selection-end-column="6" />
+          <folding>
+            <element signature="e#798#3788#0" expanded="false" />
+            <element signature="e#1952#1978#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/models/plan.server.model.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="268" max-vertical-offset="990">
+          <caret line="39" column="6" selection-start-line="39" selection-start-column="6" selection-end-line="39" selection-end-column="6" />
+          <folding>
+            <element signature="e#946#6720#0" expanded="false" />
+            <element signature="e#1123#3867#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/modules/plans/controllers/plans.client.controller.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-1.1538461" vertical-offset="0" max-vertical-offset="210">
+          <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="724" selection-end-column="0" />
+          <folding>
+            <element signature="e#69#26536#0" expanded="false" />
+            <element signature="e#26650#29033#0" expanded="false" />
+            <element signature="e#29163#30939#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/public/dist/application.min.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="7.993007" vertical-offset="25431" max-vertical-offset="28950">
-          <caret line="2405" column="3" selection-start-line="2405" selection-start-column="3" selection-end-line="2405" selection-end-column="3" />
-          <folding>
-            <element signature="e#65842#68285#0" expanded="false" />
-            <element signature="e#70430#84445#0" expanded="false" />
-          </folding>
+        <state vertical-scroll-proportion="-54.653847" vertical-offset="12949" max-vertical-offset="36375">
+          <caret line="958" column="0" selection-start-line="958" selection-start-column="0" selection-end-line="958" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/modules/core/services/core.client.service.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.11910112" vertical-offset="97" max-vertical-offset="1215">
+          <caret line="10" column="56" selection-start-line="10" selection-start-column="56" selection-end-line="10" selection-end-column="56" />
+          <folding />
         </state>
       </provider>
     </entry>
