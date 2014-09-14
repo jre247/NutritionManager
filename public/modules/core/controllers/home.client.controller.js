@@ -7,6 +7,8 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
 		$scope.authentication = Authentication;
         window.scope = $scope;
 
+        var additionalCaloriesExpended = 300;
+
         $scope.nutritionProfile = NutritionProfile.get();
 
         $scope.activityTypes = [
@@ -75,23 +77,30 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
                    calculatePlanTotalMacros(plan);
 
                    $scope.nutritionPlan = plan;
+
+                   $scope.bmr = calculateBmr();
                 }
 
                 if(data.activityPlan !== 'null'){
-                    $scope.bmr = calculateBmr();
-
                     $scope.activityPlan = data.activityPlan;
-
+                    $scope.totalCaloriesBurned = $scope.activityPlan.totalCaloriesBurned + additionalCaloriesExpended;
+                }
+                else{
+                    $scope.totalCaloriesBurned = additionalCaloriesExpended;
                 }
             });
         };
 
         $scope.calculateDeficit = function(){
-            if($scope.activityPlan && $scope.nutritionPlan) {
-                var caloriesOut = $scope.activityPlan.totalCaloriesBurned + $scope.bmr;
-                var caloriesIn = $scope.nutritionPlan.totalPlanCalories;
+            if($scope.nutritionPlan) {
+                var caloriesOut = additionalCaloriesExpended;
 
-                var additionalCaloriesExpended = 300;
+                if ($scope.activityPlan){
+                    caloriesOut = $scope.activityPlan.totalCaloriesBurned + $scope.bmr;
+
+                }
+
+                var caloriesIn = $scope.nutritionPlan.totalPlanCalories;
 
                 return caloriesIn - caloriesOut - additionalCaloriesExpended;
             }

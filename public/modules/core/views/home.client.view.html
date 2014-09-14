@@ -17,9 +17,12 @@
 			<!--&lt;!&ndash;</p>&ndash;&gt;-->
 		<!--&lt;!&ndash;</div>&ndash;&gt;-->
 	<!--</div>-->
-    <div data-ng-show="activityPlan">
-        <h2>Today's Activities:</h2>
-        <ul  data-ng-repeat="activity in activityPlan.activities">
+    <div >
+
+        <div style="border-bottom: 1px solid #eee;width:40%;">
+            <h2>Today's Activities:</h2>
+        </div>
+        <ul data-ng-show="activityPlan" data-ng-repeat="activity in activityPlan.activities" style="margin-top: 10px;">
             <li>
                 <span style="font-weight:bold;" data-ng-bind="activityTypesDictionary[activity.activityType].name"></span>:
                 <span data-ng-bind="activity.steps"></span> Steps,
@@ -27,14 +30,21 @@
                 <span data-ng-bind="activity.duration | number:0"></span> Minutes
             </li>
         </ul>
-    </div>
-    <div data-ng-show="!activityPlan" style="color: rgb(66, 66, 207);margin-top: 40px;font-weight: bold;">
-        There are no Activities entered for today yet.
+        <div data-ng-show="!activityPlan" style="color: rgb(66, 66, 207);margin-top: 20px;margin-left: 9px;font-weight: bold;">
+            There are no Activities entered for today yet.
+        </div>
     </div>
 
-    <div style="margin-top: 40px;" data-ng-show="nutritionPlan">
-        <h2 >Today's Nutrition Stats:</h2>
-        <div style="padding-left: 10px;">
+
+    <div style="margin-top: 40px;" >
+
+        <div  style="border-bottom: 1px solid #eee;width:40%;">
+            <h2 >Today's Nutrition Stats:</h2>
+        </div>
+        <div data-ng-show="!nutritionPlan" style="margin-top: 20px;margin-left: 9px;font-weight: bold;color: rgb(66, 66, 207);">
+            There is no nutrition plan entered for today yet.
+        </div>
+        <div data-ng-show="nutritionPlan" style="padding-left: 10px;">
             <div style="display:inline-block;font-weight:bold;">
                 <div style="margin-top:10px;">
                      Calories In:
@@ -62,7 +72,7 @@
                 <div>
                     <div style="margin-top:10px; width: 80px; text-align: right;display:inline-block;padding-right: 15px;">
 
-                        <span data-ng-bind="activityPlan.totalCaloriesBurned | number:0"></span>
+                        <span data-ng-bind="totalCaloriesBurned | number:0"></span>
                     </div>
                     <span>Calories</span>
                 </div>
@@ -83,24 +93,40 @@
             </div>
 
         </div>
-        <div style="padding-top: 14px;padding-left: 10px;">
+        <div data-ng-show="nutritionPlan" style="padding-top: 14px;padding-left: 10px;">
             <h4>Macros Breakdown:</h4>
                 <div style="padding-left: 7px;">
                 <div>
-                    <span style="font-weight: bold;">Carbs:</span> <span data-ng-bind="nutritionPlan.totalPlanCarbsAsPercent | number:0"></span>%
+                    <div style="width:60px;display:inline-block;">
+                        <span style="font-weight: bold;">Carbs:</span>
+                    </div>
+                    <div style="display:inline-block;">
+                        <span data-ng-bind="nutritionPlan.totalPlanCarbsAsPercent | number:0"></span>%
+                    </div>
                 </div>
                 <div>
-                    <span style="font-weight: bold;">Protein:</span> <span data-ng-bind="nutritionPlan.totalPlanProteinAsPercent | number:0"></span>%
+                    <div style="width:60px;display:inline-block;">
+                        <span style="font-weight: bold;">Protein:</span>
+                    </div>
+                    <div style="display:inline-block;">
+                        <span data-ng-bind="nutritionPlan.totalPlanProteinAsPercent | number:0"></span>%
+                    </div>
+
+
                 </div>
                 <div>
-                    <span style="font-weight: bold;">Fat:</span> <span data-ng-bind="nutritionPlan.totalPlanFatAsPercent | number:0"></span>%
+                    <div style="width:60px;display:inline-block;">
+                        <span style="font-weight: bold;">Fat:</span>
+                    </div>
+                    <div style="display:inline-block;">
+                        <span data-ng-bind="nutritionPlan.totalPlanFatAsPercent | number:0"></span>%
+                    </div>
+
                 </div>
             </div>
         </div>
     </div>
-    <div data-ng-show="!nutritionPlan" style="margin-top: 40px;font-weight: bold;color: rgb(66, 66, 207);">
-        There is no nutrition plan entered for today yet.
-    </div>
+
 
 	<!--<div class="row">-->
 		<!--<div class="col-md-3">-->
