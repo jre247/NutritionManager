@@ -101,6 +101,7 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
                         var planDateInfo = weeklyNutritionPlan[i];
                         var dPlanDate = new Date(planDateInfo.planDateYear, planDateInfo.planDateMonth, planDateInfo.planDateDay);
                         var planDateDayOfWeek = days[dPlanDate.getDay()];
+                        var nDayOfWeek = dPlanDate.getDay();
 
                         for (var nMeal = 0; nMeal < planDateInfo.meals.length; nMeal++){
                             doMealTotaling(planDateInfo.meals[nMeal]);
@@ -118,6 +119,7 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
 
                         var weeklyPlanModel = {
                             dayOfWeek: planDateDayOfWeek,
+                            nDayOfWeek:nDayOfWeek,
                             totalCalories: planDateInfo.totalPlanCalories,
                             totalProtein: planDateInfo.totalPlanProteinAsPercent,
                             totalCarbs: planDateInfo.totalPlanCarbsAsPercent,
@@ -138,6 +140,14 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
                     $scope.weeklyFatAverage = weeklyFatTotal / macrosForDaysArray.length;
 
                     $scope.weeklyNutritionPlanList = weeklyNutritionPlanList;
+
+                    $scope.weeklyNutritionPlanList.sort(function compare(a,b) {
+                        if (a.nDayOfWeek < b.nDayOfWeek)
+                            return -1;
+                        if (a.nDayOfWeek > b.nDayOfWeek)
+                            return 1;
+                        return 0;
+                    });
 
                 }
 
