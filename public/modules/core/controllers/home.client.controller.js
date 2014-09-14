@@ -92,6 +92,11 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
 
                     var days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
 
+                    var macrosForDaysArray = [];
+                    var weeklyProteinTotal = 0;
+                    var weeklyCarbsTotal = 0;
+                    var weeklyFatTotal = 0;
+
                     for(var i = 0; i < weeklyNutritionPlan.length; i++){
                         var planDateInfo = weeklyNutritionPlan[i];
                         var dPlanDate = new Date(planDateInfo.planDateYear, planDateInfo.planDateMonth, planDateInfo.planDateDay);
@@ -103,6 +108,14 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
 
                         calculatePlanTotalMacros(planDateInfo);
 
+                        var macroModel = {
+                            protein: planDateInfo.totalPlanProteinAsPercent,
+                            carbs: planDateInfo.totalPlanCarbsAsPercent,
+                            fat: planDateInfo.totalPlanFatAsPercent
+                        };
+
+                        macrosForDaysArray.push(macroModel);
+
                         var weeklyPlanModel = {
                             dayOfWeek: planDateDayOfWeek,
                             totalCalories: planDateInfo.totalPlanCalories,
@@ -113,6 +126,16 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
 
                         weeklyNutritionPlanList.push(weeklyPlanModel);
                     }
+
+                    for(var i = 0; i < macrosForDaysArray.length; i++){
+                        weeklyProteinTotal += macrosForDaysArray[i].protein;
+                        weeklyCarbsTotal += macrosForDaysArray[i].carbs;
+                        weeklyFatTotal += macrosForDaysArray[i].fat;
+                    }
+
+                    $scope.weeklyProteinAverage = weeklyProteinTotal / macrosForDaysArray.length;
+                    $scope.weeklyCarbsAverage = weeklyCarbsTotal / macrosForDaysArray.length;
+                    $scope.weeklyFatAverage = weeklyFatTotal / macrosForDaysArray.length;
 
                     $scope.weeklyNutritionPlanList = weeklyNutritionPlanList;
 

@@ -133,10 +133,9 @@
         <div style="border-bottom: 1px solid #eee;width:300px;">
             <h2>Weekly Nutrition:</h2>
         </div>
-        <div>
+        <div style="padding-top: 10px;">
             <div data-ng-repeat="dayNutritionData in weeklyNutritionPlanList">
                 <span data-ng-bind="dayNutritionData.dayOfWeek"></span>:
-
 
                 <div style="padding-left: 30px;">
                     <div style="display:inline-block;">
@@ -163,6 +162,38 @@
 
             </div>
 
+            <div style="border-bottom: 1px solid #eee;width:300px;padding-top: 20px;">
+                <h2>Weekly Averages:</h2>
+            </div>
+
+            <div style="padding-top: 10px;">
+                <div style="height: 25px;">
+                    <div style="font-weight: bold;display:inline-block; width: 70px;">
+                        Protein:
+                    </div>
+                    <div style="display:inline-block; ">
+                         <span data-ng-bind="weeklyProteinAverage | number:1"></span>%
+                    </div>
+                </div>
+
+                <div style="height: 25px;">
+                    <div style="font-weight: bold;display:inline-block;width: 70px;">
+                        Carbs:
+                    </div>
+                    <div style="display:inline-block; ">
+                        <span data-ng-bind="weeklyCarbsAverage | number:1"></span>%
+                    </div>
+                </div>
+
+                <div style="height: 25px;">
+                    <div style="font-weight: bold;display:inline-block; width: 70px;">
+                        Fat:
+                    </div>
+                    <div style="display:inline-block; ">
+                        <span data-ng-bind="weeklyFatAverage | number:1"></span>%
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 	<!--<div class="row">-->
