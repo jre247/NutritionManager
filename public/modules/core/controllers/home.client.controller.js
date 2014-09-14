@@ -66,6 +66,61 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
             $scope.activityTypesDictionary.push(activityTypeDictModel);
         }
 
+        $scope.getWeeklyDashboardData = function(){
+            var dWeeklyPlanDate = new Date();
+            var dayOfWeek = dWeeklyPlanDate.getDay();
+
+            var year = dWeeklyPlanDate.getFullYear();
+            var month = dWeeklyPlanDate.getMonth();
+            var day = dWeeklyPlanDate.getDate();
+
+            day = day - dayOfWeek;
+
+            var startWeeklyDt = new Date((new Date(year, month, day)).toUTCString());
+            var startWeeklyYear = startWeeklyDt.getFullYear();
+            var startWeeklyMonth = startWeeklyDt.getMonth();
+            var startWeeklyDay = startWeeklyDt.getDate();
+
+            var fullWeeklyDate = startWeeklyMonth + '_' + startWeeklyDay + '_' + startWeeklyYear;
+
+            CoreService.getWeeklyDashboardData(fullWeeklyDate).then(function(data){
+                if (data.weeklyNutritionPlan !== 'null'){
+
+                    var weeklyNutritionPlanList = [];
+
+                    var weeklyNutritionPlan = data.weeklyNutritionPlan;
+
+                    var days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+
+                    for(var i = 0; i < weeklyNutritionPlan.length; i++){
+                        var planDateInfo = weeklyNutritionPlan[i];
+                        var dPlanDate = new Date(planDateInfo.planDateYear, planDateInfo.planDateMonth, planDateInfo.planDateDay);
+                        var planDateDayOfWeek = days[dPlanDate.getDay()];
+
+                        for (var nMeal = 0; nMeal < planDateInfo.meals.length; nMeal++){
+                            doMealTotaling(planDateInfo.meals[nMeal]);
+                        }
+
+                        calculatePlanTotalMacros(planDateInfo);
+
+                        var weeklyPlanModel = {
+                            dayOfWeek: planDateDayOfWeek,
+                            totalCalories: planDateInfo.totalPlanCalories,
+                            totalProtein: planDateInfo.totalPlanProteinAsPercent,
+                            totalCarbs: planDateInfo.totalPlanCarbsAsPercent,
+                            totalFat: planDateInfo.totalPlanFatAsPercent,
+                        };
+
+                        weeklyNutritionPlanList.push(weeklyPlanModel);
+                    }
+
+                    $scope.weeklyNutritionPlanList = weeklyNutritionPlanList;
+
+                }
+
+            });
+        };
+
         $scope.getDailyDashboardData = function() {
             CoreService.getDailyDashboardData(planDate).then(function(data){
                 if (data.nutritionPlan !== 'null'){
@@ -179,6 +234,8 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
             }
 
             return bmr;
-        }
+        };
+
+        $scope.getWeeklyDashboardData();
 	}
 ]);

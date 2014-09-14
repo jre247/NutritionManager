@@ -176,11 +176,14 @@ exports.activityByDate = function(req, res, next, activityDate, dateRange) {
     var day = parseInt(split[1]);
     var year = parseInt(split[2]);
 
-    Activity.findOne({'planDateYear': year, 'planDateMonth': month, 'planDateDay': day, 'user': req.user.id}).exec(function(err, activity) {
+
+    Activity.findOne({'planDateYear': year, 'planDateMonth': month, 'planDateDay': day, 'user': req.user.id}).exec(function (err, activity) {
         if (err) return next(err);
         //if (!activity) return next(new Error('Failed to load activity with date: ' + activityDate));
         res.jsonp(activity);
     });
+
+
 };
 
 exports.hasAuthorization = function(req, res, next) {

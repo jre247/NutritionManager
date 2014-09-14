@@ -6,12 +6,14 @@ angular.module('core').service(
     "CoreService",
     function( $http, $q ) {
 
-        var planDate;
+        var planDate, weeklyPlanDate;
         var dailyDashboardData = {};
+        var weeklyDashboardData = {};
 
         // Return public API.
         return({
-            getDailyDashboardData: getDailyDashboardData
+            getDailyDashboardData: getDailyDashboardData,
+            getWeeklyDashboardData: getWeeklyDashboardData
         });
 
 
@@ -28,9 +30,26 @@ angular.module('core').service(
                 params: {
                     action: "get"
                 }
-            });
+
+
+        });
 
             return( request.then( handleNutritionPlanSuccess, handleError ) );
+        }
+
+        function getWeeklyDashboardData(planDateIn) {
+            weeklyPlanDate = planDateIn;
+
+
+            var request = $http({
+                method: "get",
+                url: "/plans/" + weeklyPlanDate + '/' + 7,
+                params: {
+                    action: "get"
+                }
+            });
+
+            return( request.then( handleWeeklyNutritionPlanSuccess, handleError ) );
         }
 
 
@@ -58,6 +77,15 @@ angular.module('core').service(
             });
 
             return( request.then( handleActivityPlanSuccess, handleError ) );
+        }
+
+        // I transform the successful response, unwrapping the application data
+        // from the API response payload.
+        function handleWeeklyNutritionPlanSuccess( response ) {
+
+            weeklyDashboardData.weeklyNutritionPlan = response.data;
+
+            return weeklyDashboardData;
         }
 
         function handleActivityPlanSuccess( response ) {

@@ -174,17 +174,32 @@ exports.planByID = function(req, res, next, id) {
 };
 
 
-exports.planByDate = function(req, res, next, planDate, dateRange) {
+exports.planByDate = function(req, res, next, planDate) {
     var split = planDate.split('_');
     var month = parseInt(split[0]);
     var day = parseInt(split[1]);
     var year = parseInt(split[2]);
 
-    Plan.findOne({'planDateYear': year, 'planDateMonth': month, 'planDateDay': day, 'user': req.user.id}).exec(function(err, plan) {
-        if (err) return next(err);
-        //if (!activity) return next(new Error('Failed to load activity with date: ' + activityDate));
-        res.jsonp(plan);
-    });
+    var range = req.param("dateRange");
+    var dateRange = 1;
+    if(range){
+        dateRange = parseInt(range);
+    }
+
+    if(dateRange <= 1) {
+        Plan.findOne({'planDateYear': year, 'planDateMonth': month, 'planDateDay': day, 'user': req.user.id}).exec(function (err, plan) {
+            if (err) return next(err);
+            //if (!activity) return next(new Error('Failed to load activity with date: ' + activityDate));
+            res.jsonp(plan);
+        });
+    }
+    else{
+        Plan.find({'planDateYear': year, 'planDateMonth': month, 'planDateDay': {$lt: day + 7, $gte: day - 1}, 'user': req.user.id}).exec(function (err, plans) {
+            if (err) return next(err);
+
+            res.jsonp(plans);
+        });
+    }
 };
 
 /**

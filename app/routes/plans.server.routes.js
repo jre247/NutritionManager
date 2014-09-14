@@ -24,4 +24,6 @@ module.exports = function(app) {
 	app.param('planId', plans.planByID);
 
     app.param('planDate', plans.planByDate);
+
+    app.param('dateRange', plans.planByDate);
 };
