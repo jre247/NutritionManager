@@ -83,6 +83,18 @@
             </div>
 
         </div>
+        <div style="padding-top: 14px;">
+            <h4>Macros Breakdown:</h4>
+            <div>
+                <span style="font-weight: bold;">Carbs:</span> <span data-ng-bind="nutritionPlan.totalPlanCarbsAsPercent | number:0"></span>%
+            </div>
+            <div>
+                <span style="font-weight: bold;">Protein:</span> <span data-ng-bind="nutritionPlan.totalPlanProteinAsPercent | number:0"></span>%
+            </div>
+            <div>
+                <span style="font-weight: bold;">Fat:</span> <span data-ng-bind="nutritionPlan.totalPlanFatAsPercent | number:0"></span>%
+            </div>
+        </div>
     </div>
     <div data-ng-show="!nutritionPlan" style="margin-top: 40px;font-weight: bold;color: rgb(66, 66, 207);">
         There is no nutrition plan entered for today yet.
