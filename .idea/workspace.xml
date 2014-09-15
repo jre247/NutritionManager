@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="99afd44b-0014-4bff-855e-4d01f0b1305f" name="Default" comment="create plan page is close to finished. Now trying to wire up view/edit plan page. Trying to make it all common html.">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/dist/application.min.js" afterPath="$PROJECT_DIR$/public/dist/application.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/modules/core/controllers/home.client.controller.js" afterPath="$PROJECT_DIR$/public/modules/core/controllers/home.client.controller.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/modules/core/views/home.client.view.html" afterPath="$PROJECT_DIR$/public/modules/core/views/home.client.view.html" />
     </list>
     <ignored path="NutritionManager.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -39,10 +38,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="application.min.js" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="application.min.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/dist/application.min.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.2113402" vertical-offset="19028" max-vertical-offset="36540">
+            <state vertical-scroll-proportion="-1.8636364" vertical-offset="19028" max-vertical-offset="36540">
               <caret line="1274" column="13" selection-start-line="1274" selection-start-column="13" selection-end-line="1274" selection-end-column="13" />
               <folding>
                 <element signature="e#44369#55717#0" expanded="false" />
@@ -63,11 +62,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="home.client.view.html" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="home.client.view.html" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/public/modules/core/views/home.client.view.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-10.0" vertical-offset="195" max-vertical-offset="2235">
-              <caret line="133" column="38" selection-start-line="133" selection-start-column="38" selection-end-line="133" selection-end-column="38" />
+            <state vertical-scroll-proportion="0.29656863" vertical-offset="284" max-vertical-offset="1845">
+              <caret line="131" column="93" selection-start-line="131" selection-start-column="93" selection-end-line="131" selection-end-column="93" />
               <folding>
                 <element signature="n#style#0;n#div#0;n#section#0;n#!!top" expanded="true" />
                 <element signature="tag#div#0;tag#div#0;tag#section#0" expanded="false" />
@@ -106,6 +105,7 @@
                 <element signature="n#style#0;n#div#1;n#section#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#div#0;n#div#1;n#section#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#div#1;n#div#1;n#section#0;n#!!top" expanded="true" />
+                <element signature="tag#div#0;tag#div#1;tag#div#1;tag#section#0" expanded="false" />
                 <element signature="n#style#0;n#div#0;n#div#0;n#div#1;n#div#1;n#section#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#1;n#section#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#span#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#1;n#section#0;n#!!top" expanded="true" />
@@ -256,9 +256,9 @@
         <option value="$PROJECT_DIR$/app/controllers/activities.server.controller.js" />
         <option value="$PROJECT_DIR$/public/modules/core/services/core.client.service.js" />
         <option value="$PROJECT_DIR$/app/views/layout.server.view.html" />
-        <option value="$PROJECT_DIR$/public/modules/core/views/home.client.view.html" />
         <option value="$PROJECT_DIR$/public/modules/core/controllers/home.client.controller.js" />
         <option value="$PROJECT_DIR$/public/dist/application.min.js" />
+        <option value="$PROJECT_DIR$/public/modules/core/views/home.client.view.html" />
       </list>
     </option>
   </component>
@@ -1254,10 +1254,41 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/public/modules/plans/controllers/plans.client.controller.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-8.653846" vertical-offset="10155" max-vertical-offset="11175">
+          <caret line="692" column="27" selection-start-line="686" selection-start-column="46" selection-end-line="692" selection-end-column="27" />
+          <folding>
+            <element signature="e#27080#29463#0" expanded="false" />
+            <element signature="e#29593#31369#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/modules/core/controllers/home.client.controller.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-11.0" vertical-offset="1394" max-vertical-offset="3660">
+          <caret line="147" column="37" selection-start-line="0" selection-start-column="0" selection-end-line="273" selection-end-column="3" />
+          <folding>
+            <element signature="e#479#2197#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/dist/application.min.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-1.8636364" vertical-offset="19028" max-vertical-offset="36540">
+          <caret line="1274" column="13" selection-start-line="1274" selection-start-column="13" selection-end-line="1274" selection-end-column="13" />
+          <folding>
+            <element signature="e#44369#55717#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/public/modules/core/views/home.client.view.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-10.0" vertical-offset="195" max-vertical-offset="2235">
-          <caret line="133" column="38" selection-start-line="133" selection-start-column="38" selection-end-line="133" selection-end-column="38" />
+        <state vertical-scroll-proportion="0.29656863" vertical-offset="284" max-vertical-offset="1845">
+          <caret line="131" column="93" selection-start-line="131" selection-start-column="93" selection-end-line="131" selection-end-column="93" />
           <folding>
             <element signature="n#style#0;n#div#0;n#section#0;n#!!top" expanded="true" />
             <element signature="tag#div#0;tag#div#0;tag#section#0" expanded="false" />
@@ -1296,6 +1327,7 @@
             <element signature="n#style#0;n#div#1;n#section#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#0;n#div#1;n#section#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#1;n#div#1;n#section#0;n#!!top" expanded="true" />
+            <element signature="tag#div#0;tag#div#1;tag#div#1;tag#section#0" expanded="false" />
             <element signature="n#style#0;n#div#0;n#div#0;n#div#1;n#div#1;n#section#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#1;n#section#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#span#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#1;n#section#0;n#!!top" expanded="true" />
@@ -1314,37 +1346,6 @@
             <element signature="n#style#0;n#div#2;n#div#2;n#div#1;n#div#1;n#section#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#0;n#div#2;n#div#2;n#div#1;n#div#1;n#section#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#1;n#div#2;n#div#2;n#div#1;n#div#1;n#section#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/modules/plans/controllers/plans.client.controller.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-8.653846" vertical-offset="10155" max-vertical-offset="11175">
-          <caret line="692" column="27" selection-start-line="686" selection-start-column="46" selection-end-line="692" selection-end-column="27" />
-          <folding>
-            <element signature="e#27080#29463#0" expanded="false" />
-            <element signature="e#29593#31369#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/modules/core/controllers/home.client.controller.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-11.0" vertical-offset="1394" max-vertical-offset="3660">
-          <caret line="147" column="37" selection-start-line="0" selection-start-column="0" selection-end-line="273" selection-end-column="3" />
-          <folding>
-            <element signature="e#479#2197#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/dist/application.min.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.2113402" vertical-offset="19028" max-vertical-offset="36540">
-          <caret line="1274" column="13" selection-start-line="1274" selection-start-column="13" selection-end-line="1274" selection-end-column="13" />
-          <folding>
-            <element signature="e#44369#55717#0" expanded="false" />
           </folding>
         </state>
       </provider>
