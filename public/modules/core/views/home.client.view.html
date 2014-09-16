@@ -129,40 +129,54 @@
 
     </div>
 
-    <div class="weeklyDashboard plansDesktopInlineGrid" data-ng-show="weeklyNutritionPlanList" style="vertical-align: top;padding-left: 200px;">
-        <div style="border-bottom: 1px solid #eee;width:300px;">
-            <h2>Weekly Nutrition:</h2>
-        </div>
-        <div style="padding-top: 10px;">
-            <div data-ng-repeat="dayNutritionData in weeklyNutritionPlanList">
-                <span data-ng-bind="dayNutritionData.dayOfWeek"></span>:
+    <div style="display:inline-block; width: 100px;">
+        &nbsp;
+    </div>
 
-                <div style="padding-left: 30px;">
-                    <div style="display:inline-block;">
-                        <div>
-                            <span style="font-weight: bold;">Calories:</span>
-                            <span data-ng-bind="dayNutritionData.totalCalories | number:0"></span> Calories
+    <div class="weeklyDashboard plansDesktopInlineGrid" style="vertical-align: top;">
+        <div data-ng-show="weeklyNutritionPlanList" style="vertical-align: top;display:inline-block;">
+            <div style="border-bottom: 1px solid #eee;width:300px;">
+                <h2>Weekly Nutrition:</h2>
+            </div>
+            <div style="padding-top: 10px;">
+                <div  data-ng-repeat="dayNutritionData in weeklyNutritionPlanList">
+                    <span data-ng-bind="dayNutritionData.dayOfWeek"></span>:
+
+                    <div style="padding-left: 30px;">
+                        <div style="display:inline-block;">
+                            <div>
+                                <span style="font-weight: bold;">Calories:</span>
+                                <span data-ng-bind="dayNutritionData.totalCalories | number:0"></span> Calories
+                            </div>
+                            <div>
+                                <span style="font-weight: bold;">Protein:</span>
+                                <span data-ng-bind="dayNutritionData.totalProtein | number:1"></span>%
+                            </div>
                         </div>
-                        <div>
-                            <span style="font-weight: bold;">Protein:</span>
-                            <span data-ng-bind="dayNutritionData.totalProtein | number:1"></span>%
+                        <div style="display:inline-block;padding-left: 30px;">
+                            <div>
+                                <span style="font-weight: bold;">Carbs:</span>
+                                <span data-ng-bind="dayNutritionData.totalCarbs | number:1"></span>%
+                            </div>
+                            <div>
+                                <span style="font-weight: bold;">Fat:</span>
+                                <span data-ng-bind="dayNutritionData.totalFat | number:1"></span>%
+                            </div>
                         </div>
                     </div>
-                    <div style="display:inline-block;padding-left: 30px;">
-                        <div>
-                            <span style="font-weight: bold;">Carbs:</span>
-                            <span data-ng-bind="dayNutritionData.totalCarbs | number:1"></span>%
-                        </div>
-                        <div>
-                            <span style="font-weight: bold;">Fat:</span>
-                            <span data-ng-bind="dayNutritionData.totalFat | number:1"></span>%
-                        </div>
-                    </div>
+
                 </div>
 
-            </div>
 
-            <div style="border-bottom: 1px solid #eee;width:300px;padding-top: 20px;">
+            </div>
+        </div>
+
+        <div style="display:inline-block; width: 100px;">
+            &nbsp;
+        </div>
+
+        <div style="display:inline-block;vertical-align: top;display:inline-block;">
+            <div style="border-bottom: 1px solid #eee;width:300px;">
                 <h2>Weekly Averages:</h2>
             </div>
 
@@ -180,7 +194,7 @@
                         Protein:
                     </div>
                     <div style="display:inline-block; ">
-                         <span data-ng-bind="weeklyProteinAverage | number:1"></span>%
+                        <span data-ng-bind="weeklyProteinAverage | number:1"></span>%
                     </div>
                 </div>
 
