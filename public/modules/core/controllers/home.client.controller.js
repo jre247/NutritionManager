@@ -6,23 +6,6 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
 		// This provides Authentication context.
 		$scope.authentication = Authentication;
         window.scope = $scope;
-//
-//        var authenticationDone = false;
-//        var authenticationInProgress = false;
-//
-//        $scope.$watch('authentication', function(){
-//           if($scope.authentication && $scope.authentication.user){
-//               authenticationInProgress = true;
-//               $scope.nutritionProfile = NutritionProfile.get(
-//                   function(){
-//                       $scope.getDailyDashboardData();
-//                       authenticationDone = true;
-//                       authenticationInProgress = false;
-//               }, function(data){
-//                       var error = data;
-//                   });
-//           }
-//        });
 
         var additionalCaloriesExpended = 300;
 
