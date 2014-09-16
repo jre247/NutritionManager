@@ -169,6 +169,14 @@
             <div style="padding-top: 10px;">
                 <div style="height: 25px;">
                     <div style="font-weight: bold;display:inline-block; width: 70px;">
+                        Calories:
+                    </div>
+                    <div style="display:inline-block; ">
+                        <span data-ng-bind="weeklyCaloriesAverage | number:0"></span>
+                    </div>
+                </div>
+                <div style="height: 25px;">
+                    <div style="font-weight: bold;display:inline-block; width: 70px;">
                         Protein:
                     </div>
                     <div style="display:inline-block; ">
@@ -193,6 +201,9 @@
                         <span data-ng-bind="weeklyFatAverage | number:1"></span>%
                     </div>
                 </div>
+
+
+
             </div>
         </div>
     </div>
