@@ -150,17 +150,19 @@ exports.nutritionProfileByID = function(req, res, next, id) {
  * List of Plans
  */
 exports.list = function(req, res) {
-    NutritionProfile.findOne({
-        user:req.user.id // Search Filters
-    }).exec(function(err, nutritionProfile) {
-        if (err) {
-            return res.send(400, {
-                message: getErrorMessage(err)
-            });
-        } else {
-            res.jsonp(nutritionProfile);
-        }
-    });
+    if(req.user) {
+        NutritionProfile.findOne({
+            user: req.user.id // Search Filters
+        }).exec(function (err, nutritionProfile) {
+            if (err) {
+                return res.send(400, {
+                    message: getErrorMessage(err)
+                });
+            } else {
+                res.jsonp(nutritionProfile);
+            }
+        });
+    }
 
 };
 
