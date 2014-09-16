@@ -194,7 +194,7 @@ exports.planByDate = function(req, res, next, planDate) {
         });
     }
     else{
-        Plan.find({'planDateYear': year, 'planDateMonth': month, 'planDateDay': {$lt: day + 7, $gte: day - 1}, 'user': req.user.id}).exec(function (err, plans) {
+        Plan.find({'planDateYear': year, 'planDateMonth': month, 'planDateDay': {$lt: day + 7, $gte: day}, 'user': req.user.id}).exec(function (err, plans) {
             if (err) return next(err);
 
             res.jsonp(plans);
