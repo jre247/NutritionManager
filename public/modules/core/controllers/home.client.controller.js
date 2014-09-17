@@ -190,16 +190,16 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
 
         $scope.calculateDeficit = function(){
             if($scope.nutritionPlan) {
-                var caloriesOut = additionalCaloriesExpended;
+                var caloriesOut = additionalCaloriesExpended + $scope.bmr;
 
                 if ($scope.activityPlan){
-                    caloriesOut = $scope.activityPlan.totalCaloriesBurned + $scope.bmr;
+                    caloriesOut += $scope.activityPlan.totalCaloriesBurned;
 
                 }
 
                 var caloriesIn = $scope.nutritionPlan.totalPlanCalories;
 
-                return caloriesIn - caloriesOut - additionalCaloriesExpended;
+                return caloriesIn - caloriesOut;
             }
         };
 
