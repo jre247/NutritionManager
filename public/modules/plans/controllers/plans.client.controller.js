@@ -449,7 +449,7 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
 
         $scope.foodServingsChange = function(food, meal){
 
-            var servings = parseInt(food.servings);
+            var servings = parseFloat(food.servings);
 
             food.calories = servings * food.selectedFood.calories;
             food.fat = servings * food.selectedFood.fat;
