@@ -212,8 +212,6 @@ exports.planByDate = function(req, res, next, planDate) {
                         else {
                             var bmr = calculateBmr(nutritionProfile);
 
-                            var planActivitiesChecked = 0;
-
                             var plansDict = [];
 
                             for (var i = 0; i < plans.length; i++) {
@@ -230,30 +228,29 @@ exports.planByDate = function(req, res, next, planDate) {
                                 }
 
                                 calculatePlanTotalMacros(singlePlan);
+                            }
 
-                                Activity.findOne({'planDateYear': singlePlan.planDateYear, 'planDateMonth': singlePlan.planDateMonth, 'planDateDay': singlePlan.planDateDay, 'user': req.user.id}).exec(function (err, activity) {
-                                    if (err) return next(err);
+                            Activity.find({'planDateYear': singlePlan.planDateYear, 'planDateMonth': singlePlan.planDateMonth, 'planDateDay': {$lt: day + 7, $gte: day}, 'user': req.user.id}).exec(function (err, activities) {
+                                if (err) return next(err);
 
-                                    if(activity) {
+                                if(activities && activities.length > 0) {
+                                    for(var act = 0; act < activities.length; act++){
+                                        var activityFromDb = activities[act];
 
-
-                                        var activityPlanDt = activity.planDateYear + '_' + activity.planDateMonth + '_' + activity.planDateDay;
+                                        var activityPlanDt = activityFromDb.planDateYear + '_' + activityFromDb.planDateMonth + '_' + activityFromDb.planDateDay;
 
                                         for (var a = 0; a < plansDict.length; a++) {
                                             if (plansDict[a].planDate == activityPlanDt) {
-                                                var deficit = calculateDeficit(plansDict[a].plan, activity, bmr);
+                                                var deficit = calculateDeficit(plansDict[a].plan, activityFromDb, bmr);
                                                 plansDict[a].plan.deficit = deficit;
                                             }
                                         }
                                     }
+                                }
 
-                                    planActivitiesChecked++;
+                                res.jsonp(plans);
 
-                                    if(planActivitiesChecked > plans.length - 1) {
-                                        res.jsonp(plans);
-                                    }
-                                });
-                            }
+                            });
 
 
                         }
