@@ -14,7 +14,7 @@
                         <span data-ng-bind="activity.duration | number:0"></span> Minutes
                     </li>
                 </ul>
-                <div data-ng-show="!activityPlan" style="color: rgb(66, 66, 207);margin-top: 20px;margin-left: 9px;font-weight: bold;">
+                <div data-ng-show="!activityPlan" style="color: rgb(66, 66, 207);margin-top: 20px;margin-left: 9px;font-weight: bold;display:none;">
                     There are no Activities entered for today yet.
                 </div>
             </div>
@@ -25,7 +25,7 @@
                 <div  style="border-bottom: 1px solid #eee;width:300px;">
                     <h2 >Today's Nutrition:</h2>
                 </div>
-                <div data-ng-show="!nutritionPlan" style="margin-top: 20px;margin-left: 9px;font-weight: bold;color: rgb(66, 66, 207);">
+                <div data-ng-show="!nutritionPlan" style="margin-top: 20px;margin-left: 9px;font-weight: bold;color: rgb(66, 66, 207);display:none;">
                     There is no nutrition plan entered for today yet.
                 </div>
                 <div data-ng-show="nutritionPlan" style="padding-left: 10px;">
@@ -146,6 +146,11 @@
                                     <span style="font-weight: bold;">Fat:</span>
                                     <span data-ng-bind="dayNutritionData.totalFat | number:1"></span>%
                                 </div>
+                            </div>
+
+                            <div>
+                                <span style="font-weight: bold;">Deficit:</span>
+                                <span data-ng-bind="dayNutritionData.deficit | number:0"></span> Calories
                             </div>
                         </div>
 

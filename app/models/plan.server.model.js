@@ -38,6 +38,10 @@ var PlanSchema = new Schema({
     planDateDay:{
         type: Number
     },
+    deficit:{
+        type: Number,
+        default: 0
+    },
     isUpdate:{
         type: Boolean,
         default: false

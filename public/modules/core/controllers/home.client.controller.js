@@ -130,6 +130,7 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
                             totalProtein: planDateInfo.totalPlanProteinAsPercent,
                             totalCarbs: planDateInfo.totalPlanCarbsAsPercent,
                             totalFat: planDateInfo.totalPlanFatAsPercent,
+                            deficit: planDateInfo.deficit
                         };
 
                         weeklyNutritionPlanList.push(weeklyPlanModel);
@@ -201,6 +202,8 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
                 return caloriesIn - caloriesOut - additionalCaloriesExpended;
             }
         };
+
+
 
 
         var doMealTotaling = function(meal){

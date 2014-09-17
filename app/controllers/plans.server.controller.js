@@ -6,6 +6,8 @@
 var mongoose = require('mongoose'),
 	Plan = mongoose.model('Plan'),
     Food = mongoose.model('Food'),
+    Activity = mongoose.model('Activity'),
+    NutritionProfile = mongoose.model('NutritionProfile'),
 	_ = require('lodash');
 
 /**
@@ -195,13 +197,147 @@ exports.planByDate = function(req, res, next, planDate) {
             });
         }
         else {
-            Plan.find({'planDateYear': year, 'planDateMonth': month, 'planDateDay': {$lt: day + 7, $gte: day}, 'user': req.user.id}).exec(function (err, plans) {
-                if (err) return next(err);
+            NutritionProfile.findOne({
+                user: req.user.id // Search Filters
+            }).exec(function (err, nutritionProfile) {
+                if (err) {
+                    return res.send(400, {
+                        message: getErrorMessage(err)
+                    });
+                }
+                else {
+                    Plan.find({'planDateYear': year, 'planDateMonth': month, 'planDateDay': {$lt: day + 7, $gte: day}, 'user': req.user.id}).exec(function (err, plans) {
+                        if (err) return next(err);
 
-                res.jsonp(plans);
+                        else {
+                            var bmr = calculateBmr(nutritionProfile);
+
+                            var planActivitiesChecked = 0;
+
+                            for (var i = 0; i < plans.length; i++) {
+                                var singlePlan = plans[i];
+
+
+                                for (var nMeal = 0; nMeal < singlePlan.meals.length; nMeal++){
+                                    doMealTotaling(singlePlan.meals[nMeal]);
+                                }
+
+                                calculatePlanTotalMacros(singlePlan);
+
+                                Activity.findOne({'planDateYear': singlePlan.planDateYear, 'planDateMonth': singlePlan.planDateMonth, 'planDateDay': singlePlan.planDateDay, 'user': req.user.id}).exec(function (err, activity) {
+                                    if (err) return next(err);
+
+                                    var deficit = calculateDeficit(singlePlan, activity, bmr);
+
+                                    singlePlan.deficit = deficit;
+
+                                    planActivitiesChecked++;
+
+                                    if(planActivitiesChecked > plans.length - 1) {
+                                        res.jsonp(plans);
+                                    }
+                                });
+                            }
+
+
+                        }
+                    });
+                }
             });
+
+
+
         }
     }
+};
+
+var doMealTotaling = function(meal){
+    var carbsTotal = 0, fatTotal = 0, proteinTotal = 0, caloriesTotal = 0, sodiumTotal = 0;
+
+    for(var i = 0; i < meal.foods.length; i++){
+        var foodCarbs = meal.foods[i].carbohydrates;
+
+        carbsTotal += foodCarbs;
+        fatTotal += meal.foods[i].fat;
+        proteinTotal += meal.foods[i].protein;
+        caloriesTotal += meal.foods[i].calories;
+        sodiumTotal += meal.foods[i].sodium;
+    }
+
+    meal.totalCarbohydrates = carbsTotal;
+    meal.totalProtein = proteinTotal;
+    meal.totalCalories = caloriesTotal;
+    meal.totalFat = fatTotal;
+    meal.totalSodium = sodiumTotal;
+};
+
+var calculatePlanTotalMacros = function(plan){
+    var carbsTotal = 0, fatTotal = 0, proteinTotal = 0, caloriesTotal = 0;
+
+    for (var i = 0; i < plan.meals.length; i++){
+        carbsTotal += plan.meals[i].totalCarbohydrates;
+        fatTotal += plan.meals[i].totalFat;
+        proteinTotal += plan.meals[i].totalProtein;
+        caloriesTotal += plan.meals[i].totalCalories;
+    }
+
+    plan.totalPlanCarbs = carbsTotal;
+    plan.totalPlanFat = fatTotal;
+    plan.totalPlanProtein = proteinTotal;
+    plan.totalPlanCalories = caloriesTotal;
+
+    //calculate totals as percent
+    var macroTotals = carbsTotal + fatTotal + proteinTotal;
+    plan.totalPlanCarbsAsPercent = (carbsTotal / macroTotals) * 100;
+    plan.totalPlanFatAsPercent = (fatTotal / macroTotals) * 100;
+    plan.totalPlanProteinAsPercent = (proteinTotal / macroTotals) * 100;
+};
+
+var calculateDeficit = function(nutritionPlan, activityPlan, bmr){
+   var additionalCaloriesExpended = 300;
+    var caloriesOut = 300;
+
+    if (activityPlan){
+        caloriesOut = activityPlan.totalCaloriesBurned + bmr;
+
+    }
+
+    var caloriesIn = nutritionPlan.totalPlanCalories;
+
+    return caloriesIn - caloriesOut - additionalCaloriesExpended;
+
+};
+
+//BMR for Men = 66 + (13.8 x weight in kg.) + (5 x height in cm) - (6.8 x age in years)
+//BMR for Women = 655 + (9.6 x weight in kg.) + (1.8 x height in cm) - (4.7 x age in years).
+var calculateBmr = function(nutritionProfile){
+    var age = nutritionProfile.age;
+    var weightInLbs = nutritionProfile.weight;
+    var heightFeet = nutritionProfile.heightFeet;
+    var heightInches = nutritionProfile.heightInches;
+    var totalHeight = (heightFeet * 12) + heightInches;
+    var gender = nutritionProfile.sex;
+
+    //convert weight from lbs to kg:
+    // kg = (weight in lbs) * .454
+    var weightInKg = weightInLbs * .454;
+
+    //convert height from inches to cms
+    //height in cms = (height in inches * 2.54)
+    var heightInCms = totalHeight * 2.54
+
+    var bmr = 0;
+
+    //BMR for Men = 66.47 + (13.75 x weight in kg.) + (5 x height in cm) - (6.75 x age in years)
+    if(gender == "Male"){
+        bmr = 66.47 + (13.75 * weightInKg) + (5 * heightInCms) - (6.75 * age);
+    }
+    //BMR for Women = 655 + (9.6 x weight in kg.) + (1.8 x height in cm) - (4.7 x age in years).
+    else{
+        bmr = 655.09 + (9.56 * weightInKg) + (1.84 * heightInCms) - (4.67 * age);
+    }
+
+    return bmr;
 };
 
 /**
