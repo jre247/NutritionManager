@@ -214,9 +214,16 @@ exports.planByDate = function(req, res, next, planDate) {
 
                             var planActivitiesChecked = 0;
 
+                            var plansDict = [];
+
                             for (var i = 0; i < plans.length; i++) {
                                 var singlePlan = plans[i];
 
+                                var dateForDict = singlePlan.planDateYear + '_' + singlePlan.planDateMonth + '_' + singlePlan.planDateDay;
+                                plansDict.push({
+                                    planDate: dateForDict,
+                                    plan: singlePlan
+                                });
 
                                 for (var nMeal = 0; nMeal < singlePlan.meals.length; nMeal++){
                                     doMealTotaling(singlePlan.meals[nMeal]);
@@ -227,9 +234,18 @@ exports.planByDate = function(req, res, next, planDate) {
                                 Activity.findOne({'planDateYear': singlePlan.planDateYear, 'planDateMonth': singlePlan.planDateMonth, 'planDateDay': singlePlan.planDateDay, 'user': req.user.id}).exec(function (err, activity) {
                                     if (err) return next(err);
 
-                                    var deficit = calculateDeficit(singlePlan, activity, bmr);
+                                    if(activity) {
 
-                                    singlePlan.deficit = deficit;
+
+                                        var activityPlanDt = activity.planDateYear + '_' + activity.planDateMonth + '_' + activity.planDateDay;
+
+                                        for (var a = 0; a < plansDict.length; a++) {
+                                            if (plansDict[a].planDate == activityPlanDt) {
+                                                var deficit = calculateDeficit(plansDict[a].plan, activity, bmr);
+                                                plansDict[a].plan.deficit = deficit;
+                                            }
+                                        }
+                                    }
 
                                     planActivitiesChecked++;
 
