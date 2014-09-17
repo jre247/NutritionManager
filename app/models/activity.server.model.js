@@ -33,6 +33,13 @@ var ActivitySchema = new Schema({
         type: Date,
         default: Date.now
     },
+    userRoles: {
+        type: [{
+            type: String,
+            enum: ['user', 'admin']
+        }],
+        default: ['user']
+    },
     user: {
         type: Schema.ObjectId,
         ref: 'User'

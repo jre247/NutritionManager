@@ -66,6 +66,8 @@ exports.create = function(req, res) {
                     planDb.activities.push(planClient.activities[i]);
                 }
 
+                planDb.userRoles = req.user.roles;
+
 
             }
             else{
@@ -78,6 +80,7 @@ exports.create = function(req, res) {
                 plan.planDateYear = planClient.planDateYear;
                 plan.planDateMonth = planClient.planDateMonth;
                 plan.planDateDay = planClient.planDateDay;
+                plan.userRoles = req.user.roles;
                 planToSave = plan;
 
             }

@@ -9,7 +9,7 @@
                 <ul data-ng-show="activityPlan" data-ng-repeat="activity in activityPlan.activities" style="margin-top: 10px;">
                     <li>
                         <span style="font-weight:bold;" data-ng-bind="activityTypesDictionary[activity.activityType].name"></span>:
-                        <span data-ng-bind="activity.steps"></span> Steps,
+                        <span data-ng-bind="activity.steps | number:0"></span> Steps,
                         <span data-ng-bind="activity.caloriesBurned | number:0"></span> Calories Burned,
                         <span data-ng-bind="activity.duration | number:0"></span> Minutes
                     </li>
