@@ -115,6 +115,8 @@ exports.update = function(req, res) {
 
     activity = _.extend(activity, req.body);
 
+    activity.userRoles = req.user.roles;
+    
     activity.save(function(err) {
         if (err) {
             return res.send(400, {

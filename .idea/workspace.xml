@@ -3,8 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="99afd44b-0014-4bff-855e-4d01f0b1305f" name="Default" comment="create plan page is close to finished. Now trying to wire up view/edit plan page. Trying to make it all common html.">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/activities.server.controller.js" afterPath="$PROJECT_DIR$/app/controllers/activities.server.controller.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/activity.server.model.js" afterPath="$PROJECT_DIR$/app/models/activity.server.model.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/modules/core/views/home.client.view.html" afterPath="$PROJECT_DIR$/public/modules/core/views/home.client.view.html" />
     </list>
     <ignored path="NutritionManager.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -114,7 +112,7 @@
       <file leaf-file-name="plans.server.controller.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/controllers/plans.server.controller.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-10.384615" vertical-offset="705" max-vertical-offset="4755">
+            <state vertical-scroll-proportion="55.96154" vertical-offset="2430" max-vertical-offset="4755">
               <caret line="65" column="16" selection-start-line="65" selection-start-column="16" selection-end-line="65" selection-end-column="54" />
               <folding>
                 <element signature="e#2979#3004#0" expanded="false" />
@@ -127,26 +125,25 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="activities.client.controller.js" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="activities.client.controller.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/modules/activities/controllers/activities.client.controller.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="8.948276" vertical-offset="927" max-vertical-offset="6765">
-              <caret line="304" column="0" selection-start-line="304" selection-start-column="0" selection-end-line="304" selection-end-column="0" />
+            <state vertical-scroll-proportion="-13.384615" vertical-offset="927" max-vertical-offset="6765">
+              <caret line="85" column="0" selection-start-line="85" selection-start-column="0" selection-end-line="85" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="activities.server.controller.js" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="activities.server.controller.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/controllers/activities.server.controller.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-8.076923" vertical-offset="1650" max-vertical-offset="2610">
-              <caret line="140" column="32" selection-start-line="140" selection-start-column="32" selection-end-line="140" selection-end-column="32" />
+            <state vertical-scroll-proportion="0.45812806" vertical-offset="1554" max-vertical-offset="2850">
+              <caret line="118" column="4" selection-start-line="118" selection-start-column="4" selection-end-line="118" selection-end-column="4" />
               <folding>
                 <element signature="e#3081#3113#0" expanded="false" />
-                <element signature="e#3182#3483#0" expanded="false" />
-                <element signature="e#3875#4215#0" expanded="false" />
-                <element signature="e#4301#4565#0" expanded="false" />
+                <element signature="e#3921#4261#0" expanded="false" />
+                <element signature="e#4347#4611#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -803,7 +800,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/app/controllers/activities.server.controller.js</url>
-          <line>140</line>
+          <line>142</line>
           <option name="timeStamp" value="226" />
         </line-breakpoint>
       </breakpoints>
@@ -1300,9 +1297,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/public/modules/activities/controllers/activities.client.controller.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-13.384615" vertical-offset="927" max-vertical-offset="6765">
+          <caret line="85" column="0" selection-start-line="85" selection-start-column="0" selection-end-line="85" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/controllers/plans.server.controller.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-10.384615" vertical-offset="705" max-vertical-offset="4755">
+        <state vertical-scroll-proportion="55.96154" vertical-offset="2430" max-vertical-offset="4755">
           <caret line="65" column="16" selection-start-line="65" selection-start-column="16" selection-end-line="65" selection-end-column="54" />
           <folding>
             <element signature="e#2979#3004#0" expanded="false" />
@@ -1316,22 +1321,13 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/controllers/activities.server.controller.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-8.076923" vertical-offset="1650" max-vertical-offset="2610">
-          <caret line="140" column="32" selection-start-line="140" selection-start-column="32" selection-end-line="140" selection-end-column="32" />
+        <state vertical-scroll-proportion="0.45812806" vertical-offset="1554" max-vertical-offset="2850">
+          <caret line="118" column="4" selection-start-line="118" selection-start-column="4" selection-end-line="118" selection-end-column="4" />
           <folding>
             <element signature="e#3081#3113#0" expanded="false" />
-            <element signature="e#3182#3483#0" expanded="false" />
-            <element signature="e#3875#4215#0" expanded="false" />
-            <element signature="e#4301#4565#0" expanded="false" />
+            <element signature="e#3921#4261#0" expanded="false" />
+            <element signature="e#4347#4611#0" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/modules/activities/controllers/activities.client.controller.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="8.948276" vertical-offset="927" max-vertical-offset="6765">
-          <caret line="304" column="0" selection-start-line="304" selection-start-column="0" selection-end-line="304" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
