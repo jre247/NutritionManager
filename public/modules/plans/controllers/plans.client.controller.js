@@ -71,7 +71,7 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
         };
 
 		$scope.create = function() {
-            var planDateAsString = new Date($scope.plan.planDateNonUtc.toUTCString());
+            var planDateAsString = new Date($scope.plan.planDateNonUtc).toUTCString();
             var planDate = new Date(planDateAsString);
             var planDateYear = planDate.getFullYear();
             var planDateMonth = planDate.getMonth();
@@ -311,7 +311,7 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
 		$scope.update = function() {
 			var plan = $scope.plan;
 
-            var planDateAsString = new Date($scope.plan.planDateNonUtc.toUTCString());
+            var planDateAsString = new Date($scope.plan.planDateNonUtc).toUTCString();
             var planDate = new Date(planDateAsString);
             var planDateYear = planDate.getFullYear();
             var planDateMonth = planDate.getMonth();
