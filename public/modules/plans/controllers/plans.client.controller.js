@@ -845,7 +845,7 @@ var SuggestionsModalInstanceCtrl = function ($scope, $modalInstance, parentScope
             fat: $scope.selectedFood.fat,
             fiber: $scope.selectedFood.fiber,
             foodId: $scope.selectedFood._id,
-            grams: $scope.selectedFood.cholesterol.grams,
+            grams: $scope.selectedFood.grams,
             iron: $scope.selectedFood.iron,
             name: $scope.selectedFood.name,
             protein: $scope.selectedFood.protein,

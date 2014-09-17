@@ -230,7 +230,7 @@ exports.planByDate = function(req, res, next, planDate) {
                                 calculatePlanTotalMacros(singlePlan);
                             }
 
-                            Activity.find({'planDateYear': singlePlan.planDateYear, 'planDateMonth': singlePlan.planDateMonth, 'planDateDay': {$lt: day + 7, $gte: day}, 'user': req.user.id}).exec(function (err, activities) {
+                            Activity.find({'planDateYear': year, 'planDateMonth': month, 'planDateDay': {$lt: day + 7, $gte: day}, 'user': req.user.id}).exec(function (err, activities) {
                                 if (err) return next(err);
 
                                 if(activities && activities.length > 0) {
