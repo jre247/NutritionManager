@@ -28,6 +28,10 @@
                     <input type="button" class="btn btn-default" style="margin-right: 5px; padding: 4px 9px;" data-ng-click="createMeal();" value="+"/>
 
                     <div class="plansDesktopBtn">
+                        <input type="button" class="btn btn-default" style="margin-right: 5px; padding: 4px 9px;" value="Collapse All Meals" data-ng-click="collapseAllMeals(plan);"/>
+                    </div>
+
+                    <div class="plansDesktopBtn">
                         <input type="button" class="btn btn-default" style="margin-right: 5px; padding: 4px 9px;" value="{{sortingBtnTxt}}" data-ng-click="toggleSorting();"/>
                     </div>
                     <button class="btn btn-default" style="margin-right: 5px; padding: 4px 9px;" ng-click="openCopyPlanDialog()">Copy</button>

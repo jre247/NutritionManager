@@ -106,6 +106,7 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
                     var weeklyCarbsTotal = 0;
                     var weeklyFatTotal = 0;
                     var weeklyCaloriesTotal = 0;
+                    var weeklyDeficitTotal = 0;
 
                     for(var i = 0; i < weeklyNutritionPlan.length; i++){
                         var planDateInfo = weeklyNutritionPlan[i];
@@ -123,7 +124,8 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
                             protein: planDateInfo.totalPlanProteinAsPercent,
                             carbs: planDateInfo.totalPlanCarbsAsPercent,
                             fat: planDateInfo.totalPlanFatAsPercent,
-                            calories: planDateInfo.totalPlanCalories
+                            calories: planDateInfo.totalPlanCalories,
+                            deficit: planDateInfo.deficit
                         };
 
                         macrosForDaysArray.push(macroModel);
@@ -152,12 +154,14 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
                         weeklyCarbsTotal += macrosForDaysArray[i].carbs;
                         weeklyFatTotal += macrosForDaysArray[i].fat;
                         weeklyCaloriesTotal += macrosForDaysArray[i].calories;
+                        weeklyDeficitTotal += macrosForDaysArray[i].deficit;
                     }
 
                     $scope.weeklyProteinAverage = weeklyProteinTotal / macrosForDaysArray.length;
                     $scope.weeklyCarbsAverage = weeklyCarbsTotal / macrosForDaysArray.length;
                     $scope.weeklyFatAverage = weeklyFatTotal / macrosForDaysArray.length;
                     $scope.weeklyCaloriesAverage = weeklyCaloriesTotal / macrosForDaysArray.length;
+                    $scope.weeklyDeficitAverage = weeklyDeficitTotal / macrosForDaysArray.length;
 
                     $scope.weeklyNutritionPlanList = weeklyNutritionPlanList;
 

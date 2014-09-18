@@ -166,6 +166,13 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
             }
         };
 
+        $scope.collapseAllMeals = function(plan){
+            for(var i = 0; i < plan.meals.length; i++){
+                var meal = plan.meals[i];
+                meal.isVisible = false;
+            }
+        };
+
         $scope.createFood = function(meal){
             var defaultFood = $scope.allFoods[0];
 
