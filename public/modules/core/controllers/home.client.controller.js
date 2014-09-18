@@ -12,7 +12,11 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
         $scope.nutritionPlan = null;
 
         $scope.nutritionProfile = NutritionProfile.get(function () {
+            $scope.bmr = calculateBmr();
+
             $scope.getDailyDashboardData();
+
+            $scope.getWeeklyDashboardData();
         });
 
 
@@ -124,6 +128,10 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
 
                         macrosForDaysArray.push(macroModel);
 
+                        if(planDateInfo.deficit === 0) {
+                            planDateInfo.deficit = $scope.calculateDeficit(planDateInfo, data.activityPlan)
+                        }
+
                         var weeklyPlanModel = {
                             dayOfWeek: planDateDayOfWeek,
                             nDayOfWeek:nDayOfWeek,
@@ -133,6 +141,8 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
                             totalFat: planDateInfo.totalPlanFatAsPercent,
                             deficit: planDateInfo.deficit
                         };
+
+
 
                         weeklyNutritionPlanList.push(weeklyPlanModel);
                     }
@@ -176,7 +186,7 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
 
                    $scope.nutritionPlan = plan;
 
-                   $scope.bmr = calculateBmr();
+                  // $scope.bmr = calculateBmr();
                 }
 
                 if(data.activityPlan !== 'null'){
@@ -189,16 +199,16 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
             });
         };
 
-        $scope.calculateDeficit = function(){
-            if($scope.nutritionPlan) {
+        $scope.calculateDeficit = function(nutritionPlan, activityPlan){
+            if(nutritionPlan) {
                 var caloriesOut = additionalCaloriesExpended + $scope.bmr;
 
-                if ($scope.activityPlan){
-                    caloriesOut += $scope.activityPlan.totalCaloriesBurned;
+                if (activityPlan){
+                    caloriesOut += activityPlan.totalCaloriesBurned;
 
                 }
 
-                var caloriesIn = $scope.nutritionPlan.totalPlanCalories;
+                var caloriesIn = nutritionPlan.totalPlanCalories;
 
                 return caloriesIn - caloriesOut;
             }
@@ -281,6 +291,6 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
             return bmr;
         };
 
-        $scope.getWeeklyDashboardData();
+
 	}
 ]);
