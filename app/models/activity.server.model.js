@@ -100,52 +100,6 @@ var ActivitySchema = new Schema({
                 trim: true,
                 default: ''
             },
-//            exercises: [
-//                {
-//                    reps: {
-//                        type: Number,
-//                        default: 0
-//                    },
-//                    sets: {
-//                        type: Number,
-//                        default: 0
-//                    },
-//                    weight: {
-//                        type: Number,
-//                        default: 0
-//                    },
-//                    Name:{
-//                        type: String,
-//                        default: '',
-//                        trim: true
-//                    },
-//                    ExerciseType:{
-//                        type: String,
-//                        default: '',
-//                        trim: true
-//                    },
-//                    PrimaryMuscleGroupName:{
-//                        type: String,
-//                        default: '',
-//                        trim: true
-//                    },
-//                    PrimaryMuscleGroupId:{
-//                        type: Number
-//                    },
-//                    SecondaryMuscleGroup:{
-//                        type: String,
-//                        default: '',
-//                        trim: true
-//                    },
-//                    SecondaryMuscleGroupId:{
-//                        type: Number
-//                    },
-//                    ExerciseId:{
-//                        type: Number
-//                    }
-//                }
-//            ],
-
             isActive: {
                 type: Boolean,
                 default: true

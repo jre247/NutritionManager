@@ -73,7 +73,7 @@ exports.create = function(req, res) {
             else{
                 var plan = new Activity(req.body);
                 plan.user = req.user;
-                plan.totalCaloriesBurned = req.totalCaloriesBurned;
+                plan.totalCaloriesBurned = planClient.totalCaloriesBurned;
                 plan.planDateAsUtc = planClientPlanDate;
                 plan.planDateNonUtc = planClient.planDateForDB;
                 plan.activities  = planClient.activities;
