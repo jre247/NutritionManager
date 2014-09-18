@@ -449,18 +449,20 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
 
         $scope.foodServingsChange = function(food, meal){
 
-            var servings = parseFloat(food.servings);
+            if(food.servings !== "" && food.servings !== undefined && food.servings !== "undefined") {
+                var servings = parseFloat(food.servings);
 
-            food.calories = servings * food.selectedFood.calories;
-            food.fat = servings * food.selectedFood.fat;
-            food.protein = servings * food.selectedFood.protein;
-            food.carbohydrates = servings * food.selectedFood.carbohydrates;
-            food.sodium = servings * food.selectedFood.sodium;
-            food.grams = servings * food.selectedFood.grams;
+                food.calories = servings * food.selectedFood.calories;
+                food.fat = servings * food.selectedFood.fat;
+                food.protein = servings * food.selectedFood.protein;
+                food.carbohydrates = servings * food.selectedFood.carbohydrates;
+                food.sodium = servings * food.selectedFood.sodium;
+                food.grams = servings * food.selectedFood.grams;
 
-            doMealTotaling(meal);
+                doMealTotaling(meal);
 
-            calculatePlanTotalMacros($scope.plan);
+                calculatePlanTotalMacros($scope.plan);
+            }
         };
 
         var doMealTotaling = function(meal){
