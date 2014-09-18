@@ -4,6 +4,8 @@
 	"description": "Manages Nutrition Tracking.",
 	"dependencies": {
 		"bootstrap": "3.2.0",
+        "d3": "3.4.11",
+        "c3": "*",
 		"angular": "1.2.20",
 		"angular-resource": "1.2.20",
 		"angular-animate": "1.2.20",

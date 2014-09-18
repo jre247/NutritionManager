@@ -1,0 +1,33 @@
+<!doctype html>
+<html ng-app="graphApp">
+<head>
+	<meta charset="utf-8">
+
+	<link href="css/c3-0.2.4.css" rel="stylesheet" type="text/css">
+</head>
+<body ng-controller="GraphCtrl" >
+	<h1>Sample directives</h1>
+	<h2>Most basic sample</h2>
+	<c3chart bindto-id="chart1">
+		<chart-column column-id="data-1" 
+					  column-values="30,200,100,400,150,250"
+					  column-type="line"/>		
+ 	</c3chart>
+
+ 	<h2>Using json based data coming from the model</h2>
+	<c3chart bindto-id="chart2" chart-data="datapoints" chart-columns="datacolumns">
+ 	</c3chart>
+
+ 	<h2>Add meaning to the x axis and change names and colors</h2>
+	<c3chart bindto-id="chart3" chart-data="datapoints2" chart-columns="datacolumns2" chart-x="datax2">
+ 	</c3chart>
+
+
+	<!-- Load the javascript libraries -->
+	<script src="js/d3/d3-3.4.11.min.js" charset="utf-8"></script>
+	<script src="js/c3/c3-0.2.4.min.js"></script>
+	<script src="js/angular/angular-1.2.21.min.js"></script>
+	<script src="js/c3js-directive.js"></script>
+	<script src="js/graph-app-directive-1.js"></script>
+</body>
+</html>

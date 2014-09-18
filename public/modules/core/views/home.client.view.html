@@ -113,16 +113,48 @@
 
         </div>
 
-        <div style="display:inline-block; width: 100px;">
+        <div data-ng-class="{'homepageDashboardSeparatorSmall': weeklyDashboardView == 'charts', 'homepageDashboardSeparatorBig': weeklyDashboardView == 'list' }" style="display:inline-block;">
             &nbsp;
         </div>
 
         <div class="weeklyDashboard plansDesktopInlineGrid" style="vertical-align: top;">
             <div data-ng-show="weeklyNutritionPlanList" style="vertical-align: top;display:inline-block;">
-                <div style="border-bottom: 1px solid #eee;width:300px;">
+                <div style="border-bottom: 1px solid #eee;width:250px;">
                     <h2>Weekly Nutrition:</h2>
                 </div>
-                <div style="padding-top: 10px;">
+
+                <div style="display:inline-block">
+                    <input name="showChartsList" type="radio" value="charts"  data-ng-model="weeklyDashboardView"> Show as Charts <br/>
+                </div>
+
+                <div style="display:inline-block;margin-left: 10px;">
+                    <input name="showChartsList" type="radio" value="list" data-ng-model="weeklyDashboardView" > Show as List <br/>
+                </div>
+
+                <div data-ng-show="weeklyDashboardView == 'charts'">
+                    <h4>Macros:</h4>
+                    <c3chart bindto-id="weeklyMacrosChart" chart-size chartWidth="500" chartHeight="200" chart-data="weeklyMacrosDatapoints" chart-columns="weeklyMacrosDatacolumns" chart-x="datax">
+                        <chart-axis>
+                            <chart-axis-x axis-id="x" axis-type="timeseries">
+                                <chart-axis-x-tick tick-format="%Y-%m-%d"/>
+
+                            </chart-axis-x>
+                        </chart-axis>
+                    </c3chart>
+
+                    <h4>Calories:</h4>
+                    <c3chart bindto-id="weeklyCaloriesChart" chart-size chartWidth="500" chartHeight="200" chart-data="weeklyCaloriesDatapoints" chart-columns="weeklyCaloriesDatacolumns" chart-x="datax">
+                        <chart-axis>
+                            <chart-axis-x axis-id="x" axis-type="timeseries">
+                                <chart-axis-x-tick tick-format="%Y-%m-%d"/>
+
+                            </chart-axis-x>
+                        </chart-axis>
+                    </c3chart>
+
+                </div>
+
+                <div style="padding-top: 10px;" data-ng-show="weeklyDashboardView == 'list'">
                     <div  data-ng-repeat="dayNutritionData in weeklyNutritionPlanList" style="padding-top: 10px;">
                         <span data-ng-bind="dayNutritionData.dayOfWeek"></span>:
 
@@ -160,12 +192,12 @@
                 </div>
             </div>
 
-            <div style="display:inline-block; width: 100px;">
+            <div data-ng-class="{'homepageDashboardSeparatorSmall': weeklyDashboardView == 'charts', 'homepageDashboardSeparatorBig': weeklyDashboardView == 'list' }" style="display:inline-block;">
                 &nbsp;
             </div>
 
             <div style="display:inline-block;vertical-align: top;display:inline-block;">
-                <div style="border-bottom: 1px solid #eee;width:300px;">
+                <div style="border-bottom: 1px solid #eee;width:250px;">
                     <h2>Weekly Averages:</h2>
                 </div>
 
@@ -291,4 +323,7 @@
 	<!--</div>-->
 	<!--<br>Enjoy &amp; Keep Us Updated,-->
 	<!--<br>The MEAN.JS Team.-->
+
+
+
 </section>

@@ -1,8 +1,8 @@
 'use strict';
 
 
-angular.module('core').controller('HomeController', ['$scope', 'Authentication', 'Activities', 'CoreService', 'NutritionProfile',
-	function($scope, Authentication, Activities, CoreService, NutritionProfile) {
+angular.module('core').controller('HomeController', ['$scope', 'Authentication', 'Activities', 'CoreService', 'NutritionProfile', '$interval',
+	function($scope, Authentication, Activities, CoreService, NutritionProfile, $interval) {
 		// This provides Authentication context.
 		$scope.authentication = Authentication;
         window.scope = $scope;
@@ -18,6 +18,20 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
 
             $scope.getWeeklyDashboardData();
         });
+
+        $scope.weeklyDashboardView = 'charts';
+
+
+
+        $scope.weeklyMacrosDatapoints=[];
+        $scope.weeklyMacrosDatacolumns=[{"id":"protein","type":"line"},{"id":"fat","type":"line"},
+            {"id":"carbs","type":"line"}];
+        $scope.datax={"id":"x"};
+
+        $scope.weeklyCaloriesDatapoints=[];
+        $scope.weeklyCaloriesDatacolumns=[{"id":"calories","type":"line"},{ "id": "deficit", "type":"line"}];
+        $scope.datax={"id":"x"};
+
 
 
         $scope.activityTypes = [
@@ -136,6 +150,9 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
 
                         var weeklyPlanModel = {
                             dayOfWeek: planDateDayOfWeek,
+                            dateDay: planDateInfo.planDateDay,
+                            dateMonth: planDateInfo.planDateMonth,
+                            dateYear: planDateInfo.planDateYear,
                             nDayOfWeek:nDayOfWeek,
                             totalCalories: planDateInfo.totalPlanCalories,
                             totalProtein: planDateInfo.totalPlanProteinAsPercent,
@@ -172,6 +189,9 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
                             return 1;
                         return 0;
                     });
+
+                    $scope.weeklyMacrosDatapoints = getWeeklyMacrosChartData();
+                    $scope.weeklyCaloriesDatapoints = getWeeklyCaloriesChartData();
 
                 }
 
@@ -296,5 +316,44 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
         };
 
 
+
+
+
+
+
+
+        var getWeeklyMacrosChartData = function(){
+            var list = [];
+            for(var i = 0; i < $scope.weeklyNutritionPlanList.length; i++){
+                var dayItem = $scope.weeklyNutritionPlanList[i];
+
+                var dayDate = dayItem.dateYear + '-' + dayItem.dateMonth + '-' + dayItem.dateDay;
+
+                var dayModel = {"x": dayDate, "protein": parseInt(dayItem.totalProtein), "carbs": parseInt(dayItem.totalCarbs), "fat": parseInt(dayItem.totalFat)};
+
+                list.push(dayModel);
+            }
+
+            return list;
+        };
+
+        var getWeeklyCaloriesChartData = function(){
+            var list = [];
+            for(var i = 0; i < $scope.weeklyNutritionPlanList.length; i++){
+                var dayItem = $scope.weeklyNutritionPlanList[i];
+
+                var dayDate = dayItem.dateYear + '-' + dayItem.dateMonth + '-' + dayItem.dateDay;
+
+                var dayModel = {"x": dayDate, "calories": dayItem.totalCalories, "deficit": parseInt(dayItem.deficit)};
+
+                list.push(dayModel);
+            }
+
+            return list;
+        };
+
 	}
+
+
 ]);
+
