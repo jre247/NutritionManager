@@ -193,6 +193,8 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
                     $scope.weeklyMacrosDatapoints = getWeeklyMacrosChartData();
                     $scope.weeklyCaloriesDatapoints = getWeeklyCaloriesChartData();
 
+                    showAverageWeeklyMacrosChart();
+
                 }
 
             });
@@ -231,11 +233,6 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
         };
 
         var showDailyMacrosChart = function() {
-//            $scope.dailyMacrosDatapoints=[{"x": 1, "protein": parseInt($scope.nutritionPlan.totalPlanProteinAsPercent), "carbs": parseInt($scope.nutritionPlan.totalPlanCarbsAsPercent), "fat": parseInt($scope.nutritionPlan.totalPlanFatAsPercent)}];
-//            $scope.dailyMacrosDatacolumns=[{"id":"protein","type":"pie"},{"id":"fat","type":"pie"},
-//                {"id":"carbs","type":"pie"}];
-//            $scope.datax={"id":"x"};
-//
             var config = {};
             config.bindto = '#dailyMacrosChart';
             config.data = {};
@@ -247,7 +244,23 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
             config.data.types={"protein":"pie", "carbs": "pie", "fat": "pie"};
             config.size = {width: 220, height: 220};
             $scope.chart = c3.generate(config);
-        }
+        };
+
+        var showAverageWeeklyMacrosChart = function() {
+            var config = {};
+            config.bindto = '#weeklyAverageMacrosChart';
+            config.data = {};
+            config.data.json = {};
+            config.data.json.protein = parseInt($scope.weeklyProteinAverage);
+            config.data.json.carbs = parseInt($scope.weeklyCarbsAverage);
+            config.data.json.fat = parseInt($scope.weeklyFatAverage);
+            config.axis = {"y":{"label":{"text":"Weekly Macros","position":"outer-middle"}}};
+            config.data.types={"protein":"pie", "carbs": "pie", "fat": "pie"};
+            config.size = {width: 220, height: 220};
+            $scope.chart = c3.generate(config);
+        };
+
+
 
         $scope.calculateDeficit = function(nutritionPlan, activityPlan){
             if(nutritionPlan) {

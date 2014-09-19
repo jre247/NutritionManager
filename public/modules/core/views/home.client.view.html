@@ -80,10 +80,6 @@
                 <div data-ng-show="nutritionPlan" style="padding-top: 14px;padding-left: 10px;">
                     <h4>Macros Breakdown:</h4>
                     <div style="padding-left: 7px;">
-                        <!--<c3chart bindto-id="dailyMacrosChart" chart-size chartWidth="200" chartHeight="200" chart-data="dailyMacrosDatapoints" chart-columns="dailyMacrosDatacolumns">-->
-
-                        <!--</c3chart>-->
-
                         <div id="dailyMacrosChart"></div>
                         <!--<div>-->
                             <!--<div>-->
@@ -209,36 +205,36 @@
                 </div>
 
                 <div style="padding-top: 10px;">
+                    <div id="weeklyAverageMacrosChart"></div>
+                    <!--<div >-->
+                        <!--<div style="height: 25px;">-->
+                            <!--<div style="font-weight: bold;display:inline-block; width: 70px;">-->
+                                <!--Protein:-->
+                            <!--</div>-->
+                            <!--<div style="display:inline-block; ">-->
+                                <!--<span data-ng-bind="weeklyProteinAverage | number:1"></span>%-->
+                            <!--</div>-->
+                        <!--</div>-->
 
-                    <div >
-                        <div style="height: 25px;">
-                            <div style="font-weight: bold;display:inline-block; width: 70px;">
-                                Protein:
-                            </div>
-                            <div style="display:inline-block; ">
-                                <span data-ng-bind="weeklyProteinAverage | number:1"></span>%
-                            </div>
-                        </div>
+                        <!--<div style="height: 25px;">-->
+                            <!--<div style="font-weight: bold;display:inline-block;width: 70px;">-->
+                                <!--Carbs:-->
+                            <!--</div>-->
+                            <!--<div style="display:inline-block; ">-->
+                                <!--<span data-ng-bind="weeklyCarbsAverage | number:1"></span>%-->
+                            <!--</div>-->
+                        <!--</div>-->
 
-                        <div style="height: 25px;">
-                            <div style="font-weight: bold;display:inline-block;width: 70px;">
-                                Carbs:
-                            </div>
-                            <div style="display:inline-block; ">
-                                <span data-ng-bind="weeklyCarbsAverage | number:1"></span>%
-                            </div>
-                        </div>
-
-                        <div style="height: 25px;">
-                            <div style="font-weight: bold;display:inline-block; width: 70px;">
-                                Fat:
-                            </div>
-                            <div style="display:inline-block; ">
-                                <span data-ng-bind="weeklyFatAverage | number:1"></span>%
-                            </div>
-                        </div>
-                    </div>
-                    <div style="vertical-align: top;padding-top: 10px;">
+                        <!--<div style="height: 25px;">-->
+                            <!--<div style="font-weight: bold;display:inline-block; width: 70px;">-->
+                                <!--Fat:-->
+                            <!--</div>-->
+                            <!--<div style="display:inline-block; ">-->
+                                <!--<span data-ng-bind="weeklyFatAverage | number:1"></span>%-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                    <div style="vertical-align: top;padding-top: 10px;padding-left: 10px;">
                         <div style="height: 25px;">
                             <div style="font-weight: bold;display:inline-block; width: 70px;">
                                 Calories:
