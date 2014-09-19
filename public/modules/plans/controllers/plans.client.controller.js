@@ -423,6 +423,11 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
             else{
                 $scope.plan =  {data: null, meals: null, planDate: new Date(), planDateNonUtc: new Date() };
                 $scope.plan.meals = [];
+
+                $scope.allFoods = Foods.query(function(){
+                    $scope.createMeal();
+                });
+
             }
 		};
 

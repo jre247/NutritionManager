@@ -412,6 +412,8 @@ angular.module('activities').controller('ActivitiesController', ['$scope', '$sta
                 $scope.plan =  {data: null, activities: null, planDate: new Date(), planDateNonUtc: new Date()};
                 $scope.plan.activities = [];
 
+                $scope.createActivity();
+
             }
         };
 
