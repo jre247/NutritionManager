@@ -79,7 +79,7 @@
                 </div>
                 <div data-ng-show="nutritionPlan" style="padding-top: 14px;padding-left: 10px;">
                     <h4>Macros Breakdown:</h4>
-                    <div style="padding-left: 7px;">
+                    <div>
                         <div id="dailyMacrosChart"></div>
                         <!--<div>-->
                             <!--<div>-->
@@ -135,25 +135,27 @@
                 </div>
 
                 <div data-ng-show="weeklyDashboardView == 'charts'">
-                    <h4>Macros:</h4>
-                    <c3chart bindto-id="weeklyMacrosChart" chart-size chartWidth="500" chartHeight="200" chart-data="weeklyMacrosDatapoints" chart-columns="weeklyMacrosDatacolumns" chart-x="datax">
-                        <chart-axis>
-                            <chart-axis-x axis-id="x" axis-type="timeseries">
-                                <chart-axis-x-tick tick-format="%Y-%m-%d"/>
+                    <h4>Macros: (%)</h4>
+                    <div style="padding-left: 20px;" id="weeklyMacrosChart"></div>
+                    <!--<c3chart bindto-id="weeklyMacrosChart" chart-size chartWidth="500" chartHeight="200" chart-data="weeklyMacrosDatapoints" chart-columns="weeklyMacrosDatacolumns" chart-x="datax">-->
+                        <!--<chart-axis>-->
+                            <!--<chart-axis-x axis-id="x" axis-type="timeseries">-->
+                                <!--<chart-axis-x-tick tick-fit="true" tick-format="%Y-%m-%d"/>-->
 
-                            </chart-axis-x>
-                        </chart-axis>
-                    </c3chart>
+                            <!--</chart-axis-x>-->
+                        <!--</chart-axis>-->
+                    <!--</c3chart>-->
 
                     <h4>Calories:</h4>
-                    <c3chart bindto-id="weeklyCaloriesChart" chart-size chartWidth="500" chartHeight="200" chart-data="weeklyCaloriesDatapoints" chart-columns="weeklyCaloriesDatacolumns" chart-x="datax">
-                        <chart-axis>
-                            <chart-axis-x axis-id="x" axis-type="timeseries">
-                                <chart-axis-x-tick tick-format="%Y-%m-%d"/>
+                    <div style="padding-left: 20px;" id="weeklyCaloriesChart"></div>
+                    <!--<c3chart bindto-id="weeklyCaloriesChart" chart-size chartWidth="500" chartHeight="200" chart-data="weeklyCaloriesDatapoints" chart-columns="weeklyCaloriesDatacolumns" chart-x="datax">-->
+                        <!--<chart-axis>-->
+                            <!--<chart-axis-x axis-id="x" axis-type="timeseries">-->
+                                <!--<chart-axis-x-tick tick-format="%Y-%m-%d"/>-->
 
-                            </chart-axis-x>
-                        </chart-axis>
-                    </c3chart>
+                            <!--</chart-axis-x>-->
+                        <!--</chart-axis>-->
+                    <!--</c3chart>-->
 
                 </div>
 
