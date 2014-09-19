@@ -28,8 +28,9 @@
                                 </div>
 
                                 <div style="display:inline-block;color:gray">
-                                    <span  data-ng-bind="activity.duration | number:0"></span> Minutes,
-
+                                    <div style="display:inline-block" data-ng-show="activity.duration > 0">
+                                        <span   data-ng-bind="activity.duration | number:0"></span> Minutes,
+                                    </div>
                                     <span  data-ng-bind="activity.caloriesBurned | number:0"></span> Calories
                                 </div>
                             </div>
