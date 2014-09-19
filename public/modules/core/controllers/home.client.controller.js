@@ -220,8 +220,34 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
                 else{
                     $scope.totalCaloriesBurned = additionalCaloriesExpended;
                 }
+
+
+
+
+                showDailyMacrosChart();
+
+
             });
         };
+
+        var showDailyMacrosChart = function() {
+//            $scope.dailyMacrosDatapoints=[{"x": 1, "protein": parseInt($scope.nutritionPlan.totalPlanProteinAsPercent), "carbs": parseInt($scope.nutritionPlan.totalPlanCarbsAsPercent), "fat": parseInt($scope.nutritionPlan.totalPlanFatAsPercent)}];
+//            $scope.dailyMacrosDatacolumns=[{"id":"protein","type":"pie"},{"id":"fat","type":"pie"},
+//                {"id":"carbs","type":"pie"}];
+//            $scope.datax={"id":"x"};
+//
+            var config = {};
+            config.bindto = '#dailyMacrosChart';
+            config.data = {};
+            config.data.json = {};
+            config.data.json.protein = parseInt($scope.nutritionPlan.totalPlanProteinAsPercent);
+            config.data.json.carbs = parseInt($scope.nutritionPlan.totalPlanCarbsAsPercent);
+            config.data.json.fat = parseInt($scope.nutritionPlan.totalPlanFatAsPercent);
+            config.axis = {"y":{"label":{"text":"Daily Macros","position":"outer-middle"}}};
+            config.data.types={"protein":"pie", "carbs": "pie", "fat": "pie"};
+            config.size = {width: 220, height: 220};
+            $scope.chart = c3.generate(config);
+        }
 
         $scope.calculateDeficit = function(nutritionPlan, activityPlan){
             if(nutritionPlan) {
@@ -314,12 +340,6 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
 
             return bmr;
         };
-
-
-
-
-
-
 
 
         var getWeeklyMacrosChartData = function(){

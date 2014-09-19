@@ -79,34 +79,41 @@
                 </div>
                 <div data-ng-show="nutritionPlan" style="padding-top: 14px;padding-left: 10px;">
                     <h4>Macros Breakdown:</h4>
-                        <div style="padding-left: 7px;">
-                        <div>
-                            <div style="width:60px;display:inline-block;">
-                                <span style="font-weight: bold;">Carbs:</span>
-                            </div>
-                            <div style="display:inline-block;">
-                                <span data-ng-bind="nutritionPlan.totalPlanCarbsAsPercent | number:0"></span>%
-                            </div>
-                        </div>
-                        <div>
-                            <div style="width:60px;display:inline-block;">
-                                <span style="font-weight: bold;">Protein:</span>
-                            </div>
-                            <div style="display:inline-block;">
-                                <span data-ng-bind="nutritionPlan.totalPlanProteinAsPercent | number:0"></span>%
-                            </div>
+                    <div style="padding-left: 7px;">
+                        <!--<c3chart bindto-id="dailyMacrosChart" chart-size chartWidth="200" chartHeight="200" chart-data="dailyMacrosDatapoints" chart-columns="dailyMacrosDatacolumns">-->
+
+                        <!--</c3chart>-->
+
+                        <div id="dailyMacrosChart"></div>
+                        <!--<div>-->
+                            <!--<div>-->
+                                <!--<div style="width:60px;display:inline-block;">-->
+                                    <!--<span style="font-weight: bold;">Carbs:</span>-->
+                                <!--</div>-->
+                                <!--<div style="display:inline-block;">-->
+                                    <!--<span data-ng-bind="nutritionPlan.totalPlanCarbsAsPercent | number:0"></span>%-->
+                                <!--</div>-->
+                            <!--</div>-->
+                            <!--<div>-->
+                                <!--<div style="width:60px;display:inline-block;">-->
+                                    <!--<span style="font-weight: bold;">Protein:</span>-->
+                                <!--</div>-->
+                                <!--<div style="display:inline-block;">-->
+                                    <!--<span data-ng-bind="nutritionPlan.totalPlanProteinAsPercent | number:0"></span>%-->
+                                <!--</div>-->
 
 
-                        </div>
-                        <div>
-                            <div style="width:60px;display:inline-block;">
-                                <span style="font-weight: bold;">Fat:</span>
-                            </div>
-                            <div style="display:inline-block;">
-                                <span data-ng-bind="nutritionPlan.totalPlanFatAsPercent | number:0"></span>%
-                            </div>
+                            <!--</div>-->
+                            <!--<div>-->
+                                <!--<div style="width:60px;display:inline-block;">-->
+                                    <!--<span style="font-weight: bold;">Fat:</span>-->
+                                <!--</div>-->
+                                <!--<div style="display:inline-block;">-->
+                                    <!--<span data-ng-bind="nutritionPlan.totalPlanFatAsPercent | number:0"></span>%-->
+                                <!--</div>-->
 
-                        </div>
+                            <!--</div>-->
+                        <!--</div>-->
                     </div>
                 </div>
             </div>
