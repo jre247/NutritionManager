@@ -421,7 +421,7 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
                 });
             }
             else{
-                $scope.plan =  {data: null, meals: null};
+                $scope.plan =  {data: null, meals: null, planDate: new Date(), planDateNonUtc: new Date() };
                 $scope.plan.meals = [];
             }
 		};

@@ -15,7 +15,8 @@
                     </li>
                 </ul>
                 <div data-ng-show="!activityPlan" style="color: rgb(66, 66, 207);margin-top: 20px;margin-left: 9px;font-weight: bold;">
-                    There are no Activities entered for today yet.
+                    <!--There are no Activities entered for today yet.-->
+                    <a href="/#!/activities/create" title="New Activity" class="ng-binding">Create New Activity for Today</a>
                 </div>
             </div>
 
@@ -26,7 +27,9 @@
                     <h2 >Today's Nutrition:</h2>
                 </div>
                 <div data-ng-show="!nutritionPlan" style="margin-top: 20px;margin-left: 9px;font-weight: bold;color: rgb(66, 66, 207);">
-                    There is no nutrition plan entered for today yet.
+                    <!--There is no nutrition plan entered for today yet.-->
+                    <a href="/#!/plans/create" title="New Plan" class="ng-binding">Create New Plan for Today</a>
+
                 </div>
                 <div data-ng-show="nutritionPlan" style="padding-left: 10px;">
                     <div style="display:inline-block;font-weight:bold;">

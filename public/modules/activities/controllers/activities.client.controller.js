@@ -409,8 +409,9 @@ angular.module('activities').controller('ActivitiesController', ['$scope', '$sta
                 });
             }
             else{
-                $scope.plan =  {data: null, activities: null, planDate: null, planDateNonUtc: null};
+                $scope.plan =  {data: null, activities: null, planDate: new Date(), planDateNonUtc: new Date()};
                 $scope.plan.activities = [];
+
             }
         };
 
