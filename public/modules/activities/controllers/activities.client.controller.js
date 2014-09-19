@@ -350,7 +350,7 @@ angular.module('activities').controller('ActivitiesController', ['$scope', '$sta
             if (confirm("Are you sure you want to delete this plan?")) {
                 plan.$delete(function () {
                     console.log("plan deleted");
-                    $location.path('plans');
+                    $location.path('activities');
                 }, function (errorResponse) {
                     $scope.error = errorResponse.data.message;
                 });

@@ -1,0 +1,39 @@
+<section data-ng-controller="BodyStatsController" data-ng-init="find()">
+    <div class="page-header">
+        <h1>Body Stats</h1>
+    </div>
+
+    Order Dates By:
+
+    <select data-ng-model="selectedDirection" ng-options="t for t in directionList" data-ng-change="reverseSort = selectedDirection === 'Descending'" style="font-size: 16px;vertical-align: top;"></select>
+
+    <div class="list-group" style="margin-top: 20px;">
+        <div>
+            <a data-ng-repeat="plan in bodyStats | orderBy:orderByField:reverseSort" data-ng-href="#!/body-stats/{{plan._id}}" class="list-group-item">
+                <div>
+
+                    <h4 class="list-group-item-heading" data-ng-bind="plan.planDateNonUtc | date:'shortDate'"></h4>
+                    <div >
+                        <div style="display:inline-block; margin-left: 40px;">
+                            <div class="list-group-item-text text-muted" style="display:inline-block;padding-left: 10px;">
+                                <div data-ng-show="plan.weight > 0">
+                                    <span  data-ng-bind="plan.weight | number:0"></span> lbs,
+                                </div>
+
+                            </div>
+
+                            <div style="display:inline-block;color:gray">
+                                <div style="display:inline-block" data-ng-show="plan.bodyFatPercentage > 0">
+                                    <span data-ng-bind="plan.bodyFatPercentage | number:0"></span> %
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+    <div class="alert alert-warning text-center" data-ng-if="bodyStats.$resolved && !bodyStats.length">
+        No Body Stats yet, why don't you <a href="/#!/body-stats/create">create one</a>?
+    </div>
+</section>
