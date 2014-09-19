@@ -13,23 +13,32 @@
                 <div>
 
                     <h4 class="list-group-item-heading" data-ng-bind="plan.planDateNonUtc | date:'shortDate'"></h4>
-                    <div >
-                        <div style="display:inline-block; margin-left: 40px;">
-                            <div class="list-group-item-text text-muted" style="display:inline-block;padding-left: 10px;">
+                    <ul >
+
+                        <li>
+                            <div style="width: 70px;display:inline-block;">
+                                Weight:
+                            </div>
+                            <div class="list-group-item-text text-muted" style="display:inline-block;">
                                 <div data-ng-show="plan.weight > 0">
                                     <span  data-ng-bind="plan.weight | number:0"></span> lbs,
                                 </div>
 
                             </div>
 
-                            <div style="display:inline-block;color:gray">
-                                <div style="display:inline-block" data-ng-show="plan.bodyFatPercentage > 0">
+                        </li>
+                        <li>
+                            <div style="width: 70px;display:inline-block;">
+                                Body Fat:
+                            </div>
+                            <div style="display:inline-block;">
+                                <div style="color:gray;display:inline-block" data-ng-show="plan.bodyFatPercentage > 0">
                                     <span data-ng-bind="plan.bodyFatPercentage | number:0"></span> %
                                 </div>
                             </div>
-                        </div>
+                        </li>
                     </div>
-                </div>
+                </ul>
             </a>
         </div>
     </div>
