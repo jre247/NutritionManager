@@ -122,16 +122,20 @@
 
         <div class="weeklyDashboard plansDesktopInlineGrid" style="vertical-align: top;">
             <div data-ng-show="weeklyNutritionPlanList" style="vertical-align: top;display:inline-block;">
-                <div style="border-bottom: 1px solid #eee;width:250px;">
+                <div style="border-bottom: 1px solid #eee;width:250px;"
+                     data-ng-class="{'homepageDashboardTitleAreaSmall': weeklyDashboardView == 'charts', 'homepageDashboardTitleAreaBig': weeklyDashboardView == 'list' }">
                     <h2>Weekly Nutrition:</h2>
                 </div>
 
-                <div style="display:inline-block">
-                    <input name="showChartsList" type="radio" value="charts"  data-ng-model="weeklyDashboardView"> Show as Charts <br/>
-                </div>
+                <div data-ng-class="{'homepageDashboardTitleAreaSmall': weeklyDashboardView == 'charts', 'homepageDashboardTitleAreaBig': weeklyDashboardView == 'list' }">
 
-                <div style="display:inline-block;margin-left: 10px;">
-                    <input name="showChartsList" type="radio" value="list" data-ng-model="weeklyDashboardView" > Show as List <br/>
+                    <div style="display:inline-block">
+                        <input name="showChartsList" type="radio" value="charts"  data-ng-model="weeklyDashboardView"> Show as Charts <br/>
+                    </div>
+
+                    <div style="display:inline-block;margin-left: 10px;">
+                        <input name="showChartsList" type="radio" value="list" data-ng-model="weeklyDashboardView" > Show as List <br/>
+                    </div>
                 </div>
 
                 <div data-ng-show="weeklyDashboardView == 'charts'">
@@ -197,7 +201,7 @@
                 </div>
             </div>
 
-            <div data-ng-class="{'homepageDashboardSeparatorSmall': weeklyDashboardView == 'charts', 'homepageDashboardSeparatorBig': weeklyDashboardView == 'list' }" style="display:inline-block;">
+            <div data-ng-class="{'homepageDashboardSeparatorSmall': weeklyDashboardView == 'charts', 'homepageDashboardSeparatorBigger': weeklyDashboardView == 'list' }" style="display:inline-block;">
                 &nbsp;
             </div>
 
