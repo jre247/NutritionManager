@@ -147,6 +147,8 @@ angular.module('foods').controller('FoodsController', ['$scope', '$stateParams',
                 $scope.sodiumDailyPercentageDisplay = $scope.sodiumDailyPercentage;
                 $scope.totalCarbohydratesDailyPercentageDisplay = $scope.totalCarbohydratesDailyPercentage;
                 $scope.fiberDailyPercentageDisplay = $scope.fiberDailyPercentage;
+
+                showDailyMacrosChart();
             });
         };
 
@@ -157,6 +159,20 @@ angular.module('foods').controller('FoodsController', ['$scope', '$stateParams',
             $scope.sodiumDailyPercentage = (food.sodium / 2400) * 100;
             $scope.totalCarbohydratesDailyPercentage = (food.carbohydrates / 300) * 100;
             $scope.fiberDailyPercentage = (food.fiber / 25) * 100;
+        };
+
+        var showDailyMacrosChart = function() {
+            var config = {};
+            config.bindto = '#macrosChart';
+            config.data = {};
+            config.data.json = {};
+            config.data.json.protein = parseInt($scope.food.proteinDisplay);
+            config.data.json.carbs = parseInt($scope.food.carbohydratesDisplay);
+            config.data.json.fat = parseInt($scope.food.fatDisplay);
+            config.axis = {"y":{"label":{"text":"Macros","position":"outer-middle"}}};
+            config.data.types={"protein":"pie", "carbs": "pie", "fat": "pie"};
+            config.size = {width: 280, height: 280};
+            $scope.chart = c3.generate(config);
         };
 
     }

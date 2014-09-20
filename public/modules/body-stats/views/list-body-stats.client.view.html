@@ -15,24 +15,25 @@
                     <h4 class="list-group-item-heading" data-ng-bind="plan.planDateNonUtc | date:'shortDate'"></h4>
                     <ul >
 
-                        <li>
+                        <li data-ng-show="plan.weight > 0">
                             <div style="width: 70px;display:inline-block;">
                                 Weight:
                             </div>
                             <div class="list-group-item-text text-muted" style="display:inline-block;">
-                                <div data-ng-show="plan.weight > 0">
-                                    <span  data-ng-bind="plan.weight | number:0"></span> lbs,
+                                <div >
+                                    <span  data-ng-bind="plan.weight | number:0"></span> lbs
+
                                 </div>
 
                             </div>
 
                         </li>
-                        <li>
+                        <li data-ng-show="plan.bodyFatPercentage > 0">
                             <div style="width: 70px;display:inline-block;">
                                 Body Fat:
                             </div>
                             <div style="display:inline-block;">
-                                <div style="color:gray;display:inline-block" data-ng-show="plan.bodyFatPercentage > 0">
+                                <div style="color:gray;display:inline-block" >
                                     <span data-ng-bind="plan.bodyFatPercentage | number:0"></span> %
                                 </div>
                             </div>

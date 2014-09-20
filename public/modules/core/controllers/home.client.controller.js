@@ -21,6 +21,7 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
 
         $scope.weeklyDashboardView = 'charts';
 
+        //TODO: move into service
         $scope.activityTypes = [
             {id: 0, type: 0, name: 'Ballet'},
             {id: 1, type: 0, name: 'Baseball'},
@@ -66,6 +67,7 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
 
         var planDate = month + '_' + day + '_' + year;
 
+        //TODO: move into service
         $scope.activityTypesDictionary = [];
         for(var i = 0; i < $scope.activityTypes.length; i++) {
             var activityTypeDictModel = {
@@ -213,12 +215,7 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
                     $scope.totalCaloriesBurned = additionalCaloriesExpended;
                 }
 
-
-
-
                 showDailyMacrosChart();
-
-
             });
         };
 
@@ -263,6 +260,7 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
             $scope.chart = c3.generate(config);
         };
 
+        //TODO: move into service
         var showDailyMacrosChart = function() {
             var config = {};
             config.bindto = '#dailyMacrosChart';
@@ -335,6 +333,7 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
             $scope.chart = c3.generate(config);
         };
 
+        //TODO: move into service
         $scope.calculateDeficit = function(nutritionPlan, activityPlan){
             if(nutritionPlan) {
                 var caloriesOut = additionalCaloriesExpended + $scope.bmr;
@@ -350,6 +349,7 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
             }
         };
 
+        //TODO: move into service
         var doMealTotaling = function(meal){
             var carbsTotal = 0, fatTotal = 0, proteinTotal = 0, caloriesTotal = 0, sodiumTotal = 0;
 
@@ -370,6 +370,7 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
             meal.totalSodium = sodiumTotal;
         };
 
+        //TODO: move into service
         var calculatePlanTotalMacros = function(plan){
             var carbsTotal = 0, fatTotal = 0, proteinTotal = 0, caloriesTotal = 0;
 
