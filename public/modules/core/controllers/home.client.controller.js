@@ -21,19 +21,6 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
 
         $scope.weeklyDashboardView = 'charts';
 
-
-
-        $scope.weeklyMacrosDatapoints=[];
-        $scope.weeklyMacrosDatacolumns=[{"id":"protein","type":"line"},{"id":"fat","type":"line"},
-            {"id":"carbs","type":"line"}];
-        $scope.datax={"id":"x"};
-
-        $scope.weeklyCaloriesDatapoints=[];
-        $scope.weeklyCaloriesDatacolumns=[{"id":"calories","type":"line"},{ "id": "deficit", "type":"line"}];
-        $scope.datax={"id":"x"};
-
-
-
         $scope.activityTypes = [
             {id: 0, type: 0, name: 'Ballet'},
             {id: 1, type: 0, name: 'Baseball'},
@@ -348,38 +335,6 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
             $scope.chart = c3.generate(config);
         };
 
-//        var getWeeklyMacrosChartData = function(){
-//            var list = [];
-//            for(var i = 0; i < $scope.weeklyNutritionPlanList.length; i++){
-//                var dayItem = $scope.weeklyNutritionPlanList[i];
-//
-//                var dayDate = dayItem.dateYear + '-' + dayItem.dateMonth + '-' + dayItem.dateDay;
-//
-//                var dayModel = {"x": dayDate, "protein": parseInt(dayItem.totalProtein), "carbs": parseInt(dayItem.totalCarbs), "fat": parseInt(dayItem.totalFat)};
-//
-//                list.push(dayModel);
-//            }
-//
-//            return list;
-//        };
-
-//        var getWeeklyCaloriesChartData = function(){
-//            var list = [];
-//            for(var i = 0; i < $scope.weeklyNutritionPlanList.length; i++){
-//                var dayItem = $scope.weeklyNutritionPlanList[i];
-//
-//                var dayDate = dayItem.dateYear + '-' + dayItem.dateMonth + '-' + dayItem.dateDay;
-//
-//                var dayModel = {"x": dayDate, "calories": dayItem.totalCalories, "deficit": parseInt(dayItem.deficit)};
-//
-//                list.push(dayModel);
-//            }
-//
-//            return list;
-//        };
-
-
-
         $scope.calculateDeficit = function(nutritionPlan, activityPlan){
             if(nutritionPlan) {
                 var caloriesOut = additionalCaloriesExpended + $scope.bmr;
@@ -391,12 +346,9 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
 
                 var caloriesIn = nutritionPlan.totalPlanCalories;
 
-                return caloriesIn - caloriesOut;
+                return -(caloriesIn - caloriesOut);
             }
         };
-
-
-
 
         var doMealTotaling = function(meal){
             var carbsTotal = 0, fatTotal = 0, proteinTotal = 0, caloriesTotal = 0, sodiumTotal = 0;

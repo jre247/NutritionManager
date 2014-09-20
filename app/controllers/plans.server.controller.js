@@ -34,10 +34,6 @@ var getErrorMessage = function(err) {
 	return message;
 };
 
-var createDateAsUTC = function(date) {
-    return new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate(), date.getHours(), date.getMinutes(), date.getSeconds()));
-}
-
 /**
  * Create a plan
  */
@@ -317,7 +313,7 @@ var calculateDeficit = function(nutritionPlan, activityPlan, bmr){
 
     var caloriesIn = nutritionPlan.totalPlanCalories;
 
-    return caloriesIn - caloriesOut - additionalCaloriesExpended;
+    return -(caloriesIn - caloriesOut - additionalCaloriesExpended);
 
 };
 
