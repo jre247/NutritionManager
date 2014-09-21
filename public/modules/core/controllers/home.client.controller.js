@@ -215,7 +215,9 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
                     $scope.totalCaloriesBurned = additionalCaloriesExpended;
                 }
 
-                showDailyMacrosChart();
+                if($scope.nutritionPlan) {
+                    showDailyMacrosChart();
+                }
             });
         };
 

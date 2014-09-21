@@ -29,10 +29,10 @@
       <file leaf-file-name="application.min.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/public/dist/application.min.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.4028436" vertical-offset="27490" max-vertical-offset="52560">
-              <caret line="2274" column="0" selection-start-line="2274" selection-start-column="0" selection-end-line="2274" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.60900474" vertical-offset="33733" max-vertical-offset="59055">
+              <caret line="2267" column="0" selection-start-line="2267" selection-start-column="0" selection-end-line="2267" selection-end-column="0" />
               <folding>
-                <element signature="e#61667#79309#0" expanded="false" />
+                <element signature="e#61667#79374#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -41,8 +41,8 @@
       <file leaf-file-name="home.client.controller.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/modules/core/controllers/home.client.controller.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="1442" max-vertical-offset="6615">
-              <caret line="107" column="47" selection-start-line="0" selection-start-column="0" selection-end-line="435" selection-end-column="0" />
+            <state vertical-scroll-proportion="-7.1153846" vertical-offset="3070" max-vertical-offset="6645">
+              <caret line="217" column="42" selection-start-line="0" selection-start-column="0" selection-end-line="437" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -1214,18 +1214,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/public/modules/core/controllers/home.client.controller.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1442" max-vertical-offset="6615">
-          <caret line="107" column="47" selection-start-line="0" selection-start-column="0" selection-end-line="435" selection-end-column="0" />
+        <state vertical-scroll-proportion="-7.1153846" vertical-offset="3070" max-vertical-offset="6645">
+          <caret line="217" column="42" selection-start-line="0" selection-start-column="0" selection-end-line="437" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/public/dist/application.min.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.4028436" vertical-offset="27490" max-vertical-offset="52560">
-          <caret line="2274" column="0" selection-start-line="2274" selection-start-column="0" selection-end-line="2274" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.60900474" vertical-offset="33733" max-vertical-offset="59055">
+          <caret line="2267" column="0" selection-start-line="2267" selection-start-column="0" selection-end-line="2267" selection-end-column="0" />
           <folding>
-            <element signature="e#61667#79309#0" expanded="false" />
+            <element signature="e#61667#79374#0" expanded="false" />
           </folding>
         </state>
       </provider>
