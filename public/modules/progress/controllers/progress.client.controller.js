@@ -119,7 +119,7 @@ angular.module('progress').controller('ProgressController', ['$scope', '$statePa
                     show: true,
                     "label":
                     {
-                        "text":"Weight",
+                        "text":"Weight (lbs)",
                         "position":"outer-middle"
                     }
                 }
@@ -160,7 +160,7 @@ angular.module('progress').controller('ProgressController', ['$scope', '$statePa
                     show: true,
                     "label":
                     {
-                        "text":"Weight",
+                        "text":"Weight (lbs)",
                         "position":"outer-middle"
                     }
                 }
@@ -203,7 +203,7 @@ angular.module('progress').controller('ProgressController', ['$scope', '$statePa
                     show: true,
                     "label":
                     {
-                        "text":"Weight",
+                        "text":"Weight (lbs)",
                         "position":"outer-middle"
                     }
                 }
