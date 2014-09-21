@@ -96,6 +96,36 @@ exports.create = function(req, res) {
     });
 };
 
+
+exports.bodyStatsByDate = function(req, res) {
+    if(req.user) {
+        var startDate = req.param("startDate");
+        var split = startDate.split('_');
+        var startDateMonth = parseInt(split[1]);
+        var startDateDay = parseInt(split[2]);
+        var startDateYear = parseInt(split[0]);
+
+        var endDate = req.param("endDate");
+        var split2 = endDate.split('_');
+        var endDateMonth = parseInt(split2[1]);
+        var endDateDay = parseInt(split2[2]);
+        var endDateYear = parseInt(split2[0]);
+
+        BodyStats.find({'planDateYear': {$lte: endDateYear, $gte: startDateYear}, 'planDateMonth': {$lte: endDateMonth, $gte: startDateMonth}, 'planDateDay': {$lte: endDateDay, $gte: startDateDay}, 'user': req.user.id})
+            .sort({
+                planDateYear: 1, //Sort by Date Added DESC
+                planDateMonth: 1, //Sort by Date Added DESC
+                planDateDay: 1 //Sort by Date Added DESC
+            })
+            .exec(function (err, bodyStats) {
+                if (err) return next(err);
+
+                res.jsonp(bodyStats);
+
+            });
+    }
+};
+
 /**
  * Show the current body stat
  */

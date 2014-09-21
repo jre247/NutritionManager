@@ -22,8 +22,20 @@ module.exports = function(app) {
         .put(users.requiresLogin, bodyStats.hasAuthorization, bodyStats.update)
         .delete(users.requiresLogin, bodyStats.hasAuthorization, bodyStats.delete);
 
+    app.route('/body-stats/:startDate/:endDate')
+        .get(bodyStats.bodyStatsByDate)
+       // .put(users.requiresLogin, bodyStats.hasAuthorization, bodyStats.update)
+       // .delete(users.requiresLogin, bodyStats.hasAuthorization, bodyStats.delete);
+
+
     // Finish by binding the article middleware
     app.param('bodyStatId', bodyStats.bodyStatByID);
+
+    // Finish by binding the article middleware
+    app.param('startDate', bodyStats.bodyStatsByDate);
+
+    // Finish by binding the article middleware
+    app.param('endDate', bodyStats.bodyStatsByDate);
 
 
 };

@@ -209,6 +209,7 @@ exports.list = function(req, res){
     }
 };
 
+
 exports.progressByDate = function(req, res){
     var test = "test";
 };
