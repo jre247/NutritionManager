@@ -103,14 +103,7 @@ angular.module('progress').controller('ProgressController', ['$scope', '$statePa
                         plans[i].planDateMonth == bodyStatFromDb.planDateMonth &&
                         plans[i].planDateDay == bodyStatFromDb.planDateDay) {
 
-                        bodyStatsNonZeroList.push(
-                            {
-                                dateYear: plans[i].planDateYear,
-                                dateMonth: plans[i].planDateMonth,
-                                dateDay: plans[i].planDateDay,
-                                weight: bodyStatFromDb.weight
-                            }
-                        );
+                        bodyStatsNonZeroList.push(bodyStatFromDb.weight);
 
                         weightList.push(parseInt(bodyStatFromDb.weight));
 
@@ -123,7 +116,7 @@ angular.module('progress').controller('ProgressController', ['$scope', '$statePa
                     var mostRecentWeight;
 
                     if(bodyStatsNonZeroList.length > 0) {
-                        mostRecentWeight = bodyStatsNonZeroList[bodyStatsNonZeroList.length - 1].weight;
+                        mostRecentWeight = bodyStatsNonZeroList[bodyStatsNonZeroList.length - 1];
                     }
                     else{
                         mostRecentWeight = bodyStats[0].weight;
