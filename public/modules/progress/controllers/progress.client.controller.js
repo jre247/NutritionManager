@@ -120,7 +120,14 @@ angular.module('progress').controller('ProgressController', ['$scope', '$statePa
                 }
 
                 if(!isPlanWeightMatchFound){
-                    var mostRecentWeight = bodyStatsNonZeroList[bodyStatsNonZeroList.length - 1].weight;
+                    var mostRecentWeight;
+
+                    if(bodyStatsNonZeroList.length > 0) {
+                        mostRecentWeight = bodyStatsNonZeroList[bodyStatsNonZeroList.length - 1].weight;
+                    }
+                    else{
+                        mostRecentWeight = bodyStats[0].weight;
+                    }
 
                     weightList.push(parseInt(mostRecentWeight));
 
