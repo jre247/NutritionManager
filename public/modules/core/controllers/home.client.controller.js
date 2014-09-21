@@ -96,7 +96,7 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
             var fullWeeklyDate = startWeeklyMonth + '_' + startWeeklyDay + '_' + startWeeklyYear;
 
             CoreService.getWeeklyDashboardData(fullWeeklyDate).then(function(data){
-                if (data.weeklyNutritionPlan !== 'null'){
+                if (data.weeklyNutritionPlan !== 'null' && data.weeklyNutritionPlan.length > 0){
 
                     var weeklyNutritionPlanList = [];
 
