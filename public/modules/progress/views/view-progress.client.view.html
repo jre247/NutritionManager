@@ -1,0 +1,61 @@
+<section data-ng-controller="ProgressController" data-ng-init="find()">
+
+    <div class="col-md-12">
+
+        <div style="display:inline-block;">
+            <div style="display:inline-block;position: relative;bottom: 20px;padding-right: 7px;">
+                Start Date:
+            </div>
+            <div class="row" style="display:inline-block;">
+
+
+                <div class="col-md-6" style="width: 193px;padding-top: 8px;">
+                    <p class="input-group">
+                        <input type="text" class="form-control" style="padding: 4px 8px;" id="startDate" datepicker-popup="{{format}}" ng-model="startDate" is-open="startDateOpened" min-date="minDate" max-date="'2100-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
+                          <span class="input-group-btn">
+                            <button type="button" class="btn btn-default" ng-click="openStartDate($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                          </span>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div style="display:inline-block;padding-left: 25px;">
+            <div style="display:inline-block;position: relative;bottom: 20px;padding-right: 7px;">
+                End Date:
+            </div>
+            <div class="row" style="display:inline-block;">
+
+                <div class="col-md-6" style="width: 193px;padding-top: 8px;">
+                    <p class="input-group">
+                        <input type="text" class="form-control" style="padding: 4px 8px;" id="endDate" datepicker-popup="{{format}}" ng-model="endDate" is-open="endDateOpened" min-date="minDate" max-date="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
+                          <span class="input-group-btn">
+                            <button type="button" class="btn btn-default" ng-click="openEndDate($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                          </span>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div style="display:inline-block;position: relative;bottom: 20px;margin-left: 20px;">
+            <input type="button" value="Go" data-ng-click="find();"/>
+        </div>
+
+
+    </div>
+
+    <div>
+        <h4>Macros:</h4>
+        <div id="macrosChart"></div>
+    </div>
+
+    <div>
+        <h4>Calories:</h4>
+        <div id="caloriesChart"></div>
+    </div>
+
+    <div>
+        <h4>Deficit:</h4>
+        <div id="deficitChart"></div>
+    </div>
+</section>

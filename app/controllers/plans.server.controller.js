@@ -140,7 +140,13 @@ exports.delete = function(req, res) {
 exports.list = function(req, res) {
     Plan.find({
         user:req.user.id // Search Filters
-    }).sort('planDate').populate('user', 'displayName').exec(function(err, plans) {
+    })
+    .sort({
+        planDateYear: -1,
+        planDateMonth: -1,
+        planDateDay: -1
+    })
+    .populate('user', 'displayName').exec(function(err, plans) {
         if (err) {
             return res.send(400, {
                 message: getErrorMessage(err)

@@ -57,6 +57,23 @@ var PlanSchema = new Schema({
 		type: Schema.ObjectId,
 		ref: 'User'
 	},
+    totalPlanCalories:{
+        type: Number,
+        default: 0
+    },
+
+    totalPlanCarbsAsPercent:{
+        type: Number,
+        default: 0
+    },
+    totalPlanFatAsPercent:{
+        type: Number,
+        default: 0
+    },
+    totalPlanProteinAsPercent:{
+        type: Number,
+        default: 0
+    },
     meals:
         [
             {
