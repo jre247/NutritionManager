@@ -70,6 +70,10 @@ var PlanSchema = new Schema({
         type: Number,
         default: 0
     },
+    bodyWeight:{
+        type: Number,
+        default: 0
+    },
     totalPlanProteinAsPercent:{
         type: Number,
         default: 0

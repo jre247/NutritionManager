@@ -123,6 +123,10 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
 
                         calculatePlanTotalMacros(planDateInfo);
 
+                        if(planDateInfo.deficit === 0) {
+                            planDateInfo.deficit = $scope.calculateDeficit(planDateInfo, data.activityPlan)
+                        }
+
                         var macroModel = {
                             protein: planDateInfo.totalPlanProteinAsPercent,
                             carbs: planDateInfo.totalPlanCarbsAsPercent,
@@ -133,9 +137,7 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
 
                         macrosForDaysArray.push(macroModel);
 
-                        if(planDateInfo.deficit === 0) {
-                            planDateInfo.deficit = $scope.calculateDeficit(planDateInfo, data.activityPlan)
-                        }
+
 
                         var weeklyPlanModel = {
                             dayOfWeek: planDateDayOfWeek,
@@ -179,16 +181,12 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
                         return 0;
                     });
 
-                    //$scope.weeklyMacrosDatapoints = getWeeklyMacrosChartData();
-                    //$scope.weeklyCaloriesDatapoints = getWeeklyCaloriesChartData();
                     getWeeklyMacrosChartData();
 
                     showWeeklyCaloriesDeficitChart();
 
                     showAverageWeeklyMacrosChart();
-
                 }
-
             });
         };
 
@@ -203,8 +201,6 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
                    calculatePlanTotalMacros(plan);
 
                    $scope.nutritionPlan = plan;
-
-                  // $scope.bmr = calculateBmr();
                 }
 
                 if(data.activityPlan !== 'null'){

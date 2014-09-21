@@ -65,6 +65,7 @@ angular.module('progress').controller('ProgressController', ['$scope', '$statePa
             var datesList = [];
             var caloriesList = [];
             var deficitList = [];
+            var weightList = [];
 
             for(var i = 0; i < plans.length; i++){
                 var dayItem = plans[i];
@@ -76,18 +77,19 @@ angular.module('progress').controller('ProgressController', ['$scope', '$statePa
                 fatList.push(parseInt(dayItem.totalPlanFatAsPercent));
                 caloriesList.push(parseInt(dayItem.totalPlanCalories));
                 deficitList.push(parseInt(dayItem.deficit));
+                weightList.push(parseInt(dayItem.bodyWeight));
                 datesList.push(dayDate);
             }
 
-            var macrosModel = {proteinList: proteinList, carbsList: carbsList, fatList: fatList, datesList: datesList};
+            var macrosModel = {proteinList: proteinList, carbsList: carbsList, fatList: fatList, datesList: datesList, weightList: weightList};
 
             bindMacrosChart(macrosModel);
 
-            var caloriesModel = {caloriesList: caloriesList, datesList: datesList};
+            var caloriesModel = {caloriesList: caloriesList, datesList: datesList, weightList: weightList};
 
             bindCaloriesChart(caloriesModel);
 
-            var deficitModel = {deficitList: deficitList, datesList: datesList};
+            var deficitModel = {deficitList: deficitList, datesList: datesList, weightList: weightList};
 
             bindDeficitChart(deficitModel);
         };
@@ -98,6 +100,7 @@ angular.module('progress').controller('ProgressController', ['$scope', '$statePa
             configDeficit.data = {};
             configDeficit.data.json = {};
             configDeficit.data.json.Deficit = deficit.deficitList;
+            configDeficit.data.json.Weight = deficit.weightList;
             configDeficit.axis = {
                 "x":
                 {
@@ -108,12 +111,26 @@ angular.module('progress').controller('ProgressController', ['$scope', '$statePa
                 {
                     "label":
                     {
-                        "text":"",
+                        "text":"Deficit",
+                        "position":"outer-middle"
+                    }
+                },
+                "y2": {
+                    show: true,
+                    "label":
+                    {
+                        "text":"Weight",
                         "position":"outer-middle"
                     }
                 }
             };
-            configDeficit.data.types={"Deficit":"line"};
+
+            configDeficit.data.axes = {
+                Deficit: 'y',
+                Weight: 'y2'
+            };
+
+            configDeficit.data.types={"Deficit":"line","Weight":"line"};
             configDeficit.size = {width: 850, height: 220};
             $scope.deficitChart = c3.generate(configDeficit);
         };
@@ -124,6 +141,7 @@ angular.module('progress').controller('ProgressController', ['$scope', '$statePa
             configCalories.data = {};
             configCalories.data.json = {};
             configCalories.data.json.Calories = calories.caloriesList;
+            configCalories.data.json.Weight = calories.weightList;
             configCalories.axis = {
                 "x":
                 {
@@ -134,12 +152,26 @@ angular.module('progress').controller('ProgressController', ['$scope', '$statePa
                 {
                     "label":
                     {
-                        "text":"",
+                        "text":"Calories",
+                        "position":"outer-middle"
+                    }
+                },
+                "y2": {
+                    show: true,
+                    "label":
+                    {
+                        "text":"Weight",
                         "position":"outer-middle"
                     }
                 }
             };
-            configCalories.data.types={"Calories":"line"};
+
+            configCalories.data.axes = {
+                Calories: 'y',
+                Weight: 'y2'
+            };
+
+            configCalories.data.types={"Calories":"line","Weight":"line"};
             configCalories.size = {width: 850, height: 220};
             $scope.caloriesChart = c3.generate(configCalories);
         };
@@ -152,6 +184,7 @@ angular.module('progress').controller('ProgressController', ['$scope', '$statePa
             configMacros.data.json.Protein = macros.proteinList;
             configMacros.data.json.Carbs = macros.carbsList;
             configMacros.data.json.Fat = macros.fatList;
+            configMacros.data.json.Weight = macros.weightList;
             configMacros.axis = {
                 "x":
                 {
@@ -162,14 +195,29 @@ angular.module('progress').controller('ProgressController', ['$scope', '$statePa
                 {
                     "label":
                     {
-                        "text":"",
+                        "text":"Macros",
+                        "position":"outer-middle"
+                    }
+                },
+                "y2": {
+                    show: true,
+                    "label":
+                    {
+                        "text":"Weight",
                         "position":"outer-middle"
                     }
                 }
             };
-            configMacros.data.types={"Protein":"line", "Carbs": "line", "Fat": "line"};
+            configMacros.data.axes = {
+                Protein: 'y',
+                Carbs: 'y',
+                Fat: 'y',
+                Weight: 'y2'
+            };
+            configMacros.data.types={"Protein":"line", "Carbs": "line", "Fat": "line","Weight":"line"};
             configMacros.size = {width: 850, height: 220};
             $scope.macrosChart = c3.generate(configMacros);
         };
+
     }
 ]);
