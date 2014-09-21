@@ -95,81 +95,108 @@ exports.list = function(req, res){
                             calculatePlanTotalMacros(singlePlan);
                         }
 
-                        BodyStats.find({'planDateYear': {$lte: endDateYear, $gte: startDateYear}, 'planDateMonth': {$lte: endDateMonth, $gte: startDateMonth}, 'planDateDay': {$lte: endDateDay, $gte: startDateDay}, 'user': req.user.id})
-                            .sort({
-                                planDateYear: 1, //Sort by Date Added DESC
-                                planDateMonth: 1, //Sort by Date Added DESC
-                                planDateDay: 1 //Sort by Date Added DESC
-                            })
-                            .exec(function (err, bodyStats) {
+//                        BodyStats.find({'planDateYear': {$lte: endDateYear, $gte: startDateYear}, 'planDateMonth': {$lte: endDateMonth, $gte: startDateMonth}, 'planDateDay': {$lte: endDateDay, $gte: startDateDay}, 'user': req.user.id})
+//                            .sort({
+//                                planDateYear: 1, //Sort by Date Added DESC
+//                                planDateMonth: 1, //Sort by Date Added DESC
+//                                planDateDay: 1 //Sort by Date Added DESC
+//                            })
+//                            .exec(function (err, bodyStats) {
+//                            if (err) return next(err);
+//
+//                            var bodyStatsNonZeroList = [];
+//
+//                            for (var i = 0; i < plansDict.length; i++) {
+//                                if(bodyStats && bodyStats.length > 0) {
+//                                    var isPlanWeightMatchFound = false;
+//
+//                                    for(var b = 0; b < bodyStats.length; b++){
+//                                        var bodyStatFromDb = bodyStats[b];
+//
+//                                        var bodyStatPlanDt = bodyStatFromDb.planDateYear + '_' + bodyStatFromDb.planDateMonth + '_' + bodyStatFromDb.planDateDay;
+//
+//                                        if (plansDict[i].planDate == bodyStatPlanDt) {
+//                                            bodyStatsNonZeroList.push(
+//                                                {
+//                                                    dateYear: plansDict[i].plan.planDateYear,
+//                                                    dateMonth: plansDict[i].plan.planDateMonth,
+//                                                    dateDay: plansDict[i].plan.planDateDay,
+//                                                    weight: bodyStatFromDb.weight
+//                                                }
+//                                            );
+//
+//                                            plansDict[i].plan.bodyWeight = bodyStatFromDb.weight;
+//
+//                                            isPlanWeightMatchFound = true;
+//                                           // break;
+//                                        }
+//                                    }
+//
+//                                    if(!isPlanWeightMatchFound){
+//                                        plansDict[i].plan.bodyWeight = bodyStatsNonZeroList[bodyStatsNonZeroList.length - 1].weight;
+//
+//                                        bodyStatsNonZeroList.push(plansDict[i].plan.bodyWeight);
+//                                    }
+//                                }
+//
+//                            }
+//
+//                            Activity.find({'planDateYear': {$lte: endDateYear, $gte: startDateYear}, 'planDateMonth': {$lte: endDateMonth, $gte: startDateMonth}, 'planDateDay': {$lte: endDateDay, $gte: startDateDay}, 'user': req.user.id}).exec(function (err, activities) {
+//                                if (err) return next(err);
+//
+//                                for (var i = 0; i < plansDict.length; i++) {
+//                                    var activityFoundPlan = null;
+//
+//                                    if(activities && activities.length > 0) {
+//                                        for(var act = 0; act < activities.length; act++){
+//                                            var activityFromDb = activities[act];
+//
+//                                            var activityPlanDt = activityFromDb.planDateYear + '_' + activityFromDb.planDateMonth + '_' + activityFromDb.planDateDay;
+//
+//                                            if (plansDict[i].planDate == activityPlanDt) {
+//                                                activityFoundPlan = activities[act];
+//                                            }
+//                                        }
+//                                    }
+//
+//                                    var deficit = calculateDeficit(plansDict[i].plan, activityFoundPlan, bmr);
+//                                    plansDict[i].plan.deficit = deficit;
+//                                }
+//
+//                                res.jsonp(plans);
+//
+//                            });
+//
+//
+//                        });
+//
+
+
+                        Activity.find({'planDateYear': {$lte: endDateYear, $gte: startDateYear}, 'planDateMonth': {$lte: endDateMonth, $gte: startDateMonth}, 'planDateDay': {$lte: endDateDay, $gte: startDateDay}, 'user': req.user.id}).exec(function (err, activities) {
                             if (err) return next(err);
 
-                            var bodyStatsNonZeroList = [];
-
                             for (var i = 0; i < plansDict.length; i++) {
-                                if(bodyStats && bodyStats.length > 0) {
-                                    var isPlanWeightMatchFound = false;
+                                var activityFoundPlan = null;
 
-                                    for(var b = 0; b < bodyStats.length; b++){
-                                        var bodyStatFromDb = bodyStats[b];
+                                if(activities && activities.length > 0) {
+                                    for(var act = 0; act < activities.length; act++){
+                                        var activityFromDb = activities[act];
 
-                                        var bodyStatPlanDt = bodyStatFromDb.planDateYear + '_' + bodyStatFromDb.planDateMonth + '_' + bodyStatFromDb.planDateDay;
+                                        var activityPlanDt = activityFromDb.planDateYear + '_' + activityFromDb.planDateMonth + '_' + activityFromDb.planDateDay;
 
-                                        if (plansDict[i].planDate == bodyStatPlanDt) {
-                                            bodyStatsNonZeroList.push(
-                                                {
-                                                    dateYear: plansDict[i].plan.planDateYear,
-                                                    dateMonth: plansDict[i].plan.planDateMonth,
-                                                    dateDay: plansDict[i].plan.planDateDay,
-                                                    weight: bodyStatFromDb.weight
-                                                }
-                                            );
-
-                                            plansDict[i].plan.bodyWeight = bodyStatFromDb.weight;
-
-                                            isPlanWeightMatchFound = true;
-                                           // break;
+                                        if (plansDict[i].planDate == activityPlanDt) {
+                                            activityFoundPlan = activities[act];
                                         }
-                                    }
-
-                                    if(!isPlanWeightMatchFound){
-                                        plansDict[i].plan.bodyWeight = bodyStatsNonZeroList[bodyStatsNonZeroList.length - 1].weight;
-
-                                        bodyStatsNonZeroList.push(plansDict[i].plan.bodyWeight);
                                     }
                                 }
 
+                                var deficit = calculateDeficit(plansDict[i].plan, activityFoundPlan, bmr);
+                                plansDict[i].plan.deficit = deficit;
                             }
 
-                            Activity.find({'planDateYear': {$lte: endDateYear, $gte: startDateYear}, 'planDateMonth': {$lte: endDateMonth, $gte: startDateMonth}, 'planDateDay': {$lte: endDateDay, $gte: startDateDay}, 'user': req.user.id}).exec(function (err, activities) {
-                                if (err) return next(err);
-
-                                for (var i = 0; i < plansDict.length; i++) {
-                                    var activityFoundPlan = null;
-
-                                    if(activities && activities.length > 0) {
-                                        for(var act = 0; act < activities.length; act++){
-                                            var activityFromDb = activities[act];
-
-                                            var activityPlanDt = activityFromDb.planDateYear + '_' + activityFromDb.planDateMonth + '_' + activityFromDb.planDateDay;
-
-                                            if (plansDict[i].planDate == activityPlanDt) {
-                                                activityFoundPlan = activities[act];
-                                            }
-                                        }
-                                    }
-
-                                    var deficit = calculateDeficit(plansDict[i].plan, activityFoundPlan, bmr);
-                                    plansDict[i].plan.deficit = deficit;
-                                }
-
-                                res.jsonp(plans);
-
-                            });
-
+                            res.jsonp(plans);
 
                         });
-
 
                     }
                 });
