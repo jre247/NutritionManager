@@ -152,7 +152,13 @@ exports.list = function(req, res) {
     Activity.find(
         {
             user:req.user.id
-        }).sort('planDate').populate('user', 'displayName').exec(function(err, activities) {
+        })
+        .sort({
+            planDateYear: 1, //Sort by Date Added DESC
+            planDateMonth: 1, //Sort by Date Added DESC
+            planDateDay: 1 //Sort by Date Added DESC
+        })
+        .populate('user', 'displayName').exec(function(err, activities) {
         if (err) {
             return res.send(400, {
                 message: getErrorMessage(err)

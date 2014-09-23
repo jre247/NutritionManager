@@ -48,6 +48,19 @@ angular.module('progress').controller('ProgressController', ['$scope', '$statePa
 
         $scope.initDate = new Date('2016-15-20');
 
+        $scope.selectedDurationChange = function(){
+            var selectedDuration = $scope.selectedDuration;
+            var now = new Date();
+
+            //get last day of current month
+            $scope.endDate = new Date(now.getFullYear(), now.getMonth() + 1, 0);
+
+            //calculate number of months back from current month
+            $scope.startDate = new Date(now.getFullYear(), now.getMonth() - selectedDuration, 1);
+
+
+            //$scope.find();
+        };
 
         $scope.find = function() {
             var startDateFormatted = $scope.startDate.getFullYear() + '_' + $scope.startDate.getMonth() + '_' + $scope.startDate.getDate();

@@ -37,8 +37,9 @@
             </div>
         </div>
 
-        <div style="display:inline-block;">
-            <select ng-model="selectedDuration" ng-options="t.value as t.text for t in durationList" style="font-size: 16px;vertical-align: top;"></select>
+        <div style="display:inline-block;vertical-align: top;margin-top: 15px;margin-left: 25px;">
+            Duration:
+            <select ng-model="selectedDuration" data-ng-change="selectedDurationChange()" ng-options="t.value as t.text for t in durationList" style="font-size: 16px;vertical-align: top;margin-left:10px;"></select>
 
         </div>
 

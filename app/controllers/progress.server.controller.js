@@ -70,17 +70,33 @@ exports.list = function(req, res){
             }
             else {
                 Plan.find({
-
-                        $and: [
-                            {'planDateYear': {$lte: endDateYear, $gte: startDateYear}},
-                            {'planDateMonth': {$lte: endDateMonth, $gte: startDateMonth}},
-                            {'user': req.user.id}
-
+                        'user': req.user.id,
+                        "$or" : [
+                            {
+                                'planDateMonth': startDateMonth,
+                                "$and" : [
+                                    { "planDateDay" : {$gte: startDateDay} },
+                                    { "planDateYear" : {$gte: startDateYear, $lte: endDateYear} }
+                                ]
+                            },
+                            {
+                                'planDateMonth': endDateMonth,
+                                "$and" : [
+                                    { "planDateDay" : {$lte: endDateDay} },
+                                    { "planDateYear" : {$gte: startDateYear, $lte: endDateYear} }
+                                ]
+                            },
+                            {
+                                'planDateMonth': {$ne: startDateMonth},
+                                "$and" : [
+                                    { "planDateMonth" : {$ne: endDateMonth} },
+                                    {'planDateMonth': {$lte: endDateMonth, $gte: startDateMonth}},
+                                    { "planDateYear" : {$gte: startDateYear, $lte: endDateYear} }
+                                ]
+                            }
                         ]
-
                     }
                 )
-
                   .sort({
                         planDateYear: 1, //Sort by Date Added DESC
                         planDateMonth: 1, //Sort by Date Added DESC
@@ -89,41 +105,25 @@ exports.list = function(req, res){
                     if (err) return next(err);
 
                     else {
-                        var plansFinal = [];
-
                         var bmr = calculateBmr(nutritionProfile);
 
                         var plansDict = [];
 
                         for (var i = 0; i < plans.length; i++) {
-                            var isPlanValid = false;
-
                             var singlePlan = plans[i];
 
-                            if(singlePlan.planDateMonth === startDateMonth &&
-                                (singlePlan.planDateDay >= startDateDay)
-                              ){
-                                plansFinal.push(singlePlan);
-                                isPlanValid = true;
-                            }
-                            else if(singlePlan.planDateMonth !== startDateMonth){
-                                plansFinal.push(singlePlan);
-                                isPlanValid = true;
+                            var dateForDict = singlePlan.planDateYear + '_' + singlePlan.planDateMonth + '_' + singlePlan.planDateDay;
+                            plansDict.push({
+                                planDate: dateForDict,
+                                plan: singlePlan
+                            });
+
+                            for (var nMeal = 0; nMeal < singlePlan.meals.length; nMeal++) {
+                                doMealTotaling(singlePlan.meals[nMeal]);
                             }
 
-                            if(isPlanValid) {
-                                var dateForDict = singlePlan.planDateYear + '_' + singlePlan.planDateMonth + '_' + singlePlan.planDateDay;
-                                plansDict.push({
-                                    planDate: dateForDict,
-                                    plan: singlePlan
-                                });
+                            calculatePlanTotalMacros(singlePlan);
 
-                                for (var nMeal = 0; nMeal < singlePlan.meals.length; nMeal++) {
-                                    doMealTotaling(singlePlan.meals[nMeal]);
-                                }
-
-                                calculatePlanTotalMacros(singlePlan);
-                            }
                         }
 
 //                        BodyStats.find({'planDateYear': {$lte: endDateYear, $gte: startDateYear}, 'planDateMonth': {$lte: endDateMonth, $gte: startDateMonth}, 'planDateDay': {$lte: endDateDay, $gte: startDateDay}, 'user': req.user.id})
@@ -225,7 +225,7 @@ exports.list = function(req, res){
                                 plansDict[i].plan.deficit = deficit;
                             }
 
-                            res.jsonp(plansFinal);
+                            res.jsonp(plans);
 
                         });
 
