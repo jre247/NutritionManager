@@ -37,6 +37,11 @@
             </div>
         </div>
 
+        <div style="display:inline-block;">
+            <select ng-model="selectedDuration" ng-options="t.value as t.text for t in durationList" style="font-size: 16px;vertical-align: top;"></select>
+
+        </div>
+
         <div style="display:inline-block;position: relative;bottom: 20px;margin-left: 20px;">
             <input type="button" value="Go" data-ng-click="find();"/>
         </div>

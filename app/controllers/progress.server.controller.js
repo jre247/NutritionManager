@@ -56,6 +56,9 @@ exports.list = function(req, res){
         var endDateDay = parseInt(split2[2]);
         var endDateYear = parseInt(split2[0]);
 
+        var endDateAsDt = new Date(new Date(endDateYear,endDateMonth,endDateDay).toUTCString());
+        var startDateAsDt = new Date(new Date(startDateYear,startDateMonth,startDateDay).toUTCString());
+        //planDate
 
         NutritionProfile.findOne({
             user: req.user.id // Search Filters
@@ -66,7 +69,18 @@ exports.list = function(req, res){
                 });
             }
             else {
-                Plan.find({'planDateYear': {$lte: endDateYear, $gte: startDateYear}, 'planDateMonth': {$lte: endDateMonth, $gte: startDateMonth}, 'planDateDay': {$lte: endDateDay, $gte: startDateDay}, 'user': req.user.id})
+                Plan.find({
+
+                        $and: [
+                            {'planDateYear': {$lte: endDateYear, $gte: startDateYear}},
+                            {'planDateMonth': {$lte: endDateMonth, $gte: startDateMonth}},
+                            {'user': req.user.id}
+
+                        ]
+
+                    }
+                )
+
                   .sort({
                         planDateYear: 1, //Sort by Date Added DESC
                         planDateMonth: 1, //Sort by Date Added DESC
@@ -75,24 +89,41 @@ exports.list = function(req, res){
                     if (err) return next(err);
 
                     else {
+                        var plansFinal = [];
+
                         var bmr = calculateBmr(nutritionProfile);
 
                         var plansDict = [];
 
                         for (var i = 0; i < plans.length; i++) {
+                            var isPlanValid = false;
+
                             var singlePlan = plans[i];
 
-                            var dateForDict = singlePlan.planDateYear + '_' + singlePlan.planDateMonth + '_' + singlePlan.planDateDay;
-                            plansDict.push({
-                                planDate: dateForDict,
-                                plan: singlePlan
-                            });
-
-                            for (var nMeal = 0; nMeal < singlePlan.meals.length; nMeal++){
-                                doMealTotaling(singlePlan.meals[nMeal]);
+                            if(singlePlan.planDateMonth === startDateMonth &&
+                                (singlePlan.planDateDay >= startDateDay)
+                              ){
+                                plansFinal.push(singlePlan);
+                                isPlanValid = true;
+                            }
+                            else if(singlePlan.planDateMonth !== startDateMonth){
+                                plansFinal.push(singlePlan);
+                                isPlanValid = true;
                             }
 
-                            calculatePlanTotalMacros(singlePlan);
+                            if(isPlanValid) {
+                                var dateForDict = singlePlan.planDateYear + '_' + singlePlan.planDateMonth + '_' + singlePlan.planDateDay;
+                                plansDict.push({
+                                    planDate: dateForDict,
+                                    plan: singlePlan
+                                });
+
+                                for (var nMeal = 0; nMeal < singlePlan.meals.length; nMeal++) {
+                                    doMealTotaling(singlePlan.meals[nMeal]);
+                                }
+
+                                calculatePlanTotalMacros(singlePlan);
+                            }
                         }
 
 //                        BodyStats.find({'planDateYear': {$lte: endDateYear, $gte: startDateYear}, 'planDateMonth': {$lte: endDateMonth, $gte: startDateMonth}, 'planDateDay': {$lte: endDateDay, $gte: startDateDay}, 'user': req.user.id})
@@ -194,7 +225,7 @@ exports.list = function(req, res){
                                 plansDict[i].plan.deficit = deficit;
                             }
 
-                            res.jsonp(plans);
+                            res.jsonp(plansFinal);
 
                         });
 

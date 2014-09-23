@@ -12,9 +12,20 @@ angular.module('progress').controller('ProgressController', ['$scope', '$statePa
 
         $scope.authentication = Authentication;
 
+        $scope.durationList = [
+            {value: 1, text: '1 Month'},
+            {value: 3, text: '3 Months'},
+            {value: 6, text: '6 Months'},
+            {value: 9, text: '9 Months'},
+            {value: 12, text: '1 Year'},
+
+        ];
+
+        $scope.selectedDuration = $scope.durationList[0].value;
+
         $scope.endDate = new Date();
         $scope.startDate = new Date();
-        $scope.startDate.setDate($scope.endDate.getDate() - 7);
+        $scope.startDate.setDate($scope.endDate.getDate() - 28);
 
         $scope.openStartDate = function($event) {
             $event.preventDefault();
