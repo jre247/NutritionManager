@@ -75,25 +75,36 @@ exports.list = function(req, res){
                             {
                                 'planDateMonth': startDateMonth,
                                 "$and" : [
-                                    { "planDateDay" : {$gte: startDateDay} },
-                                    { "planDateYear" : {$gte: startDateYear, $lte: endDateYear} }
+                                    { "planDateDay" : {$gte: startDateDay} }
+                                    ,{'planDateMonth': {$ne: endDateMonth}}
+                                    //,{ "planDateYear" : {$gte: startDateYear, $lte: endDateYear} }
                                 ]
                             },
                             {
                                 'planDateMonth': endDateMonth,
                                 "$and" : [
-                                    { "planDateDay" : {$lte: endDateDay} },
-                                    { "planDateYear" : {$gte: startDateYear, $lte: endDateYear} }
+                                    { "planDateDay" : {$lte: endDateDay} }
+                                    ,{'planDateMonth': {$ne: startDateMonth}}
+                                    //,{ "planDateYear" : {$gte: startDateYear, $lte: endDateYear} }
                                 ]
                             },
                             {
-                                'planDateMonth': {$ne: startDateMonth},
+                                'planDateMonth': {$ne: endDateMonth},
                                 "$and" : [
-                                    { "planDateMonth" : {$ne: endDateMonth} },
+                                    {'planDateMonth': {$ne: startDateMonth}},
                                     {'planDateMonth': {$lte: endDateMonth, $gte: startDateMonth}},
-                                    { "planDateYear" : {$gte: startDateYear, $lte: endDateYear} }
+                                    {'planDateDay': {$lte: endDateDay, $gte: startDateDay}}
+                                   // ,{ "planDateYear" : {$gte: startDateYear, $lte: endDateYear} }
                                 ]
                             }
+//                            ,{
+//                                'planDateMonth': {$ne: startDateMonth},
+//                                "$and" : [
+//                                    {'planDateMonth': {$lte: endDateMonth, $gte: startDateMonth}}
+//                                    // {'planDateDay': {$lte: endDateDay, $gte: startDateDay}}
+//                                    // ,{ "planDateYear" : {$gte: startDateYear, $lte: endDateYear} }
+//                                ]
+//                            }
                         ]
                     }
                 )

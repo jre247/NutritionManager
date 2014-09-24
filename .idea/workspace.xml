@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="99afd44b-0014-4bff-855e-4d01f0b1305f" name="Default" comment="create plan page is close to finished. Now trying to wire up view/edit plan page. Trying to make it all common html.">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/dist/application.min.js" afterPath="$PROJECT_DIR$/public/dist/application.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/progress.server.controller.js" afterPath="$PROJECT_DIR$/app/controllers/progress.server.controller.js" />
     </list>
     <ignored path="NutritionManager.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -25,13 +25,22 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="application.min.js" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="application.min.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/dist/application.min.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.57345974" vertical-offset="56068" max-vertical-offset="56490">
+            <state vertical-scroll-proportion="-9.307693" vertical-offset="56068" max-vertical-offset="56490">
               <caret line="3754" column="0" selection-start-line="3754" selection-start-column="0" selection-end-line="3754" selection-end-column="0" />
               <folding>
                 <element signature="e#129973#139695#0" expanded="false" />
+                <marker date="1411516577000" expanded="true" signature="131703:132730" placeholder="{...}" />
+                <marker date="1411516577000" expanded="true" signature="132023:132139" placeholder="{...}" />
+                <marker date="1411516577000" expanded="true" signature="132205:132703" placeholder="{...}" />
+                <marker date="1411516577000" expanded="true" signature="132279:132419" placeholder="{...}" />
+                <marker date="1411516577000" expanded="true" signature="132501:132637" placeholder="{...}" />
+                <marker date="1411516577000" expanded="true" signature="132787:135474" placeholder="{...}" />
+                <marker date="1411516577000" expanded="true" signature="133113:134969" placeholder="{...}" />
+                <marker date="1411516577000" expanded="true" signature="133849:134426" placeholder="{...}" />
+                <marker date="1411516577000" expanded="true" signature="134145:134408" placeholder="{...}" />
               </folding>
             </state>
           </provider>
@@ -53,18 +62,18 @@
       <file leaf-file-name="progress.client.controller.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/modules/progress/controllers/progress.client.controller.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="572" max-vertical-offset="4455">
-              <caret line="48" column="49" selection-start-line="0" selection-start-column="0" selection-end-line="293" selection-end-column="3" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="317" max-vertical-offset="4455">
+              <caret line="51" column="59" selection-start-line="51" selection-start-column="59" selection-end-line="51" selection-end-column="59" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="progress.server.controller.js" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="progress.server.controller.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/controllers/progress.server.controller.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="1020" max-vertical-offset="5895">
-              <caret line="95" column="29" selection-start-line="95" selection-start-column="29" selection-end-line="95" selection-end-column="29" />
+            <state vertical-scroll-proportion="0.83258927" vertical-offset="1067" max-vertical-offset="6060">
+              <caret line="96" column="85" selection-start-line="96" selection-start-column="85" selection-end-line="96" selection-end-column="85" />
               <folding />
             </state>
           </provider>
@@ -132,8 +141,8 @@
         <option value="$PROJECT_DIR$/app/controllers/activities.server.controller.js" />
         <option value="$PROJECT_DIR$/public/modules/progress/views/view-progress.client.view.html" />
         <option value="$PROJECT_DIR$/public/modules/progress/controllers/progress.client.controller.js" />
-        <option value="$PROJECT_DIR$/app/controllers/progress.server.controller.js" />
         <option value="$PROJECT_DIR$/public/dist/application.min.js" />
+        <option value="$PROJECT_DIR$/app/controllers/progress.server.controller.js" />
       </list>
     </option>
   </component>
@@ -1139,29 +1148,38 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/progress.server.controller.js">
+    <entry file="file://$PROJECT_DIR$/public/dist/application.min.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1020" max-vertical-offset="5895">
-          <caret line="95" column="29" selection-start-line="95" selection-start-column="29" selection-end-line="95" selection-end-column="29" />
-          <folding />
+        <state vertical-scroll-proportion="-9.307693" vertical-offset="56068" max-vertical-offset="56490">
+          <caret line="3754" column="0" selection-start-line="3754" selection-start-column="0" selection-end-line="3754" selection-end-column="0" />
+          <folding>
+            <element signature="e#129973#139695#0" expanded="false" />
+            <marker date="1411516577000" expanded="true" signature="131703:132730" placeholder="{...}" />
+            <marker date="1411516577000" expanded="true" signature="132023:132139" placeholder="{...}" />
+            <marker date="1411516577000" expanded="true" signature="132205:132703" placeholder="{...}" />
+            <marker date="1411516577000" expanded="true" signature="132279:132419" placeholder="{...}" />
+            <marker date="1411516577000" expanded="true" signature="132501:132637" placeholder="{...}" />
+            <marker date="1411516577000" expanded="true" signature="132787:135474" placeholder="{...}" />
+            <marker date="1411516577000" expanded="true" signature="133113:134969" placeholder="{...}" />
+            <marker date="1411516577000" expanded="true" signature="133849:134426" placeholder="{...}" />
+            <marker date="1411516577000" expanded="true" signature="134145:134408" placeholder="{...}" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/public/modules/progress/controllers/progress.client.controller.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="572" max-vertical-offset="4455">
-          <caret line="48" column="49" selection-start-line="0" selection-start-column="0" selection-end-line="293" selection-end-column="3" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="317" max-vertical-offset="4455">
+          <caret line="51" column="59" selection-start-line="51" selection-start-column="59" selection-end-line="51" selection-end-column="59" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/dist/application.min.js">
+    <entry file="file://$PROJECT_DIR$/app/controllers/progress.server.controller.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.57345974" vertical-offset="56068" max-vertical-offset="56490">
-          <caret line="3754" column="0" selection-start-line="3754" selection-start-column="0" selection-end-line="3754" selection-end-column="0" />
-          <folding>
-            <element signature="e#129973#139695#0" expanded="false" />
-          </folding>
+        <state vertical-scroll-proportion="0.83258927" vertical-offset="1067" max-vertical-offset="6060">
+          <caret line="96" column="85" selection-start-line="96" selection-start-column="85" selection-end-line="96" selection-end-column="85" />
+          <folding />
         </state>
       </provider>
     </entry>
