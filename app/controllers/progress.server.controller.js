@@ -56,8 +56,8 @@ exports.list = function(req, res){
         var endDateDay = parseInt(split2[2]);
         var endDateYear = parseInt(split2[0]);
 
-        var endDateAsDt = new Date(new Date(endDateYear,endDateMonth,endDateDay).toUTCString());
-        var startDateAsDt = new Date(new Date(startDateYear,startDateMonth,startDateDay).toUTCString());
+        var endDateAsMili = new Date(new Date(endDateYear,endDateMonth,endDateDay).toUTCString()).getTime();
+        var startDateAsMili = new Date(new Date(startDateYear,startDateMonth,startDateDay).toUTCString()).getTime();
         //planDate
 
         NutritionProfile.findOne({
@@ -71,76 +71,7 @@ exports.list = function(req, res){
             else {
                 Plan.find({
                         'user': req.user.id,
-                        "$or" : [
-                            {
-                                'planDateMonth': startDateMonth,
-                                "$and" : [
-                                    { "planDateDay" : {$gte: startDateDay} }
-                                    ,{'planDateMonth': {$ne: endDateMonth}}
-                                    //,{'planDateYear': {$gte: startDateYear}}
-
-                                ]
-                            },
-                            {
-                                'planDateMonth': endDateMonth,
-                                "$and" : [
-                                    { "planDateDay" : {$lte: endDateDay} }
-                                    ,{'planDateMonth': {$ne: startDateMonth}}
-
-                                ]
-                            },
-                            {
-                                'planDateMonth': {$ne: endDateMonth},
-                                "$and" : [
-                                    {'planDateMonth': {$ne: startDateMonth}},
-                                    {
-                                        "$or": [
-                                            {"$and":[
-                                                {'planDateMonth': {$lte: endDateMonth, $gte: startDateMonth}},
-                                                {'planDateDay': {$lte: endDateDay, $gte: startDateDay}},
-                                                {'planDateYear': {$gt: startDateYear}},
-                                                //{'planDateYear': {$gt: startDateYear}},
-                                            ]},
-                                            {'planDateYear': {$lt: endDateYear}},
-                                            {'planDateYear': {$gt: startDateYear}},
-                                            //{'planDateYear': {$ne: endDateYear}},
-                                            //{'planDateYear': {$ne: startDateYear}},
-
-                                        ]
-                                    }
-
-                                ]
-                            },
-                            {
-                                'planDateMonth': endDateMonth,
-                                "$and" : [
-                                    {'planDateMonth': startDateMonth},
-                                    {'planDateDay': {$lte: endDateDay, $gte: startDateDay}}
-
-                                ]
-                            }
-                        ]
-
-
-
-
-
-
-
-
-//
-//                        "$or" : [
-//                            {
-//                                'planDateDay': {$lte: endDateDay, $gte: startDateDay},
-//                                "$and" : [
-//                                    { "planDateYear" : {$gte: startDateYear, $lte: endDateYear} }
-//                                    ,{'planDateMonth': {$lte: endDateMonth, $gte: startDateMonth}}
-//
-//                                ]
-//                            }
-//                         ]
-
-
+                        'planDateAsMili': {$gte: startDateAsMili, $lte: endDateAsMili}
                     }
                 )
                   .sort({

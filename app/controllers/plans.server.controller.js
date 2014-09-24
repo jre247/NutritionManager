@@ -60,7 +60,7 @@ exports.create = function(req, res) {
                 }
 
                 planToSave.userRoles = req.user.roles;
-                planToSave.isUpdate = true;
+
             }
             else{
                 var plan = new Plan(req.body);
@@ -71,10 +71,9 @@ exports.create = function(req, res) {
                 plan.planDateYear = planClient.planDateYear;
                 plan.planDateMonth = planClient.planDateMonth;
                 plan.planDateDay = planClient.planDateDay;
+                plan.planDateAsMili = planClient.planDateAsMili;
 
                 planToSave = plan;
-                planToSave.isUpdate = false;
-
             }
 
             planToSave.planDateForDB = planClient.planDateForDB;

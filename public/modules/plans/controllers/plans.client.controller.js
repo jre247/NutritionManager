@@ -83,6 +83,7 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
                 planDateYear: planDateYear,
                 planDateMonth: planDateMonth,
                 planDateDay: planDateDay,
+                planDateAsMili: planDate.getTime(),
                 meals: $scope.plan.meals
 			});
             plan.$save(function(response) {
@@ -327,6 +328,7 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
             plan.planDateYear = planDateYear;
             plan.planDateMonth = planDateMonth;
             plan.planDateDay = planDateDay;
+            plan.planDateAsMili = planDate.getTime();
 
             plan.$update(function() {
 				//$location.path('plans/' + plan._id);
