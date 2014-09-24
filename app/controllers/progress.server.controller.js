@@ -101,7 +101,7 @@ exports.list = function(req, res){
                                 'planDateMonth': endDateMonth,
                                 "$and" : [
                                     {'planDateMonth': startDateMonth},
-                                   
+
                                     {'planDateDay': {$lte: endDateDay, $gte: startDateDay}}
                                     // ,{ "planDateYear" : {$gte: startDateYear, $lte: endDateYear} }
                                 ]

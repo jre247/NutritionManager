@@ -440,8 +440,8 @@ angular.module('activities').controller('ActivitiesController', ['$scope', '$sta
 
         //sorting code
         // data
-        $scope.orderByField = 'planDate';
-        $scope.reverseSort = false;
+        $scope.orderByField = 'planDateDay';
+        $scope.reverseSort = true;
         scope.plansCollection = [];
 
 
