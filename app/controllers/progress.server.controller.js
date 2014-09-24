@@ -77,7 +77,8 @@ exports.list = function(req, res){
                                 "$and" : [
                                     { "planDateDay" : {$gte: startDateDay} }
                                     ,{'planDateMonth': {$ne: endDateMonth}}
-                                    //,{ "planDateYear" : {$gte: startDateYear, $lte: endDateYear} }
+                                    //,{'planDateYear': {$gte: startDateYear}}
+
                                 ]
                             },
                             {
@@ -85,36 +86,61 @@ exports.list = function(req, res){
                                 "$and" : [
                                     { "planDateDay" : {$lte: endDateDay} }
                                     ,{'planDateMonth': {$ne: startDateMonth}}
-                                    //,{ "planDateYear" : {$gte: startDateYear, $lte: endDateYear} }
+
                                 ]
                             },
                             {
                                 'planDateMonth': {$ne: endDateMonth},
                                 "$and" : [
                                     {'planDateMonth': {$ne: startDateMonth}},
-                                    {'planDateMonth': {$lte: endDateMonth, $gte: startDateMonth}},
-                                    {'planDateDay': {$lte: endDateDay, $gte: startDateDay}}
-                                   // ,{ "planDateYear" : {$gte: startDateYear, $lte: endDateYear} }
+                                    {
+                                        "$or": [
+                                            {"$and":[
+                                                {'planDateMonth': {$lte: endDateMonth, $gte: startDateMonth}},
+                                                {'planDateDay': {$lte: endDateDay, $gte: startDateDay}},
+                                                {'planDateYear': {$gt: startDateYear}},
+                                                //{'planDateYear': {$gt: startDateYear}},
+                                            ]},
+                                            {'planDateYear': {$lt: endDateYear}},
+                                            {'planDateYear': {$gt: startDateYear}},
+                                            //{'planDateYear': {$ne: endDateYear}},
+                                            //{'planDateYear': {$ne: startDateYear}},
+
+                                        ]
+                                    }
+
                                 ]
                             },
                             {
                                 'planDateMonth': endDateMonth,
                                 "$and" : [
                                     {'planDateMonth': startDateMonth},
-
                                     {'planDateDay': {$lte: endDateDay, $gte: startDateDay}}
-                                    // ,{ "planDateYear" : {$gte: startDateYear, $lte: endDateYear} }
+
                                 ]
                             }
-//                            ,{
-//                                'planDateMonth': {$ne: startDateMonth},
+                        ]
+
+
+
+
+
+
+
+
+//
+//                        "$or" : [
+//                            {
+//                                'planDateDay': {$lte: endDateDay, $gte: startDateDay},
 //                                "$and" : [
-//                                    {'planDateMonth': {$lte: endDateMonth, $gte: startDateMonth}}
-//                                    // {'planDateDay': {$lte: endDateDay, $gte: startDateDay}}
-//                                    // ,{ "planDateYear" : {$gte: startDateYear, $lte: endDateYear} }
+//                                    { "planDateYear" : {$gte: startDateYear, $lte: endDateYear} }
+//                                    ,{'planDateMonth': {$lte: endDateMonth, $gte: startDateMonth}}
+//
 //                                ]
 //                            }
-                        ]
+//                         ]
+
+
                     }
                 )
                   .sort({
