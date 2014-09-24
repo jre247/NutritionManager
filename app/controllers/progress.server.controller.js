@@ -96,6 +96,15 @@ exports.list = function(req, res){
                                     {'planDateDay': {$lte: endDateDay, $gte: startDateDay}}
                                    // ,{ "planDateYear" : {$gte: startDateYear, $lte: endDateYear} }
                                 ]
+                            },
+                            {
+                                'planDateMonth': endDateMonth,
+                                "$and" : [
+                                    {'planDateMonth': startDateMonth},
+                                   
+                                    {'planDateDay': {$lte: endDateDay, $gte: startDateDay}}
+                                    // ,{ "planDateYear" : {$gte: startDateYear, $lte: endDateYear} }
+                                ]
                             }
 //                            ,{
 //                                'planDateMonth': {$ne: startDateMonth},
