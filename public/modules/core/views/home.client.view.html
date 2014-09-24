@@ -5,11 +5,17 @@
             <div>
                 <div style="border-bottom: 1px solid #eee;width:300px;">
 
-                        <a data-ng-href="#!/activities/{{activityPlan._id}}">
+                        <a data-ng-show="activityPlan" data-ng-href="#!/activities/{{activityPlan._id}}">
                             <h2>
                                 Today's Activities:
                             </h2>
                         </a>
+
+                    <div data-ng-show="!activityPlan">
+                        <h2>
+                            Today's Activities:
+                        </h2>
+                    </div>
 
                 </div>
                 <ul data-ng-show="activityPlan" data-ng-repeat="activity in activityPlan.activities" style="margin-top: 10px;">
@@ -37,11 +43,16 @@
 
                 <div  style="border-bottom: 1px solid #eee;width:300px;">
 
-                    <a data-ng-href="#!/plans/{{nutritionPlan._id}}">
+                    <a data-ng-show="nutritionPlan" data-ng-href="#!/plans/{{nutritionPlan._id}}">
                         <h2>
                             Today's Nutrition:
                         </h2>
                     </a>
+                    <div data-ng-show="!nutritionPlan">
+                        <h2>
+                            Today's Nutrition:
+                        </h2>
+                    </div>
                 </div>
                 <div data-ng-show="!nutritionPlan" style="margin-top: 20px;margin-left: 9px;font-weight: bold;color: rgb(66, 66, 207);">
                     <!--There is no nutrition plan entered for today yet.-->
