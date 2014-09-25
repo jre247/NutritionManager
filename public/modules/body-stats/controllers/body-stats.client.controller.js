@@ -13,7 +13,7 @@ angular.module('bodyStats').controller('BodyStatsController', ['$scope', '$state
 
 
         $scope.directionList = ['Ascending', 'Descending'];
-        $scope.selectedDirection = 'Ascending';
+        $scope.selectedDirection = 'Descending';
 
         $scope.open = function($event) {
             $event.preventDefault();
@@ -41,6 +41,7 @@ angular.module('bodyStats').controller('BodyStatsController', ['$scope', '$state
                 planDateYear: planDateYear,
                 planDateMonth: planDateMonth,
                 planDateDay: planDateDay,
+                planDateAsMili: planDate.getTime(),
                 weight: $scope.plan.weight,
                 bodyFatPercentage: $scope.plan.bodyFatPercentage
             });
@@ -105,9 +106,11 @@ angular.module('bodyStats').controller('BodyStatsController', ['$scope', '$state
             var planDateMonth = planDate.getMonth();
             var planDateDay = planDate.getDate();
 
+
             plan.planDateYear = planDateYear;
             plan.planDateMonth = planDateMonth;
             plan.planDateDay = planDateDay;
+            plan.planDateAsMili = planDate.getTime();
             plan.weight = plan.weight;
             plan.bodyFatPercentage = plan.bodyFatPercentage;
 
@@ -158,8 +161,8 @@ angular.module('bodyStats').controller('BodyStatsController', ['$scope', '$state
 
         //sorting code
         // data
-        $scope.orderByField = 'planDate';
-        $scope.reverseSort = false;
+        $scope.orderByField = 'planDateAsMili';
+        $scope.reverseSort = true;
         scope.plansCollection = [];
 
 

@@ -61,6 +61,7 @@ exports.create = function(req, res) {
             if (planDb) {
                 planDb.weight = planClient.weight;
                 planDb.bodyFatPercentage = planClient.bodyFatPercentage;
+                planDb.planDateAsMili = planClient.planDateAsMili;
 
                 planDb.userRoles = req.user.roles;
 
@@ -76,6 +77,7 @@ exports.create = function(req, res) {
                 plan.planDateYear = planClient.planDateYear;
                 plan.planDateMonth = planClient.planDateMonth;
                 plan.planDateDay = planClient.planDateDay;
+                plan.planDateAsMili = planClient.planDateAsMili;
                 plan.userRoles = req.user.roles;
                 planToSave = plan;
 
