@@ -367,6 +367,7 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
 
                         var planModel = {
                             planDateNonUtc: $scope.plans[i].planDateNonUtc || $scope.plans[i].planDate,
+                            planDateAsMili: $scope.plans[i].planDateAsMili,
                             calories: $scope.plans[i].totalPlanCalories,
                             protein: $scope.plans[i].totalPlanProtein,
                             carbs: $scope.plans[i].totalPlanCarbs,
@@ -568,8 +569,8 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
 
         //sorting code
         // data
-        $scope.orderByField = 'planDate';
-        $scope.reverseSort = false;
+        $scope.orderByField = 'planDateAsMili';
+        $scope.reverseSort = true;
         scope.plansCollection = [];
 
         $scope.setSorting = function(){

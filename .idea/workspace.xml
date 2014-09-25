@@ -3,7 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="99afd44b-0014-4bff-855e-4d01f0b1305f" name="Default" comment="create plan page is close to finished. Now trying to wire up view/edit plan page. Trying to make it all common html.">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/dist/application.min.js" afterPath="$PROJECT_DIR$/public/dist/application.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/modules/progress/controllers/progress.client.controller.js" afterPath="$PROJECT_DIR$/public/modules/progress/controllers/progress.client.controller.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/modules/plans/controllers/plans.client.controller.js" afterPath="$PROJECT_DIR$/public/modules/plans/controllers/plans.client.controller.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/plans.server.controller.js" afterPath="$PROJECT_DIR$/app/controllers/plans.server.controller.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="NutritionManager.iws" />
@@ -30,8 +31,8 @@
       <file leaf-file-name="application.min.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/public/dist/application.min.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.5379147" vertical-offset="60823" max-vertical-offset="63450">
-              <caret line="4070" column="54" selection-start-line="4070" selection-start-column="54" selection-end-line="4070" selection-end-column="54" />
+            <state vertical-scroll-proportion="0.50236964" vertical-offset="24703" max-vertical-offset="63465">
+              <caret line="1661" column="47" selection-start-line="1661" selection-start-column="47" selection-end-line="1661" selection-end-column="47" />
               <folding />
             </state>
           </provider>
@@ -40,19 +41,33 @@
       <file leaf-file-name="progress.client.controller.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/modules/progress/controllers/progress.client.controller.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-4.6923075" vertical-offset="6658" max-vertical-offset="7080">
-              <caret line="454" column="17" selection-start-line="0" selection-start-column="0" selection-end-line="468" selection-end-column="3" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="12" max-vertical-offset="7080">
+              <caret line="298" column="24" selection-start-line="298" selection-start-column="12" selection-end-line="298" selection-end-column="24" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="progress.server.controller.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/controllers/progress.server.controller.js">
+      <file leaf-file-name="plans.server.controller.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/controllers/plans.server.controller.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="795" max-vertical-offset="5550">
-              <caret line="73" column="86" selection-start-line="73" selection-start-column="86" selection-end-line="73" selection-end-column="86" />
+            <state vertical-scroll-proportion="-8.269231" vertical-offset="1930" max-vertical-offset="5550">
+              <caret line="143" column="26" selection-start-line="143" selection-start-column="26" selection-end-line="143" selection-end-column="26" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="plans.client.controller.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/modules/plans/controllers/plans.client.controller.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-11.730769" vertical-offset="7960" max-vertical-offset="12315">
+              <caret line="582" column="10" selection-start-line="0" selection-start-column="0" selection-end-line="899" selection-end-column="0" />
+              <folding>
+                <element signature="e#19487#19830#0" expanded="false" />
+                <element signature="e#19879#20422#0" expanded="false" />
+                <element signature="e#20885#22916#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -116,10 +131,10 @@
         <option value="$PROJECT_DIR$/public/modules/activities/controllers/activities.client.controller.js" />
         <option value="$PROJECT_DIR$/public/modules/core/views/home.client.view.html" />
         <option value="$PROJECT_DIR$/app/models/plan.server.model.js" />
-        <option value="$PROJECT_DIR$/app/controllers/plans.server.controller.js" />
-        <option value="$PROJECT_DIR$/public/modules/plans/controllers/plans.client.controller.js" />
         <option value="$PROJECT_DIR$/app/controllers/progress.server.controller.js" />
         <option value="$PROJECT_DIR$/public/modules/progress/controllers/progress.client.controller.js" />
+        <option value="$PROJECT_DIR$/app/controllers/plans.server.controller.js" />
+        <option value="$PROJECT_DIR$/public/modules/plans/controllers/plans.client.controller.js" />
         <option value="$PROJECT_DIR$/public/dist/application.min.js" />
       </list>
     </option>
@@ -134,7 +149,7 @@
   </component>
   <component name="ProjectFrameBounds">
     <option name="x" value="23" />
-    <option name="y" value="58" />
+    <option name="y" value="22" />
     <option name="width" value="1247" />
     <option name="height" value="714" />
   </component>
@@ -212,80 +227,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="modules" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="NutritionManager" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="NutritionManager" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="public" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="modules" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="progress" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="NutritionManager" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="NutritionManager" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="public" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="modules" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="progress" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="NutritionManager" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="NutritionManager" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="public" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="modules" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="progress" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="controllers" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -528,6 +469,14 @@
       <ConfigurationWrapper RunnerId="NodeJS.run" />
       <method />
     </configuration>
+    <configuration default="true" type="DartUnitRunConfigurationType" factoryName="DartUnit">
+      <option name="VMOptions" />
+      <option name="arguments" />
+      <option name="filePath" />
+      <option name="scope" value="ALL" />
+      <option name="testName" />
+      <method />
+    </configuration>
     <configuration default="true" type="DartCommandLineRunConfigurationType" factoryName="Dart Command Line Application">
       <option name="VMOptions" />
       <option name="arguments" />
@@ -538,12 +487,14 @@
       <option name="showConsoleOnStdOut" value="false" />
       <method />
     </configuration>
-    <configuration default="true" type="DartUnitRunConfigurationType" factoryName="DartUnit">
-      <option name="VMOptions" />
-      <option name="arguments" />
+    <configuration default="true" type="CucumberJavaScriptRunConfigurationType" factoryName="Cucumber.js">
+      <option name="cucumberJsArguments" />
+      <option name="executablePath" />
       <option name="filePath" />
-      <option name="scope" value="ALL" />
-      <option name="testName" />
+      <method />
+    </configuration>
+    <configuration default="true" type="JavaScriptTestRunnerKarma" factoryName="Karma" config-file="">
+      <envs />
       <method />
     </configuration>
     <configuration default="true" type="JSTestDriver:ConfigurationType" factoryName="JsTestDriver">
@@ -551,16 +502,6 @@
       <setting name="settingsFile" value="" />
       <setting name="serverType" value="INTERNAL" />
       <setting name="preferredDebugBrowser" value="Chrome" />
-      <method />
-    </configuration>
-    <configuration default="true" type="JavaScriptTestRunnerKarma" factoryName="Karma" config-file="">
-      <envs />
-      <method />
-    </configuration>
-    <configuration default="true" type="CucumberJavaScriptRunConfigurationType" factoryName="Cucumber.js">
-      <option name="cucumberJsArguments" />
-      <option name="executablePath" />
-      <option name="filePath" />
       <method />
     </configuration>
     <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug">
@@ -608,7 +549,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="23" y="58" width="1247" height="714" extended-state="0" />
+    <frame x="23" y="22" width="1247" height="714" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Grunt" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
@@ -624,12 +565,12 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32713178" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32713178" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32866043" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -756,7 +697,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/app/controllers/plans.server.controller.js</url>
-          <line>244</line>
+          <line>242</line>
           <option name="timeStamp" value="223" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
@@ -776,7 +717,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/app/controllers/plans.server.controller.js</url>
-          <line>240</line>
+          <line>238</line>
           <option name="timeStamp" value="228" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
@@ -1079,38 +1020,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/plans.server.controller.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="576" max-vertical-offset="5580">
-          <caret line="75" column="34" selection-start-line="75" selection-start-column="34" selection-end-line="75" selection-end-column="34" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/models/plan.server.model.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="330" max-vertical-offset="3870">
           <caret line="31" column="18" selection-start-line="31" selection-start-column="4" selection-end-line="31" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/progress.server.controller.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="795" max-vertical-offset="5550">
-          <caret line="73" column="86" selection-start-line="73" selection-start-column="86" selection-end-line="73" selection-end-column="86" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/modules/plans/controllers/plans.client.controller.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-8.269231" vertical-offset="970" max-vertical-offset="12300">
-          <caret line="79" column="34" selection-start-line="0" selection-start-column="0" selection-end-line="898" selection-end-column="0" />
-          <folding>
-            <element signature="e#19411#19754#0" expanded="false" />
-            <element signature="e#19803#20346#0" expanded="false" />
-            <element signature="e#20804#22835#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1125,7 +1038,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.7075472" vertical-offset="315" max-vertical-offset="1080">
           <caret line="41" column="86" selection-start-line="41" selection-start-column="64" selection-end-line="41" selection-end-column="86" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1133,7 +1045,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.5306604" vertical-offset="285" max-vertical-offset="1470">
           <caret line="34" column="127" selection-start-line="34" selection-start-column="91" selection-end-line="34" selection-end-column="127" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1147,16 +1058,44 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/public/modules/progress/controllers/progress.client.controller.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-4.6923075" vertical-offset="6658" max-vertical-offset="7080">
-          <caret line="454" column="17" selection-start-line="0" selection-start-column="0" selection-end-line="468" selection-end-column="3" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="12" max-vertical-offset="7080">
+          <caret line="298" column="24" selection-start-line="298" selection-start-column="12" selection-end-line="298" selection-end-column="24" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/progress.server.controller.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.66964287" vertical-offset="795" max-vertical-offset="5550">
+          <caret line="73" column="86" selection-start-line="73" selection-start-column="86" selection-end-line="73" selection-end-column="86" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/plans.server.controller.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-8.269231" vertical-offset="1930" max-vertical-offset="5550">
+          <caret line="143" column="26" selection-start-line="143" selection-start-column="26" selection-end-line="143" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/modules/plans/controllers/plans.client.controller.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-11.730769" vertical-offset="7960" max-vertical-offset="12315">
+          <caret line="582" column="10" selection-start-line="0" selection-start-column="0" selection-end-line="899" selection-end-column="0" />
+          <folding>
+            <element signature="e#19487#19830#0" expanded="false" />
+            <element signature="e#19879#20422#0" expanded="false" />
+            <element signature="e#20885#22916#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/public/dist/application.min.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5379147" vertical-offset="60823" max-vertical-offset="61305">
-          <caret line="4070" column="54" selection-start-line="4070" selection-start-column="54" selection-end-line="4070" selection-end-column="54" />
+        <state vertical-scroll-proportion="0.50236964" vertical-offset="24703" max-vertical-offset="63465">
+          <caret line="1661" column="47" selection-start-line="1661" selection-start-column="47" selection-end-line="1661" selection-end-column="47" />
           <folding />
         </state>
       </provider>
