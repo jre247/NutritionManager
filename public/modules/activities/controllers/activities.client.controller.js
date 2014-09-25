@@ -82,7 +82,7 @@ angular.module('activities').controller('ActivitiesController', ['$scope', '$sta
 //        $scope.activityFieldsList = ['planDate', 'steps', 'weight', 'duration', 'distance', 'averageHeartRate',
 //            'activityType', 'averageSpeed', 'intensity', ];
 
-        $scope.selectedDirection = 'Ascending';
+        $scope.selectedDirection = 'Descending';
 
         $scope.calculateTotalCaloriesBurned = function(){
             var total = 0;
@@ -221,8 +221,10 @@ angular.module('activities').controller('ActivitiesController', ['$scope', '$sta
             var planDateMonth = planDate.getMonth();
             var planDateDay = planDate.getDate();
 
+
             var plan = new Activities({
                 planDateForDB: planDateAsString,
+                planDateAsMili: planDate.getTime(),
                 planDateYear: planDateYear,
                 planDateMonth: planDateMonth,
                 planDateDay: planDateDay,
@@ -370,6 +372,7 @@ angular.module('activities').controller('ActivitiesController', ['$scope', '$sta
             plan.planDateMonth = planDateMonth;
             plan.planDateDay = planDateDay;
             plan.totalCaloriesBurned = plan.totalCaloriesBurned;
+            plan.planDateAsMili = planDate.getTime();
 
             plan.$update(function() {
                 $scope.success = true;
@@ -440,7 +443,7 @@ angular.module('activities').controller('ActivitiesController', ['$scope', '$sta
 
         //sorting code
         // data
-        $scope.orderByField = 'planDateDay';
+        $scope.orderByField = 'planDateAsMili';
         $scope.reverseSort = true;
         scope.plansCollection = [];
 

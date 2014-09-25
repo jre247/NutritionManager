@@ -67,6 +67,7 @@ exports.create = function(req, res) {
                 }
 
                 planDb.userRoles = req.user.roles;
+                planDb.planDateAsMili = planClient.planDateAsMili;
 
 
             }
@@ -80,6 +81,7 @@ exports.create = function(req, res) {
                 plan.planDateYear = planClient.planDateYear;
                 plan.planDateMonth = planClient.planDateMonth;
                 plan.planDateDay = planClient.planDateDay;
+                plan.planDateAsMili = planClient.planDateAsMili;
                 plan.userRoles = req.user.roles;
                 planToSave = plan;
 
@@ -154,9 +156,7 @@ exports.list = function(req, res) {
             user:req.user.id
         })
         .sort({
-            planDateYear: 1, //Sort by Date Added DESC
-            planDateMonth: 1, //Sort by Date Added DESC
-            planDateDay: 1 //Sort by Date Added DESC
+            planDateAsMili: -1 //Sort by Date Added DESC
         })
         .populate('user', 'displayName').exec(function(err, activities) {
         if (err) {
