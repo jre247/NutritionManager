@@ -81,20 +81,222 @@ angular.module('progress').controller('ProgressController', ['$scope', '$statePa
                     function(u, getResponseHeaders)
                     {
                         var bodyStats = u;
+                        var plansFinal = plans;
+                        var plansFormatted = false;
 
-                        getChartData(plans, bodyStats);
+                        if(plans.length > 10) {
+                            plansFinal = formatPlansDates(plans, bodyStats);
+                            plansFormatted = true;
+                        }
 
+                        getChartData(plansFinal, bodyStats, plansFormatted);
                     });
-
-                   // getChartData(plans);
-
                 }
             );
-
-
         };
 
-        var getChartData = function(plans, bodyStats) {
+        var formatPlansDates = function(plans, bodyStats){
+            var formattedPlans = [];
+            var yearsSpread = [];
+
+            //figure out the year and month spread
+            for(var p = 0; p < plans.length; p++){
+                var plan = plans[p];
+
+                var monthWeightList = getWeightListForPlan(bodyStats, plans[p]);
+
+                var planYear = plan.planDateYear;
+
+                if(yearsSpread.length == 0){
+                    yearsSpread.push({
+                        year: planYear,
+                        months: []
+                    });
+
+                    yearsSpread[0].months[plan.planDateMonth] = [plan];
+
+                    if(!yearsSpread[0].months[plan.planDateMonth].weightList) {
+                        yearsSpread[0].months[plan.planDateMonth].weightList = monthWeightList;
+                    }
+                    else {
+                        yearsSpread[0].months[plan.planDateMonth].weightList.concat(monthWeightList);
+                    }
+                }
+                else {
+                    yearsSpread = buildMonthsSpreadForYear(plan, planYear, yearsSpread, monthWeightList);
+                }
+            }
+
+            //average plan data for months
+            for(var y = 0; y < yearsSpread.length; y++) {
+                var yearSpreadItem = yearsSpread[y];
+
+                for (var m = 0; m < yearSpreadItem.months.length; m++) {
+                    var monthSpreadItem = yearSpreadItem.months[m];
+
+                    if (monthSpreadItem) {
+                        var newFormattedPlan = averageMonthSpreadItem(monthSpreadItem);
+
+                        formattedPlans.push(newFormattedPlan);
+                    }
+                }
+            }
+
+            return formattedPlans;
+        };
+
+        var buildMonthsSpreadForYear = function(plan, planYear, yearsSpread, monthWeightList){
+            for (var y = 0; y < yearsSpread.length; y++) {
+                var yearFoundInSpread = false;
+                var yearSpreadItem = yearsSpread[y];
+
+                var monthsSpread = yearSpreadItem ? yearSpreadItem.months : [];
+
+                if (yearSpreadItem.year == planYear) {
+                    yearFoundInSpread = true;
+
+                    var plansForMonth = monthsSpread[plan.planDateMonth] || [];
+
+                    plansForMonth.push(plan);
+
+                    if(!yearSpreadItem.months) {
+                        yearSpreadItem.months[plan.planDateMonth] = plansForMonth;
+                    }
+                    else{
+                        //tack on months to existing months array item
+                        if(yearSpreadItem.months[plan.planDateMonth]) {
+                            yearSpreadItem.months[plan.planDateMonth].concat(plansForMonth);
+                        }
+                        //initially set month in months ary
+                        else{
+                            yearSpreadItem.months[plan.planDateMonth] = plansForMonth;
+                        }
+                    }
+
+                    if(!yearSpreadItem.months[plan.planDateMonth].weightList) {
+                        yearSpreadItem.months[plan.planDateMonth].weightList = monthWeightList;
+                    }
+                    else{
+                        yearSpreadItem.months[plan.planDateMonth].weightList.concat(monthWeightList);
+                    }
+
+
+                }
+            }
+
+            if(!yearFoundInSpread){
+                yearsSpread.push({
+                    year: planYear,
+                    months: []
+                });
+
+                var len = yearsSpread.length - 1;
+
+                yearsSpread[len].months[plan.planDateMonth] = [plan];
+
+                if(!yearsSpread[len].months[plan.planDateMonth].weightList) {
+                    yearsSpread[len].months[plan.planDateMonth].weightList = monthWeightList;
+                }
+                else{
+                    yearSpreadItem.months[plan.planDateMonth].weightList.concat(monthWeightList);
+                }
+            }
+
+            return yearsSpread;
+        };
+
+        var getWeightListForPlan = function(bodyStats, plan, compareDay){
+            var isPlanWeightMatchFound = false;
+            var bodyStatsNonZeroList = [];
+            var weightList = [];
+
+            for(var b = 0; b < bodyStats.length; b++){
+                var bodyStatFromDb = bodyStats[b];
+
+                if(!compareDay) {
+                    if (plan.planDateYear == bodyStatFromDb.planDateYear &&
+                        plan.planDateMonth == bodyStatFromDb.planDateMonth) {
+
+                        bodyStatsNonZeroList.push(bodyStatFromDb.weight);
+
+                        weightList.push(parseInt(bodyStatFromDb.weight));
+
+                        isPlanWeightMatchFound = true;
+                    }
+                }
+                else{
+                    if (plan.planDateYear == bodyStatFromDb.planDateYear &&
+                        plan.planDateMonth == bodyStatFromDb.planDateMonth &&
+                        plan.planDateDay == bodyStatFromDb.planDateDay) {
+
+                        bodyStatsNonZeroList.push(bodyStatFromDb.weight);
+
+                        weightList.push(parseInt(bodyStatFromDb.weight));
+
+                        isPlanWeightMatchFound = true;
+                    }
+                }
+            }
+
+            if(!isPlanWeightMatchFound){
+                var mostRecentWeight;
+
+                if(bodyStatsNonZeroList.length > 0) {
+                    mostRecentWeight = bodyStatsNonZeroList[bodyStatsNonZeroList.length - 1];
+                }
+                else{
+                    mostRecentWeight = bodyStats[0].weight;
+                }
+
+                weightList.push(parseInt(mostRecentWeight));
+
+                bodyStatsNonZeroList.push(mostRecentWeight);
+            }
+
+            return weightList;
+        };
+
+        var averageMonthSpreadItem = function(monthSpreadItem){
+            var proteinTotal = 0;
+            var carbsTotal = 0;
+            var fatTotal = 0;
+            var caloriesTotal = 0;
+            var weightTotal = 0;
+            var deficitTotal = 0;
+
+            var month = monthSpreadItem[0].planDateMonth;
+            var year = monthSpreadItem[0].planDateYear;
+
+            for(var p = 0; p < monthSpreadItem.length; p++){
+                var planItem = monthSpreadItem[p];
+
+                proteinTotal += planItem.totalPlanProteinAsPercent;
+                carbsTotal += planItem.totalPlanCarbsAsPercent;
+                fatTotal += planItem.totalPlanFatAsPercent;
+                caloriesTotal += planItem.totalPlanCalories;
+                deficitTotal += planItem.deficit;
+            }
+
+            for(var w = 0; w < monthSpreadItem.weightList.length; w++){
+                weightTotal += monthSpreadItem.weightList[w];
+            }
+
+            var newFormattedPlan = {
+                planDateYear: year,
+                planDateMonth: month,
+                planDateDay: 1,
+                totalPlanProteinAsPercent: proteinTotal / monthSpreadItem.length,
+                totalPlanCarbsAsPercent: carbsTotal / monthSpreadItem.length,
+                totalPlanFatAsPercent: fatTotal / monthSpreadItem.length,
+                totalPlanCalories: caloriesTotal / monthSpreadItem.length,
+                deficit: deficitTotal / monthSpreadItem.length,
+                weightList: weightTotal / monthSpreadItem.weightList.length
+            };
+
+            return newFormattedPlan;
+        };
+
+        var getChartData = function(plans, bodyStats, plansFormatted) {
             var fatList = [];
             var carbsList = [];
             var proteinList = [];
@@ -102,8 +304,6 @@ angular.module('progress').controller('ProgressController', ['$scope', '$statePa
             var caloriesList = [];
             var deficitList = [];
             var weightList = [];
-
-            var bodyStatsNonZeroList = [];
 
             for(var i = 0; i < plans.length; i++){
                 var dayItem = plans[i];
@@ -115,40 +315,15 @@ angular.module('progress').controller('ProgressController', ['$scope', '$statePa
                 fatList.push(parseInt(dayItem.totalPlanFatAsPercent));
                 caloriesList.push(parseInt(dayItem.totalPlanCalories));
                 deficitList.push(parseInt(dayItem.deficit));
-               // weightList.push(parseInt(dayItem.bodyWeight));
                 datesList.push(dayDate);
 
-                var isPlanWeightMatchFound = false;
+                if(!plansFormatted){
+                    var planWeightList = getWeightListForPlan(bodyStats, dayItem, true);
 
-                for(var b = 0; b < bodyStats.length; b++){
-                    var bodyStatFromDb = bodyStats[b];
-
-                    if (plans[i].planDateYear == bodyStatFromDb.planDateYear &&
-                        plans[i].planDateMonth == bodyStatFromDb.planDateMonth &&
-                        plans[i].planDateDay == bodyStatFromDb.planDateDay) {
-
-                        bodyStatsNonZeroList.push(bodyStatFromDb.weight);
-
-                        weightList.push(parseInt(bodyStatFromDb.weight));
-
-                        isPlanWeightMatchFound = true;
-                       // break;
-                    }
+                    weightList.push(planWeightList);
                 }
-
-                if(!isPlanWeightMatchFound){
-                    var mostRecentWeight;
-
-                    if(bodyStatsNonZeroList.length > 0) {
-                        mostRecentWeight = bodyStatsNonZeroList[bodyStatsNonZeroList.length - 1];
-                    }
-                    else{
-                        mostRecentWeight = bodyStats[0].weight;
-                    }
-
-                    weightList.push(parseInt(mostRecentWeight));
-
-                    bodyStatsNonZeroList.push(mostRecentWeight);
+                else{
+                    weightList.push(dayItem.weightList);
                 }
             }
 
