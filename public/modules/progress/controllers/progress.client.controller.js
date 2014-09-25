@@ -57,9 +57,6 @@ angular.module('progress').controller('ProgressController', ['$scope', '$statePa
 
             //calculate number of months back from current month
             $scope.startDate = new Date(now.getFullYear(), now.getMonth() - selectedDuration, 1);
-
-
-            //$scope.find();
         };
 
         $scope.find = function() {

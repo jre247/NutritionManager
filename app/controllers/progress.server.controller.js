@@ -75,9 +75,7 @@ exports.list = function(req, res){
                     }
                 )
                   .sort({
-                        planDateYear: 1, //Sort by Date Added DESC
-                        planDateMonth: 1, //Sort by Date Added DESC
-                        planDateDay: 1 //Sort by Date Added DESC
+                        planDateAsMili: 1 //Sort by Date Added DESC
                   }).exec(function (err, plans) {
                     if (err) return next(err);
 
@@ -263,7 +261,7 @@ exports.progressByStartDateAndEndDate = function(req, res, next, startDate) {
 
 var calculateDeficit = function(nutritionPlan, activityPlan, bmr){
     var additionalCaloriesExpended = 300;
-    var caloriesOut = 300;
+    var caloriesOut = additionalCaloriesExpended + bmr;
 
     if (activityPlan){
         caloriesOut = activityPlan.totalCaloriesBurned + bmr + additionalCaloriesExpended;
