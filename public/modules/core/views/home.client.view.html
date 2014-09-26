@@ -4,27 +4,24 @@
         <div class="dailyDashboard" style="width: 300px;display:inline-block;">
             <div style="padding-top: 6px;">
 
-
-                <!--<span data-ng-bind="planDateDisplay"></span>-->
-                <div style="display:inline-block;float: left;margin-top: 3px;">
+                <div style="display:inline-block;float: left;margin-top: 3px;margin-right: 8px;">
                     <button type="button" class="btn btn-default btn-sm">
                         <span class="glyphicon glyphicon-chevron-left arrowBtn" data-ng-click="prevDayClick()"></span>
                     </button>
 
 
                 </div>
-                <div class="col-md-6" style="width: 173px;padding-top: 1px;">
 
-                    <p class="input-group">
-                        <input type="text" class="form-control" data-ng-change="planDateChanged()" style="padding: 4px 8px;" id="startDate" datepicker-popup="{{format}}" ng-model="planDate" is-open="planDateOpened" min-date="minDate" max-date="'2100-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
-                          <span class="input-group-btn">
-                            <button type="button" class="btn btn-default" ng-click="openPlanDate($event)"><i class="glyphicon glyphicon-calendar"></i></button>
-                          </span>
-                    </p>
+                <p class="input-group" style="width:173px;">
+                    <input type="text" class="form-control" data-ng-change="planDateChanged()" style="padding: 4px 8px;" id="startDate" datepicker-popup="{{format}}" ng-model="planDate" is-open="planDateOpened" min-date="minDate" max-date="'2100-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
+                      <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="openPlanDate($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                      </span>
+                </p>
 
-                </div>
 
-                <div style="display:inline-block;margin-top: 3px;">
+
+                <div style="display:inline-block;margin-top: 3px;position: relative;bottom: 45px;left: 184px;">
 
                     <button type="button" class="btn btn-default btn-sm">
                         <span class="glyphicon glyphicon-chevron-right arrowBtn" data-ng-click="nextDayClick()"/>
