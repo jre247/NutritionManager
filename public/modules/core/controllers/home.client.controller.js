@@ -119,6 +119,8 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
             $scope.getDailyDashboardData();
         };
 
+        var days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+
         $scope.getWeeklyDashboardData = function()
         {
             var dWeeklyPlanDate = new Date();
@@ -147,8 +149,6 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
                 },
                 function(u, getResponseHeaders)
                 {
-                    var days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
-
                     $scope.weeklyNutritionPlanList = u;
 
                     var weeklyProteinTotal = 0;
@@ -191,6 +191,11 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
 
         $scope.getDailyDashboardData = function() {
             CoreService.getDailyDashboardData($scope.planDateForDb).then(function(data){
+
+                var dPlanDate = new Date($scope.planDate.getFullYear(), $scope.planDate.getMonth(), $scope.planDate.getDate());
+                var planDateDayOfWeek = days[dPlanDate.getDay()];
+                $scope.planDayOfWeek = planDateDayOfWeek;
+
                 if (data.nutritionPlan !== 'null'){
                     var plan = data.nutritionPlan;
                    for (var nMeal = 0; nMeal < plan.meals.length; nMeal++){
@@ -200,6 +205,9 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
                    calculatePlanTotalMacros(plan);
 
                    $scope.nutritionPlan = plan;
+                }
+                else{
+                    $scope.nutritionPlan = null;
                 }
 
                 if(data.activityPlan !== 'null'){
@@ -211,9 +219,12 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
                     $scope.totalCaloriesBurned = additionalCaloriesExpended;
                 }
 
+
                 if($scope.nutritionPlan) {
                     showDailyMacrosChart();
                 }
+
+
             });
         };
 
