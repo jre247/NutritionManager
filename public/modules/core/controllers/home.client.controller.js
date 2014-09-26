@@ -65,7 +65,9 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
         var month = dt.getMonth();
         var day = dt.getDate();
 
-        var planDate = month + '_' + day + '_' + year;
+        $scope.planDate = new Date(todaysDate);
+        $scope.planDateForDb = month + '_' + day + '_' + year;
+        $scope.planDateDisplay = (month + 1) + '/' + day +'/' + year;
 
         //TODO: move into service
         $scope.activityTypesDictionary = [];
@@ -77,6 +79,45 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
 
             $scope.activityTypesDictionary.push(activityTypeDictModel);
         }
+
+        $scope.openPlanDate = function($event) {
+            $event.preventDefault();
+            $event.stopPropagation();
+
+            $scope.planDateOpened = true;
+        };
+
+
+        $scope.dateOptions = {
+            formatYear: 'yy',
+            startingDay: 1
+        };
+
+        $scope.initDate = new Date('2016-15-20');
+
+        $scope.planDateChanged = function(){
+            //$scope.planDate = new Date($scope.planDate.setDate($scope.planDate.getDate() + 1));
+            $scope.planDateForDb = $scope.planDate.getMonth() + '_' + $scope.planDate.getDate() + '_' + $scope.planDate.getFullYear();
+            $scope.planDateDisplay = ($scope.planDate.getMonth() + 1) + '/' + $scope.planDate.getDate() + '/' + $scope.planDate.getFullYear();
+
+            $scope.getDailyDashboardData();
+        };
+
+        $scope.nextDayClick = function(){
+            $scope.planDate = new Date($scope.planDate.setDate($scope.planDate.getDate() + 1));
+            $scope.planDateForDb = $scope.planDate.getMonth() + '_' + $scope.planDate.getDate() + '_' + $scope.planDate.getFullYear();
+            $scope.planDateDisplay = ($scope.planDate.getMonth() + 1) + '/' + $scope.planDate.getDate() + '/' + $scope.planDate.getFullYear();
+
+            $scope.getDailyDashboardData();
+        };
+
+        $scope.prevDayClick = function(){
+            $scope.planDate = new Date($scope.planDate.setDate($scope.planDate.getDate() - 1));
+            $scope.planDateForDb = $scope.planDate.getMonth() + '_' + $scope.planDate.getDate() + '_' + $scope.planDate.getFullYear();
+            $scope.planDateDisplay = ($scope.planDate.getMonth() + 1) + '/' + $scope.planDate.getDate() + '/' + $scope.planDate.getFullYear();
+
+            $scope.getDailyDashboardData();
+        };
 
         $scope.getWeeklyDashboardData = function()
         {
@@ -149,7 +190,7 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
         };
 
         $scope.getDailyDashboardData = function() {
-            CoreService.getDailyDashboardData(planDate).then(function(data){
+            CoreService.getDailyDashboardData($scope.planDateForDb).then(function(data){
                 if (data.nutritionPlan !== 'null'){
                     var plan = data.nutritionPlan;
                    for (var nMeal = 0; nMeal < plan.meals.length; nMeal++){
@@ -166,6 +207,7 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
                     $scope.totalCaloriesBurned = $scope.activityPlan.totalCaloriesBurned + additionalCaloriesExpended;
                 }
                 else{
+                    $scope.activityPlan = null;
                     $scope.totalCaloriesBurned = additionalCaloriesExpended;
                 }
 
