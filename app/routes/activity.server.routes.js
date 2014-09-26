@@ -29,9 +29,9 @@ module.exports = function(app) {
 
 
 
-
     // Finish by binding the article middleware
     app.param('activityId', activities.activityByID);
 
     app.param('activityDate', activities.activityByDate);
+
 };

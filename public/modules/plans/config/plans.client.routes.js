@@ -13,6 +13,10 @@ angular.module('plans').config(['$stateProvider',
 			url: '/plans/create',
 			templateUrl: 'modules/plans/views/view-plan.client.view.html'
 		}).
+        state('createPlan2', {
+            url: '/plans/create/:planDateForCreate',
+            templateUrl: 'modules/plans/views/view-plan.client.view.html'
+        }).
 		state('viewPlan', {
 			url: '/plans/:planId',
 			//templateUrl: 'modules/plans/views/view-plan.client.view.html'

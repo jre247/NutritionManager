@@ -17,6 +17,10 @@ angular.module('activities').config(['$stateProvider',
                 url: '/activities/create',
                 templateUrl: 'modules/activities/views/view-activity.client.view.html'
             }).
+            state('createActivity2', {
+                url: '/activities/create/:planDateForCreate',
+                templateUrl: 'modules/activities/views/view-activity.client.view.html'
+            }).
             state('viewActivity', {
                 url: '/activities/:activityId',
                 templateUrl: 'modules/activities/views/view-activity.client.view.html'
