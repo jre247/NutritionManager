@@ -7,7 +7,7 @@
 
                 <!--<span data-ng-bind="planDateDisplay"></span>-->
                 <div style="display:inline-block;float: left;margin-top: 5px;">
-                    <input type="button" data-ng-click="prevDayClick()" value="<"/>
+                    <span class="glyphicon glyphicon-chevron-left arrowBtn" data-ng-click="prevDayClick()"/>
                 </div>
                 <div class="col-md-6" style="width: 173px;padding-top: 1px;">
 
@@ -21,7 +21,8 @@
                 </div>
 
                 <div style="display:inline-block;margin-top: 5px;">
-                    <input type="button" data-ng-click="nextDayClick()" value=">"/>
+                    <span class="glyphicon glyphicon-chevron-right arrowBtn" data-ng-click="nextDayClick()"/>
+
                 </div>
 
                 <div style="border-bottom: 1px solid #eee;width:300px;">
