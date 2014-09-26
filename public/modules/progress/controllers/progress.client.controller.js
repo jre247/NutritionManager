@@ -216,7 +216,7 @@ angular.module('progress').controller('ProgressController', ['$scope', '$statePa
 
                         bodyStatsNonZeroList.push(bodyStatFromDb.weight);
 
-                        weightList.push(parseInt(bodyStatFromDb.weight));
+                        weightList.push(bodyStatFromDb.weight);
 
                         isPlanWeightMatchFound = true;
                     }
@@ -228,7 +228,7 @@ angular.module('progress').controller('ProgressController', ['$scope', '$statePa
 
                         bodyStatsNonZeroList.push(bodyStatFromDb.weight);
 
-                        weightList.push(parseInt(bodyStatFromDb.weight));
+                        weightList.push(bodyStatFromDb.weight);
 
                         isPlanWeightMatchFound = true;
                     }
@@ -245,7 +245,7 @@ angular.module('progress').controller('ProgressController', ['$scope', '$statePa
                     mostRecentWeight = bodyStats[0].weight;
                 }
 
-                weightList.push(parseInt(mostRecentWeight));
+                weightList.push(mostRecentWeight);
 
                 bodyStatsNonZeroList.push(mostRecentWeight);
             }

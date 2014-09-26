@@ -115,9 +115,8 @@ exports.bodyStatsByDate = function(req, res) {
 
         BodyStats.find({'planDateYear': {$lte: endDateYear, $gte: startDateYear}, 'planDateMonth': {$lte: endDateMonth, $gte: startDateMonth}, 'planDateDay': {$lte: endDateDay, $gte: startDateDay}, 'user': req.user.id})
             .sort({
-                planDateYear: 1, //Sort by Date Added DESC
-                planDateMonth: 1, //Sort by Date Added DESC
-                planDateDay: 1 //Sort by Date Added DESC
+                planDateMili: 1
+
             })
             .exec(function (err, bodyStats) {
                 if (err) return next(err);
