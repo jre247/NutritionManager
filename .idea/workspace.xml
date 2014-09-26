@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="99afd44b-0014-4bff-855e-4d01f0b1305f" name="Default" comment="create plan page is close to finished. Now trying to wire up view/edit plan page. Trying to make it all common html.">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/modules/core/views/home.client.view.html" afterPath="$PROJECT_DIR$/public/modules/core/views/home.client.view.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/layout.server.view.html" afterPath="$PROJECT_DIR$/app/views/layout.server.view.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/font-awesome/package.json" afterPath="$PROJECT_DIR$/node_modules/font-awesome/package.json" />
     </list>
     <ignored path="NutritionManager.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -68,21 +68,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="layout.server.view.html" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="layout.server.view.html" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/views/layout.server.view.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.672" vertical-offset="2463" max-vertical-offset="5070">
+            <state vertical-scroll-proportion="-5.04" vertical-offset="2463" max-vertical-offset="5070">
               <caret line="181" column="27" selection-start-line="181" selection-start-column="27" selection-end-line="181" selection-end-column="27" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="home.client.view.html" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="home.client.view.html" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/public/modules/core/views/home.client.view.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-5.7" vertical-offset="30" max-vertical-offset="6030">
-              <caret line="21" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.68" vertical-offset="30" max-vertical-offset="6030">
+              <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
               <folding>
                 <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#section#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#0;n#section#0;n#!!top" expanded="true" />
@@ -165,8 +165,8 @@
         <option value="$PROJECT_DIR$/app/controllers/progress.server.controller.js" />
         <option value="$PROJECT_DIR$/public/modules/core/controllers/home.client.controller.js" />
         <option value="$PROJECT_DIR$/public/dist/application.min.js" />
-        <option value="$PROJECT_DIR$/public/modules/core/views/home.client.view.html" />
         <option value="$PROJECT_DIR$/app/views/layout.server.view.html" />
+        <option value="$PROJECT_DIR$/public/modules/core/views/home.client.view.html" />
       </list>
     </option>
   </component>
@@ -594,7 +594,7 @@
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3782946" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32866043" sideWeight="0.5" order="9" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24186046" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24186046" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -1132,10 +1132,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/layout.server.view.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-5.04" vertical-offset="2463" max-vertical-offset="5070">
+          <caret line="181" column="27" selection-start-line="181" selection-start-column="27" selection-end-line="181" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/public/modules/core/views/home.client.view.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.7" vertical-offset="30" max-vertical-offset="6030">
-          <caret line="21" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.68" vertical-offset="30" max-vertical-offset="6030">
+          <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
           <folding>
             <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#section#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#0;n#section#0;n#!!top" expanded="true" />
@@ -1152,14 +1160,6 @@
             <element signature="n#style#0;n#div#2;n#div#2;n#div#0;n#section#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#1;n#div#1;n#div#2;n#div#2;n#div#0;n#section#0;n#!!top" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/layout.server.view.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.672" vertical-offset="2463" max-vertical-offset="5070">
-          <caret line="181" column="27" selection-start-line="181" selection-start-column="27" selection-end-line="181" selection-end-column="27" />
-          <folding />
         </state>
       </provider>
     </entry>
