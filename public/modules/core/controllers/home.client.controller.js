@@ -136,7 +136,7 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
             var startWeeklyDay = startWeeklyDt.getDate();
 
             var endWeeklyDt = startWeeklyDt;
-            endWeeklyDt.setDate(endWeeklyDt.getDate() + 7);
+            endWeeklyDt.setDate(endWeeklyDt.getDate() + 6);
 
             var startDateFormatted = startWeeklyYear + '_' + startWeeklyMonth + '_' + startWeeklyDay;
             var endDateFormatted = endWeeklyDt.getFullYear() + '_' + endWeeklyDt.getMonth() + '_' + endWeeklyDt.getDate();

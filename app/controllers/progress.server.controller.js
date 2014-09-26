@@ -56,7 +56,9 @@ exports.list = function(req, res){
         var endDateDay = parseInt(split2[2]);
         var endDateYear = parseInt(split2[0]);
 
-        var endDateAsMili = new Date(new Date(endDateYear,endDateMonth,endDateDay).toUTCString()).getTime();
+        var miliPadding = 76000000;
+
+        var endDateAsMili = new Date(new Date(endDateYear,endDateMonth,endDateDay).toUTCString()).getTime() + miliPadding;
         var startDateAsMili = new Date(new Date(startDateYear,startDateMonth,startDateDay).toUTCString()).getTime();
         //planDate
 
