@@ -29,19 +29,15 @@
                 </div>
 
                 <div style="border-bottom: 1px solid #eee;width:300px;">
+                    <a data-ng-show="activityPlan" data-ng-href="#!/activities/{{activityPlan._id}}">
+                        <h3 data-ng-show="planDayOfWeek">
 
+                            <span data-ng-bind="planDayOfWeek"></span>'s Activities:
 
+                        </h3>
+                    </a>
 
-                        <a data-ng-show="activityPlan" data-ng-href="#!/activities/{{activityPlan._id}}">
-                            <h3>
-
-                                <span data-ng-bind="planDayOfWeek"></span>'s Activities:
-
-                            </h3>
-                        </a>
-
-
-                    <div data-ng-show="!activityPlan">
+                    <div data-ng-show="!activityPlan && planDayOfWeek">
                         <h3>
                             <span data-ng-bind="planDayOfWeek"></span>'s Activities:
                         </h3>
@@ -73,12 +69,12 @@
 
                 <div  style="border-bottom: 1px solid #eee;width:300px;">
 
-                    <a data-ng-show="nutritionPlan" data-ng-href="#!/plans/{{nutritionPlan._id}}">
+                    <a data-ng-show="nutritionPlan && planDayOfWeek" data-ng-href="#!/plans/{{nutritionPlan._id}}">
                         <h3>
                             <span data-ng-bind="planDayOfWeek"></span>'s Nutrition:
                         </h3>
                     </a>
-                    <div data-ng-show="!nutritionPlan">
+                    <div data-ng-show="!nutritionPlan && planDayOfWeek">
                         <h3>
                             <span data-ng-bind="planDayOfWeek"></span>'s Nutrition:
                         </h3>
