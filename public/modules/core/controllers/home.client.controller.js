@@ -212,42 +212,48 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
                 },
                 function(u, getResponseHeaders)
                 {
-                    $scope.weeklyNutritionPlanList = u;
-
-                    var weeklyProteinTotal = 0;
-                    var weeklyCarbsTotal = 0;
-                    var weeklyFatTotal = 0;
-                    var weeklyCaloriesTotal = 0;
-                    var weeklyDeficitTotal = 0;
-
-                    var len = $scope.weeklyNutritionPlanList.length;
-
-                    for(var w = 0; w < len; w++){
-                        var item = $scope.weeklyNutritionPlanList[w];
-
-                        var dPlanDate = new Date(item.planDateYear, item.planDateMonth, item.planDateDay);
-                        var planDateDayOfWeek = days[dPlanDate.getDay()];
-                        item.dayOfWeek = planDateDayOfWeek;
 
 
-                        weeklyProteinTotal += item.totalPlanProteinAsPercent;
-                        weeklyCarbsTotal += item.totalPlanCarbsAsPercent;
-                        weeklyFatTotal += item.totalPlanFatAsPercent;
-                        weeklyCaloriesTotal += item.totalPlanCalories;
-                        weeklyDeficitTotal += item.deficit;
+                    if(u.length > 0) {
+                        $scope.weeklyNutritionPlanList = u;
+                        var weeklyProteinTotal = 0;
+                        var weeklyCarbsTotal = 0;
+                        var weeklyFatTotal = 0;
+                        var weeklyCaloriesTotal = 0;
+                        var weeklyDeficitTotal = 0;
+
+                        var len = $scope.weeklyNutritionPlanList.length;
+
+                        for (var w = 0; w < len; w++) {
+                            var item = $scope.weeklyNutritionPlanList[w];
+
+                            var dPlanDate = new Date(item.planDateYear, item.planDateMonth, item.planDateDay);
+                            var planDateDayOfWeek = days[dPlanDate.getDay()];
+                            item.dayOfWeek = planDateDayOfWeek;
+
+
+                            weeklyProteinTotal += item.totalPlanProteinAsPercent;
+                            weeklyCarbsTotal += item.totalPlanCarbsAsPercent;
+                            weeklyFatTotal += item.totalPlanFatAsPercent;
+                            weeklyCaloriesTotal += item.totalPlanCalories;
+                            weeklyDeficitTotal += item.deficit;
+                        }
+
+                        $scope.weeklyProteinAverage = weeklyProteinTotal / len;
+                        $scope.weeklyCarbsAverage = weeklyCarbsTotal / len;
+                        $scope.weeklyFatAverage = weeklyFatTotal / len;
+                        $scope.weeklyCaloriesAverage = weeklyCaloriesTotal / len;
+                        $scope.weeklyDeficitAverage = weeklyDeficitTotal / len;
+
+                        getWeeklyMacrosChartData();
+
+                        showWeeklyCaloriesDeficitChart();
+
+                        showAverageWeeklyMacrosChart();
                     }
-
-                    $scope.weeklyProteinAverage = weeklyProteinTotal / len;
-                    $scope.weeklyCarbsAverage = weeklyCarbsTotal / len;
-                    $scope.weeklyFatAverage = weeklyFatTotal / len;
-                    $scope.weeklyCaloriesAverage = weeklyCaloriesTotal / len;
-                    $scope.weeklyDeficitAverage = weeklyDeficitTotal / len;
-
-                    getWeeklyMacrosChartData();
-
-                    showWeeklyCaloriesDeficitChart();
-
-                    showAverageWeeklyMacrosChart();
+                    else{
+                        $scope.weeklyNutritionPlanList = null;
+                    }
                 }
             );
         };
