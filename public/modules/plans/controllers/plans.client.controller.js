@@ -623,7 +623,7 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
             }
         };
 
-        var calculateCurrentCaloriesIn = function(){
+        var getSuggestedFoods = function(){
             var proteinTarget = $scope.nutritionProfile.proteinPercentageTarget;
             var carbsTarget = $scope.nutritionProfile.carbohydratesPercentageTarget;
             var fatTarget = $scope.nutritionProfile.fatPercentageTarget;
@@ -641,38 +641,42 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
                 var foodToCheck = $scope.allFoods[i];
                 var score = 0;
 
-                var macrosTotal = ($scope.plan.totalPlanFat + foodToCheck.fat) +
-                    ($scope.plan.totalPlanProtein + foodToCheck.protein) +
-                    ($scope.plan.totalPlanCarbs + foodToCheck.carbohydrates);
+                if(foodToCheck.type.toLowerCase() !== 'treat' &&
+                  foodToCheck.type.toLowerCase() !== 'dessert' &&
+                  foodToCheck.type.toLowerCase() !== 'alcohol') {
+                    var macrosTotal = ($scope.plan.totalPlanFat + foodToCheck.fat) +
+                        ($scope.plan.totalPlanProtein + foodToCheck.protein) +
+                        ($scope.plan.totalPlanCarbs + foodToCheck.carbohydrates);
 
-                var newProteinTarget = (($scope.plan.totalPlanProtein + foodToCheck.protein) / macrosTotal) * 100;
-                var newCarbsTarget = (($scope.plan.totalPlanCarbs + foodToCheck.carbohydrates) / macrosTotal) * 100;
-                var newFatTarget = (($scope.plan.totalPlanFat + foodToCheck.fat) / macrosTotal) * 100;
-                var newCaloriesTarget = planTotalCalories + foodToCheck.calories;
+                    var newProteinTarget = (($scope.plan.totalPlanProtein + foodToCheck.protein) / macrosTotal) * 100;
+                    var newCarbsTarget = (($scope.plan.totalPlanCarbs + foodToCheck.carbohydrates) / macrosTotal) * 100;
+                    var newFatTarget = (($scope.plan.totalPlanFat + foodToCheck.fat) / macrosTotal) * 100;
+                    var newCaloriesTarget = planTotalCalories + foodToCheck.calories;
 
-                var caloriesTargetDiff = (caloriesTarget - newCaloriesTarget) / caloriesTarget;
-                var proteinTargetDiff = (proteinTarget - newProteinTarget) / proteinTarget;
-                var carbsTargetDiff = (carbsTarget - newCarbsTarget) / carbsTarget;
-                var fatTargetDiff = (fatTarget - newFatTarget) / fatTarget;
+                    var caloriesTargetDiff = (caloriesTarget - newCaloriesTarget) / caloriesTarget;
+                    var proteinTargetDiff = (proteinTarget - newProteinTarget) / proteinTarget;
+                    var carbsTargetDiff = (carbsTarget - newCarbsTarget) / carbsTarget;
+                    var fatTargetDiff = (fatTarget - newFatTarget) / fatTarget;
 
-                if (caloriesTargetDiff < 0){
-                    caloriesTargetDiff = -caloriesTargetDiff;
+                    if (caloriesTargetDiff < 0) {
+                        caloriesTargetDiff = -caloriesTargetDiff;
+                    }
+                    if (proteinTargetDiff < 0) {
+                        proteinTargetDiff = -proteinTargetDiff;
+                    }
+                    if (carbsTargetDiff < 0) {
+                        carbsTargetDiff = -carbsTargetDiff;
+                    }
+                    if (fatTargetDiff < 0) {
+                        fatTargetDiff = -fatTargetDiff;
+                    }
+
+                    score = (caloriesTargetDiff * 3) + proteinTargetDiff + carbsTargetDiff + fatTargetDiff;
+
+                    foodToCheck.score = score;
+
+                    suggestedFoodsAry.push(foodToCheck);
                 }
-                if (proteinTargetDiff < 0){
-                    proteinTargetDiff = -proteinTargetDiff;
-                }
-                if (carbsTargetDiff < 0){
-                    carbsTargetDiff = -carbsTargetDiff;
-                }
-                if (fatTargetDiff < 0){
-                    fatTargetDiff = -fatTargetDiff;
-                }
-
-                score = (caloriesTargetDiff * 3) + proteinTargetDiff + carbsTargetDiff + fatTargetDiff;
-
-                foodToCheck.score = score;
-
-                suggestedFoodsAry.push(foodToCheck);
             }
 
             suggestedFoodsAry.sort(function compare(a,b) {
@@ -762,7 +766,7 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
 
                     suggestedFoods: function () {
                         //figure out which foods to add to suggested foods based on nutrition profile targets
-                        return calculateCurrentCaloriesIn();
+                        return getSuggestedFoods();
                     },
                     mealForSuggestion: function(){
                         return meal;
