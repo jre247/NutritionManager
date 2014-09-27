@@ -405,6 +405,9 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
 
                         $scope.currentDeficit = planProgress.deficit;
                     }
+                    else{
+                        $scope.currentDeficit = 500; //default to 500
+                    }
                 }
             );
         }
