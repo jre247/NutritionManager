@@ -13,15 +13,21 @@ module.exports = function(app) {
         .post(progress.create);
 
     app.route('/progress/:progressId')
-        .get(progress.read)
+        .get(progress.progressByID)
         .put(progress.update)
         .delete(progress.delete);
+//
+//    app.route('/progress/:planDate')
+//        .get(progress.progressByDate)
+//        .put(progress.update)
+//        .delete(progress.delete);
 
     app.route('/progress/:startDate/:endDate')
         .get(progress.progressByDate);
 
     // Finish by binding the article middleware
     app.param('progressId', progress.progressByID);
+
 
     app.param('startDate', progress.progressByDate);
 

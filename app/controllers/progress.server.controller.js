@@ -39,7 +39,62 @@ var getErrorMessage = function(err) {
 };
 
 exports.progressByID = function(req, res){
-    var test = "test";
+    var startDate = req.param("progressId");
+    var split = startDate.split('_');
+    var planDateMonth = parseInt(split[1]);
+    var planDateDay = parseInt(split[2]);
+    var planDateYear = parseInt(split[0]);
+
+    NutritionProfile.findOne({
+        user: req.user.id // Search Filters
+    }).exec(function (err, nutritionProfile) {
+        if (err) {
+            return res.send(400, {
+                message: getErrorMessage(err)
+            });
+        }
+        else {
+            Plan.findOne({
+                    'user': req.user.id,
+                    'planDateYear': planDateYear,
+                    'planDateMonth': planDateMonth,
+                    'planDateDay': planDateDay
+                }
+            )
+                .exec(function (err, plan) {
+                    if (err) return next(err);
+
+                    else {
+                        var bmr = calculateBmr(nutritionProfile);
+
+                        var singlePlan = plan;
+
+                        for (var nMeal = 0; nMeal < singlePlan.meals.length; nMeal++) {
+                            doMealTotaling(singlePlan.meals[nMeal]);
+                        }
+
+                        calculatePlanTotalMacros(singlePlan);
+
+                        Activity.findOne({
+                            'user': req.user.id,
+                            'planDateYear': planDateYear,
+                            'planDateMonth': planDateMonth,
+                            'planDateDay': planDateDay})
+                        .exec(function (err, activity) {
+                                if (err) return next(err);
+
+                                else {
+                                    var deficit = calculateDeficit(singlePlan, activity, bmr);
+                                    plan.deficit = deficit;
+
+                                    res.jsonp(plan);
+                                }
+
+                        });
+                    }
+                });
+        }
+    });
 };
 
 exports.list = function(req, res){
@@ -76,32 +131,43 @@ exports.list = function(req, res){
                         'planDateAsMili': {$gte: startDateAsMili, $lte: endDateAsMili}
                     }
                 )
-                  .sort({
+                    .sort({
                         planDateAsMili: 1 //Sort by Date Added DESC
-                  }).exec(function (err, plans) {
-                    if (err) return next(err);
+                    }).exec(function (err, plans) {
+                        if (err) return next(err);
 
-                    else {
-                        var bmr = calculateBmr(nutritionProfile);
-
-                        var plansDict = [];
-
-                        for (var i = 0; i < plans.length; i++) {
-                            var singlePlan = plans[i];
-
-                            var dateForDict = singlePlan.planDateYear + '_' + singlePlan.planDateMonth + '_' + singlePlan.planDateDay;
-                            plansDict.push({
-                                planDate: dateForDict,
-                                plan: singlePlan
-                            });
-
-                            for (var nMeal = 0; nMeal < singlePlan.meals.length; nMeal++) {
-                                doMealTotaling(singlePlan.meals[nMeal]);
-                            }
-
-                            calculatePlanTotalMacros(singlePlan);
-
+                        else {
+                            getProgress(res, req, plans, nutritionProfile, endDateYear, startDateYear, endDateMonth, startDateMonth, endDateDay, startDateDay);
                         }
+                    });
+            }
+        });
+    }
+
+
+};
+
+var getProgress = function(res, req, plans, nutritionProfile, endDateYear, startDateYear, endDateMonth, startDateMonth, endDateDay, startDateDay){
+    var bmr = calculateBmr(nutritionProfile);
+
+    var plansDict = [];
+
+    for (var i = 0; i < plans.length; i++) {
+        var singlePlan = plans[i];
+
+        var dateForDict = singlePlan.planDateYear + '_' + singlePlan.planDateMonth + '_' + singlePlan.planDateDay;
+        plansDict.push({
+            planDate: dateForDict,
+            plan: singlePlan
+        });
+
+        for (var nMeal = 0; nMeal < singlePlan.meals.length; nMeal++) {
+            doMealTotaling(singlePlan.meals[nMeal]);
+        }
+
+        calculatePlanTotalMacros(singlePlan);
+
+    }
 
 //                        BodyStats.find({'planDateYear': {$lte: endDateYear, $gte: startDateYear}, 'planDateMonth': {$lte: endDateMonth, $gte: startDateMonth}, 'planDateDay': {$lte: endDateDay, $gte: startDateDay}, 'user': req.user.id})
 //                            .sort({
@@ -180,41 +246,35 @@ exports.list = function(req, res){
 //
 
 
-                        Activity.find({'planDateYear': {$lte: endDateYear, $gte: startDateYear}, 'planDateMonth': {$lte: endDateMonth, $gte: startDateMonth}, 'planDateDay': {$lte: endDateDay, $gte: startDateDay}, 'user': req.user.id}).exec(function (err, activities) {
-                            if (err) return next(err);
+    Activity.find({'planDateYear': {$lte: endDateYear, $gte: startDateYear}, 'planDateMonth': {$lte: endDateMonth, $gte: startDateMonth}, 'planDateDay': {$lte: endDateDay, $gte: startDateDay}, 'user': req.user.id}).exec(function (err, activities) {
+        if (err) return next(err);
 
-                            for (var i = 0; i < plansDict.length; i++) {
-                                var activityFoundPlan = null;
+        for (var i = 0; i < plansDict.length; i++) {
+            var activityFoundPlan = null;
 
-                                if(activities && activities.length > 0) {
-                                    for(var act = 0; act < activities.length; act++){
-                                        var activityFromDb = activities[act];
+            if(activities && activities.length > 0) {
+                for(var act = 0; act < activities.length; act++){
+                    var activityFromDb = activities[act];
 
-                                        var activityPlanDt = activityFromDb.planDateYear + '_' + activityFromDb.planDateMonth + '_' + activityFromDb.planDateDay;
+                    var activityPlanDt = activityFromDb.planDateYear + '_' + activityFromDb.planDateMonth + '_' + activityFromDb.planDateDay;
 
-                                        if (plansDict[i].planDate == activityPlanDt) {
-                                            activityFoundPlan = activities[act];
-                                        }
-                                    }
-                                }
-
-                                var deficit = calculateDeficit(plansDict[i].plan, activityFoundPlan, bmr);
-                                plansDict[i].plan.deficit = deficit;
-                            }
-
-                            res.jsonp(plans);
-
-                        });
-
+                    if (plansDict[i].planDate == activityPlanDt) {
+                        activityFoundPlan = activities[act];
                     }
-                });
+                }
             }
-        });
-    }
-};
+
+            var deficit = calculateDeficit(plansDict[i].plan, activityFoundPlan, bmr);
+            plansDict[i].plan.deficit = deficit;
+        }
+
+        res.jsonp(plans);
+
+    });
+}
 
 
-exports.progressByDate = function(req, res){
+exports.progressByDate = function(req, res, next){
     var test = "test";
 };
 

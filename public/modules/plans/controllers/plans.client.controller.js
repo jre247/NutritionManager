@@ -392,25 +392,15 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
             var startDateFormatted = now.getFullYear() + '_' + now.getMonth() + '_' + now.getDate();
             var endDateFormatted = startDateFormatted;
 
-            $scope.progress = Progress.query({
-                    startDate: startDateFormatted,
-                    endDate: endDateFormatted
+            $scope.progress = Progress.get({
+                    progressId: startDateFormatted
                 },
                 function(u)
                 {
-                    $scope.weeklyNutritionPlanList = u;
-
-                    if($scope.weeklyNutritionPlanList.length == 1){
-                        var planProgress = $scope.weeklyNutritionPlanList[0];
-
-                        $scope.currentDeficit = planProgress.deficit;
-                    }
-                    else{
-                        $scope.currentDeficit = 500; //default to 500
-                    }
+                    $scope.currentDeficit = u.deficit;
                 }
             );
-        }
+        };
 
 		$scope.findOne = function() {
             if ($stateParams.planId) {
