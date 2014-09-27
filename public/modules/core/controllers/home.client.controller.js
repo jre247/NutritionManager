@@ -95,12 +95,63 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
 
         $scope.initDate = new Date('2016-15-20');
 
+        //initialize weekly plan dates to send to DB
+        var dWeeklyPlanDate = new Date();
+        var dayOfWeek = dWeeklyPlanDate.getDay();
+        var year = dWeeklyPlanDate.getFullYear();
+        var month = dWeeklyPlanDate.getMonth();
+        var day = dWeeklyPlanDate.getDate();
+        day = day - dayOfWeek;
+        var startWeeklyDt = new Date((new Date(year, month, day)).toUTCString());
+        var endWeeklyDt;
+
+        var checkIfChangeWeeklyData = function(){
+            var endWeeklyYear = endWeeklyDt.getFullYear();
+            var endWeeklyMonth = endWeeklyDt.getMonth();
+            var endWeeklyDay = endWeeklyDt.getDate();
+            var endWeeklyDateMili = (new Date(endWeeklyYear, endWeeklyMonth, endWeeklyDay)).getTime();
+
+            var startWeeklyYear = startWeeklyDt.getFullYear();
+            var startWeeklyMonth = startWeeklyDt.getMonth();
+            var startWeeklyDay = startWeeklyDt.getDate();
+            var startWeeklyDateMili = (new Date(startWeeklyYear, startWeeklyMonth, startWeeklyDay)).getTime();
+
+            var currentWeeklyYear = $scope.planDate.getFullYear();
+            var currentWeeklyMonth = $scope.planDate.getMonth();
+            var currentWeeklyDay = $scope.planDate.getDate();
+
+            var currentWeeklyDateMili = (new Date(currentWeeklyYear, currentWeeklyMonth, currentWeeklyDay)).getTime();
+
+            var currentExceedsEndDt = currentWeeklyDateMili > endWeeklyDateMili;
+
+            var currentBelowStartDt = false;
+            if(!currentExceedsEndDt){
+                currentBelowStartDt = currentWeeklyDateMili < startWeeklyDateMili;
+            }
+
+            if(currentExceedsEndDt){
+                startWeeklyDt = new Date(currentWeeklyYear, currentWeeklyMonth, currentWeeklyDay);
+            }
+            else if (currentBelowStartDt){
+                startWeeklyDt = new Date(currentWeeklyYear, currentWeeklyMonth, currentWeeklyDay);
+                startWeeklyDt.setDate(startWeeklyDt.getDate() - 6);
+            }
+
+            return currentExceedsEndDt || currentBelowStartDt;
+        };
+
         $scope.planDateChanged = function(){
-            //$scope.planDate = new Date($scope.planDate.setDate($scope.planDate.getDate() + 1));
             $scope.planDateForDb = $scope.planDate.getMonth() + '_' + $scope.planDate.getDate() + '_' + $scope.planDate.getFullYear();
             $scope.planDateDisplay = ($scope.planDate.getMonth() + 1) + '/' + $scope.planDate.getDate() + '/' + $scope.planDate.getFullYear();
 
             $scope.getDailyDashboardData();
+
+            var reloadWeeklyData = checkIfChangeWeeklyData();
+
+            if(reloadWeeklyData){
+
+                $scope.getWeeklyDashboardData();
+            }
         };
 
         $scope.nextDayClick = function(){
@@ -109,6 +160,12 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
             $scope.planDateDisplay = ($scope.planDate.getMonth() + 1) + '/' + $scope.planDate.getDate() + '/' + $scope.planDate.getFullYear();
 
             $scope.getDailyDashboardData();
+
+            var reloadWeeklyData = checkIfChangeWeeklyData();
+
+            if(reloadWeeklyData){
+                $scope.getWeeklyDashboardData();
+            }
         };
 
         $scope.prevDayClick = function(){
@@ -117,27 +174,28 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
             $scope.planDateDisplay = ($scope.planDate.getMonth() + 1) + '/' + $scope.planDate.getDate() + '/' + $scope.planDate.getFullYear();
 
             $scope.getDailyDashboardData();
+
+            var reloadWeeklyData = checkIfChangeWeeklyData();
+
+            if(reloadWeeklyData){
+                $scope.getWeeklyDashboardData();
+            }
         };
 
         var days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
 
+
+
         $scope.getWeeklyDashboardData = function()
         {
-            var dWeeklyPlanDate = new Date();
-            var dayOfWeek = dWeeklyPlanDate.getDay();
 
-            var year = dWeeklyPlanDate.getFullYear();
-            var month = dWeeklyPlanDate.getMonth();
-            var day = dWeeklyPlanDate.getDate();
-
-            day = day - dayOfWeek;
-
-            var startWeeklyDt = new Date((new Date(year, month, day)).toUTCString());
             var startWeeklyYear = startWeeklyDt.getFullYear();
             var startWeeklyMonth = startWeeklyDt.getMonth();
             var startWeeklyDay = startWeeklyDt.getDate();
 
-            var endWeeklyDt = startWeeklyDt;
+            $scope.weeklyDateDisplay = (startWeeklyMonth + 1) + '/' + startWeeklyDay;
+
+            endWeeklyDt = new Date(startWeeklyYear, startWeeklyMonth, startWeeklyDay);
             endWeeklyDt.setDate(endWeeklyDt.getDate() + 6);
 
             var startDateFormatted = startWeeklyYear + '_' + startWeeklyMonth + '_' + startWeeklyDay;

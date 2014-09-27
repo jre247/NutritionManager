@@ -179,9 +179,9 @@
 
         <div class="weeklyDashboard plansDesktopInlineGrid" style="vertical-align: top;">
             <div data-ng-show="weeklyNutritionPlanList" style="vertical-align: top;display:inline-block;">
-                <div style="border-bottom: 1px solid #eee;width:250px;"
+                <div style="border-bottom: 1px solid #eee;width:260px;"
                      data-ng-class="{'homepageDashboardTitleAreaSmall': weeklyDashboardView == 'charts', 'homepageDashboardTitleAreaBig': weeklyDashboardView == 'list' }">
-                    <h3>Weekly Nutrition:</h3>
+                    <h3> Week of <span data-ng-bind="weeklyDateDisplay"></span> Nutrition:</h3>
                 </div>
 
                 <div data-ng-class="{'homepageDashboardTitleAreaSmall': weeklyDashboardView == 'charts', 'homepageDashboardTitleAreaBig': weeklyDashboardView == 'list' }">
@@ -263,8 +263,8 @@
             </div>
 
             <div class="homepageDashboardDesktopBig" style="vertical-align: top;">
-                <div style="border-bottom: 1px solid #eee;width:250px;">
-                    <h3>Weekly Averages:</h3>
+                <div style="border-bottom: 1px solid #eee;width:270px;">
+                    <h3>Week of <span data-ng-bind="weeklyDateDisplay"></span> Averages:</h3>
                 </div>
 
                 <div style="padding-top: 10px;">
