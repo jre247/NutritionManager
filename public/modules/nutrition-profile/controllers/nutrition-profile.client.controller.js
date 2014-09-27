@@ -24,7 +24,7 @@ angular.module('nutritionProfile').controller('NutritionProfileController', ['$s
                 proteinPercentageTarget: $scope.nutritionProfile.proteinPercentageTarget,
                 carbohydratesPercentageTarget: $scope.nutritionProfile.carbohydratesPercentageTarget,
                 fatPercentageTarget: $scope.nutritionProfile.fatPercentageTarget,
-                averageCaloriesTarget: $scope.nutritionProfile.averageCaloriesTarget,
+                deficitTarget: $scope.nutritionProfile.deficitTarget,
                 age: $scope.nutritionProfile.age,
                 sex: $scope.nutritionProfile.sex,
                 weight: $scope.nutritionProfile.weight,

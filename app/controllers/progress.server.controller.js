@@ -210,10 +210,6 @@ exports.list = function(req, res){
                 });
             }
         });
-
-
-
-
     }
 };
 
@@ -270,7 +266,6 @@ var calculateDeficit = function(nutritionPlan, activityPlan, bmr){
 
     }
 
-
     var caloriesIn = nutritionPlan.totalPlanCalories;
 
     return -(caloriesIn - caloriesOut);
@@ -281,7 +276,7 @@ var calculateDeficit = function(nutritionPlan, activityPlan, bmr){
 //BMR for Women = 655 + (9.6 x weight in kg.) + (1.8 x height in cm) - (4.7 x age in years).
 var calculateBmr = function(nutritionProfile){
     var age = nutritionProfile.age;
-    var weightInLbs = nutritionProfile.weight;
+    var weightInLbs = nutritionProfile.weight; //TODO get most recent weight instead of static one
     var heightFeet = nutritionProfile.heightFeet;
     var heightInches = nutritionProfile.heightInches;
     var totalHeight = (heightFeet * 12) + heightInches;

@@ -87,7 +87,7 @@ exports.update = function(req, res) {
                 message: getErrorMessage(err)
             });
         } else {
-            nutritionProfile.averageCaloriesTarget = req.body.averageCaloriesTarget;
+            nutritionProfile.deficitTarget = req.body.deficitTarget;
             nutritionProfile.carbohydratesPercentageTarget = req.body.carbohydratesPercentageTarget;
             nutritionProfile.fatPercentageTarget = req.body.fatPercentageTarget;
             nutritionProfile.proteinPercentageTarget = req.body.proteinPercentageTarget;

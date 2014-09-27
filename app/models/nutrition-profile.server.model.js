@@ -26,6 +26,9 @@ var NutritionProfileSchema = new Schema({
     averageCaloriesTarget: {
         type: Number
     },
+    deficitTarget: {
+        type: Number
+    },
     user: {
         type: Schema.ObjectId,
         ref: 'User'
