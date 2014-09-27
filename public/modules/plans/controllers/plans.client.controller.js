@@ -950,6 +950,8 @@ var SuggestionsModalInstanceCtrl = function ($scope, $modalInstance, parentScope
 
         $timeout(function(){$scope.selectedFood.IsSuggested = false;}, 4000);
 
+        $timeout(function(){$scope.parentScope.savePlan();}, 4000);
+
         $modalInstance.close(mealForSuggestion);
     };
 
