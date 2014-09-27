@@ -928,9 +928,25 @@ var SuggestionsModalInstanceCtrl = function ($scope, $modalInstance, parentScope
             }
         }
 
+        var isFoodFoundInMeal = false;
 
+        for(var m = 0; m < mealForSuggestion.foods.length; m++){
+            var foodId = mealForSuggestion.foods[m]._id;
 
-        mealForSuggestion.foods.push($scope.selectedFood);
+            if(foodId === $scope.selectedFood._id){
+                isFoodFoundInMeal = true;
+                mealForSuggestion.foods[m].servings += 1;
+                mealForSuggestion.foods[m].IsSuggested = true;
+
+                $timeout(function(){mealForSuggestion.foods[m].IsSuggested = false;}, 4000);
+                break;
+            }
+        }
+
+        if(!isFoodFoundInMeal) {
+            mealForSuggestion.foods.push($scope.selectedFood);
+        }
+
 
         $timeout(function(){$scope.selectedFood.IsSuggested = false;}, 4000);
 
