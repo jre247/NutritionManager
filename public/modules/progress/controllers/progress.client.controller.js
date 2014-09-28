@@ -21,6 +21,9 @@ angular.module('progress').controller('ProgressController', ['$scope', '$statePa
 
         ];
 
+        $scope.endDate = new Date();
+        $scope.startDate = new Date();
+
         $scope.selectedDurationChange = function(){
             var selectedDuration = $scope.selectedDuration;
             var now = new Date();
@@ -32,11 +35,7 @@ angular.module('progress').controller('ProgressController', ['$scope', '$statePa
             $scope.startDate = new Date(now.getFullYear(), now.getMonth() - selectedDuration, 1);
         };
 
-        $scope.endDate = new Date();
-        $scope.startDate = new Date();
-        //$scope.startDate.setDate($scope.endDate.getDate() - 28);
-
-        $scope.selectedDuration = $scope.durationList[0].value;
+        $scope.selectedDuration = $scope.durationList[2].value;
         $scope.selectedDurationChange();
 
         $scope.openStartDate = function($event) {

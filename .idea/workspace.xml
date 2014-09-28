@@ -29,8 +29,8 @@
       <file leaf-file-name="application.min.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/public/dist/application.min.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.7606383" vertical-offset="49889" max-vertical-offset="50265">
-              <caret line="4653" column="3" selection-start-line="4653" selection-start-column="3" selection-end-line="4653" selection-end-column="3" />
+            <state vertical-scroll-proportion="0.7606383" vertical-offset="49874" max-vertical-offset="50250">
+              <caret line="4651" column="3" selection-start-line="4651" selection-start-column="3" selection-end-line="4651" selection-end-column="3" />
               <folding>
                 <element signature="e#2338#5000#0" expanded="false" />
                 <element signature="e#5140#6212#0" expanded="false" />
@@ -55,7 +55,7 @@
                 <element signature="e#28701#29821#0" expanded="false" />
                 <element signature="e#62509#64888#0" expanded="false" />
                 <element signature="e#65018#67762#0" expanded="false" />
-                <element signature="e#145258#161710#0" expanded="false" />
+                <element signature="e#145257#161642#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -64,8 +64,8 @@
       <file leaf-file-name="progress.client.controller.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/modules/progress/controllers/progress.client.controller.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-8.269231" vertical-offset="4660" max-vertical-offset="7110">
-              <caret line="325" column="56" selection-start-line="0" selection-start-column="0" selection-end-line="468" selection-end-column="3" />
+            <state vertical-scroll-proportion="-5.730769" vertical-offset="331" max-vertical-offset="7095">
+              <caret line="32" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="467" selection-end-column="3" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
               </folding>
@@ -1132,8 +1132,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/public/modules/progress/controllers/progress.client.controller.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-8.269231" vertical-offset="4660" max-vertical-offset="7110">
-          <caret line="325" column="56" selection-start-line="0" selection-start-column="0" selection-end-line="468" selection-end-column="3" />
+        <state vertical-scroll-proportion="-5.730769" vertical-offset="331" max-vertical-offset="7095">
+          <caret line="32" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="467" selection-end-column="3" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
           </folding>
@@ -1142,8 +1142,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/public/dist/application.min.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7606383" vertical-offset="49889" max-vertical-offset="50265">
-          <caret line="4653" column="3" selection-start-line="4653" selection-start-column="3" selection-end-line="4653" selection-end-column="3" />
+        <state vertical-scroll-proportion="0.7606383" vertical-offset="49874" max-vertical-offset="50250">
+          <caret line="4651" column="3" selection-start-line="4651" selection-start-column="3" selection-end-line="4651" selection-end-column="3" />
           <folding>
             <element signature="e#2338#5000#0" expanded="false" />
             <element signature="e#5140#6212#0" expanded="false" />
@@ -1168,7 +1168,7 @@
             <element signature="e#28701#29821#0" expanded="false" />
             <element signature="e#62509#64888#0" expanded="false" />
             <element signature="e#65018#67762#0" expanded="false" />
-            <element signature="e#145258#161710#0" expanded="false" />
+            <element signature="e#145257#161642#0" expanded="false" />
           </folding>
         </state>
       </provider>
