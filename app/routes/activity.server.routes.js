@@ -34,4 +34,6 @@ module.exports = function(app) {
 
     app.param('activityDate', activities.activityByDate);
 
+    app.param('dateRange', activities.activityByDate);
+
 };

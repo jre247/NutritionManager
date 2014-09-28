@@ -181,7 +181,7 @@ exports.activityByID = function(req, res, next, id) {
     });
 };
 
-exports.activityByDate = function(req, res, next, activityDate, dateRange) {
+exports.activityByDate = function(req, res, next, activityDate) {
     if(req.user) {
         var split = activityDate.split('_');
         var month = parseInt(split[0]);

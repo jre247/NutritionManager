@@ -16,11 +16,6 @@ module.exports = function(app) {
         .get(progress.progressByID)
         .put(progress.update)
         .delete(progress.delete);
-//
-//    app.route('/progress/:planDate')
-//        .get(progress.progressByDate)
-//        .put(progress.update)
-//        .delete(progress.delete);
 
     app.route('/progress/:startDate/:endDate')
         .get(progress.progressByDate);

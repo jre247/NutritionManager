@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('plans').controller('PlansController', ['$scope', '$stateParams', '$location', '$timeout', 'Authentication', '$modal', '$log', 'Plans', 'Foods', 'NutritionProfile', 'Progress',
-	function($scope, $stateParams, $location, $timeout, Authentication, $modal, $log, Plans, Foods, NutritionProfile, Progress) {
+angular.module('plans').controller('PlansController', ['$scope', '$stateParams', '$location', '$timeout', 'Authentication', '$modal', '$log', 'Plans', 'Foods', 'NutritionProfile', 'Progress', 'PlansService', 'CoreUtilities',
+	function($scope, $stateParams, $location, $timeout, Authentication, $modal, $log, Plans, Foods, NutritionProfile, Progress, PlansService, CoreUtilities) {
 		window.scope = $scope;
         window.plans = $scope.plans;
         $scope.showPlanEditableErrorMsg = false;
@@ -17,8 +17,6 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
         $scope.allFoods = Foods.query();
 
         $scope.nutritionProfile = NutritionProfile.get();
-
-
 
         $scope.mealTypes = [
             {id: 1, name: 'Breakfast'},
@@ -165,7 +163,10 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
                     }
                 }
 
-                calculatePlanTotalMacros($scope.plan);
+                CoreUtilities.calculatePlanTotalMacros($scope.plan);
+
+                //calculate changed deficit
+                $scope.currentDeficit = CoreUtilities.calculateDeficit($scope.plan, $scope.activityPlan, $scope.nutritionProfile);
             }
         };
 
@@ -209,8 +210,11 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
             meal.foods.push(model);
 
             //foodServingsChange()
-            doMealTotaling(meal);
-            calculatePlanTotalMacros($scope.plan);
+            CoreUtilities.doMealTotaling(meal);
+            CoreUtilities.calculatePlanTotalMacros($scope.plan);
+
+            //calculate changed deficit
+            $scope.currentDeficit = CoreUtilities.calculateDeficit($scope.plan, $scope.activityPlan, $scope.nutritionProfile);
         };
 
         $scope.saveFood = function(food){
@@ -259,9 +263,12 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
                     }
                 }
 
-                doMealTotaling(meal);
+                CoreUtilities.doMealTotaling(meal);
 
-                calculatePlanTotalMacros($scope.plan);
+                CoreUtilities.calculatePlanTotalMacros($scope.plan);
+
+                //calculate changed deficit
+                $scope.currentDeficit = CoreUtilities.calculateDeficit($scope.plan, $scope.activityPlan, $scope.nutritionProfile);
             }
 
         };
@@ -341,10 +348,13 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
                         $scope.plan.meals[i].foods[j].foodId = $scope.plan.meals[i].foods[j].selectedFood.foodId;
                     }
 
-                    doMealTotaling($scope.plan.meals[i]);
+                    CoreUtilities.doMealTotaling($scope.plan.meals[i]);
                 }
 
-                calculatePlanTotalMacros($scope.plan);
+                CoreUtilities.calculatePlanTotalMacros($scope.plan);
+
+                //calculate changed deficit
+                $scope.currentDeficit = CoreUtilities.calculateDeficit($scope.plan, $scope.activityPlan, $scope.nutritionProfile);
 
                 $scope.success = true;
 
@@ -362,10 +372,10 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
                 {
                     for(var i = 0; i < $scope.plans.length; i++) {
                         for (var nMeal = 0; nMeal < $scope.plans[i].meals.length; nMeal++){
-                            doMealTotaling($scope.plans[i].meals[nMeal]);
+                            CoreUtilities.doMealTotaling($scope.plans[i].meals[nMeal]);
                         }
 
-                        calculatePlanTotalMacros($scope.plans[i]);
+                        CoreUtilities.calculatePlanTotalMacros($scope.plans[i]);
 
                         var planModel = {
                             planDateNonUtc: $scope.plans[i].planDateNonUtc || $scope.plans[i].planDate,
@@ -415,31 +425,9 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
 
                     $scope.isUserAdmin = $scope.plan.userRoles && $scope.plan.userRoles.indexOf('admin') !== -1 ? true : false;
 
-                    for (var i = 0; i < $scope.plan.meals.length; i++) {
-                        var carbsTotal = 0, proteinTotal = 0, caloriesTotal = 0, fatTotal = 0, sodiumTotal = 0;
+                    setPlanMealsTotals();
 
-                        for (var j = 0; j < $scope.plan.meals[i].foods.length; j++) {
-                            $scope.plan.meals[i].foods[j].name = $scope.plan.meals[i].foods[j].selectedFood.name;
-                            $scope.plan.meals[i].foods[j].type = $scope.plan.meals[i].foods[j].selectedFood.type;
-                            $scope.plan.meals[i].foods[j].foodId = $scope.plan.meals[i].foods[j].selectedFood.foodId;
-
-                            var carbs = $scope.plan.meals[i].foods[j].carbohydrates;
-
-                            carbsTotal += carbs;
-                            sodiumTotal += $scope.plan.meals[i].foods[j].sodium;
-                            proteinTotal += $scope.plan.meals[i].foods[j].protein;
-                            fatTotal += $scope.plan.meals[i].foods[j].fat;
-                            caloriesTotal += $scope.plan.meals[i].foods[j].calories;
-                        }
-
-                        $scope.plan.meals[i].totalCarbohydrates = carbsTotal;
-                        $scope.plan.meals[i].totalCalories = caloriesTotal;
-                        $scope.plan.meals[i].totalProtein = proteinTotal;
-                        $scope.plan.meals[i].totalFat = fatTotal;
-                        $scope.plan.meals[i].totalSodium = sodiumTotal;
-
-                        calculatePlanTotalMacros($scope.plan);
-                    }
+                    fillActivityPlan();
                 });
             }
             else{
@@ -447,35 +435,96 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
                 $scope.plan.meals = [];
 
                 //todo use ngRouter instead of this horrible method for extracting url param
-                var urlSplit = $location.path().split('/');
-                if(urlSplit.length >= 3){
-                    var dateParam;
-
-                    if(urlSplit.length == 4) {
-                        dateParam = urlSplit[3];
-                    }
-                    else{
-                        dateParam = urlSplit[2];
-                    }
-
-                    if(dateParam.indexOf('_') !== -1){
-                        var dateParamSplit = dateParam.split('_');
-
-                        var dateDay = parseInt(dateParamSplit[1]);
-                        var dateYear = parseInt(dateParamSplit[2]);
-                        var dateMonth = parseInt(dateParamSplit[0]);
-
-                        $scope.plan.planDate = new Date(dateYear, dateMonth, dateDay);
-                        $scope.plan.planDateNonUtc = new Date(dateYear, dateMonth, dateDay);
-                    }
-                }
+                setPlanDateFromUrlParam();
 
                 $scope.allFoods = Foods.query(function(){
                     $scope.createMeal();
                 });
 
+                fillActivityPlan();
             }
+
+
 		};
+
+        var setPlanMealsTotals = function(){
+            for (var i = 0; i < $scope.plan.meals.length; i++) {
+                var carbsTotal = 0, proteinTotal = 0, caloriesTotal = 0, fatTotal = 0, sodiumTotal = 0;
+
+                for (var j = 0; j < $scope.plan.meals[i].foods.length; j++) {
+                    $scope.plan.meals[i].foods[j].name = $scope.plan.meals[i].foods[j].selectedFood.name;
+                    $scope.plan.meals[i].foods[j].type = $scope.plan.meals[i].foods[j].selectedFood.type;
+                    $scope.plan.meals[i].foods[j].foodId = $scope.plan.meals[i].foods[j].selectedFood.foodId;
+
+                    var carbs = $scope.plan.meals[i].foods[j].carbohydrates;
+
+                    carbsTotal += carbs;
+                    sodiumTotal += $scope.plan.meals[i].foods[j].sodium;
+                    proteinTotal += $scope.plan.meals[i].foods[j].protein;
+                    fatTotal += $scope.plan.meals[i].foods[j].fat;
+                    caloriesTotal += $scope.plan.meals[i].foods[j].calories;
+                }
+
+                $scope.plan.meals[i].totalCarbohydrates = carbsTotal;
+                $scope.plan.meals[i].totalCalories = caloriesTotal;
+                $scope.plan.meals[i].totalProtein = proteinTotal;
+                $scope.plan.meals[i].totalFat = fatTotal;
+                $scope.plan.meals[i].totalSodium = sodiumTotal;
+
+                CoreUtilities.calculatePlanTotalMacros($scope.plan);
+
+                //calculate changed deficit
+                $scope.currentDeficit = CoreUtilities.calculateDeficit($scope.plan, $scope.activityPlan, $scope.nutritionProfile);
+            }
+        };
+
+        var setPlanDateFromUrlParam = function(){
+            var urlSplit = $location.path().split('/');
+            if(urlSplit.length >= 3){
+                var dateParam;
+
+                if(urlSplit.length == 4) {
+                    dateParam = urlSplit[3];
+                }
+                else{
+                    dateParam = urlSplit[2];
+                }
+
+                if(dateParam.indexOf('_') !== -1){
+                    var dateParamSplit = dateParam.split('_');
+
+                    var dateDay = parseInt(dateParamSplit[1]);
+                    var dateYear = parseInt(dateParamSplit[2]);
+                    var dateMonth = parseInt(dateParamSplit[0]);
+
+                    $scope.plan.planDate = new Date(dateYear, dateMonth, dateDay);
+                    $scope.plan.planDateNonUtc = new Date(dateYear, dateMonth, dateDay);
+                }
+            }
+        };
+
+        var fillActivityPlan = function(){
+            var planDate = new Date($scope.plan.planDateNonUtc);
+            var year = planDate.getFullYear();
+            var month = planDate.getMonth();
+            var day = planDate.getDate();
+
+            var planDateForDb =  month + '_' + day + '_' + year;
+
+            PlansService.getActivityByDate(planDateForDb).then(function(data) {
+                $scope.activityPlan = data;
+            });
+
+//            $scope.activityPlan = Activities.get({
+//                activityDate: planDateForDb
+//                ,dateRange: planDateForDb
+//            }, function (u, getResponseHeaders) {
+//                var test = 'test';
+//
+//            });
+        };
+
+
 
         $scope.foodSelectionChange = function(food, meal){
             food.type = food.selectedFood.type;
@@ -500,9 +549,12 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
 
             food.foodId = food.selectedFood._id;
 
-            doMealTotaling(meal);
+            CoreUtilities.doMealTotaling(meal);
 
-            calculatePlanTotalMacros($scope.plan);
+            CoreUtilities.calculatePlanTotalMacros($scope.plan);
+
+            //calculate changed deficit
+            $scope.currentDeficit = CoreUtilities.calculateDeficit($scope.plan, $scope.activityPlan, $scope.nutritionProfile);
         };
 
         $scope.foodServingsChange = function(food, meal){
@@ -517,52 +569,13 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
                 food.sodium = servings * food.selectedFood.sodium;
                 food.grams = servings * food.selectedFood.grams;
 
-                doMealTotaling(meal);
+                CoreUtilities.doMealTotaling(meal);
 
-                calculatePlanTotalMacros($scope.plan);
+                CoreUtilities.calculatePlanTotalMacros($scope.plan);
+
+                //calculate changed deficit
+                $scope.currentDeficit = CoreUtilities.calculateDeficit($scope.plan, $scope.activityPlan, $scope.nutritionProfile);
             }
-        };
-
-        var doMealTotaling = function(meal){
-            var carbsTotal = 0, fatTotal = 0, proteinTotal = 0, caloriesTotal = 0, sodiumTotal = 0;
-
-            for(var i = 0; i < meal.foods.length; i++){
-                var foodCarbs = meal.foods[i].carbohydrates;
-
-                carbsTotal += foodCarbs;
-                fatTotal += meal.foods[i].fat;
-                proteinTotal += meal.foods[i].protein;
-                caloriesTotal += meal.foods[i].calories;
-                sodiumTotal += meal.foods[i].sodium;
-            }
-
-            meal.totalCarbohydrates = carbsTotal;
-            meal.totalProtein = proteinTotal;
-            meal.totalCalories = caloriesTotal;
-            meal.totalFat = fatTotal;
-            meal.totalSodium = sodiumTotal;
-        };
-
-        var calculatePlanTotalMacros = function(plan){
-            var carbsTotal = 0, fatTotal = 0, proteinTotal = 0, caloriesTotal = 0;
-
-            for (var i = 0; i < plan.meals.length; i++){
-                carbsTotal += plan.meals[i].totalCarbohydrates;
-                fatTotal += plan.meals[i].totalFat;
-                proteinTotal += plan.meals[i].totalProtein;
-                caloriesTotal += plan.meals[i].totalCalories;
-            }
-
-            plan.totalPlanCarbs = carbsTotal;
-            plan.totalPlanFat = fatTotal;
-            plan.totalPlanProtein = proteinTotal;
-            plan.totalPlanCalories = caloriesTotal;
-
-            //calculate totals as percent
-            var macroTotals = carbsTotal + fatTotal + proteinTotal;
-            plan.totalPlanCarbsAsPercent = (carbsTotal / macroTotals) * 100;
-            plan.totalPlanFatAsPercent = (fatTotal / macroTotals) * 100;
-            plan.totalPlanProteinAsPercent = (proteinTotal / macroTotals) * 100;
         };
 
         $scope.toggleTotalsAsPercent = function(){
@@ -587,7 +600,6 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
 
             return mealTypeName;
         };
-
 
 
         var checkIfPlanEditable = function(){
@@ -782,18 +794,17 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
                // $scope.copyPlan(planCopyModel);
                 meal = mealForSuggestion;
 
-                doMealTotaling(meal);
+                CoreUtilities.doMealTotaling(meal);
 
-                calculatePlanTotalMacros($scope.plan);
+                CoreUtilities.calculatePlanTotalMacros($scope.plan);
+
+                //calculate changed deficit
+                $scope.currentDeficit = CoreUtilities.calculateDeficit($scope.plan, $scope.activityPlan, $scope.nutritionProfile);
 
             }, function () {
                 $log.info('Modal dismissed at: ' + new Date());
             });
         }
-
-
-
-
 	}
 ]);
 
