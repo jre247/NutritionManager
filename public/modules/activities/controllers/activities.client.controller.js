@@ -228,6 +228,7 @@ angular.module('activities').controller('ActivitiesController', ['$scope', '$sta
             var plan = new Activities({
                 planDateForDB: planDateAsString,
                 planDateAsMili: planDate.getTime(),
+                planDateAsConcat: parseInt(planDate.getFullYear() + '' + (planDate.getMonth() < 10 ? '0' + planDate.getMonth() : planDate.getMonth()) + '' + (planDate.getDate() < 10 ? '0' + planDate.getDate() : planDate.getDate())),
                 planDateYear: planDateYear,
                 planDateMonth: planDateMonth,
                 planDateDay: planDateDay,
@@ -376,6 +377,7 @@ angular.module('activities').controller('ActivitiesController', ['$scope', '$sta
             plan.planDateDay = planDateDay;
             plan.totalCaloriesBurned = plan.totalCaloriesBurned;
             plan.planDateAsMili = planDate.getTime();
+            plan.planDateAsConcat = parseInt(planDate.getFullYear() + '' + (planDate.getMonth() < 10 ? '0' + planDate.getMonth() : planDate.getMonth()) + '' + (planDate.getDate() < 10 ? '0' + planDate.getDate() : planDate.getDate()));
 
             plan.$update(function() {
                 $scope.success = true;

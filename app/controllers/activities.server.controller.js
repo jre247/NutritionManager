@@ -68,6 +68,7 @@ exports.create = function(req, res) {
 
                 planDb.userRoles = req.user.roles;
                 planDb.planDateAsMili = planClient.planDateAsMili;
+                planDb.planDateAsConcat = planClient.planDateAsConcat;
 
 
             }
@@ -82,6 +83,7 @@ exports.create = function(req, res) {
                 plan.planDateMonth = planClient.planDateMonth;
                 plan.planDateDay = planClient.planDateDay;
                 plan.planDateAsMili = planClient.planDateAsMili;
+                plan.planDateAsConcat = planClient.planDateAsConcat;
                 plan.userRoles = req.user.roles;
                 planToSave = plan;
 

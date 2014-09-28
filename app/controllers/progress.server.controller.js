@@ -140,7 +140,7 @@ exports.list = function(req, res){
                         if (err) return next(err);
 
                         else {
-                            getProgress(res, req, plans, nutritionProfile, endDateYear, startDateYear, endDateMonth, startDateMonth, endDateDay, startDateDay);
+                            getProgress(res, req, plans, nutritionProfile, startDateAsConcat, endDateAsConcat);
                         }
                     });
             }
@@ -150,7 +150,7 @@ exports.list = function(req, res){
 
 };
 
-var getProgress = function(res, req, plans, nutritionProfile, endDateYear, startDateYear, endDateMonth, startDateMonth, endDateDay, startDateDay){
+var getProgress = function(res, req, plans, nutritionProfile, startDateAsConcat, endDateAsConcat){
     var bmr = calculateBmr(nutritionProfile);
 
     var plansDict = [];
@@ -247,9 +247,15 @@ var getProgress = function(res, req, plans, nutritionProfile, endDateYear, start
 //
 //                        });
 //
+    //
 
+    //Activity.find({'planDateYear': {$lte: endDateYear, $gte: startDateYear}, 'planDateMonth': {$lte: endDateMonth, $gte: startDateMonth}, 'planDateDay': {$lte: endDateDay, $gte: startDateDay}, 'user': req.user.id}).exec(function (err, activities) {
+    Activity.find({
+        'planDateAsConcat': {$gte: startDateAsConcat, $lte: endDateAsConcat},
+         'user': req.user.id
+        })
+        .exec(function (err, activities) {
 
-    Activity.find({'planDateYear': {$lte: endDateYear, $gte: startDateYear}, 'planDateMonth': {$lte: endDateMonth, $gte: startDateMonth}, 'planDateDay': {$lte: endDateDay, $gte: startDateDay}, 'user': req.user.id}).exec(function (err, activities) {
         if (err) return next(err);
 
         for (var i = 0; i < plansDict.length; i++) {

@@ -19,6 +19,9 @@ var ActivitySchema = new Schema({
     planDateAsMili:{
         type: Number
     },
+    planDateAsConcat:{
+        type: Number
+    },
     planDateForDB: {
         type: String
         //required: 'Plan Date cannot be blank'
