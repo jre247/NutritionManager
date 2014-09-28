@@ -84,6 +84,7 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
                 planDateMonth: planDateMonth,
                 planDateDay: planDateDay,
                 planDateAsMili: planDate.getTime(),
+                planDateAsConcat: parseInt(planDate.getFullYear() + '' + (planDate.getMonth() < 10 ? '0' + planDate.getMonth() : planDate.getMonth()) + '' + (planDate.getDate() < 10 ? '0' + planDate.getDate() : planDate.getDate())),
                 meals: $scope.plan.meals
 			});
             plan.$save(function(response) {
@@ -338,6 +339,7 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
             plan.planDateMonth = planDateMonth;
             plan.planDateDay = planDateDay;
             plan.planDateAsMili = planDate.getTime();
+            plan.planDateAsConcat = parseInt(planDate.getFullYear() + '' + (planDate.getMonth() < 10 ? '0' + planDate.getMonth() : planDate.getMonth()) + '' + (planDate.getDate() < 10 ? '0' + planDate.getDate() : planDate.getDate()));
 
             plan.$update(function() {
 				//$location.path('plans/' + plan._id);
@@ -380,6 +382,7 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
                         var planModel = {
                             planDateNonUtc: $scope.plans[i].planDateNonUtc || $scope.plans[i].planDate,
                             planDateAsMili: $scope.plans[i].planDateAsMili,
+                            planDateAsConcat: $scope.plans[i].planDateAsConcat,
                             calories: $scope.plans[i].totalPlanCalories,
                             protein: $scope.plans[i].totalPlanProtein,
                             carbs: $scope.plans[i].totalPlanCarbs,

@@ -111,10 +111,13 @@ exports.list = function(req, res){
         var endDateDay = parseInt(split2[2]);
         var endDateYear = parseInt(split2[0]);
 
-        var miliPadding = 76000000;
+        var endDateAsConcat = parseInt(endDateYear + '' + (endDateMonth < 10 ? '0' + endDateMonth : endDateMonth) + '' + (endDateDay < 10 ? '0' + endDateDay : endDateDay));
+        var startDateAsConcat = parseInt(startDateYear + '' + (startDateMonth < 10 ? '0' + startDateMonth : startDateMonth) + '' + (startDateDay < 10 ? '0' + startDateDay : startDateDay));
 
-        var endDateAsMili = new Date(new Date(endDateYear,endDateMonth,endDateDay).toUTCString()).getTime() + miliPadding;
-        var startDateAsMili = new Date(new Date(startDateYear,startDateMonth,startDateDay).toUTCString()).getTime();
+        //var miliPadding = 76000000;
+
+        //var endDateAsMili = new Date(new Date(endDateYear,endDateMonth,endDateDay).toUTCString()).getTime() + miliPadding;
+        //var startDateAsMili = new Date(new Date(startDateYear,startDateMonth,startDateDay).toUTCString()).getTime();
         //planDate
 
         NutritionProfile.findOne({
@@ -128,7 +131,7 @@ exports.list = function(req, res){
             else {
                 Plan.find({
                         'user': req.user.id,
-                        'planDateAsMili': {$gte: startDateAsMili, $lte: endDateAsMili}
+                        'planDateAsConcat': {$gte: startDateAsConcat, $lte: endDateAsConcat}
                     }
                 )
                     .sort({

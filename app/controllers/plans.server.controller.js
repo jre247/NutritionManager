@@ -72,6 +72,7 @@ exports.create = function(req, res) {
                 plan.planDateMonth = planClient.planDateMonth;
                 plan.planDateDay = planClient.planDateDay;
                 plan.planDateAsMili = planClient.planDateAsMili;
+                plan.planDateAsConcat = planClient.planDateAsConcat;
 
                 planToSave = plan;
             }

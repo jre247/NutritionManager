@@ -32,6 +32,9 @@ var PlanSchema = new Schema({
     planDateAsMili:{
         type: Number
     },
+    planDateAsConcat:{
+        type: Number
+    },
     planDateYear:{
         type: Number
     },
