@@ -25,44 +25,51 @@
 
 
                 <div class=" planDetailsSection" style="display: inline-block; margin-top: 9px;float: right;">
-                    <input type="button" class="btn btn-default" style="margin-right: 5px; padding: 4px 9px;" data-ng-click="createMeal();" value="+"/>
+                    <!--<input type="button" class="btn btn-default" style="margin-right: 5px; padding: 4px 9px;" data-ng-click="createMeal();" value="+"/>-->
+
+                    <!---->
 
 
-                    <button type="button" title="Open Notes" class="btn btn-default btn-lg" style="height:30px;width:30px;" data-ng-click="openNotesDialog();">
+                    <button type="button" title="Open Notes" class="btn btn-default btn-lg" style="height:34px;width:34px;" data-ng-click="createMeal();">
+                        <span style="top: -5px;right: 8px;" class="glyphicon glyphicon-plus"></span>
+                    </button>
+
+
+                    <button type="button" title="Open Notes" class="btn btn-default btn-lg" style="height:34px;width:34px;" data-ng-click="openNotesDialog();">
                         <span style="top: -5px;right: 8px;" class="glyphicon glyphicon-edit"></span>
                     </button>
 
 
                     <div class="plansDesktopBtn">
-                        <input type="button" class="btn btn-default" style="margin-right: 5px; padding: 4px 9px;" value="Collapse All Meals" data-ng-click="collapseAllMeals(plan);"/>
+                        <input type="button" class="btn btn-default" style="margin-right: 5px; " value="Collapse All Meals" data-ng-click="collapseAllMeals(plan);"/>
                     </div>
 
                     <div class="plansDesktopBtn">
-                        <input type="button" class="btn btn-default" style="margin-right: 5px; padding: 4px 9px;" value="{{sortingBtnTxt}}" data-ng-click="toggleSorting();"/>
+                        <input type="button" class="btn btn-default" style="margin-right: 5px; " value="{{sortingBtnTxt}}" data-ng-click="toggleSorting();"/>
                     </div>
 
-                    <button class="btn btn-default plansDesktopBtn" style="margin-right: 5px; padding: 4px 9px;" ng-click="openCopyPlanDialog()">Copy</button>
+                    <button class="btn btn-default plansDesktopBtn" style="margin-right: 5px; " ng-click="openCopyPlanDialog()">Copy</button>
 
 
-                    <button title="Copy Plan" class="btn btn-default btn-lg plansMobileGridBtn" ng-click="openCopyPlanDialog()" style="height:30px;width:30px;">
+                    <button title="Copy Plan" class="btn btn-default btn-lg plansMobileGridBtn" ng-click="openCopyPlanDialog()" style="height:34px;width:34px;">
                         <span  style="top: -5px;right: 8px;" class="glyphicon glyphicon-share"></span>
                     </button>
 
 
                     <div class="plansDesktopBtn" data-ng-show="isUserAdmin">
-                        <button class="btn btn-default" style="margin-right: 5px; padding: 4px 9px !important;background-image: linear-gradient(to bottom, #fff 0%, rgb(247, 170, 170) 100%);" data-ng-click="deletePlan(plan);">Delete Plan</button>
+                        <button class="btn btn-default" style="margin-right: 5px; ;background-image: linear-gradient(to bottom, #fff 0%, rgb(247, 170, 170) 100%);" data-ng-click="deletePlan(plan);">Delete Plan</button>
                     </div>
                     <!--<div class="plansDesktopBtn">-->
                         <!--<button class="btn btn-default " style="margin-right: 5px; padding: 4px 9px !important;background-image: linear-gradient(to bottom, #fff 0%, rgb(247, 170, 170) 100%);" data-ng-click="deletePlan(plan);">Delete Plan</button>-->
                     <!--</div>-->
 
 
-                    <button type="submit" data-ng-click="savePlan()" class="btn btn-default btn-lg plansMobileGridBtn" style="height:30px;width:30px;" title="Save">
+                    <button type="submit" data-ng-click="savePlan()" class="btn btn-default btn-lg plansMobileGridBtn" style="height:34px;width:34px;" title="Save">
                         <span  style="top: -5px;right: 8px;" class="glyphicon glyphicon-floppy-disk"></span>
                     </button>
 
 
-                    <input type="submit" value="Save" style="padding: 4px 9px;" data-ng-click="savePlan()"  class="btn btn-default plansDesktopBtn">
+                    <input type="submit" value="Save" style="" data-ng-click="savePlan()"  class="btn btn-default plansDesktopBtn">
                 </div>
             </div>
 
@@ -104,9 +111,9 @@
 
                             <div style="display: inline-block;vertical-align: top">
                                 <input type="button"  data-ng-click="createFood(meal);" value="+"/>
-
                                 <!--<input type="button" style="margin-left:10px;"  data-ng-click="saveAll(meal);" value="Save All"/>-->
                             </div>
+
 
                             <input style="margin-left: 15px;float:right;" type="button" value="Delete Meal" data-ng-click="deleteMeal(meal);"/>
 
