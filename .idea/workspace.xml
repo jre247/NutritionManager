@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="99afd44b-0014-4bff-855e-4d01f0b1305f" name="Default" comment="create plan page is close to finished. Now trying to wire up view/edit plan page. Trying to make it all common html.">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/dist/application.min.js" afterPath="$PROJECT_DIR$/public/dist/application.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/plan.server.model.js" afterPath="$PROJECT_DIR$/app/models/plan.server.model.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/modules/plans/controllers/plans.client.controller.js" afterPath="$PROJECT_DIR$/public/modules/plans/controllers/plans.client.controller.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/plans.server.controller.js" afterPath="$PROJECT_DIR$/app/controllers/plans.server.controller.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/layout.server.view.html" afterPath="$PROJECT_DIR$/app/views/layout.server.view.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/modules/plans/views/view-plan.client.view.html" afterPath="$PROJECT_DIR$/public/modules/plans/views/view-plan.client.view.html" />
     </list>
     <ignored path="NutritionManager.iws" />
@@ -29,10 +26,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="application.min.js" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="application.min.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/dist/application.min.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.36090225" vertical-offset="30321" max-vertical-offset="70635">
+            <state vertical-scroll-proportion="-5.5384617" vertical-offset="30321" max-vertical-offset="70635">
               <caret line="2031" column="9" selection-start-line="2031" selection-start-column="9" selection-end-line="2031" selection-end-column="9" />
               <folding />
             </state>
@@ -75,15 +72,32 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="view-plan.client.view.html" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="layout.server.view.html" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/views/layout.server.view.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-2.5" vertical-offset="1015" max-vertical-offset="5160">
+              <caret line="76" column="32" selection-start-line="76" selection-start-column="32" selection-end-line="76" selection-end-column="32" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="view-plan.client.view.html" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/public/modules/plans/views/view-plan.client.view.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-2.8" vertical-offset="325" max-vertical-offset="7290">
-              <caret line="31" column="61" selection-start-line="31" selection-start-column="61" selection-end-line="31" selection-end-column="61" />
+            <state vertical-scroll-proportion="0.61333334" vertical-offset="655" max-vertical-offset="7485">
+              <caret line="59" column="68" selection-start-line="59" selection-start-column="68" selection-end-line="59" selection-end-column="68" />
               <folding>
                 <element signature="n#style#0;n#input#0;n#div#1;n#div#0;n#fieldset#0;n#form#0;n#div#0;n#section#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#button#0;n#div#1;n#div#0;n#fieldset#0;n#form#0;n#div#0;n#section#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#span#0;n#button#0;n#div#1;n#div#0;n#fieldset#0;n#form#0;n#div#0;n#section#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#input#0;n#div#0;n#div#1;n#div#0;n#fieldset#0;n#form#0;n#div#0;n#section#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#button#1;n#div#1;n#div#0;n#fieldset#0;n#form#0;n#div#0;n#section#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#button#2;n#div#1;n#div#0;n#fieldset#0;n#form#0;n#div#0;n#section#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#span#0;n#button#2;n#div#1;n#div#0;n#fieldset#0;n#form#0;n#div#0;n#section#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#button#3;n#div#1;n#div#0;n#fieldset#0;n#form#0;n#div#0;n#section#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#span#0;n#button#3;n#div#1;n#div#0;n#fieldset#0;n#form#0;n#div#0;n#section#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#1;n#fieldset#0;n#form#0;n#div#0;n#section#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#tr#1;n#tbody#0;n#table#0;n#div#0;n#div#0;n#section#0;n#!!top" expanded="true" />
               </folding>
             </state>
@@ -136,7 +150,6 @@
         <option value="$PROJECT_DIR$/app/routes/body-stats.server.routes.js" />
         <option value="$PROJECT_DIR$/public/modules/progress/views/view-progress.client.view.html" />
         <option value="$PROJECT_DIR$/app/models/body-stat.server.model.js" />
-        <option value="$PROJECT_DIR$/app/views/layout.server.view.html" />
         <option value="$PROJECT_DIR$/public/modules/body-stats/views/list-body-stats.client.view.html" />
         <option value="$PROJECT_DIR$/public/modules/body-stats/controllers/body-stats.client.controller.js" />
         <option value="$PROJECT_DIR$/app/controllers/body-stats.server.controller.js" />
@@ -161,9 +174,10 @@
         <option value="$PROJECT_DIR$/public/modules/progress/controllers/progress.client.controller.js" />
         <option value="$PROJECT_DIR$/app/models/plan.server.model.js" />
         <option value="$PROJECT_DIR$/app/controllers/plans.server.controller.js" />
-        <option value="$PROJECT_DIR$/public/modules/plans/views/view-plan.client.view.html" />
         <option value="$PROJECT_DIR$/public/modules/plans/controllers/plans.client.controller.js" />
         <option value="$PROJECT_DIR$/public/dist/application.min.js" />
+        <option value="$PROJECT_DIR$/app/views/layout.server.view.html" />
+        <option value="$PROJECT_DIR$/public/modules/plans/views/view-plan.client.view.html" />
       </list>
     </option>
   </component>
@@ -320,6 +334,24 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="dist" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="NutritionManager" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="NutritionManager" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -751,14 +783,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/layout.server.view.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="2463" max-vertical-offset="5070">
-          <caret line="181" column="27" selection-start-line="181" selection-start-column="27" selection-end-line="181" selection-end-column="27" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/modules/progress/views/view-progress.client.view.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="120" max-vertical-offset="1080">
@@ -1077,19 +1101,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/modules/plans/views/view-plan.client.view.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-2.8" vertical-offset="325" max-vertical-offset="7290">
-          <caret line="31" column="61" selection-start-line="31" selection-start-column="61" selection-end-line="31" selection-end-column="61" />
-          <folding>
-            <element signature="n#style#0;n#input#0;n#div#1;n#div#0;n#fieldset#0;n#form#0;n#div#0;n#section#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#button#0;n#div#1;n#div#0;n#fieldset#0;n#form#0;n#div#0;n#section#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#0;n#button#0;n#div#1;n#div#0;n#fieldset#0;n#form#0;n#div#0;n#section#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#tr#1;n#tbody#0;n#table#0;n#div#0;n#div#0;n#section#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/modules/plans/controllers/plans.client.controller.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-2.8076923" vertical-offset="4292" max-vertical-offset="13425">
@@ -1106,9 +1117,37 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/public/dist/application.min.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.36090225" vertical-offset="30321" max-vertical-offset="70635">
+        <state vertical-scroll-proportion="-5.5384617" vertical-offset="30321" max-vertical-offset="70635">
           <caret line="2031" column="9" selection-start-line="2031" selection-start-column="9" selection-end-line="2031" selection-end-column="9" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/layout.server.view.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-2.5" vertical-offset="1015" max-vertical-offset="5160">
+          <caret line="76" column="32" selection-start-line="76" selection-start-column="32" selection-end-line="76" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/modules/plans/views/view-plan.client.view.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.61333334" vertical-offset="655" max-vertical-offset="7485">
+          <caret line="59" column="68" selection-start-line="59" selection-start-column="68" selection-end-line="59" selection-end-column="68" />
+          <folding>
+            <element signature="n#style#0;n#input#0;n#div#1;n#div#0;n#fieldset#0;n#form#0;n#div#0;n#section#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#button#0;n#div#1;n#div#0;n#fieldset#0;n#form#0;n#div#0;n#section#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#0;n#button#0;n#div#1;n#div#0;n#fieldset#0;n#form#0;n#div#0;n#section#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#input#0;n#div#0;n#div#1;n#div#0;n#fieldset#0;n#form#0;n#div#0;n#section#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#button#1;n#div#1;n#div#0;n#fieldset#0;n#form#0;n#div#0;n#section#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#button#2;n#div#1;n#div#0;n#fieldset#0;n#form#0;n#div#0;n#section#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#0;n#button#2;n#div#1;n#div#0;n#fieldset#0;n#form#0;n#div#0;n#section#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#button#3;n#div#1;n#div#0;n#fieldset#0;n#form#0;n#div#0;n#section#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#0;n#button#3;n#div#1;n#div#0;n#fieldset#0;n#form#0;n#div#0;n#section#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#1;n#fieldset#0;n#form#0;n#div#0;n#section#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#tr#1;n#tbody#0;n#table#0;n#div#0;n#div#0;n#section#0;n#!!top" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
