@@ -788,6 +788,19 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
                     },
                     parentScope: function () {
                         return $scope;
+                    },
+                    CoreUtilities: function(){
+                        return CoreUtilities;
+                    },
+                    plan: function(){
+                        return $scope.plan;
+                    },
+                    activityPlan: function(){
+                        return $scope.activityPlan;
+                    }
+                    ,
+                    nutritionProfile: function(){
+                        return $scope.nutritionProfile;
                     }
                 }
             });
@@ -898,11 +911,14 @@ var ModalInstanceCtrl = function ($scope, $modalInstance, parentScope, dialogMea
     };
 };
 
-var SuggestionsModalInstanceCtrl = function ($scope, $modalInstance, parentScope, $timeout, suggestedFoods, mealForSuggestion) {
+var SuggestionsModalInstanceCtrl = function ($scope, $modalInstance, parentScope, $timeout, suggestedFoods, mealForSuggestion, CoreUtilities) {
     $scope.parentScope = parentScope;
     $scope.suggestedFoods = suggestedFoods;
     $scope.mealForSuggestion = mealForSuggestion;
     $scope.selectedFood = $scope.suggestedFoods[0];
+    $scope.CoreUtilities = CoreUtilities;
+
+
 
     $scope.selectedFoodClick = function(suggestedFood){
         $scope.selectedFood = suggestedFood;
@@ -950,6 +966,7 @@ var SuggestionsModalInstanceCtrl = function ($scope, $modalInstance, parentScope
             if(foodId === $scope.selectedFood._id){
                 isFoodFoundInMeal = true;
                 mealForSuggestion.foods[m].servings += 1;
+                mealForSuggestion.foods[m].calories += mealForSuggestion.foods[m].calories;
                 mealForSuggestion.foods[m].IsSuggested = true;
 
                 $timeout(function(){mealForSuggestion.foods[m].IsSuggested = false;}, 4000);
