@@ -27,6 +27,12 @@
                 <div class=" planDetailsSection" style="display: inline-block; margin-top: 9px;float: right;">
                     <input type="button" class="btn btn-default" style="margin-right: 5px; padding: 4px 9px;" data-ng-click="createMeal();" value="+"/>
 
+
+                    <button type="button" class="btn btn-default btn-lg" style="height:30px;width:30px;" data-ng-click="openNotesDialog();">
+                        <span style="top: -5px;right: 8px;" class="glyphicon glyphicon-edit"></span>
+                    </button>
+
+
                     <div class="plansDesktopBtn">
                         <input type="button" class="btn btn-default" style="margin-right: 5px; padding: 4px 9px;" value="Collapse All Meals" data-ng-click="collapseAllMeals(plan);"/>
                     </div>
@@ -433,11 +439,27 @@
                     </div>
                 </div>
             </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" ng-click="ok()">OK</button>
+            <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+        </div>
+    </script>
 
+    <script type="text/ng-template" id="notesModalContent.html">
+        <div class="modal-header" style="font-family: segui;">
+            <h3 class="modal-title">Enter Plan Notes</h3>
+        </div>
+        <div class="modal-body" style="font-family: segui;">
 
+            <div style="font-weight: bold;">
+                Notes:
+            </div>
+            <div>
+                <textarea style="width: 100%;height: 100px;" data-ng-model="selected.notesToSave">
 
-
-
+                </textarea>
+            </div>
         </div>
         <div class="modal-footer">
             <button class="btn btn-primary" ng-click="ok()">OK</button>

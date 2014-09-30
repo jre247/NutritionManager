@@ -83,6 +83,7 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
                 planDateYear: planDateYear,
                 planDateMonth: planDateMonth,
                 planDateDay: planDateDay,
+                notes: $scope.plan.notes,
                 planDateAsMili: planDate.getTime(),
                 planDateAsConcat: parseInt(planDate.getFullYear() + '' + (planDate.getMonth() < 10 ? '0' + planDate.getMonth() : planDate.getMonth()) + '' + (planDate.getDate() < 10 ? '0' + planDate.getDate() : planDate.getDate())),
                 meals: $scope.plan.meals
@@ -97,6 +98,8 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
 			$scope.plan.planDate = '';
             $scope.plan.meals = [];
 		};
+
+
 
         $scope.copyPlan = function(planCopyModel){
             var planDateAsString = planCopyModel.planDate.toUTCString();
@@ -434,7 +437,7 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
                 });
             }
             else{
-                $scope.plan =  {data: null, meals: null, planDate: new Date(), planDateNonUtc: new Date() };
+                $scope.plan =  {data: null, meals: null, notes: null, planDate: new Date(), planDateNonUtc: new Date() };
                 $scope.plan.meals = [];
 
                 //todo use ngRouter instead of this horrible method for extracting url param
@@ -791,23 +794,13 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
                     },
                     CoreUtilities: function(){
                         return CoreUtilities;
-                    },
-                    plan: function(){
-                        return $scope.plan;
-                    },
-                    activityPlan: function(){
-                        return $scope.activityPlan;
-                    }
-                    ,
-                    nutritionProfile: function(){
-                        return $scope.nutritionProfile;
                     }
                 }
             });
 
             modalInstance.result.then(function (mealForSuggestion) {
                 //$scope.dialogSelectedMealType = selectedItem;
-               // $scope.copyPlan(planCopyModel);
+                // $scope.copyPlan(planCopyModel);
                 meal = mealForSuggestion;
 
                 CoreUtilities.doMealTotaling(meal);
@@ -820,9 +813,51 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
             }, function () {
                 $log.info('Modal dismissed at: ' + new Date());
             });
+        };
+
+        $scope.openNotesDialog = function (notes) {
+            var modalInstance = $modal.open({
+                templateUrl: 'notesModalContent.html',
+                controller: NotesModalInstanceCtrl,
+
+                resolve: {
+                    parentScope: function () {
+                        return $scope;
+                    },
+                    planNotes: function(){
+                        return $scope.plan.notes
+                    }
+                }
+            });
+
+            modalInstance.result.then(function (notesToSave) {
+                $scope.plan.notes = notesToSave;
+                $scope.savePlan();
+            }, function () {
+                $log.info('Modal dismissed at: ' + new Date());
+            });
         }
 	}
 ]);
+
+var NotesModalInstanceCtrl = function ($scope, $modalInstance, parentScope, planNotes) {
+    $scope.notesToSave = null;
+    $scope.parentScope = parentScope;
+    $scope.notesToSave = planNotes;
+
+    $scope.selected = {
+        notesToSave: $scope.notesToSave
+    };
+
+    $scope.ok = function () {
+        $modalInstance.close($scope.selected.notesToSave);
+    };
+
+    $scope.cancel = function () {
+        $modalInstance.dismiss('cancel');
+    };
+};
+
 
 var ModalInstanceCtrl = function ($scope, $modalInstance, parentScope, dialogMealsDetailed, dialogMealsShort) {
     $scope.selectedMealTypes = dialogMealsDetailed[0];
