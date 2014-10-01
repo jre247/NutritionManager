@@ -124,7 +124,9 @@
                                     <li data-ng-repeat="food in meal.foods" data-ng-class="{mealSuggestedHighlight: food.IsSuggested}">
                                         <div data-ng-show="food.isEditable">
                                             <div class="controls">
-                                                <select data-ng-model="food.selectedFood" data-ng-click="foodClick(food)"  data-ng-change="foodSelectionChange(food, meal)" data-ng-blur="foodBlur(food)" ng-options="f as f.name for f in allFoods"></select>
+                                                <!--<select data-ng-model="food.selectedFood" data-ng-click="foodClick(food)"  data-ng-change="foodSelectionChange(food, meal)" data-ng-blur="foodBlur(food)" ng-options="f as f.name for f in allFoods"></select>-->
+
+                                                <input type="text" ng-model="food.selectedFood" typeahead="food as (food.name) for food in allFoods | filter:$viewValue" />
 
                                                 <span  class="deleteBtn" style="font-size: 16px;width: 15px;text-align: center;" data-ng-click="deleteFood(food, meal);">x</span>
                                             </div>
@@ -211,8 +213,10 @@
                                 <tr height="35px"  data-ng-repeat="food in meal.foods" data-ng-class="{mealSuggestedHighlight: food.IsSuggested}" data-ng-click="editFoodClick(food)">
                                     <td style="padding-right: 10px;">
                                         <div class="controls" data-ng-show="food.isEditable">
-                                            <select data-ng-model="food.selectedFood" data-ng-change="foodSelectionChange(food, meal)" data-ng-click="foodClick(food)"  ng-blur="foodBlur(food)" ng-options="f as f.name for f in allFoods"></select>
+                                            <!--<select data-ng-model="food.selectedFood" data-ng-change="foodSelectionChange(food, meal)" data-ng-click="foodClick(food)"  ng-blur="foodBlur(food)" ng-options="f as f.name for f in allFoods"></select>-->
 
+                                            <!--<autocomplete ng-model="food.selectedFood" data-ng-click="foodClick(food)"  data-ng-change="foodSelectionChange(food, meal)" data="foods" on-type="updateFoods"></autocomplete>-->
+                                            <input type="text" ng-model="food.selectedFood" typeahead="food as (food.name) for food in allFoods | filter:$viewValue" />
                                         </div>
 
                                         <div class="controls"  data-ng-show="food.isEditable == false" >

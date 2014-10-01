@@ -21,6 +21,11 @@ module.exports = function(app) {
         .put(foods.update)
         .delete(foods.delete);
 
+    app.route('/foods/:foodTyped/:foodsRange')
+        .get(foods.getFoodByPartialText);
+
     // Finish by binding the article middleware
     app.param('foodId', foods.foodByID);
+    app.param('foodTyped', foods.getFoodByPartialText);
+    app.param('foodsRange', foods.getFoodByPartialText);
 };

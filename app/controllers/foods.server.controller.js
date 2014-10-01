@@ -111,6 +111,18 @@ exports.list = function(req, res) {
     });
 };
 
+exports.getFoodByPartialText = function(req, res, callback, typedText, foodsRange) {
+    Food.find().sort('name').exec(function(err, foods) {
+        if (err) {
+            return res.send(400, {
+                message: getErrorMessage(err)
+            });
+        } else {
+            res.jsonp(foods);
+        }
+    });
+};
+
 /**
  * Food middleware
  */

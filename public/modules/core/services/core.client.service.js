@@ -32,7 +32,7 @@ angular.module('core').service(
                 }
 
 
-        });
+            });
 
             return( request.then( handleNutritionPlanSuccess, handleError ) );
         }

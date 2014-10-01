@@ -10,7 +10,8 @@ angular.module(ApplicationConfiguration.applicationModuleName).service(
         return({
             calculateDeficit: calculateDeficit,
             doMealTotaling: doMealTotaling,
-            calculatePlanTotalMacros: calculatePlanTotalMacros
+            calculatePlanTotalMacros: calculatePlanTotalMacros,
+            getFoods: getFoods
 
         });
 
@@ -19,6 +20,20 @@ angular.module(ApplicationConfiguration.applicationModuleName).service(
         // PUBLIC METHODS.
         // ---
 
+
+        function getFoods(typed) {
+            var request = $http({
+                method: "get",
+                url: "/foods/" + typed + '/' + 10,
+                params: {
+                    action: "get"
+                }
+
+
+            });
+
+            return( request.then( handleSuccess, handleError ) );
+        }
 
         function calculateDeficit(nutritionPlan, activityPlan, nutritionProfile){
             var bmr = calculateBmr(nutritionProfile);
@@ -124,6 +139,8 @@ angular.module(ApplicationConfiguration.applicationModuleName).service(
             //dailyDashboardData.activityPlan = response.data;
 
            // return dailyDashboardData;
+
+            return response.data;
         }
 
 
