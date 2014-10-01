@@ -112,7 +112,7 @@ exports.list = function(req, res) {
 };
 
 exports.getFoodByPartialText = function(req, res, callback, typedText, foodsRange) {
-    Food.find().sort('name').exec(function(err, foods) {
+    Food.find({'name' : new RegExp(typedText, 'i')}).sort('name').exec(function(err, foods) {
         if (err) {
             return res.send(400, {
                 message: getErrorMessage(err)

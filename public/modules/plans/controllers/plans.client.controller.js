@@ -15,6 +15,7 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
         $scope.meals = [];
 
         $scope.allFoods = Foods.query();
+        $scope.allFoodsInitial = [];
 
         $scope.nutritionProfile = NutritionProfile.get();
 
@@ -40,26 +41,6 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
             {id: 3, name: 'Dinner'},
             {id: 4, name: 'Snack'}
         ];
-
-        $scope.foods = [];
-        // gives another movie array on change
-        $scope.updateFoods = function(typed){
-            // MovieRetriever could be some service returning a promise
-            $scope.newFoods = CoreUtilities.getFoods(typed);
-            $scope.newFoods.then(function(data){
-                $scope.foods = data;
-            });
-        };
-//        $scope.selected = '';
-//        $scope.users = [
-//            {'id': 1, 'first': 'John', 'last': 'Depp', 'age':52, 'gender':'male'},
-//            {'id': 2, 'first': 'Sally', 'last': 'JoHanson', 'age':13, 'gender':'female'},
-//            {'id': 3, 'first': 'Taylor', 'last': 'Swift', 'age':22, 'gender':'female'},
-//            {'id': 4, 'first': 'Max', 'last': 'Payne', 'age':72, 'gender':'male'},
-//            {'id': 5, 'first': 'Jessica', 'last': 'Hutton', 'age':12, 'gender':'female'},
-//            {'id': 6, 'first': 'Nicholas', 'last': 'Cage','age':3, 'gender':'male'},
-//            {'id': 7, 'first': 'Lisa', 'last': 'Simpson', 'age':18, 'gender':'female'}
-//        ];
 
         $scope.toggleSorting = function(){
             if (!isSortingEnabled){
@@ -216,6 +197,8 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
                 meal.isVisible = false;
             }
         };
+
+
 
         $scope.createFood = function(meal){
             var defaultFood = $scope.allFoods[0];

@@ -126,7 +126,7 @@
                                             <div class="controls">
                                                 <!--<select data-ng-model="food.selectedFood" data-ng-click="foodClick(food)"  data-ng-change="foodSelectionChange(food, meal)" data-ng-blur="foodBlur(food)" ng-options="f as f.name for f in allFoods"></select>-->
 
-                                                <input type="text" ng-model="food.selectedFood" typeahead="food as (food.name) for food in allFoods | filter:$viewValue" />
+                                                <input type="text" data-ng-change="foodSelectionTypeEvent" ng-model="food.selectedFood" typeahead="food as (food.name) for food in allFoods | filter:$viewValue" />
 
                                                 <span  class="deleteBtn" style="font-size: 16px;width: 15px;text-align: center;" data-ng-click="deleteFood(food, meal);">x</span>
                                             </div>
@@ -216,7 +216,7 @@
                                             <!--<select data-ng-model="food.selectedFood" data-ng-change="foodSelectionChange(food, meal)" data-ng-click="foodClick(food)"  ng-blur="foodBlur(food)" ng-options="f as f.name for f in allFoods"></select>-->
 
                                             <!--<autocomplete ng-model="food.selectedFood" data-ng-click="foodClick(food)"  data-ng-change="foodSelectionChange(food, meal)" data="foods" on-type="updateFoods"></autocomplete>-->
-                                            <input type="text" ng-model="food.selectedFood" typeahead="food as (food.name) for food in allFoods | filter:$viewValue" />
+                                            <input type="text" data-ng-change="updateFoods(food)" ng-model="food.selectedFood" typeahead="food as (food.name) for food in allFoodsInitial | filterFoodsByPartialText:$viewValue:food.selectedFood" />
                                         </div>
 
                                         <div class="controls"  data-ng-show="food.isEditable == false" >
