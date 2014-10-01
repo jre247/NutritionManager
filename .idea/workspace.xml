@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="99afd44b-0014-4bff-855e-4d01f0b1305f" name="Default" comment="create plan page is close to finished. Now trying to wire up view/edit plan page. Trying to make it all common html.">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/dist/application.min.js" afterPath="$PROJECT_DIR$/public/dist/application.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/modules/foods/controllers/foods.client.controller.js" afterPath="$PROJECT_DIR$/public/modules/foods/controllers/foods.client.controller.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/modules/plans/controllers/plans.client.controller.js" afterPath="$PROJECT_DIR$/public/modules/plans/controllers/plans.client.controller.js" />
     </list>
     <ignored path="NutritionManager.iws" />
@@ -30,11 +29,9 @@
       <file leaf-file-name="application.min.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/public/dist/application.min.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.33168316" vertical-offset="45961" max-vertical-offset="68250">
-              <caret line="3073" column="39" selection-start-line="3073" selection-start-column="39" selection-end-line="3073" selection-end-column="39" />
-              <folding>
-                <element signature="e#106858#115618#0" expanded="false" />
-              </folding>
+            <state vertical-scroll-proportion="0.92574257" vertical-offset="30541" max-vertical-offset="71280">
+              <caret line="2061" column="0" selection-start-line="2061" selection-start-column="0" selection-end-line="2061" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -121,14 +118,14 @@
       <file leaf-file-name="plans.client.controller.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/modules/plans/controllers/plans.client.controller.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-10.346154" vertical-offset="9571" max-vertical-offset="13650">
-              <caret line="687" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="1043" selection-end-column="0" />
+            <state vertical-scroll-proportion="-5.1538463" vertical-offset="9556" max-vertical-offset="13650">
+              <caret line="677" column="47" selection-start-line="0" selection-start-column="0" selection-end-line="1043" selection-end-column="0" />
               <folding>
                 <element signature="e#22702#23045#0" expanded="false" />
                 <element signature="e#23093#23636#0" expanded="false" />
-                <element signature="e#27373#29404#0" expanded="false" />
-                <element signature="e#29462#30936#0" expanded="false" />
-                <element signature="e#33413#33922#0" expanded="false" />
+                <element signature="e#27335#29366#0" expanded="false" />
+                <element signature="e#29424#30898#0" expanded="false" />
+                <element signature="e#33375#33884#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -1296,20 +1293,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/modules/plans/controllers/plans.client.controller.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-10.346154" vertical-offset="9571" max-vertical-offset="13650">
-          <caret line="687" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="1043" selection-end-column="0" />
-          <folding>
-            <element signature="e#22702#23045#0" expanded="false" />
-            <element signature="e#23093#23636#0" expanded="false" />
-            <element signature="e#27373#29404#0" expanded="false" />
-            <element signature="e#29462#30936#0" expanded="false" />
-            <element signature="e#33413#33922#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/modules/foods/controllers/foods.client.controller.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-3.3846154" vertical-offset="107" max-vertical-offset="3180">
@@ -1318,13 +1301,25 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/public/modules/plans/controllers/plans.client.controller.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-5.1538463" vertical-offset="9556" max-vertical-offset="13650">
+          <caret line="677" column="47" selection-start-line="0" selection-start-column="0" selection-end-line="1043" selection-end-column="0" />
+          <folding>
+            <element signature="e#22702#23045#0" expanded="false" />
+            <element signature="e#23093#23636#0" expanded="false" />
+            <element signature="e#27335#29366#0" expanded="false" />
+            <element signature="e#29424#30898#0" expanded="false" />
+            <element signature="e#33375#33884#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/public/dist/application.min.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33168316" vertical-offset="45961" max-vertical-offset="68250">
-          <caret line="3073" column="39" selection-start-line="3073" selection-start-column="39" selection-end-line="3073" selection-end-column="39" />
-          <folding>
-            <element signature="e#106858#115618#0" expanded="false" />
-          </folding>
+        <state vertical-scroll-proportion="0.92574257" vertical-offset="30541" max-vertical-offset="71280">
+          <caret line="2061" column="0" selection-start-line="2061" selection-start-column="0" selection-end-line="2061" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>

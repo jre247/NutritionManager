@@ -675,8 +675,8 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
                 var foodToCheck = $scope.allFoods[i];
                 var score = 0;
 
-                if(foodToCheck.type !== $scope.foodTypes[11].id &&
-                  foodToCheck.type !== $scope.foodTypes[5].id) {
+                if(foodToCheck.type !== '12' &&
+                  foodToCheck.type !== '6') {
                     var macrosTotal = ($scope.plan.totalPlanFat + foodToCheck.fat) +
                         ($scope.plan.totalPlanProtein + foodToCheck.protein) +
                         ($scope.plan.totalPlanCarbs + foodToCheck.carbohydrates);
