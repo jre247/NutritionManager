@@ -22,7 +22,8 @@ angular.module('foods').controller('FoodsController', ['$scope', '$stateParams',
             {id: 9, type: 'Butter/Oil'},
             {id: 10, type: 'Tofu'},
             {id: 11, type: 'Beans'},
-            {id: 12, type: 'Alcohol'}
+            {id: 12, type: 'Alcohol'},
+            {id: 13, type: 'Nuts'}
         ];
 
         $scope.groceryStores = [
