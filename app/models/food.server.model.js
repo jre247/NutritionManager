@@ -25,9 +25,11 @@ var FoodSchema = new Schema({
 	},
     type: {
         type: String,
-        default: '',
-        trim: true,
-        required: 'Type cannot be blank'
+        default: ''
+    },
+    groceryStore: {
+        type: Number,
+        default: 0
     },
     calories: {
         type: Number,

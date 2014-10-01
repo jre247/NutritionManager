@@ -10,6 +10,28 @@ angular.module('foods').controller('FoodsController', ['$scope', '$stateParams',
        // $scope.authentication = Authentication;
         $scope.servings = 1;
 
+        $scope.foodTypes = [
+            {id: 1, type: 'Fruit'},
+            {id: 2, type: 'Starch'},
+            {id: 3, type: 'Meat'},
+            {id: 4, type: 'Liquid'},
+            {id: 5, type: 'Vegetable'},
+            {id: 6, type: 'Dessert'},
+            {id: 7, type: 'Yogurt'},
+            {id: 8, type: 'Pizza'},
+            {id: 9, type: 'Butter/Oil'},
+            {id: 10, type: 'Tofu'},
+            {id: 11, type: 'Beans'},
+            {id: 12, type: 'Alcohol'}
+        ];
+
+        $scope.groceryStores = [
+            {id: 1, store: 'Trader Joes'},
+            {id: 2, store: 'Wholefoods'},
+            {id: 3, store: 'Foodtown'}
+        ];
+
+
         $scope.servingsChange = function(food){
             if ($scope.servings > 0) {
                 food.gramsDisplay = $scope.servings * food.grams;
@@ -40,23 +62,24 @@ angular.module('foods').controller('FoodsController', ['$scope', '$stateParams',
 
         $scope.create = function() {
             var food = new Foods({
-                name: this.name,
-                calories: this.calories,
-                protein: $scope.protein,
-                fat: $scope.fat,
-                carbohydrates: $scope.carbohydrates,
-                grams: $scope.grams,
-                type: $scope.type,
-                sodium: $scope.sodium,
-                fiber: $scope.fiber,
-                sugar: $scope.sugar,
-                cholesterol: $scope.cholesterol,
-                vitaminA: $scope.vitaminA,
-                vitaminC: $scope.vitaminC,
-                calcium: $scope.calcium,
-                iron: $scope.iron,
-                saturatedFat: $scope.saturatedFat,
-                transfat: $scope.transfat
+                name: $scope.food.name,
+                calories: $scope.food.calories,
+                protein: $scope.food.protein,
+                fat: $scope.food.fat,
+                carbohydrates: $scope.food.carbohydrates,
+                grams: $scope.food.grams,
+                type: $scope.food.type,
+                groceryStore: $scope.food.groceryStore,
+                sodium: $scope.food.sodium,
+                fiber: $scope.food.fiber,
+                sugar: $scope.food.sugar,
+                cholesterol: $scope.food.cholesterol,
+                vitaminA: $scope.food.vitaminA,
+                vitaminC: $scope.food.vitaminC,
+                calcium: $scope.food.calcium,
+                iron: $scope.food.iron,
+                saturatedFat: $scope.food.saturatedFat,
+                transfat: $scope.food.transfat
                 //milliliters: $scope.milliliters
             });
             food.$save(function(response) {
@@ -65,23 +88,24 @@ angular.module('foods').controller('FoodsController', ['$scope', '$stateParams',
                 $scope.error = errorResponse.data.message;
             });
 
-            this.name = '';
-            this.sodium = '';
-            this.saturatedFat = '';
-            this.fiber = '';
-            this.sugar = '';
-            this.transfat = '';
-            this.vitaminA = '';
-            this.vitaminC = '';
-            this.cholesterol = '';
-            this.calcium = '';
-            this.iron = '';
-            this.calories = '';
-            this.protein = '';
-            this.fat = '';
-            this.carbohydrates = '';
-            this.grams = '';
-            this.type = '';
+            this.food.name = '';
+            this.food.groceryStore = 0;
+            this.food.sodium = '';
+            this.food.saturatedFat = '';
+            this.food.fiber = '';
+            this.food.sugar = '';
+            this.food.transfat = '';
+            this.food.vitaminA = '';
+            this.food.vitaminC = '';
+            this.food.cholesterol = '';
+            this.food.calcium = '';
+            this.food.iron = '';
+            this.food.calories = '';
+            this.food.protein = '';
+            this.food.fat = '';
+            this.food.carbohydrates = '';
+            this.food.grams = '';
+            this.food.type = '';
             //this.milliliters = '';
         };
 
@@ -140,6 +164,9 @@ angular.module('foods').controller('FoodsController', ['$scope', '$stateParams',
                 $scope.food.vitaminCDisplay = $scope.food.vitaminC;
                 $scope.food.calciumDisplay = $scope.food.calcium;
                 $scope.food.ironDisplay = $scope.food.iron;
+                $scope.food.type = parseInt($scope.food.type) >= 0 ? parseInt($scope.food.type) : 0;
+                $scope.food.typeDisplay = $scope.foodTypes[$scope.food.type].type;
+
 
                 $scope.totalFatDailyPercentageDisplay = $scope.totalFatDailyPercentage;
                 $scope.saturatedFatDailyPercentageDisplay = $scope.saturatedFatDailyPercentage;

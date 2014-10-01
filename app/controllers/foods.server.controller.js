@@ -66,6 +66,8 @@ exports.update = function(req, res) {
 
     food = _.extend(food, req.body);
 
+
+
     food.save(function(err) {
         if (err) {
             return res.send(400, {

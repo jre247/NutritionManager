@@ -8,43 +8,111 @@
                 <div class="form-group">
                     <label class="control-label" for="name">Name</label>
                     <div class="controls">
-                        <input data-ng-model="name"  id="name" class="form-control" cols="5" rows="10" placeholder="Name"/>
+                        <input type="text" data-ng-model="food.name" id="name" class="form-control" placeholder="Name" required>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="control-label" for="type">Type</label>
                     <div class="controls">
-                        <input data-ng-model="type" id="type" class="form-control" cols="5" rows="10" placeholder="Type"/>
+                        <select id="type" ng-model="food.type"  ng-options="t.id as t.type for t in foodTypes" style="font-size: 16px;vertical-align: top;"></select>
+
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="control-label" for="calories">Calories</label>
+                    <label class="control-label" for="groceryStore">Grocery Store</label>
                     <div class="controls">
-                        <input data-ng-model="calories" id="calories" class="form-control" cols="5" rows="10" placeholder="Calories"/>
+                        <select id="groceryStore" ng-model="food.groceryStore"  ng-options="t.id as t.store for t in groceryStores" style="font-size: 16px;vertical-align: top;"></select>
+
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="control-label" for="protein">Protein</label>
+                    <label class="control-label" for="grams"> Grams (g)</label>
                     <div class="controls">
-                        <input data-ng-model="protein"  id="protein" class="form-control" cols="5" rows="10" placeholder="Protein"/>
+                        <input data-ng-model="food.grams" id="grams" class="form-control" cols="30" rows="10" placeholder="Grams"/>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="control-label" for="fat">Fat</label>
+                    <label class="control-label" for="calories"> Calories (g)</label>
                     <div class="controls">
-                        <input data-ng-model="fat"  id="fat" class="form-control" cols="5" rows="10" placeholder="Fat"/>
+                        <input data-ng-model="food.calories" id="calories" class="form-control" cols="30" rows="10" placeholder="Calories"/>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="control-label" for="carbohydrates">Carbohydrates</label>
+                    <label class="control-label" for="fat">Total Fat (g)</label>
                     <div class="controls">
-                        <input data-ng-model="carbohydrates"  id="carbohydrates" class="form-control" cols="5" rows="10" placeholder="Carbohydrates"/>
+                        <input data-ng-model="food.fat" id="fat" class="form-control" cols="30" rows="10" placeholder="Total Fat"/>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="control-label" for="grams">Grams</label>
+                    <label class="control-label" for="saturatedFat">Saturated Fat (g)</label>
                     <div class="controls">
-                        <input data-ng-model="grams"  id="grams" class="form-control" cols="5" rows="10" placeholder="Grams"/>
+                        <input data-ng-model="food.saturatedFat" id="saturatedFat" class="form-control" cols="30" rows="10" placeholder="Saturated Fat"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="transfat">Trans Fat (g)</label>
+                    <div class="controls">
+                        <input data-ng-model="food.transfat" id="transfat" class="form-control" cols="30" rows="10" placeholder="Trans Fat"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="sodium">Sodium (mg)</label>
+                    <div class="controls">
+                        <input data-ng-model="food.sodium" id="sodium" class="form-control" cols="30" rows="10" placeholder="Sodium"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="cholesterol">Cholesterol (mg)</label>
+                    <div class="controls">
+                        <input data-ng-model="food.cholesterol" id="cholesterol" class="form-control" cols="30" rows="10" placeholder="Cholesterol"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="carbohydrates">Total Carbs (g)</label>
+                    <div class="controls">
+                        <input data-ng-model="food.carbohydrates" id="carbohydrates" class="form-control" cols="30" rows="10" placeholder="Carbohydrates"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="fiber">Fiber (g)</label>
+                    <div class="controls">
+                        <input data-ng-model="food.fiber" id="fiber" class="form-control" cols="30" rows="10" placeholder="Fiber"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="sugar">Sugar (g)</label>
+                    <div class="controls">
+                        <input data-ng-model="food.sugar" id="sugar" class="form-control" cols="30" rows="10" placeholder="Sugar"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="protein"> Protein (g)</label>
+                    <div class="controls">
+                        <input data-ng-model="food.protein" id="protein" class="form-control" cols="30" rows="10" placeholder="Protein"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="vitaminA">Vitamin A (%)</label>
+                    <div class="controls">
+                        <input data-ng-model="food.vitaminA" id="vitaminA" class="form-control" cols="30" rows="10" placeholder="Vitamin A"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="vitaminC">Vitamin C (%)</label>
+                    <div class="controls">
+                        <input data-ng-model="food.vitaminC" id="vitaminC" class="form-control" cols="30" rows="10" placeholder="Vitamin A"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="calcium">Calcium (%)</label>
+                    <div class="controls">
+                        <input data-ng-model="food.calcium" id="calcium" class="form-control" cols="30" rows="10" placeholder="Calcium"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="vitaminA">Iron (%)</label>
+                    <div class="controls">
+                        <input data-ng-model="food.iron" id="iron" class="form-control" cols="30" rows="10" placeholder="Iron"/>
                     </div>
                 </div>
 

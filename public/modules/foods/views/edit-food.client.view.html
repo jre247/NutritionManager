@@ -14,7 +14,16 @@
                 <div class="form-group">
                     <label class="control-label" for="type">Type</label>
                     <div class="controls">
-                        <input data-ng-model="food.type" id="type" class="form-control" cols="30" rows="10" placeholder="Type"/>
+                        <!--<input data-ng-model="food.type" id="type" class="form-control" cols="30" rows="10" placeholder="Type"/>-->
+                        <select id="type" ng-model="food.type"  ng-options="t.id as t.type for t in foodTypes" style="font-size: 16px;vertical-align: top;"></select>
+
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="groceryStore">Grocery Store</label>
+                    <div class="controls">
+                        <select id="groceryStore" ng-model="food.groceryStore"  ng-options="t.id as t.store for t in groceryStores" style="font-size: 16px;vertical-align: top;"></select>
+
                     </div>
                 </div>
                 <div class="form-group">
@@ -29,7 +38,6 @@
                         <input data-ng-model="food.calories" id="calories" class="form-control" cols="30" rows="10" placeholder="Calories"/>
                     </div>
                 </div>
-
                 <div class="form-group">
                     <label class="control-label" for="fat">Total Fat (g)</label>
                     <div class="controls">
@@ -54,7 +62,6 @@
                         <input data-ng-model="food.sodium" id="sodium" class="form-control" cols="30" rows="10" placeholder="Sodium"/>
                     </div>
                 </div>
-
                 <div class="form-group">
                     <label class="control-label" for="cholesterol">Cholesterol (mg)</label>
                     <div class="controls">
@@ -85,8 +92,6 @@
                         <input data-ng-model="food.protein" id="protein" class="form-control" cols="30" rows="10" placeholder="Protein"/>
                     </div>
                 </div>
-
-
                 <div class="form-group">
                     <label class="control-label" for="vitaminA">Vitamin A (%)</label>
                     <div class="controls">
