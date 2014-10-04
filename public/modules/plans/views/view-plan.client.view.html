@@ -429,8 +429,12 @@
                 <div class="list-group" style="margin-bottom: 0px; !important;" data-ng-repeat="food in foods">
                     <a class="list-group-item" data-ng-click="foodSelectionChange(food)">
                         <span data-ng-bind="food.name"></span>
+
                     </a>
                 </div>
+
+                <span style="color:blue;" data-ng-show="!foods || foods.length == 0">There are no foods returned</span>
+
                 <div style="margin-top: 10px;display:inline-block;margin-right: 5px;" data-ng-show="foods && skipFoods > 0">
                     <a data-ng-click="prevFoods();">Previous</a>
                 </div>
@@ -440,65 +444,84 @@
 
             </div>
             <div  data-ng-show="showFoodDetails">
-                <div style="display:inline-block;">
-                    <div style="font-weight: bold;">
-                        Servings:
+                <div style="display:inline-block">
+                    <div style="display:inline-block;">
+                        <div style="font-weight: bold;">
+                            Servings:
+                        </div>
+
+                        <input style="width: 80px;" data-ng-change="servingsChange()" data-ng-model="selected.servings" type="text"/>
+                    </div>
+                    <div style="margin-top: 20px;display:inline-block;padding-left:40px;">
+                        <div style="font-weight:bold;">Calories:</div>
+                        <span style="font-size: 18px;" data-ng-bind="selected.caloriesDisplay"></span>
                     </div>
 
-                    <input style="width: 80px;" data-ng-change="servingsChange()" data-ng-model="selected.servings" type="text"/>
-                </div>
-                <div style="margin-top: 20px;display:inline-block;padding-left:40px;">
-                    <div style="font-weight:bold;">Calories:</div>
-                    <span style="font-size: 18px;" data-ng-bind="selected.caloriesDisplay"></span>
+                    <div>
+                        <div style="padding-top: 7px;display:inline-block;">
+                            <div style="display:inline-block;padding-right:10px;">
+                                <div style="padding-top: 15px;color:rgb(36, 124, 36)">
+                                    <span style="font-weight:bold;">Total Fat:</span>
+                                    <span data-ng-bind="selected.fatDisplay"></span>g
+                                </div>
+                                <div style="margin-left: 20px;">
+                                    Saturated Fat:
+                                    <span data-ng-bind="selected.saturatedFatDisplay"></span>g
+                                </div>
+                                <div style="margin-left: 20px;">
+                                    <span>Cholesterol:</span>
+                                    <span data-ng-bind="selected.cholesterolDisplay"></span>mg
+                                </div>
+                                <div >
+                                    <span style="font-weight:bold;">Sodium:</span>
+                                    <span data-ng-bind="selected.sodiumDisplay"></span>mg
+                                </div>
+                            </div>
+                            <div style="display:inline-block;border-left: 1px solid lightgray;padding-left: 10px;">
+                                <div style="color:rgb(255, 127, 14)">
+                                    <span style="font-weight:bold;">Total Carbs:</span>
+                                    <span data-ng-bind="selected.carbsDisplay"></span>g
+                                </div>
+                                <div style="margin-left: 20px;">
+                                    Fiber:
+                                    <span data-ng-bind="selected.fiberDisplay"></span>g
+                                </div>
+                                <div style="margin-left: 20px;">
+                                    Sugar:
+                                    <span data-ng-bind="selected.sugarDisplay"></span>g
+                                </div>
+                                <div style="color:rgb(31, 119, 180)">
+                                    <span style="font-weight:bold;">Protein:</span>
+                                    <span data-ng-bind="selected.proteinDisplay"></span>g
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
                 </div>
 
-                <div style="padding-top: 7px;">
-                    <div style="display:inline-block;padding-right:10px;">
-                        <div style="padding-top: 15px;">
-                            <span style="font-weight:bold;">Total Fat:</span>
-                            <span data-ng-bind="selected.fatDisplay"></span>
-                        </div>
-                        <div style="margin-left: 20px;">
-                            Saturated Fat:
-                            <span data-ng-bind="selected.saturatedFatDisplay"></span>
-                        </div>
-                        <div style="margin-left: 20px;">
-                            <span>Cholesterol:</span>
-                            <span data-ng-bind="selected.cholesterolDisplay"></span>
-                        </div>
-                        <div >
-                            <span style="font-weight:bold;">Sodium:</span>
-                            <span data-ng-bind="selected.sodiumDisplay"></span>
-                        </div>
-                    </div>
-                    <div style="display:inline-block;border-left: 1px solid lightgray;padding-left: 10px;">
-                        <div >
-                            <span style="font-weight:bold;">Total Carbs:</span>
-                            <span data-ng-bind="selected.carbsDisplay"></span>
-                        </div>
-                        <div style="margin-left: 20px;">
-                            Fiber:
-                            <span data-ng-bind="selected.fiberDisplay"></span>
-                        </div>
-                        <div style="margin-left: 20px;">
-                            Sugar:
-                            <span data-ng-bind="selected.sugarDisplay"></span>
-                        </div>
-                        <div>
-                            <span style="font-weight:bold;">Protein:</span>
-                            <span data-ng-bind="selected.proteinDisplay"></span>
-                        </div>
-                    </div>
-                </div>
+
+                <div id="foodMacrosChart" style="display:inline-block;vertical-align: top;margin-left:40px;margin-top:10px;" ></div>
+
             </div>
+
+
+
+
+
         </div>
 
     </div>
+
+
     <div class="modal-footer">
         <button class="btn btn-primary" ng-click="ok()">OK</button>
         <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
     </div>
 </script>
+
+
 
 
     <script type="text/ng-template" id="myModalContent.html">

@@ -1094,6 +1094,8 @@ var CreateFoodModalInstanceCtrl = function ($scope, $modalInstance, parentScope,
         $scope.findFoodsByFirstLetter = false;
 
         $scope.calculateCaloriesDisplay();
+
+        showMacrosChart();
     };
 
     $scope.foodInputChange = function(){
@@ -1101,7 +1103,7 @@ var CreateFoodModalInstanceCtrl = function ($scope, $modalInstance, parentScope,
         $scope.findFoodsByFirstLetter = false;
 
         $scope.updateFoodList();
-    }
+    };
 
     $scope.updateFoodList = function(){
         if($scope.findFoodsByFirstLetter){
@@ -1156,6 +1158,22 @@ var CreateFoodModalInstanceCtrl = function ($scope, $modalInstance, parentScope,
     $scope.cancel = function () {
         $modalInstance.dismiss('cancel');
     };
+
+    var showMacrosChart = function() {
+        var config = {};
+        config.bindto = "#foodMacrosChart";
+        config.data = {};
+        config.data.json = {};
+        config.data.json.Protein = parseInt($scope.selected.proteinDisplay);
+        config.data.json.Carbs = parseInt($scope.selected.carbsDisplay);
+        config.data.json.Fat = parseInt($scope.selected.fatDisplay);
+        config.axis = {"y":{"label":{"text":"Macros","position":"outer-middle"}}};
+        config.data.types={"Protein":"pie", "Carbs": "pie", "Fat": "pie"};
+        config.size = {width: 217, height: 214};
+        $scope.chart = c3.generate(config);
+    };
+
+    window.setTimeout(function(){showMacrosChart()}, 300);
 };
 
 var NotesModalInstanceCtrl = function ($scope, $modalInstance, parentScope, planNotes) {
