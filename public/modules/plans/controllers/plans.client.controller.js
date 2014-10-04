@@ -159,6 +159,9 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
 
             var meal = $scope.plan.meals[$scope.plan.meals.length - 1];
 
+            $("html, body").animate({ scrollTop: $(document).height() }, 1000);
+            $("#content").animate({ scrollTop: $('#content').height() + 300 }, 1000);
+
             $scope.createFoodWithDialog(meal);
             //$scope.createFood(meal);
 
