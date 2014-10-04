@@ -159,7 +159,7 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
 
             var meal = $scope.plan.meals[$scope.plan.meals.length - 1];
 
-            $scope.createFood(meal);
+            //$scope.createFood(meal);
 
             //sortableEle.refresh();
         };
