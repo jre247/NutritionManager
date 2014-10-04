@@ -510,7 +510,10 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
                 setPlanDateFromUrlParam();
 
                 $scope.allFoods = Foods.query(function(){
-                    $scope.createMeal();
+                    window.setTimeout(function(){
+                        $scope.createMeal();
+                    }, 400);
+
                 });
 
                 fillActivityPlan();
@@ -1189,7 +1192,7 @@ var CreateFoodModalInstanceCtrl = function ($scope, $modalInstance, parentScope,
     if(!isCreateMeal && food) {
         window.setTimeout(function () {
             showMacrosChart()
-        }, 300);
+        }, 100);
     }
 };
 
