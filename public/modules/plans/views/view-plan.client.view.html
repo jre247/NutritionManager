@@ -109,45 +109,53 @@
 
                         <div class="planMealDesktop">
 
-                            <div style="display: inline-block;vertical-align: top">
-                                <input type="button"  data-ng-click="createFood(meal);" value="+"/>
-                                <!--<input type="button" style="margin-left:10px;"  data-ng-click="saveAll(meal);" value="Save All"/>-->
-                            </div>
+                            <!--<div class="plansDesktopGridBtn" style="vertical-align: top">-->
+                                <!--<input type="button"  data-ng-click="createFood(meal);" value="+"/>-->
+                                <!--&lt;!&ndash;<input type="button" style="margin-left:10px;"  data-ng-click="saveAll(meal);" value="Save All"/>&ndash;&gt;-->
+                            <!--</div>-->
+
+
+                            <input type="button"  data-ng-click="createFoodWithDialog(meal);" value="+"/>
+                            <!--<input type="button" style="margin-left:10px;"  data-ng-click="saveAll(meal);" value="Save All"/>-->
+
+
+
 
 
                             <input style="margin-left: 15px;float:right;" type="button" value="Delete Meal" data-ng-click="deleteMeal(meal);"/>
 
                             <input type="button" value="Suggest" style="margin-left: 10px;" data-ng-click="openSuggestionsDialog(meal)"/>
 
+
                             <div class="plansMobileGrid" style="margin-top: 5px;">
                                 <ul>
-                                    <li data-ng-repeat="food in meal.foods" data-ng-class="{mealSuggestedHighlight: food.IsSuggested}">
-                                        <div data-ng-show="food.isEditable">
-                                            <div class="controls">
-                                                <!--<select data-ng-model="food.selectedFood" data-ng-click="foodClick(food)"  data-ng-change="foodSelectionChange(food, meal)" data-ng-blur="foodBlur(food)" ng-options="f as f.name for f in allFoods"></select>-->
+                                    <li data-ng-click="createFoodWithDialog(meal, food);" data-ng-repeat="food in meal.foods" data-ng-class="{mealSuggestedHighlight: food.IsSuggested}">
+                                        <!--<div data-ng-show="food.isEditable">-->
+                                            <!--<div class="controls">-->
+                                                <!--&lt;!&ndash;<select data-ng-model="food.selectedFood" data-ng-click="foodClick(food)"  data-ng-change="foodSelectionChange(food, meal)" data-ng-blur="foodBlur(food)" ng-options="f as f.name for f in allFoods"></select>&ndash;&gt;-->
 
-                                                <input placeholder="Enter Food Name" style="width: 240px;" type="text" data-ng-change="updateFoods(food)" ng-model="food.selectedFood" typeahead="food as (food.name) for food in allFoodsInitial | filterFoodsByPartialText:$viewValue:food.selectedFood" />
+                                                <!--&lt;!&ndash;<input placeholder="Enter Food Name" style="width: 240px;" type="text" data-ng-change="updateFoods(food)" ng-model="food.selectedFood" typeahead="food as (food.name) for food in allFoodsInitial | filterFoodsByPartialText:$viewValue:food.selectedFood" />&ndash;&gt;-->
 
-                                                <span  class="deleteBtn" style="font-size: 16px;width: 15px;text-align: center;" data-ng-click="deleteFood(food, meal);">x</span>
-                                            </div>
+                                                <!--<span  class="deleteBtn" style="font-size: 16px;width: 15px;text-align: center;" data-ng-click="deleteFood(food, meal);">x</span>-->
+                                            <!--</div>-->
 
-                                            <div class="controls" style="padding-top: 3px;">
-                                                <label>Servings:</label>
-                                                <div style="display:inline-block; color: rgb(211, 139, 12)">
-                                                    <input data-ng-focus="food.hasFocus==true" data-ng-change="foodServingsChange(food, meal)" data-ng-click="foodClick(food)" data-ng-blur="foodBlur(food)" style="width: 60px;" data-ng-model="food.servings" id="servings_mobile" class="form-control" cols="3" rows="3"/>
-                                                </div>
-                                           </div>
-                                        </div>
-                                        <div data-ng-show="food.isEditable == false">
-                                            <div class="controls"   data-ng-click="editFoodClick(food)" style="font-weight: bold; font-size: 15px;">
+                                            <!--<div class="controls" style="padding-top: 3px;">-->
+                                                <!--<label>Servings:</label>-->
+                                                <!--<div style="display:inline-block; color: rgb(211, 139, 12)">-->
+                                                    <!--<input data-ng-change="foodServingsChange(food, meal)" data-ng-click="foodClick(food)"  style="width: 60px;" data-ng-model="food.servings" id="servings_mobile" class="form-control" cols="3" rows="3"/>-->
+                                                <!--</div>-->
+                                           <!--</div>-->
+                                        <!--</div>-->
+                                        <div>
+                                            <div class="controls"  style="font-weight: bold; font-size: 15px;">
                                                 <span data-ng-bind="food.name"></span>
 
                                                 <span class="deleteBtn" style="font-size: 16px;width: 15px;text-align: center;" data-ng-click="deleteFood(food, meal);">x</span>
 
 
                                             </div>
-                                            <div class="controls" data-ng-click="editFoodClick(food)" ng-blur="food.isEditable=false" style="color: rgb(211, 139, 12);padding-top: 3px;">
-                                                Servings: <span data-ng-click="food.hasFocus=true" data-ng-bind="food.servings"></span>
+                                            <div class="controls"  style="color: rgb(211, 139, 12);padding-top: 3px;">
+                                                Servings: <span data-ng-bind="food.servings"></span>
                                             </div>
 
                                         </div>
@@ -210,16 +218,16 @@
                                 </thead>
                                 <tbody>
 
-                                <tr height="35px"  data-ng-repeat="food in meal.foods" data-ng-class="{mealSuggestedHighlight: food.IsSuggested}" data-ng-click="editFoodClick(food)">
+                                <tr height="35px"  data-ng-repeat="food in meal.foods" data-ng-class="{mealSuggestedHighlight: food.IsSuggested}" data-ng-click="createFoodWithDialog(meal, food);">
                                     <td style="padding-right: 10px;">
-                                        <div class="controls" data-ng-show="food.isEditable">
-                                            <!--<select data-ng-model="food.selectedFood" data-ng-change="foodSelectionChange(food, meal)" data-ng-click="foodClick(food)"  ng-blur="foodBlur(food)" ng-options="f as f.name for f in allFoods"></select>-->
+                                        <!--<div class="controls" data-ng-show="food.isEditable">-->
+                                            <!--&lt;!&ndash;<select data-ng-model="food.selectedFood" data-ng-change="foodSelectionChange(food, meal)" data-ng-click="foodClick(food)"  ng-blur="foodBlur(food)" ng-options="f as f.name for f in allFoods"></select>&ndash;&gt;-->
 
-                                            <!--<autocomplete ng-model="food.selectedFood" data-ng-click="foodClick(food)"  data-ng-change="foodSelectionChange(food, meal)" data="foods" on-type="updateFoods"></autocomplete>-->
-                                            <input style="width: 240px;" placeholder="Enter Food Name" type="text" data-ng-change="updateFoods(food)" ng-model="food.selectedFood" typeahead="food as (food.name) for food in allFoodsInitial | filterFoodsByPartialText:$viewValue:food.selectedFood" />
-                                        </div>
+                                            <!--&lt;!&ndash;<autocomplete ng-model="food.selectedFood" data-ng-click="foodClick(food)"  data-ng-change="foodSelectionChange(food, meal)" data="foods" on-type="updateFoods"></autocomplete>&ndash;&gt;-->
+                                            <!--<input style="width: 240px;" placeholder="Enter Food Name" type="text" data-ng-change="updateFoods(food)" ng-model="food.selectedFood" typeahead="food as (food.name) for food in allFoodsInitial | filterFoodsByPartialText:$viewValue:food.selectedFood" />-->
+                                        <!--</div>-->
 
-                                        <div class="controls"  data-ng-show="food.isEditable == false" >
+                                        <div class="controls"   >
                                             <span data-ng-bind="food.selectedFood.name"></span>
                                             <!--<a data-ng-href="#!/foods/{{food.foodId}}">Food Details</a>-->
                                         </div>
@@ -230,11 +238,8 @@
                                         <!--</div>-->
                                     <!--</td>-->
                                     <td>
-                                        <div class="controls" style="width: 70px;" data-ng-show="food.isEditable">
-                                            <input  data-ng-change="foodServingsChange(food, meal)" data-ng-click="foodClick(food)" style="width: 60px;" data-ng-model="food.servings" id="servings" ng-blur="foodBlur(food)" class="form-control" cols="3" rows="3"/>
-                                        </div>
 
-                                        <div class="controls" style="width: 70px;" data-ng-show="food.isEditable == false">
+                                        <div class="controls" style="width: 70px;" >
                                             <span data-ng-bind="food.servings"></span>
                                         </div>
                                     </td>
@@ -397,6 +402,98 @@
 </div>
 
 
+<script type="text/ng-template" id="createFoodModalContent.html">
+    <div class="modal-header" style="font-family: segui;">
+        <h3 class="modal-title" data-ng-show="!showFoodDetails">Select Food To Add</h3>
+        <div data-ng-show="showFoodDetails" style="display:inline-block;">
+            <h3 class="modal-title" >
+                <span data-ng-bind="selected.foodToAdd.name"></span>
+
+            </h3>
+        </div>
+        <a data-ng-show="showFoodDetails" style="margin-left: 10px;"  data-ng-click="changeFood()">Change Food</a>
+    </div>
+    <div  style="font-family: segui;padding:10px;" >
+        <div style="display:inline-block;">
+            <div data-ng-show="!showFoodDetails">
+                <div style="margin-bottom: 20px;">
+
+
+                    <!--<input placeholder="Enter Food Name" style="width: 240px;" type="text" data-ng-change="updateFoodDetails()" ng-model="selected.foodToAdd" typeahead="food as (food.name) for food in allFoodsInitial | filterFoodsByPartialText:$viewValue:food.selectedFood" />-->
+
+                    <input placeholder="Enter Food Name" style="width: 170px;" type="text" data-ng-change="updateFoodList()" data-ng-model="selected.foodSearchTxt"  />
+                </div>
+
+                <div class="list-group" style="margin-bottom: 0px; !important;" data-ng-repeat="food in foods">
+                    <a class="list-group-item" data-ng-click="foodSelectionChange(food)">
+                        <span data-ng-bind="food.name"></span>
+                    </a>
+                </div>
+            </div>
+            <div  data-ng-show="showFoodDetails">
+                <!--<h3 style="margin-bottom: 10px;">-->
+                    <!--<span data-ng-bind="selected.foodToAdd.name"></span>-->
+                <!--</h3>-->
+
+                <div style="display:inline-block;">
+                    <div style="font-weight: bold;">
+                        Servings:
+                    </div>
+
+                    <input style="width: 80px;" data-ng-change="servingsChange()" data-ng-model="selected.servings" type="text"/>
+                </div>
+                <div style="margin-top: 20px;display:inline-block;padding-left:40px;">
+                    <div style="font-weight:bold;">Calories:</div>
+                    <span style="font-size: 18px;" data-ng-bind="selected.caloriesDisplay"></span>
+                </div>
+
+                <div style="padding-top: 7px;">
+                    <div style="display:inline-block;padding-right:15px;">
+                        <div style="padding-top: 15px;">
+                            <span style="font-weight:bold;">Total Fat:</span>
+                            <span data-ng-bind="selected.fatDisplay"></span>
+                        </div>
+                        <div style="margin-left: 20px;">
+                            Saturated Fat:
+                            <span data-ng-bind="selected.saturatedFatDisplay"></span>
+                        </div>
+                        <div style="margin-left: 20px;">
+                            <span>Cholesterol:</span>
+                            <span data-ng-bind="selected.cholesterolDisplay"></span>
+                        </div>
+                        <div >
+                            <span style="font-weight:bold;">Sodium:</span>
+                            <span data-ng-bind="selected.sodiumDisplay"></span>
+                        </div>
+                    </div>
+                    <div style="display:inline-block;border-left: 1px solid lightgray;padding-left: 15px;">
+                        <div >
+                            <span style="font-weight:bold;">Total Carbs:</span>
+                            <span data-ng-bind="selected.carbsDisplay"></span>
+                        </div>
+                        <div style="margin-left: 20px;">
+                            Fiber:
+                            <span data-ng-bind="selected.fiberDisplay"></span>
+                        </div>
+                        <div style="margin-left: 20px;">
+                            Sugar:
+                            <span data-ng-bind="selected.sugarDisplay"></span>
+                        </div>
+                        <div>
+                            <span style="font-weight:bold;">Protein:</span>
+                            <span data-ng-bind="selected.proteinDisplay"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" ng-click="ok()">OK</button>
+        <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+    </div>
+</script>
 
 
     <script type="text/ng-template" id="myModalContent.html">

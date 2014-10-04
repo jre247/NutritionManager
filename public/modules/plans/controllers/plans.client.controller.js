@@ -265,6 +265,8 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
             //$scope.currentDeficit = CoreUtilities.calculateDeficit($scope.plan, $scope.activityPlan, $scope.nutritionProfile);
         };
 
+
+
         $scope.saveFood = function(food){
             food.isEditable = false;
         };
@@ -858,6 +860,84 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
             });
         };
 
+        $scope.createFoodWithDialog = function(meal, food){
+            var modalInstance = $modal.open({
+                templateUrl: 'createFoodModalContent.html',
+                controller: CreateFoodModalInstanceCtrl,
+
+                resolve: {
+                    parentScope: function () {
+                        return $scope;
+                    },
+                    meal: function(){
+                        return meal
+                    },
+                    food: function(){
+                        return food;
+                    },
+                    CoreUtilities: function(){
+                        return CoreUtilities;
+                    }
+                }
+            });
+
+            modalInstance.result.then(function (selected) {
+                var food = selected.foodToAdd;
+                var isUpdate = selected.isUpdate;
+                food.servings = selected.servings;
+
+                food.isEditable = false;
+
+                if(isUpdate) {
+                    if(selected.oldFood._id !== food._id) {
+                        food.selectedFood = {
+                            _id: food._id,
+                            name: food.name,
+                            calories: food.calories,
+                            carbohydrates: food.carbohydrates,
+                            protein: food.protein,
+                            fat: food.fat,
+                            sodium: food.sodium,
+                            grams: food.grams,
+                            cholesterol: food.cholesterol,
+                            saturatedFat: food.saturatedFat,
+                            sugar: food.sugar,
+                            fiber: food.fiber
+                        };
+                    }
+
+                    for(var m = 0; m < meal.foods.length; m++){
+                        if (meal.foods[m]._id === selected.oldFood._id){
+                            meal.foods[m] = food;
+                            break;
+                        }
+                    }
+                }
+                else {
+                    food.selectedFood = {
+                        _id: food._id,
+                        name: food.name,
+                        calories: food.calories,
+                        carbohydrates: food.carbohydrates,
+                        protein: food.protein,
+                        fat: food.fat,
+                        sodium: food.sodium,
+                        grams: food.grams,
+                        cholesterol: food.cholesterol,
+                        saturatedFat: food.saturatedFat,
+                        sugar: food.sugar,
+                        fiber: food.fiber
+                    };
+
+                    meal.foods.push(food);
+                }
+
+                $scope.foodServingsChange(food, meal);
+            }, function () {
+                $log.info('Modal dismissed at: ' + new Date());
+            });
+        };
+
         $scope.openNotesDialog = function (notes) {
             var modalInstance = $modal.open({
                 templateUrl: 'notesModalContent.html',
@@ -882,6 +962,130 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
         }
 	}
 ]);
+
+
+var CreateFoodModalInstanceCtrl = function ($scope, $modalInstance, parentScope, meal, food, CoreUtilities) {
+    $scope.foodToAdd = food;
+    $scope.parentScope = parentScope;
+    $scope.meal = meal;
+    $scope.isUpdate = food !== 'undefined' && food !== null && food !== 'null' && food !== undefined;
+    $scope.servings = 1;
+    window.scope = $scope;
+    $scope.showFoodDetails = $scope.isUpdate ? true : false;
+    $scope.foods = [];
+    $scope.foodSearchTxt = null;
+    $scope.CoreUtilities = CoreUtilities;
+
+    if($scope.foodToAdd) {
+        $scope.caloriesDisplay = $scope.foodToAdd.selectedFood ? $scope.foodToAdd.selectedFood.calories : $scope.foodToAdd.calories;
+    }
+
+
+
+    $scope.selected = {
+        showFoodDetails: $scope.showFoodDetails,
+        foodToAdd: $scope.foodToAdd,
+        oldFood: food,
+        isUpdate: $scope.isUpdate,
+        servings: $scope.servings,
+        foodSearchTxt: $scope.foodSearchTxt,
+
+        caloriesDisplay: $scope.caloriesDisplay,
+        proteinDisplay: $scope.proteinDisplay,
+        fatDisplay: $scope.fatDisplay,
+        carbsDisplay: $scope.carbsDisplay,
+        gramsDisplay: $scope.gramsDisplay,
+        sodiumDisplay: $scope.sodiumDisplay,
+        fiberDisplay: $scope.fiberDisplay,
+        cholesterolDisplay: $scope.cholesterolDisplay,
+        sugarDisplay: $scope.sugarDisplay,
+        saturatedFat: $scope.saturatedFat
+
+
+    };
+
+    $scope.changeFood = function(){
+        $scope.showFoodDetails = false;
+    };
+
+    CoreUtilities.getFoods('null').then(function(data){
+        $scope.foods = data;
+    });
+
+    $scope.calculateCaloriesDisplay = function(){
+        var caloriesDisplay = 0, proteinDisplay = 0, fatDisplay = 0, sodiumDisplay = 0, gramsDisplay = 0,
+            carbsDisplay = 0, saturatedFatDisplay = 0, cholesterolDisplay = 0, fiberDisplay = 0, sugarDisplay = 0;
+
+        if($scope.selected.foodToAdd && $scope.selected.servings > 0) {
+
+            caloriesDisplay = $scope.selected.foodToAdd.selectedFood ? parseInt($scope.selected.servings) * $scope.selected.foodToAdd.selectedFood.calories : parseInt($scope.selected.servings) * $scope.selected.foodToAdd.calories;
+            proteinDisplay = $scope.selected.foodToAdd.selectedFood ? parseInt($scope.selected.servings) * $scope.selected.foodToAdd.selectedFood.protein : parseInt($scope.selected.servings) * $scope.selected.foodToAdd.protein;
+            fatDisplay = $scope.selected.foodToAdd.selectedFood ? parseInt($scope.selected.servings) * $scope.selected.foodToAdd.selectedFood.fat : parseInt($scope.selected.servings) * $scope.selected.foodToAdd.fat;
+            sodiumDisplay = $scope.selected.foodToAdd.selectedFood ? parseInt($scope.selected.servings) * $scope.selected.foodToAdd.selectedFood.sodium : parseInt($scope.selected.servings) * $scope.selected.foodToAdd.sodium;
+            gramsDisplay = $scope.selected.foodToAdd.selectedFood ? parseInt($scope.selected.servings) * $scope.selected.foodToAdd.selectedFood.grams : parseInt($scope.selected.servings) * $scope.selected.foodToAdd.grams;
+            carbsDisplay = $scope.selected.foodToAdd.selectedFood ? parseInt($scope.selected.servings) * $scope.selected.foodToAdd.selectedFood.carbohydrates : parseInt($scope.selected.servings) * $scope.selected.foodToAdd.carbohydrates;
+            saturatedFatDisplay = $scope.selected.foodToAdd.selectedFood ? parseInt($scope.selected.servings) * $scope.selected.foodToAdd.selectedFood.saturatedFat : parseInt($scope.selected.servings) * $scope.selected.foodToAdd.saturatedFat;
+            cholesterolDisplay = $scope.selected.foodToAdd.selectedFood ? parseInt($scope.selected.servings) * $scope.selected.foodToAdd.selectedFood.cholesterol : parseInt($scope.selected.servings) * $scope.selected.foodToAdd.cholesterol;
+            sodiumDisplay = $scope.selected.foodToAdd.selectedFood ? parseInt($scope.selected.servings) * $scope.selected.foodToAdd.selectedFood.sodium : parseInt($scope.selected.servings) * $scope.selected.foodToAdd.sodium;
+            fiberDisplay = $scope.selected.foodToAdd.selectedFood ? parseInt($scope.selected.servings) * $scope.selected.foodToAdd.selectedFood.fiber : parseInt($scope.selected.servings) * $scope.selected.foodToAdd.fiber;
+            sugarDisplay = $scope.selected.foodToAdd.selectedFood ? parseInt($scope.selected.servings) * $scope.selected.foodToAdd.selectedFood.sugar : parseInt($scope.selected.servings) * $scope.selected.foodToAdd.sugar;
+
+        }
+
+        $scope.selected.caloriesDisplay = caloriesDisplay;
+        $scope.selected.proteinDisplay = proteinDisplay;
+        $scope.selected.fatDisplay = fatDisplay;
+        $scope.selected.sodiumDisplay = sodiumDisplay;
+        $scope.selected.gramsDisplay = gramsDisplay;
+        $scope.selected.carbsDisplay = carbsDisplay;
+        $scope.selected.saturatedFatDisplay = saturatedFatDisplay;
+        $scope.selected.cholesterolDisplay = cholesterolDisplay;
+        $scope.selected.sodiumDisplay = sodiumDisplay;
+        $scope.selected.fiberDisplay = fiberDisplay;
+        $scope.selected.sugarDisplay = sugarDisplay;
+    };
+
+    $scope.foodSelectionChange = function(food){
+        $scope.selected.foodToAdd = food;
+        $scope.showFoodDetails = true;
+
+        $scope.calculateCaloriesDisplay();
+    };
+
+    $scope.updateFoodList = function(){
+        var foodSearchTxt = $scope.selected.foodSearchTxt;
+        //$scope.calculateCaloriesDisplay();
+        if(!foodSearchTxt){
+            foodSearchTxt = 'null';
+        }
+
+        CoreUtilities.getFoods(foodSearchTxt).then(function(data){
+            $scope.foods = data;
+        });
+    };
+
+
+    $scope.servingsChange = function(){
+        $scope.calculateCaloriesDisplay();
+    };
+
+    if($scope.isUpdate){
+        $scope.selected.servings = food.servings;
+
+        $scope.calculateCaloriesDisplay();
+
+    };
+
+
+
+    $scope.ok = function () {
+        $modalInstance.close($scope.selected);
+    };
+
+    $scope.cancel = function () {
+        $modalInstance.dismiss('cancel');
+    };
+};
 
 var NotesModalInstanceCtrl = function ($scope, $modalInstance, parentScope, planNotes) {
     $scope.notesToSave = null;
