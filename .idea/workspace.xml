@@ -57,8 +57,8 @@
       <file leaf-file-name="view-plan.client.view.html" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/public/modules/plans/views/view-plan.client.view.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.4674221" vertical-offset="5505" max-vertical-offset="8640">
-              <caret line="378" column="47" selection-start-line="378" selection-start-column="47" selection-end-line="378" selection-end-column="47" />
+            <state vertical-scroll-proportion="0.6175637" vertical-offset="6232" max-vertical-offset="8535">
+              <caret line="430" column="102" selection-start-line="430" selection-start-column="102" selection-end-line="430" selection-end-column="102" />
               <folding>
                 <element signature="n#style#0;n#div#1;n#fieldset#0;n#form#0;n#div#0;n#section#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#div#2;n#fieldset#0;n#form#0;n#div#0;n#section#0;n#!!top" expanded="true" />
@@ -1289,8 +1289,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/public/modules/plans/views/view-plan.client.view.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.4674221" vertical-offset="5505" max-vertical-offset="8640">
-          <caret line="378" column="47" selection-start-line="378" selection-start-column="47" selection-end-line="378" selection-end-column="47" />
+        <state vertical-scroll-proportion="0.6175637" vertical-offset="6232" max-vertical-offset="8535">
+          <caret line="430" column="102" selection-start-line="430" selection-start-column="102" selection-end-line="430" selection-end-column="102" />
           <folding>
             <element signature="n#style#0;n#div#1;n#fieldset#0;n#form#0;n#div#0;n#section#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#2;n#fieldset#0;n#form#0;n#div#0;n#section#0;n#!!top" expanded="true" />
