@@ -185,7 +185,7 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
 
 
 
-        $scope.deleteMeal = function(meal){
+        $scope.deleteMeal = function(meal, isMobileDevice){
             if (confirm("Are you sure you want to delete this meal?")) {
                 for (var i in $scope.plan.meals) {
                     if ($scope.plan.meals[i] === meal) {
@@ -197,6 +197,10 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
 
                 //calculate changed deficit
                 $scope.currentDeficit = CoreUtilities.calculateDeficit($scope.plan, $scope.activityPlan, $scope.nutritionProfile);
+
+                if(isMobileDevice){
+                    $scope.savePlan(true);
+                }
             }
         };
 
@@ -310,7 +314,7 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
             setSelectedFood(food);
         };
 
-        $scope.deleteFood = function(food, meal){
+        $scope.deleteFood = function(food, meal, isMobileDevice){
             if (confirm("Are you sure you want to delete this food?")) {
                 for (var nMeal = 0; nMeal < $scope.plan.meals.length; nMeal++) {
                     if ($scope.plan.meals[nMeal] === meal) {
@@ -328,6 +332,10 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
 
                 //calculate changed deficit
                 $scope.currentDeficit = CoreUtilities.calculateDeficit($scope.plan, $scope.activityPlan, $scope.nutritionProfile);
+
+                if(isMobileDevice){
+                    $scope.savePlan(true);
+                }
             }
 
         };
@@ -348,7 +356,7 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
 			}
 		};
 
-        $scope.savePlan = function(callback){
+        $scope.savePlan = function(isMobileDevice){
           $scope.showPlanEditableErrorMsg = false;
 
           for(var i = 0; i < $scope.plan.meals.length; i++){
@@ -367,7 +375,7 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
               $scope.create();
           }
             else{
-              $scope.update();
+              $scope.update(isMobileDevice);
           }
 
             //callback();
@@ -384,7 +392,7 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
             }
         };
 
-		$scope.update = function() {
+		$scope.update = function(isMobileDevice) {
 			var plan = $scope.plan;
 
             var planDateAsString = new Date($scope.plan.planDateNonUtc).toUTCString();
@@ -416,9 +424,13 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
                 //calculate changed deficit
                 $scope.currentDeficit = CoreUtilities.calculateDeficit($scope.plan, $scope.activityPlan, $scope.nutritionProfile);
 
-                $scope.success = true;
+                if(!isMobileDevice) {
+                    $scope.success = true;
+                    $timeout(function () {
+                        $scope.success = false;
+                    }, 3000);
+                }
 
-                $timeout(function(){$scope.success = false;}, 3000);
                 $timeout(function(){$scope.setSorting();}, 100);
 
 			}, function(errorResponse) {
@@ -869,7 +881,7 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
             });
         };
 
-        $scope.createFoodWithDialog = function(meal, food, isCreateMeal){
+        $scope.createFoodWithDialog = function(meal, food, isCreateMeal, isMobileDevice){
             var modalInstance = $modal.open({
                 templateUrl: 'createFoodModalContent.html',
                 controller: CreateFoodModalInstanceCtrl,
@@ -945,6 +957,10 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
 
                 if(isCreateMeal) {
                     scrollToBottom();
+                }
+
+                if(isMobileDevice){
+                    $scope.savePlan(true);
                 }
             }, function () {
                 $log.info('Modal dismissed at: ' + new Date());
