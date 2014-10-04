@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="99afd44b-0014-4bff-855e-4d01f0b1305f" name="Default" comment="create plan page is close to finished. Now trying to wire up view/edit plan page. Trying to make it all common html.">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/modules/foods/views/view-food.client.view.html" afterPath="$PROJECT_DIR$/public/modules/foods/views/view-food.client.view.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/modules/plans/views/view-plan.client.view.html" afterPath="$PROJECT_DIR$/public/modules/plans/views/view-plan.client.view.html" />
     </list>
     <ignored path="NutritionManager.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -56,11 +56,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="view-plan.client.view.html" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="view-plan.client.view.html" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/public/modules/plans/views/view-plan.client.view.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-2.34" vertical-offset="363" max-vertical-offset="8580">
-              <caret line="32" column="168" selection-start-line="32" selection-start-column="158" selection-end-line="32" selection-end-column="168" />
+            <state vertical-scroll-proportion="0.45892352" vertical-offset="6648" max-vertical-offset="8580">
+              <caret line="527" column="30" selection-start-line="527" selection-start-column="30" selection-end-line="527" selection-end-column="30" />
               <folding>
                 <element signature="n#style#0;n#section#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#div#0;n#fieldset#0;n#form#0;n#div#0;n#section#0;n#!!top" expanded="true" />
@@ -148,10 +148,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="foods.client.controller.js" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="foods.client.controller.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/modules/foods/controllers/foods.client.controller.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.33333334" vertical-offset="2540" max-vertical-offset="3180">
+            <state vertical-scroll-proportion="-5.0" vertical-offset="2540" max-vertical-offset="3180">
               <caret line="178" column="36" selection-start-line="178" selection-start-column="25" selection-end-line="178" selection-end-column="36" />
               <folding />
             </state>
@@ -243,11 +243,11 @@
         <option value="$PROJECT_DIR$/app/routes/foods.server.routes.js" />
         <option value="$PROJECT_DIR$/public/modules/core/services/core.utilities.service.js" />
         <option value="$PROJECT_DIR$/app/controllers/foods.server.controller.js" />
-        <option value="$PROJECT_DIR$/public/modules/plans/views/view-plan.client.view.html" />
         <option value="$PROJECT_DIR$/app/views/layout.server.view.html" />
         <option value="$PROJECT_DIR$/public/modules/plans/controllers/plans.client.controller.js" />
         <option value="$PROJECT_DIR$/public/dist/application.min.js" />
         <option value="$PROJECT_DIR$/public/modules/foods/views/view-food.client.view.html" />
+        <option value="$PROJECT_DIR$/public/modules/plans/views/view-plan.client.view.html" />
       </list>
     </option>
   </component>
@@ -1398,10 +1398,59 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/public/modules/plans/controllers/plans.client.controller.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-11.615385" vertical-offset="12433" max-vertical-offset="15870">
+          <caret line="971" column="18" selection-start-line="971" selection-start-column="18" selection-end-line="971" selection-end-column="37" />
+          <folding>
+            <element signature="e#24149#24492#0" expanded="false" />
+            <element signature="e#24540#25083#0" expanded="false" />
+            <element signature="e#28782#30813#0" expanded="false" />
+            <element signature="e#30871#32345#0" expanded="false" />
+            <element signature="e#30917#31697#0" expanded="false" />
+            <element signature="e#38678#42753#0" expanded="false" />
+            <element signature="e#45349#45710#0" expanded="false" />
+            <element signature="e#45824#48207#0" expanded="false" />
+            <element signature="e#46971#47480#0" expanded="false" />
+            <element signature="e#48352#51232#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/dist/application.min.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-5.9615383" vertical-offset="18580" max-vertical-offset="76830">
+          <caret line="1249" column="18" selection-start-line="1249" selection-start-column="18" selection-end-line="1249" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/modules/foods/views/view-food.client.view.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-5.06" vertical-offset="3452" max-vertical-offset="3840">
+          <caret line="247" column="91" selection-start-line="247" selection-start-column="80" selection-end-line="247" selection-end-column="91" />
+          <folding>
+            <element signature="n#style#0;n#div#1;n#section#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#input#0;n#div#1;n#section#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#2;n#section#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#3;n#section#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#4;n#section#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/modules/foods/controllers/foods.client.controller.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-5.0" vertical-offset="2540" max-vertical-offset="3180">
+          <caret line="178" column="36" selection-start-line="178" selection-start-column="25" selection-end-line="178" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/public/modules/plans/views/view-plan.client.view.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-2.34" vertical-offset="363" max-vertical-offset="8580">
-          <caret line="32" column="168" selection-start-line="32" selection-start-column="158" selection-end-line="32" selection-end-column="168" />
+        <state vertical-scroll-proportion="0.45892352" vertical-offset="6648" max-vertical-offset="8580">
+          <caret line="527" column="30" selection-start-line="527" selection-start-column="30" selection-end-line="527" selection-end-column="30" />
           <folding>
             <element signature="n#style#0;n#section#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#0;n#fieldset#0;n#form#0;n#div#0;n#section#0;n#!!top" expanded="true" />
@@ -1485,55 +1534,6 @@
             <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#section#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#input#0;n#div#0;n#div#0;n#div#0;n#section#0;n#!!top" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/modules/plans/controllers/plans.client.controller.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-11.615385" vertical-offset="12433" max-vertical-offset="15870">
-          <caret line="971" column="18" selection-start-line="971" selection-start-column="18" selection-end-line="971" selection-end-column="37" />
-          <folding>
-            <element signature="e#24149#24492#0" expanded="false" />
-            <element signature="e#24540#25083#0" expanded="false" />
-            <element signature="e#28782#30813#0" expanded="false" />
-            <element signature="e#30871#32345#0" expanded="false" />
-            <element signature="e#30917#31697#0" expanded="false" />
-            <element signature="e#38678#42753#0" expanded="false" />
-            <element signature="e#45349#45710#0" expanded="false" />
-            <element signature="e#45824#48207#0" expanded="false" />
-            <element signature="e#46971#47480#0" expanded="false" />
-            <element signature="e#48352#51232#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/dist/application.min.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.9615383" vertical-offset="18580" max-vertical-offset="76830">
-          <caret line="1249" column="18" selection-start-line="1249" selection-start-column="18" selection-end-line="1249" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/modules/foods/views/view-food.client.view.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.06" vertical-offset="3452" max-vertical-offset="3840">
-          <caret line="247" column="91" selection-start-line="247" selection-start-column="80" selection-end-line="247" selection-end-column="91" />
-          <folding>
-            <element signature="n#style#0;n#div#1;n#section#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#input#0;n#div#1;n#section#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#2;n#section#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#3;n#section#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#4;n#section#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/modules/foods/controllers/foods.client.controller.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33333334" vertical-offset="2540" max-vertical-offset="3180">
-          <caret line="178" column="36" selection-start-line="178" selection-start-column="25" selection-end-line="178" selection-end-column="36" />
-          <folding />
         </state>
       </provider>
     </entry>
