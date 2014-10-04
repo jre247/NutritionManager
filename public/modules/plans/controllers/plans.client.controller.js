@@ -897,11 +897,18 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
                     },
                     CoreUtilities: function(){
                         return CoreUtilities;
+                    },
+                    isCreateMeal: function(){
+                        return isCreateMeal;
+                    },
+                    mealTypes: function(){
+                        return $scope.mealTypes;
                     }
                 }
             });
 
             modalInstance.result.then(function (selected) {
+                meal.isEditable = false;
                 var food = selected.foodToAdd;
                 var isUpdate = selected.isUpdate;
                 food.servings = selected.servings;
@@ -955,6 +962,7 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
                 $scope.foodServingsChange(food, meal);
 
                 if(isCreateMeal) {
+                    meal.type = selected.mealType;
                     scrollToBottom();
                 }
 
@@ -992,7 +1000,7 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
 ]);
 
 
-var CreateFoodModalInstanceCtrl = function ($scope, $modalInstance, parentScope, meal, food, CoreUtilities) {
+var CreateFoodModalInstanceCtrl = function ($scope, $modalInstance, parentScope, meal, food, CoreUtilities, isCreateMeal, mealTypes) {
     $scope.foodToAdd = food;
     $scope.parentScope = parentScope;
     $scope.meal = meal;
@@ -1005,6 +1013,9 @@ var CreateFoodModalInstanceCtrl = function ($scope, $modalInstance, parentScope,
     $scope.CoreUtilities = CoreUtilities;
     $scope.skipFoods = 0;
     $scope.findFoodsByFirstLetter = false;
+    $scope.mealTypes = mealTypes;
+    $scope.showCreateMealSection = isCreateMeal;
+
 
     if($scope.foodToAdd) {
         $scope.caloriesDisplay = $scope.foodToAdd.selectedFood ? $scope.foodToAdd.selectedFood.calories : $scope.foodToAdd.calories;
@@ -1039,7 +1050,9 @@ var CreateFoodModalInstanceCtrl = function ($scope, $modalInstance, parentScope,
         fiberDisplay: $scope.fiberDisplay,
         cholesterolDisplay: $scope.cholesterolDisplay,
         sugarDisplay: $scope.sugarDisplay,
-        saturatedFat: $scope.saturatedFat
+        saturatedFat: $scope.saturatedFat,
+
+        mealTypes: $scope.mealTypes
 
 
     };
@@ -1173,7 +1186,11 @@ var CreateFoodModalInstanceCtrl = function ($scope, $modalInstance, parentScope,
         $scope.chart = c3.generate(config);
     };
 
-    window.setTimeout(function(){showMacrosChart()}, 300);
+    if(!isCreateMeal && food) {
+        window.setTimeout(function () {
+            showMacrosChart()
+        }, 300);
+    }
 };
 
 var NotesModalInstanceCtrl = function ($scope, $modalInstance, parentScope, planNotes) {
