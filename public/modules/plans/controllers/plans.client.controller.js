@@ -169,7 +169,7 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
 
         var scrollToBottom = function(){
             $("html, body").animate({ scrollTop: $(document).height() }, 1000);
-            $("#content").animate({ scrollTop: $('#content').height() + 300 }, 1000);
+            $("#content").animate({ scrollTop: $('#content').height() + 700 }, 1000);
 
         };
 
@@ -1043,17 +1043,17 @@ var CreateFoodModalInstanceCtrl = function ($scope, $modalInstance, parentScope,
 
         }
 
-        $scope.selected.caloriesDisplay = caloriesDisplay.toFixed(1);
-        $scope.selected.proteinDisplay = proteinDisplay.toFixed(1);
-        $scope.selected.fatDisplay = fatDisplay.toFixed(1);
-        $scope.selected.sodiumDisplay = sodiumDisplay.toFixed(1);
-        $scope.selected.gramsDisplay = gramsDisplay.toFixed(1);
-        $scope.selected.carbsDisplay = carbsDisplay.toFixed(1);
-        $scope.selected.saturatedFatDisplay = saturatedFatDisplay.toFixed(1);
-        $scope.selected.cholesterolDisplay = cholesterolDisplay.toFixed(1);
-        $scope.selected.sodiumDisplay = sodiumDisplay.toFixed(1);
-        $scope.selected.fiberDisplay = fiberDisplay.toFixed(1);
-        $scope.selected.sugarDisplay = sugarDisplay.toFixed(1);
+        $scope.selected.caloriesDisplay = caloriesDisplay % 1 != 0 ? caloriesDisplay.toFixed(1) : caloriesDisplay;
+        $scope.selected.proteinDisplay = proteinDisplay % 1 != 0 ? proteinDisplay.toFixed(1) : proteinDisplay;
+        $scope.selected.fatDisplay = fatDisplay % 1 != 0 ? fatDisplay.toFixed(1) : fatDisplay;
+        $scope.selected.sodiumDisplay = sodiumDisplay % 1 != 0 ? sodiumDisplay.toFixed(1) : sodiumDisplay;
+        $scope.selected.gramsDisplay = gramsDisplay % 1 != 0 ? gramsDisplay.toFixed(1) : gramsDisplay;
+        $scope.selected.carbsDisplay = carbsDisplay % 1 != 0 ? carbsDisplay.toFixed(1) : carbsDisplay;
+        $scope.selected.saturatedFatDisplay = saturatedFatDisplay % 1 != 0 ? saturatedFatDisplay.toFixed(1) : saturatedFatDisplay;
+        $scope.selected.cholesterolDisplay = cholesterolDisplay % 1 != 0 ? cholesterolDisplay.toFixed(1) : cholesterolDisplay;
+        $scope.selected.sodiumDisplay = sodiumDisplay % 1 != 0 ? sodiumDisplay.toFixed(1) : sodiumDisplay;
+        $scope.selected.fiberDisplay = fiberDisplay % 1 != 0 ? fiberDisplay.toFixed(1) : fiberDisplay;
+        $scope.selected.sugarDisplay = sugarDisplay % 1 != 0 ? sugarDisplay.toFixed(1) : sugarDisplay;
     };
 
     $scope.foodSelectionChange = function(food){
