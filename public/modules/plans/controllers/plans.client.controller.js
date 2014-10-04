@@ -356,7 +356,7 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
 			}
 		};
 
-        $scope.savePlan = function(isMobileDevice){
+        $scope.savePlan = function(){
           $scope.showPlanEditableErrorMsg = false;
 
           for(var i = 0; i < $scope.plan.meals.length; i++){
@@ -375,7 +375,7 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
               $scope.create();
           }
             else{
-              $scope.update(isMobileDevice);
+              $scope.update();
           }
 
             //callback();
@@ -392,7 +392,7 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
             }
         };
 
-		$scope.update = function(isMobileDevice) {
+		$scope.update = function() {
 			var plan = $scope.plan;
 
             var planDateAsString = new Date($scope.plan.planDateNonUtc).toUTCString();
@@ -424,12 +424,11 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
                 //calculate changed deficit
                 $scope.currentDeficit = CoreUtilities.calculateDeficit($scope.plan, $scope.activityPlan, $scope.nutritionProfile);
 
-                if(!isMobileDevice) {
-                    $scope.success = true;
-                    $timeout(function () {
-                        $scope.success = false;
-                    }, 3000);
-                }
+                $scope.success = true;
+                $timeout(function () {
+                    $scope.success = false;
+                }, 3000);
+
 
                 $timeout(function(){$scope.setSorting();}, 100);
 
