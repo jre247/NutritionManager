@@ -1003,12 +1003,23 @@ var CreateFoodModalInstanceCtrl = function ($scope, $modalInstance, parentScope,
     $scope.foods = [];
     $scope.foodSearchTxt = null;
     $scope.CoreUtilities = CoreUtilities;
+    $scope.skipFoods = 0;
 
     if($scope.foodToAdd) {
         $scope.caloriesDisplay = $scope.foodToAdd.selectedFood ? $scope.foodToAdd.selectedFood.calories : $scope.foodToAdd.calories;
     }
 
+    $scope.nextFoods = function(){
+        $scope.skipFoods += 9;
 
+        $scope.updateFoodList();
+    };
+
+    $scope.prevFoods = function(){
+        $scope.skipFoods -= 9;
+
+        $scope.updateFoodList();
+    };
 
     $scope.selected = {
         showFoodDetails: $scope.showFoodDetails,
@@ -1077,6 +1088,8 @@ var CreateFoodModalInstanceCtrl = function ($scope, $modalInstance, parentScope,
         $scope.selected.foodToAdd = food;
         $scope.showFoodDetails = true;
 
+        $scope.skipFoods = 0;
+
         $scope.calculateCaloriesDisplay();
     };
 
@@ -1087,7 +1100,17 @@ var CreateFoodModalInstanceCtrl = function ($scope, $modalInstance, parentScope,
             foodSearchTxt = 'null';
         }
 
-        CoreUtilities.getFoods(foodSearchTxt).then(function(data){
+        CoreUtilities.getFoods(foodSearchTxt, $scope.skipFoods).then(function(data){
+            $scope.foods = data;
+        });
+    };
+
+    $scope.findFoodsByLetter = function(letter){
+        $scope.skipFoods = 0;
+
+        $scope.selected.foodSearchTxt = letter;
+
+        CoreUtilities.getFoods(letter, $scope.skipFoods, true).then(function(data){
             $scope.foods = data;
         });
     };

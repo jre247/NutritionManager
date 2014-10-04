@@ -112,19 +112,42 @@ exports.list = function(req, res) {
 };
 
 exports.getFoodByPartialText = function(req, res, callback, typedText, foodsRange) {
+    var getFoodByFirstLetterOnly = req.param('foodsRange');
+    var skip = req.param('skip');
+
+    var nSkip = parseInt(skip);
+    if(skip === 'undefined'){
+        nSkip = 0;
+    }
+
     if(typedText === 'null'){
         typedText = '';
     }
 
-    Food.find({'name' : new RegExp(typedText, 'i')}).sort('name').limit(9).exec(function(err, foods) {
-        if (err) {
-            return res.send(400, {
-                message: getErrorMessage(err)
-            });
-        } else {
-            res.jsonp(foods);
-        }
-    });
+    if(getFoodByFirstLetterOnly !== 'true'){
+        Food.find({'name' : new RegExp(typedText, 'i')}).sort('name').skip(nSkip).limit(9).exec(function(err, foods) {
+            if (err) {
+                return res.send(400, {
+                    message: getErrorMessage(err)
+                });
+            } else {
+                res.jsonp(foods);
+            }
+        });
+    }
+    else{
+        Food.find({'name' : new RegExp('^' + typedText, 'i')}).sort('name').skip(nSkip).limit(9).exec(function(err, foods) {
+            if (err) {
+                return res.send(400, {
+                    message: getErrorMessage(err)
+                });
+            } else {
+                res.jsonp(foods);
+            }
+        });
+    }
+
+
 };
 
 /**

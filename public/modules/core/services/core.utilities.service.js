@@ -21,10 +21,10 @@ angular.module(ApplicationConfiguration.applicationModuleName).service(
         // ---
 
 
-        function getFoods(typed) {
+        function getFoods(typed, skip, searchByFirstLetterOnly) {
             var request = $http({
                 method: "get",
-                url: "/foods/" + typed + '/' + 10,
+                url: "/foods/" + typed + '/' + searchByFirstLetterOnly + '/' + skip,
                 params: {
                     action: "get"
                 }
