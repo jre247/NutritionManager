@@ -427,7 +427,7 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
                 $scope.success = true;
                 $timeout(function () {
                     $scope.success = false;
-                }, 3000);
+                }, 2500);
 
 
                 $timeout(function(){$scope.setSorting();}, 100);
