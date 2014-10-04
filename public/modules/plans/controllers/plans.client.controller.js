@@ -159,13 +159,18 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
 
             var meal = $scope.plan.meals[$scope.plan.meals.length - 1];
 
-            $("html, body").animate({ scrollTop: $(document).height() }, 1000);
-            $("#content").animate({ scrollTop: $('#content').height() + 300 }, 1000);
+            scrollToBottom();
 
             $scope.createFoodWithDialog(meal);
             //$scope.createFood(meal);
 
             //sortableEle.refresh();
+        };
+
+        var scrollToBottom = function(){
+            $("html, body").animate({ scrollTop: $(document).height() }, 1000);
+            $("#content").animate({ scrollTop: $('#content').height() + 300 }, 1000);
+
         };
 
         $scope.editMeal = function(meal){
@@ -937,6 +942,8 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
                 }
 
                 $scope.foodServingsChange(food, meal);
+
+                scrollToBottom();
             }, function () {
                 $log.info('Modal dismissed at: ' + new Date());
             });
@@ -1022,31 +1029,31 @@ var CreateFoodModalInstanceCtrl = function ($scope, $modalInstance, parentScope,
 
         if($scope.selected.foodToAdd && $scope.selected.servings > 0) {
 
-            caloriesDisplay = $scope.selected.foodToAdd.selectedFood ? parseInt($scope.selected.servings) * $scope.selected.foodToAdd.selectedFood.calories : parseInt($scope.selected.servings) * $scope.selected.foodToAdd.calories;
-            proteinDisplay = $scope.selected.foodToAdd.selectedFood ? parseInt($scope.selected.servings) * $scope.selected.foodToAdd.selectedFood.protein : parseInt($scope.selected.servings) * $scope.selected.foodToAdd.protein;
-            fatDisplay = $scope.selected.foodToAdd.selectedFood ? parseInt($scope.selected.servings) * $scope.selected.foodToAdd.selectedFood.fat : parseInt($scope.selected.servings) * $scope.selected.foodToAdd.fat;
-            sodiumDisplay = $scope.selected.foodToAdd.selectedFood ? parseInt($scope.selected.servings) * $scope.selected.foodToAdd.selectedFood.sodium : parseInt($scope.selected.servings) * $scope.selected.foodToAdd.sodium;
-            gramsDisplay = $scope.selected.foodToAdd.selectedFood ? parseInt($scope.selected.servings) * $scope.selected.foodToAdd.selectedFood.grams : parseInt($scope.selected.servings) * $scope.selected.foodToAdd.grams;
-            carbsDisplay = $scope.selected.foodToAdd.selectedFood ? parseInt($scope.selected.servings) * $scope.selected.foodToAdd.selectedFood.carbohydrates : parseInt($scope.selected.servings) * $scope.selected.foodToAdd.carbohydrates;
-            saturatedFatDisplay = $scope.selected.foodToAdd.selectedFood ? parseInt($scope.selected.servings) * $scope.selected.foodToAdd.selectedFood.saturatedFat : parseInt($scope.selected.servings) * $scope.selected.foodToAdd.saturatedFat;
-            cholesterolDisplay = $scope.selected.foodToAdd.selectedFood ? parseInt($scope.selected.servings) * $scope.selected.foodToAdd.selectedFood.cholesterol : parseInt($scope.selected.servings) * $scope.selected.foodToAdd.cholesterol;
-            sodiumDisplay = $scope.selected.foodToAdd.selectedFood ? parseInt($scope.selected.servings) * $scope.selected.foodToAdd.selectedFood.sodium : parseInt($scope.selected.servings) * $scope.selected.foodToAdd.sodium;
-            fiberDisplay = $scope.selected.foodToAdd.selectedFood ? parseInt($scope.selected.servings) * $scope.selected.foodToAdd.selectedFood.fiber : parseInt($scope.selected.servings) * $scope.selected.foodToAdd.fiber;
-            sugarDisplay = $scope.selected.foodToAdd.selectedFood ? parseInt($scope.selected.servings) * $scope.selected.foodToAdd.selectedFood.sugar : parseInt($scope.selected.servings) * $scope.selected.foodToAdd.sugar;
+            caloriesDisplay = $scope.selected.foodToAdd.selectedFood ? parseFloat($scope.selected.servings) * $scope.selected.foodToAdd.selectedFood.calories : parseFloat($scope.selected.servings) * $scope.selected.foodToAdd.calories;
+            proteinDisplay = $scope.selected.foodToAdd.selectedFood ? parseFloat($scope.selected.servings) * $scope.selected.foodToAdd.selectedFood.protein : parseFloat($scope.selected.servings) * $scope.selected.foodToAdd.protein;
+            fatDisplay = $scope.selected.foodToAdd.selectedFood ? parseFloat($scope.selected.servings) * $scope.selected.foodToAdd.selectedFood.fat : parseFloat($scope.selected.servings) * $scope.selected.foodToAdd.fat;
+            sodiumDisplay = $scope.selected.foodToAdd.selectedFood ? parseFloat($scope.selected.servings) * $scope.selected.foodToAdd.selectedFood.sodium : parseFloat($scope.selected.servings) * $scope.selected.foodToAdd.sodium;
+            gramsDisplay = $scope.selected.foodToAdd.selectedFood ? parseFloat($scope.selected.servings) * $scope.selected.foodToAdd.selectedFood.grams : parseFloat($scope.selected.servings) * $scope.selected.foodToAdd.grams;
+            carbsDisplay = $scope.selected.foodToAdd.selectedFood ? parseFloat($scope.selected.servings) * $scope.selected.foodToAdd.selectedFood.carbohydrates : parseFloat($scope.selected.servings) * $scope.selected.foodToAdd.carbohydrates;
+            saturatedFatDisplay = $scope.selected.foodToAdd.selectedFood ? parseFloat($scope.selected.servings) * $scope.selected.foodToAdd.selectedFood.saturatedFat : parseFloat($scope.selected.servings) * $scope.selected.foodToAdd.saturatedFat;
+            cholesterolDisplay = $scope.selected.foodToAdd.selectedFood ? parseFloat($scope.selected.servings) * $scope.selected.foodToAdd.selectedFood.cholesterol : parseFloat($scope.selected.servings) * $scope.selected.foodToAdd.cholesterol;
+            sodiumDisplay = $scope.selected.foodToAdd.selectedFood ? parseFloat($scope.selected.servings) * $scope.selected.foodToAdd.selectedFood.sodium : parseFloat($scope.selected.servings) * $scope.selected.foodToAdd.sodium;
+            fiberDisplay = $scope.selected.foodToAdd.selectedFood ? parseFloat($scope.selected.servings) * $scope.selected.foodToAdd.selectedFood.fiber : parseFloat($scope.selected.servings) * $scope.selected.foodToAdd.fiber;
+            sugarDisplay = $scope.selected.foodToAdd.selectedFood ? parseFloat($scope.selected.servings) * $scope.selected.foodToAdd.selectedFood.sugar : parseFloat($scope.selected.servings) * $scope.selected.foodToAdd.sugar;
 
         }
 
-        $scope.selected.caloriesDisplay = caloriesDisplay;
-        $scope.selected.proteinDisplay = proteinDisplay;
-        $scope.selected.fatDisplay = fatDisplay;
-        $scope.selected.sodiumDisplay = sodiumDisplay;
-        $scope.selected.gramsDisplay = gramsDisplay;
-        $scope.selected.carbsDisplay = carbsDisplay;
-        $scope.selected.saturatedFatDisplay = saturatedFatDisplay;
-        $scope.selected.cholesterolDisplay = cholesterolDisplay;
-        $scope.selected.sodiumDisplay = sodiumDisplay;
-        $scope.selected.fiberDisplay = fiberDisplay;
-        $scope.selected.sugarDisplay = sugarDisplay;
+        $scope.selected.caloriesDisplay = caloriesDisplay.toFixed(1);
+        $scope.selected.proteinDisplay = proteinDisplay.toFixed(1);
+        $scope.selected.fatDisplay = fatDisplay.toFixed(1);
+        $scope.selected.sodiumDisplay = sodiumDisplay.toFixed(1);
+        $scope.selected.gramsDisplay = gramsDisplay.toFixed(1);
+        $scope.selected.carbsDisplay = carbsDisplay.toFixed(1);
+        $scope.selected.saturatedFatDisplay = saturatedFatDisplay.toFixed(1);
+        $scope.selected.cholesterolDisplay = cholesterolDisplay.toFixed(1);
+        $scope.selected.sodiumDisplay = sodiumDisplay.toFixed(1);
+        $scope.selected.fiberDisplay = fiberDisplay.toFixed(1);
+        $scope.selected.sugarDisplay = sugarDisplay.toFixed(1);
     };
 
     $scope.foodSelectionChange = function(food){
