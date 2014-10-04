@@ -159,6 +159,7 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
 
             var meal = $scope.plan.meals[$scope.plan.meals.length - 1];
 
+            $scope.createFoodWithDialog(meal);
             //$scope.createFood(meal);
 
             //sortableEle.refresh();
