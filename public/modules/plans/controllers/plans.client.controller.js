@@ -161,7 +161,7 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
 
             scrollToBottom();
 
-            $scope.createFoodWithDialog(meal);
+            $scope.createFoodWithDialog(meal, null, true);
             //$scope.createFood(meal);
 
             //sortableEle.refresh();
@@ -869,7 +869,7 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
             });
         };
 
-        $scope.createFoodWithDialog = function(meal, food){
+        $scope.createFoodWithDialog = function(meal, food, isCreateMeal){
             var modalInstance = $modal.open({
                 templateUrl: 'createFoodModalContent.html',
                 controller: CreateFoodModalInstanceCtrl,
@@ -943,7 +943,9 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
 
                 $scope.foodServingsChange(food, meal);
 
-                scrollToBottom();
+                if(isCreateMeal) {
+                    scrollToBottom();
+                }
             }, function () {
                 $log.info('Modal dismissed at: ' + new Date());
             });
