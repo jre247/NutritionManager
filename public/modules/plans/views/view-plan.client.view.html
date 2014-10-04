@@ -375,10 +375,10 @@
     <div class="modal-header" style="font-family: segui;">
         <h3 class="modal-title" data-ng-show="!showFoodDetails">Select Food To Add</h3>
         <div data-ng-show="showFoodDetails" style="display:inline-block;width: 220px;">
-            <h3 class="modal-title" >
-                <span data-ng-bind="selected.foodToAdd.name"></span>
+            <h4 class="modal-title" >
+                <span style="font-weight: bold;" data-ng-bind="selected.foodToAdd.name"></span>
 
-            </h3>
+            </h4>
         </div>
         <a data-ng-show="showFoodDetails" style="margin-left: 10px;"  data-ng-click="changeFood()">Change Food</a>
     </div>
