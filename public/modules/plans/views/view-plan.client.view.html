@@ -193,8 +193,8 @@
                                 </thead>
                                 <tbody>
 
-                                <tr height="35px"  data-ng-repeat="food in meal.foods" data-ng-class="{mealSuggestedHighlight: food.IsSuggested}" data-ng-click="createFoodWithDialog(meal, food);">
-                                    <td style="padding-right: 10px;">
+                                <tr class="planGridRow" height="35px"  data-ng-repeat="food in meal.foods" data-ng-class="{mealSuggestedHighlight: food.IsSuggested}" data-ng-click="createFoodWithDialog(meal, food);">
+                                    <td style="padding-right: 10px;padding-left:5px;">
 
                                         <div class="controls">
                                             <span data-ng-bind="food.selectedFood.name"></span>
@@ -244,7 +244,7 @@
                                     </td>
 
                                     <td>
-                                        <div>
+                                        <div style="padding-right:5px;">
                                             <span tooltip="Delete Food" class="deleteBtn" data-ng-click="deleteFood(food, meal);">x</span>
                                         </div>
                                     </td>
@@ -440,7 +440,9 @@
                         </a>
                     </div>
 
-                    <span style="color:blue;" data-ng-show="!foods || foods.length == 0">There are no foods returned</span>
+                    <div>
+                        <span style="color:blue;" data-ng-show="!foods || foods.length == 0">There are no foods returned</span>
+                    </div>
 
                     <div style="margin-top: 10px;display:inline-block;margin-right: 5px;" data-ng-show="foods && skipFoods > 0">
                         <a data-ng-click="prevFoods();">Previous</a>
