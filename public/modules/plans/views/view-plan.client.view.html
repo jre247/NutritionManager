@@ -387,7 +387,7 @@
             <div data-ng-show="!showFoodDetails">
                 <div style="margin-bottom: 20px;">
 
-                    <input placeholder="Enter Food Name" style="width: 170px;" type="text" data-ng-change="updateFoodList()" data-ng-model="selected.foodSearchTxt"  />
+                    <input placeholder="Enter Food Name" style="width: 170px;" type="text" data-ng-change="foodInputChange()" data-ng-model="selected.foodSearchTxt"  />
                 </div>
 
                 <div class="searchLetters">
@@ -424,12 +424,13 @@
                         <span data-ng-bind="food.name"></span>
                     </a>
                 </div>
-                <div style="margin-top: 10px;" data-ng-show="foods && foods.length == 9">
-                    <a data-ng-click="nextFoods();">Next</a>
-                </div>
-                <div style="margin-top: 10px;" data-ng-show="foods && skipFoods > 0">
+                <div style="margin-top: 10px;display:inline-block;margin-right: 5px;" data-ng-show="foods && skipFoods > 0">
                     <a data-ng-click="prevFoods();">Previous</a>
                 </div>
+                <div style="margin-top: 10px;display:inline-block" data-ng-show="foods && foods.length == 9">
+                    <a data-ng-click="nextFoods();">Next</a>
+                </div>
+
             </div>
             <div  data-ng-show="showFoodDetails">
                 <div style="display:inline-block;">
