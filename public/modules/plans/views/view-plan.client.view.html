@@ -301,13 +301,14 @@
 
     </form>
 
-    <div class="planFooter" style="width: 109%;margin-right: -15px;margin-left: -15px;">
+    <div class="planFooter" style="margin-right: -15px;margin-left: -15px;">
         <table style="border-top: 1px solid lightgray;display: inline-block;" id="footer">
             <thead>
             <tr>
                 <th class="plansDesktopInlineGrid" width="316px">&nbsp;</th>
                 <th width="90px">Deficit </th>
                 <th width="90px">Calories </th>
+                <th width="40px" style="border-left: 1px solid lightgray;">&nbsp;</th>
                 <th width="90px">Carbs</th>
                 <th width="90px">Protein</th>
                 <th width="130px">Fat</th>
@@ -324,6 +325,9 @@
 
                 <td style="color: rgb(33, 51, 184);">
                     <span data-ng-bind="plan.totalPlanCalories | number:0"></span>
+                </td>
+                <td style="color: rgb(33, 51, 184);border-left: 1px solid lightgray;">
+                    <span >&nbsp;</span>
                 </td>
                 <td style="color: rgb(33, 51, 184);">
                     <span data-ng-bind="plan.totalPlanCarbs | number:1"></span>g
@@ -345,6 +349,9 @@
                 </td>
                 <td style="color: rgb(33, 51, 184);">
                     <span data-ng-bind="plan.totalPlanCalories | number:0"></span>
+                </td>
+                <td style="color: rgb(33, 51, 184);">
+                    <span style="border-left: 1px solid lightgray;">&nbsp;</span>
                 </td>
                 <td style="color: rgb(33, 51, 184);">
                     <span data-ng-bind="plan.totalPlanCarbsAsPercent | number:1"></span>%
