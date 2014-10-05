@@ -140,7 +140,7 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
             });
         };
 
-        $scope.createMeal = function(createFoodByDefault){
+        $scope.createMeal = function(createFoodByDefault, noScrollToBottom){
             var model = {
                 name: '',
                 type: 1,
@@ -160,7 +160,9 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
 
             var meal = $scope.plan.meals[$scope.plan.meals.length - 1];
 
-            scrollToBottom();
+            if(!noScrollToBottom) {
+                scrollToBottom();
+            }
 
             if(createFoodByDefault) {
                 $scope.createFoodWithDialog(meal, null, true);
@@ -173,7 +175,6 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
         var scrollToBottom = function(){
             $("html, body").animate({ scrollTop: $(document).height() }, 1000);
             $("#content").animate({ scrollTop: $('#content').height() + 700 }, 1000);
-
         };
 
         $scope.editMeal = function(meal){
@@ -495,18 +496,17 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
                 setPlanDateFromUrlParam();
 
                 $scope.allFoods = Foods.query(function(){
-//                    window.setTimeout(function(){
-//                        $scope.createMeal();
-//                    }, 400);
-                    $scope.createMeal();
-                    $scope.createMeal();
-                    $scope.createMeal();
+                    $scope.createMeal(null, true);
+                    $scope.createMeal(null, true);
+                    $scope.createMeal(null, true);
 
                     $scope.plan.meals[0].isEditable = false;
                     $scope.plan.meals[1].type = $scope.mealTypes[1].id;
                     $scope.plan.meals[1].isEditable = false;
                     $scope.plan.meals[2].isEditable = false;
                     $scope.plan.meals[2].type = $scope.mealTypes[2].id;
+
+
                 });
 
                 fillActivityPlan();
