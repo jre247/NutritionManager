@@ -971,7 +971,7 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
                 }
 
                 //if(isMobileDevice){
-                    $scope.savePlan(true);
+                    $scope.savePlan();
                 //}
             }, function () {
                 $log.info('Modal dismissed at: ' + new Date());
