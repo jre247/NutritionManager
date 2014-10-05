@@ -88,18 +88,24 @@
                 <accordion sortable="sortableOptions" disableallelementsbydefault="true" updateCallback="sortableUpdateCallback" startCallback="sortableStartCallback" rootSortableElement=".panel-group" ng-show="plan.meals.length > 0"  class="plansAccordion" style="..." close-others="oneAtATime">
                     <accordion-group data-ng-repeat="meal in plan.meals" is-open="meal.isVisible">
                         <accordion-heading>
-                            <div style="height: 28px;">
-                            <span style="width: 80px;" data-ng-show="meal.isEditable == false" data-ng-bind="getMealTypeName(meal.type)"></span>
+                            <div data-ng-mouseover="meal.showEditIcon = true" data-ng-mouseleave="meal.showEditIcon = false"
+                               class="accordionHeadingRegion">
+                                <div style="display:inline-block;">
+                                    <span style="width: 80px;" data-ng-show="meal.isEditable == false" data-ng-bind="getMealTypeName(meal.type)"></span>
+                                </div>
 
-                            <select class="plansDesktopBtn" ng-model="meal.type" data-ng-change="meal.isEditable = false" data-ng-click="meal.isVisible = !meal.isVisible" data-ng-show="meal.isEditable" ng-options="t.id as t.name for t in mealTypes" style="font-size: 16px;vertical-align: top;"></select>
-                            <select class="plansMobileGridBtn" data-ng-change="savePlan(true);" ng-model="meal.type" data-ng-click="meal.isVisible = !meal.isVisible" data-ng-show="meal.isEditable" ng-options="t.id as t.name for t in mealTypes" style="font-size: 16px;vertical-align: top;"></select>
+                                <select class="plansDesktopBtn" ng-model="meal.type" data-ng-change="meal.isEditable = false" data-ng-click="meal.isVisible = !meal.isVisible" data-ng-show="meal.isEditable" ng-options="t.id as t.name for t in mealTypes" style="font-size: 16px;vertical-align: top;"></select>
+                                <select class="plansMobileGridBtn" data-ng-change="savePlan(true);" ng-model="meal.type" data-ng-click="meal.isVisible = !meal.isVisible" data-ng-show="meal.isEditable" ng-options="t.id as t.name for t in mealTypes" style="font-size: 16px;vertical-align: top;"></select>
 
 
-                            <div class="editRow" style="display:inline-block;" class="col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 col-xs-12">
-                                <img  alt="Edit Meal Type" class="img-responsive text-center" data-ng-show="meal.isEditable == false" data-ng-click="editMeal(meal);" src="modules/core/img/brand/pencilIcon.png" />
+                                <!--<div style="margin-left: 10px;cursor:pointer;" data-ng-class="{'editRowShow': meal.showEditIcon && !meal.isEditable}" class="editRowHide">-->
+                                    <!--<img  alt="Edit Meal Type" class="img-responsive text-center"  data-ng-click="editMeal(meal);" src="modules/core/img/brand/pencilIcon.png" />-->
+                                <!--</div>-->
+                                <div style="margin-left: 10px;cursor:pointer;" data-ng-click="editMeal(meal);" type="button" data-ng-class="{editRowShow: meal.showEditIcon && !meal.isEditable}"  class="editRowHide">
+                                    <span  class="glyphicon glyphicon-pencil"></span>
+                                </div>
+
                             </div>
-
-                        </div>
                         </accordion-heading>
 
                         <div class="planMealDesktop">
@@ -445,7 +451,7 @@
                     </div>
 
                     <div>
-                        <span style="color:blue;" data-ng-show="!foods || foods.length == 0">There are no foods returned</span>
+                        <span style="color:blue;padding-left:5px;" data-ng-show="!foods || foods.length == 0">There are no foods returned</span>
                     </div>
 
                     <div style="margin-top: 10px;display:inline-block;margin-right: 5px;" data-ng-show="foods && skipFoods > 0">
