@@ -125,7 +125,7 @@ exports.getFoodByPartialText = function(req, res, callback, typedText, foodsRang
     }
 
     if(getFoodByFirstLetterOnly !== 'true'){
-        Food.find({'name' : new RegExp(typedText, 'i')}).sort('name').skip(nSkip).limit(9).exec(function(err, foods) {
+        Food.find({'name' : new RegExp(typedText, 'i')}).sort('name').skip(nSkip).limit(8).exec(function(err, foods) {
             if (err) {
                 return res.send(400, {
                     message: getErrorMessage(err)
@@ -136,7 +136,7 @@ exports.getFoodByPartialText = function(req, res, callback, typedText, foodsRang
         });
     }
     else{
-        Food.find({'name' : new RegExp('^' + typedText, 'i')}).sort('name').skip(nSkip).limit(9).exec(function(err, foods) {
+        Food.find({'name' : new RegExp('^' + typedText, 'i')}).sort('name').skip(nSkip).limit(8).exec(function(err, foods) {
             if (err) {
                 return res.send(400, {
                     message: getErrorMessage(err)

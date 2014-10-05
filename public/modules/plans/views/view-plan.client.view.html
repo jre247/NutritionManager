@@ -306,12 +306,13 @@
             <thead>
             <tr>
                 <th class="plansDesktopInlineGrid" width="316px">&nbsp;</th>
-                <th width="90px">Deficit </th>
+                <th data-ng-show="currentDeficit >= 0" width="90px">Deficit </th>
+                <th data-ng-show="currentDeficit < 0" width="90px">Surplus </th>
                 <th width="90px">Calories </th>
                 <th width="40px" style="border-left: 1px solid lightgray;">&nbsp;</th>
-                <th width="90px">Carbs</th>
-                <th width="90px">Protein</th>
-                <th width="130px">Fat</th>
+                <th class="carbsColorLbl" width="90px">Carbs</th>
+                <th class=proteinColorLbl" width="90px">Protein</th>
+                <th class="fatColorLbl" width="130px">Fat</th>
             </tr>
             </thead>
             <tbody>
@@ -320,7 +321,8 @@
                     <span style="font-weight:bold;">Totals:</span>
                 </td>
                 <td style="color: rgb(33, 51, 184);">
-                    <span data-ng-bind="currentDeficit | number:0"></span>
+                    <span data-ng-show="currentDeficit >= 0" data-ng-bind="currentDeficit | number:0"></span>
+                    <span data-ng-show="currentDeficit < 0" data-ng-bind="-(currentDeficit) | number:0"></span>
                 </td>
 
                 <td style="color: rgb(33, 51, 184);">
@@ -329,13 +331,13 @@
                 <td style="color: rgb(33, 51, 184);border-left: 1px solid lightgray;">
                     <span >&nbsp;</span>
                 </td>
-                <td style="color: rgb(33, 51, 184);">
+                <td class="carbsColor">
                     <span data-ng-bind="plan.totalPlanCarbs | number:1"></span>g
                 </td>
-                <td style="color: rgb(33, 51, 184);">
+                <td class="proteinColor" >
                     <span data-ng-bind="plan.totalPlanProtein | number:1"></span>g
                 </td>
-                <td style="color: rgb(33, 51, 184);">
+                <td class="fatColor">
                     <span data-ng-bind="plan.totalPlanFat | number:1"></span>g
                 </td>
 
@@ -345,21 +347,22 @@
                     <span style="font-weight:bold;">Totals:</span>
                 </td>
                 <td style="color: rgb(33, 51, 184);">
-                    <span data-ng-bind="currentDeficit | number:0"></span>
+                    <span data-ng-show="currentDeficit >= 0" data-ng-bind="currentDeficit | number:0"></span>
+                    <span data-ng-show="currentDeficit < 0" data-ng-bind="-(currentDeficit) | number:0"></span>
                 </td>
                 <td style="color: rgb(33, 51, 184);">
                     <span data-ng-bind="plan.totalPlanCalories | number:0"></span>
                 </td>
-                <td style="color: rgb(33, 51, 184);">
+                <td  style="color: rgb(33, 51, 184);">
                     <span style="border-left: 1px solid lightgray;">&nbsp;</span>
                 </td>
-                <td style="color: rgb(33, 51, 184);">
+                <td class="carbsColor">
                     <span data-ng-bind="plan.totalPlanCarbsAsPercent | number:1"></span>%
                 </td>
-                <td style="color: rgb(33, 51, 184);">
+                <td class="proteinColor">
                     <span data-ng-bind="plan.totalPlanProteinAsPercent | number:1"></span>%
                 </td>
-                <td style="color: rgb(33, 51, 184);">
+                <td class="fatColor">
                     <span data-ng-bind="plan.totalPlanFatAsPercent | number:1"></span>%
                 </td>
 
@@ -387,7 +390,7 @@
 
             </h3>
         </div>
-        <a data-ng-show="showFoodDetails" style="margin-left: 10px;"  data-ng-click="changeFood()">Change Food</a>
+        <a class="ActionLink" data-ng-show="showFoodDetails" style="margin-left: 10px;"  data-ng-click="changeFood()">Change Food</a>
     </div>
     <div  style="font-family: segui;padding-left: 10px;padding-bottom:10px;" >
         <div style="display:inline-block;">
@@ -402,6 +405,7 @@
                     <div style="margin-bottom: 20px;">
 
                         <input placeholder="Enter Food Name" style="width: 170px;" type="text" data-ng-change="foodInputChange()" data-ng-model="selected.foodSearchTxt"  />
+                        <a class="ActionLink clearInputLink" data-ng-click="clearFoodInput()">Clear</a>
                     </div>
 
                     <div class="searchLetters">
@@ -434,7 +438,7 @@
                     </div>
 
                     <div class="list-group" style="margin-bottom: 0px; !important;" data-ng-repeat="food in foods">
-                        <a class="list-group-item" data-ng-click="foodSelectionChange(food)">
+                        <a class="list-group-item actionRow" data-ng-click="foodSelectionChange(food)">
                             <span data-ng-bind="food.name"></span>
 
                         </a>
@@ -445,10 +449,10 @@
                     </div>
 
                     <div style="margin-top: 10px;display:inline-block;margin-right: 5px;" data-ng-show="foods && skipFoods > 0">
-                        <a data-ng-click="prevFoods();">Previous</a>
+                        <a class="ActionLink" data-ng-click="prevFoods();">Previous</a>
                     </div>
-                    <div style="margin-top: 10px;display:inline-block" data-ng-show="foods && foods.length == 9">
-                        <a data-ng-click="nextFoods();">Next</a>
+                    <div style="margin-top: 10px;display:inline-block" data-ng-show="foods && foods.length == 8">
+                        <a class="ActionLink" data-ng-click="nextFoods();">Next</a>
                     </div>
 
                 </div>

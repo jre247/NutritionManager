@@ -1025,15 +1025,20 @@ var CreateFoodModalInstanceCtrl = function ($scope, $modalInstance, parentScope,
     }
 
     $scope.nextFoods = function(){
-        $scope.skipFoods += 9;
+        $scope.skipFoods += 8;
 
         $scope.updateFoodList();
     };
 
     $scope.prevFoods = function(){
-        $scope.skipFoods -= 9;
+        $scope.skipFoods -= 8;
 
         $scope.updateFoodList();
+    };
+
+    $scope.clearFoodInput = function(){
+        $scope.selected.foodSearchTxt = '';
+        $scope.foodInputChange();
     };
 
     $scope.selected = {
