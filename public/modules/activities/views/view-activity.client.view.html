@@ -60,13 +60,16 @@
 <accordion sortable="sortableOptions" disableallelementsbydefault="true" updateCallback="sortableUpdateCallback" startCallback="sortableStartCallback" rootSortableElement=".panel-group" ng-show="plan.activities.length > 0"  class="plansAccordion" style="..." close-others="oneAtATime">
 <accordion-group data-ng-repeat="activity in plan.activities" is-open="activity.isVisible">
 <accordion-heading>
-    <div style="height: 28px;">
+    <div data-ng-mouseover="activity.showEditIcon = true" data-ng-mouseleave="activity.showEditIcon = false" class="accordionHeadingRegion">
         <span style="width: 80px;" data-ng-show="activity.isEditable == false" data-ng-bind="activityTypesDictionary[activity.activityType].name"></span>
 
-        <select ng-model="activity.activityType" data-ng-click="activity.isVisible = !activity.isVisible" data-ng-show="activity.isEditable" ng-options="t.id as t.name for t in activityTypes" style="font-size: 16px;vertical-align: top;"></select>
+        <select ng-model="activity.activityType" data-ng-change="activity.isEditable = false" data-ng-click="activity.isVisible = !activity.isVisible" data-ng-show="activity.isEditable" ng-options="t.id as t.name for t in activityTypes" style="font-size: 16px;vertical-align: top;"></select>
 
-        <div class="editRow" style="display:inline-block;" class="col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 col-xs-12">
-            <img  alt="Edit Activity Type" class="img-responsive text-center" data-ng-show="activity.isEditable == false" data-ng-click="editActivity(activity);" src="modules/core/img/brand/pencilIcon.png" />
+        <!--<div class="editRow" style="display:inline-block;" class="col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 col-xs-12">-->
+            <!--<img  alt="Edit Activity Type" class="img-responsive text-center" data-ng-show="activity.isEditable == false" data-ng-click="editActivity(activity);" src="modules/core/img/brand/pencilIcon.png" />-->
+        <!--</div>-->
+        <div style="margin-left: 10px;cursor:pointer;" data-ng-click="editActivity(activity);" type="button" data-ng-class="{editRowShow: activity.showEditIcon && !activity.isEditable}"  class="editRowHide">
+            <span  class="glyphicon glyphicon-pencil"></span>
         </div>
 
     </div>

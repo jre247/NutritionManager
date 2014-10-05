@@ -90,9 +90,9 @@
                         <accordion-heading>
                             <div data-ng-mouseover="meal.showEditIcon = true" data-ng-mouseleave="meal.showEditIcon = false"
                                class="accordionHeadingRegion">
-                                <div style="display:inline-block;">
-                                    <span style="width: 80px;" data-ng-show="meal.isEditable == false" data-ng-bind="getMealTypeName(meal.type)"></span>
-                                </div>
+
+                                <span style="width: 80px;" data-ng-show="meal.isEditable == false" data-ng-bind="getMealTypeName(meal.type)"></span>
+
 
                                 <select class="plansDesktopBtn" ng-model="meal.type" data-ng-change="meal.isEditable = false" data-ng-click="meal.isVisible = !meal.isVisible" data-ng-show="meal.isEditable" ng-options="t.id as t.name for t in mealTypes" style="font-size: 16px;vertical-align: top;"></select>
                                 <select class="plansMobileGridBtn" data-ng-change="savePlan(true);" ng-model="meal.type" data-ng-click="meal.isVisible = !meal.isVisible" data-ng-show="meal.isEditable" ng-options="t.id as t.name for t in mealTypes" style="font-size: 16px;vertical-align: top;"></select>
