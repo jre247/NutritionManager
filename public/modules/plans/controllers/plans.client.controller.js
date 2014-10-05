@@ -511,9 +511,9 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
                 setPlanDateFromUrlParam();
 
                 $scope.allFoods = Foods.query(function(){
-                    window.setTimeout(function(){
-                        $scope.createMeal();
-                    }, 400);
+//                    window.setTimeout(function(){
+//                        $scope.createMeal();
+//                    }, 400);
 
                 });
 
