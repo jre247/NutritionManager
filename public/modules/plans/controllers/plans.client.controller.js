@@ -518,10 +518,25 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
                 });
 
                 fillActivityPlan();
+
+                $scope.plan.moveArrowImgLeft = false;
             }
-
-
 		};
+
+
+        var interval;
+        $scope.$watch('plan.meals', function(){
+            if($scope.plan && $scope.plan.meals) {
+                if ($scope.plan.meals.length == 0) {
+                    interval = window.setInterval(function () {
+                        $scope.plan.moveArrowImgLeft = !$scope.plan.moveArrowImgLeft;
+                    }, 2000);
+                }
+                else {
+                    clearInterval(interval);
+                }
+            }
+        });
 
         var setPlanMealsTotals = function(){
             for (var i = 0; i < $scope.plan.meals.length; i++) {

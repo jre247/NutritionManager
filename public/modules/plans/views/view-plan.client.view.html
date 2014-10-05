@@ -29,10 +29,13 @@
 
                     <!---->
 
+                    <span style="font-size: 25px;" data-ng-class="{arrowImgMoveLeft: plan.moveArrowImgLeft}" data-ng-show="!plan.meals || plan.meals.length == 0" class="glyphicon glyphicon-arrow-right"></span>
 
                     <button type="button" title="Create Meal" class="btn btn-default btn-lg" style="height:34px;width:34px;margin-right: 3px;" data-ng-click="createMeal();">
                         <span style="top: -5px;right: 8px;" class="glyphicon glyphicon-plus"></span>
                     </button>
+
+
 
 
                     <button type="button" title="Open Notes" class="btn btn-default btn-lg" style="height:34px;width:34px;margin-right: 3px;" data-ng-click="openNotesDialog();">
@@ -84,6 +87,11 @@
 
 
         <fieldset id="wrapper" >
+
+            <div data-ng-show="!plan.meals || plan.meals.length == 0" class="emptyPlanMealsTxt">
+                Press the plus button above to create your first meal.
+            </div>
+
             <div id="content" class="form-group planContent" style="overflow-y: auto;overflow-x:hidden; margin-bottom: 3px;">
                 <accordion sortable="sortableOptions" disableallelementsbydefault="true" updateCallback="sortableUpdateCallback" startCallback="sortableStartCallback" rootSortableElement=".panel-group" ng-show="plan.meals.length > 0"  class="plansAccordion" style="..." close-others="oneAtATime">
                     <accordion-group data-ng-repeat="meal in plan.meals" is-open="meal.isVisible">
