@@ -48,7 +48,7 @@ angular.module(ApplicationConfiguration.applicationModuleName).service(
 
             var caloriesIn = nutritionPlan.totalPlanCalories;
 
-            return -(caloriesIn - caloriesOut);
+            return -(caloriesIn - caloriesOut) || 0;
 
         };
 

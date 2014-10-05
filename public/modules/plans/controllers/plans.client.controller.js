@@ -11,7 +11,7 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
         $scope.sortingBtnTxt = sortingBtnTxtOptions[0];
         var isSortingEnabled = false;
 
-
+        $scope.currentDeficit = 0;
         $scope.authentication = Authentication;
         $scope.meals = [];
 
@@ -140,7 +140,7 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
             });
         };
 
-        $scope.createMeal = function(){
+        $scope.createMeal = function(createFoodByDefault){
             var model = {
                 name: '',
                 type: 1,
@@ -162,7 +162,9 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
 
             scrollToBottom();
 
-            $scope.createFoodWithDialog(meal, null, true);
+            if(createFoodByDefault) {
+                $scope.createFoodWithDialog(meal, null, true);
+            }
             //$scope.createFood(meal);
 
             //sortableEle.refresh();
@@ -217,32 +219,6 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
         $scope.createFood = function(meal){
             var defaultFood = $scope.allFoods[0];
 
-           // var selectedFood = $scope.allFoods[0];
-            //selectedFood.foodId = defaultFood.foodId;
-
-//            var model = {
-//                name: defaultFood.name,
-//                type: defaultFood.type,
-//                servings: 1,
-//                calories: defaultFood.calories,
-//                grams: defaultFood.grams,
-//                protein: defaultFood.protein,
-//                carbohydrates: defaultFood.carbohydrates,
-//                fat: defaultFood.fat,
-//                sodium: defaultFood.sodium,
-//                fiber: defaultFood.fiber,
-//                transfat: defaultFood.transfat,
-//                saturatedFat: defaultFood.saturatedFat,
-//                sugar: defaultFood.sugar,
-//                cholesterol: defaultFood.cholesterol,
-//                vitaminA: defaultFood.vitaminA,
-//                vitaminC: defaultFood.vitaminC,
-//                calcium: defaultFood.calcium,
-//                iron: defaultFood.iron,
-//                foodId: defaultFood.foodId,
-//                selectedFood: $scope.allFoods[0],
-//                isEditable: true
-//            };
             var selectedFood = {
                 _id: defaultFood.foodId,
                 name: '',
@@ -486,6 +462,7 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
         };
 
 		$scope.findOne = function() {
+
             if ($stateParams.planId) {
                 $scope.plan = Plans.get({
                     planId: $stateParams.planId
@@ -493,6 +470,8 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
                     if (!$scope.plan.planDateNonUtc){
                         $scope.plan.planDateNonUtc = $scope.plan.planDate;
                     }
+
+
 
                     setCurrentDeficit();
 
@@ -507,6 +486,11 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
                 $scope.plan =  {data: null, meals: null, notes: null, planDate: new Date(), planDateNonUtc: new Date() };
                 $scope.plan.meals = [];
 
+                $scope.plan.totalPlanCalories = 0;
+                $scope.plan.totalPlanCarbsAsPercent = 0;
+                $scope.plan.totalPlanFatAsPercent = 0;
+                $scope.plan.totalPlanProteinAsPercent = 0;
+
                 //todo use ngRouter instead of this horrible method for extracting url param
                 setPlanDateFromUrlParam();
 
@@ -514,7 +498,15 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
 //                    window.setTimeout(function(){
 //                        $scope.createMeal();
 //                    }, 400);
+                    $scope.createMeal();
+                    $scope.createMeal();
+                    $scope.createMeal();
 
+                    $scope.plan.meals[0].isEditable = false;
+                    $scope.plan.meals[1].type = $scope.mealTypes[1].id;
+                    $scope.plan.meals[1].isEditable = false;
+                    $scope.plan.meals[2].isEditable = false;
+                    $scope.plan.meals[2].type = $scope.mealTypes[2].id;
                 });
 
                 fillActivityPlan();
@@ -1240,7 +1232,6 @@ var NotesModalInstanceCtrl = function ($scope, $modalInstance, parentScope, plan
         $modalInstance.dismiss('cancel');
     };
 };
-
 
 var ModalInstanceCtrl = function ($scope, $modalInstance, parentScope, dialogMealsDetailed, dialogMealsShort) {
     $scope.selectedMealTypes = dialogMealsDetailed[0];
