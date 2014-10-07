@@ -119,18 +119,33 @@
                                     <span  class="glyphicon glyphicon-pencil"></span>
                                 </div>
 
+                                <div style="margin-left: 10px;cursor:pointer;float:right;" data-ng-click="deleteMeal(meal, true);" type="button" data-ng-class="{editRowShow: meal.showEditIcon && !meal.isEditable}"  class="editRowHide">
+                                    <span  class="glyphicon glyphicon-trash"></span>
+                                </div>
+
+                                <!--<input style="margin-left: 15px;float:right;" type="button" value="Delete Meal" data-ng-click="deleteMeal(meal, true);"/>-->
+
+
                             </div>
                         </accordion-heading>
 
                         <div class="planMealDesktop">
 
-                            <input type="button" class="plansDesktopBtn"  data-ng-click="createFoodWithDialog(meal);" value="Add Food"/>
+                            <button type="button" class="btn btn-primary btn-sm plansDesktopBtn" data-ng-click="createFoodWithDialog(meal);">
+                                <span class="glyphicon glyphicon-plus" ></span> Add Food
+                            </button>
+
                             <input type="button" class="plansMobileGridBtn"  data-ng-click="createFoodWithDialog(meal, null, null, true);" value="+"/>
 
-                            <input class="plansMobileGridBtn" style="margin-left: 15px;float:right;" type="button" value="Delete Meal" data-ng-click="deleteMeal(meal, true);"/>
-                            <input class="plansDesktopBtn" style="margin-left: 15px;float:right;" type="button" value="Delete Meal" data-ng-click="deleteMeal(meal);"/>
+                            <!--<input class="plansMobileGridBtn" style="margin-left: 15px;float:right;" type="button" value="Delete Meal" data-ng-click="deleteMeal(meal, true);"/>-->
+                            <!--<input class="plansDesktopBtn" style="margin-left: 15px;float:right;" type="button" value="Delete Meal" data-ng-click="deleteMeal(meal);"/>-->
 
-                            <input type="button" value="Suggest" style="margin-left: 10px;" data-ng-click="openSuggestionsDialog(meal)"/>
+
+                            <button style="margin-left:10px;" type="button" class="btn btn-primary btn-sm plansDesktopBtn" data-ng-click="openSuggestionsDialog(meal)">
+                                <span class="glyphicon glyphicon-question-sign" ></span> Suggest
+                            </button>
+
+                            <!--<input type="button" value="Suggest" style="margin-left: 10px;" data-ng-click="openSuggestionsDialog(meal)"/>-->
 
                             <div class="plansMobileGrid" style="margin-top: 5px;">
                                 <ul>
