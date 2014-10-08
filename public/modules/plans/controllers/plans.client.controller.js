@@ -472,8 +472,6 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
                         $scope.plan.planDateNonUtc = $scope.plan.planDate;
                     }
 
-
-
                     setCurrentDeficit();
 
                     $scope.isUserAdmin = $scope.plan.userRoles && $scope.plan.userRoles.indexOf('admin') !== -1 ? true : false;
