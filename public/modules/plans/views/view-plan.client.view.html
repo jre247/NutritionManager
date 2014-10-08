@@ -232,7 +232,8 @@
                                 </thead>
                                 <tbody>
 
-                                <tr class="planGridRow" height="35px"  data-ng-repeat="food in meal.foods" data-ng-class="{mealSuggestedHighlight: food.IsSuggested}" data-ng-click="createFoodWithDialog(meal, food);">
+                                <tr class="planGridRow" height="35px"  data-ng-repeat="food in meal.foods" data-ng-class="{mealSuggestedHighlight: food.IsSuggested}"
+                                    data-ng-click="createFoodWithDialog(meal, food);" data-ng-mouseover="food.showEditIcon = true" data-ng-mouseleave="food.showEditIcon = false">
                                     <td style="padding-right: 10px;padding-left:5px;">
 
                                         <div class="controls">
@@ -240,11 +241,7 @@
 
                                         </div>
                                     </td>
-                                    <!--<td>-->
-                                        <!--<div class="controls" style="width: 60px;">-->
-                                            <!--<span data-ng-bind="food.type" id="foodType"  />-->
-                                        <!--</div>-->
-                                    <!--</td>-->
+
                                     <td>
 
                                         <div class="controls" style="width: 70px;" >
@@ -283,8 +280,14 @@
                                     </td>
 
                                     <td>
-                                        <div style="padding-right:5px;">
-                                            <span tooltip="Delete Food" class="deleteBtn" data-ng-click="deleteFood(food, meal);">x</span>
+                                        <!--<div style="padding-right:5px;">-->
+                                            <!--<span tooltip="Delete Food" class="deleteBtn" data-ng-click="deleteFood(food, meal);">x</span>-->
+                                        <!--</div>-->
+
+                                        <div style="display:inline-block;width:40px;">
+                                            <div style="padding-right:5px;cursor:pointer;float:right;padding-top:5px;" data-ng-click="deleteFood(food, meal);" type="button" data-ng-class="{editRowShow: food.showEditIcon && !food.isEditable}"  class="editRowHide">
+                                                <span  class="glyphicon glyphicon-trash"></span>
+                                            </div>
                                         </div>
                                     </td>
                                 </tr>
