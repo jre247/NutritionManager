@@ -7,7 +7,7 @@
 
     <div style="display:inline-block">
         Search:
-        <input type="text" data-ng-change data-ng-model="foodFilterInput"/>
+        <input type="text" data-ng-change="foodInputChange()" data-ng-model="foodFilterInput"/>
     </div>
     <div style="display:inline-block;float:right">
         <button class="btn btn-primary" type="button" data-ng-show="isUserAdmin" data-ng-click="importFoodsFromExcel()">
@@ -16,7 +16,8 @@
     </div>
 
     <div class="list-group" style="padding-top: 15px;">
-        <div data-ng-repeat="food in foods | filter:foodFilterInput">
+        <!--<div data-ng-repeat="food in foods | filter:foodFilterInput">-->
+        <div data-ng-repeat="food in foods">
             <div style="display: inline-block;">
                 <a data-ng-href="#!/foods/{{food._id}}" class="list-group-item">
                     <h4 class="list-group-item-heading" data-ng-bind="food.name"></h4>
@@ -46,6 +47,8 @@
 
 
             </div>
+
+
             <!--<div style="display: inline-block;">-->
                 <!--<a class="btn btn-primary" data-ng-href="/#!/foods/{{food._id}}/edit">-->
                     <!--<i class="glyphicon glyphicon-edit"></i>-->
@@ -54,6 +57,10 @@
                     <!--<i class="glyphicon glyphicon-trash"></i>-->
                 <!--</a>-->
             <!--</div>-->
+        </div>
+
+        <div style="margin-top: 10px;" data-ng-show="foods && foods.length >= 8" data-ng-click="moreFoods()">
+            <a>More Foods</a>
         </div>
     </div>
     <div class="alert alert-warning text-center" data-ng-if="foods.$resolved && !foods.length">

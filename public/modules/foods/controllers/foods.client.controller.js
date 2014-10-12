@@ -10,6 +10,8 @@ angular.module('foods').controller('FoodsController', ['$scope', '$stateParams',
        // $scope.authentication = Authentication;
         $scope.servings = 1;
 
+        $scope.skipFoods = 0;
+
         $scope.foodTypes = [
             {id: 1, type: 'Fruit'},
             {id: 2, type: 'Starch'},
@@ -34,6 +36,26 @@ angular.module('foods').controller('FoodsController', ['$scope', '$stateParams',
 
         $scope.importFoodsFromExcel = function(){
             CoreUtilities.importFoodsFromExcel();
+        };
+
+        $scope.foodFilterInput = '';
+
+        $scope.foodInputChange = function(){
+            CoreUtilities.getFoods($scope.foodFilterInput, 0, false).then(function (data) {
+                $scope.foods = data;
+            });
+        };
+
+        $scope.moreFoods = function(){
+            $scope.skipFoods += 8;
+
+            var filterTxt = $scope.foodFilterInput || 'null';
+
+            CoreUtilities.getFoods(filterTxt, $scope.skipFoods, false).then(function (data) {
+                for(var f = 0; f < data.length; f++){
+                    $scope.foods.push(data[f]);
+                }
+            });
         };
 
         $scope.servingsChange = function(food){
@@ -147,7 +169,9 @@ angular.module('foods').controller('FoodsController', ['$scope', '$stateParams',
         };
 
         $scope.find = function() {
-            $scope.foods = Foods.query();
+            CoreUtilities.getFoods('null', 0).then(function (data) {
+                $scope.foods = data;
+            });
 
             $scope.isUserAdmin = isUserAdmin();
         };
