@@ -8,6 +8,7 @@ var mongoose = require('mongoose'),
     Food = mongoose.model('Food'),
     Activity = mongoose.model('Activity'),
     NutritionProfile = mongoose.model('NutritionProfile'),
+    UserFoods = mongoose.model('UserFoods'),
 	_ = require('lodash');
 
 /**
@@ -86,11 +87,72 @@ exports.create = function(req, res) {
                         message: getErrorMessage(err)
                     });
                 } else {
+                    saveUserFoods(planToSave, req, res);
+                }
+            });
+        }
+    });
+};
+
+var saveUserFoods = function(planToSave, req, res){
+    //save user foods in database
+    UserFoods.findOne({userId: req.user.id}).exec(function(userFoodsErr, userFoodsDb){
+        if (userFoodsErr) {
+            return res.send(400, {
+                message: getErrorMessage(userFoodsErr)
+            });
+        }
+        else{
+            for(var i = 0; i < planToSave.meals.length; i++){
+                var meal = planToSave.meals[i];
+
+                for(var f = 0; f < meal.foods.length; f++){
+                    var foodId = meal.foods[f].id;
+
+                    if(userFoodsDb && userFoodsDb.userFoods && userFoodsDb.userFoods.length > 0) {
+                        var foodExistsInDb = findFoodInUserFoods(userFoodsDb, foodId);
+
+                        if (!foodExistsInDb) {
+                            userFoodsDb.userFoods.push(foodId);
+                        }
+                    }
+                    else{
+                        userFoodsDb = new UserFoods();
+                        userFoodsDb.userId = req.user.id;
+                        userFoodsDb.userFoods = [];
+                        userFoodsDb.userFoods.push(foodId);
+                    }
+
+                }
+            }
+
+            userFoodsDb.save(function(err){
+                if (err) {
+                    return res.send(400, {
+                        message: getErrorMessage(err)
+                    });
+                } else {
                     res.jsonp(planToSave);
                 }
             });
         }
     });
+
+};
+
+var findFoodInUserFoods = function(userFoodsDb, foodId){
+    var foodExists = false;
+
+    for(var f = 0; f < userFoodsDb.userFoods.length; f++){
+        var foodDbCompare = userFoodsDb.userFoods[f];
+
+        if(foodDbCompare === foodId){
+            foodExists = true;
+            break;
+        }
+    }
+
+    return foodExists;
 };
 
 /**
@@ -113,7 +175,8 @@ exports.update = function(req, res) {
 				message: getErrorMessage(err)
 			});
 		} else {
-			res.jsonp(plan);
+            saveUserFoods(plan, req, res);
+			//res.jsonp(plan);
 		}
 	});
 };

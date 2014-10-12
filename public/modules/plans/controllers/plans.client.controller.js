@@ -15,7 +15,11 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
         $scope.authentication = Authentication;
         $scope.meals = [];
 
-        $scope.allFoods = Foods.query();
+        //$scope.allFoods = Foods.query();
+        CoreUtilities.getUserFoods(user._id, 'null', 0, false).then(function(data){
+            $scope.allFoods = data;
+        });
+
         $scope.allFoodsInitial = [];
 
         $scope.nutritionProfile = NutritionProfile.get();
@@ -493,25 +497,29 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
                 //todo use ngRouter instead of this horrible method for extracting url param
                 setPlanDateFromUrlParam();
 
-                $scope.allFoods = Foods.query(function(){
-                    $scope.createMeal(null, true);
-                    $scope.createMeal(null, true);
-                    $scope.createMeal(null, true);
+//                $scope.allFoods = Foods.query(function(){
+//                   createDefaultMealsTemplate();
+//                });
 
-                    $scope.plan.meals[0].isEditable = false;
-                    $scope.plan.meals[1].type = $scope.mealTypes[1].id;
-                    $scope.plan.meals[1].isEditable = false;
-                    $scope.plan.meals[2].isEditable = false;
-                    $scope.plan.meals[2].type = $scope.mealTypes[2].id;
-
-
-                });
+                createDefaultMealsTemplate();
 
                 fillActivityPlan();
 
                 $scope.plan.moveArrowImgLeft = false;
             }
 		};
+
+        var createDefaultMealsTemplate = function(){
+            $scope.createMeal(null, true);
+            $scope.createMeal(null, true);
+            $scope.createMeal(null, true);
+
+            $scope.plan.meals[0].isEditable = false;
+            $scope.plan.meals[1].type = $scope.mealTypes[1].id;
+            $scope.plan.meals[1].isEditable = false;
+            $scope.plan.meals[2].isEditable = false;
+            $scope.plan.meals[2].type = $scope.mealTypes[2].id;
+        }
 
 
         var interval;
@@ -787,7 +795,8 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
 
             var suggestedFoodsTop5 = [];
 
-            for(i = 0; i < 5; i++){
+            var length = suggestedFoodsAry.length > 5 ? 5 : suggestedFoodsAry.length;
+            for(i = 0; i < length; i++){
                 var suggestedFood = suggestedFoodsAry[i];
 
                 suggestedFoodsTop5.push(suggestedFood);

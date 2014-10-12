@@ -13,6 +13,10 @@ var FoodSchema = new Schema({
     foodId:{
         type: String
     },
+    foodToken:{
+        type: String,
+        default: '-1'
+    },
 	created: {
 		type: Date,
 		default: Date.now
@@ -98,8 +102,77 @@ var FoodSchema = new Schema({
     isActive: {
         type: Boolean,
         default: true
-    }
+    },
+    importSource: {
+        type: String,
+        default: '',
+        trim: true
+    },
+    isImported: {
+        type: Boolean,
+        default: false
+    },
+    water:{
+        type: Number
 
+    },
+    magnesium:{
+        type: Number
+    },
+    phosphorus:{
+        type: Number
+    },
+    potassium:{
+        type: Number
+    },
+    zinc:{
+        type: Number
+    },
+    copper:{
+        type: Number
+    },
+    manganese:{
+        type: Number
+    },
+    selenium:{
+        type: Number
+    },
+    thiamin:{
+        type: Number
+    },
+    riboflavin:{
+        type: Number
+    },
+    niacin:{
+        type: Number
+    },
+    vitaminB6:{
+        type: Number
+    },
+    folate:{
+        type: Number
+    },
+    folicAcid:{
+        type: Number
+    },
+    vitaminB12:{
+        type: Number
+    },
+    vitaminE:{
+        type: Number
+    },
+    vitaminD:{
+        type: Number
+    },
+    vitaminK:{
+        type: Number
+    },
+    monoFat:{
+        type: Number
+    },
+    polyFat:{
+        type: Number
+    }
 
 
 });

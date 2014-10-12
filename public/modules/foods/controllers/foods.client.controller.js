@@ -3,8 +3,8 @@
  */
 'use strict';
 
-angular.module('foods').controller('FoodsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Foods',
-    function($scope, $stateParams, $location, Authentication, Foods) {
+angular.module('foods').controller('FoodsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Foods', 'CoreUtilities',
+    function($scope, $stateParams, $location, Authentication, Foods, CoreUtilities) {
         window.scope = $scope;
 
        // $scope.authentication = Authentication;
@@ -32,6 +32,9 @@ angular.module('foods').controller('FoodsController', ['$scope', '$stateParams',
             {id: 3, store: 'Foodtown'}
         ];
 
+        $scope.importFoodsFromExcel = function(){
+            CoreUtilities.importFoodsFromExcel();
+        };
 
         $scope.servingsChange = function(food){
             if ($scope.servings > 0) {
@@ -63,6 +66,7 @@ angular.module('foods').controller('FoodsController', ['$scope', '$stateParams',
 
         $scope.create = function() {
             var food = new Foods({
+                foodToken: '-1',
                 name: $scope.food.name,
                 calories: $scope.food.calories,
                 protein: $scope.food.protein,
@@ -113,6 +117,10 @@ angular.module('foods').controller('FoodsController', ['$scope', '$stateParams',
         $scope.update = function() {
             var food = $scope.food;
 
+            if(!food.foodToken){
+                food.foodToken = '-1';
+            }
+
             food.$update(function() {
                 $location.path('foods');
             }, function(errorResponse) {
@@ -141,13 +149,19 @@ angular.module('foods').controller('FoodsController', ['$scope', '$stateParams',
         $scope.find = function() {
             $scope.foods = Foods.query();
 
+            $scope.isUserAdmin = isUserAdmin();
+        };
 
+        var isUserAdmin = function(){
+            return user.roles.indexOf('admin') !== -1 ? true : false;
         };
 
         $scope.findOne = function() {
             $scope.food = Foods.get({
                 foodId: $stateParams.foodId
             },function(){
+                $scope.isUserAdmin = isUserAdmin();
+
                 $scope.calculateDailyPercentages($scope.food);
 
                 $scope.food.gramsDisplay = $scope.food.grams;
@@ -177,6 +191,8 @@ angular.module('foods').controller('FoodsController', ['$scope', '$stateParams',
                 $scope.fiberDailyPercentageDisplay = $scope.fiberDailyPercentage;
 
                 showDailyMacrosChart();
+
+
             });
         };
 

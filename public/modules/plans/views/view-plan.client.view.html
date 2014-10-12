@@ -54,11 +54,15 @@
                             <input type="button" class="btn btn-default" style="margin-right: 3px; " value="{{sortingBtnTxt}}" data-ng-click="toggleSorting();"/>
                         </div>
 
-                        <button class="btn btn-default plansDesktopBtn" style="margin-right: 3px; " ng-click="openCopyPlanDialog()">Copy</button>
+                        <!--<button class="btn btn-default plansDesktopBtn" style="margin-right: 3px; " ng-click="openCopyPlanDialog()">Copy</button>-->
 
 
-                        <button title="Copy Plan" class="btn btn-default btn-lg plansMobileGridBtn" ng-click="openCopyPlanDialog()" style="height:34px;width:34px;margin-right: 3px;">
-                            <span  style="top: -5px;right: 8px;" class="glyphicon glyphicon-share"></span>
+                        <button title="Copy Plan" class="btn btn-default btn-m plansDesktopBtn" ng-click="openCopyPlanDialog()">
+                            <span  class="glyphicon glyphicon-share"></span> Copy Plan
+                        </button>
+
+                        <button title="Copy Plan" class="btn btn-default btn-m plansMobileGridBtn" ng-click="openCopyPlanDialog()">
+                            <span  class="glyphicon glyphicon-share"></span>
                         </button>
 
 

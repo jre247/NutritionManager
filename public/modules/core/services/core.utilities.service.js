@@ -11,7 +11,9 @@ angular.module(ApplicationConfiguration.applicationModuleName).service(
             calculateDeficit: calculateDeficit,
             doMealTotaling: doMealTotaling,
             calculatePlanTotalMacros: calculatePlanTotalMacros,
-            getFoods: getFoods
+            getFoods: getFoods,
+            getUserFoods: getUserFoods,
+            importFoodsFromExcel: importFoodsFromExcel
 
         });
 
@@ -25,6 +27,34 @@ angular.module(ApplicationConfiguration.applicationModuleName).service(
             var request = $http({
                 method: "get",
                 url: "/foods/" + typed + '/' + searchByFirstLetterOnly + '/' + skip,
+                params: {
+                    action: "get"
+                }
+
+
+            });
+
+            return( request.then( handleSuccess, handleError ) );
+        }
+
+        function getUserFoods(userId, typed, skip, searchByFirstLetterOnly) {
+            var request = $http({
+                method: "get",
+                url: "/foods/" + 'userFoods/' + userId + '/' + typed + '/' + searchByFirstLetterOnly + '/' + skip,
+                params: {
+                    action: "get"
+                }
+
+
+            });
+
+            return( request.then( handleSuccess, handleError ) );
+        }
+
+        function importFoodsFromExcel() {
+            var request = $http({
+                method: "get",
+                url: "/foods/" + 'excel' + '/' + 'all',
                 params: {
                     action: "get"
                 }

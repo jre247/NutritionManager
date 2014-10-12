@@ -3,8 +3,17 @@
         <h1>Foods</h1>
     </div>
 
-    Search:
-    <input type="text" data-ng-model="foodFilterInput"/>
+
+
+    <div style="display:inline-block">
+        Search:
+        <input type="text" data-ng-change data-ng-model="foodFilterInput"/>
+    </div>
+    <div style="display:inline-block;float:right">
+        <button class="btn btn-primary" type="button" data-ng-show="isUserAdmin" data-ng-click="importFoodsFromExcel()">
+            <span></span>Import Foods From Excel
+        </button>
+    </div>
 
     <div class="list-group" style="padding-top: 15px;">
         <div data-ng-repeat="food in foods | filter:foodFilterInput">
