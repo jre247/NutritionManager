@@ -135,10 +135,11 @@ exports.getUserFoodsByPartialText = function(req, res, callback) {
                 message: getErrorMessage(err)
             });
         } else {
-            var userFoodIds = userFoodsDb.userFoods;
+            if(userFoodsDb) {
+                var userFoodIds = userFoodsDb.userFoods;
 
-           // if(getFoodByFirstLetterOnly !== 'true'){
-                Food.find({_id : {$in: userFoodIds}}).exec(function(err, foods) {
+                // if(getFoodByFirstLetterOnly !== 'true'){
+                Food.find({_id: {$in: userFoodIds}}).exec(function (err, foods) {
                     if (err) {
                         return res.send(400, {
                             message: getErrorMessage(err)
@@ -147,19 +148,10 @@ exports.getUserFoodsByPartialText = function(req, res, callback) {
                         res.jsonp(foods);
                     }
                 });
-          //  }
-//            else{
-//               // Food.find({'name' : new RegExp('^' + typedText, 'i')}, {'id' : {$in: userFoodIds}}).sort('name').skip(nSkip).limit(8).exec(function(err, foods) {
-//                Food.find({_id : {$in: userFoodIds}}).exec(function(err, foods) {
-//                    if (err) {
-//                        return res.send(400, {
-//                            message: getErrorMessage(err)
-//                        });
-//                    } else {
-//                        res.jsonp(foods);
-//                    }
-//                });
-//            }
+            }
+            else{
+                res.jsonp([]);
+            }
         }
     });
 
