@@ -192,6 +192,13 @@ angular.module('foods').controller('FoodsController', ['$scope', '$stateParams',
 
                 $scope.calculateDailyPercentages($scope.food);
 
+                if($scope.food.isImported){
+                    $scope.food.vitaminA = ($scope.food.vitaminA / 900) * 100;
+                    $scope.food.vitaminC = ($scope.food.vitaminC / 75)  * 100;
+                    $scope.food.iron = ($scope.food.iron / 15) * 100;
+                    $scope.food.calcium = ($scope.food.calcium / 1000) * 100;
+                }
+
                 $scope.food.gramsDisplay = $scope.food.grams;
                 $scope.food.caloriesDisplay = $scope.food.calories;
                 $scope.food.fatDisplay = $scope.food.fat;
@@ -209,6 +216,8 @@ angular.module('foods').controller('FoodsController', ['$scope', '$stateParams',
                 $scope.food.ironDisplay = $scope.food.iron;
                 $scope.food.type = parseInt($scope.food.type) >= 0 ? parseInt($scope.food.type) : 0;
                 $scope.food.typeDisplay = $scope.foodTypes[$scope.food.type].type;
+
+
 
 
                 $scope.totalFatDailyPercentageDisplay = $scope.totalFatDailyPercentage;

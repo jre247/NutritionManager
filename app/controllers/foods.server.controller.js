@@ -308,7 +308,7 @@ var fillFoodWithData = function(food, rowData){
     food.folate = rowData[26].columnData * servingsDelta;
     food.folicAcid = rowData[27].columnData * servingsDelta;
     food.vitaminB12 = rowData[31].columnData * servingsDelta;
-    food.vitaminA = rowData[32].columnData * servingsDelta;
+    food.vitaminA = rowData[33].columnData * servingsDelta;
     food.vitaminE = rowData[40].columnData * servingsDelta;
     food.vitaminD = rowData[41].columnData * servingsDelta;
     food.vitaminK = rowData[43].columnData * servingsDelta;
@@ -341,15 +341,20 @@ var findFoodForRow = function(workbook, currentRow, isDone, columns, res){
         isDone = true;
     }
 
+
+    //TODO: comment this out when ready
+//    if (currentRow == 8) {
+//        isDone = true;
+//
+//        isDone = true;
+//    }
+
+
+
     if(isDone){
         res.jsonp({isDone: true});
     }
-    //TODO: comment this out when ready
-//    if (currentRow == 8) {
-//       isDone = true;
-//
-//        return isDone;
-//    }
+
 
     if(!isDone) {
         Food.findOne({foodToken: foodToken}).exec(function (err, food) {
