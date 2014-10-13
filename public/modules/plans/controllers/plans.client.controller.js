@@ -927,6 +927,9 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
                     },
                     mealTypes: function(){
                         return $scope.mealTypes;
+                    },
+                    userFoods: function(){
+                        return $scope.allFoods;
                     }
                 }
             });
@@ -1024,7 +1027,7 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
 ]);
 
 
-var CreateFoodModalInstanceCtrl = function ($scope, $modalInstance, parentScope, meal, food, CoreUtilities, isCreateMeal, mealTypes) {
+var CreateFoodModalInstanceCtrl = function ($scope, $modalInstance, parentScope, meal, food, CoreUtilities, isCreateMeal, mealTypes, userFoods) {
     $scope.foodToAdd = food;
     $scope.parentScope = parentScope;
     $scope.meal = meal;
@@ -1039,6 +1042,9 @@ var CreateFoodModalInstanceCtrl = function ($scope, $modalInstance, parentScope,
     $scope.findFoodsByFirstLetter = false;
     $scope.mealTypes = mealTypes;
     $scope.showCreateMealSection = isCreateMeal;
+    $scope.userFoods = userFoods;
+    $scope.myFoodsChecked = false;
+    $scope.allFoodsChecked = true;
 
 
     if($scope.foodToAdd) {
@@ -1048,13 +1054,23 @@ var CreateFoodModalInstanceCtrl = function ($scope, $modalInstance, parentScope,
     $scope.nextFoods = function(){
         $scope.skipFoods += 8;
 
-        $scope.updateFoodList();
+        if($scope.foodsRadioBtn == 'myFoods'){
+            $scope.foods = filterMyFoods($scope.findFoodsByFirstLetter, $scope.userFoods, $scope.selected.foodSearchTxt, $scope.skipFoods);
+        }
+        else{
+            $scope.updateFoodList();
+        }
     };
 
     $scope.prevFoods = function(){
         $scope.skipFoods -= 8;
 
-        $scope.updateFoodList();
+        if($scope.foodsRadioBtn == 'myFoods'){
+            $scope.foods = filterMyFoods($scope.findFoodsByFirstLetter, $scope.userFoods, $scope.selected.foodSearchTxt, $scope.skipFoods);
+        }
+        else{
+            $scope.updateFoodList();
+        }
     };
 
     $scope.clearFoodInput = function(){
@@ -1144,8 +1160,69 @@ var CreateFoodModalInstanceCtrl = function ($scope, $modalInstance, parentScope,
         $scope.skipFoods = 0;
         $scope.findFoodsByFirstLetter = false;
 
-        $scope.updateFoodList();
+        if($scope.foodsRadioBtn == 'myFoods'){
+            $scope.foods = filterMyFoods($scope.findFoodsByFirstLetter, $scope.userFoods, $scope.selected.foodSearchTxt, $scope.skipFoods);
+        }
+        else{
+            $scope.updateFoodList();
+        }
     };
+
+    $scope.foodsRadioBtn = 'allFoods';
+
+    var filterMyFoods = function(findFoodsByFirstLetter, userFoods, foodSearchTxt, skipFoods){
+        var foods = [];
+
+        var nFoodAdded = 0;
+        if(foodSearchTxt && foodSearchTxt.length > 0) {
+            foodSearchTxt = foodSearchTxt.toLowerCase();
+        }
+
+        for(var f = skipFoods; f < userFoods.length; f++){
+            if(nFoodAdded >= 8){
+                break;
+            }
+
+            var addFood = true;
+            var userFood = userFoods[f];
+
+            if(findFoodsByFirstLetter){
+                if(userFood.name.toLowerCase().substring(0, 1) !== foodSearchTxt){
+                    addFood = false;
+                }
+            }
+            else if(foodSearchTxt && foodSearchTxt.length > 0){
+                if(userFood.name.toLowerCase().indexOf(foodSearchTxt) === -1){
+                    addFood = false;
+                }
+            }
+
+
+            if(addFood) {
+                foods.push(userFood);
+
+                nFoodAdded++;
+            }
+        }
+
+        return foods;
+    };
+
+    $scope.radioBtnCheckedChange = function(radioBtnValue){
+        $scope.skipFoods = 0;
+        $scope.findFoodsByFirstLetter = false;
+        $scope.foodsRadioBtn = radioBtnValue;
+
+        //TODO: put myFoods find in core utility
+        if(radioBtnValue == 'myFoods'){
+            $scope.foods = filterMyFoods($scope.findFoodsByFirstLetter, $scope.userFoods, $scope.selected.foodSearchTxt, $scope.skipFoods);
+        }
+        else{
+            $scope.updateFoodList();
+        }
+    };
+
+
 
     $scope.updateFoodList = function(){
         if($scope.findFoodsByFirstLetter){
@@ -1165,18 +1242,23 @@ var CreateFoodModalInstanceCtrl = function ($scope, $modalInstance, parentScope,
     };
 
     $scope.findFoodsByLetter = function(letter){
-       //
         $scope.findFoodsByFirstLetter = true;
-
 
         if(letter){
             $scope.selected.foodSearchTxt = letter;
             $scope.skipFoods = 0;
         }
 
-        CoreUtilities.getFoods($scope.selected.foodSearchTxt, $scope.skipFoods, true).then(function(data){
-            $scope.foods = data;
-        });
+        if($scope.foodsRadioBtn == 'myFoods'){
+            $scope.foods = filterMyFoods($scope.findFoodsByFirstLetter, $scope.userFoods, $scope.selected.foodSearchTxt, $scope.skipFoods);
+        }
+        else{
+            CoreUtilities.getFoods($scope.selected.foodSearchTxt, $scope.skipFoods, true).then(function(data){
+                $scope.foods = data;
+            });
+        }
+
+
     };
 
 
