@@ -1173,6 +1173,10 @@ var CreateFoodModalInstanceCtrl = function ($scope, $modalInstance, parentScope,
     var filterMyFoods = function(findFoodsByFirstLetter, userFoods, foodSearchTxt, skipFoods){
         var foods = [];
 
+        if(!userFoods || userFoods.length == 0){
+            userFoods = [];
+        }
+
         var nFoodAdded = 0;
         if(foodSearchTxt && foodSearchTxt.length > 0) {
             foodSearchTxt = foodSearchTxt.toLowerCase();
