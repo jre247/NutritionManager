@@ -85,8 +85,8 @@
       <file leaf-file-name="foods.server.controller.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/controllers/foods.server.controller.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.7636816" vertical-offset="1928" max-vertical-offset="5670">
-              <caret line="149" column="19" selection-start-line="149" selection-start-column="19" selection-end-line="149" selection-end-column="19" />
+            <state vertical-scroll-proportion="0.6666667" vertical-offset="5192" max-vertical-offset="5670">
+              <caret line="419" column="26" selection-start-line="419" selection-start-column="26" selection-end-line="419" selection-end-column="26" />
               <folding>
                 <element signature="e#4828#6204#0" expanded="false" />
               </folding>
@@ -1382,8 +1382,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/controllers/foods.server.controller.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7636816" vertical-offset="1928" max-vertical-offset="5670">
-          <caret line="149" column="19" selection-start-line="149" selection-start-column="19" selection-end-line="149" selection-end-column="19" />
+        <state vertical-scroll-proportion="0.6666667" vertical-offset="5192" max-vertical-offset="5670">
+          <caret line="419" column="26" selection-start-line="419" selection-start-column="26" selection-end-line="419" selection-end-column="26" />
           <folding>
             <element signature="e#4828#6204#0" expanded="false" />
           </folding>

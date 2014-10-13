@@ -417,7 +417,7 @@ exports.importFoodDataFromExcel = function(req, res){
     var columns = getColumns(workbook);
 
     var isDone = false;
-    var currentRow = 2;
+    var currentRow = 2000;
 
 
     findFoodForRow(workbook, currentRow, isDone, columns, res);
