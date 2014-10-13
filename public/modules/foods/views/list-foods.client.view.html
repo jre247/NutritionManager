@@ -10,6 +10,7 @@
         <input type="text" data-ng-change="foodInputChange()" data-ng-model="foodFilterInput"/>
     </div>
     <div style="display:inline-block;float:right">
+        <span style="color: green; font-weight: bold;" data-ng-show="successLoading">Success!</span>
         <button class="btn btn-primary" type="button" data-ng-show="isUserAdmin" data-ng-click="importFoodsFromExcel()">
             <span></span>Import Foods From Excel
         </button>
@@ -26,19 +27,19 @@
                         <!--Type: <span class="list-group-item-text" data-ng-bind="food.typeDisplay"></span>-->
                     <!--</div>-->
                     <div class="foodItem">
-                        Calories: <span class="list-group-item-text" data-ng-bind="food.calories"></span>
+                        Calories: <span class="list-group-item-text" data-ng-bind="food.calories | number:0"></span>
                     </div>
                     <div class="foodItem">
-                        Fat: <span class="list-group-item-text" data-ng-bind="food.fat"></span>
+                        Fat: <span class="list-group-item-text" data-ng-bind="food.fat | number:1"></span>
                     </div>
                     <div class="foodItem">
-                        Protein: <span class="list-group-item-text" data-ng-bind="food.protein"></span>
+                        Protein: <span class="list-group-item-text" data-ng-bind="food.protein | number:1"></span>
                     </div>
                     <div class="foodItem">
-                        Carbs: <span class="list-group-item-text" data-ng-bind="food.carbohydrates"></span>
+                        Carbs: <span class="list-group-item-text" data-ng-bind="food.carbohydrates | number:1"></span>
                     </div>
                     <div class="foodItem">
-                        Grams: <span class="list-group-item-text" data-ng-bind="food.grams"></span>
+                        Grams: <span class="list-group-item-text" data-ng-bind="food.grams | number:0"></span>
                     </div>
 
 

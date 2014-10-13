@@ -112,6 +112,9 @@ var FoodSchema = new Schema({
         type: Boolean,
         default: false
     },
+    servingDescription: {
+        type: String
+    },
     water:{
         type: Number
 

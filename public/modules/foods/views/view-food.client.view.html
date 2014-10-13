@@ -23,7 +23,7 @@
                 <small>
                     <span style="font-weight:bold;">Serving Size: </span>
                     <em class="text-muted">
-                        {{food.gramsDisplay}} grams
+                        {{food.gramsDisplay | number:0}} grams
                     </em>
                 </small>
 
@@ -36,7 +36,7 @@
             <small>
                 <span style="font-weight:bold;">Calories: </span>
                 <em class="text-muted">
-                    {{food.caloriesDisplay}}
+                    {{food.caloriesDisplay | number:1}}
                 </em>
 
             </small>
@@ -48,7 +48,7 @@
             <small>
                 <span style="font-weight:bold;">Total Fat: </span>
                 <em class="text-muted">
-                    {{food.fatDisplay}}g
+                    {{food.fatDisplay | number:1}}g
                 </em>
 
             </small>
@@ -64,7 +64,7 @@
             <small style="padding-left: 15px;">
                 <span >Saturated Fat: </span>
                 <em class="text-muted">
-                    {{food.saturatedFatDisplay}}g
+                    {{food.saturatedFatDisplay | number:1}}g
                 </em>
 
             </small>
@@ -80,7 +80,7 @@
             <small style="padding-left: 15px;">
                 <span >Trans Fat:</span>
                 <em class="text-muted">
-                    {{food.transfatDisplay}}g
+                    {{food.transfatDisplay | number:1}}g
                 </em>
 
             </small>
@@ -91,7 +91,7 @@
             <small>
                 <span style="font-weight:bold;">Cholesterol:</span>
                 <em class="text-muted">
-                    {{food.cholesterolDisplay}}mg
+                    {{food.cholesterolDisplay | number:1}}mg
                 </em>
 
             </small>
@@ -108,7 +108,7 @@
                 <span style="font-weight:bold;">Sodium:</span>
                 <em class="text-muted">
 
-                    {{food.sodiumDisplay}}mg
+                    {{food.sodiumDisplay | number:1}}mg
                 </em>
 
             </small>
@@ -124,7 +124,7 @@
             <small>
                 <span style="font-weight:bold;">Total Carbohydrates:</span>
                 <em class="text-muted">
-                    {{food.carbohydratesDisplay}}g
+                    {{food.carbohydratesDisplay | number:1}}g
                 </em>
 
             </small>
@@ -140,7 +140,7 @@
             <small style="padding-left: 15px;">
                 <span >Dietary Fiber:</span>
                 <em class="text-muted">
-                    {{food.fiberDisplay}}g
+                    {{food.fiberDisplay | number:1}}g
                 </em>
 
             </small>
@@ -156,7 +156,7 @@
             <small style="padding-left: 15px;">
                 <span >Sugars:</span>
                 <em class="text-muted">
-                    {{food.sugarDisplay}}g
+                    {{food.sugarDisplay | number:1}}g
                 </em>
 
             </small>
@@ -167,7 +167,7 @@
             <small>
                 <span style="font-weight:bold;">Protein:</span>
                 <em class="text-muted">
-                    {{food.proteinDisplay}}g
+                    {{food.proteinDisplay | number:1}}g
                 </em>
 
             </small>
@@ -186,7 +186,7 @@
 
             <small style="padding-left: 40px;">
                 <em class="text-muted">
-                    {{food.vitaminADisplay}}%
+                    {{food.vitaminADisplay | number:0}}%
                 </em>
 
             </small>
@@ -200,7 +200,7 @@
 
             <small style="float:right;">
                 <em class="text-muted">
-                    {{food.vitaminCDisplay}}%
+                    {{food.vitaminCDisplay | number:0}}%
                 </em>
 
             </small>
@@ -217,7 +217,7 @@
 
             <small style="padding-left:40px;">
                 <em class="text-muted">
-                    {{food.calciumDisplay}}%
+                    {{food.calciumDisplay | number:0}}%
                 </em>
 
             </small>
@@ -231,7 +231,7 @@
 
             <small style="float:right;">
                 <em class="text-muted">
-                    {{food.ironDisplay}}%
+                    {{food.ironDisplay | number:0}}%
                 </em>
 
             </small>

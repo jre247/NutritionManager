@@ -53,10 +53,10 @@ angular.module(ApplicationConfiguration.applicationModuleName).service(
 
         function importFoodsFromExcel() {
             var request = $http({
-                method: "get",
+                method: "post",
                 url: "/foods/" + 'excel' + '/' + 'all',
                 params: {
-                    action: "get"
+                    action: "post"
                 }
 
 

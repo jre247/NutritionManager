@@ -12,6 +12,8 @@ angular.module('foods').controller('FoodsController', ['$scope', '$stateParams',
 
         $scope.skipFoods = 0;
 
+        $scope.successLoading = false;
+
         $scope.foodTypes = [
             {id: 1, type: 'Fruit'},
             {id: 2, type: 'Starch'},
@@ -35,7 +37,9 @@ angular.module('foods').controller('FoodsController', ['$scope', '$stateParams',
         ];
 
         $scope.importFoodsFromExcel = function(){
-            CoreUtilities.importFoodsFromExcel();
+            CoreUtilities.importFoodsFromExcel().then(function(){
+                $scope.successLoading = true;
+            });
         };
 
         $scope.foodFilterInput = '';

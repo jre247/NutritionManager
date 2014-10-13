@@ -278,49 +278,53 @@ var getColumns = function(workbook){
 };
 
 var fillFoodWithData = function(food, rowData){
+    var oneServingGrams = rowData[48].columnData;
+    var servingsDelta = oneServingGrams / 100;
+
     food.foodToken = rowData[0].columnData;
     food.name = rowData[1].columnData;
-    food.water = rowData[2].columnData;
-    food.calories = rowData[3].columnData;
-    food.protein = rowData[4].columnData;
-    food.fat = rowData[5].columnData;
-    food.carbohydrates = rowData[7].columnData;
-    food.fiber = rowData[8].columnData;
-    food.sugar = rowData[9].columnData;
-    food.calcium = rowData[10].columnData;
-    food.iron = rowData[11].columnData;
-    food.magnesium = rowData[12].columnData;
-    food.phosphorus = rowData[13].columnData;
-    food.potassium = rowData[14].columnData;
-    food.sodium = rowData[15].columnData;
-    food.zinc = rowData[16].columnData;
-    food.copper = rowData[17].columnData;
-    food.manganese = rowData[18].columnData;
-    food.selenium = rowData[19].columnData;
-    food.vitaminC = rowData[20].columnData;
-    food.thiamin = rowData[21].columnData;
-    food.riboflavin = rowData[22].columnData;
-    food.niacin = rowData[23].columnData;
-    food.vitaminB6 = rowData[25].columnData;
-    food.folate = rowData[26].columnData;
-    food.folicAcid = rowData[27].columnData;
-    food.vitaminB12 = rowData[31].columnData;
-    food.vitaminA = rowData[32].columnData;
-    food.vitaminE = rowData[40].columnData;
-    food.vitaminD = rowData[41].columnData;
-    food.vitaminK = rowData[43].columnData;
-    food.saturatedFat = rowData[44].columnData;
-    food.monoFat = rowData[45].columnData;
-    food.polyFat = rowData[46].columnData;
-    food.cholesterol = rowData[47].columnData;
+    food.water = rowData[2].columnData * servingsDelta;
+    food.calories = rowData[3].columnData * servingsDelta;
+    food.protein = rowData[4].columnData * servingsDelta;
+    food.fat = rowData[5].columnData * servingsDelta;
+    food.carbohydrates = rowData[7].columnData * servingsDelta;
+    food.fiber = rowData[8].columnData * servingsDelta;
+    food.sugar = rowData[9].columnData * servingsDelta;
+    food.calcium = rowData[10].columnData * servingsDelta;
+    food.iron = rowData[11].columnData * servingsDelta;
+    food.magnesium = rowData[12].columnData * servingsDelta;
+    food.phosphorus = rowData[13].columnData * servingsDelta;
+    food.potassium = rowData[14].columnData * servingsDelta;
+    food.sodium = rowData[15].columnData * servingsDelta;
+    food.zinc = rowData[16].columnData * servingsDelta;
+    food.copper = rowData[17].columnData * servingsDelta;
+    food.manganese = rowData[18].columnData * servingsDelta;
+    food.selenium = rowData[19].columnData * servingsDelta;
+    food.vitaminC = rowData[20].columnData * servingsDelta;
+    food.thiamin = rowData[21].columnData * servingsDelta;
+    food.riboflavin = rowData[22].columnData * servingsDelta;
+    food.niacin = rowData[23].columnData * servingsDelta;
+    food.vitaminB6 = rowData[25].columnData * servingsDelta;
+    food.folate = rowData[26].columnData * servingsDelta;
+    food.folicAcid = rowData[27].columnData * servingsDelta;
+    food.vitaminB12 = rowData[31].columnData * servingsDelta;
+    food.vitaminA = rowData[32].columnData * servingsDelta;
+    food.vitaminE = rowData[40].columnData * servingsDelta;
+    food.vitaminD = rowData[41].columnData * servingsDelta;
+    food.vitaminK = rowData[43].columnData * servingsDelta;
+    food.saturatedFat = rowData[44].columnData * servingsDelta;
+    food.monoFat = rowData[45].columnData * servingsDelta;
+    food.polyFat = rowData[46].columnData * servingsDelta;
+    food.cholesterol = rowData[47].columnData * servingsDelta;
     food.importSource = 'usda';
     food.isImported = true;
-    food.grams = 100;
+    food.grams = oneServingGrams;
+    food.servingDescription = rowData[49].columnData;
 
     return food;
 };
 
-var findFoodForRow = function(workbook, currentRow, isDone, columns){
+var findFoodForRow = function(workbook, currentRow, isDone, columns, res){
     var sheet_name_list = workbook.SheetNames;
 
     var column = columns[0];
@@ -336,12 +340,16 @@ var findFoodForRow = function(workbook, currentRow, isDone, columns){
     else{
         isDone = true;
     }
-    //TODO: comment this out when ready
-    //if (currentRow == 8) {
-       // isDone = true;
 
-      //  return isDone;
-    //}
+    if(isDone){
+        res.jsonp({isDone: true});
+    }
+    //TODO: comment this out when ready
+//    if (currentRow == 8) {
+//       isDone = true;
+//
+//        return isDone;
+//    }
 
     if(!isDone) {
         Food.findOne({foodToken: foodToken}).exec(function (err, food) {
@@ -393,7 +401,7 @@ var findFoodForRow = function(workbook, currentRow, isDone, columns){
                         } else {
                             currentRow++;
 
-                            isDone = findFoodForRow(workbook, currentRow, isDone, columns);
+                            isDone = findFoodForRow(workbook, currentRow, isDone, columns, res);
                         }
                     });
                 }
@@ -406,7 +414,7 @@ var findFoodForRow = function(workbook, currentRow, isDone, columns){
 
 };
 
-exports.importFoodDataFromExcel = function(){
+exports.importFoodDataFromExcel = function(req, res){
     var workbook = XLS.readFile('usda_foods/usda_food_list_2014_10_9.xls');
 
     var columns = getColumns(workbook);
@@ -415,7 +423,7 @@ exports.importFoodDataFromExcel = function(){
     var currentRow = 2;
 
 
-    var isDone = findFoodForRow(workbook, currentRow, isDone, columns);
+    findFoodForRow(workbook, currentRow, isDone, columns, res);
 };
 
 

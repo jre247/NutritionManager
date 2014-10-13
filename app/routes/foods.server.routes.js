@@ -22,7 +22,7 @@ module.exports = function(app) {
         .delete(foods.delete);
 
     app.route('/foods/:importFoodsFileFormat/:foodsCountImport')
-        .get(foods.importFoodDataFromExcel);
+        .post(foods.importFoodDataFromExcel);
 
 
     app.route('/foods/:foodTyped/:foodsRange/:skip')
