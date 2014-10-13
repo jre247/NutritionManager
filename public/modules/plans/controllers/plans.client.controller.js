@@ -1045,6 +1045,20 @@ var CreateFoodModalInstanceCtrl = function ($scope, $modalInstance, parentScope,
     $scope.userFoods = userFoods;
     $scope.myFoodsChecked = false;
     $scope.allFoodsChecked = true;
+    $scope.foodsRadioBtn = 'myFoods';
+
+    var userFoodsLength;
+    if(userFoods.length > 8){
+        userFoodsLength = 8;
+    }
+    else{
+        userFoodsLength = userFoods.length;
+    }
+
+    for(var f = 0 ; f < userFoodsLength; f++){
+        $scope.foods.push(userFoods[f]);
+    }
+
 
 
     if($scope.foodToAdd) {
@@ -1107,9 +1121,9 @@ var CreateFoodModalInstanceCtrl = function ($scope, $modalInstance, parentScope,
         $scope.findFoodsByFirstLetter = false;
     };
 
-    CoreUtilities.getFoods('null').then(function(data){
-        $scope.foods = data;
-    });
+//    CoreUtilities.getFoods('null').then(function(data){
+//        $scope.foods = data;
+//    });
 
     $scope.calculateCaloriesDisplay = function(){
         var caloriesDisplay = 0, proteinDisplay = 0, fatDisplay = 0, sodiumDisplay = 0, gramsDisplay = 0,
@@ -1156,6 +1170,7 @@ var CreateFoodModalInstanceCtrl = function ($scope, $modalInstance, parentScope,
         showMacrosChart();
     };
 
+
     $scope.foodInputChange = function(){
         $scope.skipFoods = 0;
         $scope.findFoodsByFirstLetter = false;
@@ -1168,7 +1183,7 @@ var CreateFoodModalInstanceCtrl = function ($scope, $modalInstance, parentScope,
         }
     };
 
-    $scope.foodsRadioBtn = 'allFoods';
+
 
     var filterMyFoods = function(findFoodsByFirstLetter, userFoods, foodSearchTxt, skipFoods){
         var foods = [];
