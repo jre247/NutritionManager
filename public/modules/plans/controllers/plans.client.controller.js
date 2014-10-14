@@ -1047,19 +1047,31 @@ var CreateFoodModalInstanceCtrl = function ($scope, $modalInstance, parentScope,
     $scope.allFoodsChecked = true;
     $scope.foodsRadioBtn = 'myFoods';
 
-    var userFoodsLength;
-    if(userFoods.length > 8){
-        userFoodsLength = 8;
-    }
-    else{
-        userFoodsLength = userFoods.length;
-    }
+    var initializeUserFoods = function(userFoods){
+        userFoods.sort(function compare(a,b) {
+            var foodNameA = a.name.toLowerCase();
+            var foodNameB = b.name.toLowerCase();
 
-    for(var f = 0 ; f < userFoodsLength; f++){
-        $scope.foods.push(userFoods[f]);
-    }
+            if (foodNameA < foodNameB)
+                return -1;
+            if (foodNameA > foodNameB)
+                return 1;
+            return 0;
+        });
+        var userFoodsLength;
+        if(userFoods.length > 8){
+            userFoodsLength = 8;
+        }
+        else{
+            userFoodsLength = userFoods.length;
+        }
 
+        for(var f = 0 ; f < userFoodsLength; f++){
+            $scope.foods.push(userFoods[f]);
+        }
+    };
 
+    initializeUserFoods(userFoods);
 
     if($scope.foodToAdd) {
         $scope.caloriesDisplay = $scope.foodToAdd.selectedFood ? $scope.foodToAdd.selectedFood.calories : $scope.foodToAdd.calories;
