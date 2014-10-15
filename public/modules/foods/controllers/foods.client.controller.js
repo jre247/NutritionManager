@@ -55,7 +55,7 @@ angular.module('foods').controller('FoodsController', ['$scope', '$stateParams',
         };
 
         $scope.moreFoods = function(){
-            $scope.isLoading = true;
+            $scope.isMoreLoading = true;
             $scope.skipFoods += 8;
 
             var filterTxt = $scope.foodFilterInput || 'null';
@@ -64,7 +64,7 @@ angular.module('foods').controller('FoodsController', ['$scope', '$stateParams',
                 for(var f = 0; f < data.length; f++){
                     $scope.foods.push(data[f]);
                 }
-                $scope.isLoading = false;
+                $scope.isMoreLoading = false;
             });
         };
 
