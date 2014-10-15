@@ -13,6 +13,7 @@ angular.module('foods').controller('FoodsController', ['$scope', '$stateParams',
         $scope.skipFoods = 0;
 
         $scope.successLoading = false;
+        $scope.isLoading = false;
 
         $scope.foodTypes = [
             {id: 1, type: 'Fruit'},
@@ -177,8 +178,11 @@ angular.module('foods').controller('FoodsController', ['$scope', '$stateParams',
         };
 
         $scope.find = function() {
+            $scope.isLoading = true;
+
             CoreUtilities.getFoods('null', 0).then(function (data) {
                 $scope.foods = data;
+                $scope.isLoading = false;
             });
 
             $scope.isUserAdmin = isUserAdmin();
