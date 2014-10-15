@@ -311,7 +311,10 @@ var fillFoodWithData = function(food, rowData){
     food.importSource = 'usda';
     food.isImported = true;
     food.grams = oneServingGrams;
-    food.servingDescription = rowData[49].columnData;
+    food.servingDescription1 = rowData[49].columnData;
+    food.servingGrams2 = rowData[50].columnData;
+    food.servingDescription2 = rowData[51].columnData;
+    food.servingGrams1 = oneServingGrams;
 
     return food;
 };

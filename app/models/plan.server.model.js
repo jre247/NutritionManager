@@ -165,6 +165,21 @@ var PlanSchema = new Schema({
                             sodium:{
                                 type: Number,
                                 default: 0
+                            },
+                            servingGrams1: {
+                                type: Number
+                            },
+                            servingGrams2: {
+                                type: Number
+                            },
+                            servingDescription2: {
+                                type: String
+                            },
+                            servingDescription1: {
+                                type: String
+                            },
+                            servingType: {
+                                type: Number
                             }
                         },
                         servings: {
@@ -230,6 +245,21 @@ var PlanSchema = new Schema({
                         iron:{
                             type: Number,
                             default: 0
+                        },
+                        servingGrams1: {
+                            type: Number
+                        },
+                        servingGrams2: {
+                            type: Number
+                        },
+                        servingDescription2: {
+                            type: String
+                        },
+                        servingDescription1: {
+                            type: String
+                        },
+                        servingType: {
+                            type: Number
                         },
                         isEditable: {
                             type: Boolean,

@@ -112,7 +112,7 @@ var FoodSchema = new Schema({
         type: Boolean,
         default: false
     },
-    servingDescription: {
+    servingDescription1: {
         type: String
     },
     water:{
@@ -175,6 +175,15 @@ var FoodSchema = new Schema({
     },
     polyFat:{
         type: Number
+    },
+    servingGrams1: {
+        type: Number
+    },
+    servingGrams2: {
+        type: Number
+    },
+    servingDescription2: {
+        type: String
     }
 
 

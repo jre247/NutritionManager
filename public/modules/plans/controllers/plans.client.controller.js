@@ -233,7 +233,12 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
                 carbohydrates: 0,
                 protein: 0,
                 fat: 0,
-                sodium: 0
+                sodium: 0,
+                servingDescription1: defaultFood.servingDescription1,
+                servingDescription2: defaultFood.servingDescription2,
+                servingGrams1: defaultFood.servingGrams1,
+                servingGrams2: defaultFood.servingGrams2,
+                servingType: defaultFood.servingType
             };
 
             var model = {
@@ -247,20 +252,16 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
                 protein: 0,
                 fat: 0,
                 sodium: 0,
-                isEditable: true
+                servingDescription1: defaultFood.servingDescription1,
+                servingDescription2: defaultFood.servingDescription2,
+                servingGrams1: defaultFood.servingGrams1,
+                servingGrams2: defaultFood.servingGrams2,
+                isEditable: true,
+                servingType: defaultFood.servingType
             };
 
             meal.foods.push(model);
-
-            //foodServingsChange()
-            //CoreUtilities.doMealTotaling(meal);
-            //CoreUtilities.calculatePlanTotalMacros($scope.plan);
-
-            //calculate changed deficit
-            //$scope.currentDeficit = CoreUtilities.calculateDeficit($scope.plan, $scope.activityPlan, $scope.nutritionProfile);
         };
-
-
 
         $scope.saveFood = function(food){
             food.isEditable = false;
@@ -519,7 +520,7 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
             $scope.plan.meals[1].isEditable = false;
             $scope.plan.meals[2].isEditable = false;
             $scope.plan.meals[2].type = $scope.mealTypes[2].id;
-        }
+        };
 
 
         var interval;
@@ -641,6 +642,12 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
             food.name = food.selectedFood.name;
             food.selectedFood.foodId = food.selectedFood._id;
             food.type = food.selectedFood.type;
+
+            food.servingDescription1 = food.selectedFood.servingDescription1;
+            food.servingDescription2 = food.selectedFood.servingDescription2;
+            food.servingGrams1 = food.selectedFood.servingGrams1;
+            food.servingGrams2 = food.selectedFood.servingGrams2;
+            food.servingType = food.selectedFood.servingType;
 
             food.foodId = food.selectedFood._id;
 
@@ -934,6 +941,21 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
                 }
             });
 
+            var checkIfIncrementingServings = function(meal, food){
+                var isServingsUpdated = false;
+
+                //check if just incrementing servings of food since list already has this food
+                for(var m = 0; m < meal.foods.length; m++){
+                    if (meal.foods[m]._id === food._id){
+                        meal.foods[m].servings += meal.foods[m].servings;
+                        isServingsUpdated = true;
+                        break;
+                    }
+                }
+
+                return isServingsUpdated;
+            };
+
             modalInstance.result.then(function (selected) {
                 meal.isEditable = false;
                 var food = selected.foodToAdd;
@@ -943,7 +965,9 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
                 food.isEditable = false;
 
                 if(isUpdate) {
-                    if(selected.oldFood._id !== food._id) {
+                    var isServingsUpdated = false;
+
+                    //if(selected.oldFood._id !== food._id) {
                         food.selectedFood = {
                             _id: food._id,
                             name: food.name,
@@ -956,14 +980,26 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
                             cholesterol: food.cholesterol,
                             saturatedFat: food.saturatedFat,
                             sugar: food.sugar,
-                            fiber: food.fiber
+                            fiber: food.fiber,
+                            servingGrams2: food.servingGrams2,
+                            servingGrams1: food.servingGrams1,
+                            servingDescription1: food.servingDescription1,
+                            servingDescription2: food.servingDescription2,
+                            servingType: selected.servingType
                         };
+
+                    food.servingType = selected.servingType;
+
+                    if(selected.oldFood._id !== food._id){
+                        isServingsUpdated = checkIfIncrementingServings(meal, food);
                     }
 
-                    for(var m = 0; m < meal.foods.length; m++){
-                        if (meal.foods[m]._id === selected.oldFood._id){
-                            meal.foods[m] = food;
-                            break;
+                    if(!isServingsUpdated) {
+                        for (var m = 0; m < meal.foods.length; m++) {
+                            if (meal.foods[m]._id === selected.oldFood._id) {
+                                meal.foods[m] = food;
+                                break;
+                            }
                         }
                     }
                 }
@@ -980,10 +1016,21 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
                         cholesterol: food.cholesterol,
                         saturatedFat: food.saturatedFat,
                         sugar: food.sugar,
-                        fiber: food.fiber
+                        fiber: food.fiber,
+                        servingGrams1: food.servingGrams1,
+                        servingGrams2: food.servingGrams2,
+                        servingDescription1: food.servingDescription1,
+                        servingDescription2: food.servingDescription2,
+                        servingType: selected.servingType
                     };
 
-                    meal.foods.push(food);
+                    food.servingType = selected.servingType;
+
+                    var isServingsUpdated = checkIfIncrementingServings(meal, food);
+
+                    if(!isServingsUpdated) {
+                        meal.foods.push(food);
+                    }
                 }
 
                 $scope.foodServingsChange(food, meal);
@@ -1033,7 +1080,7 @@ var CreateFoodModalInstanceCtrl = function ($scope, $modalInstance, parentScope,
     $scope.meal = meal;
     $scope.isUpdate = food !== 'undefined' && food !== null && food !== 'null' && food !== undefined;
     $scope.servings = 1;
-    window.scope = $scope;
+    window.scopeCreateFoodDialog = $scope;
     $scope.showFoodDetails = $scope.isUpdate ? true : false;
     $scope.foods = [];
     $scope.foodSearchTxt = null;
@@ -1046,6 +1093,72 @@ var CreateFoodModalInstanceCtrl = function ($scope, $modalInstance, parentScope,
     $scope.myFoodsChecked = false;
     $scope.allFoodsChecked = true;
     $scope.foodsRadioBtn = 'myFoods';
+    $scope.servingType = food ? food.servingType : 0;
+
+
+
+    $scope.servingTypeChange = function(){
+        $scope.selected.servings = 1;
+
+        var food = $scope.selected.foodToAdd;
+        var oneServingGrams, servingsDelta;
+
+        if($scope.selected.servingType == 0){
+            oneServingGrams = $scope.foodServingTypes[0].grams;
+            servingsDelta = oneServingGrams / $scope.foodServingTypes[1].grams;
+        }
+        else{
+            oneServingGrams = $scope.foodServingTypes[1].grams;
+            servingsDelta = (oneServingGrams / $scope.foodServingTypes[0].grams);
+        }
+
+        food.water = food.water * servingsDelta;
+        food.calories = food.calories * servingsDelta;
+        food.protein = food.protein * servingsDelta;
+        food.fat = food.fat * servingsDelta;
+        food.carbohydrates = food.carbohydrates * servingsDelta;
+        food.fiber = food.fiber * servingsDelta;
+        food.sugar = food.sugar * servingsDelta;
+        food.calcium = food.calcium * servingsDelta;
+        food.iron = food.iron * servingsDelta;
+        food.magnesium = food.magnesium * servingsDelta;
+        food.phosphorus = food.phosphorus * servingsDelta;
+        food.potassium = food.potassium * servingsDelta;
+        food.sodium = food.sodium * servingsDelta;
+        food.zinc = food.zinc * servingsDelta;
+        food.copper = food.copper * servingsDelta;
+        food.manganese = food.manganese * servingsDelta;
+        food.selenium = food.selenium  * servingsDelta;
+        food.vitaminC = food.vitaminC * servingsDelta;
+        food.thiamin = food.thiamin * servingsDelta;
+        food.riboflavin = food.riboflavin * servingsDelta;
+        food.niacin = food.niacin * servingsDelta;
+        food.vitaminB6 = food.vitaminB6 * servingsDelta;
+        food.folate = food.folate * servingsDelta;
+        food.folicAcid = food.folicAcid * servingsDelta;
+        food.vitaminB12 = food.vitaminB12 * servingsDelta;
+        food.vitaminA = food.vitaminA * servingsDelta;
+        food.vitaminE = food.vitaminE * servingsDelta;
+        food.vitaminD = food.vitaminD * servingsDelta;
+        food.vitaminK = food.vitaminK * servingsDelta;
+        food.saturatedFat = food.saturatedFat * servingsDelta;
+        food.monoFat = food.monoFat * servingsDelta;
+        food.polyFat = food.polyFat * servingsDelta;
+        food.cholesterol = food.cholesterol * servingsDelta;
+        food.grams = oneServingGrams;
+        food.servingType = $scope.selected.servingType;
+
+        $scope.selected.caloriesDisplay = food.calories,
+        $scope.selected.proteinDisplay = food.protein,
+        $scope.selected.fatDisplay = food.fat,
+        $scope.selected.carbsDisplay = food.carbohydrates,
+        $scope.selected.gramsDisplay = food.grams,
+        $scope.selected.sodiumDisplay = food.sodium,
+        $scope.selected.fiberDisplay = food.fiber,
+        $scope.selected.cholesterolDisplay = food.cholesterol,
+        $scope.selected.sugarDisplay = food.sugar,
+        $scope.selected.saturatedFatDisplay = food.saturatedFat
+    };
 
     var initializeUserFoods = function(userFoods){
         userFoods.sort(function compare(a,b) {
@@ -1121,7 +1234,9 @@ var CreateFoodModalInstanceCtrl = function ($scope, $modalInstance, parentScope,
         fiberDisplay: $scope.fiberDisplay,
         cholesterolDisplay: $scope.cholesterolDisplay,
         sugarDisplay: $scope.sugarDisplay,
-        saturatedFat: $scope.saturatedFat,
+        saturatedFatDisplay: $scope.saturatedFat,
+
+        servingType: $scope.servingType,
 
         mealTypes: $scope.mealTypes
 
@@ -1170,6 +1285,29 @@ var CreateFoodModalInstanceCtrl = function ($scope, $modalInstance, parentScope,
         $scope.selected.sugarDisplay = sugarDisplay % 1 != 0 ? sugarDisplay.toFixed(1) : sugarDisplay;
     };
 
+    var initializeServingTypes = function(food){
+        var foodServingsGrams1 = food.servingGrams1;
+        var foodServingsGrams2 = food.servingGrams2;
+
+        $scope.foodServingTypes = [];
+
+        $scope.foodServingTypes.push({
+            id: 0,
+            grams: foodServingsGrams1,
+            description: food.servingDescription1
+        });
+
+        if(foodServingsGrams2) {
+            $scope.foodServingTypes.push({
+                id: 1,
+                grams: foodServingsGrams2,
+                description: food.servingDescription2
+            });
+        }
+
+
+    };
+
     $scope.foodSelectionChange = function(food){
         $scope.selected.foodToAdd = food;
         $scope.showFoodDetails = true;
@@ -1180,8 +1318,13 @@ var CreateFoodModalInstanceCtrl = function ($scope, $modalInstance, parentScope,
         $scope.calculateCaloriesDisplay();
 
         showMacrosChart();
+
+        initializeServingTypes(food);
     };
 
+    if(food){
+        initializeServingTypes(food);
+    }
 
     $scope.foodInputChange = function(){
         $scope.skipFoods = 0;

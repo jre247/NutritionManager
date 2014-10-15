@@ -430,7 +430,7 @@
 <script type="text/ng-template" id="createFoodModalContent.html">
     <div class="modal-header" style="font-family: segui;">
         <h3 class="modal-title" data-ng-show="!showFoodDetails">Select Food To Add</h3>
-        <div data-ng-show="showFoodDetails" style="display:inline-block;width: 220px;">
+        <div data-ng-show="showFoodDetails" style="display:inline-block;">
             <h3 class="modal-title" >
                 <span style="font-weight: bold;" data-ng-bind="selected.foodToAdd.name"></span>
 
@@ -529,45 +529,63 @@
                         </div>
                         <div style="margin-top: 20px;display:inline-block;padding-left:40px;">
                             <div style="font-weight:bold;">Calories:</div>
-                            <span style="font-size: 18px;" data-ng-bind="selected.caloriesDisplay"></span>
+                            <span style="font-size: 18px;" data-ng-bind="selected.caloriesDisplay | number: 0"></span>
                         </div>
+
+                        <div style="display:inline-block;">
+                            <div data-ng-show="foodServingTypes && foodServingTypes.length > 1">
+                                <select data-ng-model="selected.servingType" data-ng-change="servingTypeChange();"
+                                        ng-options="t.id as t.description for t in foodServingTypes"></select>
+                            </div>
+                        </div>
+
+                        <div style="display:inline-block;">
+                            <span data-ng-show="foodServingTypes && foodServingTypes.length <= 1" data-ng-bind="selected.foodToAdd.servingDescription1"></span>
+                        </div>
+                        <!--<div style="margin-top: 20px;display:inline-block;padding-left:40px;"-->
+                           <!--data-ng-show="selected.foodToAdd ? selected.foodToAdd.servingDescription.toLowerCase() !== '1 serving' : selected.servingDescription.toLowerCase() !== '1 serving'">-->
+                            <!--<div>-->
+                                <!--<span style="font-weight:bold">1 Serving: </span>-->
+                            <!--</div>-->
+                            <!--<span style="font-size: 18px;" data-ng-bind="selected.foodToAdd ? selected.foodToAdd.servingDescription : selected.servingDescription"></span>-->
+                        <!--</div>-->
 
                         <div>
                             <div style="padding-top: 7px;display:inline-block;">
                                 <div style="display:inline-block;padding-right:10px;">
                                     <div style="padding-top: 15px;color:rgb(36, 124, 36)">
                                         <span style="font-weight:bold;">Total Fat:</span>
-                                        <span data-ng-bind="selected.fatDisplay"></span>g
+                                        <span data-ng-bind="selected.fatDisplay | number: 1"></span>g
                                     </div>
                                     <div style="margin-left: 20px;">
                                         Saturated Fat:
-                                        <span data-ng-bind="selected.saturatedFatDisplay"></span>g
+                                        <span data-ng-bind="selected.saturatedFatDisplay | number: 0"></span>g
                                     </div>
                                     <div style="margin-left: 20px;">
                                         <span>Cholesterol:</span>
-                                        <span data-ng-bind="selected.cholesterolDisplay"></span>mg
+                                        <span data-ng-bind="selected.cholesterolDisplay | number: 0"></span>mg
                                     </div>
                                     <div >
                                         <span style="font-weight:bold;">Sodium:</span>
-                                        <span data-ng-bind="selected.sodiumDisplay"></span>mg
+                                        <span data-ng-bind="selected.sodiumDisplay | number: 0"></span>mg
                                     </div>
                                 </div>
                                 <div style="display:inline-block;border-left: 1px solid lightgray;padding-left: 10px;">
                                     <div style="color:rgb(255, 127, 14)">
                                         <span style="font-weight:bold;">Total Carbs:</span>
-                                        <span data-ng-bind="selected.carbsDisplay"></span>g
+                                        <span data-ng-bind="selected.carbsDisplay | number: 1"></span>g
                                     </div>
                                     <div style="margin-left: 20px;">
                                         Fiber:
-                                        <span data-ng-bind="selected.fiberDisplay"></span>g
+                                        <span data-ng-bind="selected.fiberDisplay | number: 0"></span>g
                                     </div>
                                     <div style="margin-left: 20px;">
                                         Sugar:
-                                        <span data-ng-bind="selected.sugarDisplay"></span>g
+                                        <span data-ng-bind="selected.sugarDisplay | number: 1"></span>g
                                     </div>
                                     <div style="color:rgb(31, 119, 180)">
                                         <span style="font-weight:bold;">Protein:</span>
-                                        <span data-ng-bind="selected.proteinDisplay"></span>g
+                                        <span data-ng-bind="selected.proteinDisplay | number: 1"></span>g
                                     </div>
                                 </div>
                             </div>

@@ -110,7 +110,10 @@ angular.module('foods').controller('FoodsController', ['$scope', '$stateParams',
                 calcium: $scope.food.calcium,
                 iron: $scope.food.iron,
                 saturatedFat: $scope.food.saturatedFat,
-                transfat: $scope.food.transfat
+                transfat: $scope.food.transfat,
+                servingDescription1: $scope.food.servingDescription1,
+                servingDescription2: $scope.food.servingDescription2,
+                servingGrams2: $scope.food.servingGrams2
                 //milliliters: $scope.milliliters
             });
             food.$save(function(response) {
@@ -137,6 +140,7 @@ angular.module('foods').controller('FoodsController', ['$scope', '$stateParams',
             this.food.carbohydrates = '';
             this.food.grams = '';
             this.food.type = '';
+
             //this.milliliters = '';
         };
 
@@ -216,8 +220,9 @@ angular.module('foods').controller('FoodsController', ['$scope', '$stateParams',
                 $scope.food.ironDisplay = $scope.food.iron;
                 $scope.food.type = parseInt($scope.food.type) >= 0 ? parseInt($scope.food.type) : 0;
                 $scope.food.typeDisplay = $scope.foodTypes[$scope.food.type].type;
-
-
+                $scope.food.servingDescription1Display = $scope.food.servingDescription1;
+                $scope.food.servingDescription2Display = $scope.food.servingDescription2;
+                $scope.food.servingGrams2Display = $scope.food.servingGrams2;
 
 
                 $scope.totalFatDailyPercentageDisplay = $scope.totalFatDailyPercentage;
