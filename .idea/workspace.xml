@@ -29,10 +29,10 @@
       <file leaf-file-name="application.min.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/public/dist/application.min.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.33705774" vertical-offset="55634" max-vertical-offset="77445">
-              <caret line="3989" column="3" selection-start-line="3989" selection-start-column="3" selection-end-line="3989" selection-end-column="3" />
+            <state vertical-scroll-proportion="0.38919926" vertical-offset="14821" max-vertical-offset="71085">
+              <caret line="1703" column="2" selection-start-line="1703" selection-start-column="2" selection-end-line="1703" selection-end-column="2" />
               <folding>
-                <element signature="e#135504#146705#0" expanded="false" />
+                <element signature="e#31830#60896#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -51,8 +51,8 @@
       <file leaf-file-name="plans.client.sharedService.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/modules/plans/services/plans.client.sharedService.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-4.1153846" vertical-offset="3148" max-vertical-offset="8655">
-              <caret line="345" column="46" selection-start-line="345" selection-start-column="46" selection-end-line="345" selection-end-column="46" />
+            <state vertical-scroll-proportion="-12.307693" vertical-offset="5590" max-vertical-offset="8790">
+              <caret line="522" column="48" selection-start-line="0" selection-start-column="0" selection-end-line="708" selection-end-column="2" />
               <folding>
                 <element signature="e#782#3681#0" expanded="false" />
                 <element signature="e#8046#8811#0" expanded="false" />
@@ -85,11 +85,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="plan.server.model.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/models/plan.server.model.js">
+      <file leaf-file-name="layout.server.view.html" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/views/layout.server.view.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="3590" max-vertical-offset="4425">
-              <caret line="248" column="37" selection-start-line="248" selection-start-column="24" selection-end-line="248" selection-end-column="37" />
+            <state vertical-scroll-proportion="-3.54" vertical-offset="2553" max-vertical-offset="6540">
+              <caret line="182" column="37" selection-start-line="182" selection-start-column="13" selection-end-line="182" selection-end-column="37" />
               <folding />
             </state>
           </provider>
@@ -98,8 +98,8 @@
       <file leaf-file-name="view-plan.client.view.html" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/modules/plans/views/view-plan.client.view.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-5.72" vertical-offset="6869" max-vertical-offset="9300">
-              <caret line="550" column="122" selection-start-line="550" selection-start-column="122" selection-end-line="550" selection-end-column="122" />
+            <state vertical-scroll-proportion="-7.22" vertical-offset="7664" max-vertical-offset="9300">
+              <caret line="608" column="77" selection-start-line="608" selection-start-column="62" selection-end-line="608" selection-end-column="77" />
               <folding>
                 <element signature="n#style#0;n#span#0;n#div#0;n#accordion-heading#0;n#accordion-group#0;n#accordion#0;n#div#1;n#fieldset#1;n#form#0;n#div#0;n#section#0;n#!!top" expanded="true" />
                 <element signature="tag#div#0;tag#div#0;tag#accordion-group#0;tag#accordion#0;tag#div#1;tag#fieldset#1;tag#form#0;tag#div#0;tag#section#0" expanded="false" />
@@ -1208,14 +1208,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/layout.server.view.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.512" vertical-offset="1353" max-vertical-offset="6540">
-          <caret line="103" column="22" selection-start-line="103" selection-start-column="22" selection-end-line="103" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/routes/plans.server.routes.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="67" max-vertical-offset="510">
@@ -1293,21 +1285,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/modules/plans/views/view-plan.client.view.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.72" vertical-offset="6869" max-vertical-offset="9300">
-          <caret line="550" column="122" selection-start-line="550" selection-start-column="122" selection-end-line="550" selection-end-column="122" />
-          <folding>
-            <element signature="n#style#0;n#span#0;n#div#0;n#accordion-heading#0;n#accordion-group#0;n#accordion#0;n#div#1;n#fieldset#1;n#form#0;n#div#0;n#section#0;n#!!top" expanded="true" />
-            <element signature="tag#div#0;tag#div#0;tag#accordion-group#0;tag#accordion#0;tag#div#1;tag#fieldset#1;tag#form#0;tag#div#0;tag#section#0" expanded="false" />
-            <element signature="tag#tr#0;tag#thead#0;tag#table#0;tag#div#0;tag#accordion-group#0;tag#accordion#0;tag#div#1;tag#fieldset#1;tag#form#0;tag#div#0;tag#section#0" expanded="false" />
-            <element signature="tag#script#2;tag#section#0" expanded="false" />
-            <element signature="tag#script#3;tag#section#0" expanded="false" />
-            <element signature="tag#script#4;tag#section#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/modules/foods/views/list-foods.client.view.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-13.375" vertical-offset="504" max-vertical-offset="1110">
@@ -1315,20 +1292,6 @@
           <folding>
             <element signature="n#style#0;n#div#0;n#div#0;n#div#3;n#section#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#1;n#div#3;n#section#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/modules/plans/services/plans.client.sharedService.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-4.1153846" vertical-offset="3148" max-vertical-offset="8655">
-          <caret line="345" column="46" selection-start-line="345" selection-start-column="46" selection-end-line="345" selection-end-column="46" />
-          <folding>
-            <element signature="e#782#3681#0" expanded="false" />
-            <element signature="e#8046#8811#0" expanded="false" />
-            <element signature="e#9091#9452#0" expanded="false" />
-            <element signature="e#9496#9857#0" expanded="false" />
-            <element signature="e#9906#10015#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1349,12 +1312,49 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/layout.server.view.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-3.54" vertical-offset="2553" max-vertical-offset="6540">
+          <caret line="182" column="37" selection-start-line="182" selection-start-column="13" selection-end-line="182" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/modules/plans/views/view-plan.client.view.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-7.22" vertical-offset="7664" max-vertical-offset="9300">
+          <caret line="608" column="77" selection-start-line="608" selection-start-column="62" selection-end-line="608" selection-end-column="77" />
+          <folding>
+            <element signature="n#style#0;n#span#0;n#div#0;n#accordion-heading#0;n#accordion-group#0;n#accordion#0;n#div#1;n#fieldset#1;n#form#0;n#div#0;n#section#0;n#!!top" expanded="true" />
+            <element signature="tag#div#0;tag#div#0;tag#accordion-group#0;tag#accordion#0;tag#div#1;tag#fieldset#1;tag#form#0;tag#div#0;tag#section#0" expanded="false" />
+            <element signature="tag#tr#0;tag#thead#0;tag#table#0;tag#div#0;tag#accordion-group#0;tag#accordion#0;tag#div#1;tag#fieldset#1;tag#form#0;tag#div#0;tag#section#0" expanded="false" />
+            <element signature="tag#script#2;tag#section#0" expanded="false" />
+            <element signature="tag#script#3;tag#section#0" expanded="false" />
+            <element signature="tag#script#4;tag#section#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/modules/plans/services/plans.client.sharedService.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-12.307693" vertical-offset="5590" max-vertical-offset="8790">
+          <caret line="522" column="48" selection-start-line="0" selection-start-column="0" selection-end-line="708" selection-end-column="2" />
+          <folding>
+            <element signature="e#782#3681#0" expanded="false" />
+            <element signature="e#8046#8811#0" expanded="false" />
+            <element signature="e#9091#9452#0" expanded="false" />
+            <element signature="e#9496#9857#0" expanded="false" />
+            <element signature="e#9906#10015#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/public/dist/application.min.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33705774" vertical-offset="55634" max-vertical-offset="77445">
-          <caret line="3989" column="3" selection-start-line="3989" selection-start-column="3" selection-end-line="3989" selection-end-column="3" />
+        <state vertical-scroll-proportion="0.38919926" vertical-offset="14821" max-vertical-offset="71085">
+          <caret line="1703" column="2" selection-start-line="1703" selection-start-column="2" selection-end-line="1703" selection-end-column="2" />
           <folding>
-            <element signature="e#135504#146705#0" expanded="false" />
+            <element signature="e#31830#60896#0" expanded="false" />
           </folding>
         </state>
       </provider>
