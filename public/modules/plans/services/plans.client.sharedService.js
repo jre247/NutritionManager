@@ -279,10 +279,6 @@ angular.module('plans').service(
                 $scope.findFoodsByFirstLetter = false;
             };
 
-//    CoreUtilities.getFoods('null').then(function(data){
-//        $scope.foods = data;
-//    });
-
             $scope.calculateCaloriesDisplay = function(){
                 var caloriesDisplay = 0, proteinDisplay = 0, fatDisplay = 0, sodiumDisplay = 0, gramsDisplay = 0,
                     carbsDisplay = 0, saturatedFatDisplay = 0, cholesterolDisplay = 0, fiberDisplay = 0, sugarDisplay = 0;
@@ -344,6 +340,8 @@ angular.module('plans').service(
             };
 
             $scope.foodSelectionChange = function(food){
+
+
                 $scope.selected.foodToAdd = food;
                 $scope.showFoodDetails = true;
 
@@ -368,6 +366,9 @@ angular.module('plans').service(
 
                     $scope.calculateCaloriesDisplay();
                 }
+
+                food.servingType = 0;
+                $scope.selected.servingType = 0;
             };
 
             if(food){
