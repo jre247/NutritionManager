@@ -321,6 +321,11 @@ angular.module('plans').service(
 
                 $scope.foodServingTypes = [];
 
+                if(!foodServingsGrams1){
+                    foodServingsGrams1 = food.grams;
+                    food.servingDescription1 = '1 Serving';
+                }
+
                 $scope.foodServingTypes.push({
                     id: 0,
                     grams: foodServingsGrams1,

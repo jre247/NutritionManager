@@ -46,12 +46,16 @@ angular.module('foods').controller('FoodsController', ['$scope', '$stateParams',
         $scope.foodFilterInput = '';
 
         $scope.foodInputChange = function(){
+            $scope.isLoading = true;
+
             CoreUtilities.getFoods($scope.foodFilterInput, 0, false).then(function (data) {
                 $scope.foods = data;
+                $scope.isLoading = false;
             });
         };
 
         $scope.moreFoods = function(){
+            $scope.isLoading = true;
             $scope.skipFoods += 8;
 
             var filterTxt = $scope.foodFilterInput || 'null';
@@ -60,6 +64,7 @@ angular.module('foods').controller('FoodsController', ['$scope', '$stateParams',
                 for(var f = 0; f < data.length; f++){
                     $scope.foods.push(data[f]);
                 }
+                $scope.isLoading = false;
             });
         };
 
