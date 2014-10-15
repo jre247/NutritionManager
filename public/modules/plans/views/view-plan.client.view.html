@@ -501,11 +501,15 @@
                         <span data-ng-click="findFoodsByLetter('z')">Z</span>
                     </div>
 
-                    <div class="list-group" style="margin-bottom: 0px; !important;" data-ng-repeat="food in foods">
+                    <div data-ng-show="!isLoading" class="list-group" style="margin-bottom: 0px; !important;" data-ng-repeat="food in foods">
                         <a class="list-group-item actionRow" data-ng-click="foodSelectionChange(food)">
                             <span data-ng-bind="food.name"></span>
 
                         </a>
+                    </div>
+
+                    <div data-ng-show="isLoading" style="height: 336px;">
+                        <img width="25" height="25" src="/modules/core/img/loaders/loader.gif">
                     </div>
 
                     <div>
