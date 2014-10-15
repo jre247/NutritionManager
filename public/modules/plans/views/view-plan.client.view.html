@@ -430,15 +430,17 @@
 <script type="text/ng-template" id="createFoodModalContent.html">
     <div class="modal-header" style="font-family: segui;">
         <h3 class="modal-title" data-ng-show="!showFoodDetails">Select Food To Add</h3>
-        <div data-ng-show="showFoodDetails" style="display:inline-block;">
+        <div data-ng-show="showFoodDetails" >
             <h3 class="modal-title" >
                 <span style="font-weight: bold;" data-ng-bind="selected.foodToAdd.name"></span>
 
             </h3>
         </div>
-        <a class="ActionLink" data-ng-show="showFoodDetails" style="margin-left: 10px;"  data-ng-click="changeFood()">Change Food</a>
+        <div style="position: relative;top: 5px;">
+            <a class="ActionLink" data-ng-show="showFoodDetails"   data-ng-click="changeFood()">Change Food</a>
+        </div>
     </div>
-    <div  style="font-family: segui;padding-left: 10px;padding-bottom:10px;" >
+    <div style="font-family: segui;padding-left: 10px;padding-bottom:10px;" >
         <div style="display:inline-block;">
             <div data-ng-show="showCreateMealSection" style="margin-top: 10px;">
                 Select Meal Type:
@@ -527,20 +529,26 @@
 
                             <input style="width: 80px;" data-ng-change="servingsChange()" data-ng-model="selected.servings" type="text"/>
                         </div>
-                        <div style="margin-top: 20px;display:inline-block;padding-left:40px;">
+                        <div style="margin-top: 20px;display:inline-block;padding-left:35px;">
                             <div style="font-weight:bold;">Calories:</div>
                             <span style="font-size: 18px;" data-ng-bind="selected.caloriesDisplay | number: 0"></span>
                         </div>
 
                         <div style="display:inline-block;">
-                            <div data-ng-show="foodServingTypes && foodServingTypes.length > 1">
-                                <select data-ng-model="selected.servingType" data-ng-change="servingTypeChange();"
+                            <div style="padding-left:20px;" data-ng-show="foodServingTypes && foodServingTypes.length > 1">
+                                <span style="font-weight: bold;position: relative;bottom: 3px;">Serving Desc.:</span>
+                                <br/>
+                                <select style="font-size:18px;" data-ng-model="selected.servingType" data-ng-change="servingTypeChange();"
                                         ng-options="t.id as t.description for t in foodServingTypes"></select>
                             </div>
                         </div>
 
                         <div style="display:inline-block;">
-                            <span data-ng-show="foodServingTypes && foodServingTypes.length <= 1" data-ng-bind="selected.foodToAdd.servingDescription1"></span>
+                            <div style="padding-left:20px;" data-ng-show="foodServingTypes && foodServingTypes.length <= 1">
+                                <span style="font-weight: bold;">Serving Desc.:</span>
+                                <br/>
+                                <span style="font-size: 18px;"  data-ng-bind="selected.foodToAdd.servingDescription1"></span>
+                            </div>
                         </div>
                         <!--<div style="margin-top: 20px;display:inline-block;padding-left:40px;"-->
                            <!--data-ng-show="selected.foodToAdd ? selected.foodToAdd.servingDescription.toLowerCase() !== '1 serving' : selected.servingDescription.toLowerCase() !== '1 serving'">-->

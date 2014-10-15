@@ -958,37 +958,57 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
 
             modalInstance.result.then(function (selected) {
                 meal.isEditable = false;
-                var food = selected.foodToAdd;
+                var foodDetails = selected.foodToAdd;
                 var isUpdate = selected.isUpdate;
-                food.servings = selected.servings;
 
-                food.isEditable = false;
+                var food = {
+                    _id: foodDetails._id,
+                    name: foodDetails.name,
+                    calories: foodDetails.calories,
+                    carbohydrates: foodDetails.carbohydrates,
+                    protein: foodDetails.protein,
+                    fat: foodDetails.fat,
+                    sodium: foodDetails.sodium,
+                    grams: foodDetails.grams,
+                    cholesterol: foodDetails.cholesterol,
+                    saturatedFat: foodDetails.saturatedFat,
+                    sugar: foodDetails.sugar,
+                    fiber: foodDetails.fiber,
+                    servingGrams2: foodDetails.servingGrams2,
+                    servingGrams1: foodDetails.servingGrams1,
+                    servingDescription1: foodDetails.servingDescription1,
+                    servingDescription2: foodDetails.servingDescription2,
+                    servingType: selected.servingType,
+                    servings: selected.servings,
+                    isEditable: false
+                };
+
+                var selectedFoodDefault = {
+                    _id: foodDetails._id,
+                    name: foodDetails.name,
+                    calories: foodDetails.calories,
+                    carbohydrates: foodDetails.carbohydrates,
+                    protein: foodDetails.protein,
+                    fat: foodDetails.fat,
+                    sodium: foodDetails.sodium,
+                    grams: foodDetails.grams,
+                    cholesterol: foodDetails.cholesterol,
+                    saturatedFat: foodDetails.saturatedFat,
+                    sugar: foodDetails.sugar,
+                    fiber: foodDetails.fiber,
+                    servingGrams2: foodDetails.servingGrams2,
+                    servingGrams1: foodDetails.servingGrams1,
+                    servingDescription1: foodDetails.servingDescription1,
+                    servingDescription2: foodDetails.servingDescription2,
+                    servingType: selected.servingType,
+                    servings: 1,
+                    isEditable: false
+                };
+
+                food.selectedFood = foodDetails.selectedFood ? foodDetails.selectedFood : selectedFoodDefault;
 
                 if(isUpdate) {
                     var isServingsUpdated = false;
-
-                    //if(selected.oldFood._id !== food._id) {
-                        food.selectedFood = {
-                            _id: food._id,
-                            name: food.name,
-                            calories: food.calories,
-                            carbohydrates: food.carbohydrates,
-                            protein: food.protein,
-                            fat: food.fat,
-                            sodium: food.sodium,
-                            grams: food.grams,
-                            cholesterol: food.cholesterol,
-                            saturatedFat: food.saturatedFat,
-                            sugar: food.sugar,
-                            fiber: food.fiber,
-                            servingGrams2: food.servingGrams2,
-                            servingGrams1: food.servingGrams1,
-                            servingDescription1: food.servingDescription1,
-                            servingDescription2: food.servingDescription2,
-                            servingType: selected.servingType
-                        };
-
-                    food.servingType = selected.servingType;
 
                     if(selected.oldFood._id !== food._id){
                         isServingsUpdated = checkIfIncrementingServings(meal, food);
@@ -1004,28 +1024,6 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
                     }
                 }
                 else {
-                    food.selectedFood = {
-                        _id: food._id,
-                        name: food.name,
-                        calories: food.calories,
-                        carbohydrates: food.carbohydrates,
-                        protein: food.protein,
-                        fat: food.fat,
-                        sodium: food.sodium,
-                        grams: food.grams,
-                        cholesterol: food.cholesterol,
-                        saturatedFat: food.saturatedFat,
-                        sugar: food.sugar,
-                        fiber: food.fiber,
-                        servingGrams1: food.servingGrams1,
-                        servingGrams2: food.servingGrams2,
-                        servingDescription1: food.servingDescription1,
-                        servingDescription2: food.servingDescription2,
-                        servingType: selected.servingType
-                    };
-
-                    food.servingType = selected.servingType;
-
                     var isServingsUpdated = checkIfIncrementingServings(meal, food);
 
                     if(!isServingsUpdated) {
@@ -1112,41 +1110,45 @@ var CreateFoodModalInstanceCtrl = function ($scope, $modalInstance, parentScope,
             servingsDelta = (oneServingGrams / $scope.foodServingTypes[0].grams);
         }
 
-        food.water = food.water * servingsDelta;
-        food.calories = food.calories * servingsDelta;
-        food.protein = food.protein * servingsDelta;
-        food.fat = food.fat * servingsDelta;
-        food.carbohydrates = food.carbohydrates * servingsDelta;
-        food.fiber = food.fiber * servingsDelta;
-        food.sugar = food.sugar * servingsDelta;
-        food.calcium = food.calcium * servingsDelta;
-        food.iron = food.iron * servingsDelta;
-        food.magnesium = food.magnesium * servingsDelta;
-        food.phosphorus = food.phosphorus * servingsDelta;
-        food.potassium = food.potassium * servingsDelta;
-        food.sodium = food.sodium * servingsDelta;
-        food.zinc = food.zinc * servingsDelta;
-        food.copper = food.copper * servingsDelta;
-        food.manganese = food.manganese * servingsDelta;
-        food.selenium = food.selenium  * servingsDelta;
-        food.vitaminC = food.vitaminC * servingsDelta;
-        food.thiamin = food.thiamin * servingsDelta;
-        food.riboflavin = food.riboflavin * servingsDelta;
-        food.niacin = food.niacin * servingsDelta;
-        food.vitaminB6 = food.vitaminB6 * servingsDelta;
-        food.folate = food.folate * servingsDelta;
-        food.folicAcid = food.folicAcid * servingsDelta;
-        food.vitaminB12 = food.vitaminB12 * servingsDelta;
-        food.vitaminA = food.vitaminA * servingsDelta;
-        food.vitaminE = food.vitaminE * servingsDelta;
-        food.vitaminD = food.vitaminD * servingsDelta;
-        food.vitaminK = food.vitaminK * servingsDelta;
-        food.saturatedFat = food.saturatedFat * servingsDelta;
-        food.monoFat = food.monoFat * servingsDelta;
-        food.polyFat = food.polyFat * servingsDelta;
-        food.cholesterol = food.cholesterol * servingsDelta;
-        food.grams = oneServingGrams;
-        food.servingType = $scope.selected.servingType;
+        if($scope.selected.foodToAdd.selectedFood) {
+            food.water = $scope.selected.foodToAdd.selectedFood.water * servingsDelta;
+            food.calories = $scope.selected.foodToAdd.selectedFood.calories * servingsDelta;
+            food.protein = $scope.selected.foodToAdd.selectedFood.protein * servingsDelta;
+            food.fat = $scope.selected.foodToAdd.selectedFood.fat * servingsDelta;
+            food.carbohydrates = $scope.selected.foodToAdd.selectedFood.carbohydrates * servingsDelta;
+            food.fiber = $scope.selected.foodToAdd.selectedFood.fiber * servingsDelta;
+            food.sugar = $scope.selected.foodToAdd.selectedFood.sugar * servingsDelta;
+            food.calcium = $scope.selected.foodToAdd.selectedFood.calcium * servingsDelta;
+            food.iron = $scope.selected.foodToAdd.selectedFood.iron * servingsDelta;
+            food.sodium = $scope.selected.foodToAdd.selectedFood.sodium * servingsDelta;
+            food.vitaminC = $scope.selected.foodToAdd.selectedFood.vitaminC * servingsDelta;
+            food.vitaminA = $scope.selected.foodToAdd.selectedFood.vitaminA * servingsDelta;
+            food.saturatedFat = $scope.selected.foodToAdd.selectedFood.saturatedFat * servingsDelta;
+            food.monoFat = $scope.selected.foodToAdd.selectedFood.monoFat * servingsDelta;
+            food.polyFat = $scope.selected.foodToAdd.selectedFood.polyFat * servingsDelta;
+            food.cholesterol = $scope.selected.foodToAdd.selectedFood.cholesterol * servingsDelta;
+            food.grams = oneServingGrams;
+            food.servingType = $scope.selected.servingType;
+        }
+
+        food.selectedFood.water = food.water;
+        food.selectedFood.calories = food.calories;
+        food.selectedFood.protein = food.protein;
+        food.selectedFood.fat = food.fat;
+        food.selectedFood.carbohydrates = food.carbohydrates;
+        food.selectedFood.fiber = food.fiber;
+        food.selectedFood.sugar = food.sugar;
+        food.selectedFood.calcium = food.calcium;
+        food.selectedFood.iron = food.iron;
+        food.selectedFood.sodium = food.sodium;
+        food.selectedFood.vitaminC = food.vitaminC;
+        food.selectedFood.vitaminA = food.vitaminA;
+        food.selectedFood.saturatedFat = food.saturatedFat;
+        food.selectedFood.monoFat = food.monoFat;
+        food.selectedFood.polyFat = food.polyFat;
+        food.selectedFood.cholesterol = food.cholesterol;
+        food.selectedFood.grams = oneServingGrams;
+        food.selectedFood.servingType = $scope.selected.servingType;
 
         $scope.selected.caloriesDisplay = food.calories,
         $scope.selected.proteinDisplay = food.protein,
@@ -1270,6 +1272,17 @@ var CreateFoodModalInstanceCtrl = function ($scope, $modalInstance, parentScope,
             fiberDisplay = $scope.selected.foodToAdd.selectedFood ? parseFloat($scope.selected.servings) * $scope.selected.foodToAdd.selectedFood.fiber : parseFloat($scope.selected.servings) * $scope.selected.foodToAdd.fiber;
             sugarDisplay = $scope.selected.foodToAdd.selectedFood ? parseFloat($scope.selected.servings) * $scope.selected.foodToAdd.selectedFood.sugar : parseFloat($scope.selected.servings) * $scope.selected.foodToAdd.sugar;
 
+//            $scope.selected.foodToAdd.calories = parseFloat($scope.selected.servings) * $scope.selected.foodToAdd.calories;
+//            $scope.selected.foodToAdd.protein = parseFloat($scope.selected.servings) * $scope.selected.foodToAdd.protein;
+//            $scope.selected.foodToAdd.fat = parseFloat($scope.selected.servings) * $scope.selected.foodToAdd.fat;
+//            $scope.selected.foodToAdd.sodium = parseFloat($scope.selected.servings) * $scope.selected.foodToAdd.sodium;
+//            $scope.selected.foodToAdd.grams = parseFloat($scope.selected.servings) * $scope.selected.foodToAdd.grams;
+//            $scope.selected.foodToAdd.carbohydrates = parseFloat($scope.selected.servings) * $scope.selected.foodToAdd.carbohydrates;
+//            $scope.selected.foodToAdd.saturatedFat = parseFloat($scope.selected.servings) * $scope.selected.foodToAdd.saturatedFat;
+//            $scope.selected.foodToAdd.cholesterol = parseFloat($scope.selected.servings) * $scope.selected.foodToAdd.cholesterol;
+//            $scope.selected.foodToAdd.sodium = parseFloat($scope.selected.servings) * $scope.selected.foodToAdd.sodium;
+//            $scope.selected.foodToAdd.fiber =  parseFloat($scope.selected.servings) * $scope.selected.foodToAdd.fiber;
+//            $scope.selected.foodToAdd.sugar = parseFloat($scope.selected.servings) * $scope.selected.foodToAdd.sugar;
         }
 
         $scope.selected.caloriesDisplay = caloriesDisplay % 1 != 0 ? caloriesDisplay.toFixed(1) : caloriesDisplay;
