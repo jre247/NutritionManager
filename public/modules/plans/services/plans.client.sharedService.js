@@ -472,8 +472,10 @@ angular.module('plans').service(
                     $scope.foods = filterMyFoods($scope.findFoodsByFirstLetter, $scope.userFoods, $scope.selected.foodSearchTxt, $scope.skipFoods);
                 }
                 else{
+                    $scope.isLoading = true;
                     CoreUtilities.getFoods($scope.selected.foodSearchTxt, $scope.skipFoods, true).then(function(data){
                         $scope.foods = data;
+                        $scope.isLoading = false;
                     });
                 }
 
