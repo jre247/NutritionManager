@@ -16,6 +16,10 @@ var ActivitySchema = new Schema({
     planDateNonUtc: {
         type: Date
     },
+    planExistsInDb:{
+        type: Boolean,
+        default: false
+    },
     planDateAsMili:{
         type: Number
     },

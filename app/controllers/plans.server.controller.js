@@ -206,7 +206,7 @@ exports.list = function(req, res) {
         user:req.user.id // Search Filters
     })
     .sort({
-            planDateAsMili: -1
+            planDateAsConcat: -1
     })
     .populate('user', 'displayName').exec(function(err, plans) {
         if (err) {

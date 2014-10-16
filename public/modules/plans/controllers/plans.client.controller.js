@@ -95,9 +95,10 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
 		$scope.create = function() {
             var planDateAsString = new Date($scope.plan.planDateNonUtc).toUTCString();
             var planDate = new Date(planDateAsString);
-            var planDateYear = planDate.getFullYear();
-            var planDateMonth = planDate.getMonth();
-            var planDateDay = planDate.getDate();
+            var planSplit = planDate.toISOString().substr(0, 10).split('-');
+            var planDateYear = parseInt(planSplit[0]);
+            var planDateMonth = parseInt(planSplit[1]) - 1;
+            var planDateDay = parseInt(planSplit[2]);
 
 			var plan = new Plans({
 				//planDate: planDateAsString,
@@ -107,7 +108,7 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
                 planDateDay: planDateDay,
                 notes: $scope.plan.notes,
                 planDateAsMili: planDate.getTime(),
-                planDateAsConcat: parseInt(planDate.getFullYear() + '' + (planDate.getMonth() < 10 ? '0' + planDate.getMonth() : planDate.getMonth()) + '' + (planDate.getDate() < 10 ? '0' + planDate.getDate() : planDate.getDate())),
+                planDateAsConcat: parseInt(planDateYear + '' + (planDateMonth < 10 ? '0' + planDateMonth : planDateMonth) + '' + (planDateDay < 10 ? '0' + planDateDay : planDateDay)),
                 meals: $scope.plan.meals
 			});
             plan.$save(function(response) {
@@ -126,12 +127,14 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
         $scope.copyPlan = function(planCopyModel){
             var planDateAsString = planCopyModel.planDate.toUTCString();
             var planDate = new Date(planDateAsString);
-            var planDateYear = planDate.getFullYear();
-            var planDateMonth = planDate.getMonth();
-            var planDateDay = planDate.getDate();
+            var planSplit = planDate.toISOString().substr(0, 10).split('-');
+            var planDateYear = parseInt(planSplit[0]);
+            var planDateMonth = parseInt(planSplit[1]) - 1;
+            var planDateDay = parseInt(planSplit[2]);
 
             var plan = new Plans({
                 planDateForDB: planCopyModel.planDate,
+                planDateAsConcat: parseInt(planDateYear + '' + (planDateMonth < 10 ? '0' + planDateMonth : planDateMonth) + '' + (planDateDay < 10 ? '0' + planDateDay : planDateDay)),
                 planDateYear: planDateYear,
                 planDateMonth: planDateMonth,
                 planDateDay: planDateDay,
@@ -336,15 +339,16 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
 
             var planDateAsString = new Date($scope.plan.planDateNonUtc).toUTCString();
             var planDate = new Date(planDateAsString);
-            var planDateYear = planDate.getFullYear();
-            var planDateMonth = planDate.getMonth();
-            var planDateDay = planDate.getDate();
+            var planSplit = planDate.toISOString().substr(0, 10).split('-');
+            var planDateYear = parseInt(planSplit[0]);
+            var planDateMonth = parseInt(planSplit[1]) - 1;
+            var planDateDay = parseInt(planSplit[2]);
 
             plan.planDateYear = planDateYear;
             plan.planDateMonth = planDateMonth;
             plan.planDateDay = planDateDay;
             plan.planDateAsMili = planDate.getTime();
-            plan.planDateAsConcat = parseInt(planDate.getFullYear() + '' + (planDate.getMonth() < 10 ? '0' + planDate.getMonth() : planDate.getMonth()) + '' + (planDate.getDate() < 10 ? '0' + planDate.getDate() : planDate.getDate()));
+            plan.planDateAsConcat = parseInt(planDateYear + '' + (planDateMonth < 10 ? '0' + planDateMonth : planDateMonth) + '' + (planDateDay < 10 ? '0' + planDateDay : planDateDay)),
 
             plan.$update(function() {
 				//$location.path('plans/' + plan._id);
@@ -399,9 +403,17 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
                         };
 
                         $scope.plansCollection.push(planModel);
-
-
                     }
+
+//                    $scope.plansCollection.sort(function compare(a,b) {
+//                        if (a.planDateAsConcat < b.planDateAsConcat)
+//                            return -1;
+//                        if (a.planDateAsConcat > b.planDateAsConcat)
+//                            return 1;
+//                        return 0;
+//                    });
+
+
                 }
             );
 

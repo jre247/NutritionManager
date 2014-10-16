@@ -130,6 +130,53 @@ exports.update = function(req, res) {
             res.jsonp(activity);
         }
     });
+
+
+//
+//
+//    var planClient = req.body;
+//    var planDateYear = planClient.planDateYear;
+//    var planDateMonth = planClient.planDateMonth;
+//    var planDateDay = planClient.planDateDay;
+//
+//    //check if already existing activity in database for this activity date
+//    //if so, just update the activity, not create new one
+//    Activity.findOne({'planDateYear': planDateYear, 'planDateMonth': planDateMonth, 'planDateDay': planDateDay, 'user': req.user.id}).exec(function(err, planDb) {
+//        if (err) {
+//            return res.send(400, {
+//                message: getErrorMessage(err)
+//            });
+//        } else {
+//            if (planDb) {
+//                var activity = req.activity;
+//
+//                activity = _.extend(activity, req.body);
+//                activity.userRoles = req.user.roles;
+//                activity.planExistsInDb = true;
+//                res.jsonp(activity);
+//            }
+//            else{
+//                var activity = req.activity;
+//
+//                activity = _.extend(activity, req.body);
+//
+//                activity.userRoles = req.user.roles;
+//                activity.planExistsInDb = false;
+//                activity.save(function(err) {
+//                    if (err) {
+//                        return res.send(400, {
+//                            message: getErrorMessage(err)
+//                        });
+//                    } else {
+//                        res.jsonp(activity);
+//                    }
+//                });
+//
+//            }
+//
+//
+//        }
+//    });
 };
 
 /**

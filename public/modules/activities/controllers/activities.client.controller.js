@@ -20,7 +20,7 @@ angular.module('activities').controller('ActivitiesController', ['$scope', '$sta
           'Endurance', 'Strength', 'Balance', 'Flexibility'
         ];
 
-
+        $scope.planExistsInDb = false;
        // $scope.planDateParam = $routeParams.planDateForCreate;
 
 
@@ -220,15 +220,16 @@ angular.module('activities').controller('ActivitiesController', ['$scope', '$sta
         $scope.create = function() {
             var planDateAsString = $scope.plan.planDateNonUtc.toUTCString();
             var planDate = new Date(planDateAsString);
-            var planDateYear = planDate.getFullYear();
-            var planDateMonth = planDate.getMonth();
-            var planDateDay = planDate.getDate();
 
+            var planSplit = planDate.toISOString().substr(0, 10).split('-');
+            var planDateYear = parseInt(planSplit[0]);
+            var planDateMonth = parseInt(planSplit[1]) - 1;
+            var planDateDay = parseInt(planSplit[2]);
 
             var plan = new Activities({
                 planDateForDB: planDateAsString,
                 planDateAsMili: planDate.getTime(),
-                planDateAsConcat: parseInt(planDate.getFullYear() + '' + (planDate.getMonth() < 10 ? '0' + planDate.getMonth() : planDate.getMonth()) + '' + (planDate.getDate() < 10 ? '0' + planDate.getDate() : planDate.getDate())),
+                planDateAsConcat: parseInt(planDateYear + '' + (planDateMonth < 10 ? '0' + planDateMonth : planDateMonth) + '' + (planDateDay < 10 ? '0' + planDateDay : planDateDay)),
                 planDateYear: planDateYear,
                 planDateMonth: planDateMonth,
                 planDateDay: planDateDay,
@@ -368,22 +369,37 @@ angular.module('activities').controller('ActivitiesController', ['$scope', '$sta
 
             var planDateAsString = new Date($scope.plan.planDateNonUtc).toUTCString();
             var planDate = new Date(planDateAsString);
-            var planDateYear = planDate.getFullYear();
-            var planDateMonth = planDate.getMonth();
-            var planDateDay = planDate.getDate();
+            var planSplit = planDate.toISOString().substr(0, 10).split('-');
+            var planDateYear = parseInt(planSplit[0]);
+            var planDateMonth = parseInt(planSplit[1]) - 1;
+            var planDateDay = parseInt(planSplit[2]);
 
             plan.planDateYear = planDateYear;
             plan.planDateMonth = planDateMonth;
             plan.planDateDay = planDateDay;
             plan.totalCaloriesBurned = plan.totalCaloriesBurned;
             plan.planDateAsMili = planDate.getTime();
-            plan.planDateAsConcat = parseInt(planDate.getFullYear() + '' + (planDate.getMonth() < 10 ? '0' + planDate.getMonth() : planDate.getMonth()) + '' + (planDate.getDate() < 10 ? '0' + planDate.getDate() : planDate.getDate()));
+            plan.planDateAsConcat = parseInt(planDateYear + '' + (planDateMonth < 10 ? '0' + planDateMonth : planDateMonth) + '' + (planDateDay < 10 ? '0' + planDateDay : planDateDay));
 
-            plan.$update(function() {
-                $scope.success = true;
+            plan.$update(function(data) {
+//                if(data.planExistsInDb){
+//                    $scope.planExistsInDb = true;
+//
+//                    $timeout(function () {
+//                        $scope.planExistsInDb = false;
+//                    }, 5000);
+//                }
+//                else {
+                    $scope.planExistsInDb = false;
+                    $scope.success = true;
 
-                $timeout(function(){$scope.success = false;}, 3000);
-                $timeout(function(){$scope.setSorting();}, 100);
+                    $timeout(function () {
+                        $scope.success = false;
+                    }, 3000);
+                    $timeout(function () {
+                        $scope.setSorting();
+                    }, 100);
+               // }
 
             }, function(errorResponse) {
                 $scope.error = errorResponse.data.message;
