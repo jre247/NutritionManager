@@ -135,7 +135,7 @@ exports.list = function(req, res){
                     }
                 )
                     .sort({
-                        planDateAsMili: 1 //Sort by Date Added DESC
+                        planDateAsConcat: 1 //Sort by Date Added DESC
                     }).exec(function (err, plans) {
                         if (err) return next(err);
 
