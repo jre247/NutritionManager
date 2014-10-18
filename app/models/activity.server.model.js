@@ -62,10 +62,49 @@ var ActivitySchema = new Schema({
         type: Date,
         default: Date.now
     },
-    activities: [{
+    notes:{
+        type: String,
+        trim: true,
+        default: ''
+    },
+    notesVisible:{
+        type: Boolean,
+        default: false
+    },
+    injuryNotes:{
+        type: String,
+        trim: true,
+        default: ''
+    },
+    injuries: [
+        {
+            painLevel: {
+                type: Number,
+                default: 0
+            },
+            injuryNotes: {
+                type: String,
+                default: ''
+            },
+            injuryLocation: {
+                type: String,
+                default: ''
+            }
+        }
+
+    ],
+    activities: [
+        {
             activityType: {
                 type: Number,
                 default: 0
+            },
+            dailySteps:{
+                type: Number,
+                default: 0
+            },
+            activityTypeId: {
+                type: String
             },
             caloriesBurned:{
                 type: Number,
@@ -124,7 +163,8 @@ var ActivitySchema = new Schema({
 
             }
 
-        }]
+        }
+    ]
 });
 
 mongoose.model('Activity', ActivitySchema);

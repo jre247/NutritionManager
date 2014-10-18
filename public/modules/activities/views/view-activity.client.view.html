@@ -3,163 +3,307 @@
 <!--<h1>New Plan</h1>-->
 <!--</div>-->
 <div class="col-md-12">
-<form class="form-horizontal" data-ng-init="findOne()" novalidate>
+    <form class="form-horizontal" data-ng-init="findOne()" novalidate>
+        <fieldset>
+            <div class="form-group" style="margin-bottom: 1px;">
+                <div class="planDetailsSection" style="display:inline-block;vertical-align: top;">
+                    <div class="row">
+                        <div class="col-md-6" style="width: 153px;padding-top: 8px;">
+                            <p class="input-group">
+                              <input type="text" class="form-control" style="padding: 4px 8px;" id="planDate" datepicker-popup="{{format}}" ng-model="plan.planDateNonUtc" is-open="opened" min-date="minDate" max-date="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
+                              <span class="input-group-btn">
+                                <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                              </span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <span style="color:red; font-weight: bold;position:relative; top: 13px; left: 10px;" data-ng-show="planExistsInDb">There is already an existing plan for this date.</span>
 
 
-<fieldset>
-    <div class="form-group" style="margin-bottom: 1px;">
-        <div class="planDetailsSection" style="display:inline-block;vertical-align: top;">
-            <!--<label class="control-label" for="planDate">Plan Date</label>-->
+                <div class="planDetailsSection" style="display: inline-block; margin-top: 9px;float: right;">
+                    <button data-ng-show="!showNotesSection" type="button" class="btn btn-primary btn-m" style="margin-bottom: 15px;" data-ng-click="createNotes();">
+                        <span class="glyphicon glyphicon-edit" ></span> Add Notes
+                    </button>
 
-            <div class="row">
-                <div class="col-md-6" style="width: 153px;padding-top: 8px;">
-                    <p class="input-group">
-                      <input type="text" class="form-control" style="padding: 4px 8px;" id="planDate" datepicker-popup="{{format}}" ng-model="plan.planDateNonUtc" is-open="opened" min-date="minDate" max-date="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
-                      <span class="input-group-btn">
-                        <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
-                      </span>
+                    <button data-ng-show="!showInjuriesSection" type="button" class="btn btn-primary btn-m" style="margin-bottom: 15px;" data-ng-click="createInjuries();">
+                        <span class="glyphicon glyphicon-plus" ></span> Add Injuries
+                    </button>
 
-                    </p>
+                    <button type="submit" class="btn btn-primary btn-m " style="margin-bottom: 15px;" data-ng-click="saveActivityPlan();">
+                        <span class="glyphicon glyphicon-floppy-disk" ></span> Save
+                    </button>
+
+                    <button type="button" data-ng-show="isUserAdmin" class="btn btn-primary btn-m  btn-danger plansDesktopBtn" style="margin-bottom: 15px;" data-ng-click="deletePlan(plan);">
+                        <span  ></span> Delete Activity Plan
+                    </button>
+                </div>
+            </div>
+
+            <div data-ng-show="success" style="color: green; font-weight: bold; margin-bottom: 10px;opacity: 1;transition: opacity .25s ease-in-out;-moz-transition: opacity .25s ease-in-out;-webkit-transition: opacity .25s ease-in-out;" >
+                <strong>Your changes have been saved!</strong>
+            </div>
+
+            <div data-ng-show="showPlanEditableErrorMsg" style="color: red; font-weight: bold; margin-bottom: 10px;">
+                <strong>Please save the plan before copying it.</strong>
+            </div>
+        </fieldset>
+
+
+        <fieldset id="wrapper" >
+            <div id="content" class="form-group planContent" style="overflow-y: auto;overflow-x:hidden; margin-bottom: 3px;">
+                <div style="margin-bottom: 30px;margin-top: 10px;">
+                    <label>Daily Steps:</label>
+                    <input style="width:100px;" type="text" data-ng-change="dailyStepsChange();" data-ng-model="plan.dailySteps"/>
+                </div>
+                <accordion sortable="sortableOptions" disableallelementsbydefault="true" updateCallback="sortableUpdateCallback" startCallback="sortableStartCallback" rootSortableElement=".panel-group" ng-show="plan.activities.length > 0"  class="plansAccordion" style="..." close-others="oneAtATime">
+                    <accordion-group is-open="isExercisesOpen">
+                        <accordion-heading>
+                            <div class="accordionHeadingRegion">
+                                <span>Exercises</span>
+                            </div>
+
+                        </accordion-heading>
+
+                        <button type="button" class="btn btn-primary btn-sm" style="margin-bottom: 15px;" data-ng-click="createActivityWithDialog();">
+                            <span class="glyphicon glyphicon-plus" ></span> Add Activity
+                        </button>
+
+                        <div data-ng-repeat="activity in plan.activities" class="list-group" style="margin-bottom: 0px;">
+                            <a class="list-group-item actionRow" data-ng-click="createActivityWithDialog(activity)"
+                               data-ng-mouseover="activity.showEditIcon = true" data-ng-mouseleave="activity.showEditIcon = false">
+                                <div style="display:inline-block; font-weight:bold;color:rgb(105, 97, 97)" >
+                                    <span data-ng-bind="activityTypesDictionary[activity.activityType].name"></span>:
+                                </div>
+
+                                <div class="list-group-item-text text-muted" style="display:inline-block;padding-left: 10px;">
+                                    <div data-ng-show="activity.steps > 0">
+                                        <span  data-ng-bind="activity.steps | number:0"></span> Steps,
+                                    </div>
+
+                                </div>
+
+                                <div style="display:inline-block;color:gray">
+                                    <div style="display:inline-block" data-ng-show="activity.duration > 0">
+                                        <span   data-ng-bind="activity.duration | number:0"></span> Minutes,
+                                    </div>
+                                    <span  data-ng-bind="activity.caloriesBurned | number:0"></span> Calories
+                                </div>
+
+                                <div style="display:inline-block;width:40px;float:right">
+                                    <div style="padding-right:5px;cursor:pointer;padding-top:5px;" data-ng-click="deleteActivity(activity);" type="button" data-ng-class="{editRowShow: activity.showEditIcon && !activity.isEditable}"  class="editRowHide">
+                                        <span  class="glyphicon glyphicon-trash"></span>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+
+
+
+                        <!--<div class="planMealDesktop" style="height: 100px;">-->
+                            <!--<div>-->
+                                <!--<input style="margin-left: 15px;float:right;" type="button" value="Delete" data-ng-click="deleteActivity(activity);"/>-->
+                            <!--</div>-->
+
+                            <!--<br/>-->
+                            <!--<div style="float:left;">-->
+                                <!--<div data-ng-show="isActivityEndurance(activity)">-->
+                                    <!--<div style="display:inline-block;width: 100px">-->
+                                        <!--Steps:<br/> <input style="width: 60px;" data-ng-model="activity.steps" data-ng-change="calculateCalories(activity)" type="text"/>-->
+                                    <!--</div>-->
+
+                                    <!--<div style="display:inline-block;width: 100px">-->
+                                        <!--Duration (minutes):<br/> <input style="width: 60px;" data-ng-model="activity.duration" data-ng-change="calculateCalories(activity)" type="text"/>-->
+                                    <!--</div>-->
+
+                                    <!--<div style="display:inline-block;width: 100px" data-ng-show="isActivityDistanceRelated(activity)">-->
+                                        <!--Distance (miles):<br/> <input style="width: 60px;" data-ng-model="activity.distance" type="text"/>-->
+                                    <!--</div>-->
+
+                                    <!--<div style="display:inline-block;width: 100px">-->
+                                        <!--Intensity:<br/>-->
+
+                                        <!--<select data-ng-model="activity.intensity" ng-options="t for t in intensityList" style="font-size: 16px;vertical-align: top;"></select>-->
+                                    <!--</div>-->
+
+                                    <!--<div style="display:inline-block;width: 100px">-->
+                                        <!--Avg. Speed:<br/> <input style="width: 60px;" data-ng-model="activity.averageSpeed" type="text"/>-->
+                                    <!--</div>-->
+
+                                    <!--<div style="display:inline-block;width: 100px">-->
+                                        <!--Avg. Heart Rate:<br/> <input style="width: 60px;" data-ng-model="activity.averageHeartRate" data-ng-change="calculateCalories(activity)" type="text"/>-->
+                                    <!--</div>-->
+                                <!--</div>-->
+
+                                <!--<div data-ng-show="isActivityEndurance(activity) === false">-->
+                                    <!--<div style="display:inline-block;width: 100px">-->
+                                        <!--Duration (minutes):<br/> <input style="width: 60px;" data-ng-model="activity.duration" data-ng-change="calculateCalories(activity)" type="text"/>-->
+                                    <!--</div>-->
+
+                                    <!--<div style="display:inline-block;width: 100px">-->
+                                        <!--Intensity:<br/>-->
+                                        <!--<select data-ng-model="activity.intensity" ng-options="t for t in intensityList" style="font-size: 16px;vertical-align: top;"></select>-->
+
+                                    <!--</div>-->
+
+                                    <!--<div style="display:inline-block;width: 100px">-->
+                                        <!--Avg. Heart Rate:<br/> <input style="width: 60px;" data-ng-model="activity.averageHeartRate" data-ng-change="calculateCalories(activity)" type="text"/>-->
+                                    <!--</div>-->
+
+                                <!--</div>-->
+
+                                <!--<div style="font-weight:bold;margin-top: 15px;color: rgb(66, 66, 207);font-weight: bold;font-size: 12.5px;">-->
+                                    <!--Calories Burned: <span data-ng-bind="activity.caloriesBurned | number:0"></span>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                        <!--</div>-->
+
+
+                    </accordion-group>
+
+                    <accordion-group data-ng-show="showInjuriesSection" is-open="plan.injuriesVisible" style="margin-top: 20px;">
+                        <accordion-heading>
+                            Injuries
+                        </accordion-heading>
+
+                        <button type="button" class="btn btn-primary btn-sm plansDesktopBtn" style="margin-bottom: 15px;" data-ng-click="createInjuryWithDialog();">
+                            <span class="glyphicon glyphicon-plus" ></span> Add Injury
+                        </button>
+
+                        <div data-ng-repeat="injury in plan.injuries" class="list-group" style="margin-bottom: 0px;">
+                            <a class="list-group-item actionRow" >
+                                <div>
+                                    <label>Pain Level:</label>
+                                    <span data-ng-bind="plan.painLevel"></span>
+                                </div>
+                                <div>
+                                    <label>Pain Location:</label>
+                                    <span data-ng-bind="plan.injuryLocation"></span>
+                                </div>
+                                <div>
+                                    <label>Notes:</label>
+                                    <span data-ng-bind="plan.injuryNotes"></span>
+                                </div>
+                            </a>
+                        </div>
+                        <!--<textarea style="width: 100%;height: 100px;" data-ng-model="plan.notes"></textarea>-->
+                    </accordion-group>
+
+                    <accordion-group data-ng-show="plan.notesVisible" is-open="showNotesSection" style="margin-top: 20px;">
+                        <accordion-heading>
+                            <div class="accordionHeadingRegion">
+                                <span>Notes</span>
+                            </div>
+                        </accordion-heading>
+
+                        <textarea style="width: 100%;height: 100px;" data-ng-model="plan.notes"></textarea>
+
+                    </accordion-group>
+                </accordion>
+            </div>
+        </fieldset>
+
+        <div style="font-weight:bold;margin-top: 24px; padding-top: 6px; border-top: 1px solid lightgray; color: rgb(66, 66, 207);font-weight: bold;font-size: 12.5px;">
+            Total Calories Burned: <span data-ng-bind="plan.totalCaloriesBurned | number:0"></span>
+        </div>
+
+        <div data-ng-show="error" class="text-danger">
+            <strong data-ng-bind="error"></strong>
+        </div>
+
+    </form>
+
+
+</div>
+
+
+
+
+
+<script type="text/ng-template" id="createExerciseModalContent.html">
+    <div class="modal-header" style="font-family: segui;">
+        <h3 class="modal-title" data-ng-show="!showActivityDetails">Select Activity To Add</h3>
+        <div data-ng-show="showActivityDetails" >
+            <h3 class="modal-title" >
+                <span style="font-weight: bold;" data-ng-bind="selectedActivityType.name"></span>
+
+            </h3>
+        </div>
+        <div style="position: relative;top: 5px;">
+            <a class="ActionLink" data-ng-show="showActivityDetails" data-ng-click="changeActivity();">Change Activity</a>
+        </div>
+    </div>
+    <div style="font-family: segui;padding-left: 10px;padding-bottom:10px;" >
+        <div style="display:inline-block;">
+            <div>
+                <div data-ng-show="!showActivityDetails" style="margin-top: 10px;width: 580px;">
+                    <div style="margin-bottom: 20px;">
+
+                        <div style="vertical-align: top;display:inline-block;">
+                            <input placeholder="Enter Activity Name" style="width: 170px;" type="text" data-ng-change="activityInputChange()" data-ng-model="selected.activitySearchTxt"  />
+                            <a class="ActionLink clearInputLink" data-ng-click="selected.activitySearchTxt = ''">Clear</a>
+                        </div>
+                    </div>
+
+                    <div style="overflow-y: auto;max-height: 400px;">
+                        <div data-ng-show="!isLoading" class="list-group" style="margin-bottom: 0px; !important;" data-ng-repeat="activity in activityTypes | filter: selected.activitySearchTxt">
+                            <a class="list-group-item actionRow" data-ng-click="activitySelectionChange(activity)">
+                                <span data-ng-bind="activity.name"></span>
+
+                            </a>
+                        </div>
+                    </div>
+
+
+                    <div data-ng-show="isLoading" style="height: 336px;">
+                        <img width="25" height="25" src="/modules/core/img/loaders/loader.gif">
+                    </div>
+
+                    <div>
+                        <span style="color:blue;padding-left:5px;" data-ng-show="!activityTypes || activityTypes.length == 0">There are no activities returned</span>
+                    </div>
+
+                </div>
+                <div data-ng-show="showActivityDetails">
+                    <div >
+                        <form  class="form-horizontal" style="margin-left: 50px;margin-top: 20px;" autocomplete="off">
+                            <fieldset>
+                                <div class="form-group">
+                                    <label for="duration">Duration (minutes)</label>
+                                    <input type="text" id="duration" name="duration" class="form-control" data-ng-model="selected.activity.duration" placeholder="Duration">
+                                </div>
+                                <div class="form-group">
+                                    <label for="averageHeartRate">Average Heart Rate (bpm)</label>
+                                    <input type="text" id="averageHeartRate" name="duration" class="form-control" data-ng-model="selected.activity.averageHeartRate" placeholder="Average Heartrate">
+                                </div>
+
+                                <div class="form-group" data-ng-show="selected.activity.isCardio">
+                                    <label for="distance">Distance (miles)</label>
+                                    <input type="text" id="distance" name="distance" class="form-control" data-ng-model="selected.activity.distance" placeholder="Distance">
+                                </div>
+                                <div class="form-group" data-ng-show="selected.activity.isCardio">
+                                    <label for="averageSpeed">Average Speed (mph)</label>
+                                    <input type="text" id="averageSpeed" name="averageSpeed" class="form-control" data-ng-model="selected.activity.averageSpeed" placeholder="Average Speed">
+                                </div>
+
+
+                            </fieldset>
+                        </form>
+                    </div>
+
                 </div>
             </div>
         </div>
-        <span style="color:red; font-weight: bold;position:relative; top: 13px; left: 10px;" data-ng-show="planExistsInDb">There is already an existing plan for this date.</span>
-
-
-        <div class="planDetailsSection" style="display: inline-block; margin-top: 9px;float: right;">
-            <input type="button" class="btn btn-default" style="margin-right: 5px; padding: 4px 9px;" data-ng-click="createActivity();" value="+"/>
-
-            <div class="plansDesktopBtn" >
-                <input type="button" class="btn btn-default" style="margin-right: 5px; padding: 4px 9px;" value="{{sortingBtnTxt}}" data-ng-click="toggleSorting();"/>
-            </div>
-            <!--<button class="btn btn-default" style="margin-right: 5px; padding: 4px 9px;" ng-click="openCopyPlanDialog()">Copy</button>-->
-
-            <div class="plansDesktopBtn" data-ng-show="isUserAdmin">
-                <button class="btn btn-default " style="margin-right: 5px; padding: 4px 9px !important;background-image: linear-gradient(to bottom, #fff 0%, rgb(247, 170, 170) 100%);" data-ng-click="deletePlan(plan);">Delete Activity Plan</button>
-            </div>
-
-            <!--<div class="plansDesktopBtn" >-->
-                <!--<button class="btn btn-default " style="margin-right: 5px; padding: 4px 9px !important;background-image: linear-gradient(to bottom, #fff 0%, rgb(247, 170, 170) 100%);" data-ng-click="deletePlan(plan);">Delete Activity Plan</button>-->
-            <!--</div>-->
-
-            <input type="submit" value="Save" style="padding: 4px 9px;" data-ng-click="saveActivityPlan();"  class="btn btn-default">
-        </div>
-    </div>
-
-    <div data-ng-show="success" style="color: green; font-weight: bold; margin-bottom: 10px;opacity: 1;transition: opacity .25s ease-in-out;-moz-transition: opacity .25s ease-in-out;-webkit-transition: opacity .25s ease-in-out;" >
-        <strong>Your changes have been saved!</strong>
-    </div>
-
-    <div data-ng-show="showPlanEditableErrorMsg" style="color: red; font-weight: bold; margin-bottom: 10px;">
-        <strong>Please save the plan before copying it.</strong>
-    </div>
-</fieldset>
-
-
-<fieldset id="wrapper" >
-<div id="content" class="form-group planContent" style="overflow-y: auto;overflow-x:hidden; margin-bottom: 3px;">
-<accordion sortable="sortableOptions" disableallelementsbydefault="true" updateCallback="sortableUpdateCallback" startCallback="sortableStartCallback" rootSortableElement=".panel-group" ng-show="plan.activities.length > 0"  class="plansAccordion" style="..." close-others="oneAtATime">
-<accordion-group data-ng-repeat="activity in plan.activities" is-open="activity.isVisible">
-<accordion-heading>
-    <div data-ng-mouseover="activity.showEditIcon = true" data-ng-mouseleave="activity.showEditIcon = false" class="accordionHeadingRegion">
-        <span style="width: 80px;" data-ng-show="activity.isEditable == false" data-ng-bind="activityTypesDictionary[activity.activityType].name"></span>
-
-        <select ng-model="activity.activityType" data-ng-change="activity.isEditable = false" data-ng-click="activity.isVisible = !activity.isVisible" data-ng-show="activity.isEditable" ng-options="t.id as t.name for t in activityTypes" style="font-size: 16px;vertical-align: top;"></select>
-
-        <!--<div class="editRow" style="display:inline-block;" class="col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 col-xs-12">-->
-            <!--<img  alt="Edit Activity Type" class="img-responsive text-center" data-ng-show="activity.isEditable == false" data-ng-click="editActivity(activity);" src="modules/core/img/brand/pencilIcon.png" />-->
-        <!--</div>-->
-        <div style="margin-left: 10px;cursor:pointer;" data-ng-click="editActivity(activity);" type="button" data-ng-class="{editRowShow: activity.showEditIcon && !activity.isEditable}"  class="editRowHide">
-            <span  class="glyphicon glyphicon-pencil"></span>
-        </div>
 
     </div>
-</accordion-heading>
 
-<div class="planMealDesktop" style="height: 100px;">
-    <div>
-        <input style="margin-left: 15px;float:right;" type="button" value="Delete" data-ng-click="deleteActivity(activity);"/>
+
+    <div class="modal-footer">
+        <button class="btn btn-primary"  ng-click="ok()">OK</button>
+        <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
     </div>
+</script>
 
-    <br/>
-    <div style="float:left;">
-        <div data-ng-show="isActivityEndurance(activity)">
-            <div style="display:inline-block;width: 100px">
-                Steps:<br/> <input style="width: 60px;" data-ng-model="activity.steps" data-ng-change="calculateCalories(activity)" type="text"/>
-            </div>
-
-            <div style="display:inline-block;width: 100px">
-                Duration (minutes):<br/> <input style="width: 60px;" data-ng-model="activity.duration" data-ng-change="calculateCalories(activity)" type="text"/>
-            </div>
-
-            <div style="display:inline-block;width: 100px" data-ng-show="isActivityDistanceRelated(activity)">
-                Distance (miles):<br/> <input style="width: 60px;" data-ng-model="activity.distance" type="text"/>
-            </div>
-
-            <div style="display:inline-block;width: 100px">
-                Intensity:<br/>
-
-                <select data-ng-model="activity.intensity" ng-options="t for t in intensityList" style="font-size: 16px;vertical-align: top;"></select>
-            </div>
-
-            <div style="display:inline-block;width: 100px">
-                Avg. Speed:<br/> <input style="width: 60px;" data-ng-model="activity.averageSpeed" type="text"/>
-            </div>
-
-            <div style="display:inline-block;width: 100px">
-                Avg. Heart Rate:<br/> <input style="width: 60px;" data-ng-model="activity.averageHeartRate" data-ng-change="calculateCalories(activity)" type="text"/>
-            </div>
-        </div>
-
-        <div data-ng-show="isActivityEndurance(activity) === false">
-            <div style="display:inline-block;width: 100px">
-                Duration (minutes):<br/> <input style="width: 60px;" data-ng-model="activity.duration" data-ng-change="calculateCalories(activity)" type="text"/>
-            </div>
-
-            <div style="display:inline-block;width: 100px">
-                Intensity:<br/>
-                <select data-ng-model="activity.intensity" ng-options="t for t in intensityList" style="font-size: 16px;vertical-align: top;"></select>
-
-            </div>
-
-            <div style="display:inline-block;width: 100px">
-                Avg. Heart Rate:<br/> <input style="width: 60px;" data-ng-model="activity.averageHeartRate" data-ng-change="calculateCalories(activity)" type="text"/>
-            </div>
-
-        </div>
-
-        <div style="font-weight:bold;margin-top: 15px;color: rgb(66, 66, 207);font-weight: bold;font-size: 12.5px;">
-            Calories Burned: <span data-ng-bind="activity.caloriesBurned | number:0"></span>
-        </div>
-    </div>
-</div>
-</accordion-group>
-</accordion>
-
-
-
-
-
-
-</div>
-
-
-</fieldset>
-
-    <div style="font-weight:bold;margin-top: 24px; padding-top: 6px; border-top: 1px solid lightgray; color: rgb(66, 66, 207);font-weight: bold;font-size: 12.5px;">
-        Total Calories Burned: <span data-ng-bind="plan.totalCaloriesBurned | number:0"></span>
-    </div>
-
-
-
-<div data-ng-show="error" class="text-danger">
-    <strong data-ng-bind="error"></strong>
-</div>
-
-</form>
-
-
-</div>
 
 
 <script>

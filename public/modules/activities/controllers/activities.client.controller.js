@@ -4,8 +4,8 @@
 
 'use strict';
 
-angular.module('activities').controller('ActivitiesController', ['$scope', '$stateParams', '$timeout', '$location', 'Authentication', 'Activities', 'NutritionProfile',
-    function($scope, $stateParams, $timeout, $location, Authentication, Activities, NutritionProfile) {
+angular.module('activities').controller('ActivitiesController', ['$scope', '$stateParams', '$timeout', '$location', 'Authentication', 'Activities', 'NutritionProfile', '$modal', 'ActivitiesDialogService',
+    function($scope, $stateParams, $timeout, $location, Authentication, Activities, NutritionProfile, $modal, ActivitiesDialogService) {
         window.scope = $scope;
         $scope.showPlanEditableErrorMsg = false;
         $scope.isSortingEnabled = false;
@@ -13,12 +13,18 @@ angular.module('activities').controller('ActivitiesController', ['$scope', '$sta
         $scope.sortingBtnTxt = sortingBtnTxtOptions[0];
         var isSortingEnabled = false;
 
+        $scope.showInjuriesSection = false;
+        $scope.showNotesSection = true;
+        $scope.dailyStepsEntered = false;
+
         $scope.authentication = Authentication;
         $scope.nutritionProfile = NutritionProfile.get();
 
         $scope.activityTypeCategories = [
-          'Endurance', 'Strength', 'Balance', 'Flexibility'
+          'Endurance', 'Strength', 'Balance', 'Flexibility', 'DailySteps'
         ];
+
+
 
         $scope.planExistsInDb = false;
        // $scope.planDateParam = $routeParams.planDateForCreate;
@@ -76,9 +82,7 @@ angular.module('activities').controller('ActivitiesController', ['$scope', '$sta
             {id: 1, name: 'Indoors'}
         ];
 
-        $scope.intensityList = [
-            0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
-        ];
+
 
         $scope.directionList = ['Ascending', 'Descending'];
 
@@ -147,44 +151,6 @@ angular.module('activities').controller('ActivitiesController', ['$scope', '$sta
             $scope.calculateTotalCaloriesBurned();
         };
 
-        $scope.isActivityEndurance = function(activity){
-            var activityTypeId = activity.activityType;
-
-            var type = $scope.activityTypesDictionary[activityTypeId].type;
-
-            return type === 0;
-        };
-
-        $scope.isActivityDistanceRelated = function(activity){
-            var activityTypeId = activity.activityType;
-
-            var type = $scope.activityTypesDictionary[activityTypeId].name;
-
-            return type === 'Running' || type === 'Walking';
-        };
-
-        $scope.toggleSorting = function(){
-            if (!isSortingEnabled){
-                $('.panel-group').find('.panel-default').removeClass('disabled');
-                isSortingEnabled = true;
-                $scope.sortingBtnTxt = sortingBtnTxtOptions[1];
-            }
-            else{
-                $('.panel-group').find('.panel-default').addClass('disabled');
-                isSortingEnabled = false;
-                $scope.sortingBtnTxt = sortingBtnTxtOptions[0];
-            }
-        };
-
-        $scope.setSorting = function(){
-            if (!isSortingEnabled){
-                $('.panel-group').find('.panel-default').addClass('disabled');
-                isSortingEnabled = false;
-
-            }
-
-        };
-
         $scope.open = function($event) {
             $event.preventDefault();
             $event.stopPropagation();
@@ -199,22 +165,37 @@ angular.module('activities').controller('ActivitiesController', ['$scope', '$sta
 
         $scope.initDate = new Date('2016-15-20');
 
-        $scope.sortableStartCallback = function(e, ui) {
-            ui.item.data('start', ui.item.index());
-        };
-        $scope.sortableUpdateCallback = function(e, ui) {
-            var start = ui.item.data('start'),
-                end = ui.item.index();
 
-            $scope.plan.activities.splice(end, 0,
-                $scope.plan.activities.splice(start, 1)[0]);
+        $scope.dailyStepsChange = function(){
+            if(!$scope.dailyStepsEntered){
+                $scope.dailyStepsEntered = true;
 
-            $scope.$apply();
-        };
+                var model = {
+                    name: '',
+                    activityType: 28,
+                    activityName: 'Walking',
+                    intensity: 1,
+                    distance: 0,
+                    equipment: 0,
+                    duration: 0,
+                    averageHeartRate: 0,
+                    caloriesBurned: 0,
+                    averageSpeed: 0,
+                    reps: 0,
+                    sets: 0,
+                    steps: parseInt($scope.plan.dailySteps),
+                    weight: 0,
+                    isVisible: true,
+                    isEditable: true
+                };
 
-        $scope.sortableOptions = {
-            start: $scope.sortableStartCallback,
-            update: $scope.sortableUpdateCallback
+                $scope.plan.activities.push(model);
+
+                $scope.calculateCalories(model);
+            }
+            else{
+                $scope.calculateTotalCaloriesBurned();
+            }
         };
 
         $scope.create = function() {
@@ -228,13 +209,15 @@ angular.module('activities').controller('ActivitiesController', ['$scope', '$sta
 
             var plan = new Activities({
                 planDateForDB: planDateAsString,
-                planDateAsMili: planDate.getTime(),
+               // planDateAsMili: planDate.getTime(),
                 planDateAsConcat: parseInt(planDateYear + '' + (planDateMonth < 10 ? '0' + planDateMonth : planDateMonth) + '' + (planDateDay < 10 ? '0' + planDateDay : planDateDay)),
                 planDateYear: planDateYear,
                 planDateMonth: planDateMonth,
                 planDateDay: planDateDay,
                 totalCaloriesBurned: $scope.plan.totalCaloriesBurned,
-                activities: $scope.plan.activities
+                activities: $scope.plan.activities,
+                notes: $scope.plan.notes,
+                notesVisible: $scope.plan.notesVisible
             });
             plan.$save(function(response) {
                 plan.planDateNonUtc = response.planDateNonUtc;
@@ -260,45 +243,6 @@ angular.module('activities').controller('ActivitiesController', ['$scope', '$sta
             });
         };
 
-        $scope.createActivity = function(){
-            var model = {
-                name: '',
-                activityType: 28,
-                activityName: 'Walking',
-                steps: 0,
-                intensity: 1,
-                distance: 0,
-                equipment: 0,
-                duration: 0,
-                averageHeartRate: 0,
-                caloriesBurned: 0,
-                averageSpeed: 0,
-                reps: 0,
-                sets: 0,
-                weight: 0,
-                isVisible: true,
-                isEditable: true
-            };
-
-            $scope.plan.activities.push(model);
-
-            $scope.calculateCalories(model);
-
-            $timeout(function(){$scope.setSorting();}, 100);
-        };
-
-        $scope.editActivity = function(activity){
-            activity.isEditable = true;
-            activity.isVisible = !activity.isVisible;
-        };
-
-        $scope.saveActivity = function(activity){
-            activity.isEditable = false;
-            activity.isVisible = !activity.isVisible;
-        };
-
-
-
         $scope.deleteActivity = function(activity){
             if (confirm("Are you sure you want to delete this activity?")) {
                 for (var i in $scope.plan.activities) {
@@ -308,8 +252,6 @@ angular.module('activities').controller('ActivitiesController', ['$scope', '$sta
                 }
             }
         };
-
-
 
         $scope.remove = function(plan) {
             if (plan) {
@@ -382,25 +324,12 @@ angular.module('activities').controller('ActivitiesController', ['$scope', '$sta
             plan.planDateAsConcat = parseInt(planDateYear + '' + (planDateMonth < 10 ? '0' + planDateMonth : planDateMonth) + '' + (planDateDay < 10 ? '0' + planDateDay : planDateDay));
 
             plan.$update(function(data) {
-//                if(data.planExistsInDb){
-//                    $scope.planExistsInDb = true;
-//
-//                    $timeout(function () {
-//                        $scope.planExistsInDb = false;
-//                    }, 5000);
-//                }
-//                else {
-                    $scope.planExistsInDb = false;
-                    $scope.success = true;
+                $scope.planExistsInDb = false;
+                $scope.success = true;
 
-                    $timeout(function () {
-                        $scope.success = false;
-                    }, 3000);
-                    $timeout(function () {
-                        $scope.setSorting();
-                    }, 100);
-               // }
-
+                $timeout(function () {
+                    $scope.success = false;
+                }, 3000);
             }, function(errorResponse) {
                 $scope.error = errorResponse.data.message;
             });
@@ -430,11 +359,16 @@ angular.module('activities').controller('ActivitiesController', ['$scope', '$sta
 
                     $scope.calculateTotalCaloriesBurned();
 
+                    $scope.isExercisesOpen = true;
+
+
                 });
             }
             else{
                 $scope.plan =  {data: null, activities: null, planDate: new Date(), planDateNonUtc: new Date()};
                 $scope.plan.activities = [];
+                $scope.isExercisesOpen = true;
+
 
                 //todo use ngRouter instead of this horrible method for extracting url param
                 var urlSplit = $location.path().split('/');
@@ -465,25 +399,60 @@ angular.module('activities').controller('ActivitiesController', ['$scope', '$sta
             }
         };
 
+        $scope.createActivityWithDialog = function(activity){
+            var modalInstance = $modal.open({
+                templateUrl: 'createExerciseModalContent.html',
+                controller: ActivitiesDialogService.CreateExerciseInstanceCtrl,
+                //size: size,
+                resolve: {
+                    activity: function(){
+                        return activity
+                    },
+                    activityTypes: function () {
+                        return $scope.activityTypes;
+                    },
+                    activityTypesDictionary: function () {
+                        return $scope.activityTypesDictionary;
+                    },
+                    parentScope: function () {
+                        return $scope;
+                    }
+                }
+            });
 
-        $scope.toggleActivityVisibility = function(activity){
-            activity.isVisible = !activity.activity;
+            modalInstance.result.then(function (newActivityModel) {
+                if(newActivityModel.isUpdate){
+                    for(var i = 0; i < $scope.plan.activities.length; i++){
+                        if($scope.plan.activities[i]._id == newActivityModel._id){
+                            $scope.plan.activities[i] = newActivityModel;
+                        }
+                    }
+                }
+                else {
+                    $scope.plan.activities.push(newActivityModel);
+                }
+
+                $scope.calculateCalories(newActivityModel);
+
+                $scope.saveActivityPlan();
+            }, function () {
+                //$log.info('Modal dismissed at: ' + new Date());
+            });
         };
 
+        $scope.createInjuryWithDialog = function(){
 
-        var checkIfPlanEditable = function(){
-            var isPlanEditable = false;
+        };
 
-            for(var i = 0; i < $scope.plan.activities.length; i++){
-                var planActivity = $scope.plan.activities[i];
+        $scope.createInjuries = function(){
+            $scope.showInjuriesSection = true;
+            $scope.plan.injuriesVisible = true;
+        };
 
-                if (planActivity.isEditable){
-                    isPlanEditable = true;
-                    break;
-                }
-            }
+        $scope.createNotes = function(){
+            $scope.showNotesSection = true;
 
-            return isPlanEditable;
+            $scope.plan.notesVisible = true;
         };
 
         //sorting code

@@ -427,205 +427,205 @@
 </div>
 
 
-<script type="text/ng-template" id="createFoodModalContent.html">
-    <div class="modal-header" style="font-family: segui;">
-        <h3 class="modal-title" data-ng-show="!showFoodDetails">Select Food To Add</h3>
-        <div data-ng-show="showFoodDetails" >
-            <h3 class="modal-title" >
-                <span style="font-weight: bold;" data-ng-bind="selected.foodToAdd.name"></span>
+    <script type="text/ng-template" id="createFoodModalContent.html">
+        <div class="modal-header" style="font-family: segui;">
+            <h3 class="modal-title" data-ng-show="!showFoodDetails">Select Food To Add</h3>
+            <div data-ng-show="showFoodDetails" >
+                <h3 class="modal-title" >
+                    <span style="font-weight: bold;" data-ng-bind="selected.foodToAdd.name"></span>
 
-            </h3>
-        </div>
-        <div style="position: relative;top: 5px;">
-            <a class="ActionLink" data-ng-show="showFoodDetails"   data-ng-click="changeFood()">Change Food</a>
-        </div>
-    </div>
-    <div style="font-family: segui;padding-left: 10px;padding-bottom:10px;" >
-        <div style="display:inline-block;">
-            <div data-ng-show="showCreateMealSection" style="margin-top: 10px;">
-                Select Meal Type:
-                <select data-ng-model="selected.mealType" data-ng-change="showCreateMealSection = false;" data-ng-options="t.id as t.name for t in mealTypes" style="font-size:16px;"></select>
-                <!--<input type="text" data-ng-model="selected.mealType" data-ng-change="showCreateMealSection = false;"/>-->
+                </h3>
             </div>
-
-            <div data-ng-show="!showCreateMealSection">
-                <div data-ng-show="!showFoodDetails" style="margin-top: 10px;">
-                    <div style="margin-bottom: 20px;">
-
-                        <div style="vertical-align: top;display:inline-block;">
-                            <input placeholder="Enter Food Name" style="width: 170px;" type="text" data-ng-change="foodInputChange()" data-ng-model="selected.foodSearchTxt"  />
-                            <a class="ActionLink clearInputLink" data-ng-click="clearFoodInput()">Clear</a>
-                        </div>
-
-                        <div style="display:inline-block; margin-left:25px;">
-                            <div >
-
-                                <input type="radio" data-ng-change="radioBtnCheckedChange('myFoods')" value="myFoods" checked="checked" name="foodsCheckbox" data-ng-model="foodsRadioBtn"/>
-                                My Foods
-                            </div>
-                            <div >
-
-                                <input type="radio" data-ng-change="radioBtnCheckedChange('allFoods')" value="allFoods"  name="foodsCheckbox"  data-ng-model="foodsRadioBtn"/>
-                                All Foods
-                            </div>
-                        </div>
-                    </div>
-
-
-                    <div class="searchLetters">
-                        <span data-ng-click="findFoodsByLetter('a')">A</span>
-                        <span data-ng-click="findFoodsByLetter('b')">B</span>
-                        <span data-ng-click="findFoodsByLetter('c')">C</span>
-                        <span data-ng-click="findFoodsByLetter('d')">D</span>
-                        <span data-ng-click="findFoodsByLetter('e')">E</span>
-                        <span data-ng-click="findFoodsByLetter('f')">F</span>
-                        <span data-ng-click="findFoodsByLetter('g')">G</span>
-                        <span data-ng-click="findFoodsByLetter('h')">H</span>
-                        <span data-ng-click="findFoodsByLetter('i')">I</span>
-                        <span data-ng-click="findFoodsByLetter('j')">J</span>
-                        <span data-ng-click="findFoodsByLetter('k')">K</span>
-                        <span data-ng-click="findFoodsByLetter('l')">L</span>
-                        <span data-ng-click="findFoodsByLetter('m')">M</span>
-                        <span data-ng-click="findFoodsByLetter('n')">N</span>
-                        <span data-ng-click="findFoodsByLetter('o')">O</span>
-                        <span data-ng-click="findFoodsByLetter('p')">P</span>
-                        <span data-ng-click="findFoodsByLetter('q')">Q</span>
-                        <span data-ng-click="findFoodsByLetter('r')">R</span>
-                        <span data-ng-click="findFoodsByLetter('s')">S</span>
-                        <span data-ng-click="findFoodsByLetter('t')">T</span>
-                        <span data-ng-click="findFoodsByLetter('u')">U</span>
-                        <span data-ng-click="findFoodsByLetter('v')">V</span>
-                        <span data-ng-click="findFoodsByLetter('w')">W</span>
-                        <span data-ng-click="findFoodsByLetter('x')">X</span>
-                        <span data-ng-click="findFoodsByLetter('y')">Y</span>
-                        <span data-ng-click="findFoodsByLetter('z')">Z</span>
-                    </div>
-
-                    <div data-ng-show="!isLoading" class="list-group" style="margin-bottom: 0px; !important;" data-ng-repeat="food in foods">
-                        <a class="list-group-item actionRow" data-ng-click="foodSelectionChange(food)">
-                            <span data-ng-bind="food.name"></span>
-
-                        </a>
-                    </div>
-
-                    <div data-ng-show="isLoading" style="height: 336px;">
-                        <img width="25" height="25" src="/modules/core/img/loaders/loader.gif">
-                    </div>
-
-                    <div>
-                        <span style="color:blue;padding-left:5px;" data-ng-show="!foods || foods.length == 0">There are no foods returned</span>
-                    </div>
-
-                    <div style="margin-top: 10px;display:inline-block;margin-right: 5px;" data-ng-show="foods && skipFoods > 0">
-                        <a class="ActionLink" data-ng-click="prevFoods();">Previous</a>
-                    </div>
-                    <div style="margin-top: 10px;display:inline-block" data-ng-show="foods && foods.length == 8">
-                        <a class="ActionLink" data-ng-click="nextFoods();">Next</a>
-                    </div>
-
+            <div style="position: relative;top: 5px;">
+                <a class="ActionLink" data-ng-show="showFoodDetails"   data-ng-click="changeFood()">Change Food</a>
+            </div>
+        </div>
+        <div style="font-family: segui;padding-left: 10px;padding-bottom:10px;" >
+            <div style="display:inline-block;">
+                <div data-ng-show="showCreateMealSection" style="margin-top: 10px;">
+                    Select Meal Type:
+                    <select data-ng-model="selected.mealType" data-ng-change="showCreateMealSection = false;" data-ng-options="t.id as t.name for t in mealTypes" style="font-size:16px;"></select>
+                    <!--<input type="text" data-ng-model="selected.mealType" data-ng-change="showCreateMealSection = false;"/>-->
                 </div>
-                <div  data-ng-show="showFoodDetails">
-                    <div style="display:inline-block">
-                        <div style="display:inline-block;">
-                            <div style="font-weight: bold;">
-                                Servings:
+
+                <div data-ng-show="!showCreateMealSection">
+                    <div data-ng-show="!showFoodDetails" style="margin-top: 10px;">
+                        <div style="margin-bottom: 20px;">
+
+                            <div style="vertical-align: top;display:inline-block;">
+                                <input placeholder="Enter Food Name" style="width: 170px;" type="text" data-ng-change="foodInputChange()" data-ng-model="selected.foodSearchTxt"  />
+                                <a class="ActionLink clearInputLink" data-ng-click="clearFoodInput()">Clear</a>
                             </div>
 
-                            <input style="width: 80px;" data-ng-change="servingsChange()" data-ng-model="selected.servings" type="text"/>
-                        </div>
-                        <div style="margin-top: 20px;display:inline-block;padding-left:35px;">
-                            <div style="font-weight:bold;">Calories:</div>
-                            <span style="font-size: 18px;" data-ng-bind="selected.caloriesDisplay | number: 0"></span>
-                        </div>
+                            <div style="display:inline-block; margin-left:25px;">
+                                <div >
 
-                        <div style="display:inline-block;">
-                            <div style="padding-left:20px;" data-ng-show="foodServingTypes && foodServingTypes.length > 1">
-                                <span style="font-weight: bold;position: relative;bottom: 3px;">Serving Desc.:</span>
-                                <br/>
-                                <select style="font-size:18px;" data-ng-model="selected.servingType" data-ng-change="servingTypeChange();"
-                                        ng-options="t.id as t.description for t in foodServingTypes"></select>
+                                    <input type="radio" data-ng-change="radioBtnCheckedChange('myFoods')" value="myFoods" checked="checked" name="foodsCheckbox" data-ng-model="foodsRadioBtn"/>
+                                    My Foods
+                                </div>
+                                <div >
+
+                                    <input type="radio" data-ng-change="radioBtnCheckedChange('allFoods')" value="allFoods"  name="foodsCheckbox"  data-ng-model="foodsRadioBtn"/>
+                                    All Foods
+                                </div>
                             </div>
                         </div>
 
-                        <div style="display:inline-block;">
-                            <div style="padding-left:20px;" data-ng-show="foodServingTypes && foodServingTypes.length <= 1">
-                                <span style="font-weight: bold;">Serving Desc.:</span>
-                                <br/>
-                                <span style="font-size: 18px;"  data-ng-bind="selected.foodToAdd.servingDescription1"></span>
-                            </div>
+
+                        <div class="searchLetters">
+                            <span data-ng-click="findFoodsByLetter('a')">A</span>
+                            <span data-ng-click="findFoodsByLetter('b')">B</span>
+                            <span data-ng-click="findFoodsByLetter('c')">C</span>
+                            <span data-ng-click="findFoodsByLetter('d')">D</span>
+                            <span data-ng-click="findFoodsByLetter('e')">E</span>
+                            <span data-ng-click="findFoodsByLetter('f')">F</span>
+                            <span data-ng-click="findFoodsByLetter('g')">G</span>
+                            <span data-ng-click="findFoodsByLetter('h')">H</span>
+                            <span data-ng-click="findFoodsByLetter('i')">I</span>
+                            <span data-ng-click="findFoodsByLetter('j')">J</span>
+                            <span data-ng-click="findFoodsByLetter('k')">K</span>
+                            <span data-ng-click="findFoodsByLetter('l')">L</span>
+                            <span data-ng-click="findFoodsByLetter('m')">M</span>
+                            <span data-ng-click="findFoodsByLetter('n')">N</span>
+                            <span data-ng-click="findFoodsByLetter('o')">O</span>
+                            <span data-ng-click="findFoodsByLetter('p')">P</span>
+                            <span data-ng-click="findFoodsByLetter('q')">Q</span>
+                            <span data-ng-click="findFoodsByLetter('r')">R</span>
+                            <span data-ng-click="findFoodsByLetter('s')">S</span>
+                            <span data-ng-click="findFoodsByLetter('t')">T</span>
+                            <span data-ng-click="findFoodsByLetter('u')">U</span>
+                            <span data-ng-click="findFoodsByLetter('v')">V</span>
+                            <span data-ng-click="findFoodsByLetter('w')">W</span>
+                            <span data-ng-click="findFoodsByLetter('x')">X</span>
+                            <span data-ng-click="findFoodsByLetter('y')">Y</span>
+                            <span data-ng-click="findFoodsByLetter('z')">Z</span>
                         </div>
-                        <!--<div style="margin-top: 20px;display:inline-block;padding-left:40px;"-->
-                           <!--data-ng-show="selected.foodToAdd ? selected.foodToAdd.servingDescription.toLowerCase() !== '1 serving' : selected.servingDescription.toLowerCase() !== '1 serving'">-->
-                            <!--<div>-->
-                                <!--<span style="font-weight:bold">1 Serving: </span>-->
-                            <!--</div>-->
-                            <!--<span style="font-size: 18px;" data-ng-bind="selected.foodToAdd ? selected.foodToAdd.servingDescription : selected.servingDescription"></span>-->
-                        <!--</div>-->
+
+                        <div data-ng-show="!isLoading" class="list-group" style="margin-bottom: 0px; !important;" data-ng-repeat="food in foods">
+                            <a class="list-group-item actionRow" data-ng-click="foodSelectionChange(food)">
+                                <span data-ng-bind="food.name"></span>
+
+                            </a>
+                        </div>
+
+                        <div data-ng-show="isLoading" style="height: 336px;">
+                            <img width="25" height="25" src="/modules/core/img/loaders/loader.gif">
+                        </div>
 
                         <div>
-                            <div style="padding-top: 7px;display:inline-block;">
-                                <div style="display:inline-block;padding-right:10px;">
-                                    <div style="padding-top: 15px;color:rgb(36, 124, 36)">
-                                        <span style="font-weight:bold;">Total Fat:</span>
-                                        <span data-ng-bind="selected.fatDisplay | number: 1"></span>g
-                                    </div>
-                                    <div style="margin-left: 20px;">
-                                        Saturated Fat:
-                                        <span data-ng-bind="selected.saturatedFatDisplay | number: 0"></span>g
-                                    </div>
-                                    <div style="margin-left: 20px;">
-                                        <span>Cholesterol:</span>
-                                        <span data-ng-bind="selected.cholesterolDisplay | number: 0"></span>mg
-                                    </div>
-                                    <div >
-                                        <span style="font-weight:bold;">Sodium:</span>
-                                        <span data-ng-bind="selected.sodiumDisplay | number: 0"></span>mg
-                                    </div>
+                            <span style="color:blue;padding-left:5px;" data-ng-show="!foods || foods.length == 0">There are no foods returned</span>
+                        </div>
+
+                        <div style="margin-top: 10px;display:inline-block;margin-right: 5px;" data-ng-show="foods && skipFoods > 0">
+                            <a class="ActionLink" data-ng-click="prevFoods();">Previous</a>
+                        </div>
+                        <div style="margin-top: 10px;display:inline-block" data-ng-show="foods && foods.length == 8">
+                            <a class="ActionLink" data-ng-click="nextFoods();">Next</a>
+                        </div>
+
+                    </div>
+                    <div  data-ng-show="showFoodDetails">
+                        <div style="display:inline-block">
+                            <div style="display:inline-block;">
+                                <div style="font-weight: bold;">
+                                    Servings:
                                 </div>
-                                <div style="display:inline-block;border-left: 1px solid lightgray;padding-left: 10px;">
-                                    <div style="color:rgb(255, 127, 14)">
-                                        <span style="font-weight:bold;">Total Carbs:</span>
-                                        <span data-ng-bind="selected.carbsDisplay | number: 1"></span>g
-                                    </div>
-                                    <div style="margin-left: 20px;">
-                                        Fiber:
-                                        <span data-ng-bind="selected.fiberDisplay | number: 0"></span>g
-                                    </div>
-                                    <div style="margin-left: 20px;">
-                                        Sugar:
-                                        <span data-ng-bind="selected.sugarDisplay | number: 1"></span>g
-                                    </div>
-                                    <div style="color:rgb(31, 119, 180)">
-                                        <span style="font-weight:bold;">Protein:</span>
-                                        <span data-ng-bind="selected.proteinDisplay | number: 1"></span>g
-                                    </div>
+
+                                <input style="width: 80px;" data-ng-change="servingsChange()" data-ng-model="selected.servings" type="text"/>
+                            </div>
+                            <div style="margin-top: 20px;display:inline-block;padding-left:35px;">
+                                <div style="font-weight:bold;">Calories:</div>
+                                <span style="font-size: 18px;" data-ng-bind="selected.caloriesDisplay | number: 0"></span>
+                            </div>
+
+                            <div style="display:inline-block;">
+                                <div style="padding-left:20px;" data-ng-show="foodServingTypes && foodServingTypes.length > 1">
+                                    <span style="font-weight: bold;position: relative;bottom: 3px;">Serving Desc.:</span>
+                                    <br/>
+                                    <select style="font-size:18px;" data-ng-model="selected.servingType" data-ng-change="servingTypeChange();"
+                                            ng-options="t.id as t.description for t in foodServingTypes"></select>
                                 </div>
                             </div>
 
+                            <div style="display:inline-block;">
+                                <div style="padding-left:20px;" data-ng-show="foodServingTypes && foodServingTypes.length <= 1">
+                                    <span style="font-weight: bold;">Serving Desc.:</span>
+                                    <br/>
+                                    <span style="font-size: 18px;"  data-ng-bind="selected.foodToAdd.servingDescription1"></span>
+                                </div>
+                            </div>
+                            <!--<div style="margin-top: 20px;display:inline-block;padding-left:40px;"-->
+                               <!--data-ng-show="selected.foodToAdd ? selected.foodToAdd.servingDescription.toLowerCase() !== '1 serving' : selected.servingDescription.toLowerCase() !== '1 serving'">-->
+                                <!--<div>-->
+                                    <!--<span style="font-weight:bold">1 Serving: </span>-->
+                                <!--</div>-->
+                                <!--<span style="font-size: 18px;" data-ng-bind="selected.foodToAdd ? selected.foodToAdd.servingDescription : selected.servingDescription"></span>-->
+                            <!--</div>-->
 
+                            <div>
+                                <div style="padding-top: 7px;display:inline-block;">
+                                    <div style="display:inline-block;padding-right:10px;">
+                                        <div style="padding-top: 15px;color:rgb(36, 124, 36)">
+                                            <span style="font-weight:bold;">Total Fat:</span>
+                                            <span data-ng-bind="selected.fatDisplay | number: 1"></span>g
+                                        </div>
+                                        <div style="margin-left: 20px;">
+                                            Saturated Fat:
+                                            <span data-ng-bind="selected.saturatedFatDisplay | number: 0"></span>g
+                                        </div>
+                                        <div style="margin-left: 20px;">
+                                            <span>Cholesterol:</span>
+                                            <span data-ng-bind="selected.cholesterolDisplay | number: 0"></span>mg
+                                        </div>
+                                        <div >
+                                            <span style="font-weight:bold;">Sodium:</span>
+                                            <span data-ng-bind="selected.sodiumDisplay | number: 0"></span>mg
+                                        </div>
+                                    </div>
+                                    <div style="display:inline-block;border-left: 1px solid lightgray;padding-left: 10px;">
+                                        <div style="color:rgb(255, 127, 14)">
+                                            <span style="font-weight:bold;">Total Carbs:</span>
+                                            <span data-ng-bind="selected.carbsDisplay | number: 1"></span>g
+                                        </div>
+                                        <div style="margin-left: 20px;">
+                                            Fiber:
+                                            <span data-ng-bind="selected.fiberDisplay | number: 0"></span>g
+                                        </div>
+                                        <div style="margin-left: 20px;">
+                                            Sugar:
+                                            <span data-ng-bind="selected.sugarDisplay | number: 1"></span>g
+                                        </div>
+                                        <div style="color:rgb(31, 119, 180)">
+                                            <span style="font-weight:bold;">Protein:</span>
+                                            <span data-ng-bind="selected.proteinDisplay | number: 1"></span>g
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="dekstopMediumWindowWidth" id="foodMacrosChart" style="vertical-align: top;margin-left:40px;" ></div>
+                        <div class="dekstopMediumWindowWidth" id="foodMacrosChart" style="vertical-align: top;margin-left:40px;" ></div>
+
+                    </div>
 
                 </div>
 
+
+
+
+
             </div>
-
-
-
-
 
         </div>
 
-    </div>
 
-
-    <div class="modal-footer">
-        <button class="btn btn-primary" data-ng-show="!showCreateMealSection" ng-click="ok()">OK</button>
-        <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
-    </div>
-</script>
+        <div class="modal-footer">
+            <button class="btn btn-primary" data-ng-show="!showCreateMealSection" ng-click="ok()">OK</button>
+            <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+        </div>
+    </script>
 
 
 
