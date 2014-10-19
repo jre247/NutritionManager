@@ -17,8 +17,37 @@ angular.module('plans').service(
         // PUBLIC METHODS.
         // ---
 
-        function CreateInjuriesInstanceCtrl($scope, $modalInstance, parentScope){
+        function CreateInjuriesInstanceCtrl($scope, $modalInstance, injury){
+            $scope.painLevelList = [
+                0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+            ];
 
+            $scope.selectedPainLevel = $scope.painLevelList[0];
+            $scope.injuryNotes = '';
+            $scope.injuryLocation = '';
+
+            $scope.selected = {
+                painLevel: $scope.selectedPainLevel,
+                injuryNotes: $scope.injuryNotes,
+                injuryLocation: $scope.injuryLocation,
+                isUpdate: injury ? true : false,
+
+            };
+
+            if(injury){
+                $scope.selected.painLevel = injury.painLevel;
+                $scope.selected.injuryNotes = injury.injuryNotes;
+                $scope.selected.injuryLocation = injury.injuryLocation;
+                $scope.selected._id = injury._id;
+            }
+
+            $scope.ok = function () {
+                $modalInstance.close($scope.selected);
+            };
+
+            $scope.cancel = function () {
+                $modalInstance.dismiss('cancel');
+            };
         };
 
         function CreateExerciseInstanceCtrl($scope, $modalInstance, parentScope, activityTypes, activityTypesDictionary, activity) {

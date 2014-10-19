@@ -16,6 +16,7 @@ angular.module('activities').controller('ActivitiesController', ['$scope', '$sta
         $scope.showInjuriesSection = false;
         $scope.showNotesSection = true;
         $scope.dailyStepsEntered = false;
+        $scope.injuriesVisible = false;
 
         $scope.authentication = Authentication;
         $scope.nutritionProfile = NutritionProfile.get();
@@ -63,7 +64,8 @@ angular.module('activities').controller('ActivitiesController', ['$scope', '$sta
             {id: 29, type: 0, name: 'Water Aerobics'},
             {id: 30, type: 1, name: 'Weight Lifting'},
             {id: 31, type: 0, name: 'Wrestling'},
-            {id: 32, type: 3, name: 'Yoga'}
+            {id: 32, type: 3, name: 'Yoga'},
+            {id: 33, type: 4, name: 'Daily Steps'}
 
         ];
 
@@ -101,7 +103,28 @@ angular.module('activities').controller('ActivitiesController', ['$scope', '$sta
                 total += calories;
             }
 
+            if($scope.plan.dailySteps > 0) {
+                var stepsCaloriesBurned = calculateCaloriesForSteps($scope.plan.dailySteps);
+
+                $scope.plan.dailyStepsCaloriesBurned = stepsCaloriesBurned;
+
+                total += stepsCaloriesBurned;
+            }
+
             $scope.plan.totalCaloriesBurned = total;
+        };
+
+        var calculateCaloriesForSteps = function(steps){
+            if(steps > 0){
+                var weight = $scope.nutritionProfile.weight;
+
+                var caloriesBurnedInMile = 0.57 * weight;
+                var stepsInMiles = steps / 2000;
+
+                var caloriesBurned = stepsInMiles * caloriesBurnedInMile;
+
+                return caloriesBurned;
+            }
         };
 
         //formulate for calculating calories burned for men:
@@ -136,13 +159,7 @@ angular.module('activities').controller('ActivitiesController', ['$scope', '$sta
             }
             else{
                 if(!averageHeartRate || averageHeartRate <= 0){
-                    var steps = activity.steps;
-                    if(steps > 0) {
-                        var caloriesBurnedInMile = 0.57 * weight;
-                        var stepsInMiles = steps / 2000;
-
-                        caloriesBurned = stepsInMiles * caloriesBurnedInMile;
-                    }
+                    caloriesBurned = calculateCaloriesForSteps(activity.steps);
                 }
             }
 
@@ -165,37 +182,8 @@ angular.module('activities').controller('ActivitiesController', ['$scope', '$sta
 
         $scope.initDate = new Date('2016-15-20');
 
-
         $scope.dailyStepsChange = function(){
-            if(!$scope.dailyStepsEntered){
-                $scope.dailyStepsEntered = true;
-
-                var model = {
-                    name: '',
-                    activityType: 28,
-                    activityName: 'Walking',
-                    intensity: 1,
-                    distance: 0,
-                    equipment: 0,
-                    duration: 0,
-                    averageHeartRate: 0,
-                    caloriesBurned: 0,
-                    averageSpeed: 0,
-                    reps: 0,
-                    sets: 0,
-                    steps: parseInt($scope.plan.dailySteps),
-                    weight: 0,
-                    isVisible: true,
-                    isEditable: true
-                };
-
-                $scope.plan.activities.push(model);
-
-                $scope.calculateCalories(model);
-            }
-            else{
-                $scope.calculateTotalCaloriesBurned();
-            }
+            $scope.calculateTotalCaloriesBurned();
         };
 
         $scope.create = function() {
@@ -217,7 +205,10 @@ angular.module('activities').controller('ActivitiesController', ['$scope', '$sta
                 totalCaloriesBurned: $scope.plan.totalCaloriesBurned,
                 activities: $scope.plan.activities,
                 notes: $scope.plan.notes,
-                notesVisible: $scope.plan.notesVisible
+                notesVisible: $scope.plan.notesVisible,
+                injuries: $scope.plan.injuries,
+                dailySteps: parseInt($scope.plan.dailySteps),
+                dailyStepsCaloriesBurned: $scope.plan.dailyStepsCaloriesBurned
             });
             plan.$save(function(response) {
                 plan.planDateNonUtc = response.planDateNonUtc;
@@ -319,7 +310,9 @@ angular.module('activities').controller('ActivitiesController', ['$scope', '$sta
             plan.planDateYear = planDateYear;
             plan.planDateMonth = planDateMonth;
             plan.planDateDay = planDateDay;
-            plan.totalCaloriesBurned = plan.totalCaloriesBurned;
+            plan.dailySteps = parseInt($scope.plan.dailySteps);
+           // plan.totalCaloriesBurned = plan.totalCaloriesBurned;
+            //plan.dailyStepsCaloriesBurned = plan.dailyStepsCaloriesBurned;
             plan.planDateAsMili = planDate.getTime();
             plan.planDateAsConcat = parseInt(planDateYear + '' + (planDateMonth < 10 ? '0' + planDateMonth : planDateMonth) + '' + (planDateDay < 10 ? '0' + planDateDay : planDateDay));
 
@@ -357,18 +350,19 @@ angular.module('activities').controller('ActivitiesController', ['$scope', '$sta
 
                     $scope.isUserAdmin = $scope.plan.userRoles && $scope.plan.userRoles.indexOf('admin') !== -1 ? true : false;
 
+                    if($scope.plan.injuries && $scope.plan.injuries.length > 0){
+                        $scope.injuriesVisible = true;
+                        $scope.showInjuriesSection = true;
+                    }
+
                     $scope.calculateTotalCaloriesBurned();
-
-                    $scope.isExercisesOpen = true;
-
-
                 });
             }
             else{
                 $scope.plan =  {data: null, activities: null, planDate: new Date(), planDateNonUtc: new Date()};
                 $scope.plan.activities = [];
-                $scope.isExercisesOpen = true;
-
+                $scope.plan.notesVisible = false;
+                $scope.plan.injuriesVisible = false;
 
                 //todo use ngRouter instead of this horrible method for extracting url param
                 var urlSplit = $location.path().split('/');
@@ -393,10 +387,9 @@ angular.module('activities').controller('ActivitiesController', ['$scope', '$sta
                         $scope.plan.planDateNonUtc = new Date(dateYear, dateMonth, dateDay);
                     }
                 }
-
-                $scope.createActivity();
-
             }
+
+            $scope.isExercisesOpen = true;
         };
 
         $scope.createActivityWithDialog = function(activity){
@@ -440,13 +433,61 @@ angular.module('activities').controller('ActivitiesController', ['$scope', '$sta
             });
         };
 
-        $scope.createInjuryWithDialog = function(){
+        $scope.createInjuryWithDialog = function(injury){
 
+            var modalInstance = $modal.open({
+                templateUrl: 'createInjuriesModalContent.html',
+                controller: ActivitiesDialogService.CreateInjuriesInstanceCtrl,
+                resolve: {
+                    injury: function(){
+                        return injury;
+                    }
+                }
+            });
+
+            modalInstance.result.then(function (selected) {
+                var injuryModel = {
+                    painLevel: selected.painLevel,
+                    injuryNotes: selected.injuryNotes,
+                    injuryLocation: selected.injuryLocation
+                };
+
+                if(selected.isUpdate){
+                    for(var i = 0; i < $scope.plan.injuries.length; i++){
+                        if($scope.plan.injuries[i]._id == selected._id){
+                            var injuryToUpdate = $scope.plan.injuries[i];
+
+                            injuryToUpdate.painLevel = injuryModel.painLevel;
+                            injuryToUpdate.injuryNotes = injuryModel.injuryNotes;
+                            injuryToUpdate.injuryLocation = injuryModel.injuryLocation;
+                        }
+                    }
+                }
+                else {
+                    $scope.plan.injuries.push(injuryModel);
+                }
+
+                $scope.injuriesVisible = true;
+
+                $scope.saveActivityPlan();
+            }, function () {
+                //$log.info('Modal dismissed at: ' + new Date());
+            });
+        };
+
+        $scope.updateInjury = function(injury){
+            $scope.createInjuryWithDialog(injury);
+        };
+
+        $scope.addInjury = function(){
+            $scope.createInjuryWithDialog();
         };
 
         $scope.createInjuries = function(){
             $scope.showInjuriesSection = true;
-            $scope.plan.injuriesVisible = true;
+            $scope.injuriesVisible = true;
+
+            $scope.createInjuryWithDialog();
         };
 
         $scope.createNotes = function(){

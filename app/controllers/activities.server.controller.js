@@ -76,6 +76,8 @@ exports.create = function(req, res) {
                 var plan = new Activity(req.body);
                 plan.user = req.user;
                 plan.totalCaloriesBurned = planClient.totalCaloriesBurned;
+                plan.dailySteps = planClient.dailySteps;
+                plan.dailyStepsCaloriesBurned = planClient.dailyStepsCaloriesBurned;
                 plan.planDateAsUtc = planClientPlanDate;
                 plan.planDateNonUtc = planClient.planDateForDB;
                 plan.activities  = planClient.activities;
@@ -85,6 +87,7 @@ exports.create = function(req, res) {
                 plan.planDateAsMili = planClient.planDateAsMili;
                 plan.planDateAsConcat = planClient.planDateAsConcat;
                 plan.userRoles = req.user.roles;
+                plan.injuries = planClient.injuries;
                 planToSave = plan;
 
             }

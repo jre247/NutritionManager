@@ -76,6 +76,14 @@ var ActivitySchema = new Schema({
         trim: true,
         default: ''
     },
+    dailySteps:{
+        type: Number,
+        default: 0
+    },
+    dailyStepsCaloriesBurned:{
+        type: Number,
+        default: 0
+    },
     injuries: [
         {
             painLevel: {
@@ -96,10 +104,6 @@ var ActivitySchema = new Schema({
     activities: [
         {
             activityType: {
-                type: Number,
-                default: 0
-            },
-            dailySteps:{
                 type: Number,
                 default: 0
             },

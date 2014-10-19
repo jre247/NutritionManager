@@ -35,6 +35,25 @@
                                 </div>
                             </div>
                         </div>
+
+                        <div data-ng-if="plan.dailySteps > 0">
+                            <div style="display:inline-block; margin-left: 40px;">
+                                <div style="display:inline-block; font-weight:bold;color:rgb(105, 97, 97)" >
+                                    <span>Daily Steps</span>:
+                                </div>
+
+                                <div class="list-group-item-text text-muted" style="display:inline-block;padding-left: 10px;">
+                                    <div>
+                                        <span data-ng-bind="plan.dailySteps | number: 0"></span> Steps,
+                                    </div>
+
+                                </div>
+
+                                <div style="display:inline-block;color:gray">
+                                    <span data-ng-bind="plan.dailyStepsCaloriesBurned | number: 0"></span> Calories
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div style="color: rgb(33, 51, 184);font-weight:bold;margin-left: 40px;margin-top: 18px;">
                         Total Calories Burned: <span data-ng-bind="plan.totalCaloriesBurned | number:0"></span>

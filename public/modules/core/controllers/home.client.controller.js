@@ -55,7 +55,9 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
             {id: 29, type: 0, name: 'Water Aerobics'},
             {id: 30, type: 1, name: 'Weight Lifting'},
             {id: 31, type: 0, name: 'Wrestling'},
-            {id: 32, type: 3, name: 'Yoga'}
+            {id: 32, type: 3, name: 'Yoga'},
+            {id: 33, type: 4, name: 'Daily Steps'}
+
 
         ];
 
@@ -281,6 +283,18 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
 
                 if(data.activityPlan !== 'null'){
                     $scope.activityPlan = data.activityPlan;
+
+                    if($scope.activityPlan.dailySteps > 0){
+                        var dailyStepsModel = {
+                            name: 'Daily Steps',
+                            steps: $scope.activityPlan.dailySteps,
+                            activityType: 33,
+                            caloriesBurned: $scope.activityPlan.dailyStepsCaloriesBurned
+                        };
+
+                        $scope.activityPlan.activities.push(dailyStepsModel);
+                    }
+
                     $scope.totalCaloriesBurned = $scope.activityPlan.totalCaloriesBurned + additionalCaloriesExpended;
                 }
                 else{
