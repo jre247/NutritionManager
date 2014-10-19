@@ -244,6 +244,16 @@ angular.module('activities').controller('ActivitiesController', ['$scope', '$sta
             }
         };
 
+        $scope.deleteInjury = function(injury){
+            if (confirm("Are you sure you want to delete this injury?")) {
+                for (var i in $scope.plan.injuries) {
+                    if ($scope.plan.injuries[i] === injury) {
+                        $scope.plan.injuries.splice(i, 1);
+                    }
+                }
+            }
+        };
+
         $scope.remove = function(plan) {
             if (plan) {
                 plan.$remove();
@@ -337,6 +347,11 @@ angular.module('activities').controller('ActivitiesController', ['$scope', '$sta
             );
 
 
+        };
+
+        var scrollToBottom = function(){
+            $("html, body").animate({ scrollTop: $(document).height() }, 1000);
+            $("#content").animate({ scrollTop: $('#content').height() + 700 }, 1000);
         };
 
         $scope.findOne = function() {
@@ -494,6 +509,8 @@ angular.module('activities').controller('ActivitiesController', ['$scope', '$sta
             $scope.showNotesSection = true;
 
             $scope.plan.notesVisible = true;
+
+            scrollToBottom();
         };
 
         //sorting code

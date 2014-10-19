@@ -12,7 +12,13 @@
             <a data-ng-repeat="plan in activities | orderBy:orderByField:reverseSort" data-ng-href="#!/activities/{{plan._id}}" class="list-group-item">
                 <div>
 
-                    <h4 class="list-group-item-heading" data-ng-bind="(plan.planDateMonth + 1) + '/' + plan.planDateDay + '/' + plan.planDateYear"></h4>
+                    <h4 class="list-group-item-heading" >
+                        <span data-ng-bind="(plan.planDateMonth + 1) + '/' + plan.planDateDay + '/' + plan.planDateYear"></span>
+                        <div style="display: inline-block; font-weight: bold; color: red;padding-left:20px;" data-ng-if="plan.injuries && plan.injuries.length > 0">
+                            <span class="glyphicon glyphicon-star-empty"></span> Injured
+                        </div>
+                    </h4>
+
                     <div >
                         <div data-ng-repeat="activity in plan.activities" style="display:inline-block;">
                             <div style="display:inline-block; margin-left: 40px;">

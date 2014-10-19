@@ -117,7 +117,8 @@
                             <span class="glyphicon glyphicon-plus" ></span> Add Injury
                         </button>
 
-                        <div data-ng-repeat="injury in plan.injuries" data-ng-click="updateInjury(injury);" class="list-group" style="margin-bottom: 10px;">
+                        <div data-ng-repeat="injury in plan.injuries" data-ng-click="updateInjury(injury);" class="list-group" style="margin-bottom: 10px;"
+                             data-ng-mouseover="injury.showEditIcon = true" data-ng-mouseleave="injury.showEditIcon = false">
                             <a class="list-group-item actionRow" >
                                 <div>
                                     <label>Pain Location:</label>
@@ -130,6 +131,12 @@
                                 <div>
                                     <label>Notes:</label>
                                     <span data-ng-bind="injury.injuryNotes"></span>
+                                </div>
+
+                                <div style="display:inline-block;width:40px;float:right; position:relative; bottom: 80px;">
+                                    <div style="padding-right:5px;cursor:pointer;padding-top:5px;" data-ng-click="deleteInjury(injury);" type="button" data-ng-class="{editRowShow: injury.showEditIcon}"  class="editRowHide">
+                                        <span  class="glyphicon glyphicon-trash"></span>
+                                    </div>
                                 </div>
                             </a>
                         </div>
