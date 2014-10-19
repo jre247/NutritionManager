@@ -22,16 +22,16 @@
 
 
                 <div class="planDetailsSection" style="display: inline-block; margin-top: 9px;float: right;">
-                    <button data-ng-show="plan && !plan.notesVisible" type="button" class="btn btn-primary btn-m" style="margin-bottom: 15px;" data-ng-click="createNotes();">
-                        <span class="glyphicon glyphicon-edit" ></span> Add Notes
+                    <button data-ng-show="plan && !plan.notesVisible" type="button" class="btn btn-primary btn-m " style="margin-bottom: 15px;" data-ng-click="createNotes();">
+                        <span class="glyphicon glyphicon-edit" ></span> <span class="hidden-xs">Add Notes</span>
                     </button>
 
                     <button data-ng-show="!showInjuriesSection" type="button" class="btn btn-primary btn-m" style="margin-bottom: 15px;" data-ng-click="createInjuries();">
-                        <span class="glyphicon glyphicon-plus" ></span> Add Injuries
+                        <span class="glyphicon glyphicon-star-empty" ></span> <span class="hidden-xs">Add Injuries</span>
                     </button>
 
                     <button type="submit" class="btn btn-primary btn-m " style="margin-bottom: 15px;" data-ng-click="saveActivityPlan();">
-                        <span class="glyphicon glyphicon-floppy-disk" ></span> Save
+                        <span class="glyphicon glyphicon-floppy-disk" ></span> <span class="hidden-xs">Save</span>
                     </button>
 
                     <button type="button" data-ng-show="isUserAdmin" class="btn btn-primary btn-m  btn-danger plansDesktopBtn" style="margin-bottom: 15px;" data-ng-click="deletePlan(plan);">
@@ -40,7 +40,7 @@
                 </div>
             </div>
 
-            <div data-ng-show="success" style="color: green; font-weight: bold; margin-bottom: 10px;opacity: 1;transition: opacity .25s ease-in-out;-moz-transition: opacity .25s ease-in-out;-webkit-transition: opacity .25s ease-in-out;" >
+            <div data-ng-show="success" class="successMsgFixed" >
                 <strong>Your changes have been saved!</strong>
             </div>
 
@@ -72,7 +72,7 @@
                         </accordion-heading>
 
                         <button type="button" class="btn btn-primary btn-sm" style="margin-bottom: 15px;" data-ng-click="createActivityWithDialog();">
-                            <span class="glyphicon glyphicon-plus" ></span> Add Activity
+                            <span class="glyphicon glyphicon-plus" ></span> Add Exercise
                         </button>
 
                         <div data-ng-repeat="activity in plan.activities" class="list-group" style="margin-bottom: 0px;">
@@ -97,7 +97,7 @@
                                 </div>
 
                                 <div style="display:inline-block;width:40px;float:right">
-                                    <div style="padding-right:5px;cursor:pointer;padding-top:5px;" data-ng-click="deleteActivity(activity);" type="button" data-ng-class="{editRowShow: activity.showEditIcon && !activity.isEditable}"  class="editRowHide">
+                                    <div style="cursor:pointer;padding-top:1px;" data-ng-click="deleteActivity(activity);" type="button" data-ng-class="{editRowShow: activity.showEditIcon && !activity.isEditable}"  class="editRowHide">
                                         <span  class="glyphicon glyphicon-trash"></span>
                                     </div>
                                 </div>
@@ -113,7 +113,7 @@
                             </div>
                         </accordion-heading>
 
-                        <button type="button" class="btn btn-primary btn-sm plansDesktopBtn" style="margin-bottom: 15px;" data-ng-click="createInjuryWithDialog();">
+                        <button type="button" class="btn btn-primary btn-sm" style="margin-bottom: 15px;" data-ng-click="createInjuryWithDialog();">
                             <span class="glyphicon glyphicon-plus" ></span> Add Injury
                         </button>
 
@@ -158,7 +158,7 @@
         </fieldset>
 
         <div style="font-weight:bold;margin-top: 24px; padding-top: 6px; border-top: 1px solid lightgray; color: rgb(66, 66, 207);font-weight: bold;font-size: 12.5px;">
-            Total Calories Burned: <span data-ng-bind="plan.totalCaloriesBurned | number:0"></span>
+            Total Calories Burned: <span data-ng-bind="(plan.totalCaloriesBurned || 0) | number:0"></span>
         </div>
 
         <div data-ng-show="error" class="text-danger">
@@ -174,7 +174,7 @@
 
 <script type="text/ng-template" id="createExerciseModalContent.html">
     <div class="modal-header" style="font-family: segui;">
-        <h3 class="modal-title" data-ng-show="!showActivityDetails">Select Activity To Add</h3>
+        <h3 class="modal-title" data-ng-show="!showActivityDetails">Select Exercise To Add</h3>
         <div data-ng-show="showActivityDetails" >
             <h3 class="modal-title" >
                 <span style="font-weight: bold;" data-ng-bind="selectedActivityType.name"></span>
@@ -192,14 +192,23 @@
                     <div style="margin-bottom: 20px;">
 
                         <div style="vertical-align: top;display:inline-block;">
-                            <input placeholder="Enter Activity Name" style="width: 170px;" type="text" data-ng-change="activityInputChange()" data-ng-model="selected.activitySearchTxt"  />
+                            <input placeholder="Enter Activity Name" style="width: 80%;" type="text" data-ng-change="activityInputChange()" data-ng-model="selected.activitySearchTxt"  />
                             <a class="ActionLink clearInputLink" data-ng-click="selected.activitySearchTxt = ''">Clear</a>
                         </div>
                     </div>
 
-                    <div style="overflow-y: auto;max-height: 400px;">
+                    <div style="overflow-y: auto;max-height: 400px;" class="hidden-xs">
                         <div data-ng-show="!isLoading" class="list-group" style="margin-bottom: 0px; !important;" data-ng-repeat="activity in activityTypes | filter: selected.activitySearchTxt">
                             <a class="list-group-item actionRow" data-ng-click="activitySelectionChange(activity)">
+                                <span data-ng-bind="activity.name"></span>
+
+                            </a>
+                        </div>
+                    </div>
+
+                    <div style="overflow-y: auto;max-height: 270px;width: 50%;" class="visible-xs">
+                        <div data-ng-show="!isLoading" class="list-group" style="margin-bottom: 0px; !important;" data-ng-repeat="activity in activityTypes | filter: selected.activitySearchTxt">
+                            <a class="list-group-item actionRow"  data-ng-click="activitySelectionChange(activity)">
                                 <span data-ng-bind="activity.name"></span>
 
                             </a>
@@ -267,7 +276,7 @@
                 <div class="form-group">
                     <label for="painLevel">Pain Level:</label>
                     <br/>
-                    <select id="painLevel" style="width: 20%;font-size: 18px;" name="painLevel" data-ng-options="t for t in painLevelList" data-ng-model="selected.painLevel"></select>
+                    <select id="painLevel" style="width: 30%;font-size: 18px;" name="painLevel" data-ng-options="t for t in painLevelList" data-ng-model="selected.painLevel"></select>
                 </div>
                 <div class="form-group">
                     <label for="injuryLocation">Injury Location:</label>
@@ -291,16 +300,5 @@
     </div>
 </script>
 
-
-
-<script>
-    jQuery(document).ready(function(){
-
-        window.setTimeout(function(){
-            jQuery('.panel-group').find('.panel-default').addClass('disabled');
-        }, 1000)
-
-    });
-</script>
 
 </section>
