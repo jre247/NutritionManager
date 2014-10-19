@@ -62,7 +62,7 @@
                     <input style="width: 100px;display:inline-block;" type="text" data-ng-change="dailyStepsChange();" id="dailySteps" name="dailySteps" class="form-control" data-ng-model="plan.dailySteps" placeholder="Daily Steps">
                 </div>
 
-                <accordion sortable="sortableOptions" disableallelementsbydefault="true" updateCallback="sortableUpdateCallback" startCallback="sortableStartCallback" rootSortableElement=".panel-group"   class="plansAccordion" style="..." close-others="oneAtATime">
+                <accordion  class="plansAccordion" style="..." close-others="oneAtATime">
                     <accordion-group is-open="isExercisesOpen">
                         <accordion-heading>
                             <div class="accordionHeadingRegion">
@@ -150,7 +150,9 @@
                             </div>
                         </accordion-heading>
 
-                        <textarea style="width: 100%;height: 100px;" data-ng-model="plan.notes"></textarea>
+                        <!--<textarea style="width: 100%;height: 100px;" data-ng-model="plan.notes"></textarea>-->
+                        <textarea id="planNotes" style="width: 100%;height: 100px;" name="planNotes" class="form-control" data-ng-model="plan.notes" placeholder="Notes">
+                        </textarea>
 
                     </accordion-group>
                 </accordion>
@@ -206,7 +208,7 @@
                         </div>
                     </div>
 
-                    <div style="overflow-y: auto;max-height: 270px;width: 50%;" class="visible-xs">
+                    <div style="overflow-y: auto;max-height: 270px;width: 47%;" class="visible-xs">
                         <div data-ng-show="!isLoading" class="list-group" style="margin-bottom: 0px; !important;" data-ng-repeat="activity in activityTypes | filter: selected.activitySearchTxt">
                             <a class="list-group-item actionRow"  data-ng-click="activitySelectionChange(activity)">
                                 <span data-ng-bind="activity.name"></span>
