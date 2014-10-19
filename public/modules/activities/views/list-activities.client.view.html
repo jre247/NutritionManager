@@ -16,6 +16,7 @@
                         <span data-ng-bind="(plan.planDateMonth + 1) + '/' + plan.planDateDay + '/' + plan.planDateYear"></span>
                         <div style="display: inline-block; font-weight: bold; color: red;padding-left:20px;" data-ng-if="plan.injuries && plan.injuries.length > 0">
                             <span class="glyphicon glyphicon-star-empty"></span> Injured
+                            <span data-ng-bind="getLocationsForInjuries(plan)"></span>
                         </div>
                     </h4>
 

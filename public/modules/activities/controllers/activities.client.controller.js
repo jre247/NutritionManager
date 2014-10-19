@@ -343,10 +343,37 @@ angular.module('activities').controller('ActivitiesController', ['$scope', '$sta
                 function(u, getResponseHeaders)
                 {
 
+
+
                 }
             );
 
 
+        };
+
+        $scope.getLocationsForInjuries = function(activity){
+            var injuryLocationsTxt = '';
+
+            for(var i = 0; i < activity.injuries.length; i++){
+                var activityInjury = activity.injuries[i];
+
+                if(activityInjury.injuryLocation){
+                    if(i == 0){
+                        injuryLocationsTxt = injuryLocationsTxt + '(' + activityInjury.injuryLocation;
+
+                    }
+
+                    else {
+                        injuryLocationsTxt = injuryLocationsTxt + ', ' + activityInjury.injuryLocation;
+                    }
+                }
+            }
+
+            if(injuryLocationsTxt.length > 0){
+                injuryLocationsTxt = injuryLocationsTxt + ')';
+            }
+
+            return injuryLocationsTxt;
         };
 
         var scrollToBottom = function(){
