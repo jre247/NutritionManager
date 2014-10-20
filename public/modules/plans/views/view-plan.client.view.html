@@ -23,63 +23,41 @@
                     </div>
                 </div>
 
-
                 <div class="planDetailsSection" style="display: inline-block; margin-top: 9px;float: right;">
-                    <!--<input type="button" class="btn btn-default" style="margin-right: 5px; padding: 4px 9px;" data-ng-click="createMeal();" value="+"/>-->
-
-                    <!---->
-
                     <div style="display:inline-block">
-                        <button type="button" title="Create Meal" class="btn btn-default btn-lg" style="height:34px;width:34px;margin-right: 3px;" data-ng-click="createMeal(true);">
-                            <span style="top: -5px;right: 8px;" class="glyphicon glyphicon-plus"></span>
+                        <button type="button" class="btn btn-primary btn-m "  data-ng-click="createMeal(true);">
+                            <span class="glyphicon glyphicon-plus" ></span><span class="hidden-xs"> Add Meal</span>
                         </button>
-                        <div class="plansDesktopGrid" data-ng-show="!plan.meals || plan.meals.length == 0">
+                        <div data-ng-show="!plan.meals || plan.meals.length == 0">
                             <span style="font-size: 25px;" data-ng-class="{arrowImgMoveLeft: plan.moveArrowImgLeft}"  class="glyphicon glyphicon-arrow-up"></span>
                         </div>
                     </div>
 
                     <div style="display:inline-block;vertical-align: top;">
-
-
-                        <button type="button" title="Open Notes" class="btn btn-default btn-lg" style="height:34px;width:34px;margin-right: 3px;" data-ng-click="openNotesDialog();">
-                            <span style="top: -5px;right: 8px;" class="glyphicon glyphicon-edit"></span>
+                        <button  type="button" class="btn btn-primary btn-m "  data-ng-click="openNotesDialog();">
+                            <span class="glyphicon glyphicon-edit" ></span><span class="hidden-xs"> Open Notes</span>
                         </button>
 
-
-                        <div class="plansDesktopBtn">
-                            <input type="button" class="btn btn-default" style="margin-right: 3px; " value="Collapse All Meals" data-ng-click="collapseAllMeals(plan);"/>
-                        </div>
-
-                        <div class="plansDesktopBtn">
-                            <input type="button" class="btn btn-default" style="margin-right: 3px; " value="{{sortingBtnTxt}}" data-ng-click="toggleSorting();"/>
-                        </div>
-
-                        <!--<button class="btn btn-default plansDesktopBtn" style="margin-right: 3px; " ng-click="openCopyPlanDialog()">Copy</button>-->
-
-
-                        <button title="Copy Plan" class="btn btn-default btn-m plansDesktopBtn" ng-click="openCopyPlanDialog()">
-                            <span  class="glyphicon glyphicon-share"></span> Copy Plan
+                        <button  type="button" class="btn btn-primary btn-m  hidden-xs"  data-ng-click="collapseAllMeals(plan);">
+                            <span class="glyphicon glyphicon" ></span><span >Collapse All Meals</span>
                         </button>
 
-                        <button title="Copy Plan" class="btn btn-default btn-m plansMobileGridBtn" ng-click="openCopyPlanDialog()">
-                            <span  class="glyphicon glyphicon-share"></span>
+                        <button type="button" class="btn btn-primary btn-m hidden-sm hidden-xs"  data-ng-click="toggleSorting();">
+                            <span class="glyphicon glyphicon" ></span>{{sortingBtnTxt}}
                         </button>
 
-
-                        <div class="plansDesktopBtn" data-ng-show="isUserAdmin">
-                            <button class="btn btn-default" style="margin-right: 5px; ;background-image: linear-gradient(to bottom, #fff 0%, rgb(247, 170, 170) 100%);" data-ng-click="deletePlan(plan);">Delete Plan</button>
-                        </div>
-                        <!--<div class="plansDesktopBtn">-->
-                            <!--<button class="btn btn-default " style="margin-right: 5px; padding: 4px 9px !important;background-image: linear-gradient(to bottom, #fff 0%, rgb(247, 170, 170) 100%);" data-ng-click="deletePlan(plan);">Delete Plan</button>-->
-                        <!--</div>-->
-
-
-                        <button type="submit" data-ng-click="savePlan()" class="btn btn-default btn-lg plansMobileGridBtn" style="height:34px;width:34px;" title="Save">
-                            <span  style="top: -5px;right: 8px;" class="glyphicon glyphicon-floppy-disk"></span>
+                        <button type="button" class="btn btn-primary btn-m"  data-ng-click="openCopyPlanDialog()">
+                            <span class="glyphicon glyphicon-share" ></span><span class="hidden-xs"> Copy Plan</span>
                         </button>
 
+                        <button type="button" class="btn btn-primary btn-m btn-danger hidden-sm hidden-xs"  data-ng-click="deletePlan(plan)">
+                            <span class="glyphicon glyphicon" ></span><span>Delete Plan</span>
+                        </button>
 
-                        <input type="submit" value="Save" style="" data-ng-click="savePlan()"  class="btn btn-default plansDesktopBtn">
+                        <button type="submit" class="btn btn-primary btn-m"  data-ng-click="savePlan()">
+                            <span class="glyphicon glyphicon-floppy-disk" ></span><span class="hidden-xs"> Save</span>
+                        </button>
+
                     </div>
                 </div>
             </div>
@@ -95,8 +73,6 @@
 
 
         <fieldset id="wrapper" >
-
-
             <div data-ng-show="!plan.meals || plan.meals.length == 0" class="emptyPlanMealsTxt">
                 Press the plus button above to create your first meal.
             </div>
@@ -219,7 +195,7 @@
                                 No food logged for meal
                             </div>
 
-                            <table data-ng-show="meal.foods.length > 0" class="plansDesktopGrid" style="margin-top: 6px;width:100%;">
+                            <table class="table hidden-xs hidden-sm" data-ng-show="meal.foods.length > 0"  style="margin-top: 6px;width:100%;">
                                 <thead>
                                 <tr>
                                     <th width="30%">Name</th>
@@ -236,7 +212,7 @@
                                 </thead>
                                 <tbody>
 
-                                <tr class="planGridRow" height="35px"  data-ng-repeat="food in meal.foods" data-ng-class="{mealSuggestedHighlight: food.IsSuggested}"
+                                <tr class="planGridRow"   data-ng-repeat="food in meal.foods" data-ng-class="{mealSuggestedHighlight: food.IsSuggested}"
                                     data-ng-click="createFoodWithDialog(meal, food);" data-ng-mouseover="food.showEditIcon = true" data-ng-mouseleave="food.showEditIcon = false">
                                     <td style="padding-right: 10px;padding-left:5px;">
 
@@ -289,7 +265,7 @@
                                         <!--</div>-->
 
                                         <div style="display:inline-block;width:40px;">
-                                            <div style="padding-right:5px;cursor:pointer;float:right;padding-top:5px;" data-ng-click="deleteFood(food, meal);" type="button" data-ng-class="{editRowShow: food.showEditIcon && !food.isEditable}"  class="editRowHide">
+                                            <div style="padding-right:5px;cursor:pointer;float:right;height: 14px !important;" data-ng-click="deleteFood(food, meal);" type="button" data-ng-class="{editRowShow: food.showEditIcon && !food.isEditable}"  class="editRowHide">
                                                 <span  class="glyphicon glyphicon-trash"></span>
                                             </div>
                                         </div>
