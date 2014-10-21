@@ -57,9 +57,13 @@
                     <!--<input style="width:100px;" type="text" data-ng-change="dailyStepsChange();" data-ng-model="plan.dailySteps"/>-->
                 <!--</div>-->
 
-                <div  style="margin-bottom: 30px;margin-top: 10px;">
+                <div  style="margin-bottom: 30px;margin-top: 10px;display: inline-block;">
                     <label for="dailySteps">Daily Steps:</label>
                     <input style="width: 100px;display:inline-block;" type="text" data-ng-change="dailyStepsChange();" id="dailySteps" name="dailySteps" class="form-control" data-ng-model="plan.dailySteps" placeholder="Daily Steps">
+                </div>
+
+                <div style="float:right; color: rgb(66, 66, 207);font-weight: bold;font-size: 12.5px;display: inline-block;padding-right: 10px;padding-top: 20px;}">
+                    Total Calories Burned: <span data-ng-bind="(plan.totalCaloriesBurned || 0) | number:0"></span>
                 </div>
 
                 <accordion  class="plansAccordion" style="..." close-others="oneAtATime">
@@ -159,9 +163,9 @@
             </div>
         </fieldset>
 
-        <div style="font-weight:bold;margin-top: 24px; padding-top: 6px; border-top: 1px solid lightgray; color: rgb(66, 66, 207);font-weight: bold;font-size: 12.5px;">
-            Total Calories Burned: <span data-ng-bind="(plan.totalCaloriesBurned || 0) | number:0"></span>
-        </div>
+        <!--<div style="font-weight:bold;margin-top: 24px; padding-top: 6px; border-top: 1px solid lightgray; color: rgb(66, 66, 207);font-weight: bold;font-size: 12.5px;">-->
+            <!--Total Calories Burned: <span data-ng-bind="(plan.totalCaloriesBurned || 0) | number:0"></span>-->
+        <!--</div>-->
 
         <div data-ng-show="error" class="text-danger">
             <strong data-ng-bind="error"></strong>
