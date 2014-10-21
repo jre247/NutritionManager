@@ -111,21 +111,13 @@
 
                         <div class="planMealDesktop">
 
-                            <button type="button" class="btn btn-primary btn-sm plansDesktopBtn" data-ng-click="createFoodWithDialog(meal);">
+                            <button type="button" class="btn btn-primary btn-sm" data-ng-click="createFoodWithDialog(meal);">
                                 <span class="glyphicon glyphicon-plus" ></span> Add Food
                             </button>
 
-                            <input type="button" class="plansMobileGridBtn"  data-ng-click="createFoodWithDialog(meal, null, null, true);" value="+"/>
-
-                            <!--<input class="plansMobileGridBtn" style="margin-left: 15px;float:right;" type="button" value="Delete Meal" data-ng-click="deleteMeal(meal, true);"/>-->
-                            <!--<input class="plansDesktopBtn" style="margin-left: 15px;float:right;" type="button" value="Delete Meal" data-ng-click="deleteMeal(meal);"/>-->
-
-
-                            <button style="margin-left:10px;" type="button" class="btn btn-primary btn-sm plansDesktopBtn" data-ng-click="openSuggestionsDialog(meal)">
+                            <button style="margin-left:10px;" type="button" class="btn btn-primary btn-sm" data-ng-click="openSuggestionsDialog(meal)">
                                 <span class="glyphicon glyphicon-question-sign" ></span> Suggest
                             </button>
-
-                            <!--<input type="button" value="Suggest" style="margin-left: 10px;" data-ng-click="openSuggestionsDialog(meal)"/>-->
 
                             <div class="plansMobileGrid" style="margin-top: 5px;">
                                 <ul>
@@ -151,16 +143,7 @@
                                                 <span data-ng-bind="food.servings"></span> serving<span data-ng-show="food.servings > 1">s</span>,
                                                 <span data-ng-bind="food.grams | number:0"></span> grams
                                             </div>
-                                            <!--<div>-->
-                                                <!--<span data-ng-bind="food.calories | number:0"></span> Calories,-->
-                                                <!--<span data-ng-bind="food.carbohydrates | number:1"></span>g Carbs,-->
-                                                <!--<span data-ng-bind="food.protein | number:1"></span>g Protein,-->
 
-                                            <!--</div>-->
-                                            <!--<div>-->
-                                                <!--<span data-ng-bind="food.fat | number:1"></span>g Fat,-->
-                                                <!--<span data-ng-bind="food.grams | number:1"></span>g Grams-->
-                                            <!--</div>-->
                                         </div>
 
 
@@ -168,22 +151,28 @@
                                     </li>
                                 </ul>
 
-                                <div style="padding-top: 9px; padding-top: 3px;color: rgb(66, 66, 207); font-weight: bold;font-size: 12.5px;">
+                                <div style="padding-top: 9px; padding-top: 3px;color: rgb(66, 66, 207); font-weight: bold;font-size: 12.5px;border-top: 1px solid lightgray;" data-ng-show="meal.foods && meal.foods.length > 0">
 
-                                    <div style="width: 42px; display:inline-block;">Totals:</div>
+                                    <div style="width: 42px; display:inline-block;color:rgb(46, 46, 141)">Totals:</div>
 
                                     <div style="display:inline-block;">
 
-                                        <span  data-ng-bind="meal.totalCalories | number:0"></span> Calories,
-                                        <span data-ng-bind="meal.totalCarbohydrates | number:1"></span>g Carbs,
+                                        <span  data-ng-bind="meal.totalCalories | number:0"></span> Calories
+
 
                                     </div>
 
                                     <div >
                                         <div style="width: 42px; display:inline-block;">&nbsp;</div>
-                                        <span data-ng-bind="meal.totalProtein | number:1"></span>g Protein,
-
-                                        <span data-ng-bind="meal.totalFat | number:1"></span>g Fat
+                                        <div style="display:inline-block;padding-right:6px;" class="carbsColorLbl">
+                                            <span>Carbs: </span><span data-ng-bind="meal.totalCarbohydrates | number:0"></span><span>g</span>
+                                        </div>
+                                        <div style="display:inline-block;padding-right:6px;" class="proteinColorLbl">
+                                            <span>Protein: </span><span data-ng-bind="meal.totalProtein | number:0"></span><span>g</span>
+                                        </div>
+                                        <div style="display:inline-block;" class="fatColorLbl">
+                                            <span>Fat: </span><span data-ng-bind="meal.totalFat | number:0"></span><span>g</span>
+                                        </div>
                                     </div>
                                 </div>
 
