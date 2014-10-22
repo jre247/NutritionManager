@@ -111,7 +111,7 @@ angular.module('activities').controller('ActivitiesController', ['$scope', '$sta
                 total += stepsCaloriesBurned;
             }
 
-            $scope.plan.totalCaloriesBurned = total;
+            $scope.plan.totalCaloriesBurned = total || 0;
         };
 
         var calculateCaloriesForSteps = function(steps){
