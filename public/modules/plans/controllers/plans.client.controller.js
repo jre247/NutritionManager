@@ -694,7 +694,7 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
 
         //sorting code
         // data
-        $scope.orderByField = 'planDateAsMili';
+        $scope.orderByField = 'planDateAsConcat';
         $scope.reverseSort = true;
         scope.plansCollection = [];
 
