@@ -62,7 +62,7 @@
                     <input style="width: 100px;display:inline-block;" type="text" data-ng-change="dailyStepsChange();" id="dailySteps" name="dailySteps" class="form-control" data-ng-model="plan.dailySteps" placeholder="Daily Steps">
                 </div>
 
-                <div style="float:right; color: rgb(66, 66, 207);font-weight: bold;font-size: 12.5px;display: inline-block;padding-right: 10px;padding-top: 20px;}">
+                <div style="float:right; color: rgb(66, 66, 207);font-weight: bold;border: 1px solid rgb(221, 221, 221); display: inline-block;padding: 10px;margin-top: 10px;border-radius: 5px;}">
                     Total Calories Burned: <span data-ng-bind="(plan.totalCaloriesBurned || 0) | number:0"></span>
                 </div>
 
@@ -100,8 +100,8 @@
                                     <span  data-ng-bind="activity.caloriesBurned | number:0"></span> Calories
                                 </div>
 
-                                <div style="display:inline-block;width:40px;float:right">
-                                    <div style="cursor:pointer;padding-top:1px;" data-ng-click="deleteActivity(activity);" type="button" data-ng-class="{editRowShow: activity.showEditIcon && !activity.isEditable}"  class="editRowHide">
+                                <div style="display:inline-block;width:40px;float:right" data-ng-if="isUserAdmin">
+                                    <div style="cursor:pointer;padding-top:1px;" data-ng-click="deleteActivity(activity);"  type="button" data-ng-class="{editRowShow: activity.showEditIcon && !activity.isEditable}"  class="editRowHide">
                                         <span  class="glyphicon glyphicon-trash"></span>
                                     </div>
                                 </div>
