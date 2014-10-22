@@ -62,7 +62,7 @@
                     <input style="width: 100px;display:inline-block;" type="text" data-ng-change="dailyStepsChange();" id="dailySteps" name="dailySteps" class="form-control" data-ng-model="plan.dailySteps" placeholder="Daily Steps">
                 </div>
 
-                <div style="float:right; color: rgb(66, 66, 207);font-weight: bold;border: 1px solid rgb(221, 221, 221); display: inline-block;padding: 10px;margin-top: 10px;border-radius: 5px;}">
+                <div class="hidden-xs" style="float:right; color: rgb(66, 66, 207);font-weight: bold;border: 1px solid rgb(221, 221, 221); display: inline-block;padding: 10px;margin-top: 10px;border-radius: 5px;}">
                     Total Calories Burned: <span data-ng-bind="(plan.totalCaloriesBurned) | number:0"></span>
                 </div>
 
@@ -93,7 +93,7 @@
 
                                 </div>
 
-                                <div style="display:inline-block;color:gray">
+                                <div style="display:inline-block;color:gray" >
                                     <div style="display:inline-block" data-ng-show="activity.duration > 0">
                                         <span   data-ng-bind="activity.duration | number:0"></span> Minutes,
                                     </div>
@@ -163,9 +163,9 @@
             </div>
         </fieldset>
 
-        <!--<div style="font-weight:bold;margin-top: 24px; padding-top: 6px; border-top: 1px solid lightgray; color: rgb(66, 66, 207);font-weight: bold;font-size: 12.5px;">-->
-            <!--Total Calories Burned: <span data-ng-bind="(plan.totalCaloriesBurned || 0) | number:0"></span>-->
-        <!--</div>-->
+        <div class="visible-xs" style="font-weight:bold;margin-top: 24px; padding-top: 6px; border-top: 1px solid lightgray; color: rgb(66, 66, 207);font-weight: bold;font-size: 12.5px;">
+            Total Calories Burned: <span data-ng-bind="(plan.totalCaloriesBurned || 0) | number:0"></span>
+        </div>
 
         <div data-ng-show="error" class="text-danger">
             <strong data-ng-bind="error"></strong>
