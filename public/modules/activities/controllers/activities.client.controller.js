@@ -402,6 +402,10 @@ angular.module('activities').controller('ActivitiesController', ['$scope', '$sta
                 });
             }
             else{
+                $scope.nutritionProfile = NutritionProfile.get(function () {
+                    $scope.calculateTotalCaloriesBurned();
+                });
+
                 $scope.plan =  {data: null, activities: null, planDate: new Date(), planDateNonUtc: new Date()};
                 $scope.plan.activities = [];
                 $scope.plan.notesVisible = false;

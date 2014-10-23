@@ -1,8 +1,8 @@
 'use strict';
 
 
-angular.module('core').controller('HomeController', ['$scope', 'Authentication', 'Activities', 'CoreService', 'NutritionProfile', 'Progress',
-	function($scope, Authentication, Activities, CoreService, NutritionProfile, Progress) {
+angular.module('core').controller('HomeController', ['$scope', 'Authentication', 'Activities', 'CoreService', 'NutritionProfile', 'Progress', 'ThermometerChartService',
+	function($scope, Authentication, Activities, CoreService, NutritionProfile, Progress, ThermometerChartService) {
 		// This provides Authentication context.
 		$scope.authentication = Authentication;
         window.scope = $scope;
@@ -171,6 +171,8 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
 
             var reloadWeeklyData = checkIfChangeWeeklyData();
 
+            buildThermometerChart();
+
             if(reloadWeeklyData){
                 $scope.getWeeklyDashboardData();
             }
@@ -184,6 +186,8 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
             $scope.getDailyDashboardData();
 
             var reloadWeeklyData = checkIfChangeWeeklyData();
+
+            buildThermometerChart();
 
             if(reloadWeeklyData){
                 $scope.getWeeklyDashboardData();
@@ -261,6 +265,13 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
             );
         };
 
+        var buildThermometerChart = function(){
+            var caloriesIn = parseFloat($scope.nutritionPlan.totalPlanCalories.toFixed(0));
+            var deficit = $scope.calculateDeficit($scope.nutritionPlan, $scope.activityPlan);
+            var goalCalories = parseFloat(caloriesIn + deficit).toFixed(0);;
+            ThermometerChartService.buildThermometerChart(caloriesIn, goalCalories, '.budgetChart');
+        }
+
         $scope.getDailyDashboardData = function() {
             CoreService.getDailyDashboardData($scope.planDateForDb).then(function(data){
 
@@ -306,9 +317,9 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
 
                 if($scope.nutritionPlan) {
                     showDailyMacrosChart();
+
+                    buildThermometerChart();
                 }
-
-
             });
         };
 

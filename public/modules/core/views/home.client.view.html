@@ -175,10 +175,12 @@
                     </div>
 
                     <div data-ng-show="dailyDashboardView == 'dailyCharts'">
-                        <div data-ng-if="nutritionPlan && nutritionPlan.totalPlanCalories" style="position:relative; right: 12px;color:rgb(8, 81, 189)">
-                            <span style="font-size: 16px; font-weight:bold;padding-left: 20px;position: relative;top: 15px;">Daily Calories:</span>
-                            <svg budget-thermometer-chart caloriesIn="{{nutritionPlan.totalPlanCalories}}"
-                                 deficit="{{calculateDeficit(nutritionPlan, activityPlan)}}" class="budgetChart"></svg>
+                        <div  style="position:relative; right: 12px;color:rgb(8, 81, 189)">
+                            <span style="font-size: 16px; font-weight:bold;padding-left: 20px;position: relative;top: 18px;">Daily Calories:</span>
+
+                            <!--<svg budget-thermometer-chart caloriesIn="{{nutritionPlan.totalPlanCalories}}"-->
+                                 <!--deficit="{{calculateDeficit(nutritionPlan, activityPlan)}}" class="budgetChart"></svg>-->
+                            <svg class="budgetChart"></svg>
                         </div>
                         <div data-ng-show="nutritionPlan" style="padding-top: 10px;padding-left: 10px;color:rgb(8, 81, 189)">
                             <div>
