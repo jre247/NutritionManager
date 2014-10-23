@@ -85,96 +85,105 @@
                     <a href="/#!/plans/create/{{planDateForDb}}" title="New Plan" class="ng-binding">Create New Plan for Day</a>
 
                 </div>
-                <div data-ng-show="nutritionPlan" style="padding-left: 10px;">
-                    <div style="display:inline-block;font-weight:bold;">
-                        <div style="margin-top:10px;">
-                             Calories In:
-                        </div>
-                        <div style="margin-top:10px;">
-                             Calories Out:
-                        </div>
-                        <div style="margin-top:10px;">
-                             BMR:
-                        </div>
-                        <div style="margin-top:10px;">
-                            <div style="font-weight: bold;display:inline-block; width: 70px;">
-                                <span data-ng-show="calculateDeficit(nutritionPlan, activityPlan) < 0">Surplus:</span>
-                                <span data-ng-show="calculateDeficit(nutritionPlan, activityPlan) > 0">Deficit:</span>
 
-                            </div>
 
+
+                <div data-ng-show="nutritionPlan">
+                    <div style="padding-top: 10px;">
+
+                        <div style="display:inline-block">
+                            <input name="showDailyChartsList" type="radio" value="dailyCharts"  data-ng-model="dailyDashboardView"> Show as Charts <br/>
+                        </div>
+
+                        <div style="display:inline-block;margin-left: 10px;">
+                            <input name="showDailyChartsList" type="radio" value="dailyList" data-ng-model="dailyDashboardView" > Show as List <br/>
                         </div>
                     </div>
 
-
-                    <div style="display:inline-block;margin-left: 5px;">
-                        <div>
-                            <div style="margin-top:10px; width: 80px; text-align: right;display:inline-block;padding-right: 15px;">
-                                <span data-ng-bind="nutritionPlan.totalPlanCalories | number:0"></span>
+                    <div data-ng-show="dailyDashboardView == 'dailyList'" style="padding-left: 10px;padding-top: 10px;">
+                        <div style="display:inline-block;font-weight:bold;">
+                            <div style="margin-top:10px;">
+                                 Calories In:
                             </div>
-                            <span>Calories</span>
+                            <div style="margin-top:10px;">
+                                 Calories Out:
+                            </div>
+                            <div style="margin-top:10px;">
+                                 BMR:
+                            </div>
+                            <div style="margin-top:10px;">
+                                <div style="font-weight: bold;display:inline-block; width: 70px;">
+                                    <span data-ng-show="calculateDeficit(nutritionPlan, activityPlan) < 0">Surplus:</span>
+                                    <span data-ng-show="calculateDeficit(nutritionPlan, activityPlan) > 0">Deficit:</span>
+
+                                </div>
+
+                            </div>
                         </div>
 
-                        <div>
-                            <div style="margin-top:10px; width: 80px; text-align: right;display:inline-block;padding-right: 15px;">
-                                <span style="margin-top:10px;padding-right: 17px;">-</span>
-                                <span data-ng-bind="totalCaloriesBurned | number:0"></span>
+
+                        <div style="display:inline-block;margin-left: 5px;">
+                            <div>
+                                <div style="margin-top:10px; width: 80px; text-align: right;display:inline-block;padding-right: 15px;">
+                                    <span data-ng-bind="nutritionPlan.totalPlanCalories | number:0"></span>
+                                </div>
+                                <span>Calories</span>
                             </div>
-                            <span>Calories</span>
+
+                            <div>
+                                <div style="margin-top:10px; width: 80px; text-align: right;display:inline-block;padding-right: 15px;">
+                                    <span style="margin-top:10px;padding-right: 17px;">-</span>
+                                    <span data-ng-bind="totalCaloriesBurned | number:0"></span>
+                                </div>
+                                <span>Calories</span>
+                            </div>
+
+                            <div>
+                                <div style="margin-top:10px; width: 80px; text-align: right;display:inline-block;padding-right: 15px;">
+                                    <span style="margin-top:10px;margin-right: 5px;">-</span>
+                                    <span data-ng-bind="bmr | number:0"></span>
+                                </div>
+                                <span>Calories</span>
+                            </div>
+                            <div style="color: rgb(33, 51, 184);font-weight: bold;">
+                                <div style="border-top: 1px solid black; padding-top:10px; width: 80px; text-align: right;padding-right: 15px;display:inline-block;">
+
+                                    <span data-ng-show="calculateDeficit(nutritionPlan, activityPlan) < 0" data-ng-bind="-(calculateDeficit(nutritionPlan, activityPlan)) | number:0"></span>
+                                    <span data-ng-show="calculateDeficit(nutritionPlan, activityPlan) > 0" data-ng-bind="calculateDeficit(nutritionPlan, activityPlan) | number:0"></span>
+
+                                </div>
+                                <span>Calories</span>
+                            </div>
                         </div>
-
-                        <div>
-                            <div style="margin-top:10px; width: 80px; text-align: right;display:inline-block;padding-right: 15px;">
-                                <span style="margin-top:10px;margin-right: 5px;">-</span>
-                                <span data-ng-bind="bmr | number:0"></span>
+                        <div style="padding-top:30px">
+                            <h4>Macros:</h4>
+                            <div style="padding-left: 5px;">
+                                <div>
+                                    <label style="width: 60px;">Protein:</label>
+                                    <span>{{nutritionPlan.totalPlanProteinAsPercent | number: 1}}</span>
+                                </div>
+                                <div>
+                                    <label style="width: 60px;">Carbs:</label>
+                                    <span>{{nutritionPlan.totalPlanCarbsAsPercent | number: 1}}</span>
+                                </div>
+                                <div>
+                                    <label style="width: 60px;">Fat:</label>
+                                    <span>{{nutritionPlan.totalPlanFatAsPercent | number: 1}}</span>
+                                </div>
                             </div>
-                            <span>Calories</span>
-                        </div>
-                        <div style="color: rgb(33, 51, 184);font-weight: bold;">
-                            <div style="border-top: 1px solid black; padding-top:10px; width: 80px; text-align: right;padding-right: 15px;display:inline-block;">
-
-                                <span data-ng-show="calculateDeficit(nutritionPlan, activityPlan) < 0" data-ng-bind="-(calculateDeficit(nutritionPlan, activityPlan)) | number:0"></span>
-                                <span data-ng-show="calculateDeficit(nutritionPlan, activityPlan) > 0" data-ng-bind="calculateDeficit(nutritionPlan, activityPlan) | number:0"></span>
-
-                            </div>
-                            <span>Calories</span>
                         </div>
                     </div>
 
-                </div>
-                <div data-ng-show="nutritionPlan" style="padding-top: 14px;padding-left: 10px;">
-                    <!--<h4>Macros Breakdown:</h4>-->
-                    <div>
-                        <div id="dailyMacrosChart"></div>
-                        <!--<div>-->
-                            <!--<div>-->
-                                <!--<div style="width:60px;display:inline-block;">-->
-                                    <!--<span style="font-weight: bold;">Carbs:</span>-->
-                                <!--</div>-->
-                                <!--<div style="display:inline-block;">-->
-                                    <!--<span data-ng-bind="nutritionPlan.totalPlanCarbsAsPercent | number:0"></span>%-->
-                                <!--</div>-->
-                            <!--</div>-->
-                            <!--<div>-->
-                                <!--<div style="width:60px;display:inline-block;">-->
-                                    <!--<span style="font-weight: bold;">Protein:</span>-->
-                                <!--</div>-->
-                                <!--<div style="display:inline-block;">-->
-                                    <!--<span data-ng-bind="nutritionPlan.totalPlanProteinAsPercent | number:0"></span>%-->
-                                <!--</div>-->
+                    <div data-ng-show="dailyDashboardView == 'dailyCharts'">
+                        <div data-ng-show="nutritionPlan" style="position:relative; right: 12px">
+                            <svg budget-thermometer-chart class="budgetChart"></svg>
+                        </div>
+                        <div data-ng-show="nutritionPlan" style="padding-top: 14px;padding-left: 10px;">
+                            <div>
+                                <div id="dailyMacrosChart"></div>
 
-
-                            <!--</div>-->
-                            <!--<div>-->
-                                <!--<div style="width:60px;display:inline-block;">-->
-                                    <!--<span style="font-weight: bold;">Fat:</span>-->
-                                <!--</div>-->
-                                <!--<div style="display:inline-block;">-->
-                                    <!--<span data-ng-bind="nutritionPlan.totalPlanFatAsPercent | number:0"></span>%-->
-                                <!--</div>-->
-
-                            <!--</div>-->
-                        <!--</div>-->
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -277,34 +286,7 @@
 
                 <div style="padding-top: 10px;">
                     <div id="weeklyAverageMacrosChart"></div>
-                    <!--<div >-->
-                        <!--<div style="height: 25px;">-->
-                            <!--<div style="font-weight: bold;display:inline-block; width: 70px;">-->
-                                <!--Protein:-->
-                            <!--</div>-->
-                            <!--<div style="display:inline-block; ">-->
-                                <!--<span data-ng-bind="weeklyProteinAverage | number:1"></span>%-->
-                            <!--</div>-->
-                        <!--</div>-->
 
-                        <!--<div style="height: 25px;">-->
-                            <!--<div style="font-weight: bold;display:inline-block;width: 70px;">-->
-                                <!--Carbs:-->
-                            <!--</div>-->
-                            <!--<div style="display:inline-block; ">-->
-                                <!--<span data-ng-bind="weeklyCarbsAverage | number:1"></span>%-->
-                            <!--</div>-->
-                        <!--</div>-->
-
-                        <!--<div style="height: 25px;">-->
-                            <!--<div style="font-weight: bold;display:inline-block; width: 70px;">-->
-                                <!--Fat:-->
-                            <!--</div>-->
-                            <!--<div style="display:inline-block; ">-->
-                                <!--<span data-ng-bind="weeklyFatAverage | number:1"></span>%-->
-                            <!--</div>-->
-                        <!--</div>-->
-                    <!--</div>-->
                     <div style="vertical-align: top;padding-top: 10px;padding-left: 10px;">
                         <div style="height: 25px;">
                             <div style="font-weight: bold;display:inline-block; width: 70px;">
@@ -325,6 +307,8 @@
                     </div>
 
                 </div>
+
+
             </div>
         </div>
     </div>

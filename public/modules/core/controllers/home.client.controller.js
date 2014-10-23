@@ -20,6 +20,7 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
         });
 
         $scope.weeklyDashboardView = 'charts';
+        $scope.dailyDashboardView = 'dailyCharts';
 
         //TODO: move into service
         $scope.activityTypes = [
