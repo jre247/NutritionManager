@@ -16,7 +16,7 @@ angular.module('core').service(
         // PUBLIC METHODS.
         // ---
 
-        function buildThermometerChart(caloriesIn, goalCalories, chartElementSelector){
+        function buildThermometerChart(caloriesIn, goalCalories, chartElementSelector, isUpdate){
             var data2 = [500, 1000, 1500, 2000, 2500]; //represents calories list
 
             var borderColor = "rgba(0, 0, 0, 0.39)";
@@ -28,7 +28,7 @@ angular.module('core').service(
 
             //var caloriesIn = 750;
             //var goalCalories = 1750;
-            var deficit = goalCalories - caloriesIn;
+            var caloriesFromTarget = goalCalories - caloriesIn;
 
             var pixelsPerCalorie = 7.8125;
             var caloriesInWidth = caloriesIn / pixelsPerCalorie;
@@ -47,6 +47,9 @@ angular.module('core').service(
                     height: 115
                 });
 
+            if(isUpdate) {
+                $(svgContainer[0]).empty();
+            }
 
             //-------------------- Calorie Text Start ------------------------------------//
 
@@ -76,7 +79,7 @@ angular.module('core').service(
                 .attr("class", "tooltip")
                 .style("opacity", 0);
 
-            var tooltipTest = d3.select("body")
+            var tooltip = d3.select("body")
                 .append("div")
                 .style("position", "absolute")
                 .style("z-index", "10")
@@ -135,7 +138,7 @@ angular.module('core').service(
                     div.transition()
                         .duration(200)
                         .style("opacity", .9);
-                    div.html("Deficit:" + "<br/>"  + deficit)
+                    div.html("Calories Needed:" + "<br/>"  + caloriesFromTarget)
                         .style("left", (d3.event.pageX) + "px")
                         .style("top", (d3.event.pageY - 28) + "px");
                 })

@@ -171,7 +171,7 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
 
             var reloadWeeklyData = checkIfChangeWeeklyData();
 
-            buildThermometerChart();
+            buildThermometerChart(true);
 
             if(reloadWeeklyData){
                 $scope.getWeeklyDashboardData();
@@ -187,7 +187,7 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
 
             var reloadWeeklyData = checkIfChangeWeeklyData();
 
-            buildThermometerChart();
+            buildThermometerChart(true);
 
             if(reloadWeeklyData){
                 $scope.getWeeklyDashboardData();
@@ -265,11 +265,14 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
             );
         };
 
-        var buildThermometerChart = function(){
+        var buildThermometerChart = function(isUpdate){
             var caloriesIn = parseFloat($scope.nutritionPlan.totalPlanCalories.toFixed(0));
+            var deficitTarget = scope.nutritionProfile.deficitTarget;
+
             var deficit = $scope.calculateDeficit($scope.nutritionPlan, $scope.activityPlan);
-            var goalCalories = parseFloat(caloriesIn + deficit).toFixed(0);;
-            ThermometerChartService.buildThermometerChart(caloriesIn, goalCalories, '.budgetChart');
+
+            var goalCalories = parseFloat(((deficit - deficitTarget) + caloriesIn).toFixed(0));
+            ThermometerChartService.buildThermometerChart(caloriesIn, goalCalories, '.budgetChart', isUpdate);
         }
 
         $scope.getDailyDashboardData = function() {
