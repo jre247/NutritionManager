@@ -19,7 +19,7 @@ angular.module('activities').controller('ActivitiesController', ['$scope', '$sta
         $scope.injuriesVisible = false;
 
         $scope.authentication = Authentication;
-        $scope.nutritionProfile = NutritionProfile.get();
+
 
         $scope.activityTypeCategories = [
           'Endurance', 'Strength', 'Balance', 'Flexibility', 'DailySteps'
@@ -396,8 +396,9 @@ angular.module('activities').controller('ActivitiesController', ['$scope', '$sta
                         $scope.injuriesVisible = true;
                         $scope.showInjuriesSection = true;
                     }
-
-                    $scope.calculateTotalCaloriesBurned();
+                    $scope.nutritionProfile = NutritionProfile.get(function () {
+                        $scope.calculateTotalCaloriesBurned();
+                    });
                 });
             }
             else{

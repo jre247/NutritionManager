@@ -89,7 +89,7 @@
 
 
                 <div data-ng-show="nutritionPlan">
-                    <div style="padding-top: 10px;">
+                    <div style="padding-top: 10px;color:gray;">
 
                         <div style="display:inline-block">
                             <input name="showDailyChartsList" type="radio" value="dailyCharts"  data-ng-model="dailyDashboardView"> Show as Charts <br/>
@@ -175,11 +175,14 @@
                     </div>
 
                     <div data-ng-show="dailyDashboardView == 'dailyCharts'">
-                        <div data-ng-show="nutritionPlan" style="position:relative; right: 12px">
-                            <svg budget-thermometer-chart class="budgetChart"></svg>
+                        <div data-ng-if="nutritionPlan && nutritionPlan.totalPlanCalories" style="position:relative; right: 12px;color:rgb(8, 81, 189)">
+                            <span style="font-size: 16px; font-weight:bold;padding-left: 20px;position: relative;top: 15px;">Daily Calories:</span>
+                            <svg budget-thermometer-chart caloriesIn="{{nutritionPlan.totalPlanCalories}}"
+                                 deficit="{{calculateDeficit(nutritionPlan, activityPlan)}}" class="budgetChart"></svg>
                         </div>
-                        <div data-ng-show="nutritionPlan" style="padding-top: 14px;padding-left: 10px;">
+                        <div data-ng-show="nutritionPlan" style="padding-top: 10px;padding-left: 10px;color:rgb(8, 81, 189)">
                             <div>
+                                <span style="font-size: 16px; font-weight:bold;">Daily Macros:</span>
                                 <div id="dailyMacrosChart"></div>
 
                             </div>
@@ -201,7 +204,7 @@
                     <h3> Week of <span data-ng-bind="weeklyDateDisplay"></span> Nutrition:</h3>
                 </div>
 
-                <div data-ng-class="{'homepageDashboardTitleAreaSmall': weeklyDashboardView == 'charts', 'homepageDashboardTitleAreaBig': weeklyDashboardView == 'list' }">
+                <div data-ng-class="{'homepageDashboardTitleAreaSmall': weeklyDashboardView == 'charts', 'homepageDashboardTitleAreaBig': weeklyDashboardView == 'list' }" style="color:gray;padding-bottom: 11px;">
 
                     <div style="display:inline-block">
                         <input name="showChartsList" type="radio" value="charts"  data-ng-model="weeklyDashboardView"> Show as Charts <br/>
