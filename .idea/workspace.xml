@@ -3,13 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="99afd44b-0014-4bff-855e-4d01f0b1305f" name="Default" comment="create plan page is close to finished. Now trying to wire up view/edit plan page. Trying to make it all common html.">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/dist/application.min.js" afterPath="$PROJECT_DIR$/public/dist/application.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/body-stat.server.model.js" afterPath="$PROJECT_DIR$/app/models/body-stat.server.model.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/modules/body-stats/controllers/body-stats.client.controller.js" afterPath="$PROJECT_DIR$/public/modules/body-stats/controllers/body-stats.client.controller.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/body-stats.server.controller.js" afterPath="$PROJECT_DIR$/app/controllers/body-stats.server.controller.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/nutrition-profile.server.controller.js" afterPath="$PROJECT_DIR$/app/controllers/nutrition-profile.server.controller.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/modules/progress/controllers/progress.client.controller.js" afterPath="$PROJECT_DIR$/public/modules/progress/controllers/progress.client.controller.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/modules/progress/views/view-progress.client.view.html" afterPath="$PROJECT_DIR$/public/modules/progress/views/view-progress.client.view.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="NutritionManager.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -35,12 +29,13 @@
       <file leaf-file-name="application.min.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/public/dist/application.min.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.82625484" vertical-offset="84232" max-vertical-offset="84750">
-              <caret line="6435" column="3" selection-start-line="6435" selection-start-column="3" selection-end-line="6435" selection-end-column="3" />
+            <state vertical-scroll-proportion="0.5811966" vertical-offset="45126" max-vertical-offset="75915">
+              <caret line="3966" column="0" selection-start-line="3966" selection-start-column="0" selection-end-line="3966" selection-end-column="0" />
               <folding>
                 <element signature="e#100766#112093#0" expanded="false" />
+                <element signature="e#118659#142477#0" expanded="false" />
                 <element signature="e#153388#153478#0" expanded="false" />
-                <element signature="e#213359#226873#0" expanded="false" />
+                <element signature="e#213280#226794#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -49,14 +44,14 @@
       <file leaf-file-name="progress.client.controller.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/modules/progress/controllers/progress.client.controller.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2580">
-              <caret line="6" column="13" selection-start-line="0" selection-start-column="0" selection-end-line="435" selection-end-column="3" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2535">
+              <caret line="10" column="31" selection-start-line="0" selection-start-column="0" selection-end-line="430" selection-end-column="3" />
               <folding>
-                <element signature="e#2962#4145#0" expanded="false" />
-                <element signature="e#6781#8496#0" expanded="false" />
-                <element signature="e#8549#10323#0" expanded="false" />
-                <element signature="e#10372#12360#0" expanded="false" />
-                <element signature="e#12409#13627#0" expanded="false" />
+                <element signature="e#2883#4066#0" expanded="false" />
+                <element signature="e#6702#8417#0" expanded="false" />
+                <element signature="e#8470#10244#0" expanded="false" />
+                <element signature="e#10293#12281#0" expanded="false" />
+                <element signature="e#12330#13548#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -66,7 +61,7 @@
         <entry file="file://$PROJECT_DIR$/public/modules/core/controllers/home.client.controller.js">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="8925">
-              <caret line="10" column="35" selection-start-line="0" selection-start-column="0" selection-end-line="589" selection-end-column="0" />
+              <caret line="9" column="45" selection-start-line="0" selection-start-column="0" selection-end-line="589" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -155,8 +150,8 @@
         <option value="$PROJECT_DIR$/public/modules/body-stats/controllers/body-stats.client.controller.js" />
         <option value="$PROJECT_DIR$/app/controllers/body-stats.server.controller.js" />
         <option value="$PROJECT_DIR$/app/controllers/nutrition-profile.server.controller.js" />
-        <option value="$PROJECT_DIR$/public/modules/progress/controllers/progress.client.controller.js" />
         <option value="$PROJECT_DIR$/public/modules/progress/views/view-progress.client.view.html" />
+        <option value="$PROJECT_DIR$/public/modules/progress/controllers/progress.client.controller.js" />
         <option value="$PROJECT_DIR$/public/dist/application.min.js" />
       </list>
     </option>
@@ -702,7 +697,7 @@
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.34660032" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32866043" sideWeight="0.5" order="9" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.27860695" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2769486" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -1451,14 +1446,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/modules/core/controllers/home.client.controller.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="8925">
-          <caret line="10" column="35" selection-start-line="0" selection-start-column="0" selection-end-line="589" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/modules/body-stats/controllers/body-stats.client.controller.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-3.0769231" vertical-offset="565" max-vertical-offset="2715">
@@ -1501,26 +1488,35 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/public/modules/progress/controllers/progress.client.controller.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2580">
-          <caret line="6" column="13" selection-start-line="0" selection-start-column="0" selection-end-line="435" selection-end-column="3" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2535">
+          <caret line="10" column="31" selection-start-line="0" selection-start-column="0" selection-end-line="430" selection-end-column="3" />
           <folding>
-            <element signature="e#2962#4145#0" expanded="false" />
-            <element signature="e#6781#8496#0" expanded="false" />
-            <element signature="e#8549#10323#0" expanded="false" />
-            <element signature="e#10372#12360#0" expanded="false" />
-            <element signature="e#12409#13627#0" expanded="false" />
+            <element signature="e#2883#4066#0" expanded="false" />
+            <element signature="e#6702#8417#0" expanded="false" />
+            <element signature="e#8470#10244#0" expanded="false" />
+            <element signature="e#10293#12281#0" expanded="false" />
+            <element signature="e#12330#13548#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/modules/core/controllers/home.client.controller.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="8925">
+          <caret line="9" column="45" selection-start-line="0" selection-start-column="0" selection-end-line="589" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/public/dist/application.min.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.82625484" vertical-offset="84232" max-vertical-offset="84750">
-          <caret line="6435" column="3" selection-start-line="6435" selection-start-column="3" selection-end-line="6435" selection-end-column="3" />
+        <state vertical-scroll-proportion="0.5811966" vertical-offset="45126" max-vertical-offset="75915">
+          <caret line="3966" column="0" selection-start-line="3966" selection-start-column="0" selection-end-line="3966" selection-end-column="0" />
           <folding>
             <element signature="e#100766#112093#0" expanded="false" />
+            <element signature="e#118659#142477#0" expanded="false" />
             <element signature="e#153388#153478#0" expanded="false" />
-            <element signature="e#213359#226873#0" expanded="false" />
+            <element signature="e#213280#226794#0" expanded="false" />
           </folding>
         </state>
       </provider>

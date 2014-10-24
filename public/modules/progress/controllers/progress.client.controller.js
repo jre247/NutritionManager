@@ -1,9 +1,4 @@
-/**
- * Created by jason on 9/20/14.
- */
-/**
- * Created by jason on 9/19/14.
- */
+
 'use strict';
 
 angular.module('progress').controller('ProgressController', ['$scope', '$stateParams', '$location', 'Authentication', 'Progress', 'BodyStats',
