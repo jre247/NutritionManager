@@ -53,7 +53,7 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
 
 
         $scope.nutritionProfile = NutritionProfile.get(function (data) {
-            if(data.age && data.heightInches && data.heightFeet && data.sex) {
+            if(data.age && data.heightFeet && data.sex) {
                 $scope.bmr = calculateBmr();
 
                 $scope.getDailyDashboardData();
