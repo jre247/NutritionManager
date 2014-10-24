@@ -334,6 +334,9 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
                    calculatePlanTotalMacros(plan);
 
                    $scope.nutritionPlan = plan;
+
+                   $scope.isUserAdmin = $scope.nutritionPlan.userRoles && $scope.nutritionPlan.userRoles.indexOf('admin') !== -1 ? true : false;
+
                 }
                 else{
                     $scope.nutritionPlan = null;
@@ -369,6 +372,14 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
                     //}
 
                    // thermometerInitialized = true;
+                }
+
+                if(data.dailyBodyStats === "null"){
+                    $scope.showEnterDailyWeight = true;
+                }
+                else{
+                    $scope.showEnterDailyWeight = false;
+                    $scope.dailyBodyStats = data.dailyBodyStats;
                 }
             });
         };
@@ -425,7 +436,8 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
             config.data.json.fat = $scope.nutritionPlan.totalPlanFatAsPercent;
             config.axis = {"y":{"label":{"text":"Daily Macros","position":"outer-middle"}}};
             config.data.types={"protein":"pie", "carbs": "pie", "fat": "pie"};
-            config.size = {width: 220, height: 220};
+            config.size = {width: 190, height: 190};
+           // config.size = {width: 220, height: 220};
             $scope.chart = c3.generate(config);
         };
 

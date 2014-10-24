@@ -158,7 +158,29 @@ angular.module('bodyStats').controller('BodyStatsController', ['$scope', '$state
             else{
                 $scope.plan =  {weight: null, bodyFatPercentage: null, planDate: new Date(), planDateNonUtc: new Date()};
 
+                //todo use ngRouter instead of this horrible method for extracting url param
+                var urlSplit = $location.path().split('/');
+                if(urlSplit.length >= 3){
+                    var dateParam;
 
+                    if(urlSplit.length == 4) {
+                        dateParam = urlSplit[3];
+                    }
+                    else{
+                        dateParam = urlSplit[2];
+                    }
+
+                    if(dateParam.indexOf('_') !== -1){
+                        var dateParamSplit = dateParam.split('_');
+
+                        var dateDay = parseInt(dateParamSplit[1]);
+                        var dateYear = parseInt(dateParamSplit[2]);
+                        var dateMonth = parseInt(dateParamSplit[0]);
+
+                        $scope.plan.planDate = new Date(dateYear, dateMonth, dateDay);
+                        $scope.plan.planDateNonUtc = new Date(dateYear, dateMonth, dateDay);
+                    }
+                }
             }
         };
 

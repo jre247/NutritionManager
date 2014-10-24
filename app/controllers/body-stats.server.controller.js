@@ -99,31 +99,48 @@ exports.create = function(req, res) {
 };
 
 
-exports.bodyStatsByDate = function(req, res) {
+exports.bodyStatsByDate = function(req, res, next, activityDate) {
     if(req.user) {
-        var startDate = req.param("startDate");
-        var split = startDate.split('_');
-        var startDateMonth = parseInt(split[1]);
-        var startDateDay = parseInt(split[2]);
-        var startDateYear = parseInt(split[0]);
+//        var startDate = req.param("startDate");
+//        var split = startDate.split('_');
+//        var startDateMonth = parseInt(split[1]);
+//        var startDateDay = parseInt(split[2]);
+//        var startDateYear = parseInt(split[0]);
+//
+//        var endDate = req.param("endDate");
+//        var split2 = endDate.split('_');
+//        var endDateMonth = parseInt(split2[1]);
+//        var endDateDay = parseInt(split2[2]);
+//        var endDateYear = parseInt(split2[0]);
+//
+//        BodyStats.find({'planDateYear': {$lte: endDateYear, $gte: startDateYear}, 'planDateMonth': {$lte: endDateMonth, $gte: startDateMonth}, 'planDateDay': {$lte: endDateDay, $gte: startDateDay}, 'user': req.user.id})
+//            .sort({
+//                planDateMili: 1
+//
+//            })
+//            .exec(function (err, bodyStats) {
+//                if (err) return next(err);
+//
+//                res.jsonp(bodyStats);
+//
+//            });
 
-        var endDate = req.param("endDate");
-        var split2 = endDate.split('_');
-        var endDateMonth = parseInt(split2[1]);
-        var endDateDay = parseInt(split2[2]);
-        var endDateYear = parseInt(split2[0]);
 
-        BodyStats.find({'planDateYear': {$lte: endDateYear, $gte: startDateYear}, 'planDateMonth': {$lte: endDateMonth, $gte: startDateMonth}, 'planDateDay': {$lte: endDateDay, $gte: startDateDay}, 'user': req.user.id})
-            .sort({
-                planDateMili: 1
 
-            })
-            .exec(function (err, bodyStats) {
-                if (err) return next(err);
 
-                res.jsonp(bodyStats);
 
-            });
+        var activityDate = req.param("startDate");
+        var split = activityDate.split('_');
+        var month = parseInt(split[0]);
+        var day = parseInt(split[1]);
+        var year = parseInt(split[2]);
+
+
+        BodyStats.findOne({'planDateYear': year, 'planDateMonth': month, 'planDateDay': day, 'user': req.user.id}).exec(function (err, bodyStat) {
+            if (err) return next(err);
+            //if (!activity) return next(new Error('Failed to load activity with date: ' + activityDate));
+            res.jsonp(bodyStat);
+        });
     }
 };
 

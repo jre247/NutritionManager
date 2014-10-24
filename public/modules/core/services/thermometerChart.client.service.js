@@ -21,6 +21,7 @@ angular.module('core').service(
 
             var borderColor = "rgba(0, 0, 0, 0.39)";
             var borderWidth = .3;
+            var caloriesInColor = "rgb(104, 177, 104)";
 
             if(!chartElementSelector){
                 chartElementSelector = ".budgetChart";
@@ -181,7 +182,7 @@ angular.module('core').service(
                 })
                 .style("stroke", borderColor)
                 .style("stroke-width", borderWidth)
-                .style("fill", "rgb(69, 151, 69)");
+                .style("fill", caloriesInColor);
 
             //Draw the calories-in rounded edges Rectangle
             var rectangle = svgContainer.append("rect")
@@ -194,7 +195,7 @@ angular.module('core').service(
                     height: 40
                 })
 
-                .style("fill", "rgb(69, 151, 69)");
+                .style("fill", caloriesInColor);
 
 
             //-------------------- Draw Rects End ------------------------------------//

@@ -65,7 +65,7 @@
             </div>
 
 
-            <div style="margin-top: 40px;" >
+            <div style="margin-top: 30px;" >
 
                 <div  style="border-bottom: 1px solid #eee;width:300px;">
 
@@ -92,11 +92,11 @@
                     <div style="padding-top: 10px;color:gray;">
 
                         <div style="display:inline-block">
-                            <input name="showDailyChartsList" type="radio" value="dailyCharts"  data-ng-model="dailyDashboardView"> Show as Charts <br/>
+                            <input name="showDailyChartsList" id="dailyCharts" type="radio" value="dailyCharts"  data-ng-model="dailyDashboardView"> <label style="font-weight: normal;" for="dailyCharts">Show as Charts</label> <br/>
                         </div>
 
                         <div style="display:inline-block;margin-left: 10px;">
-                            <input name="showDailyChartsList" type="radio" value="dailyList" data-ng-model="dailyDashboardView" > Show as List <br/>
+                            <input name="showDailyChartsList" id="dailyList" type="radio" value="dailyList" data-ng-model="dailyDashboardView" > <label style="font-weight: normal;" for="dailyList">Show as List</label> <br/>
                         </div>
                     </div>
 
@@ -160,15 +160,15 @@
                             <div style="padding-left: 5px;">
                                 <div>
                                     <label style="width: 60px;">Protein:</label>
-                                    <span>{{nutritionPlan.totalPlanProteinAsPercent | number: 1}}</span>
+                                    <span>{{nutritionPlan.totalPlanProteinAsPercent | number: 1}}</span>%
                                 </div>
                                 <div>
                                     <label style="width: 60px;">Carbs:</label>
-                                    <span>{{nutritionPlan.totalPlanCarbsAsPercent | number: 1}}</span>
+                                    <span>{{nutritionPlan.totalPlanCarbsAsPercent | number: 1}}</span>%
                                 </div>
                                 <div>
                                     <label style="width: 60px;">Fat:</label>
-                                    <span>{{nutritionPlan.totalPlanFatAsPercent | number: 1}}</span>
+                                    <span>{{nutritionPlan.totalPlanFatAsPercent | number: 1}}</span>%
                                 </div>
                             </div>
                         </div>
@@ -176,17 +176,39 @@
 
                     <div data-ng-show="dailyDashboardView == 'dailyCharts'">
                         <div  style="position:relative; right: 12px;color:rgb(8, 81, 189)">
-                            <span style="font-size: 16px; font-weight:bold;padding-left: 20px;position: relative;top: 18px;">Daily Calories:</span>
+                            <span style="font-size: 16px; font-weight:bold;padding-left: 10px;position: relative;top: 18px;">Daily Calories:</span>
 
                             <!--<svg budget-thermometer-chart caloriesIn="{{nutritionPlan.totalPlanCalories}}"-->
                                  <!--deficit="{{calculateDeficit(nutritionPlan, activityPlan)}}" class="budgetChart"></svg>-->
                             <svg style="position:relative; right: 10px;" class="budgetChart"></svg>
                         </div>
-                        <div data-ng-show="nutritionPlan" style="padding-top: 10px;padding-left: 10px;color:rgb(8, 81, 189)">
+                        <div data-ng-show="nutritionPlan" style="padding-top: 10px;color:rgb(8, 81, 189);display:inline-block;">
                             <div>
                                 <span style="font-size: 16px; font-weight:bold;">Daily Macros:</span>
-                                <div id="dailyMacrosChart"></div>
+                                <div id="dailyMacrosChart" style="right: 25px;"></div>
 
+                            </div>
+                        </div>
+                        <div  style="display:inline-block;">
+
+                            <div data-ng-if="showEnterDailyWeight" style="width: 105px;position: relative;bottom: 93px;left: 13px;">
+                                <span style="font-size: 16px; font-weight:bold;color:rgb(8, 81, 189);position: relative;top: 8px;right: 7px;">Daily Weight:</span>
+
+                                <img src="/modules/core/img/brand/weightScale.png" width="90px" alt="Enter Daily Weight" style="right: 6px;top: 2px;position: relative;}"/>
+                                <div>
+                                    <a href="/#!/body-stats/create/{{planDateForDb}}">Enter Weight</a>
+                                </div>
+                            </div>
+
+                            <div data-ng-if="!showEnterDailyWeight && !isUserAdmin" style="width: 100px;">
+                                <span style="font-size: 16px; font-weight:bold;color:rgb(8, 81, 189);bottom: 52px;position: relative;right: 5px;">Daily Weight:</span>
+
+
+                                <span data-ng-bind="dailyBodyStats.weight" style="position: relative;bottom: 28px;left: 40px;font-size: 14px;color: blue;background-color: white;z-index: 20;"></span>lbs
+
+                                <a data-ng-href="#!/body-stats/{{dailyBodyStats._id}}">
+                                    <img src="/modules/core/img/brand/weightScale.png" width="225px" alt="Daily Weight" style="bottom: 125px;right: 59px;;position: relative;}"/>
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -206,7 +228,7 @@
                     <h3> Week of <span data-ng-bind="weeklyDateDisplay"></span> Nutrition:</h3>
                 </div>
 
-                <div data-ng-class="{'homepageDashboardTitleAreaSmall': weeklyDashboardView == 'charts', 'homepageDashboardTitleAreaBig': weeklyDashboardView == 'list' }" style="color:gray;padding-bottom: 11px;">
+                <div data-ng-class="{'homepageDashboardTitleAreaSmall': weeklyDashboardView == 'charts', 'homepageDashboardTitleAreaBig': weeklyDashboardView == 'list' }" style="color:gray;padding-bottom: 11px;padding-top: 8px;">
 
                     <div style="display:inline-block">
                         <input name="showChartsList" type="radio" value="charts"  data-ng-model="weeklyDashboardView"> Show as Charts <br/>

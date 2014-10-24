@@ -92,6 +92,21 @@ angular.module('core').service(
 
             dailyDashboardData.activityPlan = response.data;
 
+            var request = $http({
+                method: "get",
+                url: "/body-stats/" + planDate + '/' + 1,
+                params: {
+                    action: "get"
+                }
+            });
+
+            //return dailyDashboardData;
+            return( request.then( handleBodystatsSuccess, handleError ) );
+        }
+
+        function handleBodystatsSuccess( response ) {
+            dailyDashboardData.dailyBodyStats = response.data;
+
             return dailyDashboardData;
         }
 

@@ -16,6 +16,10 @@ angular.module('bodyStats').config(['$stateProvider',
                 url: '/body-stats/create',
                 templateUrl: 'modules/body-stats/views/view-body-stat.client.view.html'
             }).
+            state('createBodyStat2', {
+                url: '/body-stats/create/:planDateForCreate',
+                templateUrl: 'modules/body-stats/views/view-body-stat.client.view.html'
+            }).
             state('viewBodyStat', {
                 url: '/body-stats/:bodyStatId',
                 templateUrl: 'modules/body-stats/views/view-body-stat.client.view.html'
