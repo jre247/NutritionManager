@@ -8,6 +8,7 @@
  */
 var mongoose = require('mongoose'),
     NutritionProfile = mongoose.model('NutritionProfile'),
+    BodyStats = mongoose.model('BodyStats'),
     _ = require('lodash');
 
 /**
@@ -43,14 +44,43 @@ exports.create = function(req, res) {
     var nutritionProfile = new NutritionProfile(req.body);
     nutritionProfile.user = req.user;
 
-    nutritionProfile.save(function(err, nutritionProfileDb) {
+    nutritionProfile.save(function(err) {
         if (err) {
             return res.send(400, {
                 message: getErrorMessage(err)
             });
         } else {
-           // nutritionProfile.nutritionProfileId = nutritionProfileDb.id;
-            res.jsonp(nutritionProfile);
+            //create new Body Stat for today (so user has at least one by default)
+            var planDateAsString = (new Date()).toUTCString();
+            var planDate = new Date(planDateAsString);
+
+            var planSplit = planDate.toISOString().substr(0, 10).split('-');
+            var planDateYear = parseInt(planSplit[0]);
+            var planDateMonth = parseInt(planSplit[1]) - 1;
+            var planDateDay = parseInt(planSplit[2]);
+
+            var plan = new BodyStats({
+                planDateForDB: planDateAsString,
+                planDateYear: planDateYear,
+                planDateMonth: planDateMonth,
+                planDateDay: planDateDay,
+                planDateAsMili: planDate.getTime(),
+                planDateAsConcat: parseInt(planDateYear + '' + (planDateMonth < 10 ? '0' + planDateMonth : planDateMonth) + '' + (planDateDay < 10 ? '0' + planDateDay : planDateDay)),
+                weight: nutritionProfile.weight,
+                bodyFatPercentage: nutritionProfile.bodyFatPercentage,
+                user: req.user,
+                userRoles: req.user.roles
+            });
+
+            plan.save(function(err) {
+                if (err) {
+                    return res.send(400, {
+                        message: getErrorMessage(err)
+                    });
+                } else {
+                    res.jsonp(nutritionProfile);
+                }
+            });
         }
     });
 

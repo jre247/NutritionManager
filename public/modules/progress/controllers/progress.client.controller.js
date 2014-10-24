@@ -11,6 +11,7 @@ angular.module('progress').controller('ProgressController', ['$scope', '$statePa
         window.scope = $scope;
 
         $scope.authentication = Authentication;
+        $scope.isLoading = false;
 
         $scope.durationList = [
             {value: 1, text: '1 Month'},
@@ -62,6 +63,7 @@ angular.module('progress').controller('ProgressController', ['$scope', '$statePa
 
 
         $scope.find = function() {
+            $scope.isLoading = true;
             var startDateFormatted = $scope.startDate.getFullYear() + '_' + $scope.startDate.getMonth() + '_' + $scope.startDate.getDate();
             var endDateFormatted = $scope.endDate.getFullYear() + '_' + $scope.endDate.getMonth() + '_' + $scope.endDate.getDate();
 
@@ -82,6 +84,7 @@ angular.module('progress').controller('ProgressController', ['$scope', '$statePa
                         var bodyStats = u;
 
                         getChartData(plans, bodyStats);
+                        $scope.isLoading = false;
                     });
                 }
             );

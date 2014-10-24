@@ -179,7 +179,7 @@ exports.list = function(req, res) {
     BodyStats.find(
         {
             user:req.user.id
-        }).sort('planDate').populate('user', 'displayName').exec(function(err, bodyStats) {
+        }).sort('planDateAsConcat').populate('user', 'displayName').exec(function(err, bodyStats) {
             if (err) {
                 return res.send(400, {
                     message: getErrorMessage(err)

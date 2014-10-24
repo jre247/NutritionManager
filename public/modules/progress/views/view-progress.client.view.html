@@ -50,23 +50,28 @@
 
     </div>
 
-    <div>
-        <h4>Weight:</h4>
-        <div id="weightChart"></div>
-    </div>
+    <div data-ng-show="!isLoading">
+        <div>
+            <h4>Weight:</h4>
+            <div id="weightChart"></div>
+        </div>
 
-    <div>
-        <h4>Calories:</h4>
-        <div id="caloriesChart"></div>
-    </div>
+        <div>
+            <h4>Calories:</h4>
+            <div id="caloriesChart"></div>
+        </div>
 
-    <div>
-        <h4>Deficit:</h4>
-        <div id="deficitChart"></div>
-    </div>
+        <div>
+            <h4>Deficit:</h4>
+            <div id="deficitChart"></div>
+        </div>
 
-    <div>
-        <h4>Macros:</h4>
-        <div id="macrosChart"></div>
+        <div>
+            <h4>Macros:</h4>
+            <div id="macrosChart"></div>
+        </div>
+    </div>
+    <div data-ng-show="isLoading">
+        <img width="25" height="25" src="/modules/core/img/loaders/loader.gif">
     </div>
 </section>

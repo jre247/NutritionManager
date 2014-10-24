@@ -32,9 +32,11 @@ angular.module('bodyStats').controller('BodyStatsController', ['$scope', '$state
         $scope.create = function() {
             var planDateAsString = $scope.plan.planDateNonUtc.toUTCString();
             var planDate = new Date(planDateAsString);
-            var planDateYear = planDate.getFullYear();
-            var planDateMonth = planDate.getMonth();
-            var planDateDay = planDate.getDate();
+
+            var planSplit = planDate.toISOString().substr(0, 10).split('-');
+            var planDateYear = parseInt(planSplit[0]);
+            var planDateMonth = parseInt(planSplit[1]) - 1;
+            var planDateDay = parseInt(planSplit[2]);
 
             var plan = new BodyStats({
                 planDateForDB: planDateAsString,
@@ -42,6 +44,7 @@ angular.module('bodyStats').controller('BodyStatsController', ['$scope', '$state
                 planDateMonth: planDateMonth,
                 planDateDay: planDateDay,
                 planDateAsMili: planDate.getTime(),
+                planDateAsConcat: parseInt(planDateYear + '' + (planDateMonth < 10 ? '0' + planDateMonth : planDateMonth) + '' + (planDateDay < 10 ? '0' + planDateDay : planDateDay)),
                 weight: $scope.plan.weight,
                 bodyFatPercentage: $scope.plan.bodyFatPercentage
             });
@@ -102,15 +105,17 @@ angular.module('bodyStats').controller('BodyStatsController', ['$scope', '$state
 
             var planDateAsString = new Date($scope.plan.planDateNonUtc).toUTCString();
             var planDate = new Date(planDateAsString);
-            var planDateYear = planDate.getFullYear();
-            var planDateMonth = planDate.getMonth();
-            var planDateDay = planDate.getDate();
 
+            var planSplit = planDate.toISOString().substr(0, 10).split('-');
+            var planDateYear = parseInt(planSplit[0]);
+            var planDateMonth = parseInt(planSplit[1]) - 1;
+            var planDateDay = parseInt(planSplit[2]);
 
             plan.planDateYear = planDateYear;
             plan.planDateMonth = planDateMonth;
             plan.planDateDay = planDateDay;
             plan.planDateAsMili = planDate.getTime();
+            plan.planDateAsConcat = parseInt(planDateYear + '' + (planDateMonth < 10 ? '0' + planDateMonth : planDateMonth) + '' + (planDateDay < 10 ? '0' + planDateDay : planDateDay));
             plan.weight = plan.weight;
             plan.bodyFatPercentage = plan.bodyFatPercentage;
 
@@ -161,7 +166,7 @@ angular.module('bodyStats').controller('BodyStatsController', ['$scope', '$state
 
         //sorting code
         // data
-        $scope.orderByField = 'planDateAsMili';
+        $scope.orderByField = 'planDateAsConcat';
         $scope.reverseSort = true;
         scope.plansCollection = [];
 
