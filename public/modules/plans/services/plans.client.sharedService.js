@@ -151,7 +151,7 @@ angular.module('plans').service(
             $scope.userFoods = userFoods;
             $scope.myFoodsChecked = false;
             $scope.allFoodsChecked = true;
-            $scope.foodsRadioBtn = 'myFoods';
+            $scope.foodsRadioBtn = userFoods && userFoods.length > 0 ? 'myFoods' : 'allFoods';
             $scope.servingType = food ? food.servingType : 0;
             $scope.isLoading = false;
 
@@ -465,6 +465,10 @@ angular.module('plans').service(
                     });
                 }
             };
+
+            if(!userFoods || userFoods.length == 0){
+                $scope.updateFoodList();
+            }
 
             $scope.findFoodsByLetter = function(letter){
                 $scope.findFoodsByFirstLetter = true;

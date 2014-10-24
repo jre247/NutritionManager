@@ -54,45 +54,47 @@ exports.progressByID = function(req, res){
             });
         }
         else {
-            Plan.findOne({
-                    'user': req.user.id,
-                    'planDateYear': planDateYear,
-                    'planDateMonth': planDateMonth,
-                    'planDateDay': planDateDay
-                }
-            )
-                .exec(function (err, plan) {
-                    if (err) return next(err);
-
-                    else {
-                        var bmr = calculateBmr(nutritionProfile);
-
-                        var singlePlan = plan;
-
-                        for (var nMeal = 0; nMeal < singlePlan.meals.length; nMeal++) {
-                            doMealTotaling(singlePlan.meals[nMeal]);
-                        }
-
-                        calculatePlanTotalMacros(singlePlan);
-
-                        Activity.findOne({
-                            'user': req.user.id,
-                            'planDateYear': planDateYear,
-                            'planDateMonth': planDateMonth,
-                            'planDateDay': planDateDay})
-                        .exec(function (err, activity) {
-                                if (err) return next(err);
-
-                                else {
-                                    var deficit = calculateDeficit(singlePlan, activity, bmr);
-                                    plan.deficit = deficit;
-
-                                    res.jsonp(plan);
-                                }
-
-                        });
+            if(nutritionProfile) {
+                Plan.findOne({
+                        'user': req.user.id,
+                        'planDateYear': planDateYear,
+                        'planDateMonth': planDateMonth,
+                        'planDateDay': planDateDay
                     }
-                });
+                )
+                    .exec(function (err, plan) {
+                        if (err) return next(err);
+
+                        else {
+                            var bmr = calculateBmr(nutritionProfile);
+
+                            var singlePlan = plan;
+
+                            for (var nMeal = 0; nMeal < singlePlan.meals.length; nMeal++) {
+                                doMealTotaling(singlePlan.meals[nMeal]);
+                            }
+
+                            calculatePlanTotalMacros(singlePlan);
+
+                            Activity.findOne({
+                                'user': req.user.id,
+                                'planDateYear': planDateYear,
+                                'planDateMonth': planDateMonth,
+                                'planDateDay': planDateDay})
+                                .exec(function (err, activity) {
+                                    if (err) return next(err);
+
+                                    else {
+                                        var deficit = calculateDeficit(singlePlan, activity, bmr);
+                                        plan.deficit = deficit;
+
+                                        res.jsonp(plan);
+                                    }
+
+                                });
+                        }
+                    });
+            }
         }
     });
 };
@@ -129,20 +131,22 @@ exports.list = function(req, res){
                 });
             }
             else {
-                Plan.find({
-                        'user': req.user.id,
-                        'planDateAsConcat': {$gte: startDateAsConcat, $lte: endDateAsConcat}
-                    }
-                )
-                    .sort({
-                        planDateAsConcat: 1 //Sort by Date Added DESC
-                    }).exec(function (err, plans) {
-                        if (err) return next(err);
-
-                        else {
-                            getProgress(res, req, plans, nutritionProfile, startDateAsConcat, endDateAsConcat);
+                if(nutritionProfile) {
+                    Plan.find({
+                            'user': req.user.id,
+                            'planDateAsConcat': {$gte: startDateAsConcat, $lte: endDateAsConcat}
                         }
-                    });
+                    )
+                        .sort({
+                            planDateAsConcat: 1 //Sort by Date Added DESC
+                        }).exec(function (err, plans) {
+                            if (err) return next(err);
+
+                            else {
+                                getProgress(res, req, plans, nutritionProfile, startDateAsConcat, endDateAsConcat);
+                            }
+                        });
+                }
             }
         });
     }
@@ -362,15 +366,16 @@ var calculateBmr = function(nutritionProfile){
     var bmr = 0;
 
     //BMR for Men = 66.47 + (13.75 x weight in kg.) + (5 x height in cm) - (6.75 x age in years)
-    if(gender == "Male"){
+    if (gender == "Male") {
         bmr = 66.47 + (13.75 * weightInKg) + (5 * heightInCms) - (6.75 * age);
     }
     //BMR for Women = 655 + (9.6 x weight in kg.) + (1.8 x height in cm) - (4.7 x age in years).
-    else{
+    else {
         bmr = 655.09 + (9.56 * weightInKg) + (1.84 * heightInCms) - (4.67 * age);
     }
 
     return bmr;
+
 };
 
 

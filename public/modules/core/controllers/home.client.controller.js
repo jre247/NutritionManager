@@ -1,8 +1,8 @@
 'use strict';
 
 
-angular.module('core').controller('HomeController', ['$scope', 'Authentication', 'Activities', 'CoreService', 'NutritionProfile', 'Progress', 'ThermometerChartService',
-	function($scope, Authentication, Activities, CoreService, NutritionProfile, Progress, ThermometerChartService) {
+angular.module('core').controller('HomeController', ['$scope', 'Authentication', 'Activities', 'CoreService', 'NutritionProfile', 'Progress', 'ThermometerChartService', '$modal', 'CoreDialogsService', '$location',
+	function($scope, Authentication, Activities, CoreService, NutritionProfile, Progress, ThermometerChartService, $modal, CoreDialogsService, $location) {
 		// This provides Authentication context.
 		$scope.authentication = Authentication;
         window.scope = $scope;
@@ -11,13 +11,60 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
         $scope.activityPlan = null;
         $scope.nutritionPlan = null;
 
-        $scope.nutritionProfile = NutritionProfile.get(function () {
-            $scope.bmr = calculateBmr();
+        $scope.nutritionProfileParameters = {
+            showSubmitButton: false
+        };
 
-            $scope.getDailyDashboardData();
+        var createNutritionProfileWithDialog = function(){
+            var modalInstance = $modal.open({
+                templateUrl: 'createNutritionProfileModalContent.html',
+                controller: CoreDialogsService.CreateNutritionProfileInstanceCtrl,
+                resolve: {
+                    parent: function(){
+                        return $scope;
+                    }
+                }
+            });
 
-            $scope.getWeeklyDashboardData();
+            modalInstance.result.then(function (selected) {
+                var nutritionProfile = new NutritionProfile({
+                    proteinPercentageTarget: selected.nutritionProfile.proteinPercentageTarget,
+                    carbohydratesPercentageTarget: selected.nutritionProfile.carbohydratesPercentageTarget,
+                    fatPercentageTarget: selected.nutritionProfile.fatPercentageTarget,
+                    deficitTarget: selected.nutritionProfile.deficitTarget,
+                    age: selected.nutritionProfile.age,
+                    sex: selected.nutritionProfile.sex,
+                    weight: selected.nutritionProfile.weight,
+                    heightFeet: selected.nutritionProfile.heightFeet,
+                    heightInches: selected.nutritionProfile.heightInches,
+                    restingHeartRate: selected.nutritionProfile.restingHeartRate,
+                    bodyFatPercentage: selected.nutritionProfile.bodyFatPercentage
+                });
+                nutritionProfile.$save(function(response) {
+                    $scope.nutritionProfile = response;
+                    $location.path('plans/create');
+                }, function(errorResponse) {
+                    $scope.error = errorResponse.data.message;
+                });
+            }, function () {
+                //$log.info('Modal dismissed at: ' + new Date());
+            });
+        };
+
+
+        $scope.nutritionProfile = NutritionProfile.get(function (data) {
+            if(data.age && data.heightInches && data.heightFeet && data.sex) {
+                $scope.bmr = calculateBmr();
+
+                $scope.getDailyDashboardData();
+
+                $scope.getWeeklyDashboardData();
+            }
+            else{
+                createNutritionProfileWithDialog();
+            }
         });
+
 
         $scope.weeklyDashboardView = 'charts';
         $scope.dailyDashboardView = 'dailyCharts';

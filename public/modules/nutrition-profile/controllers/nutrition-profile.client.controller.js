@@ -19,6 +19,10 @@ angular.module('nutritionProfile').controller('NutritionProfileController', ['$s
         $scope.heightInchesOptions = [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
 
 
+        $scope.nutritionProfileParameters = {
+            showSubmitButton: true
+        };
+
         $scope.create = function() {
             var nutritionProfile = new NutritionProfile({
                 proteinPercentageTarget: $scope.nutritionProfile.proteinPercentageTarget,

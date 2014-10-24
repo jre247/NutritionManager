@@ -337,6 +337,19 @@
         <!--</div>-->
     </div>
 
+    <script type="text/ng-template" id="createNutritionProfileModalContent.html">
+        <div class="modal-header" style="font-family: segui;">
+            <h3 class="modal-title" >Create Nutrition Profile</h3>
+        </div>
+
+        <ng-include onInclude="nutritionProfileParameters = nutritionProfileParameters" src="'/modules/nutrition-profile/views/edit-nutritionProfile-container.client.view.html'"></ng-include>
+
+        <div class="modal-footer">
+            <button class="btn btn-primary"  ng-click="ok()">OK</button>
+            <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+        </div>
+    </script>
+
 
 	<!--<div class="row">-->
 		<!--<div class="col-md-3">-->
