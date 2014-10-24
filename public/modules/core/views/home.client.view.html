@@ -239,7 +239,7 @@
                     </div>
                 </div>
 
-                <div data-ng-show="weeklyDashboardView == 'charts'">
+                <div data-ng-show="weeklyDashboardView == 'charts'" style="position:relative; left: 30px;">
                     <h4>Macros: (%)</h4>
                     <div style="padding-left: 20px;" id="weeklyMacrosChart"></div>
                     <!--<c3chart bindto-id="weeklyMacrosChart" chart-size chartWidth="500" chartHeight="200" chart-data="weeklyMacrosDatapoints" chart-columns="weeklyMacrosDatacolumns" chart-x="datax">-->
@@ -306,12 +306,12 @@
                 &nbsp;
             </div>
 
-            <div class="homepageDashboardDesktopBig" style="vertical-align: top;" data-ng-show="weeklyNutritionPlanList">
+            <div class="homepageDashboardDesktopBig" style="vertical-align: top;" data-ng-show="weeklyNutritionPlanList" >
                 <div style="border-bottom: 1px solid #eee;width:277px;">
                     <h3>Week of <span data-ng-bind="weeklyDateDisplay"></span> Averages:</h3>
                 </div>
 
-                <div style="padding-top: 10px;">
+                <div style="padding-top: 10px;position:relative; left: 20px;">
                     <div id="weeklyAverageMacrosChart"></div>
 
                     <div style="vertical-align: top;padding-top: 10px;padding-left: 10px;">
