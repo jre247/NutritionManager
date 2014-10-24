@@ -167,11 +167,9 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
             $scope.planDateForDb = $scope.planDate.getMonth() + '_' + $scope.planDate.getDate() + '_' + $scope.planDate.getFullYear();
             $scope.planDateDisplay = ($scope.planDate.getMonth() + 1) + '/' + $scope.planDate.getDate() + '/' + $scope.planDate.getFullYear();
 
-            $scope.getDailyDashboardData();
+            $scope.getDailyDashboardData(true);
 
             var reloadWeeklyData = checkIfChangeWeeklyData();
-
-            buildThermometerChart(true);
 
             if(reloadWeeklyData){
                 $scope.getWeeklyDashboardData();
@@ -183,11 +181,9 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
             $scope.planDateForDb = $scope.planDate.getMonth() + '_' + $scope.planDate.getDate() + '_' + $scope.planDate.getFullYear();
             $scope.planDateDisplay = ($scope.planDate.getMonth() + 1) + '/' + $scope.planDate.getDate() + '/' + $scope.planDate.getFullYear();
 
-            $scope.getDailyDashboardData();
+            $scope.getDailyDashboardData(true);
 
             var reloadWeeklyData = checkIfChangeWeeklyData();
-
-            buildThermometerChart(true);
 
             if(reloadWeeklyData){
                 $scope.getWeeklyDashboardData();
@@ -275,7 +271,7 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
             ThermometerChartService.buildThermometerChart(caloriesIn, goalCalories, '.budgetChart', isUpdate);
         }
 
-        $scope.getDailyDashboardData = function() {
+        $scope.getDailyDashboardData = function(isUpdate) {
             CoreService.getDailyDashboardData($scope.planDateForDb).then(function(data){
 
                 var dPlanDate = new Date($scope.planDate.getFullYear(), $scope.planDate.getMonth(), $scope.planDate.getDate());
@@ -321,7 +317,11 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
                 if($scope.nutritionPlan) {
                     showDailyMacrosChart();
 
-                    buildThermometerChart();
+                    //if(!thermometerInitialized) {
+                        buildThermometerChart(isUpdate);
+                    //}
+
+                   // thermometerInitialized = true;
                 }
             });
         };

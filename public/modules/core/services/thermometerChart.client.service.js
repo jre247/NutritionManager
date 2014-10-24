@@ -40,6 +40,13 @@ angular.module('core').service(
                 .domain([0, d3.max(data2)])
                 .range([0, width]);
 
+            if(isUpdate) {
+                // $(svgContainer[0]).empty();
+                var svgContainerUpdate = d3.select(chartElementSelector);
+                $(svgContainerUpdate).empty();
+                svgContainerUpdate[0][0].innerHTML = ''
+            }
+
             //Make an SVG Container
             var svgContainer = d3.select(chartElementSelector)
                 .attr({
@@ -47,9 +54,7 @@ angular.module('core').service(
                     height: 115
                 });
 
-            if(isUpdate) {
-                $(svgContainer[0]).empty();
-            }
+
 
             //-------------------- Calorie Text Start ------------------------------------//
 
@@ -287,6 +292,8 @@ angular.module('core').service(
 
 
             //-------------------- End Budget Symbol Code ------------------------------------//
+
+
         };
 
 
