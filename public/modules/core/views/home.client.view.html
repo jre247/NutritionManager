@@ -8,8 +8,6 @@
                     <button type="button" class="btn btn-default btn-sm" data-ng-click="prevDayClick();">
                         <span class="glyphicon glyphicon-chevron-left arrowBtn" ></span>
                     </button>
-
-
                 </div>
 
                 <p class="input-group" style="width:139px;">
@@ -18,8 +16,6 @@
                         <button type="button" class="btn btn-default" ng-click="openPlanDate($event)"><i class="glyphicon glyphicon-calendar"></i></button>
                       </span>
                 </p>
-
-
 
                 <div style="display:inline-block;margin-top: 3px;position: relative;bottom: 45px;right: 77px;float: right;">
 
@@ -178,8 +174,6 @@
                         <div  style="position:relative; right: 12px;color:rgb(8, 81, 189)">
                             <span style="font-size: 16px; font-weight:bold;padding-left: 10px;position: relative;top: 18px;">Daily Calories:</span>
 
-                            <!--<svg budget-thermometer-chart caloriesIn="{{nutritionPlan.totalPlanCalories}}"-->
-                                 <!--deficit="{{calculateDeficit(nutritionPlan, activityPlan)}}" class="budgetChart"></svg>-->
                             <svg style="position:relative; right: 10px;" class="budgetChart"></svg>
                         </div>
                         <div data-ng-show="nutritionPlan" style="padding-top: 10px;color:rgb(8, 81, 189);display:inline-block;">
@@ -242,25 +236,9 @@
                 <div data-ng-show="weeklyDashboardView == 'charts'" style="position:relative; left: 30px;">
                     <h4>Macros: (%)</h4>
                     <div style="padding-left: 20px;" id="weeklyMacrosChart"></div>
-                    <!--<c3chart bindto-id="weeklyMacrosChart" chart-size chartWidth="500" chartHeight="200" chart-data="weeklyMacrosDatapoints" chart-columns="weeklyMacrosDatacolumns" chart-x="datax">-->
-                        <!--<chart-axis>-->
-                            <!--<chart-axis-x axis-id="x" axis-type="timeseries">-->
-                                <!--<chart-axis-x-tick tick-fit="true" tick-format="%Y-%m-%d"/>-->
-
-                            <!--</chart-axis-x>-->
-                        <!--</chart-axis>-->
-                    <!--</c3chart>-->
 
                     <h4>Calories:</h4>
                     <div style="padding-left: 20px;" id="weeklyCaloriesChart"></div>
-                    <!--<c3chart bindto-id="weeklyCaloriesChart" chart-size chartWidth="500" chartHeight="200" chart-data="weeklyCaloriesDatapoints" chart-columns="weeklyCaloriesDatacolumns" chart-x="datax">-->
-                        <!--<chart-axis>-->
-                            <!--<chart-axis-x axis-id="x" axis-type="timeseries">-->
-                                <!--<chart-axis-x-tick tick-format="%Y-%m-%d"/>-->
-
-                            <!--</chart-axis-x>-->
-                        <!--</chart-axis>-->
-                    <!--</c3chart>-->
 
                 </div>
 
@@ -352,11 +330,6 @@
         Fit2Create!
         </p>
         </div>
-        <!--<div class="row">-->
-        <!--<p>-->
-        <!--<a class="btn btn-primary btn-lg" href="http://meanjs.org" target="_blank">Learn more</a>-->
-        <!--</p>-->
-        <!--</div>-->
     </div>
 
     <script type="text/ng-template" id="createNutritionProfileModalContent.html">
