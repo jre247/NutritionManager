@@ -415,23 +415,23 @@
 
                 <div data-ng-show="!showCreateMealSection">
                     <div data-ng-show="!showFoodDetails" style="margin-top: 10px;">
-                        <div style="margin-bottom: 20px;">
+                        <div style="margin-bottom: 10px;">
 
                             <div style="vertical-align: top;display:inline-block;">
                                 <input placeholder="Enter Food Name" style="width: 140px;" type="text" data-ng-change="foodInputChange()" data-ng-model="selected.foodSearchTxt"  />
                                 <a class="ActionLink clearInputLink" data-ng-click="clearFoodInput()">Clear</a>
                             </div>
 
-                            <div style="display:inline-block; margin-left:25px;">
+                            <div style="display:inline-block; margin-left:25px;font-weight: normal;">
                                 <div >
 
-                                    <input type="radio" data-ng-change="radioBtnCheckedChange('myFoods')" value="myFoods" checked="checked" name="foodsCheckbox" data-ng-model="foodsRadioBtn"/>
-                                    My Foods
+                                    <input id="myFoodsInput" type="radio" data-ng-change="radioBtnCheckedChange('myFoods')" value="myFoods" checked="checked" name="foodsCheckbox" data-ng-model="foodsRadioBtn"/>
+                                    <label for="myFoodsInput">My Foods</label>
                                 </div>
                                 <div >
 
-                                    <input type="radio" data-ng-change="radioBtnCheckedChange('allFoods')" value="allFoods"  name="foodsCheckbox"  data-ng-model="foodsRadioBtn"/>
-                                    All Foods
+                                    <input id="allFoodsInput" type="radio" data-ng-change="radioBtnCheckedChange('allFoods')" value="allFoods"  name="foodsCheckbox"  data-ng-model="foodsRadioBtn"/>
+                                    <label for="allFoodsInput">All Foods</label>
                                 </div>
                             </div>
                         </div>

@@ -2,8 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="99afd44b-0014-4bff-855e-4d01f0b1305f" name="Default" comment="create plan page is close to finished. Now trying to wire up view/edit plan page. Trying to make it all common html.">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/modules/core/views/home.client.view.html" afterPath="$PROJECT_DIR$/public/modules/core/views/home.client.view.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/layout.server.view.html" afterPath="$PROJECT_DIR$/app/views/layout.server.view.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/modules/plans/views/view-plan.client.view.html" afterPath="$PROJECT_DIR$/public/modules/plans/views/view-plan.client.view.html" />
     </list>
     <ignored path="NutritionManager.iws" />
@@ -153,8 +151,8 @@
       <file leaf-file-name="view-plan.client.view.html" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/public/modules/plans/views/view-plan.client.view.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-0.0069582504" vertical-offset="5887" max-vertical-offset="10320">
-              <caret line="418" column="0" selection-start-line="418" selection-start-column="0" selection-end-line="418" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.20178926" vertical-offset="5662" max-vertical-offset="10320">
+              <caret line="417" column="52" selection-start-line="417" selection-start-column="52" selection-end-line="417" selection-end-column="52" />
               <folding>
                 <element signature="tag#accordion-heading#0;tag#accordion-group#0;tag#accordion#0;tag#div#1;tag#fieldset#1;tag#form#0;tag#div#0;tag#section#0" expanded="false" />
                 <element signature="tag#script#2;tag#section#0" expanded="false" />
@@ -1464,8 +1462,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/public/modules/plans/views/view-plan.client.view.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.0069582504" vertical-offset="5887" max-vertical-offset="10320">
-          <caret line="418" column="0" selection-start-line="418" selection-start-column="0" selection-end-line="418" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.20178926" vertical-offset="5662" max-vertical-offset="10320">
+          <caret line="417" column="52" selection-start-line="417" selection-start-column="52" selection-end-line="417" selection-end-column="52" />
           <folding>
             <element signature="tag#accordion-heading#0;tag#accordion-group#0;tag#accordion#0;tag#div#1;tag#fieldset#1;tag#form#0;tag#div#0;tag#section#0" expanded="false" />
             <element signature="tag#script#2;tag#section#0" expanded="false" />
