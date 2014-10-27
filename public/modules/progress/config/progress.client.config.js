@@ -5,8 +5,8 @@
 angular.module('progress').run(['Menus',
     function(Menus) {
         // Set top bar menu items
-        Menus.addMenuItem('topbar', 'Progress', 'progress', 'dropdown', '/progress(/create)?');
-        Menus.addSubMenuItem('topbar', 'progress', 'Show Progress', 'progress');
+        Menus.addMenuItem('topbar', 'Progress', 'progress', '/progress');
+       // Menus.addSubMenuItem('topbar', 'progress', 'Show Progress', 'progress');
         //Menus.addSubMenuItem('topbar', 'progress', 'New Body Stat', 'body-stats/create');
     }
 ]);

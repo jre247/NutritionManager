@@ -7,6 +7,12 @@
 
     <select data-ng-model="selectedDirection" ng-options="t for t in directionList" data-ng-change="reverseSort = selectedDirection === 'Descending'" style="font-size: 16px;vertical-align: top;"></select>
 
+    <a data-ng-href="#!/body-stats/create" style="float:right;position: relative;bottom: 10px;">
+        <button type="button" class="btn btn-primary btn-m" style="padding: 6px 10px;">
+            <span class="glyphicon glyphicon-plus" ></span> Create
+        </button>
+    </a>
+
     <div class="list-group" style="margin-top: 20px;">
         <div>
             <a data-ng-repeat="plan in bodyStats | orderBy:orderByField:reverseSort" data-ng-href="#!/body-stats/{{plan._id}}" class="list-group-item">

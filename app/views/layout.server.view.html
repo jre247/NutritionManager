@@ -76,19 +76,7 @@
             font-size: 12px;
         }
 
-        div.tooltip {
-            position: absolute;
-            text-align: center;
-            width: 120px;
-            height: 32px;
-            padding: 2px;
-            font: 12px sans-serif;
-            background: #3F88FC;
-            border: 0px;
-            color: #EBEBEB;
-            border-radius: 8px;
-            pointer-events: none;
-        }
+
 
         .mobileSearchLetters > span{
             font-size: 18px;
@@ -440,7 +428,7 @@
 
 <body class="ng-cloak">
 	<header data-ng-include="'/modules/core/views/header.client.view.html'" class="navbar navbar-fixed-top navbar-inverse"></header>
-	<section class="content">
+	<section id="page-content" class="content">
 		<section class="container">
 			{% block content %}{% endblock %}
 		</section>
@@ -468,6 +456,7 @@
 	<script type="text/javascript" src="http://localhost:35729/livereload.js"></script>
 
 	{% endif %}
+
 
 
 
