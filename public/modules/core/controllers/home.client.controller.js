@@ -199,12 +199,11 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
             $scope.planDateForDb = $scope.planDate.getMonth() + '_' + $scope.planDate.getDate() + '_' + $scope.planDate.getFullYear();
             $scope.planDateDisplay = ($scope.planDate.getMonth() + 1) + '/' + $scope.planDate.getDate() + '/' + $scope.planDate.getFullYear();
 
-            $scope.getDailyDashboardData();
+            $scope.getDailyDashboardData(true);
 
             var reloadWeeklyData = checkIfChangeWeeklyData();
 
             if(reloadWeeklyData){
-
                 $scope.getWeeklyDashboardData();
             }
         };
@@ -367,11 +366,7 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
                 if($scope.nutritionPlan) {
                     showDailyMacrosChart();
 
-                    //if(!thermometerInitialized) {
-                        buildThermometerChart(isUpdate);
-                    //}
-
-                   // thermometerInitialized = true;
+                    buildThermometerChart(isUpdate);
                 }
 
                 if(data.dailyBodyStats === "null"){
