@@ -52,14 +52,17 @@ div.tooltip {
 
 .deficitRegion{
     background-color: rgb(183, 193, 231);
+   
 }
 
 .caloriesInRegion{
     background-color: rgb(69, 151, 69);
+
 }
 
 .goalsRegion{
     background-color: orange;
+
 }
 
 

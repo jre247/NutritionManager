@@ -97,7 +97,7 @@ angular.module('core').service(
                 .attr({
                     width: 340,
                     height: 130
-                })
+                });
 
 
             //Calorie Text Start
@@ -127,7 +127,7 @@ angular.module('core').service(
                     .style("z-index", "10")
                     .style("visibility", "hidden")
                     .text("a simple tooltip");
-            }
+            };
 
             var mouseMoveForToolTip = function(){
                 return  div.style("left", Math.max(0, d3.event.pageX - 50) + "px")
@@ -150,7 +150,7 @@ angular.module('core').service(
                     .style("stroke", borderColor)
                     .style("stroke-width", borderWidth)
                     .style("fill", "rgb(230, 227, 227)");
-            }
+            };
 
             //Draw the deficit sharp edges Rectangle
             var drawDeficitRect = function(){
@@ -172,11 +172,13 @@ angular.module('core').service(
 
                         mouseOverForToolTip('deficit');
 
-                        deficitSharpEdgesRect.style("fill", deficitFocusColor)
+                        deficitSharpEdgesRect.style("fill", deficitFocusColor);
+
+                        deficitSharpEdgesRect.style("cursor", "pointer");
                     })
                     .on("mouseout", function(d) {
                         mouseOutForToolTip('deficit');
-                        deficitSharpEdgesRect.style("fill", deficitColor)
+                        deficitSharpEdgesRect.style("fill", deficitColor);
 
                         div.transition()
                             .duration(50)
@@ -185,7 +187,7 @@ angular.module('core').service(
                     .style("stroke", borderColor)
                     .style("stroke-width", borderWidth)
                     .style("fill", deficitColor);
-            }
+            };
 
             //Draw the calories-in sharp edges Rectangle
             var drawCaloriesInSharpEdgesRect = function(){
@@ -207,6 +209,8 @@ angular.module('core').service(
 
                         mouseOverForToolTip('caloriesIn');
 
+                        caloriesInSharpEdgesRect.style("cursor", "pointer");
+
                     })
                     .on("mouseout", function(d) {
                         mouseOutForToolTip('caloriesIn');
@@ -218,7 +222,7 @@ angular.module('core').service(
                     .style("stroke", borderColor)
                     .style("stroke-width", borderWidth)
                     .style("fill", caloriesInColor);
-            }
+            };
 
             //Draw the calories-in rounded edges Rectangle
             var drawCaloriesInRoundedEdgesRect = function(){
@@ -242,6 +246,8 @@ angular.module('core').service(
                             .duration(200)
                             .style("opacity", .9);
                         div.html("<div class='toolTipColorRegion caloriesInRegion'>&nbsp;</div><div class='toolTipLbl'>Calories In</div>" + "<div class='toolTipValue'>"  + caloriesIn + "</div>")
+
+                        caloriesInRoundEdgesRect.style("cursor", "pointer");
                     })
                     .on("mouseout", function(d) {
                         mouseOutForToolTip('caloriesIn');
@@ -251,7 +257,7 @@ angular.module('core').service(
                             .style("opacity", 0);
                     })
                     .style("fill", "rgb(69, 151, 69)");
-            }
+            };
             //-------------------- Draw Rects End ------------------------------------//
 
             var drawDottedLines = function(){
@@ -293,6 +299,8 @@ angular.module('core').service(
                             .duration(200)
                             .style("opacity", .9);
                         div.html("<div class='toolTipColorRegion goalsRegion'>&nbsp;</div><div class='toolTipLbl'>Goal Calories</div>" + "<div class='toolTipValue'>"  + goalCalories + "</div>")
+
+                        budgetLine.style("cursor", "pointer");
                     })
                     .on("mouseout", function(d) {
                         mouseOutForToolTip('budget');
@@ -321,6 +329,8 @@ angular.module('core').service(
                             .duration(200)
                             .style("opacity", .9);
                         div.html("<div class='toolTipColorRegion goalsRegion'>&nbsp;</div><div class='toolTipLbl'>Goal Calories</div>" + "<div class='toolTipValue'>"  + goalCalories + "</div>")
+
+                        budgetCircle.style("cursor", "pointer");
                     })
                     .on("mouseout", function(d) {
                         mouseOutForToolTip('budget');
