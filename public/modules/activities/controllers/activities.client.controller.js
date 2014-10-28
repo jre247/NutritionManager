@@ -17,6 +17,7 @@ angular.module('activities').controller('ActivitiesController', ['$scope', '$sta
         $scope.showNotesSection = true;
         $scope.dailyStepsEntered = false;
         $scope.injuriesVisible = false;
+        $scope.isLoading = false;
 
         $scope.authentication = Authentication;
 
@@ -339,10 +340,12 @@ angular.module('activities').controller('ActivitiesController', ['$scope', '$sta
         };
 
         $scope.find = function() {
+            $scope.isLoading = true;
+
             $scope.activities = Activities.query(
                 function(u, getResponseHeaders)
                 {
-
+                    $scope.isLoading = false;
 
 
                 }

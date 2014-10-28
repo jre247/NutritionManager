@@ -10,12 +10,14 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
         var sortingBtnTxtOptions = ['Enable Sorting', 'Disable Sorting'];
         $scope.sortingBtnTxt = sortingBtnTxtOptions[0];
         var isSortingEnabled = false;
+        $scope.isLoading = false;
 
         $scope.currentDeficit = 0;
         $scope.authentication = Authentication;
         $scope.meals = [];
 
         //$scope.allFoods = Foods.query();
+        //TODO: put this in server controller and attach to req obj
         CoreUtilities.getUserFoods(user._id, 'null', 0, false).then(function(data){
             $scope.allFoods = data;
         });
@@ -381,6 +383,8 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
 		};
 
 		$scope.find = function() {
+            $scope.isLoading = true;
+
 			$scope.plans = Plans.query(
                 function(u, getResponseHeaders)
                 {
@@ -404,6 +408,8 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
 
                         $scope.plansCollection.push(planModel);
                     }
+
+                    $scope.isLoading = false;
 
 //                    $scope.plansCollection.sort(function compare(a,b) {
 //                        if (a.planDateAsConcat < b.planDateAsConcat)
