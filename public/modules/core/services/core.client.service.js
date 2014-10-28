@@ -21,12 +21,28 @@ angular.module('core').service(
         // PUBLIC METHODS.
         // ---
 
+//        function getDailyDashboardData(planDateIn) {
+//            planDate = planDateIn;
+//
+//            var request = $http({
+//                method: "get",
+//                url: "/plans/" + planDate + '/' + 1,
+//                params: {
+//                    action: "get"
+//                }
+//
+//
+//            });
+//
+//            return( request.then( handleNutritionPlanSuccess, handleError ) );
+//        }
+
         function getDailyDashboardData(planDateIn) {
             planDate = planDateIn;
 
             var request = $http({
                 method: "get",
-                url: "/plans/" + planDate + '/' + 1,
+                url: "/core/" + planDate,
                 params: {
                     action: "get"
                 }
@@ -34,7 +50,7 @@ angular.module('core').service(
 
             });
 
-            return( request.then( handleNutritionPlanSuccess, handleError ) );
+            return( request.then( handleGetDailyDashboardDataSuccess, handleError ) );
         }
 
         function getWeeklyDashboardData(planDateIn) {
@@ -106,6 +122,14 @@ angular.module('core').service(
 
         function handleBodystatsSuccess( response ) {
             dailyDashboardData.dailyBodyStats = response.data;
+
+            return dailyDashboardData;
+        }
+
+        function handleGetDailyDashboardDataSuccess( response ) {
+            dailyDashboardData.dailyBodyStats = response.data.dailyBodyStats;
+            dailyDashboardData.nutritionPlan = response.data.nutritionPlan;
+            dailyDashboardData.activityPlan = response.data.activityPlan;
 
             return dailyDashboardData;
         }

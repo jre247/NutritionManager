@@ -324,7 +324,7 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
                 var planDateDayOfWeek = days[dPlanDate.getDay()];
                 $scope.planDayOfWeek = planDateDayOfWeek;
 
-                if (data.nutritionPlan !== 'null'){
+                if (data.nutritionPlan){
                     var plan = data.nutritionPlan;
                    for (var nMeal = 0; nMeal < plan.meals.length; nMeal++){
                         doMealTotaling(plan.meals[nMeal]);
@@ -341,7 +341,7 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
                     $scope.nutritionPlan = null;
                 }
 
-                if(data.activityPlan !== 'null'){
+                if(data.activityPlan){
                     $scope.activityPlan = data.activityPlan;
 
                     if($scope.activityPlan.dailySteps > 0){
@@ -369,7 +369,7 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
                     buildThermometerChart(isUpdate);
                 }
 
-                if(data.dailyBodyStats === "null"){
+                if(!data.dailyBodyStats){
                     $scope.showEnterDailyWeight = true;
                 }
                 else{

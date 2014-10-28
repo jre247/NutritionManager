@@ -17,6 +17,10 @@ angular.module('core').service(
         // ---
 
         function buildThermometerChart(caloriesIn, goalCalories, chartElementSelector, isUpdate){
+            if(isUpdate){
+                $(chartElementSelector).empty();
+            }
+
             var data2 = [500, 1000, 1500, 2000, 2500]; //represents calories list
 
             var borderColor = "rgba(0, 0, 0, 0.39)";
