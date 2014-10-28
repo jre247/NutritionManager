@@ -27,15 +27,15 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="application.min.js" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="application.min.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/public/dist/application.min.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-6.923077" vertical-offset="41460" max-vertical-offset="89355">
-              <caret line="3141" column="2" selection-start-line="3141" selection-start-column="2" selection-end-line="3141" selection-end-column="2" />
+            <state vertical-scroll-proportion="0.2195122" vertical-offset="41460" max-vertical-offset="89355">
+              <caret line="3155" column="2" selection-start-line="3155" selection-start-column="2" selection-end-line="3155" selection-end-column="2" />
               <folding>
-                <element signature="e#100910#114802#0" expanded="false" />
-                <element signature="e#157637#157727#0" expanded="false" />
-                <element signature="e#203582#204648#0" expanded="false" />
+                <element signature="e#100910#115529#0" expanded="false" />
+                <element signature="e#158364#158454#0" expanded="false" />
+                <element signature="e#204309#205375#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -51,11 +51,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="core.css" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="core.css" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/modules/core/css/core.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.2965186" vertical-offset="563" max-vertical-offset="2310">
-              <caret line="54" column="3" selection-start-line="54" selection-start-column="3" selection-end-line="54" selection-end-column="3" />
+            <state vertical-scroll-proportion="-9.5" vertical-offset="563" max-vertical-offset="2310">
+              <caret line="54" column="0" selection-start-line="54" selection-start-column="0" selection-end-line="54" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -80,8 +80,8 @@
       <file leaf-file-name="thermometerChart.client.service.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/modules/core/services/thermometerChart.client.service.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="4390" max-vertical-offset="5670">
-              <caret line="324" column="50" selection-start-line="0" selection-start-column="0" selection-end-line="372" selection-end-column="2" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="3310" max-vertical-offset="5880">
+              <caret line="258" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="386" selection-end-column="2" />
               <folding />
             </state>
           </provider>
@@ -161,9 +161,9 @@
         <option value="$PROJECT_DIR$/app/controllers/core.server.controller.js" />
         <option value="$PROJECT_DIR$/public/modules/core/services/core.client.service.js" />
         <option value="$PROJECT_DIR$/public/modules/core/controllers/home.client.controller.js" />
+        <option value="$PROJECT_DIR$/public/modules/core/css/core.css" />
         <option value="$PROJECT_DIR$/public/modules/core/services/thermometerChart.client.service.js" />
         <option value="$PROJECT_DIR$/public/dist/application.min.js" />
-        <option value="$PROJECT_DIR$/public/modules/core/css/core.css" />
       </list>
     </option>
   </component>
@@ -1153,26 +1153,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/modules/core/services/thermometerChart.client.service.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="4390" max-vertical-offset="5670">
-          <caret line="324" column="50" selection-start-line="0" selection-start-column="0" selection-end-line="372" selection-end-column="2" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/dist/application.min.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-6.923077" vertical-offset="41460" max-vertical-offset="89355">
-          <caret line="3141" column="2" selection-start-line="3141" selection-start-column="2" selection-end-line="3141" selection-end-column="2" />
-          <folding>
-            <element signature="e#100910#114802#0" expanded="false" />
-            <element signature="e#157637#157727#0" expanded="false" />
-            <element signature="e#203582#204648#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/modules/core/services/core.client.service.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-3.4615386" vertical-offset="0" max-vertical-offset="1560">
@@ -1197,9 +1177,29 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/public/modules/core/css/core.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.2965186" vertical-offset="563" max-vertical-offset="2310">
-          <caret line="54" column="3" selection-start-line="54" selection-start-column="3" selection-end-line="54" selection-end-column="3" />
+        <state vertical-scroll-proportion="-9.5" vertical-offset="563" max-vertical-offset="2310">
+          <caret line="54" column="0" selection-start-line="54" selection-start-column="0" selection-end-line="54" selection-end-column="0" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/modules/core/services/thermometerChart.client.service.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="3310" max-vertical-offset="5880">
+          <caret line="258" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="386" selection-end-column="2" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/dist/application.min.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.2195122" vertical-offset="41460" max-vertical-offset="89355">
+          <caret line="3155" column="2" selection-start-line="3155" selection-start-column="2" selection-end-line="3155" selection-end-column="2" />
+          <folding>
+            <element signature="e#100910#115529#0" expanded="false" />
+            <element signature="e#158364#158454#0" expanded="false" />
+            <element signature="e#204309#205375#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>

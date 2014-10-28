@@ -189,6 +189,8 @@ angular.module('core').service(
                     .style("fill", deficitColor);
             };
 
+            var caloriesInFillColor = "rgb(50, 131, 50)";
+
             //Draw the calories-in sharp edges Rectangle
             var drawCaloriesInSharpEdgesRect = function(){
                 caloriesInSharpEdgesRect = svgContainer.append("rect")
@@ -211,9 +213,15 @@ angular.module('core').service(
 
                         caloriesInSharpEdgesRect.style("cursor", "pointer");
 
+                        caloriesInSharpEdgesRect.style("fill", caloriesInFillColor);
+                        caloriesInRoundEdgesRect.style("fill", caloriesInFillColor);
+
                     })
                     .on("mouseout", function(d) {
                         mouseOutForToolTip('caloriesIn');
+
+                        caloriesInSharpEdgesRect.style("fill", caloriesInColor);
+                        caloriesInRoundEdgesRect.style("fill", caloriesInColor);
 
                         div.transition()
                             .duration(500)
@@ -248,9 +256,15 @@ angular.module('core').service(
                         div.html("<div class='toolTipColorRegion caloriesInRegion'>&nbsp;</div><div class='toolTipLbl'>Calories In</div>" + "<div class='toolTipValue'>"  + caloriesIn + "</div>")
 
                         caloriesInRoundEdgesRect.style("cursor", "pointer");
+
+                        caloriesInSharpEdgesRect.style("fill", caloriesInFillColor);
+                        caloriesInRoundEdgesRect.style("fill", caloriesInFillColor);
                     })
                     .on("mouseout", function(d) {
                         mouseOutForToolTip('caloriesIn');
+
+                        caloriesInSharpEdgesRect.style("fill", caloriesInColor);
+                        caloriesInRoundEdgesRect.style("fill", caloriesInColor);
 
                         div.transition()
                             .duration(500)
