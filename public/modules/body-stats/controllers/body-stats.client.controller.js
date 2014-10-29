@@ -29,7 +29,7 @@ angular.module('bodyStats').controller('BodyStatsController', ['$scope', '$state
 
         $scope.initDate = new Date('2016-15-20');
 
-        $scope.s function() {
+        $scope.create = function() {
 //            var planDateAsString = $scope.plan.planDateNonUtc.toUTCString();
 //            var planDate = new Date(planDateAsString);
 //
@@ -37,7 +37,7 @@ angular.module('bodyStats').controller('BodyStatsController', ['$scope', '$state
 //            var planDateYear = parseInt(planSplit[0]);
 //            var planDateMonth = parseInt(planSplit[1]) - 1;
 //            var planDateDay = parseInt(planSplit[2]);
-            var planDateAsString = new Date($scope.plan.planDateNonUtc).toUTCString();
+            var planDateAsString = new Date($scope.plan.planDateNonUtc);
             var planDate = new Date(planDateAsString);
             var planDateToSave = new Date($scope.plan.planDateNonUtc);
             var planDateYear = planDateToSave.getFullYear();
@@ -59,7 +59,7 @@ angular.module('bodyStats').controller('BodyStatsController', ['$scope', '$state
                 bodyFatPercentage: $scope.plan.bodyFatPercentage
             });
             plan.$save(function(response) {
-                plan.planDateNonUtc = response.planDateNonUtc;
+                plan.planDateNonUtc = response.planDateAsMili;
                 $location.path('body-stats/' + response._id);
             }, function(errorResponse) {
                 $scope.error = errorResponse.data.message;
@@ -124,7 +124,7 @@ angular.module('bodyStats').controller('BodyStatsController', ['$scope', '$state
 //            plan.planDateYear = planDateYear;
 //            plan.planDateMonth = planDateMonth;
 //            plan.planDateDay = planDateDay;
-            var planDateAsString = new Date($scope.plan.planDateNonUtc).toUTCString();
+            var planDateAsString = new Date($scope.plan.planDateNonUtc);
             var planDate = new Date(planDateAsString);
             var planDateToSave = new Date($scope.plan.planDateNonUtc);
             var planDateYear = planDateToSave.getFullYear();

@@ -95,7 +95,7 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
         };
 
 		$scope.create = function() {
-            var planDateAsString = new Date($scope.plan.planDateNonUtc).toUTCString();
+            var planDateAsString = new Date($scope.plan.planDateNonUtc);
             var planDate = new Date(planDateAsString);
 //            var planSplit = planDate.toISOString().substr(0, 10).split('-');
 //            var planDateYear = parseInt(planSplit[0]);
@@ -119,7 +119,7 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
                 meals: $scope.plan.meals
 			});
             plan.$save(function(response) {
-                plan.planDateNonUtc = new Date(response.planDateNonUtc);
+                plan.planDateNonUtc = new Date(response.planDateAsMili);
 				$location.path('plans/' + response._id);
 			}, function(errorResponse) {
 				$scope.error = errorResponse.data.message;
@@ -351,7 +351,7 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
 //            var planDateMonth = parseInt(planSplit[1]) - 1;
 //            var planDateDay = parseInt(planSplit[2]);
 
-            var planDateAsString = new Date($scope.plan.planDateNonUtc).toUTCString();
+            var planDateAsString = new Date($scope.plan.planDateNonUtc);
             var planDate = new Date(planDateAsString);
             var planDateToSave = new Date($scope.plan.planDateNonUtc);
             var planDateYear = planDateToSave.getFullYear();
@@ -362,6 +362,7 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
             plan.planDateMonth = planDateMonth;
             plan.planDateDay = planDateDay;
 
+            plan.planDateForDBAsDate = $scope.plan.planDateNonUtc;
             plan.planDateAsMili = planDate.getTime();
             plan.planDateAsConcat = parseInt(planDateYear + '' + (planDateMonth < 10 ? '0' + planDateMonth : planDateMonth) + '' + (planDateDay < 10 ? '0' + planDateDay : planDateDay)),
 

@@ -195,7 +195,7 @@ angular.module('activities').controller('ActivitiesController', ['$scope', '$sta
 //            var planDateYear = parseInt(planSplit[0]);
 //            var planDateMonth = parseInt(planSplit[1]) - 1;
 //            var planDateDay = parseInt(planSplit[2]);
-            var planDateAsString = new Date($scope.plan.planDateNonUtc).toUTCString();
+            var planDateAsString = new Date($scope.plan.planDateNonUtc);
             var planDate = new Date(planDateAsString);
             var planDateToSave = new Date($scope.plan.planDateNonUtc);
             var planDateYear = planDateToSave.getFullYear();
@@ -208,7 +208,7 @@ angular.module('activities').controller('ActivitiesController', ['$scope', '$sta
 
             var plan = new Activities({
                 planDateForDB: planDateAsString,
-               // planDateAsMili: planDate.getTime(),
+                planDateAsMili: planDate.getTime(),
                 planDateAsConcat: parseInt(planDateYear + '' + (planDateMonth < 10 ? '0' + planDateMonth : planDateMonth) + '' + (planDateDay < 10 ? '0' + planDateDay : planDateDay)),
                 planDateYear: planDateYear,
                 planDateMonth: planDateMonth,
@@ -222,7 +222,7 @@ angular.module('activities').controller('ActivitiesController', ['$scope', '$sta
                 dailyStepsCaloriesBurned: $scope.plan.dailyStepsCaloriesBurned
             });
             plan.$save(function(response) {
-                plan.planDateNonUtc = response.planDateNonUtc;
+                plan.planDateNonUtc = response.planDateAsMili;
                 $location.path('activities/' + response._id);
             }, function(errorResponse) {
                 $scope.error = errorResponse.data.message;

@@ -29,6 +29,9 @@ var PlanSchema = new Schema({
         type: String
         //required: 'Plan Date cannot be blank'
     },
+    planDateForDBAsDate:{
+        type: Date
+    },
     planDateAsMili:{
         type: Number
     },
