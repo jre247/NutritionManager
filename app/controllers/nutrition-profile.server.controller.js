@@ -69,7 +69,8 @@ exports.create = function(req, res) {
                 weight: nutritionProfile.weight,
                 bodyFatPercentage: nutritionProfile.bodyFatPercentage,
                 user: req.user,
-                userRoles: req.user.roles
+                userRoles: req.user.roles,
+                templateMeals: req.templateMeals
             });
 
             plan.save(function(err) {
@@ -127,6 +128,7 @@ exports.update = function(req, res) {
             nutritionProfile.heightInches = req.body.heightInches;
             nutritionProfile.heightFeet = req.body.heightFeet;
             nutritionProfile.sex = req.body.sex;
+            nutritionProfile.templateMeals = req.body.templateMeals;
 
             nutritionProfile.save(function(err) {
                 if (err) {

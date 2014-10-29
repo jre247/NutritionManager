@@ -188,13 +188,22 @@ angular.module('activities').controller('ActivitiesController', ['$scope', '$sta
         };
 
         $scope.create = function() {
-            var planDateAsString = $scope.plan.planDateNonUtc.toUTCString();
+//            var planDateAsString = $scope.plan.planDateNonUtc.toUTCString();
+//            var planDate = new Date(planDateAsString);
+//
+//            var planSplit = planDate.toISOString().substr(0, 10).split('-');
+//            var planDateYear = parseInt(planSplit[0]);
+//            var planDateMonth = parseInt(planSplit[1]) - 1;
+//            var planDateDay = parseInt(planSplit[2]);
+            var planDateAsString = new Date($scope.plan.planDateNonUtc).toUTCString();
             var planDate = new Date(planDateAsString);
+            var planDateYear = $scope.plan.planDateNonUtc.getFullYear();
+            var planDateMonth = $scope.plan.planDateNonUtc.getMonth();
+            var planDateDay = $scope.plan.planDateNonUtc.getDate();
 
-            var planSplit = planDate.toISOString().substr(0, 10).split('-');
-            var planDateYear = parseInt(planSplit[0]);
-            var planDateMonth = parseInt(planSplit[1]) - 1;
-            var planDateDay = parseInt(planSplit[2]);
+            var planDateYear = planDateYear;
+            var planDateMonth = planDateMonth;
+            var planDateDay = planDateDay;
 
             var plan = new Activities({
                 planDateForDB: planDateAsString,
@@ -311,16 +320,26 @@ angular.module('activities').controller('ActivitiesController', ['$scope', '$sta
         $scope.update = function() {
             var plan = $scope.plan;
 
+//            var planDateAsString = new Date($scope.plan.planDateNonUtc).toUTCString();
+//            var planDate = new Date(planDateAsString);
+//            var planSplit = planDate.toISOString().substr(0, 10).split('-');
+//            var planDateYear = parseInt(planSplit[0]);
+//            var planDateMonth = parseInt(planSplit[1]) - 1;
+//            var planDateDay = parseInt(planSplit[2]);
+//
+//            plan.planDateYear = planDateYear;
+//            plan.planDateMonth = planDateMonth;
+//            plan.planDateDay = planDateDay;
             var planDateAsString = new Date($scope.plan.planDateNonUtc).toUTCString();
             var planDate = new Date(planDateAsString);
-            var planSplit = planDate.toISOString().substr(0, 10).split('-');
-            var planDateYear = parseInt(planSplit[0]);
-            var planDateMonth = parseInt(planSplit[1]) - 1;
-            var planDateDay = parseInt(planSplit[2]);
+            var planDateYear = $scope.plan.planDateNonUtc.getFullYear();
+            var planDateMonth = $scope.plan.planDateNonUtc.getMonth();
+            var planDateDay = $scope.plan.planDateNonUtc.getDate();
 
             plan.planDateYear = planDateYear;
             plan.planDateMonth = planDateMonth;
             plan.planDateDay = planDateDay;
+
             plan.dailySteps = parseInt($scope.plan.dailySteps);
            // plan.totalCaloriesBurned = plan.totalCaloriesBurned;
             //plan.dailyStepsCaloriesBurned = plan.dailyStepsCaloriesBurned;

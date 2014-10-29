@@ -8,6 +8,10 @@
 	display: none !important;
 }
 
+.panel-body{
+    overflow-x: hidden;
+}
+
 
 /* Thermometer chart css*/
 div.tooltip {
@@ -64,6 +68,10 @@ div.tooltip {
     background-color: orange;
 
 }
+
+
+
+
 
 
 

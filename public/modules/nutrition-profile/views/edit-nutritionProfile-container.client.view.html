@@ -101,6 +101,35 @@
 
         </fieldset>
 
+        <fieldset style="margin-top: 30px;">
+            <legend style="margin-bottom: 2px;">Meals Template:</legend>
+
+            <button type="button" class="btn btn-primary btn-m" style="padding: 6px 10px;margin-top: 10px;margin-left: 15px;" data-ng-click="addMealToTemplateWithDialog()">
+                <span class="glyphicon glyphicon-plus" ></span> <span class="hidden-xs">Add Meal</span>
+            </button>
+
+            <div sortable="sortableOptions"  updateCallback="sortableUpdateCallback" startCallback="sortableStartCallback" rootSortableElement=".mealsTemplateContainer">
+                <div class="form-group mealsTemplateContainer" style="margin-left: 15px;" >
+                    <div   data-ng-repeat="templateMeal in nutritionProfile.templateMeals"
+                         data-ng-mouseover="templateMeal.showEditIcon = true" data-ng-mouseleave="templateMeal.showEditIcon = false">
+
+                        <div class="templateMealItem" style="display:inline-block;">
+                            <span data-ng-bind="templateMeal.name"></span>
+                        </div>
+
+
+
+                        <div style="display:inline-block;width: 20px;padding-left: 10px;">
+                            <div style="cursor:pointer;height: 14px !important;" data-ng-click="deleteTemplateMeal(templateMeal);" type="button" data-ng-class="{editRowShow: templateMeal.showEditIcon}"  class="editRowHide">
+                                <span  class="glyphicon glyphicon-trash"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </fieldset>
+
 
 
 
@@ -108,3 +137,19 @@
 
     </form>
 </div>
+
+<script type="text/ng-template" id="addMealToTemplateModalContent.html">
+    <div class="modal-header" style="font-family: segui;">
+        <h3 class="modal-title" data-ng-show="!showActivityDetails">Select Meal To Add To Template</h3>
+    </div>
+    <div style="font-family: segui;padding: 20px;" >
+        <select id="templateMeals" style="width: 30%;font-size: 18px;" name="templateMeals" data-ng-options="t.id as t.name for t in mealsDict" data-ng-model="selected.selectedMealForTemplate"></select>
+
+    </div>
+
+
+    <div class="modal-footer">
+        <button class="btn btn-primary"  ng-click="ok()">OK</button>
+        <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+    </div>
+</script>

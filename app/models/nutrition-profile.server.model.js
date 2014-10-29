@@ -64,7 +64,17 @@ var NutritionProfileSchema = new Schema({
     created: {
         type: Date,
         default: Date.now
-    }
+    },
+    templateMeals: [
+        {
+            id: {
+                type: Number
+            },
+            name: {
+                type: String
+            }
+        }
+    ]
 });
 
 mongoose.model('NutritionProfile', NutritionProfileSchema);

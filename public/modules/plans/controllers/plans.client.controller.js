@@ -24,7 +24,7 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
 
         $scope.allFoodsInitial = [];
 
-        $scope.nutritionProfile = NutritionProfile.get();
+
 
         $scope.foodTypes = [
             {id: 1, type: 'Fruit'},
@@ -97,10 +97,14 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
 		$scope.create = function() {
             var planDateAsString = new Date($scope.plan.planDateNonUtc).toUTCString();
             var planDate = new Date(planDateAsString);
-            var planSplit = planDate.toISOString().substr(0, 10).split('-');
-            var planDateYear = parseInt(planSplit[0]);
-            var planDateMonth = parseInt(planSplit[1]) - 1;
-            var planDateDay = parseInt(planSplit[2]);
+//            var planSplit = planDate.toISOString().substr(0, 10).split('-');
+//            var planDateYear = parseInt(planSplit[0]);
+//            var planDateMonth = parseInt(planSplit[1]) - 1;
+//            var planDateDay = parseInt(planSplit[2]);
+
+            var planDateYear = $scope.plan.planDateNonUtc.getFullYear();
+            var planDateMonth = $scope.plan.planDateNonUtc.getMonth();
+            var planDateDay = $scope.plan.planDateNonUtc.getDate();
 
 			var plan = new Plans({
 				//planDate: planDateAsString,
@@ -339,16 +343,23 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
 		$scope.update = function() {
 			var plan = $scope.plan;
 
+//            var planDateAsString = new Date($scope.plan.planDateNonUtc).toUTCString();
+//            var planDate = new Date(planDateAsString);
+//            var planSplit = planDate.toISOString().substr(0, 10).split('-');
+//            var planDateYear = parseInt(planSplit[0]);
+//            var planDateMonth = parseInt(planSplit[1]) - 1;
+//            var planDateDay = parseInt(planSplit[2]);
+
             var planDateAsString = new Date($scope.plan.planDateNonUtc).toUTCString();
             var planDate = new Date(planDateAsString);
-            var planSplit = planDate.toISOString().substr(0, 10).split('-');
-            var planDateYear = parseInt(planSplit[0]);
-            var planDateMonth = parseInt(planSplit[1]) - 1;
-            var planDateDay = parseInt(planSplit[2]);
+            var planDateYear = $scope.plan.planDateNonUtc.getFullYear();
+            var planDateMonth = $scope.plan.planDateNonUtc.getMonth();
+            var planDateDay = $scope.plan.planDateNonUtc.getDate();
 
             plan.planDateYear = planDateYear;
             plan.planDateMonth = planDateMonth;
             plan.planDateDay = planDateDay;
+
             plan.planDateAsMili = planDate.getTime();
             plan.planDateAsConcat = parseInt(planDateYear + '' + (planDateMonth < 10 ? '0' + planDateMonth : planDateMonth) + '' + (planDateDay < 10 ? '0' + planDateDay : planDateDay)),
 
@@ -442,60 +453,73 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
         };
 
 		$scope.findOne = function() {
+            $scope.nutritionProfile = NutritionProfile.get(function(){
+                if ($stateParams.planId) {
+                    $scope.plan = Plans.get({
+                        planId: $stateParams.planId
+                    }, function (u, getResponseHeaders) {
+                        if (!$scope.plan.planDateNonUtc){
+                            $scope.plan.planDateNonUtc = $scope.plan.planDate;
+                        }
 
-            if ($stateParams.planId) {
-                $scope.plan = Plans.get({
-                    planId: $stateParams.planId
-                }, function (u, getResponseHeaders) {
-                    if (!$scope.plan.planDateNonUtc){
-                        $scope.plan.planDateNonUtc = $scope.plan.planDate;
-                    }
+                        setCurrentDeficit();
 
-                    setCurrentDeficit();
+                        $scope.isUserAdmin = $scope.plan.userRoles && $scope.plan.userRoles.indexOf('admin') !== -1 ? true : false;
 
-                    $scope.isUserAdmin = $scope.plan.userRoles && $scope.plan.userRoles.indexOf('admin') !== -1 ? true : false;
+                        setPlanMealsTotals();
 
-                    setPlanMealsTotals();
+                        fillActivityPlan();
+                    });
+                }
+                else{
+                    var now = new Date();
+                    $scope.plan =  {data: null, meals: null, notes: null, planDate: new Date(), planDateNonUtc: now, planDateYear: now.getFullYear(), planDateMonth: now.getMonth(), planDateDay: now.getDate()  };
+                    $scope.plan.meals = [];
+
+                    $scope.plan.totalPlanCalories = 0;
+                    $scope.plan.totalPlanCarbsAsPercent = 0;
+                    $scope.plan.totalPlanFatAsPercent = 0;
+                    $scope.plan.totalPlanProteinAsPercent = 0;
+
+                    //todo use ngRouter instead of this horrible method for extracting url param
+                    setPlanDateFromUrlParam();
+
+                    createDefaultMealsTemplate();
 
                     fillActivityPlan();
-                });
-            }
-            else{
-                $scope.plan =  {data: null, meals: null, notes: null, planDate: new Date(), planDateNonUtc: new Date() };
-                $scope.plan.meals = [];
 
-                $scope.plan.totalPlanCalories = 0;
-                $scope.plan.totalPlanCarbsAsPercent = 0;
-                $scope.plan.totalPlanFatAsPercent = 0;
-                $scope.plan.totalPlanProteinAsPercent = 0;
+                    $scope.plan.moveArrowImgLeft = false;
+                }
+            });
 
-                //todo use ngRouter instead of this horrible method for extracting url param
-                setPlanDateFromUrlParam();
 
-//                $scope.allFoods = Foods.query(function(){
-//                   createDefaultMealsTemplate();
-//                });
-
-                createDefaultMealsTemplate();
-
-                fillActivityPlan();
-
-                $scope.plan.moveArrowImgLeft = false;
-            }
 		};
 
         var createDefaultMealsTemplate = function(){
-            $scope.createMeal(null, true);
-            $scope.createMeal(null, true);
-            $scope.createMeal(null, true);
+            //create meal template based on what user specified in their nutrition profile
+            if($scope.nutritionProfile.templateMeals && $scope.nutritionProfile.templateMeals.length > 0){
+                for(var t = 0; t < $scope.nutritionProfile.templateMeals.length; t++){
+                    var templateMealItem = $scope.nutritionProfile.templateMeals[t];
 
-            $scope.plan.meals[0].isEditable = false;
-            $scope.plan.meals[1].type = $scope.mealTypes[1].id;
-            $scope.plan.meals[1].isEditable = false;
-            $scope.plan.meals[2].isEditable = false;
-            $scope.plan.meals[2].type = $scope.mealTypes[2].id;
+                    $scope.createMeal(null, true);
+
+                    $scope.plan.meals[t].isEditable = false;
+                    $scope.plan.meals[t].type = $scope.mealTypes[templateMealItem.id - 1].id;
+                }
+            }
+            //create breakfast, lunch, and dinner as default empty meals for plan
+            else {
+                $scope.createMeal(null, true);
+                $scope.createMeal(null, true);
+                $scope.createMeal(null, true);
+
+                $scope.plan.meals[0].isEditable = false;
+                $scope.plan.meals[1].type = $scope.mealTypes[1].id;
+                $scope.plan.meals[1].isEditable = false;
+                $scope.plan.meals[2].isEditable = false;
+                $scope.plan.meals[2].type = $scope.mealTypes[2].id;
+            }
         };
-
 
         var interval;
         $scope.$watch('plan.meals.length', function(){
