@@ -197,9 +197,10 @@ angular.module('activities').controller('ActivitiesController', ['$scope', '$sta
 //            var planDateDay = parseInt(planSplit[2]);
             var planDateAsString = new Date($scope.plan.planDateNonUtc).toUTCString();
             var planDate = new Date(planDateAsString);
-            var planDateYear = $scope.plan.planDateNonUtc.getFullYear();
-            var planDateMonth = $scope.plan.planDateNonUtc.getMonth();
-            var planDateDay = $scope.plan.planDateNonUtc.getDate();
+            var planDateToSave = new Date($scope.plan.planDateNonUtc);
+            var planDateYear = planDateToSave.getFullYear();
+            var planDateMonth = planDateToSave.getMonth();
+            var planDateDay = planDateToSave.getDate();
 
             var planDateYear = planDateYear;
             var planDateMonth = planDateMonth;
@@ -332,9 +333,10 @@ angular.module('activities').controller('ActivitiesController', ['$scope', '$sta
 //            plan.planDateDay = planDateDay;
             var planDateAsString = new Date($scope.plan.planDateNonUtc).toUTCString();
             var planDate = new Date(planDateAsString);
-            var planDateYear = $scope.plan.planDateNonUtc.getFullYear();
-            var planDateMonth = $scope.plan.planDateNonUtc.getMonth();
-            var planDateDay = $scope.plan.planDateNonUtc.getDate();
+            var planDateToSave = new Date($scope.plan.planDateNonUtc);
+            var planDateYear = planDateToSave.getFullYear();
+            var planDateMonth = planDateToSave.getMonth();
+            var planDateDay = planDateToSave.getDate();
 
             plan.planDateYear = planDateYear;
             plan.planDateMonth = planDateMonth;
