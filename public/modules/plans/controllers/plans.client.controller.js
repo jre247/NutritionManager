@@ -467,8 +467,9 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
         };
 
 		$scope.findOne = function() {
+            $scope.isLoading = true;
+
             $scope.nutritionProfile = NutritionProfile.get(function(){
-                $scope.isLoading = true;
                 if ($stateParams.planId) {
                     $scope.plan = Plans.get({
                         planId: $stateParams.planId
