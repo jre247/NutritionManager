@@ -571,7 +571,7 @@ angular.module('activities').controller('ActivitiesController', ['$scope', '$sta
 
         //sorting code
         // data
-        $scope.orderByField = 'planDateAsMili';
+        $scope.orderByField = 'planDateAsConcat';
         $scope.reverseSort = true;
         scope.plansCollection = [];
 

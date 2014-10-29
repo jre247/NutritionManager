@@ -29,7 +29,7 @@ angular.module('bodyStats').controller('BodyStatsController', ['$scope', '$state
 
         $scope.initDate = new Date('2016-15-20');
 
-        $scope.create = function() {
+        $scope.s function() {
 //            var planDateAsString = $scope.plan.planDateNonUtc.toUTCString();
 //            var planDate = new Date(planDateAsString);
 //
