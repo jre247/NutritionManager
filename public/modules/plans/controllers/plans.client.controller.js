@@ -420,7 +420,15 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
 
                             CoreUtilities.calculatePlanTotalMacros($scope.plans[i]);
 
+                            var planFullDate = new Date($scope.plans[i].planDateNonUtc);
+                            var planDateYear = planFullDate.getFullYear();
+                            var planDateMonth = planFullDate.getMonth();
+                            var planDateDay = planFullDate.getDate();
+
                             var planModel = {
+                                planDateYear: planDateYear,
+                                planDateMonth: planDateMonth,
+                                planDateDay: planDateDay,
                                 planDateNonUtc: $scope.plans[i].planDateNonUtc || $scope.plans[i].planDate,
                                 planDateAsMili: $scope.plans[i].planDateAsMili,
                                 planDateAsConcat: $scope.plans[i].planDateAsConcat,

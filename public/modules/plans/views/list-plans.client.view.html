@@ -10,7 +10,7 @@
             </button>
         </a>
     </div>
-    <div class="list-group" style="padding-top: 40px;">
+    <div class="list-group hidden-xs" style="padding-top: 40px;">
         <div style="font-weight: bold;">
             <div style="width: 16%; display: inline-block;padding-left:16px;" class="headerColumn"
                data-ng-click="orderByField='planDateNonUtc'; reverseSort = !reverseSort">
@@ -59,13 +59,7 @@
                             <div style="color: rgb(33, 51, 184);display:inline-block;text-align: right;width: 19%;margin-left: 2px;">
                                 <span data-ng-bind="plan.fat | number:0"></span>g
                             </div>
-
-
-
-
                         </div>
-
-
                     </div>
                 </a>
                 <div data-ng-show="isLoading || isMoreLoading" style="height: 336px;">
@@ -75,7 +69,6 @@
                 <div style="margin-top: 10px;" data-ng-show="plansCollection && plansCollection.length >= 14 && !hideMorePlansLink" data-ng-click="nextPlans()">
                     <a>More Plans</a>
                 </div>
-
             </div>
         </div>
 
@@ -83,6 +76,57 @@
 
 
     </div>
+
+    <div class="visible-xs">
+        <a data-ng-repeat="plan in plansCollection | orderBy:orderByField:reverseSort" data-ng-href="#!/plans/{{plan._id}}" class="list-group-item">
+            <div>
+
+                <h4 class="list-group-item-heading" >
+                    <span data-ng-bind="(plan.planDateMonth + 1) + '/' + plan.planDateDay + '/' + plan.planDateYear"></span>
+
+                </h4>
+
+                <div style="margin-left: 40px;">
+
+                    <div >
+                        <div class="carbsColorLbl" style="display:inline-block; font-weight:bold; width: 50px;"  >
+                            <span>Carbs:</span>
+                        </div>
+
+                        <div class="list-group-item-text carbsColor" style="display:inline-block;padding-left: 10px;">
+                            <span data-ng-bind="plan.carbs | number:0"></span>g
+                        </div>
+                    </div>
+                    <div >
+                        <div class="proteinColorLbl" style="display:inline-block; font-weight:bold;width: 50px;" >
+                            <span>Protein:</span>
+                        </div>
+
+                        <div class="list-group-item-text proteinColor" style="padding-left: 10px;display:inline-block;">
+                            <span data-ng-bind="plan.protein | number:0"></span>g
+                        </div>
+                    </div>
+                    <div>
+                        <div class="fatColorLbl" style="display:inline-block; font-weight:bold; width: 50px;" >
+                            <span>Fat:</span>
+                        </div>
+
+                        <div class="list-group-item-text fatColor" style="display:inline-block;padding-left: 10px;">
+                            <span data-ng-bind="plan.fat | number:0"></span>g
+                        </div>
+                    </div>
+                </div>
+                <div style="color: rgb(33, 51, 184);font-weight:bold;margin-left: 40px;margin-top: 18px;">
+                    Calories: <span data-ng-bind="plan.calories | number:0"></span>
+                </div>
+
+            </div>
+        </a>
+        <div style="margin-top: 10px;" data-ng-show="plansCollection && plansCollection.length >= 14 && !hideMorePlansLink" data-ng-click="nextPlans()">
+            <a>More Plans</a>
+        </div>
+    </div>
+
     <div class="alert alert-warning text-center" data-ng-if="plans.$resolved && !plansCollection.length">
         No plans yet, why don't you <a href="/#!/plans/create">create one</a>?
     </div>
