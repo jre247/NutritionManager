@@ -28,7 +28,7 @@
                         <button type="button" class="btn btn-primary btn-m" style="padding: 6px 10px;"  data-ng-click="createMeal(true);">
                             <span class="glyphicon glyphicon-plus" ></span><span class="hidden-xs"> Add Meal</span>
                         </button>
-                        <div data-ng-show="!plan.meals || plan.meals.length == 0">
+                        <div data-ng-show="(!plan.meals || plan.meals.length == 0) && !isLoading">
                             <span style="font-size: 25px;" data-ng-class="{arrowImgMoveLeft: plan.moveArrowImgLeft}"  class="glyphicon glyphicon-arrow-up"></span>
                         </div>
                     </div>
@@ -73,12 +73,17 @@
 
 
         <fieldset id="wrapper" >
-            <div data-ng-show="!plan.meals || plan.meals.length == 0" class="emptyPlanMealsTxt">
-                Press the plus button above to create your first meal.
+            <!--<div data-ng-show="(!plan.meals || plan.meals.length == 0) && !isLoading" class="emptyPlanMealsTxt">-->
+                <!--Press the plus button above to create your first meal.-->
+            <!--</div>-->
+
+
+            <div data-ng-show="isLoading" style="height: 336px;">
+                <img width="25" height="25" src="/modules/core/img/loaders/loader.gif">
             </div>
 
 
-            <div id="content" class="form-group planContent" style="overflow-y: auto;overflow-x:hidden; margin-bottom: 3px;">
+            <div data-ng-show="!isLoading" id="content" class="form-group planContent" style="overflow-y: auto;overflow-x:hidden; margin-bottom: 3px;">
                 <accordion sortable="sortableOptions" disableallelementsbydefault="true" updateCallback="sortableUpdateCallback" startCallback="sortableStartCallback" rootSortableElement=".panel-group" ng-show="plan.meals.length > 0"  class="plansAccordion" style="..." close-others="oneAtATime">
                     <accordion-group data-ng-repeat="meal in plan.meals" is-open="meal.isVisible">
                         <accordion-heading>
@@ -108,6 +113,7 @@
 
                             </div>
                         </accordion-heading>
+
 
                         <div class="planMealDesktop">
 

@@ -201,25 +201,33 @@ exports.delete = function(req, res) {
 /**
  * List of Plans
  */
-exports.list = function(req, res) {
-    Plan.find({
-        user:req.user.id // Search Filters
-    })
-    .sort({
-            planDateAsConcat: -1
-    })
-    .populate('user', 'displayName').exec(function(err, plans) {
-        if (err) {
-            return res.send(400, {
-                message: getErrorMessage(err)
+exports.list = function(req, res, skipPlans) {
+    var nSkip = req.param('skipPlans') || 0;
+
+    //Plan.count({user:req.user.id}, function(err, count)
+    //{
+        Plan.find({
+            user:req.user.id // Search Filters
+        })
+            .skip(nSkip).limit(14)
+            .sort({
+                planDateAsConcat: -1
+            })
+            .populate('user', 'displayName').exec(function(err, plans) {
+                if (err) {
+                    return res.send(400, {
+                        message: getErrorMessage(err)
+                    });
+                } else {
+                    res.jsonp(plans);
+
+
+
+                }
             });
-        } else {
-            res.jsonp(plans);
+    //});
 
 
-
-        }
-    });
 
 };
 
