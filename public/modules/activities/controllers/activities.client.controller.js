@@ -348,7 +348,8 @@ angular.module('activities').controller('ActivitiesController', ['$scope', '$sta
             plan.planDateAsMili = planDate.getTime();
             plan.planDateAsConcat = parseInt(planDateYear + '' + (planDateMonth < 10 ? '0' + planDateMonth : planDateMonth) + '' + (planDateDay < 10 ? '0' + planDateDay : planDateDay));
 
-            plan.$update(function(data) {
+            plan.$update(function(response) {
+                plan.planDateNonUtc = new Date(response.planDateAsMili);
                 $scope.planExistsInDb = false;
                 $scope.success = true;
 
@@ -410,9 +411,7 @@ angular.module('activities').controller('ActivitiesController', ['$scope', '$sta
                 $scope.plan = Activities.get({
                     activityId: $stateParams.activityId
                 }, function (u, getResponseHeaders) {
-                    if (!$scope.plan.planDateNonUtc){
-                        $scope.plan.planDateNonUtc = new Date($scope.plan.planDateYear, $scope.plan.planDateMonth, $scope.plan.planDateDay);
-                    }
+                    $scope.plan.planDateNonUtc = new Date($scope.plan.planDateAsMili);
 
                     $scope.isUserAdmin = $scope.plan.userRoles && $scope.plan.userRoles.indexOf('admin') !== -1 ? true : false;
 

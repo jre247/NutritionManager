@@ -140,7 +140,8 @@ angular.module('bodyStats').controller('BodyStatsController', ['$scope', '$state
             plan.weight = plan.weight;
             plan.bodyFatPercentage = plan.bodyFatPercentage;
 
-            plan.$update(function() {
+            plan.$update(function(response) {
+                plan.planDateNonUtc = new Date(response.planDateAsMili);
                 $scope.success = true;
 
                 $timeout(function(){$scope.success = false;}, 3000);
@@ -158,8 +159,6 @@ angular.module('bodyStats').controller('BodyStatsController', ['$scope', '$state
 
                 }
             );
-
-
         };
 
         $scope.findOne = function() {
@@ -167,13 +166,9 @@ angular.module('bodyStats').controller('BodyStatsController', ['$scope', '$state
                 $scope.plan = BodyStats.get({
                     bodyStatId: $stateParams.bodyStatId
                 }, function (u, getResponseHeaders) {
-                    if (!$scope.plan.planDateNonUtc){
-                        $scope.plan.planDateNonUtc = $scope.plan.planDate;
-                    }
+                    $scope.plan.planDateNonUtc = new Date($scope.plan.planDateAsMili);
 
                     $scope.isUserAdmin = $scope.plan.userRoles && $scope.plan.userRoles.indexOf('admin') !== -1 ? true : false;
-
-
                 });
             }
             else{

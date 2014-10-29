@@ -366,7 +366,9 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
             plan.planDateAsMili = planDate.getTime();
             plan.planDateAsConcat = parseInt(planDateYear + '' + (planDateMonth < 10 ? '0' + planDateMonth : planDateMonth) + '' + (planDateDay < 10 ? '0' + planDateDay : planDateDay)),
 
-            plan.$update(function() {
+            plan.$update(function(response) {
+                plan.planDateNonUtc = new Date(response.planDateAsMili);
+
 				//$location.path('plans/' + plan._id);
                 for (var i = 0; i < $scope.plan.meals.length; i++){
                     for (var j = 0; j < $scope.plan.meals[i].foods.length; j++){
@@ -461,9 +463,7 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
                     $scope.plan = Plans.get({
                         planId: $stateParams.planId
                     }, function (u, getResponseHeaders) {
-                        if (!$scope.plan.planDateNonUtc){
-                            $scope.plan.planDateNonUtc = $scope.plan.planDate;
-                        }
+                        $scope.plan.planDateNonUtc = new Date($scope.plan.planDateAsMili);
 
                         setCurrentDeficit();
 
