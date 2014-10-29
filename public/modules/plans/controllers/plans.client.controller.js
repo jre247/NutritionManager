@@ -26,6 +26,7 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
         });
 
         $scope.allFoodsInitial = [];
+        var plansToGet = 14;
 
 
 
@@ -402,7 +403,6 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
 			});
 		};
 
-
 		$scope.find = function(getMorePlans) {
             if(!getMorePlans) {
                 $scope.isLoading = true;
@@ -439,6 +439,10 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
                         }
                         else {
                             $scope.isMoreLoading = false;
+                        }
+
+                        if(data.length < plansToGet){
+                            $scope.hideMorePlansLink = true;
                         }
                     }
                     else{
@@ -832,7 +836,7 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
 
         $scope.nextPlans =function(){
             $scope.isMoreLoading = true;
-            $scope.skipPlans += 14;
+            $scope.skipPlans += plansToGet;
 
             $scope.find(true);
         };

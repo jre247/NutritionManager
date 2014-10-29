@@ -4,7 +4,6 @@
     <list default="true" id="99afd44b-0014-4bff-855e-4d01f0b1305f" name="Default" comment="create plan page is close to finished. Now trying to wire up view/edit plan page. Trying to make it all common html.">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/dist/application.min.js" afterPath="$PROJECT_DIR$/public/dist/application.min.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/modules/plans/controllers/plans.client.controller.js" afterPath="$PROJECT_DIR$/public/modules/plans/controllers/plans.client.controller.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/modules/plans/views/view-plan.client.view.html" afterPath="$PROJECT_DIR$/public/modules/plans/views/view-plan.client.view.html" />
     </list>
     <ignored path="NutritionManager.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -27,11 +26,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="application.min.js" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="application.min.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/dist/application.min.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.9682875" vertical-offset="40964" max-vertical-offset="98625">
-              <caret line="2792" column="0" selection-start-line="2792" selection-start-column="0" selection-end-line="2792" selection-end-column="0" />
+            <state vertical-scroll-proportion="-35.23077" vertical-offset="41024" max-vertical-offset="98670">
+              <caret line="2796" column="0" selection-start-line="2796" selection-start-column="0" selection-end-line="2796" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -70,14 +69,14 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="plans.client.controller.js" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="plans.client.controller.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/public/modules/plans/controllers/plans.client.controller.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="7043" max-vertical-offset="15210">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.49154335" vertical-offset="5865" max-vertical-offset="15270">
+              <caret line="422" column="45" selection-start-line="0" selection-start-column="0" selection-end-line="1086" selection-end-column="0" />
               <folding>
-                <element signature="e#31713#33757#0" expanded="false" />
-                <element signature="e#40009#40728#0" expanded="false" />
+                <element signature="e#31891#33935#0" expanded="false" />
+                <element signature="e#40187#40906#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -159,8 +158,8 @@
     <initial>false</initial>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="1295" />
-    <option name="y" value="82" />
+    <option name="x" value="1346" />
+    <option name="y" value="178" />
     <option name="width" value="1904" />
     <option name="height" value="1105" />
   </component>
@@ -453,7 +452,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="1295" y="82" width="1904" height="1105" extended-state="0" />
+    <frame x="1346" y="178" width="1904" height="1105" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Grunt" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
@@ -1019,7 +1018,7 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="211" max-vertical-offset="1110">
           <caret line="50" column="30" selection-start-line="50" selection-start-column="30" selection-end-line="50" selection-end-column="30" />
           <folding>
-            <element signature="n#!!doc" expanded="true" />
+            <element signature="n#!!doc" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1115,22 +1114,22 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/modules/plans/controllers/plans.client.controller.js">
+    <entry file="file://$PROJECT_DIR$/public/dist/application.min.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="7043" max-vertical-offset="15210">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#31713#33757#0" expanded="false" />
-            <element signature="e#40009#40728#0" expanded="false" />
-          </folding>
+        <state vertical-scroll-proportion="-35.23077" vertical-offset="41024" max-vertical-offset="98670">
+          <caret line="2796" column="0" selection-start-line="2796" selection-start-column="0" selection-end-line="2796" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/dist/application.min.js">
+    <entry file="file://$PROJECT_DIR$/public/modules/plans/controllers/plans.client.controller.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.9682875" vertical-offset="40964" max-vertical-offset="98625">
-          <caret line="2792" column="0" selection-start-line="2792" selection-start-column="0" selection-end-line="2792" selection-end-column="0" />
-          <folding />
+        <state vertical-scroll-proportion="0.49154335" vertical-offset="5865" max-vertical-offset="15270">
+          <caret line="422" column="45" selection-start-line="0" selection-start-column="0" selection-end-line="1086" selection-end-column="0" />
+          <folding>
+            <element signature="e#31891#33935#0" expanded="false" />
+            <element signature="e#40187#40906#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
