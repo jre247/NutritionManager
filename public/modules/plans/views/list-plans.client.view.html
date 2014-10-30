@@ -78,7 +78,11 @@
     </div>
 
     <div class="visible-xs">
-        <a data-ng-repeat="plan in plansCollection | orderBy:orderByField:reverseSort" data-ng-href="#!/plans/{{plan._id}}" class="list-group-item">
+        <div data-ng-show="isLoading" style="height: 336px;">
+            <img width="25" height="25" src="/modules/core/img/loaders/loader.gif">
+        </div>
+
+        <a data-ng-show="!isLoading" data-ng-repeat="plan in plansCollection | orderBy:orderByField:reverseSort" data-ng-href="#!/plans/{{plan._id}}" class="list-group-item">
             <div>
 
                 <h4 class="list-group-item-heading" >
