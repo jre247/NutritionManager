@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="99afd44b-0014-4bff-855e-4d01f0b1305f" name="Default" comment="create plan page is close to finished. Now trying to wire up view/edit plan page. Trying to make it all common html.">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/layout.server.view.html" afterPath="$PROJECT_DIR$/app/views/layout.server.view.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/modules/plans/views/list-plans.client.view.html" afterPath="$PROJECT_DIR$/public/modules/plans/views/list-plans.client.view.html" />
     </list>
     <ignored path="NutritionManager.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -92,8 +91,8 @@
       <file leaf-file-name="layout.server.view.html" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/views/layout.server.view.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.47288775" vertical-offset="6015" max-vertical-offset="7050">
-              <caret line="426" column="7" selection-start-line="426" selection-start-column="7" selection-end-line="426" selection-end-column="7" />
+            <state vertical-scroll-proportion="0.6998739" vertical-offset="5910" max-vertical-offset="7050">
+              <caret line="431" column="35" selection-start-line="431" selection-start-column="35" selection-end-line="431" selection-end-column="35" />
               <folding />
             </state>
           </provider>
@@ -1234,8 +1233,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/views/layout.server.view.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.47288775" vertical-offset="6015" max-vertical-offset="7050">
-          <caret line="426" column="7" selection-start-line="426" selection-start-column="7" selection-end-line="426" selection-end-column="7" />
+        <state vertical-scroll-proportion="0.6998739" vertical-offset="5910" max-vertical-offset="7050">
+          <caret line="431" column="35" selection-start-line="431" selection-start-column="35" selection-end-line="431" selection-end-column="35" />
           <folding />
         </state>
       </provider>
