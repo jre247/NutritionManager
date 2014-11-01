@@ -70,7 +70,8 @@ exports.create = function(req, res) {
                 bodyFatPercentage: nutritionProfile.bodyFatPercentage,
                 user: req.user,
                 userRoles: req.user.roles,
-                templateMeals: req.templateMeals
+                templateMeals: req.templateMeals,
+                hideWeightOnHomeScreen: req.hideWeightOnHomeScreen
             });
 
             plan.save(function(err) {
@@ -122,6 +123,7 @@ exports.update = function(req, res) {
             nutritionProfile.carbohydratesPercentageTarget = req.body.carbohydratesPercentageTarget;
             nutritionProfile.fatPercentageTarget = req.body.fatPercentageTarget;
             nutritionProfile.proteinPercentageTarget = req.body.proteinPercentageTarget;
+            nutritionProfile.hideWeightOnHomeScreen = req.body.hideWeightOnHomeScreen;
 
             nutritionProfile.age = req.body.age;
             nutritionProfile.weight = req.body.weight;

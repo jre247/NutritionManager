@@ -315,7 +315,7 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
 
             var goalCalories = parseFloat(((deficit - deficitTarget) + caloriesIn).toFixed(0));
             ThermometerChartService.buildThermometerChart(caloriesIn, goalCalories, '.budgetChart', isUpdate);
-        }
+        };
 
         $scope.getDailyDashboardData = function(isUpdate) {
             CoreService.getDailyDashboardData($scope.planDateForDb).then(function(data){
@@ -374,6 +374,7 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
                 }
                 else{
                     $scope.showEnterDailyWeight = false;
+
                     $scope.dailyBodyStats = data.dailyBodyStats;
                 }
             });

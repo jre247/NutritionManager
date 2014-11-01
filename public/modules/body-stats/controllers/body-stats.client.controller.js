@@ -113,17 +113,6 @@ angular.module('bodyStats').controller('BodyStatsController', ['$scope', '$state
         $scope.update = function() {
             var plan = $scope.plan;
 
-//            var planDateAsString = new Date($scope.plan.planDateNonUtc).toUTCString();
-//            var planDate = new Date(planDateAsString);
-//
-//            var planSplit = planDate.toISOString().substr(0, 10).split('-');
-//            var planDateYear = parseInt(planSplit[0]);
-//            var planDateMonth = parseInt(planSplit[1]) - 1;
-//            var planDateDay = parseInt(planSplit[2]);
-//
-//            plan.planDateYear = planDateYear;
-//            plan.planDateMonth = planDateMonth;
-//            plan.planDateDay = planDateDay;
             var planDateAsString = new Date($scope.plan.planDateNonUtc);
             var planDate = new Date(planDateAsString);
             var planDateToSave = new Date($scope.plan.planDateNonUtc);
@@ -141,7 +130,7 @@ angular.module('bodyStats').controller('BodyStatsController', ['$scope', '$state
             plan.bodyFatPercentage = plan.bodyFatPercentage;
 
             plan.$update(function(response) {
-                plan.planDateNonUtc = new Date(response.planDateAsMili);
+                plan.planDateNonUtc = new Date(plan.planDateYear, plan.planDateMonth, plan.planDateDay);
                 $scope.success = true;
 
                 $timeout(function(){$scope.success = false;}, 3000);

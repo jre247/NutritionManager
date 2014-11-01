@@ -17,35 +17,35 @@
             <legend style="margin-bottom: 2px;">Macros Targets:</legend>
 
             <div class="form-group">
-                <div style="margin-left: 30px;">
+                <div class="row" style="margin-left:30px;">
 
-                    <div style="display:inline-block; width: 130px;">
+                    <div class="col-md-3" style="width: 170px;margin-right: 20px;">
                         <label class="control-label" for="deficitTarget">Deficit:</label>
                         <div class="controls">
-                            <input style="width: 60%;" type="text" data-ng-model="nutritionProfile.deficitTarget" id="deficitTarget" class="form-control"  required>
+                            <input style="margin-right: 10px;"  type="text" data-ng-model="nutritionProfile.deficitTarget" id="deficitTarget" class="form-control"  required>
                         </div>
                     </div>
 
-                    <div style="display:inline-block; width: 130px;">
+                    <div class="col-md-3" style="width: 170px;margin-right: 20px;">
                         <label class="control-label" for="proteinPercentageTarget">Protein %:</label>
                         <div class="controls">
-                            <input style="width: 60%;" type="text" data-ng-model="nutritionProfile.proteinPercentageTarget" id="proteinPercentageTarget" class="form-control" placeholder="Protein % Target" required>
+                            <input style="margin-right: 10px;"  type="text" data-ng-model="nutritionProfile.proteinPercentageTarget" id="proteinPercentageTarget" class="form-control" placeholder="Protein % Target" required>
                         </div>
                     </div>
 
 
 
-                    <div style="display:inline-block; width: 130px;">
+                    <div class="col-md-3" style="width: 170px;margin-right: 20px;">
                         <label class="control-label" for="carbohydratesPercentageTarget">Carbs %:</label>
                         <div class="controls">
-                            <input style="width: 60%;" type="text" data-ng-model="nutritionProfile.carbohydratesPercentageTarget" id="carbohydratesPercentageTarget" class="form-control" placeholder="Carbs % Target" required>
+                            <input style="margin-right: 10px;"  type="text" data-ng-model="nutritionProfile.carbohydratesPercentageTarget" id="carbohydratesPercentageTarget" class="form-control" placeholder="Carbs % Target" required>
                         </div>
                     </div>
 
-                    <div style="display:inline-block; width: 130px;">
+                    <div class="col-md-3" style="width: 170px;margin-right: 20px;">
                         <label class="control-label" for="fatPercentageTarget">Fat %:</label>
                         <div class="controls">
-                            <input style="width: 60%;" type="text" data-ng-model="nutritionProfile.fatPercentageTarget" id="fatPercentageTarget" class="form-control" placeholder="Fat % Target" required>
+                            <input style="margin-right: 10px;"  type="text" data-ng-model="nutritionProfile.fatPercentageTarget" id="fatPercentageTarget" class="form-control" placeholder="Fat % Target" required>
                         </div>
                     </div>
                 </div>
@@ -62,7 +62,7 @@
                     <div style="display:inline-block">
                         <label class="control-label" for="age">Age:</label>
                         <div class="controls">
-                            <input style="width: 70%;" type="text" data-ng-model="nutritionProfile.age" id="age" class="form-control" required>
+                            <input style="margin-right: 10px;" type="text" data-ng-model="nutritionProfile.age" id="age" class="form-control" required>
                         </div>
                     </div>
 
@@ -101,10 +101,10 @@
 
         </fieldset>
 
-        <fieldset style="margin-top: 30px;">
+        <fieldset style="margin-top: 30px;" >
             <legend style="margin-bottom: 2px;">Meals Template:</legend>
 
-            <button type="button" class="btn btn-primary btn-m" style="padding: 6px 10px;margin-top: 10px;margin-left: 15px;" data-ng-click="addMealToTemplateWithDialog()">
+            <button type="button" class="btn btn-primary btn-m hidden-xs" style="padding: 6px 10px;margin-top: 10px;margin-left: 15px;" data-ng-click="addMealToTemplateWithDialog()">
                 <span class="glyphicon glyphicon-plus" ></span> <span class="hidden-xs">Add Meal</span>
             </button>
 
@@ -127,6 +127,14 @@
                     </div>
 
                 </div>
+            </div>
+        </fieldset>
+
+        <fieldset>
+            <legend style="margin-bottom: 2px;">Customizations:</legend>
+            <div style="margin-top: 10px">
+                <label for="hideWeightOnHomeScreen"> Hide Weight on Home Screen:</label>
+                <input id="hideWeightOnHomeScreen" type="checkbox" data-ng-model="nutritionProfile.hideWeightOnHomeScreen" />
             </div>
         </fieldset>
 

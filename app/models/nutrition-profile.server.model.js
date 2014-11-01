@@ -74,7 +74,11 @@ var NutritionProfileSchema = new Schema({
                 type: String
             }
         }
-    ]
+    ],
+    hideWeightOnHomeScreen:{
+        type: Boolean,
+        default: false
+    }
 });
 
 mongoose.model('NutritionProfile', NutritionProfileSchema);

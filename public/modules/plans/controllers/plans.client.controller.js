@@ -349,13 +349,6 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
 		$scope.update = function() {
 			var plan = $scope.plan;
 
-//            var planDateAsString = new Date($scope.plan.planDateNonUtc).toUTCString();
-//            var planDate = new Date(planDateAsString);
-//            var planSplit = planDate.toISOString().substr(0, 10).split('-');
-//            var planDateYear = parseInt(planSplit[0]);
-//            var planDateMonth = parseInt(planSplit[1]) - 1;
-//            var planDateDay = parseInt(planSplit[2]);
-
             var planDateAsString = new Date($scope.plan.planDateNonUtc);
             var planDate = new Date(planDateAsString);
             var planDateToSave = new Date($scope.plan.planDateNonUtc);
@@ -372,7 +365,7 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
             plan.planDateAsConcat = parseInt(planDateYear + '' + (planDateMonth < 10 ? '0' + planDateMonth : planDateMonth) + '' + (planDateDay < 10 ? '0' + planDateDay : planDateDay)),
 
             plan.$update(function(response) {
-                plan.planDateNonUtc = new Date(response.planDateAsMili);
+                plan.planDateNonUtc = new Date(plan.planDateYear, plan.planDateMonth, plan.planDateDay);
 
 				//$location.path('plans/' + plan._id);
                 for (var i = 0; i < $scope.plan.meals.length; i++){
