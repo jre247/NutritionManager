@@ -33,7 +33,12 @@ angular.module('manageUserItems').controller('ManageUserItemsController', ['$sco
 
         $scope.clearFoodInput = function(){
             $scope.foodSearchTxt = '';
-            $scope.foodInputChange();
+
+            $scope.userFoodsDisplay = [];
+
+            for(var f = 0; f < $scope.userFoodsModel.userFoods.length; f++){
+                $scope.userFoodsDisplay.push($scope.userFoodsModel.userFoods[f]);
+            }
         };
 
         $scope.deleteFood = function(food){
