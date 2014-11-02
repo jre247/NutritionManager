@@ -60,6 +60,24 @@ exports.read = function(req, res) {
     res.jsonp(req.food);
 };
 
+var updateFoodFromDb = function(foodNew, foodOld){
+    foodOld.calories = foodNew.calories;
+    foodOld.protein = foodNew.protein;
+    foodOld.fat = foodNew.fat;
+    foodOld.saturatedFat = foodNew.saturatedFat;
+    foodOld.fiber = foodNew.fiber;
+    foodOld.cholesterol = foodNew.cholesterol;
+    foodOld.sugar = foodNew.sugar;
+    foodOld.sodium = foodNew.sodium;
+    foodOld.vitaminA = foodNew.vitaminA;
+    foodOld.vitaminC = foodNew.vitaminC;
+    foodOld.calcium = foodNew.calcium;
+    foodOld.iron = foodNew.iron;
+    foodOld.carbohydrates = foodNew.carbohydrates;
+    foodOld.grams = foodNew.grams;
+   // foodOld.milliliters = foodNew.milliliters;
+};
+
 /**
  * Update a food
  */
@@ -76,6 +94,32 @@ exports.update = function(req, res) {
                 message: getErrorMessage(err)
             });
         } else {
+//            //save food across all user plans and user "my foods"
+//            UserFoods.find().exec(function(err, userFoodsDb){
+//                if (err) {
+//                    return res.send(400, {
+//                        message: getErrorMessage(err)
+//                    });
+//                } else {
+//                    if(userFoodsDb) {
+//                        for(var u = 0; u < userFoodsDb.length; u++){
+//                            var userFoodIds = userFoodsDb[u].userFoods;
+//
+//                            for(var f = 0; f < userFoodIds.length; f++){
+//                                var userFoodCompare = userFoodIds[f];
+//                                if(userFoodCompare.id === food.id){
+//                                    updateFoodFromDb(food, userFoodCompare);
+//                                }
+//                            }
+//
+//                        }
+//
+//                        res.jsonp(food);
+//                    }
+//
+//                }
+//            });
+
             res.jsonp(food);
         }
     });

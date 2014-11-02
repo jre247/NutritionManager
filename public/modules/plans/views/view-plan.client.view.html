@@ -533,37 +533,42 @@
 
                                 <input style="width: 80px;" data-ng-change="servingsChange()" data-ng-model="selected.servings" type="text"/>
                             </div>
-                            <div style="margin-top: 20px;display:inline-block;padding-left:35px;padding-right: 20px;">
-                                <div style="font-weight:bold;">Calories:</div>
-                                <span style="font-size: 18px;" data-ng-bind="selected.caloriesDisplay | number: 0"></span>
-                            </div>
+
 
                             <div style="display:inline-block;">
-                                <div style="padding-top:10px;" data-ng-show="foodServingTypes && foodServingTypes.length > 1">
-                                    <span style="font-weight: bold;position: relative;bottom: 3px;">Serving Desc.:</span>
+                                <div style="padding-top:10px;padding-left: 30px;" data-ng-show="foodServingTypes && foodServingTypes.length > 1">
+                                    <span style="font-weight: bold;position: relative;bottom: 3px;">Serving Type:</span>
                                     <br/>
                                     <select style="font-size:18px;" data-ng-model="selected.servingType" data-ng-change="servingTypeChange();"
                                             ng-options="t.id as t.description for t in foodServingTypes"></select>
                                 </div>
                             </div>
 
-                            <div style="display:inline-block;">
+                            <div style="display:inline-block;padding-left: 30px;">
                                 <div style="padding-top:10px;" data-ng-show="foodServingTypes && foodServingTypes.length <= 1">
-                                    <span style="font-weight: bold;">Serving Desc.:</span>
+                                    <span style="font-weight: bold;">Serving Type:</span>
                                     <br/>
                                     <span style="font-size: 18px;"  data-ng-bind="selected.foodToAdd.servingDescription1"></span>
                                 </div>
                             </div>
-                            <!--<div style="margin-top: 20px;display:inline-block;padding-left:40px;"-->
-                               <!--data-ng-show="selected.foodToAdd ? selected.foodToAdd.servingDescription.toLowerCase() !== '1 serving' : selected.servingDescription.toLowerCase() !== '1 serving'">-->
-                                <!--<div>-->
-                                    <!--<span style="font-weight:bold">1 Serving: </span>-->
-                                <!--</div>-->
-                                <!--<span style="font-size: 18px;" data-ng-bind="selected.foodToAdd ? selected.foodToAdd.servingDescription : selected.servingDescription"></span>-->
-                            <!--</div>-->
+
+
+                            <div style="color: rgb(33, 51, 184)">
+                                <div style="margin-top: 20px;padding-right: 25px;display:inline-block;">
+                                    <span style="font-weight:bold;">Calories:</span>
+                                    <span  data-ng-bind="selected.caloriesDisplay | number: 0"></span>
+                                </div>
+
+                                <div style="display:inline-block;padding-top:5px;">
+                                    <span  style="font-weight:bold;">Total Grams:</span>
+
+                                    <span>{{gramsDisplay}}</span>
+
+                                </div>
+                            </div>
 
                             <div>
-                                <div style="padding-top: 7px;display:inline-block;">
+                                <div style="padding-top: 2px;display:inline-block;">
                                     <div style="display:inline-block;padding-right:10px;">
                                         <div style="padding-top: 15px;color:rgb(36, 124, 36)">
                                             <span style="font-weight:bold;">Total Fat:</span>

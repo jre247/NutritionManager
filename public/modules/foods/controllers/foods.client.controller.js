@@ -15,6 +15,12 @@ angular.module('foods').controller('FoodsController', ['$scope', '$stateParams',
         $scope.successLoading = false;
         $scope.isLoading = false;
 
+        $scope.selectedTab = 'allFoods';
+
+        $scope.selectTab = function(tabName){
+            $scope.selectedTab = tabName;
+        };
+
         $scope.foodTypes = [
             {id: 1, type: 'Fruit'},
             {id: 2, type: 'Starch'},

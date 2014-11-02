@@ -155,6 +155,8 @@ angular.module('plans').service(
             $scope.servingType = food ? food.servingType : 0;
             $scope.isLoading = false;
 
+
+
             $scope.servingTypeChange = function(){
                 $scope.selected.servings = 1;
 
@@ -164,10 +166,14 @@ angular.module('plans').service(
                 if($scope.selected.servingType == 0){
                     oneServingGrams = $scope.foodServingTypes[0].grams;
                     servingsDelta = oneServingGrams / $scope.foodServingTypes[1].grams;
+
+                    $scope.gramsDisplay = oneServingGrams * $scope.selected.servings;
                 }
                 else{
                     oneServingGrams = $scope.foodServingTypes[1].grams;
                     servingsDelta = (oneServingGrams / $scope.foodServingTypes[0].grams);
+
+                    $scope.gramsDisplay = oneServingGrams * $scope.selected.servings;
                 }
 
                 if($scope.selected.foodToAdd.selectedFood) {
@@ -274,6 +280,21 @@ angular.module('plans').service(
 
             };
 
+            var setUpGramsDisplay = function(){
+                if($scope.selected.servingType == 0){
+                    var oneServingGrams = $scope.foodServingTypes[0].grams;
+
+                    $scope.gramsDisplay = oneServingGrams * $scope.selected.servings;
+                }
+                else{
+                    var oneServingGrams = $scope.foodServingTypes[1].grams;
+
+                    $scope.gramsDisplay = oneServingGrams * $scope.selected.servings;
+                }
+            };
+
+
+
             $scope.changeFood = function(){
                 $scope.showFoodDetails = false;
                 $scope.findFoodsByFirstLetter = false;
@@ -309,6 +330,8 @@ angular.module('plans').service(
                 $scope.selected.sodiumDisplay = sodiumDisplay % 1 != 0 ? sodiumDisplay.toFixed(1) : sodiumDisplay;
                 $scope.selected.fiberDisplay = fiberDisplay % 1 != 0 ? fiberDisplay.toFixed(1) : fiberDisplay;
                 $scope.selected.sugarDisplay = sugarDisplay % 1 != 0 ? sugarDisplay.toFixed(1) : sugarDisplay;
+
+
             };
 
             var initializeServingTypes = function(food){
@@ -335,6 +358,8 @@ angular.module('plans').service(
                         description: food.servingDescription2
                     });
                 }
+
+                setUpGramsDisplay();
 
 
             };
@@ -495,12 +520,16 @@ angular.module('plans').service(
 
             $scope.servingsChange = function(){
                 $scope.calculateCaloriesDisplay();
+
+                setUpGramsDisplay();
             };
 
             if($scope.isUpdate){
                 $scope.selected.servings = food.servings;
 
                 $scope.calculateCaloriesDisplay();
+
+                setUpGramsDisplay();
 
             };
 
@@ -536,6 +565,8 @@ angular.module('plans').service(
                 $scope.chart = c3.generate(config);
 
             };
+
+
 
             if(!isCreateMeal && food) {
                 window.setTimeout(function () {
