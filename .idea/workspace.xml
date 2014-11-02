@@ -3,10 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="99afd44b-0014-4bff-855e-4d01f0b1305f" name="Default" comment="create plan page is close to finished. Now trying to wire up view/edit plan page. Trying to make it all common html.">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/dist/application.min.js" afterPath="$PROJECT_DIR$/public/dist/application.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/modules/core/services/core.utilities.service.js" afterPath="$PROJECT_DIR$/public/modules/core/services/core.utilities.service.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/modules/manageUserItems/views/edit-manageUserItems.client.view.html" afterPath="$PROJECT_DIR$/public/modules/manageUserItems/views/edit-manageUserItems.client.view.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/modules/manageUserItems/controllers/manageUserItems.client.controller.js" afterPath="$PROJECT_DIR$/public/modules/manageUserItems/controllers/manageUserItems.client.controller.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/modules/plans/services/plans.client.sharedService.js" afterPath="$PROJECT_DIR$/public/modules/plans/services/plans.client.sharedService.js" />
     </list>
     <ignored path="NutritionManager.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -32,12 +28,11 @@
       <file leaf-file-name="application.min.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/public/dist/application.min.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.375" vertical-offset="14787" max-vertical-offset="86910">
-              <caret line="1700" column="2" selection-start-line="1700" selection-start-column="2" selection-end-line="1700" selection-end-column="2" />
+            <state vertical-scroll-proportion="0.33241758" vertical-offset="73333" max-vertical-offset="97350">
+              <caret line="5109" column="3" selection-start-line="5109" selection-start-column="3" selection-end-line="5109" selection-end-column="3" />
               <folding>
-                <element signature="e#31974#60692#0" expanded="false" />
                 <element signature="e#176782#181845#0" expanded="false" />
-                <element signature="e#183136#184462#0" expanded="false" />
+                <element signature="e#183136#185409#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -62,8 +57,8 @@
       <file leaf-file-name="manageUserItems.client.controller.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/modules/manageUserItems/controllers/manageUserItems.client.controller.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="163" max-vertical-offset="1200">
-              <caret line="21" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="388" max-vertical-offset="1200">
+              <caret line="52" column="17" selection-start-line="52" selection-start-column="17" selection-end-line="52" selection-end-column="17" />
               <folding />
             </state>
           </provider>
@@ -1270,14 +1265,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/modules/manageUserItems/controllers/manageUserItems.client.controller.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="163" max-vertical-offset="1200">
-          <caret line="21" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/modules/foods/views/list-foods.client.view.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-7.5" vertical-offset="0" max-vertical-offset="555">
@@ -1313,14 +1300,21 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/public/modules/manageUserItems/controllers/manageUserItems.client.controller.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="388" max-vertical-offset="1200">
+          <caret line="52" column="17" selection-start-line="52" selection-start-column="17" selection-end-line="52" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/public/dist/application.min.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.375" vertical-offset="14787" max-vertical-offset="86910">
-          <caret line="1700" column="2" selection-start-line="1700" selection-start-column="2" selection-end-line="1700" selection-end-column="2" />
+        <state vertical-scroll-proportion="0.33241758" vertical-offset="73333" max-vertical-offset="97350">
+          <caret line="5109" column="3" selection-start-line="5109" selection-start-column="3" selection-end-line="5109" selection-end-column="3" />
           <folding>
-            <element signature="e#31974#60692#0" expanded="false" />
             <element signature="e#176782#181845#0" expanded="false" />
-            <element signature="e#183136#184462#0" expanded="false" />
+            <element signature="e#183136#185409#0" expanded="false" />
           </folding>
         </state>
       </provider>
