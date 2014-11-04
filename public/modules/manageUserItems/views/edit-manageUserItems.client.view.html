@@ -6,41 +6,51 @@
         <strong>Your changes have been saved!</strong>
     </div>
 
-    <div style="margin-top: 30px;">
-        <div style="display:inline-block; ">
-            Search:
-            <input type="text" data-ng-change="foodInputChange()" data-ng-model="foodSearchTxt"/>
-            <a class="ActionLink clearInputLink" data-ng-click="clearFoodInput()">Clear</a>
-        </div>
-
-        <div style="float:right">
-            <button type="submit" class="btn btn-primary btn-m "  data-ng-click="update();">
-                <span class="glyphicon glyphicon-floppy-disk" ></span> <span class="hidden-xs">Save</span>
-            </button>
-        </div>
+    <div style="float:right">
+        <button type="submit" class="btn btn-primary btn-m "  data-ng-click="update();">
+            <span class="glyphicon glyphicon-floppy-disk" ></span> <span class="hidden-xs">Save</span>
+        </button>
     </div>
 
-
-
-    <div style="margin-bottom: 12px;">
+    <div >
         &nbsp;
     </div>
 
-    <div>
-        <div data-ng-show="isLoading" style="height: 336px;">
-            <img width="25" height="25" src="/modules/core/img/loaders/loader.gif">
+    <div style="margin-top: 30px;">
+
+
+        <div >
+            <div style="display:inline-block; ">
+                Search:
+                <input type="text" data-ng-change="foodInputChange()" data-ng-model="foodSearchTxt"/>
+                <a class="ActionLink clearInputLink" data-ng-click="clearFoodInput()">Clear</a>
+            </div>
+
+
         </div>
-        <div data-ng-show="!isLoading">
 
-            <div class="list-group" style="margin-bottom: 0px; !important;" data-ng-repeat="food in userFoodsDisplay"
-                 data-ng-mouseover="food.showEditIcon = true" data-ng-mouseleave="food.showEditIcon = false">
-                <a class="list-group-item actionRow">
-                    <span data-ng-bind="food.name"></span>
 
-                    <div style="padding-right:5px;cursor:pointer;float:right;height: 14px !important;" data-ng-click="deleteFood(food);" type="button" data-ng-class="{editRowShow: food.showEditIcon && !food.isEditable}"  class="editRowHide">
-                        <span  class="glyphicon glyphicon-trash"></span>
-                    </div>
-                </a>
+
+        <div style="margin-bottom: 12px;">
+            &nbsp;
+        </div>
+
+        <div>
+            <div data-ng-show="isLoading" style="height: 336px;">
+                <img width="25" height="25" src="/modules/core/img/loaders/loader.gif">
+            </div>
+            <div data-ng-show="!isLoading">
+
+                <div class="list-group" style="margin-bottom: 0px; !important;" data-ng-repeat="food in userFoodsDisplay"
+                     data-ng-mouseover="food.showEditIcon = true" data-ng-mouseleave="food.showEditIcon = false">
+                    <a class="list-group-item actionRow" data-ng-href="#!/foods/{{food._id}}">
+                        <span data-ng-bind="food.name"></span>
+
+                        <div style="padding-right:5px;cursor:pointer;float:right;height: 14px !important;" data-ng-click="deleteFood(food);" type="button" data-ng-class="{editRowShow: food.showEditIcon && !food.isEditable}"  class="editRowHide">
+                            <span  class="glyphicon glyphicon-trash"></span>
+                        </div>
+                    </a>
+                </div>
             </div>
         </div>
     </div>

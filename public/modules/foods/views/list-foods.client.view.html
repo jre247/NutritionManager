@@ -1,19 +1,13 @@
-<div data-ng-controller="FoodsParentContainerController" class="container" style="margin-top:30px;">
+<div data-ng-controller="FoodsParentContainerController" class="container" style="margin-top:30px;padding-left: 0px;padding-right: 0px;">
     <div >
         <div class="span6">
             <ul class="nav nav-tabs">
                 <li data-ng-class="{active: selectedTab == 'myFoods'}">
                     <a  data-ng-click="selectTab('myFoods')">My Foods</a>
-
-
                 </li>
                 <li  data-ng-class="{active: selectedTab == 'allFoods'}" data-ng-click="selectTab('allFoods')">
                     <a >All Foods</a>
-
-
                 </li>
-
-
             </ul>
         </div>
     </div>
@@ -30,73 +24,80 @@
             <!--</div>-->
 
 
-            <div style="margin-top: 30px;">
-                <div style="display:inline-block; ">
-                    Search:
-                    <input type="text" data-ng-change="foodInputChange()" data-ng-model="foodFilterInput"/>
-                </div>
-                <div style="display:inline-block;float:right">
+            <div style="margin-top: 10px;">
+
+                <div  style="display:inline-block;float:right">
                     <span style="color: green; font-weight: bold;" data-ng-show="successLoading">Success!</span>
-                    <button class="btn btn-primary" type="button" data-ng-show="isUserAdmin" data-ng-click="importFoodsFromExcel()">
+                    <button  class="btn btn-primary hidden-xs" type="button" data-ng-show="isUserAdmin" data-ng-click="importFoodsFromExcel()">
                         <span></span>Import Foods From Excel
                     </button>
                 </div>
                 <a data-ng-href="#!/foods/create" style="float:right;position: relative;bottom: 10px;">
                     <button type="button" class="btn btn-primary btn-m" style="padding: 6px 10px;">
-                        <span class="glyphicon glyphicon-plus" ></span> Create
+                        <span class="glyphicon glyphicon-plus" ></span> <span class="hidden-xs">Create</span>
                     </button>
                 </a>
             </div>
 
-            <div class="list-group" style="padding-top: 15px;">
-                <!--<div data-ng-repeat="food in foods | filter:foodFilterInput">-->
-                <div data-ng-show="!isLoading" data-ng-repeat="food in foods">
-                    <div style="display: inline-block;">
-                        <a data-ng-href="#!/foods/{{food._id}}" class="list-group-item">
-                            <h4 class="list-group-item-heading" data-ng-bind="food.name"></h4>
+            <div >
+                &nbsp;
+            </div>
+            <div style="margin-top: 15px;">
+                <div style="display:inline-block; ">
+                    Search:
+                    <input type="text" data-ng-change="foodInputChange()" data-ng-model="foodFilterInput"/>
+                </div>
 
-                            <!--<div class="foodItem">-->
-                            <!--Type: <span class="list-group-item-text" data-ng-bind="food.typeDisplay"></span>-->
-                            <!--</div>-->
-                            <div class="foodItem">
-                                Calories: <span class="list-group-item-text" data-ng-bind="food.calories | number:0"></span>
-                            </div>
-                            <div class="foodItem">
-                                Fat: <span class="list-group-item-text" data-ng-bind="food.fat | number:1"></span>
-                            </div>
-                            <div class="foodItem">
-                                Protein: <span class="list-group-item-text" data-ng-bind="food.protein | number:1"></span>
-                            </div>
-                            <div class="foodItem">
-                                Carbs: <span class="list-group-item-text" data-ng-bind="food.carbohydrates | number:1"></span>
-                            </div>
-                            <div class="foodItem">
-                                Grams: <span class="list-group-item-text" data-ng-bind="food.grams | number:0"></span>
-                            </div>
-                        </a>
+                <div class="list-group" style="margin-top: 15px">
+                    <!--<div data-ng-repeat="food in foods | filter:foodFilterInput">-->
+                    <div data-ng-show="!isLoading" data-ng-repeat="food in foods">
+                        <div >
+                            <a data-ng-href="#!/foods/{{food._id}}" class="list-group-item">
+                                <h4 class="list-group-item-heading" data-ng-bind="food.name"></h4>
+
+                                <!--<div class="foodItem">-->
+                                <!--Type: <span class="list-group-item-text" data-ng-bind="food.typeDisplay"></span>-->
+                                <!--</div>-->
+                                <div class="foodItem">
+                                    Calories: <span class="list-group-item-text" data-ng-bind="food.calories | number:0"></span>
+                                </div>
+                                <div class="foodItem">
+                                    Fat: <span class="list-group-item-text" data-ng-bind="food.fat | number:1"></span>
+                                </div>
+                                <div class="foodItem">
+                                    Protein: <span class="list-group-item-text" data-ng-bind="food.protein | number:1"></span>
+                                </div>
+                                <div class="foodItem">
+                                    Carbs: <span class="list-group-item-text" data-ng-bind="food.carbohydrates | number:1"></span>
+                                </div>
+                                <div class="foodItem">
+                                    Grams: <span class="list-group-item-text" data-ng-bind="food.grams | number:0"></span>
+                                </div>
+                            </a>
+                        </div>
+
+
+                        <!--<div style="display: inline-block;">-->
+                        <!--<a class="btn btn-primary" data-ng-href="/#!/foods/{{food._id}}/edit">-->
+                        <!--<i class="glyphicon glyphicon-edit"></i>-->
+                        <!--</a>-->
+                        <!--<a class="btn btn-primary" data-ng-click="remove(food);">-->
+                        <!--<i class="glyphicon glyphicon-trash"></i>-->
+                        <!--</a>-->
+                        <!--</div>-->
                     </div>
 
+                    <div data-ng-show="isLoading || isMoreLoading" style="height: 336px;">
+                        <img width="25" height="25" src="/modules/core/img/loaders/loader.gif">
+                    </div>
 
-                    <!--<div style="display: inline-block;">-->
-                    <!--<a class="btn btn-primary" data-ng-href="/#!/foods/{{food._id}}/edit">-->
-                    <!--<i class="glyphicon glyphicon-edit"></i>-->
-                    <!--</a>-->
-                    <!--<a class="btn btn-primary" data-ng-click="remove(food);">-->
-                    <!--<i class="glyphicon glyphicon-trash"></i>-->
-                    <!--</a>-->
-                    <!--</div>-->
+                    <div style="margin-top: 10px;" data-ng-show="foods && foods.length >= 8" data-ng-click="moreFoods()">
+                        <a>More Foods</a>
+                    </div>
                 </div>
-
-                <div data-ng-show="isLoading || isMoreLoading" style="height: 336px;">
-                    <img width="25" height="25" src="/modules/core/img/loaders/loader.gif">
+                <div class="alert alert-warning text-center" data-ng-if="foods.$resolved && !foods.length">
+                    No Foods yet, why don't you <a href="/#!/foods/create">create one</a>?
                 </div>
-
-                <div style="margin-top: 10px;" data-ng-show="foods && foods.length >= 8" data-ng-click="moreFoods()">
-                    <a>More Foods</a>
-                </div>
-            </div>
-            <div class="alert alert-warning text-center" data-ng-if="foods.$resolved && !foods.length">
-                No Foods yet, why don't you <a href="/#!/foods/create">create one</a>?
             </div>
         </section>
     </div>

@@ -6,21 +6,25 @@
  */
 'use strict';
 
-angular.module('manageUserItems').controller('ManageUserItemsController', ['$scope', '$stateParams', 'Authentication', '$timeout', 'CoreUtilities', 'ManageUserItems',
-    function($scope, $stateParams, Authentication, $timeout, CoreUtilities, ManageUserItems) {
+angular.module('manageUserItems').controller('ManageUserItemsController', ['$scope', '$stateParams', 'Authentication', '$timeout', 'CoreUtilities', 'ManageUserItems', '$location',
+    function($scope, $stateParams, Authentication, $timeout, CoreUtilities, ManageUserItems, $location) {
         window.scope = $scope;
         $scope.isLoading = false;
         $scope.skipFoods = 0;
         $scope.foodSearchTxt = '';
         $scope.userFoodsDisplay = [];
 
-        $scope.update = function() {
+        $scope.update = function(isDelete) {
             var userFoods = $scope.userFoodsModel;
 
             userFoods.$save(function () {
                 $scope.success = true;
 
                 $timeout(function(){$scope.success = false;}, 3000);
+
+                if(isDelete){
+                    $location.path('foods');
+                }
             }, function (errorResponse) {
                 $scope.error = errorResponse.data.message;
             });
@@ -56,6 +60,8 @@ angular.module('manageUserItems').controller('ManageUserItemsController', ['$sco
                         $scope.userFoodsDisplay.splice(i, 1);
                     }
                 }
+
+                $scope.update(true);
             }
         };
 
