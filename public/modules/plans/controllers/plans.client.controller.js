@@ -449,7 +449,9 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
                     else{
                         $scope.hideMorePlansLink = true;
                         $scope.isMoreLoading = false;
+                        $scope.isLoading = false;
                     }
+
                 }
             );
 
