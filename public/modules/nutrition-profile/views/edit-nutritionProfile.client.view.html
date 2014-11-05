@@ -1,6 +1,14 @@
 <section data-ng-controller="NutritionProfileController" data-ng-init="findOne()">
     <div class="page-header">
-        <h1>Edit Nutrition Profile</h1>
+        <div style="width: 400px;display:inline-block">
+            <h1>Edit Nutrition Settings</h1>
+        </div>
+        <div style="display:inline-block;float:right;margin-top: 18px;">
+
+            <button type="submit" class="btn btn-primary btn-m" data-ng-click="update()">
+                <span class="glyphicon glyphicon-floppy-disk" ></span><span class="hidden-xs"> Save</span>
+            </button>
+        </div>
     </div>
 
     <ng-include onInclude="nutritionProfileParameters = nutritionProfileParameters" src="'/modules/nutrition-profile/views/edit-nutritionProfile-container.client.view.html'"></ng-include>

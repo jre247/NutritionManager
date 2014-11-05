@@ -29,6 +29,14 @@ var NutritionProfileSchema = new Schema({
     deficitTarget: {
         type: Number
     },
+    isAdvancedNutrientTargets:{
+        type: Boolean,
+        default: false
+    },
+    activityLevel:{
+        type: Number,
+        default: 0
+    },
     user: {
         type: Schema.ObjectId,
         ref: 'User'
