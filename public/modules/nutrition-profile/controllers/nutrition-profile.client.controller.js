@@ -143,7 +143,7 @@ angular.module('nutritionProfile').controller('NutritionProfileController', ['$s
                     heightInches: $scope.nutritionProfile.heightInches,
                     restingHeartRate: $scope.nutritionProfile.restingHeartRate,
                     bodyFatPercentage: $scope.nutritionProfile.bodyFatPercentage,
-                    templateMeals: $scope.templateMeals,
+                    templateMeals: $scope.nutritionProfile.templateMeals,
                     hideWeightOnHomeScreen: $scope.hideWeightOnHomeScreen,
                     isAdvancedNutrientTargets: $scope.nutritionProfile.isAdvancedNutrientTargets,
                     activityLevel: $scope.nutritionProfile.activityLevel

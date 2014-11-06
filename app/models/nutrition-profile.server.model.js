@@ -15,19 +15,23 @@ var mongoose = require('mongoose'),
  */
 var NutritionProfileSchema = new Schema({
     proteinPercentageTarget: {
-        type: Number
+        type: Number,
+        default: 20
     },
     carbohydratesPercentageTarget: {
-        type: Number
+        type: Number,
+        default: 40
     },
     fatPercentageTarget: {
-        type: Number
+        type: Number,
+        default: 40
     },
     averageCaloriesTarget: {
         type: Number
     },
     deficitTarget: {
-        type: Number
+        type: Number,
+        default: 500
     },
     isAdvancedNutrientTargets:{
         type: Boolean,
@@ -51,7 +55,7 @@ var NutritionProfileSchema = new Schema({
     },
     weight: {
         type: Number,
-        default: 0
+        default: 130
     },
     heightFeet: {
         type: Number,
