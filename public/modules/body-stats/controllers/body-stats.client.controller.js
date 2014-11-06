@@ -59,7 +59,7 @@ angular.module('bodyStats').controller('BodyStatsController', ['$scope', '$state
                 bodyFatPercentage: $scope.plan.bodyFatPercentage
             });
             plan.$save(function(response) {
-                plan.planDateNonUtc = response.planDateAsMili;
+                plan.planDateNonUtc = new Date($scope.plan.planDateYear, $scope.plan.planDateMonth, $scope.plan.planDateDay)
                 $location.path('body-stats/' + response._id);
             }, function(errorResponse) {
                 $scope.error = errorResponse.data.message;
@@ -155,7 +155,7 @@ angular.module('bodyStats').controller('BodyStatsController', ['$scope', '$state
                 $scope.plan = BodyStats.get({
                     bodyStatId: $stateParams.bodyStatId
                 }, function (u, getResponseHeaders) {
-                    $scope.plan.planDateNonUtc = new Date($scope.plan.planDateAsMili);
+                    $scope.plan.planDateNonUtc = new Date($scope.plan.planDateYear, $scope.plan.planDateMonth, $scope.plan.planDateDay);
 
                     $scope.isUserAdmin = $scope.plan.userRoles && $scope.plan.userRoles.indexOf('admin') !== -1 ? true : false;
                 });

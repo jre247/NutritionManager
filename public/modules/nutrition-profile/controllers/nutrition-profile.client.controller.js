@@ -88,7 +88,7 @@ angular.module('nutritionProfile').controller('NutritionProfileController', ['$s
                 //20/30/50 - Protein, Carbs, Fat
                 case 1:
                     $scope.nutritionProfile.proteinPercentageTarget = 20;
-                    $scope.nutritionProfile.carbohydratesPercentageTarget = 40;
+                    $scope.nutritionProfile.carbohydratesPercentageTarget = 30;
                     $scope.nutritionProfile.fatPercentageTarget = 50;
                     break;
                 //Atkins Diet

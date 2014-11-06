@@ -313,7 +313,7 @@ exports.planByDate = function(req, res, next, planDate) {
 
                                         for (var a = 0; a < plansDict.length; a++) {
                                             if (plansDict[a].planDate == activityPlanDt) {
-                                                var deficit = calculateDeficit(plansDict[a].plan, activityFromDb, bmr);
+                                                var deficit = calculateDeficit(plansDict[a].plan, activityFromDb, nutritionProfile, bmr);
                                                 plansDict[a].plan.deficit = deficit;
                                             }
                                         }
@@ -378,20 +378,89 @@ var calculatePlanTotalMacros = function(plan){
     plan.totalPlanProteinAsPercent = (proteinTotal / macroTotals) * 100;
 };
 
-var calculateDeficit = function(nutritionPlan, activityPlan, bmr){
-   var additionalCaloriesExpended = 300;
-    var caloriesOut = 300;
 
-    if (activityPlan){
-        caloriesOut = activityPlan.totalCaloriesBurned + bmr;
+//TODO put in utilities
+function calculateDeficitForAdvancedTargets(nutritionPlan, activityPlan, bmr){
+    var additionalCaloriesExpended = 300;
+    var caloriesOut = additionalCaloriesExpended + bmr;
+
+    if (activityPlan && typeof activityPlan == 'object') {
+        caloriesOut = activityPlan.totalCaloriesBurned + bmr + additionalCaloriesExpended;
 
     }
 
     var caloriesIn = nutritionPlan.totalPlanCalories;
 
-    return -(caloriesIn - caloriesOut - additionalCaloriesExpended);
+    var deficit = -(caloriesIn - caloriesOut) || 0;
 
+    return deficit;
 };
+
+//TODO put in utilities
+function calculateCaloriesOut(nutritionProfile, bmr){
+    var caloriesOut;
+
+    switch(nutritionProfile.activityLevel){
+        //Sedentary
+        case 0:
+            caloriesOut = bmr * 1.2;
+            break;
+        //Lightly Active
+        case 1:
+            caloriesOut = bmr * 1.375;
+            break;
+        //Moderately Active
+        case 2:
+            caloriesOut = bmr * 1.55;
+            break;
+        //Very Active
+        case 3:
+            caloriesOut = bmr * 1.725;
+            break;
+        //Extremely Active
+        case 4:
+            caloriesOut = bmr * 1.9;
+            break;
+    }
+
+    return caloriesOut;
+}
+
+//TODO put in utilities
+function calculateDeficitForBasicTargets(nutritionPlan, nutritionProfile, bmr){
+    var caloriesOut = calculateCaloriesOut(nutritionProfile, bmr);
+
+    var caloriesIn = nutritionPlan.totalPlanCalories;
+
+    var deficit = -(caloriesIn - caloriesOut) || 0;
+
+    return deficit;
+};
+
+//TODO put in utilities
+var calculateDeficit = function(nutritionPlan, activityPlan, nutritionProfile, bmr){
+    if(nutritionProfile.isAdvancedNutrientTargets) {
+        return calculateDeficitForAdvancedTargets(nutritionPlan, activityPlan, bmr);
+    }
+    else{
+        return calculateDeficitForBasicTargets(nutritionPlan, nutritionProfile, bmr);
+    }
+};
+
+//var calculateDeficit = function(nutritionPlan, activityPlan, bmr){
+//   var additionalCaloriesExpended = 300;
+//    var caloriesOut = 300;
+//
+//    if (activityPlan){
+//        caloriesOut = activityPlan.totalCaloriesBurned + bmr;
+//
+//    }
+//
+//    var caloriesIn = nutritionPlan.totalPlanCalories;
+//
+//    return -(caloriesIn - caloriesOut - additionalCaloriesExpended);
+//
+//};
 
 //BMR for Men = 66 + (13.8 x weight in kg.) + (5 x height in cm) - (6.8 x age in years)
 //BMR for Women = 655 + (9.6 x weight in kg.) + (1.8 x height in cm) - (4.7 x age in years).

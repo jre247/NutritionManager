@@ -109,8 +109,8 @@
                             </div>
                             <div style="margin-top:10px;">
                                 <div style="font-weight: bold;display:inline-block; width: 70px;">
-                                    <span data-ng-show="calculateDeficit(nutritionPlan, activityPlan) < 0">Surplus:</span>
-                                    <span data-ng-show="calculateDeficit(nutritionPlan, activityPlan) > 0">Deficit:</span>
+                                    <span data-ng-show="deficit < 0">Surplus:</span>
+                                    <span data-ng-show="deficit > 0">Deficit:</span>
 
                                 </div>
 
@@ -144,8 +144,8 @@
                             <div style="color: rgb(33, 51, 184);font-weight: bold;">
                                 <div style="border-top: 1px solid black; padding-top:10px; width: 80px; text-align: right;padding-right: 15px;display:inline-block;">
 
-                                    <span data-ng-show="calculateDeficit(nutritionPlan, activityPlan) < 0" data-ng-bind="-(calculateDeficit(nutritionPlan, activityPlan)) | number:0"></span>
-                                    <span data-ng-show="calculateDeficit(nutritionPlan, activityPlan) > 0" data-ng-bind="calculateDeficit(nutritionPlan, activityPlan) | number:0"></span>
+                                    <span data-ng-show="deficit < 0" data-ng-bind="-(deficit) | number:0"></span>
+                                    <span data-ng-show="deficit > 0" data-ng-bind="deficit | number:0"></span>
 
                                 </div>
                                 <span>Calories</span>

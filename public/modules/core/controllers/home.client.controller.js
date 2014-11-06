@@ -1,8 +1,8 @@
 'use strict';
 
 
-angular.module('core').controller('HomeController', ['$scope', 'Authentication', 'Activities', 'CoreService', 'NutritionProfile', 'Progress', 'ThermometerChartService', '$modal', 'CoreDialogsService', '$location',
-	function($scope, Authentication, Activities, CoreService, NutritionProfile, Progress, ThermometerChartService, $modal, CoreDialogsService, $location) {
+angular.module('core').controller('HomeController', ['$scope', 'Authentication', 'Activities', 'CoreService', 'NutritionProfile', 'Progress', 'ThermometerChartService', '$modal', 'CoreDialogsService', '$location', 'CoreUtilities',
+	function($scope, Authentication, Activities, CoreService, NutritionProfile, Progress, ThermometerChartService, $modal, CoreDialogsService, $location, CoreUtilities) {
 		// This provides Authentication context.
 		$scope.authentication = Authentication;
         window.scope = $scope;
@@ -54,7 +54,7 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
 
         $scope.nutritionProfile = NutritionProfile.get(function (data) {
             if(data.age && data.heightFeet && data.sex) {
-                $scope.bmr = calculateBmr();
+                $scope.bmr = CoreUtilities.calculateBmr($scope.nutritionProfile);
 
                 $scope.getDailyDashboardData();
 
@@ -309,11 +309,11 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
 
         var buildThermometerChart = function(isUpdate){
             var caloriesIn = parseFloat($scope.nutritionPlan.totalPlanCalories.toFixed(0));
-            var deficitTarget = scope.nutritionProfile.deficitTarget;
+            var deficitTarget = $scope.nutritionProfile.deficitTarget;
 
-            var deficit = $scope.calculateDeficit($scope.nutritionPlan, $scope.activityPlan);
+            $scope.deficit = CoreUtilities.calculateDeficit($scope.nutritionPlan, $scope.activityPlan, $scope.nutritionProfile);
 
-            var goalCalories = parseFloat(((deficit - deficitTarget) + caloriesIn).toFixed(0));
+            var goalCalories = parseFloat((($scope.deficit - deficitTarget) + caloriesIn).toFixed(0));
             ThermometerChartService.buildThermometerChart(caloriesIn, goalCalories, '.budgetChart', isUpdate);
         };
 
@@ -355,11 +355,24 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
                         $scope.activityPlan.activities.push(dailyStepsModel);
                     }
 
-                    $scope.totalCaloriesBurned = $scope.activityPlan.totalCaloriesBurned + additionalCaloriesExpended;
+                    if($scope.nutritionProfile.isAdvancedNutrientTargets) {
+                        $scope.totalCaloriesBurned = $scope.activityPlan.totalCaloriesBurned + additionalCaloriesExpended;
+                    }
+                    else{
+                        var bmr = CoreUtilities.calculateBmr($scope.nutritionProfile);
+                        $scope.totalCaloriesBurned = CoreUtilities.calculateCaloriesOut($scope.nutritionProfile, bmr) - bmr;
+                    }
                 }
                 else{
                     $scope.activityPlan = null;
-                    $scope.totalCaloriesBurned = additionalCaloriesExpended;
+
+                    if($scope.nutritionProfile.isAdvancedNutrientTargets) {
+                        $scope.totalCaloriesBurned = additionalCaloriesExpended;
+                    }
+                    else{
+                        var bmr = CoreUtilities.calculateBmr($scope.nutritionProfile);
+                        $scope.totalCaloriesBurned = CoreUtilities.calculateCaloriesOut($scope.nutritionProfile, bmr) - bmr;
+                    }
                 }
 
 
@@ -496,20 +509,20 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
         };
 
         //TODO: move into service
-        $scope.calculateDeficit = function(nutritionPlan, activityPlan){
-            if(nutritionPlan) {
-                var caloriesOut = additionalCaloriesExpended + $scope.bmr;
-
-                if (activityPlan){
-                    caloriesOut += activityPlan.totalCaloriesBurned;
-
-                }
-
-                var caloriesIn = nutritionPlan.totalPlanCalories;
-
-                return -(caloriesIn - caloriesOut);
-            }
-        };
+//        $scope.calculateDeficit = function(nutritionPlan, activityPlan){
+//            if(nutritionPlan) {
+//                var caloriesOut = additionalCaloriesExpended + $scope.bmr;
+//
+//                if (activityPlan){
+//                    caloriesOut += activityPlan.totalCaloriesBurned;
+//
+//                }
+//
+//                var caloriesIn = nutritionPlan.totalPlanCalories;
+//
+//                return -(caloriesIn - caloriesOut);
+//            }
+//        };
 
         //TODO: move into service
         var doMealTotaling = function(meal){
@@ -557,35 +570,35 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
 
         //BMR for Men = 66 + (13.8 x weight in kg.) + (5 x height in cm) - (6.8 x age in years)
         //BMR for Women = 655 + (9.6 x weight in kg.) + (1.8 x height in cm) - (4.7 x age in years).
-        var calculateBmr = function(){
-            var age = $scope.nutritionProfile.age;
-            var weightInLbs = $scope.nutritionProfile.weight;
-            var heightFeet = $scope.nutritionProfile.heightFeet;
-            var heightInches = $scope.nutritionProfile.heightInches;
-            var totalHeight = (heightFeet * 12) + heightInches;
-            var gender = $scope.nutritionProfile.sex;
-
-            //convert weight from lbs to kg:
-            // kg = (weight in lbs) * .454
-            var weightInKg = weightInLbs * .454;
-
-            //convert height from inches to cms
-            //height in cms = (height in inches * 2.54)
-            var heightInCms = totalHeight * 2.54
-
-            var bmr = 0;
-
-            //BMR for Men = 66.47 + (13.75 x weight in kg.) + (5 x height in cm) - (6.75 x age in years)
-            if(gender == "Male"){
-                bmr = 66.47 + (13.75 * weightInKg) + (5 * heightInCms) - (6.75 * age);
-            }
-            //BMR for Women = 655 + (9.6 x weight in kg.) + (1.8 x height in cm) - (4.7 x age in years).
-            else{
-                bmr = 655.09 + (9.56 * weightInKg) + (1.84 * heightInCms) - (4.67 * age);
-            }
-
-            return bmr;
-        };
+//        var calculateBmr = function(){
+//            var age = $scope.nutritionProfile.age;
+//            var weightInLbs = $scope.nutritionProfile.weight;
+//            var heightFeet = $scope.nutritionProfile.heightFeet;
+//            var heightInches = $scope.nutritionProfile.heightInches;
+//            var totalHeight = (heightFeet * 12) + heightInches;
+//            var gender = $scope.nutritionProfile.sex;
+//
+//            //convert weight from lbs to kg:
+//            // kg = (weight in lbs) * .454
+//            var weightInKg = weightInLbs * .454;
+//
+//            //convert height from inches to cms
+//            //height in cms = (height in inches * 2.54)
+//            var heightInCms = totalHeight * 2.54
+//
+//            var bmr = 0;
+//
+//            //BMR for Men = 66.47 + (13.75 x weight in kg.) + (5 x height in cm) - (6.75 x age in years)
+//            if(gender == "Male"){
+//                bmr = 66.47 + (13.75 * weightInKg) + (5 * heightInCms) - (6.75 * age);
+//            }
+//            //BMR for Women = 655 + (9.6 x weight in kg.) + (1.8 x height in cm) - (4.7 x age in years).
+//            else{
+//                bmr = 655.09 + (9.56 * weightInKg) + (1.84 * heightInCms) - (4.67 * age);
+//            }
+//
+//            return bmr;
+//        };
 
 
 

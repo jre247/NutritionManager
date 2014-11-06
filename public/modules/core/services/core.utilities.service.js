@@ -14,7 +14,9 @@ angular.module(ApplicationConfiguration.applicationModuleName).service(
             getFoods: getFoods,
             getUserFoods: getUserFoods,
             importFoodsFromExcel: importFoodsFromExcel,
-            filterMyFoods: filterMyFoods
+            filterMyFoods: filterMyFoods,
+            calculateBmr: calculateBmr,
+            calculateCaloriesOut: calculateCaloriesOut
 
         });
 
@@ -108,21 +110,70 @@ angular.module(ApplicationConfiguration.applicationModuleName).service(
             return( request.then( handleSuccess, handleError ) );
         }
 
-        function calculateDeficit(nutritionPlan, activityPlan, nutritionProfile){
-            var bmr = calculateBmr(nutritionProfile);
-
+        function calculateDeficitForAdvancedTargets(nutritionPlan, activityPlan, bmr){
             var additionalCaloriesExpended = 300;
             var caloriesOut = additionalCaloriesExpended + bmr;
 
-            if (activityPlan && typeof activityPlan == 'object'){
+            if (activityPlan && typeof activityPlan == 'object') {
                 caloriesOut = activityPlan.totalCaloriesBurned + bmr + additionalCaloriesExpended;
 
             }
 
             var caloriesIn = nutritionPlan.totalPlanCalories;
 
-            return -(caloriesIn - caloriesOut) || 0;
+            var deficit = -(caloriesIn - caloriesOut) || 0;
 
+            return deficit;
+        };
+
+        function calculateCaloriesOut(nutritionProfile, bmr){
+            var caloriesOut;
+
+            switch(nutritionProfile.activityLevel){
+                //Sedentary
+                case 0:
+                    caloriesOut = bmr * 1.2;
+                    break;
+                //Lightly Active
+                case 1:
+                    caloriesOut = bmr * 1.375;
+                    break;
+                //Moderately Active
+                case 2:
+                    caloriesOut = bmr * 1.55;
+                    break;
+                //Very Active
+                case 3:
+                    caloriesOut = bmr * 1.725;
+                    break;
+                //Extremely Active
+                case 4:
+                    caloriesOut = bmr * 1.9;
+                    break;
+            }
+
+            return caloriesOut;
+        }
+
+        function calculateDeficitForBasicTargets(nutritionPlan, nutritionProfile, bmr){
+            var caloriesOut = calculateCaloriesOut(nutritionProfile, bmr);
+
+            var caloriesIn = nutritionPlan.totalPlanCalories;
+
+            var deficit = -(caloriesIn - caloriesOut) || 0;
+
+            return deficit;
+        };
+
+        function calculateDeficit(nutritionPlan, activityPlan, nutritionProfile){
+            var bmr = calculateBmr(nutritionProfile);
+
+            if(nutritionProfile.isAdvancedNutrientTargets) {
+                return calculateDeficitForAdvancedTargets(nutritionPlan, activityPlan, bmr);
+            }
+            else{
+                return calculateDeficitForBasicTargets(nutritionPlan, nutritionProfile, bmr);
+            }
         };
 
 
