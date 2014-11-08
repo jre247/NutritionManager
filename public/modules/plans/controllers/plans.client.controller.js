@@ -475,7 +475,7 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
                 // Instance the tour
                //startTour();
                // tour.
-                $scope.openTourDialog();
+               // $scope.openTourDialog();
             }
         };
 
@@ -522,6 +522,10 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
                     $scope.plan.moveArrowImgLeft = false;
 
                     $scope.isLoading = false;
+
+                    if(localStorage.tour_current_step && !localStorage.tour_end) {
+                        tour.goTo(6);
+                    }
                 }
             });
 
@@ -845,28 +849,28 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
 
 
         //dialog code
-        $scope.openTourDialog = function (size) {
-            var modalInstance = $modal.open({
-                templateUrl: 'startTourDialog.html',
-                controller: PlansService.StartTourDialogCtrl,
-                //size: size,
-                resolve: {
-                    parentScope: function () {
-                        return $scope;
-                    }
-                }
-            });
-
-            modalInstance.result.then(function (planCopyModel) {
-                //$scope.dialogSelectedMealType = selectedItem;
-                //$scope.copyPlan(planCopyModel);
-
-            }, function () {
-                $log.info('Modal dismissed at: ' + new Date());
-            });
-
-
-        };
+//        $scope.openTourDialog = function (size) {
+//            var modalInstance = $modal.open({
+//                templateUrl: 'startTourDialog.html',
+//                controller: PlansService.StartTourDialogCtrl,
+//                //size: size,
+//                resolve: {
+//                    parentScope: function () {
+//                        return $scope;
+//                    }
+//                }
+//            });
+//
+//            modalInstance.result.then(function (planCopyModel) {
+//                //$scope.dialogSelectedMealType = selectedItem;
+//                //$scope.copyPlan(planCopyModel);
+//
+//            }, function () {
+//                $log.info('Modal dismissed at: ' + new Date());
+//            });
+//
+//
+//        };
 
         $scope.openCopyPlanDialog = function (size) {
             var isPlanEditable = checkIfPlanEditable();

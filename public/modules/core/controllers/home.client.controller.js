@@ -15,6 +15,29 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
             showSubmitButton: false
         };
 
+        var startTour = function(){
+            $scope.openTourDialog();
+        };
+
+        $scope.openTourDialog = function (size) {
+            var modalInstance = $modal.open({
+                templateUrl: 'startTourDialog.html',
+                controller: CoreDialogsService.StartTourDialogCtrl,
+                //size: size,
+                resolve: {
+                    parentScope: function () {
+                        return $scope;
+                    }
+                }
+            });
+
+            modalInstance.result.then(function (planCopyModel) {
+            }, function () {
+                $log.info('Modal dismissed at: ' + new Date());
+            });
+        };
+
+
         var createNutritionProfileWithDialog = function(){
             var modalInstance = $modal.open({
                 templateUrl: 'createNutritionProfileModalContent.html',
@@ -44,7 +67,9 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
                 });
                 nutritionProfile.$save(function(response) {
                     $scope.nutritionProfile = response;
-                    $location.path('plans/create/' + planDateForDb + '/true');
+                    //$location.path('plans/create/' + planDateForDb + '/true');
+                    //$scope.isNewUser = true;
+                    startTour();
                 }, function(errorResponse) {
                     $scope.error = errorResponse.data.message;
                 });
@@ -391,6 +416,10 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
                     $scope.showEnterDailyWeight = false;
 
                     $scope.dailyBodyStats = data.dailyBodyStats;
+                }
+
+                if(localStorage.tour_current_step == "5") {
+                    tour.goTo(5);
                 }
             });
         };

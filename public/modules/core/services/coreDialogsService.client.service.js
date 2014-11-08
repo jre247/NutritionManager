@@ -8,13 +8,25 @@ angular.module('core').service(
 
         // Return public API.
         return({
-            CreateNutritionProfileInstanceCtrl: CreateNutritionProfileInstanceCtrl
+            CreateNutritionProfileInstanceCtrl: CreateNutritionProfileInstanceCtrl,
+            StartTourDialogCtrl: StartTourDialogCtrl
         });
 
 
         // ---
         // PUBLIC METHODS.
         // ---
+
+        function StartTourDialogCtrl($scope, $modalInstance) {
+            $scope.ok = function () {
+                $modalInstance.close();
+            };
+
+            $scope.cancel = function () {
+                $modalInstance.dismiss('cancel');
+            };
+        };
+
 
         function CreateNutritionProfileInstanceCtrl($scope, $modalInstance){
             $scope.nutritionProfile = {};

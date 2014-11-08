@@ -15,8 +15,8 @@ angular.module('plans').service(
             SuggestionsModalInstanceCtrl: SuggestionsModalInstanceCtrl,
             CreateFoodModalInstanceCtrl: CreateFoodModalInstanceCtrl,
             ModalInstanceCtrl: ModalInstanceCtrl,
-            fillFoodNutrients: fillFoodNutrients,
-            StartTourDialogCtrl: StartTourDialogCtrl
+            fillFoodNutrients: fillFoodNutrients
+            //StartTourDialogCtrl: StartTourDialogCtrl
         });
 
 
@@ -24,15 +24,15 @@ angular.module('plans').service(
         // PUBLIC METHODS.
         // ---
 
-        function StartTourDialogCtrl($scope, $modalInstance, parentScope) {
-            $scope.ok = function () {
-                $modalInstance.close();
-            };
-
-            $scope.cancel = function () {
-                $modalInstance.dismiss('cancel');
-            };
-        };
+//        function StartTourDialogCtrl($scope, $modalInstance, parentScope) {
+//            $scope.ok = function () {
+//                $modalInstance.close();
+//            };
+//
+//            $scope.cancel = function () {
+//                $modalInstance.dismiss('cancel');
+//            };
+//        };
 
 
         function ModalInstanceCtrl($scope, $modalInstance, parentScope, dialogMealsDetailed, dialogMealsShort) {

@@ -4,24 +4,28 @@
         <div class="dailyDashboard" style="width: 300px;display:inline-block;">
             <div style="padding-top: 6px;">
 
-                <div style="display:inline-block;float: left;margin-top: 3px;margin-right: 8px;">
+                <div style="display:inline-block;float: left;margin-top: 3px;margin-right: 8px;" id="prevDay">
                     <button type="button" class="btn btn-default btn-sm" data-ng-click="prevDayClick();">
                         <span class="glyphicon glyphicon-chevron-left arrowBtn" ></span>
                     </button>
                 </div>
 
-                <p class="input-group" style="width:139px;">
+                <p class="input-group" style="width:139px;" id="planDateForDay">
                     <input type="text" class="form-control" data-ng-change="planDateChanged()" style="padding: 4px 8px;" id="startDate" datepicker-popup="{{format}}" ng-model="planDate" is-open="planDateOpened" min-date="minDate" max-date="'2100-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
                       <span class="input-group-btn">
                         <button type="button" class="btn btn-default" ng-click="openPlanDate($event)"><i class="glyphicon glyphicon-calendar"></i></button>
                       </span>
                 </p>
 
-                <div style="display:inline-block;margin-top: 3px;position: relative;bottom: 45px;right: 77px;float: right;">
+                <div style="display:inline-block;margin-top: 3px;position: relative;bottom: 45px;right: 77px;float: right;" id="nextDay">
 
                     <button type="button" class="btn btn-default btn-sm" data-ng-click="nextDayClick();">
                         <span class="glyphicon glyphicon-chevron-right arrowBtn" />
                     </button>
+                </div>
+
+                <div >
+                    <input type="button" data-ng-click="openTourDialog();" value="test tour"/>
                 </div>
 
                 <div style="border-bottom: 1px solid #eee;width:300px;">
@@ -54,7 +58,7 @@
                         </div>
                     </li>
                 </ul>
-                <div data-ng-show="!activityPlan" style="color: rgb(66, 66, 207);margin-top: 20px;margin-left: 9px;font-weight: bold;">
+                <div id="createActivityForDay" data-ng-show="!activityPlan" style="color: rgb(66, 66, 207);margin-top: 20px;margin-left: 9px;font-weight: bold;">
                     <!--There are no Activities entered for today yet.-->
                     <a href="/#!/activities/create/{{planDateForDb}}" title="New Activity" class="ng-binding">Create New Activity for Day</a>
                 </div>
@@ -76,7 +80,7 @@
                         </h3>
                     </div>
                 </div>
-                <div data-ng-show="!nutritionPlan" style="margin-top: 20px;margin-left: 9px;font-weight: bold;color: rgb(66, 66, 207);">
+                <div id="createNutritionPlanForDay" data-ng-show="!nutritionPlan" style="margin-top: 20px;margin-left: 9px;font-weight: bold;color: rgb(66, 66, 207);">
                     <!--There is no nutrition plan entered for today yet.-->
                     <a href="/#!/plans/create/{{planDateForDb}}" title="New Plan" class="ng-binding">Create New Plan for Day</a>
 
@@ -216,13 +220,14 @@
         </div>
 
         <div class="weeklyDashboard plansDesktopInlineGrid" style="vertical-align: top;">
-            <div data-ng-show="weeklyNutritionPlanList" style="vertical-align: top;display:inline-block;">
+            <div  style="vertical-align: top;display:inline-block;">
                 <div style="border-bottom: 1px solid #eee;width:270px;"
                      data-ng-class="{'homepageDashboardTitleAreaSmall': weeklyDashboardView == 'charts', 'homepageDashboardTitleAreaBig': weeklyDashboardView == 'list' }">
                     <h3> Week of <span data-ng-bind="weeklyDateDisplay"></span> Nutrition:</h3>
                 </div>
 
-                <div data-ng-class="{'homepageDashboardTitleAreaSmall': weeklyDashboardView == 'charts', 'homepageDashboardTitleAreaBig': weeklyDashboardView == 'list' }" style="color:gray;padding-bottom: 11px;padding-top: 8px;">
+                <div data-ng-class="{'homepageDashboardTitleAreaSmall': weeklyDashboardView == 'charts', 'homepageDashboardTitleAreaBig': weeklyDashboardView == 'list' }" style="color:gray;padding-bottom: 11px;padding-top: 8px;"
+                     data-ng-show="weeklyNutritionPlanList">
 
                     <div style="display:inline-block">
                         <input name="showChartsList" type="radio" value="charts"  data-ng-model="weeklyDashboardView"> Show as Charts <br/>
@@ -233,7 +238,7 @@
                     </div>
                 </div>
 
-                <div data-ng-show="weeklyDashboardView == 'charts'" style="position:relative; left: 30px;">
+                <div data-ng-show="weeklyNutritionPlanList && weeklyDashboardView == 'charts'" style="position:relative; left: 30px;">
                     <h4>Macros: (%)</h4>
                     <div style="padding-left: 20px;" id="weeklyMacrosChart"></div>
 
@@ -242,7 +247,11 @@
 
                 </div>
 
-                <div style="padding-top: 10px;" data-ng-show="weeklyDashboardView == 'list'">
+                <div style="padding-left: 40px;padding-top: 20px;" class="emptyDataTxt" data-ng-show="!weeklyNutritionPlanList">
+                    There are no plans for this week
+                </div>
+
+                <div style="padding-top: 10px;" data-ng-show="weeklyNutritionPlanList && weeklyDashboardView == 'list'">
                     <div  data-ng-repeat="dayNutritionData in weeklyNutritionPlanList" style="padding-top: 10px;">
                         <span data-ng-bind="dayNutritionData.dayOfWeek"></span>:
 
@@ -343,6 +352,23 @@
 
         <div class="modal-footer">
             <button class="btn btn-primary"  ng-click="ok()">OK</button>
+            <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+        </div>
+    </script>
+
+    <script type="text/ng-template" id="startTourDialog.html">
+        <div class="modal-header" style="font-family: segui;">
+            <h3 class="modal-title">Fit2Create Tour!</h3>
+        </div>
+        <div class="modal-body" style="font-family: segui;text-align: center;padding: 50px;">
+            <button type="button" id="demo" data-ng-click="ok()" class="btn btn-default btn-lg" data-demo>
+                <span class="glyphicon glyphicon-play"></span>
+                Start the demo
+            </button>
+
+        </div>
+        <div class="modal-footer">
+
             <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
         </div>
     </script>
