@@ -418,8 +418,9 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
                     $scope.dailyBodyStats = data.dailyBodyStats;
                 }
 
-                if(localStorage.tour_current_step == "5") {
-                    tour.goTo(5);
+                if(localStorage.tour_current_step) {
+                    var tourStep = parseInt(localStorage.tour_current_step);
+                    tour.goTo(tourStep);
                 }
             });
         };
