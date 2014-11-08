@@ -26,6 +26,8 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
                 }
             });
 
+            var planDateForDb = $scope.planDate.getMonth() + '_' + $scope.planDate.getDate() + '_' + $scope.planDate.getFullYear();
+
             modalInstance.result.then(function (selected) {
                 var nutritionProfile = new NutritionProfile({
                     proteinPercentageTarget: selected.nutritionProfile.proteinPercentageTarget,
@@ -42,7 +44,7 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
                 });
                 nutritionProfile.$save(function(response) {
                     $scope.nutritionProfile = response;
-                    $location.path('plans/create');
+                    $location.path('plans/create/' + planDateForDb + '/true');
                 }, function(errorResponse) {
                     $scope.error = errorResponse.data.message;
                 });
@@ -193,7 +195,7 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
             var day = $scope.planDate.getDate();
             day = day - dayOfWeek;
             startWeeklyDt = new Date((new Date(year, month, day)).toUTCString());
-        }
+        };
 
         $scope.planDateChanged = function(){
             $scope.planDateForDb = $scope.planDate.getMonth() + '_' + $scope.planDate.getDate() + '_' + $scope.planDate.getFullYear();

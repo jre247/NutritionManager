@@ -15,14 +15,21 @@ module.exports = {
 			css: [
 				'public/lib/bootstrap/dist/css/bootstrap.css',
 				'public/lib/bootstrap/dist/css/bootstrap-theme.css',
+                'public/lib/bootstrap-tour/bootstrap-tour.css'
 			],
 			js: [
+                'public/lib/jquery/jquery.js',
+                'public/lib/jquery/jquery-ui.min.js',
 				'public/lib/angular/angular.js',
 				'public/lib/angular-resource/angular-resource.js',
 				'public/lib/angular-animate/angular-animate.js',
+                'public/lib/angular-route/angular-route.js',
 				'public/lib/angular-ui-router/release/angular-ui-router.js',
 				'public/lib/angular-ui-utils/ui-utils.js',
-				'public/lib/angular-bootstrap/ui-bootstrap-tpls.js'
+				'public/lib/angular-bootstrap/ui-bootstrap-tpls.js',
+                'public/lib/bootstrap/dist/js/bootstrap.js',
+                'public/lib/bootstrap-tour/bootstrap-tour.js'
+                //'public/lib/bootstrap-tour/bootstrap-tour-popover.js'
 			]
 		},
 		css: [

@@ -17,10 +17,13 @@ angular.module('plans').config(['$stateProvider',
             url: '/plans/create/:planDateForCreate',
             templateUrl: 'modules/plans/views/view-plan.client.view.html'
         }).
+        state('createPlanForNewUser', {
+            url: '/plans/create/:planDateForCreate/:isNewUser',
+            templateUrl: 'modules/plans/views/view-plan.client.view.html'
+        }).
 		state('viewPlan', {
 			url: '/plans/:planId',
-			//templateUrl: 'modules/plans/views/view-plan.client.view.html'
-                templateUrl: 'modules/plans/views/view-plan.client.view.html'
+            templateUrl: 'modules/plans/views/view-plan.client.view.html'
 		}).
 		state('editPlan', {
 			url: '/plans/:planId/edit',

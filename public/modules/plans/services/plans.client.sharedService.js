@@ -15,13 +15,25 @@ angular.module('plans').service(
             SuggestionsModalInstanceCtrl: SuggestionsModalInstanceCtrl,
             CreateFoodModalInstanceCtrl: CreateFoodModalInstanceCtrl,
             ModalInstanceCtrl: ModalInstanceCtrl,
-            fillFoodNutrients: fillFoodNutrients
+            fillFoodNutrients: fillFoodNutrients,
+            StartTourDialogCtrl: StartTourDialogCtrl
         });
 
 
         // ---
         // PUBLIC METHODS.
         // ---
+
+        function StartTourDialogCtrl($scope, $modalInstance, parentScope) {
+            $scope.ok = function () {
+                $modalInstance.close();
+            };
+
+            $scope.cancel = function () {
+                $modalInstance.dismiss('cancel');
+            };
+        };
+
 
         function ModalInstanceCtrl($scope, $modalInstance, parentScope, dialogMealsDetailed, dialogMealsShort) {
             $scope.selectedMealTypes = dialogMealsDetailed[0];

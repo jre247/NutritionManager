@@ -12,7 +12,7 @@
                     <!--<label class="control-label" for="planDate">Plan Date</label>-->
 
                     <div class="row">
-                        <div class="col-md-6" style="width: 153px;padding-top: 8px;">
+                        <div class="col-md-6" id="planDateContainer" style="width: 153px;padding-top: 8px;">
                             <p class="input-group">
                                <input type="text" class="form-control" style="padding: 4px 8px;" id="planDate" datepicker-popup="{{format}}" ng-model="plan.planDateNonUtc" is-open="opened" min-date="minDate" max-date="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
                               <span class="input-group-btn">
@@ -24,8 +24,8 @@
                 </div>
 
                 <div class="planDetailsSection" style="display: inline-block; margin-top: 9px;float: right;">
-                    <div style="display:inline-block">
-                        <button type="button" class="btn btn-primary btn-m" style="padding: 6px 10px;"  data-ng-click="createMeal(true);">
+                    <div style="display:inline-block" id="createMeal">
+                        <button  type="button" class="btn btn-primary btn-m" style="padding: 6px 10px;"  data-ng-click="createMeal(true);">
                             <span class="glyphicon glyphicon-plus" ></span><span class="hidden-xs"> Add Meal</span>
                         </button>
                         <!--<div data-ng-show="(!plan.meals || plan.meals.length == 0) && !isLoading">-->
@@ -46,13 +46,16 @@
                             <span class="glyphicon glyphicon" ></span>{{sortingBtnTxt}}
                         </button>
 
-                        <button type="button" class="btn btn-primary btn-m" style="padding: 6px 10px;" data-ng-click="openCopyPlanDialog()">
-                            <span class="glyphicon glyphicon-share" ></span><span class="hidden-xs"> Copy Plan</span>
-                        </button>
-
+                        <div style="display:inline-block" id="copyPlanBtn">
+                            <button  type="button" class="btn btn-primary btn-m" style="padding: 6px 10px;" data-ng-click="openCopyPlanDialog()">
+                                <span class="glyphicon glyphicon-share" ></span><span class="hidden-xs"> Copy Plan</span>
+                            </button>
+                        </div>
                         <button  type="button" class="btn btn-primary btn-m btn-danger hidden-sm hidden-xs"  data-ng-click="deletePlan(plan)">
                             <span class="glyphicon glyphicon" ></span><span>Delete Plan</span>
                         </button>
+
+
 
                         <button type="submit" class="btn btn-primary btn-m" style="padding: 6px 10px;" data-ng-click="savePlan()">
                             <span class="glyphicon glyphicon-floppy-disk" ></span><span class="hidden-xs"> Save</span>
@@ -115,15 +118,19 @@
                         </accordion-heading>
 
 
-                        <div >
+                        <div>
 
-                            <button type="button" class="btn btn-primary btn-sm" data-ng-click="createFoodWithDialog(meal);">
-                                <span class="glyphicon glyphicon-plus" ></span> Add Food
-                            </button>
+                            <div style="display:inline-block" class="createMealFood">
+                                <button type="button" class="btn btn-primary btn-sm " data-ng-click="createFoodWithDialog(meal);">
+                                    <span class="glyphicon glyphicon-plus" ></span> Add Food
+                                </button>
+                            </div>
 
-                            <button style="margin-left:10px;" type="button" class="btn btn-primary btn-sm" data-ng-click="openSuggestionsDialog(meal)">
-                                <span class="glyphicon glyphicon-question-sign" ></span> Suggest
-                            </button>
+                            <div style="display:inline-block" class="suggestFoods">
+                                <button style="margin-left:10px;" type="button" class="btn btn-primary btn-sm " data-ng-click="openSuggestionsDialog(meal)">
+                                    <span class="glyphicon glyphicon-question-sign" ></span> Suggest
+                                </button>
+                            </div>
 
                             <div class="plansMobileGrid" style="margin-top: 5px;">
                                 <ul>
@@ -190,7 +197,7 @@
                                 No food logged for meal
                             </div>
 
-                            <table class="table hidden-xs hidden-sm" data-ng-show="meal.foods.length > 0"  style="margin-top: 6px;width:100%;">
+                            <table id="foodTable" class="table hidden-xs hidden-sm" data-ng-show="meal.foods.length > 0"  style="margin-top: 6px;width:100%;">
                                 <thead>
                                 <tr>
                                     <th width="30%">Name</th>
@@ -323,13 +330,18 @@
             <thead>
             <tr>
                 <th class="plansDesktopInlineGrid" width="316px">&nbsp;</th>
-                <th data-ng-show="currentDeficit >= 0" width="90px">Deficit </th>
-                <th data-ng-show="currentDeficit < 0" width="90px">Surplus </th>
-                <th width="90px">Calories </th>
+
+                <th id="totalDeficit" data-ng-show="currentDeficit >= 0" width="90px">Deficit </th>
+                <th  data-ng-show="currentDeficit < 0" width="90px">Surplus </th>
+                <th id="totalCalories" width="90px">Calories </th>
+
+
                 <th width="40px" style="border-left: 1px solid lightgray;">&nbsp;</th>
-                <th class="carbsColorLbl" width="90px">Carbs</th>
+
+                <th id="totalCarbs" class="carbsColorLbl" width="90px">Carbs</th>
                 <th class=proteinColorLbl" width="90px">Protein</th>
                 <th class="fatColorLbl" width="130px">Fat</th>
+
             </tr>
             </thead>
             <tbody>
@@ -337,24 +349,24 @@
                 <td class="plansDesktopInlineGrid" style="padding-right: 15px;">
                     <span style="font-weight:bold;">Totals:</span>
                 </td>
-                <td style="color: rgb(33, 51, 184);">
+                <td style="color: rgb(33, 51, 184);" >
                     <span data-ng-show="currentDeficit >= 0" data-ng-bind="(currentDeficit || 0) | number:0"></span>
                     <span data-ng-show="currentDeficit < 0" data-ng-bind="-(currentDeficit || 0) | number:0"></span>
                 </td>
 
-                <td style="color: rgb(33, 51, 184);">
+                <td style="color: rgb(33, 51, 184);" id=totalCalories>
                     <span data-ng-bind="plan.totalPlanCalories | number:0"></span>
                 </td>
                 <td style="color: rgb(33, 51, 184);border-left: 1px solid lightgray;">
                     <span >&nbsp;</span>
                 </td>
-                <td class="carbsColor">
+                <td class="carbsColor" >
                     <span data-ng-bind="plan.totalPlanCarbs | number:1"></span>g
                 </td>
-                <td class="proteinColor" >
+                <td class="proteinColor" id="totalProtein">
                     <span data-ng-bind="plan.totalPlanProtein | number:1"></span>g
                 </td>
-                <td class="fatColor">
+                <td class="fatColor" id="totalFat">
                     <span data-ng-bind="plan.totalPlanFat | number:1"></span>g
                 </td>
 
@@ -677,6 +689,23 @@
         </div>
         <div class="modal-footer">
             <button style="float: left;" class="btn btn-primary" ng-click="selectAllMeals()">All Meals</button>
+            <button class="btn btn-primary" ng-click="ok()">OK</button>
+            <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+        </div>
+    </script>
+
+    <script type="text/ng-template" id="startTourDialog.html">
+        <div class="modal-header" style="font-family: segui;">
+            <h3 class="modal-title">Fit2Create Tour!</h3>
+        </div>
+        <div class="modal-body" style="font-family: segui;text-align: center;padding: 50px;">
+            <button type="button" id="demo" data-ng-click="ok()" class="btn btn-default btn-lg" data-demo>
+                <span class="glyphicon glyphicon-play"></span>
+                Start the demo
+            </button>
+
+        </div>
+        <div class="modal-footer">
             <button class="btn btn-primary" ng-click="ok()">OK</button>
             <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
         </div>

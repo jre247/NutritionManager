@@ -4,7 +4,7 @@
 var ApplicationConfiguration = (function() {
 	// Init module configuration options
 	var applicationModuleName = 'nutrition-manager';
-	var applicationModuleVendorDependencies = ['ngResource', 'ngAnimate', 'ui.router', 'ui.bootstrap'];
+	var applicationModuleVendorDependencies = ['ngRoute', 'ngResource', 'ngAnimate', 'ui.router', 'ui.bootstrap'];
 
 	// Add a new vertical module
 	var registerModule = function(moduleName) {

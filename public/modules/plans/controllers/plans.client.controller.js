@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('plans').controller('PlansController', ['$scope', '$stateParams', '$location', '$timeout', 'Authentication', '$modal', '$log', 'Plans', 'Foods', 'NutritionProfile', 'Progress', 'PlansService', 'CoreUtilities',
-	function($scope, $stateParams, $location, $timeout, Authentication, $modal, $log, Plans, Foods, NutritionProfile, Progress, PlansService, CoreUtilities) {
+angular.module('plans').controller('PlansController', ['$scope', '$stateParams', '$location', '$timeout', 'Authentication', '$modal', '$log', 'Plans', 'Foods', 'NutritionProfile', 'Progress', 'PlansService', 'CoreUtilities', '$routeParams',
+	function($scope, $stateParams, $location, $timeout, Authentication, $modal, $log, Plans, Foods, NutritionProfile, Progress, PlansService, CoreUtilities, $routeParams) {
 		window.scope = $scope;
         window.plans = $scope.plans;
         $scope.showPlanEditableErrorMsg = false;
@@ -101,11 +101,6 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
 		$scope.create = function() {
             var planDateAsString = new Date($scope.plan.planDateNonUtc);
             var planDate = new Date(planDateAsString);
-//            var planSplit = planDate.toISOString().substr(0, 10).split('-');
-//            var planDateYear = parseInt(planSplit[0]);
-//            var planDateMonth = parseInt(planSplit[1]) - 1;
-//            var planDateDay = parseInt(planSplit[2]);
-
             var planDateToSave = new Date($scope.plan.planDateNonUtc);
             var planDateYear = planDateToSave.getFullYear();
             var planDateMonth = planDateToSave.getMonth();
@@ -473,6 +468,17 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
             );
         };
 
+
+
+        var checkIfNewUser = function(){
+            if ($stateParams.isNewUser && $stateParams.isNewUser == 'true'){
+                // Instance the tour
+               //startTour();
+               // tour.
+                $scope.openTourDialog();
+            }
+        };
+
 		$scope.findOne = function() {
             $scope.isLoading = true;
 
@@ -506,6 +512,8 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
 
                     //todo use ngRouter instead of this horrible method for extracting url param
                     setPlanDateFromUrlParam();
+
+                    checkIfNewUser();
 
                     createDefaultMealsTemplate();
 
@@ -598,27 +606,18 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
         };
 
         var setPlanDateFromUrlParam = function(){
-            var urlSplit = $location.path().split('/');
-            if(urlSplit.length >= 3){
-                var dateParam;
+            var dateParam = $stateParams.planDateForCreate;
 
-                if(urlSplit.length == 4) {
-                    dateParam = urlSplit[3];
-                }
-                else{
-                    dateParam = urlSplit[2];
-                }
+            if(dateParam){
+                var dateParamSplit = dateParam.split('_');
 
-                if(dateParam.indexOf('_') !== -1){
-                    var dateParamSplit = dateParam.split('_');
+                var dateDay = parseInt(dateParamSplit[1]);
+                var dateYear = parseInt(dateParamSplit[2]);
+                var dateMonth = parseInt(dateParamSplit[0]);
 
-                    var dateDay = parseInt(dateParamSplit[1]);
-                    var dateYear = parseInt(dateParamSplit[2]);
-                    var dateMonth = parseInt(dateParamSplit[0]);
+                $scope.plan.planDate = new Date(dateYear, dateMonth, dateDay);
+                $scope.plan.planDateNonUtc = new Date(dateYear, dateMonth, dateDay);
 
-                    $scope.plan.planDate = new Date(dateYear, dateMonth, dateDay);
-                    $scope.plan.planDateNonUtc = new Date(dateYear, dateMonth, dateDay);
-                }
             }
         };
 
@@ -846,6 +845,29 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
 
 
         //dialog code
+        $scope.openTourDialog = function (size) {
+            var modalInstance = $modal.open({
+                templateUrl: 'startTourDialog.html',
+                controller: PlansService.StartTourDialogCtrl,
+                //size: size,
+                resolve: {
+                    parentScope: function () {
+                        return $scope;
+                    }
+                }
+            });
+
+            modalInstance.result.then(function (planCopyModel) {
+                //$scope.dialogSelectedMealType = selectedItem;
+                //$scope.copyPlan(planCopyModel);
+
+            }, function () {
+                $log.info('Modal dismissed at: ' + new Date());
+            });
+
+
+        };
+
         $scope.openCopyPlanDialog = function (size) {
             var isPlanEditable = checkIfPlanEditable();
 
