@@ -146,7 +146,63 @@
                     reflex: true
                     //backdrop: true
                    // reflex: true
+                },
+                {
+                    path: "/#!/plans/create",
+                    element: "#landingPageLink",
+                    placement: "right",
+                    title: "Landing Page",
+                    content: "You can click this Fit2Create link at any time to return to your home landing page."
+
+                },
+                {
+                    path: "/#!/activities/create",
+                    //element: "#landingPageLink",
+                    placement: "bottom",
+                    title: "Activities Page",
+                    content: "Welcome to the Activities page where you can set daily steps, add exercises for today, add activities notes, and track today's injuries.<br/><br/>You can navigate to this page by clicking the 'Create Activity For Today' link on your home landing page",
+                    orphan: true,
+                    backdrop: true
+
+                },
+                {
+                    path: "/#!/activities/create",
+                    element: "#dailySteps",
+                    placement: "bottom",
+                    title: "Daily Steps",
+                    content: "You can track daily steps here",
+                    backdrop: true
+
+                },
+                {
+                    path: "/#!/activities/create",
+                    element: "#addExercise",
+                    placement: "bottom",
+                    title: "Add Exercise(s)",
+                    content: "You can click this button to add one or more exercises for today.",
+                    backdrop: true
+
+                },
+                {
+                    path: "/#!/activities/create",
+                    element: "#addNotes",
+                    placement: "bottom",
+                    title: "Add Notes",
+                    content: "You can click this button to add notes for today.",
+                    backdrop: true
+
+                },
+                {
+                    path: "/#!/activities/create",
+                    element: "#addInjuries",
+                    placement: "bottom",
+                    title: "Add Injury",
+                    content: "You can click this button to track one or more injuries for today.",
+                    backdrop: true
+
                 }
+
+
 
 
             ]

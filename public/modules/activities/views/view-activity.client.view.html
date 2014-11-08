@@ -22,14 +22,16 @@
 
 
                 <div class="planDetailsSection" style="display: inline-block; margin-top: 9px;float: right;">
-                    <button data-ng-show="plan && !plan.notesVisible" type="button" class="btn btn-primary btn-m " style="margin-bottom: 15px;" data-ng-click="createNotes();">
-                        <span class="glyphicon glyphicon-edit" ></span> <span class="hidden-xs">Add Notes</span>
-                    </button>
-
-                    <button data-ng-show="!showInjuriesSection" type="button" class="btn btn-primary btn-m" style="margin-bottom: 15px;" data-ng-click="createInjuries();">
-                        <span class="glyphicon glyphicon-star-empty" ></span> <span class="hidden-xs">Add Injuries</span>
-                    </button>
-
+                    <div id="addNotes" style="display:inline-block">
+                        <button data-ng-show="plan && !plan.notesVisible" type="button" class="btn btn-primary btn-m " style="margin-bottom: 15px;" data-ng-click="createNotes();">
+                            <span class="glyphicon glyphicon-edit" ></span> <span class="hidden-xs">Add Notes</span>
+                        </button>
+                    </div>
+                    <div id="addInjuries" style="display:inline-block">
+                        <button data-ng-show="!showInjuriesSection" type="button" class="btn btn-primary btn-m" style="margin-bottom: 15px;" data-ng-click="createInjuries();">
+                            <span class="glyphicon glyphicon-star-empty" ></span> <span class="hidden-xs">Add Injuries</span>
+                        </button>
+                    </div>
                     <button type="submit" class="btn btn-primary btn-m " style="margin-bottom: 15px;" data-ng-click="saveActivityPlan();">
                         <span class="glyphicon glyphicon-floppy-disk" ></span> <span class="hidden-xs">Save</span>
                     </button>
@@ -75,10 +77,11 @@
 
                         </accordion-heading>
 
-                        <button type="button" class="btn btn-primary btn-sm" style="margin-bottom: 15px;" data-ng-click="createActivityWithDialog();">
-                            <span class="glyphicon glyphicon-plus" ></span> Add Exercise
-                        </button>
-
+                        <div id="addExercise" style="width: 103px;height: 31px;">
+                            <button type="button" class="btn btn-primary btn-sm" style="margin-bottom: 15px;" data-ng-click="createActivityWithDialog();">
+                                <span class="glyphicon glyphicon-plus" ></span> Add Exercise
+                            </button>
+                        </div>
                         <div data-ng-repeat="activity in plan.activities" class="list-group" style="margin-bottom: 0px;">
                             <a class="list-group-item actionRow" data-ng-click="createActivityWithDialog(activity)"
                                data-ng-mouseover="activity.showEditIcon = true" data-ng-mouseleave="activity.showEditIcon = false">

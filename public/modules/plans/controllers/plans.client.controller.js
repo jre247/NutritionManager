@@ -523,7 +523,10 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
 
                     $scope.isLoading = false;
 
-                    if(localStorage.tour_current_step && !localStorage.tour_end) {
+                    if(localStorage.tour_current_step =="14") {
+                        tour.goTo(14);
+                    }
+                    else if(localStorage.tour_current_step && !localStorage.tour_end) {
                         tour.goTo(6);
                     }
                 }

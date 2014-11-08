@@ -440,6 +440,10 @@ angular.module('activities').controller('ActivitiesController', ['$scope', '$sta
                         $scope.plan.planDateNonUtc = new Date(dateYear, dateMonth, dateDay);
                     }
                 }
+
+                if(localStorage.tour_current_step && !localStorage.tour_end) {
+                    tour.goTo(15);
+                }
             }
 
             $scope.isExercisesOpen = true;
