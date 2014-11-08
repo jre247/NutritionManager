@@ -169,28 +169,28 @@
                 {
                     path: "/#!/activities/create",
                     element: "#dailySteps",
-                    placement: "bottom",
+                    placement: "right",
                     title: "Daily Steps",
-                    content: "You can track daily steps here",
-                    backdrop: true
+                    content: "You can track daily steps here"
+                    //backdrop: true
 
                 },
                 {
                     path: "/#!/activities/create",
                     element: "#addExercise",
-                    placement: "bottom",
+                    placement: "right",
                     title: "Add Exercise(s)",
-                    content: "You can click this button to add one or more exercises for today.",
-                    backdrop: true
+                    content: "You can click this button to add one or more exercises for today."
+                    //backdrop: true
 
                 },
                 {
                     path: "/#!/activities/create",
                     element: "#addNotes",
-                    placement: "bottom",
+                    placement: "left",
                     title: "Add Notes",
-                    content: "You can click this button to add notes for today.",
-                    backdrop: true
+                    content: "You can click this button to add notes for today."
+                   // backdrop: true
 
                 },
                 {
@@ -198,8 +198,8 @@
                     element: "#addInjuries",
                     placement: "bottom",
                     title: "Add Injury",
-                    content: "You can click this button to track one or more injuries for today.",
-                    backdrop: true
+                    content: "You can click this button to track one or more injuries for today."
+                   // backdrop: true
 
                 }
 
