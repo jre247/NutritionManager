@@ -16,6 +16,7 @@
 
                 return $demo.removeClass("disabled", true);
 
+                //return window.location = '/#!/';
             },
             debug: true,
             steps: [
@@ -23,7 +24,7 @@
 
                 {
                     path: "/#!/",
-                   // element: "#demo",
+                    // element: "#demo",
                     placement: "bottom",
                     title: "Welcome to Fit2Create!",
                     content: "Welcome to Fit2Create, where you can create your own nutrition and fitness destiny! <br/><br/> This is the home landing page where you can look at overall nutrition, activity, and weight data for the day and week.",
@@ -36,7 +37,7 @@
                     placement: "bottom",
                     title: "Weekly Dashboard",
                     content: "This is where you can see nutrition and activity data for a selected week.",
-                        //+ "<br/><br/>Right now this is empty because there are currently no plans entered. However, you'll see some fancy charts here once you have at least one plan created.",
+                    //+ "<br/><br/>Right now this is empty because there are currently no plans entered. However, you'll see some fancy charts here once you have at least one plan created.",
                     backdrop: true
                 },
                 {
@@ -45,7 +46,7 @@
                     placement: "bottom",
                     title: "Daily Dashboard",
                     content: "This is where you can see nutrition and activity data for a select day.",
-                        //+ "<br/><br/>Right now this is empty because there is currently no plan entered for today. After you create a plan for today you'll see some super helpful charts displayed for today!",
+                    //+ "<br/><br/>Right now this is empty because there is currently no plan entered for today. After you create a plan for today you'll see some super helpful charts displayed for today!",
                     backdrop: true
                 },
                 {
@@ -53,24 +54,24 @@
                     element: "#planDateForDay",
                     placement: "bottom",
                     title: "Plan for Date",
-                    content: "You can select the date to see nutrition and activity for that day's plan.",
-                    backdrop: true
+                    content: "You can select the date to see nutrition and activity for that day's plan."
+                    //backdrop: true
                 },
                 {
                     path: "/#!/",
                     element: "#createActivityForDay",
                     placement: "bottom",
                     title: "Create Day Activity",
-                    content: "You can click this link to create an activity for the selected day.",
-                    backdrop: true
+                    content: "You can click this link to create an activity for the selected day."
+                    // backdrop: true
                 },
                 {
                     path: "/#!/",
                     element: "#createNutritionPlanForDay",
                     placement: "bottom",
                     title: "Create Day Nutrition",
-                    content: "You can click this link to create a nutrition plan for the selected day.<br/><br/> We will click this link and go to the create nutrition plan page now.",
-                    backdrop: true
+                    content: "You can click this link to create a nutrition plan for the selected day.<br/><br/> We will click this link and go to the create nutrition plan page now."
+                    //backdrop: true
                 },
                 {
                     path: "/#!/plans/create",
@@ -87,8 +88,8 @@
                     element: "#planDateContainer",
                     placement: "bottom",
                     title: "Select Plan Date",
-                    content: "You can select a custom date for this plan here. Note: This date will default to today's date for a new plan.",
-                    backdrop: true
+                    content: "You can select a custom date for this plan here. Note: This date will default to today's date for a new plan."
+                    //backdrop: true
 
                 },
                 {
@@ -97,7 +98,7 @@
                     placement: "bottom",
                     title: "Add Meal",
                     content: "You can click this button to add a new meal to this plan. <br/><br/>However, there is a way to customize a meals template that you can have as a default for each new plan. For example, if you want 'Breakfast, Lunch, Snack, Dinner' as a default for each new plan then you can set that up in your Nutrition Settings page. We'll get to that in a minute.",
-                    backdrop: true,
+                    //backdrop: true,
                     reflex: true
                 },
                 {
@@ -106,7 +107,7 @@
                     placement: "bottom",
                     title: "Copy Plan!",
                     content: "You can click this button to copy one or more meals from this plan to another plan!",
-                    backdrop: true,
+                    //backdrop: true,
                     reflex: true
                 },
                 {
@@ -115,7 +116,7 @@
                     placement: "bottom",
                     title: "Add Food",
                     content: "Each meal has an 'Add Food' button to add a food to that specific meal.",
-                    backdrop: true,
+                    //backdrop: true,
                     reflex: true,
                     redirect: true
                     //reflex: true
@@ -126,7 +127,7 @@
                     placement: "bottom",
                     title: "Suggest Foods",
                     content: "Each meal has a suggest button to suggest the top 5 foods that will get you closest to your Nutrient Goals!",
-                    backdrop: true,
+                    //backdrop: true,
                     reflex: true
                     //duration: 5000
                 },
@@ -143,10 +144,10 @@
                     element: "#totalCarbs",
                     placement: "top",
                     title: "Total Macros",
-                    content: "You can see the total plan macros right here at any time while modifying a plan.",
-                    reflex: true
+                    content: "You can see the total plan macros right here at any time while modifying a plan."
+                    //reflex: true
                     //backdrop: true
-                   // reflex: true
+                    // reflex: true
                 },
                 {
                     path: "/#!/plans/create",
@@ -168,8 +169,16 @@
                 },
                 {
                     path: "/#!/activities/create",
+                    element: "#planDateContainer",
+                    placement: "bottom",
+                    title: "Set Activity Plan Date",
+                    content: "You can set a custom date for an activity's plan. <br/><br/>Note: This plan date defaults to today's date."
+                    // backdrop: true
+                },
+                {
+                    path: "/#!/activities/create",
                     element: "#dailySteps",
-                    placement: "right",
+                    placement: "bottom",
                     title: "Daily Steps",
                     content: "You can track daily steps here"
                     //backdrop: true
@@ -178,7 +187,7 @@
                 {
                     path: "/#!/activities/create",
                     element: "#addExercise",
-                    placement: "right",
+                    placement: "bottom",
                     title: "Add Exercise(s)",
                     content: "You can click this button to add one or more exercises for today."
                     //backdrop: true
@@ -187,10 +196,10 @@
                 {
                     path: "/#!/activities/create",
                     element: "#addNotes",
-                    placement: "left",
+                    placement: "bottom",
                     title: "Add Notes",
                     content: "You can click this button to add notes for today."
-                   // backdrop: true
+                    // backdrop: true
 
                 },
                 {
@@ -199,8 +208,15 @@
                     placement: "bottom",
                     title: "Add Injury",
                     content: "You can click this button to track one or more injuries for today."
-                   // backdrop: true
-
+                    // backdrop: true
+                },
+                {
+                    path: "/#!/",
+                    element: "#createNutritionPlanForDay",
+                    placement: "bottom",
+                    title: "Create your first Nutrition Plan!",
+                    content: "Create your first Nutrition Plan if you haven't done so already!",
+                    backdrop: true
                 }
 
 
