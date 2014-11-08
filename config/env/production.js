@@ -10,6 +10,7 @@ module.exports = {
                 'public/lib/bootstrap-tour/bootstrap-tour.min.css'
 			],
 			js: [
+                'public/lib/jquery/jquery.min.map.js',
                 'public/lib/jquery/jquery.min.js',
                 'public/lib/jquery/jquery-ui.min.js',
                 'public/lib/angular/angular.min.js',
