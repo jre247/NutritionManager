@@ -23,11 +23,12 @@
 
                 {
                     path: "/#!/",
-                    element: "#demo",
+                   // element: "#demo",
                     placement: "bottom",
                     title: "Welcome to Fit2Create!",
                     content: "Welcome to Fit2Create, where you can create your own nutrition and fitness destiny! <br/><br/> This is the home landing page where you can look at overall nutrition, activity, and weight data for the day and week.",
-                    backdrop: true
+                    backdrop: true,
+                    orphan: true
                 },
                 {
                     path: "/#!/",
