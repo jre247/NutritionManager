@@ -69,18 +69,8 @@
                     //path: "/api",
                     element: "#totalDeficit",
                     placement: "top",
-                    title: "Total Plan Deficit",
-                    content: "You can see the total plan deficit right here at any time while modifying a plan.",
-                    backdrop: true
-                    //backdrop: true
-                },
-                {
-                    //path: "/api",
-                    element: "#totalCalories",
-                    placement: "top",
-                    title: "Total Plan Calories",
-                    content: "You can see the total plan calories right here at any time while modifying a plan.",
-                    backdrop: true
+                    title: "Total Plan Deficit and Calories",
+                    content: "You can see the total plan deficit and calories right here at any time while modifying a plan."
                     //backdrop: true
                 },
                 {

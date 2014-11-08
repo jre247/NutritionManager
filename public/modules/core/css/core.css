@@ -82,6 +82,9 @@ div.tooltip {
 
 
 /* Bootstrap overrides */
+.popover-title{
+    background-color: rgb(161, 228, 174);
+}
 .navbar-inverse .navbar-brand {
     color: white;
 }
