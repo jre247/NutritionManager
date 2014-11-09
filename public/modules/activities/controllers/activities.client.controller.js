@@ -394,7 +394,9 @@ angular.module('activities').controller('ActivitiesController', ['$scope', '$sta
                 $scope.plan = Activities.get({
                     activityId: $stateParams.activityId
                 }, function (u, getResponseHeaders) {
-                    $scope.plan.planDateNonUtc = new Date($scope.plan.planDateAsMili);
+                    //$scope.plan.planDateNonUtc = new Date($scope.plan.planDateAsMili);
+                    $scope.plan.planDateNonUtc = new Date($scope.plan.planDateYear, $scope.plan.planDateMonth, $scope.plan.planDateDay);
+
 
                     $scope.isUserAdmin = $scope.plan.userRoles && $scope.plan.userRoles.indexOf('admin') !== -1 ? true : false;
 

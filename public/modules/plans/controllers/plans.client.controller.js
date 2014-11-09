@@ -487,7 +487,7 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
                     $scope.plan = Plans.get({
                         planId: $stateParams.planId
                     }, function (u, getResponseHeaders) {
-                        $scope.plan.planDateNonUtc = new Date($scope.plan.planDateAsMili);
+                        $scope.plan.planDateNonUtc = new Date($scope.plan.planDateYear, $scope.plan.planDateMonth, $scope.plan.planDateDay);
 
                         setCurrentDeficit();
 

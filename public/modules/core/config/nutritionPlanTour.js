@@ -104,7 +104,7 @@
                 {
                     path: "/#!/plans/create",
                     element: "#copyPlanBtn",
-                    placement: "bottom",
+                    placement: "left",
                     title: "Copy Plan!",
                     content: "You can click this button to copy one or more meals from this plan to another plan!",
                     //backdrop: true,
