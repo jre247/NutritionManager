@@ -1,8 +1,8 @@
 'use strict';
 
 
-angular.module('core').controller('HomeController', ['$scope', 'Authentication', 'Activities', 'CoreService', 'NutritionProfile', 'Progress', 'ThermometerChartService', '$modal', 'CoreDialogsService', '$location', 'CoreUtilities',
-	function($scope, Authentication, Activities, CoreService, NutritionProfile, Progress, ThermometerChartService, $modal, CoreDialogsService, $location, CoreUtilities) {
+angular.module('core').controller('HomeController', ['$scope', '$stateParams', 'Authentication', 'Activities', 'CoreService', 'NutritionProfile', 'Progress', 'ThermometerChartService', '$modal', 'CoreDialogsService', '$location', 'CoreUtilities',
+	function($scope, $stateParams, Authentication, Activities, CoreService, NutritionProfile, Progress, ThermometerChartService, $modal, CoreDialogsService, $location, CoreUtilities) {
 		// This provides Authentication context.
 		$scope.authentication = Authentication;
         window.scope = $scope;
@@ -136,15 +136,35 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
 
         ];
 
-        var todaysDate = (new Date()).toUTCString();
-        var dt = new Date(todaysDate);
-        var year = dt.getFullYear();
-        var month = dt.getMonth();
-        var day = dt.getDate();
+        var setDashboardDateFromUrl = function(){
+            var dateParam = $stateParams.dashboardDate;
+            var sDateParam = dateParam.toString();
+            var year = sDateParam.substr(0, 4);
+            var month = sDateParam.substr(4, 2);
+            var day = sDateParam.substr(6, 2);
+            $scope.planDate = new Date(year, month, day);
+            $scope.planDateForDb = month + '_' + day + '_' + year;
+            $scope.planDateDisplay = ($scope.planDate.getMonth() + 1) + '/' + $scope.planDate.getDate() + '/' + $scope.planDate.getFullYear();
+        };
 
-        $scope.planDate = new Date(todaysDate);
-        $scope.planDateForDb = month + '_' + day + '_' + year;
-        $scope.planDateDisplay = (month + 1) + '/' + day +'/' + year;
+        var initializePlanDate = function(){
+            if($stateParams.dashboardDate) {
+                setDashboardDateFromUrl();
+            }
+            else {
+                var todaysDate = (new Date()).toUTCString();
+                var dt = new Date(todaysDate);
+                var year = dt.getFullYear();
+                var month = dt.getMonth();
+                var day = dt.getDate();
+
+                $scope.planDate = new Date(todaysDate);
+                $scope.planDateForDb = month + '_' + day + '_' + year;
+                $scope.planDateDisplay = (month + 1) + '/' + day + '/' + year;
+            }
+        };
+
+        initializePlanDate();
 
         //TODO: move into service
         $scope.activityTypesDictionary = [];
@@ -344,7 +364,11 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
             ThermometerChartService.buildThermometerChart(caloriesIn, goalCalories, '.budgetChart', isUpdate);
         };
 
+
+
         $scope.getDailyDashboardData = function(isUpdate) {
+
+
             CoreService.getDailyDashboardData($scope.planDateForDb).then(function(data){
 
                 var dPlanDate = new Date($scope.planDate.getFullYear(), $scope.planDate.getMonth(), $scope.planDate.getDate());

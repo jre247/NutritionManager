@@ -11,12 +11,12 @@ angular.module('plans').service(
         // Return public API.
         return({
             getActivityByDate: getActivityByDate,
+            //getPlanByDate: getPlanByDate,
             NotesModalInstanceCtrl: NotesModalInstanceCtrl,
             SuggestionsModalInstanceCtrl: SuggestionsModalInstanceCtrl,
             CreateFoodModalInstanceCtrl: CreateFoodModalInstanceCtrl,
             ModalInstanceCtrl: ModalInstanceCtrl,
             fillFoodNutrients: fillFoodNutrients
-            //StartTourDialogCtrl: StartTourDialogCtrl
         });
 
 
@@ -668,6 +668,23 @@ angular.module('plans').service(
             return( request.then( handleActivityByDateSuccess, handleError ) );
         }
 
+//        function getPlanByDate(planDateIn) {
+//            planDate = planDateIn;
+//
+//            var request = $http({
+//                method: "get",
+//                url: "/plans/" + planDate + '/' + 1 + '/' + 1,
+//                params: {
+//                    action: "get"
+//                }
+//
+//
+//            });
+//
+//            return request;
+//
+//            //return( request.then( handlePlanByDateSuccess, handleError ) );
+//        }
 
 
 
@@ -678,6 +695,15 @@ angular.module('plans').service(
         // PRIVATE METHODS.
         // ---
 
+
+        function handlePlanByDateSuccess(response){
+            if(response.data !== 'null') {
+                return response.data;
+            }
+            else{
+                return "empty";
+            }
+        };
 
         // I transform the successful response, unwrapping the application data
         // from the API response payload.

@@ -98,6 +98,12 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
             update: $scope.sortableUpdateCallback
         };
 
+        var getPlanDateAsConcat = function(planDateYear, planDateMonth, planDateDay){
+            return parseInt(planDateYear + '' + (planDateMonth < 10 ? '0' + planDateMonth : planDateMonth) + '' + (planDateDay < 10 ? '0' + planDateDay : planDateDay));
+        };
+
+
+
 		$scope.create = function() {
             var planDateAsString = new Date($scope.plan.planDateNonUtc);
             var planDate = new Date(planDateAsString);
@@ -479,61 +485,185 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
             }
         };
 
-		$scope.findOne = function() {
+        var processReturnedPlan = function(){
+            $scope.plan.planDateNonUtc = new Date($scope.plan.planDateYear, $scope.plan.planDateMonth, $scope.plan.planDateDay);
+
+            setCurrentDeficit();
+
+            $scope.isUserAdmin = $scope.plan.userRoles && $scope.plan.userRoles.indexOf('admin') !== -1 ? true : false;
+
+            setPlanMealsTotals();
+
+            fillActivityPlan();
+
+            $scope.isLoading = false;
+        };
+
+        var processNewPlan = function(planDateYear, planDateMonth, planDateDay){
+            var planDate;
+
+            if(planDateYear && planDateMonth && planDateDay) {
+                planDate = new Date(planDateYear, planDateMonth, planDateDay);
+            }
+            else{
+                planDate = new Date();
+            }
+
+            $scope.plan =  {data: null, meals: null, notes: null, planDate: planDate, planDateNonUtc: planDate, planDateYear: planDate.getFullYear(), planDateMonth: planDate.getMonth(), planDateDay: planDate.getDate()  };
+            $scope.plan.meals = [];
+
+            $scope.plan.totalPlanCalories = 0;
+            $scope.plan.totalPlanCarbsAsPercent = 0;
+            $scope.plan.totalPlanFatAsPercent = 0;
+            $scope.plan.totalPlanProteinAsPercent = 0;
+
+            if(planDateYear && planDateMonth && planDateDay){
+                $scope.plan.planDateAsConcat = getPlanDateAsConcat(planDateYear, planDateMonth, planDateDay);
+            }
+
+            //todo use ngRouter instead of this horrible method for extracting url param
+            setPlanDateFromUrlParam();
+
+            checkIfNewUser();
+
+            createDefaultMealsTemplate();
+
+            fillActivityPlan();
+
+            $scope.plan.moveArrowImgLeft = false;
+
+            $scope.isLoading = false;
+
+            if(localStorage.tour_current_step =="14") {
+                tour.goTo(14);
+            }
+            else if(localStorage.tour_current_step && !localStorage.tour_end) {
+                tour.goTo(6);
+            }
+        };
+
+        var nextDayClick = function(){
+            $scope.plan.planDateNonUtc = new Date($scope.plan.planDateNonUtc.setDate($scope.plan.planDateNonUtc.getDate() + 1));
+
+            var planDateYear = $scope.plan.planDateNonUtc.getFullYear();
+            var planDateMonth = $scope.plan.planDateNonUtc.getMonth();
+            var planDateDay = $scope.plan.planDateNonUtc.getDate();
+
+            var planDateAsConcat = getPlanDateAsConcat(planDateYear, planDateMonth, planDateDay);
+
+            $scope.findOne(planDateAsConcat);
+        };
+
+        var prevDayClick = function(){
+            $scope.plan.planDateNonUtc = new Date($scope.plan.planDateNonUtc.setDate($scope.plan.planDateNonUtc.getDate() - 1));
+
+            var planDateYear = $scope.plan.planDateNonUtc.getFullYear();
+            var planDateMonth = $scope.plan.planDateNonUtc.getMonth();
+            var planDateDay = $scope.plan.planDateNonUtc.getDate();
+
+            var planDateAsConcat = getPlanDateAsConcat(planDateYear, planDateMonth, planDateDay);
+
+            $scope.findOne(planDateAsConcat);
+
+        };
+
+        $scope.findOne = function() {
             $scope.isLoading = true;
 
+            if($stateParams.planDate) {
+                var sDateParam = $stateParams.planDate.toString();
+                var year = sDateParam.substr(0, 4);
+                var month = sDateParam.substr(4, 2);
+                var day = sDateParam.substr(6, 2);
+
+                var planDateAsConcat = new Date(year, month, day);
+
+                if ($stateParams.planDateChangeDirection === 'nextDay') {
+                    planDateAsConcat = new Date(planDateAsConcat.setDate(planDateAsConcat.getDate() + 1));
+                }
+                else {
+                    planDateAsConcat = new Date(planDateAsConcat.setDate(planDateAsConcat.getDate() - 1));
+                }
+
+                year = planDateAsConcat.getFullYear();
+                month = planDateAsConcat.getMonth();
+                day = planDateAsConcat.getDate();
+
+                planDateAsConcat = getPlanDateAsConcat(year, month, day);
+            }
+
             $scope.nutritionProfile = NutritionProfile.get(function(){
-                if ($stateParams.planId) {
+                if(planDateAsConcat){
                     $scope.plan = Plans.get({
-                        planId: $stateParams.planId
-                    }, function (u, getResponseHeaders) {
-                        $scope.plan.planDateNonUtc = new Date($scope.plan.planDateYear, $scope.plan.planDateMonth, $scope.plan.planDateDay);
-
-                        setCurrentDeficit();
-
-                        $scope.isUserAdmin = $scope.plan.userRoles && $scope.plan.userRoles.indexOf('admin') !== -1 ? true : false;
-
-                        setPlanMealsTotals();
-
-                        fillActivityPlan();
+                        planId: planDateAsConcat
+                    },function(plan){
+                        if(!plan || (plan && !plan.planDateYear)) {
+                            processNewPlan(year, month, day);
+                        }
 
                         $scope.isLoading = false;
                     });
                 }
+                else if ($stateParams.planId) {
+                    $scope.plan = Plans.get({
+                        planId: $stateParams.planId
+                    }, function () {
+                        processReturnedPlan();
+                    });
+                }
                 else{
-                    var now = new Date();
-                    $scope.plan =  {data: null, meals: null, notes: null, planDate: new Date(), planDateNonUtc: now, planDateYear: now.getFullYear(), planDateMonth: now.getMonth(), planDateDay: now.getDate()  };
-                    $scope.plan.meals = [];
-
-                    $scope.plan.totalPlanCalories = 0;
-                    $scope.plan.totalPlanCarbsAsPercent = 0;
-                    $scope.plan.totalPlanFatAsPercent = 0;
-                    $scope.plan.totalPlanProteinAsPercent = 0;
-
-                    //todo use ngRouter instead of this horrible method for extracting url param
-                    setPlanDateFromUrlParam();
-
-                    checkIfNewUser();
-
-                    createDefaultMealsTemplate();
-
-                    fillActivityPlan();
-
-                    $scope.plan.moveArrowImgLeft = false;
-
-                    $scope.isLoading = false;
-
-                    if(localStorage.tour_current_step =="14") {
-                        tour.goTo(14);
-                    }
-                    else if(localStorage.tour_current_step && !localStorage.tour_end) {
-                        tour.goTo(6);
-                    }
+                    processNewPlan();
                 }
             });
 
 
-		};
+        };
+
+//		$scope.findOne = function(planDateAsConcat, sentFromView) {
+//            $scope.isLoading = true;
+//
+//            $scope.nutritionProfile = NutritionProfile.get(function(){
+//                if(planDateAsConcat){
+//                    PlansService.getPlanByDate(planDateAsConcat).then(function(plan){
+//                        if(plan && plan.data !== "null") {
+//                            $scope.plan = plan.data;
+//
+//                            $scope.plan = Plans.get({
+//                                planId: $scope.plan._id
+//                            }, function () {
+//                                $location.path('/plans/' + $scope.plan._id);
+//
+//                                processReturnedPlan();
+//                            });
+//
+//                            //processReturnedPlan();
+//                        }
+//                        else{
+//                            $location.path('/plans/create');
+//
+//                            var sDateParam = planDateAsConcat.toString();
+//                            var year = sDateParam.substr(0, 4);
+//                            var month = sDateParam.substr(4, 2);
+//                            var day = sDateParam.substr(6, 2);
+//
+//                            processNewPlan(year, month, day);
+//                        }
+//                    });
+//                }
+//                else if ($stateParams.planId) {
+//                    $scope.plan = Plans.get({
+//                        planId: $stateParams.planId
+//                    }, function () {
+//                        processReturnedPlan();
+//                    });
+//                }
+//                else{
+//                    processNewPlan();
+//                }
+//            });
+//
+//
+//		};
 
         var createDefaultMealsTemplate = function(){
             //create meal template based on what user specified in their nutrition profile
@@ -851,30 +981,9 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
         };
 
 
-        //dialog code
-//        $scope.openTourDialog = function (size) {
-//            var modalInstance = $modal.open({
-//                templateUrl: 'startTourDialog.html',
-//                controller: PlansService.StartTourDialogCtrl,
-//                //size: size,
-//                resolve: {
-//                    parentScope: function () {
-//                        return $scope;
-//                    }
-//                }
-//            });
-//
-//            modalInstance.result.then(function (planCopyModel) {
-//                //$scope.dialogSelectedMealType = selectedItem;
-//                //$scope.copyPlan(planCopyModel);
-//
-//            }, function () {
-//                $log.info('Modal dismissed at: ' + new Date());
-//            });
-//
-//
-//        };
+        //$scope.findOne();
 
+        //dialog code
         $scope.openCopyPlanDialog = function (size) {
             var isPlanEditable = checkIfPlanEditable();
 

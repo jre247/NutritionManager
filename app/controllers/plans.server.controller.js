@@ -234,17 +234,65 @@ exports.list = function(req, res, skipPlans) {
 /**
  * Plan middleware
  */
+var getPlanByDate = function(req, res, planDate){
+    var nPlanDate = parseInt(planDate);
+
+    Plan.findOne({'planDateAsConcat': nPlanDate, 'user': req.user.id}).populate('user', 'displayName').exec(function(err, plan) {
+        if (err) return next(err);
+        //if (!plan) return next(new Error('Failed to load plan ' + id));
+
+        if(plan) {
+            plan.userRoles = req.user.roles;
+        }
+        else
+        {
+            plan = {};
+        }
+        // req.plan = plan;
+
+
+
+        res.jsonp(plan);
+    });
+};
+
 exports.planByID = function(req, res, next, id) {
-	Plan.findById(id).populate('user', 'displayName').exec(function(err, plan) {
-		if (err) return next(err);
-		if (!plan) return next(new Error('Failed to load plan ' + id));
+    if (id.length === 8){
+        return getPlanByDate(req, res, id);
 
-        plan.userRoles = req.user.roles;
-        req.plan = plan;
-        next();
+    }
+    else {
+        Plan.findById(id).populate('user', 'displayName').exec(function (err, plan) {
+            if (err) return next(err);
+            if (!plan) return next(new Error('Failed to load plan ' + id));
+
+            plan.userRoles = req.user.roles;
+            req.plan = plan;
+            next();
 
 
-	});
+        });
+    }
+};
+
+exports.planByPlanDateAsConcat = function(req, res, next, id) {
+    var planDate = req.param("planDateAsConcat");
+
+    var nPlanDate = parseInt(planDate);
+
+    Plan.findOne({'planDateAsConcat': nPlanDate, 'user': req.user.id}).populate('user', 'displayName').exec(function(err, plan) {
+        if (err) return next(err);
+        //if (!plan) return next(new Error('Failed to load plan ' + id));
+
+        if(plan) {
+            plan.userRoles = req.user.roles;
+        }
+       // req.plan = plan;
+
+        res.jsonp(plan);
+
+
+    });
 };
 
 

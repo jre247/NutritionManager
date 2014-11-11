@@ -3,22 +3,48 @@
 <!--<h1>New Plan</h1>-->
 <!--</div>-->
 <div class="col-md-12">
-    <form class="form-horizontal" data-ng-init="findOne()" novalidate>
+    <form class="form-horizontal" data-ng-init="findOne(null, true)" novalidate>
 
 
         <fieldset>
+
+
             <div class="form-group" style="margin-bottom: 1px;">
+
+                <div style="margin-top: 9px;margin-bottom: 15px;">
+                    <a data-ng-href="#!/{{plan.planDateAsConcat}}">
+                        <button type="button" class="btn btn-primary btn-m">
+                            <span class="glyphicon glyphicon-circle-arrow-left" ></span><span> Dashboard</span>
+                        </button>
+                    </a>
+                </div>
+
                 <div class="planDetailsSection" style="display:inline-block;vertical-align: top;">
                     <!--<label class="control-label" for="planDate">Plan Date</label>-->
 
-                    <div class="row">
-                        <div class="col-md-6" id="planDateContainer" style="width: 153px;padding-top: 8px;">
+
+                    <div >
+                        <div style="display:inline-block;vertical-align: top;position: relative;top: 10px;" id="prevDay">
+                            <a data-ng-href="#!/plans/{{plan.planDateAsConcat}}/previousDay/1">
+                                <button type="button" class="btn btn-default btn-sm" >
+                                    <span class="glyphicon glyphicon-chevron-left arrowBtn" ></span>
+                                </button>
+                            </a>
+                        </div>
+                        <div id="planDateContainer" style="width: 126px;padding-top: 8px;display:inline-block">
                             <p class="input-group">
                                <input type="text" class="form-control" style="padding: 4px 8px;" id="planDate" datepicker-popup="{{format}}" ng-model="plan.planDateNonUtc" is-open="opened" min-date="minDate" max-date="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
                               <span class="input-group-btn">
                                 <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
                               </span>
                             </p>
+                        </div>
+                        <div style="display:inline-block;vertical-align: top;position: relative;top: 10px;" id="nextDay">
+                            <a data-ng-href="#!/plans/{{plan.planDateAsConcat}}/nextDay/1">
+                                <button type="button" class="btn btn-default btn-sm" >
+                                    <span class="glyphicon glyphicon-chevron-right arrowBtn" />
+                                </button>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -28,18 +54,15 @@
                         <button  type="button" class="btn btn-primary btn-m" style="padding: 6px 10px;"  data-ng-click="createMeal(true);">
                             <span class="glyphicon glyphicon-plus" ></span><span class="hidden-xs"> Add Meal</span>
                         </button>
-                        <!--<div data-ng-show="(!plan.meals || plan.meals.length == 0) && !isLoading">-->
-                            <!--<span style="font-size: 25px;" data-ng-class="{arrowImgMoveLeft: plan.moveArrowImgLeft}"  class="glyphicon glyphicon-arrow-up"></span>-->
-                        <!--</div>-->
                     </div>
 
                     <div style="display:inline-block;vertical-align: top;">
                         <button  type="button" class="btn btn-primary btn-m " style="padding: 6px 10px;"  data-ng-click="openNotesDialog();">
-                            <span class="glyphicon glyphicon-edit" ></span><span class="hidden-xs"> Open Notes</span>
+                            <span class="glyphicon glyphicon-edit" ></span><span class="hidden-xs"> Notes</span>
                         </button>
 
                         <button  type="button" class="btn btn-primary btn-m  hidden-xs"  data-ng-click="collapseAllMeals(plan);">
-                            <span class="glyphicon glyphicon" ></span><span >Collapse All Meals</span>
+                            <span class="glyphicon glyphicon" ></span><span >Collapse All</span>
                         </button>
 
                         <button type="button" class="btn btn-primary btn-m hidden-sm hidden-xs"  data-ng-click="toggleSorting();">
