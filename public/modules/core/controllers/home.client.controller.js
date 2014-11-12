@@ -49,8 +49,6 @@ angular.module('core').controller('HomeController', ['$scope', '$stateParams', '
                 }
             });
 
-            var planDateForDb = $scope.planDate.getMonth() + '_' + $scope.planDate.getDate() + '_' + $scope.planDate.getFullYear();
-
             modalInstance.result.then(function (selected) {
                 var nutritionProfile = new NutritionProfile({
                     proteinPercentageTarget: selected.nutritionProfile.proteinPercentageTarget,
@@ -67,8 +65,6 @@ angular.module('core').controller('HomeController', ['$scope', '$stateParams', '
                 });
                 nutritionProfile.$save(function(response) {
                     $scope.nutritionProfile = response;
-                    //$location.path('plans/create/' + planDateForDb + '/true');
-                    //$scope.isNewUser = true;
                     startTour();
                 }, function(errorResponse) {
                     $scope.error = errorResponse.data.message;
@@ -136,6 +132,10 @@ angular.module('core').controller('HomeController', ['$scope', '$stateParams', '
 
         ];
 
+        var getPlanDateAsConcat = function(planDateYear, planDateMonth, planDateDay){
+            return parseInt(planDateYear + '' + (planDateMonth < 10 ? '0' + planDateMonth : planDateMonth) + '' + (planDateDay < 10 ? '0' + planDateDay : planDateDay));
+        };
+
         var setDashboardDateFromUrl = function(){
             var dateParam = $stateParams.dashboardDate;
             var sDateParam = dateParam.toString();
@@ -144,6 +144,8 @@ angular.module('core').controller('HomeController', ['$scope', '$stateParams', '
             var day = sDateParam.substr(6, 2);
             $scope.planDate = new Date(year, month, day);
             $scope.planDateForDb = month + '_' + day + '_' + year;
+            $scope.planDateForCreate = getPlanDateAsConcat(year, month, day);
+            //$scope.planDateForDb = getPlanDateAsConcat(planDateYear, planDateMonth, planDateDay);
             $scope.planDateDisplay = ($scope.planDate.getMonth() + 1) + '/' + $scope.planDate.getDate() + '/' + $scope.planDate.getFullYear();
         };
 
@@ -160,6 +162,7 @@ angular.module('core').controller('HomeController', ['$scope', '$stateParams', '
 
                 $scope.planDate = new Date(todaysDate);
                 $scope.planDateForDb = month + '_' + day + '_' + year;
+                $scope.planDateForCreate = getPlanDateAsConcat(year, month, day);
                 $scope.planDateDisplay = (month + 1) + '/' + day + '/' + year;
             }
         };
@@ -245,6 +248,7 @@ angular.module('core').controller('HomeController', ['$scope', '$stateParams', '
         $scope.planDateChanged = function(){
             $scope.planDateForDb = $scope.planDate.getMonth() + '_' + $scope.planDate.getDate() + '_' + $scope.planDate.getFullYear();
             $scope.planDateDisplay = ($scope.planDate.getMonth() + 1) + '/' + $scope.planDate.getDate() + '/' + $scope.planDate.getFullYear();
+            $scope.planDateForCreate = getPlanDateAsConcat($scope.planDate.getFullYear(), $scope.planDate.getMonth(), $scope.planDate.getDate());
 
             $scope.getDailyDashboardData(true);
 
@@ -258,6 +262,7 @@ angular.module('core').controller('HomeController', ['$scope', '$stateParams', '
         $scope.nextDayClick = function(){
             $scope.planDate = new Date($scope.planDate.setDate($scope.planDate.getDate() + 1));
             $scope.planDateForDb = $scope.planDate.getMonth() + '_' + $scope.planDate.getDate() + '_' + $scope.planDate.getFullYear();
+            $scope.planDateForCreate = getPlanDateAsConcat($scope.planDate.getFullYear(), $scope.planDate.getMonth(), $scope.planDate.getDate());
             $scope.planDateDisplay = ($scope.planDate.getMonth() + 1) + '/' + $scope.planDate.getDate() + '/' + $scope.planDate.getFullYear();
 
             $scope.getDailyDashboardData(true);
@@ -272,6 +277,7 @@ angular.module('core').controller('HomeController', ['$scope', '$stateParams', '
         $scope.prevDayClick = function(){
             $scope.planDate = new Date($scope.planDate.setDate($scope.planDate.getDate() - 1));
             $scope.planDateForDb = $scope.planDate.getMonth() + '_' + $scope.planDate.getDate() + '_' + $scope.planDate.getFullYear();
+            $scope.planDateForCreate = getPlanDateAsConcat($scope.planDate.getFullYear(), $scope.planDate.getMonth(), $scope.planDate.getDate());
             $scope.planDateDisplay = ($scope.planDate.getMonth() + 1) + '/' + $scope.planDate.getDate() + '/' + $scope.planDate.getFullYear();
 
             $scope.getDailyDashboardData(true);

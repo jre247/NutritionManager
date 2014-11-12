@@ -9,7 +9,7 @@ angular.module('core').config(['$stateProvider', '$urlRouterProvider',
 		// Home state routing
 		$stateProvider.
 		state('dashboardForDate', {
-			url: '/:dashboardDate',
+			url: '/dashboard/:dashboardDate',
 			templateUrl: 'modules/core/views/home.client.view.html'
 		}).
         state('home', {

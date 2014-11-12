@@ -12,7 +12,7 @@
             <div class="form-group" style="margin-bottom: 1px;">
 
                 <div style="margin-top: 9px;margin-bottom: 15px;">
-                    <a data-ng-href="#!/{{plan.planDateAsConcat}}">
+                    <a data-ng-href="#!/dashboard/{{plan.planDateAsConcat}}">
                         <button type="button" class="btn btn-primary btn-m">
                             <span class="glyphicon glyphicon-circle-arrow-left" ></span><span> Dashboard</span>
                         </button>
@@ -20,9 +20,6 @@
                 </div>
 
                 <div class="planDetailsSection" style="display:inline-block;vertical-align: top;">
-                    <!--<label class="control-label" for="planDate">Plan Date</label>-->
-
-
                     <div >
                         <div style="display:inline-block;vertical-align: top;position: relative;top: 10px;" id="prevDay">
                             <a data-ng-href="#!/plans/{{plan.planDateAsConcat}}/previousDay/1">
@@ -33,7 +30,8 @@
                         </div>
                         <div id="planDateContainer" style="width: 126px;padding-top: 8px;display:inline-block">
                             <p class="input-group">
-                               <input type="text" class="form-control" style="padding: 4px 8px;" id="planDate" datepicker-popup="{{format}}" ng-model="plan.planDateNonUtc" is-open="opened" min-date="minDate" max-date="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
+                               <input type="text" class="form-control" style="padding: 4px 8px;" id="planDate" datepicker-popup="{{format}}" data-ng-change="planInputChange()" ng-model="plan.planDateNonUtc"
+                                      is-open="opened" min-date="minDate" max-date="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
                               <span class="input-group-btn">
                                 <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
                               </span>
@@ -377,7 +375,7 @@
                     <span data-ng-show="currentDeficit < 0" data-ng-bind="-(currentDeficit || 0) | number:0"></span>
                 </td>
 
-                <td style="color: rgb(33, 51, 184);" id=totalCalories>
+                <td style="color: rgb(33, 51, 184);" id=totalCaloriesData>
                     <span data-ng-bind="plan.totalPlanCalories | number:0"></span>
                 </td>
                 <td style="color: rgb(33, 51, 184);border-left: 1px solid lightgray;">

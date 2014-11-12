@@ -60,6 +60,7 @@ exports.progressByID = function(req, res){
                         'planDateYear': planDateYear,
                         'planDateMonth': planDateMonth,
                         'planDateDay': planDateDay
+                       // 'planDateAsConcat':
                     }
                 )
                     .exec(function (err, plan) {
@@ -70,28 +71,33 @@ exports.progressByID = function(req, res){
 
                             var singlePlan = plan;
 
-                            for (var nMeal = 0; nMeal < singlePlan.meals.length; nMeal++) {
-                                doMealTotaling(singlePlan.meals[nMeal]);
+                            if(singlePlan) {
+                                for (var nMeal = 0; nMeal < singlePlan.meals.length; nMeal++) {
+                                    doMealTotaling(singlePlan.meals[nMeal]);
+                                }
+
+                                calculatePlanTotalMacros(singlePlan);
+
+                                Activity.findOne({
+                                    'user': req.user.id,
+                                    'planDateYear': planDateYear,
+                                    'planDateMonth': planDateMonth,
+                                    'planDateDay': planDateDay})
+                                    .exec(function (err, activity) {
+                                        if (err) return next(err);
+
+                                        else {
+                                            var deficit = calculateDeficit(singlePlan, activity, nutritionProfile, bmr);
+                                            plan.deficit = deficit;
+
+                                            res.jsonp(plan);
+                                        }
+
+                                    });
                             }
-
-                            calculatePlanTotalMacros(singlePlan);
-
-                            Activity.findOne({
-                                'user': req.user.id,
-                                'planDateYear': planDateYear,
-                                'planDateMonth': planDateMonth,
-                                'planDateDay': planDateDay})
-                                .exec(function (err, activity) {
-                                    if (err) return next(err);
-
-                                    else {
-                                        var deficit = calculateDeficit(singlePlan, activity, nutritionProfile, bmr);
-                                        plan.deficit = deficit;
-
-                                        res.jsonp(plan);
-                                    }
-
-                                });
+                            else{
+                                res.jsonp({});
+                            }
                         }
                     });
             }

@@ -251,9 +251,9 @@ angular.module(ApplicationConfiguration.applicationModuleName).service(
 
             //calculate totals as percent
             var macroTotals = carbsTotal + fatTotal + proteinTotal;
-            plan.totalPlanCarbsAsPercent = (carbsTotal / macroTotals) * 100;
-            plan.totalPlanFatAsPercent = (fatTotal / macroTotals) * 100;
-            plan.totalPlanProteinAsPercent = (proteinTotal / macroTotals) * 100;
+            plan.totalPlanCarbsAsPercent = carbsTotal > 0 ? (carbsTotal / macroTotals) * 100 : 0;
+            plan.totalPlanFatAsPercent = fatTotal > 0 ? (fatTotal / macroTotals) * 100 : 0;
+            plan.totalPlanProteinAsPercent = proteinTotal > 0 ? (proteinTotal / macroTotals) * 100 : 0;
 
 
         };
