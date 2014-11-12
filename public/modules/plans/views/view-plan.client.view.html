@@ -11,33 +11,27 @@
 
             <div class="form-group" style="margin-bottom: 1px;">
 
-                <div style="margin-top: 9px;margin-bottom: 15px;">
-                    <a data-ng-href="#!/dashboard/{{plan.planDateAsConcat}}">
-                        <button type="button" class="btn btn-primary btn-m">
-                            <span class="glyphicon glyphicon-circle-arrow-left" ></span><span> Dashboard</span>
-                        </button>
-                    </a>
-                </div>
 
-                <div class="planDetailsSection" style="display:inline-block;vertical-align: top;">
+
+                <div class="planDetailsSection" style="vertical-align: top;text-align: center;background-color: rgba(172, 231, 242, 0.32);border-radius: 8px;">
                     <div >
-                        <div style="display:inline-block;vertical-align: top;position: relative;top: 10px;" id="prevDay">
+                        <div style="display:inline-block;vertical-align: top;position: relative;top: 10px;right: 10px;" id="prevDay">
                             <a data-ng-href="#!/plans/{{plan.planDateAsConcat}}/previousDay/1">
                                 <button type="button" class="btn btn-default btn-sm" >
                                     <span class="glyphicon glyphicon-chevron-left arrowBtn" ></span>
                                 </button>
                             </a>
                         </div>
-                        <div id="planDateContainer" style="width: 126px;padding-top: 8px;display:inline-block">
+                        <div id="planDateContainer" style="width: 152px;padding-top: 8px;display:inline-block;">
                             <p class="input-group">
-                               <input type="text" class="form-control" style="padding: 4px 8px;" id="planDate" datepicker-popup="{{format}}" data-ng-change="planInputChange()" ng-model="plan.planDateNonUtc"
+                               <input type="text" class="form-control" style="padding: 4px 8px;text-align: center;font-size: 16px;" id="planDate" datepicker-popup="{{format}}" data-ng-change="planInputChange()" ng-model="plan.planDateNonUtc"
                                       is-open="opened" min-date="minDate" max-date="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
                               <span class="input-group-btn">
                                 <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
                               </span>
                             </p>
                         </div>
-                        <div style="display:inline-block;vertical-align: top;position: relative;top: 10px;" id="nextDay">
+                        <div style="display:inline-block;vertical-align: top;position: relative;top: 10px;left:10px" id="nextDay">
                             <a data-ng-href="#!/plans/{{plan.planDateAsConcat}}/nextDay/1">
                                 <button type="button" class="btn btn-default btn-sm" >
                                     <span class="glyphicon glyphicon-chevron-right arrowBtn" />
@@ -47,6 +41,13 @@
                     </div>
                 </div>
 
+                <div style="margin-top: 9px;margin-bottom: 15px;display:inline-block; float:left">
+                    <a data-ng-href="#!/dashboard/{{plan.planDateAsConcat}}">
+                        <button type="button" class="btn btn-primary btn-m">
+                            <span class="glyphicon glyphicon-circle-arrow-left" ></span><span> Dashboard</span>
+                        </button>
+                    </a>
+                </div>
                 <div class="planDetailsSection" style="display: inline-block; margin-top: 9px;float: right;">
                     <div style="display:inline-block" id="createMeal">
                         <button  type="button" class="btn btn-primary btn-m" style="padding: 6px 10px;"  data-ng-click="createMeal(true);">
@@ -78,9 +79,9 @@
 
 
 
-                        <button type="submit" class="btn btn-primary btn-m" style="padding: 6px 10px;" data-ng-click="savePlan()">
-                            <span class="glyphicon glyphicon-floppy-disk" ></span><span class="hidden-xs"> Save</span>
-                        </button>
+                        <!--<button type="submit" class="btn btn-primary btn-m" style="padding: 6px 10px;" data-ng-click="savePlan()">-->
+                            <!--<span class="glyphicon glyphicon-floppy-disk" ></span><span class="hidden-xs"> Save</span>-->
+                        <!--</button>-->
 
                     </div>
                 </div>
@@ -117,13 +118,8 @@
                                 <span style="width: 80px;" data-ng-show="meal.isEditable == false" data-ng-bind="getMealTypeName(meal.type)"></span>
 
 
-                                <select class="plansDesktopBtn" ng-model="meal.type" data-ng-change="meal.isEditable = false" data-ng-click="meal.isVisible = !meal.isVisible" data-ng-show="meal.isEditable" ng-options="t.id as t.name for t in mealTypes" style="font-size: 16px;vertical-align: top;"></select>
-                                <select class="plansMobileGridBtn" data-ng-change="savePlan(true);" ng-model="meal.type" data-ng-click="meal.isVisible = !meal.isVisible" data-ng-show="meal.isEditable" ng-options="t.id as t.name for t in mealTypes" style="font-size: 16px;vertical-align: top;"></select>
+                                <select  ng-model="meal.type" data-ng-change="savePlan(true)" data-ng-click="meal.isVisible = !meal.isVisible" data-ng-show="meal.isEditable" ng-options="t.id as t.name for t in mealTypes" style="font-size: 16px;vertical-align: top;"></select>
 
-
-                                <!--<div style="margin-left: 10px;cursor:pointer;" data-ng-class="{'editRowShow': meal.showEditIcon && !meal.isEditable}" class="editRowHide">-->
-                                    <!--<img  alt="Edit Meal Type" class="img-responsive text-center"  data-ng-click="editMeal(meal);" src="modules/core/img/brand/pencilIcon.png" />-->
-                                <!--</div>-->
                                 <div style="margin-left: 10px;cursor:pointer;" data-ng-click="editMeal(meal);" type="button" data-ng-class="{editRowShow: meal.showEditIcon && !meal.isEditable}"  class="editRowHide">
                                     <span  class="glyphicon glyphicon-pencil"></span>
                                 </div>
@@ -131,10 +127,6 @@
                                 <div style="margin-left: 10px;cursor:pointer;float:right;" data-ng-click="deleteMeal(meal, true);" type="button" data-ng-class="{editRowShow: meal.showEditIcon && !meal.isEditable}"  class="editRowHide">
                                     <span  class="glyphicon glyphicon-trash"></span>
                                 </div>
-
-                                <!--<input style="margin-left: 15px;float:right;" type="button" value="Delete Meal" data-ng-click="deleteMeal(meal, true);"/>-->
-
-
                             </div>
                         </accordion-heading>
 

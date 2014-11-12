@@ -610,7 +610,7 @@ angular.module('plans').service(
                         mealForSuggestion.foods[m].calories += mealForSuggestion.foods[m].calories;
                         mealForSuggestion.foods[m].IsSuggested = true;
 
-                        $timeout(function(){mealForSuggestion.foods[m].IsSuggested = false;}, 4000);
+                        $timeout(function(){mealForSuggestion.foods[m].IsSuggested = false;}, 2000);
                         break;
                     }
                 }
@@ -620,9 +620,9 @@ angular.module('plans').service(
                 }
 
 
-                $timeout(function(){$scope.selectedFood.IsSuggested = false;}, 4000);
+                $timeout(function(){$scope.selectedFood.IsSuggested = false;}, 2000);
 
-                $timeout(function(){$scope.parentScope.savePlan();}, 4000);
+                $timeout(function(){$scope.parentScope.savePlan();}, 2000);
 
                 $modalInstance.close(mealForSuggestion);
             };

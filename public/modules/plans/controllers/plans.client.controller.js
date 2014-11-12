@@ -91,6 +91,8 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
                 $scope.plan.meals.splice(start, 1)[0]);
 
             $scope.$apply();
+
+            $scope.savePlan();
         };
 
         $scope.sortableOptions = {
@@ -288,9 +290,9 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
                 //calculate changed deficit
                 $scope.currentDeficit = CoreUtilities.calculateDeficit($scope.plan, $scope.activityPlan, $scope.nutritionProfile);
 
-                if(isMobileDevice){
-                    $scope.savePlan(true);
-                }
+               // if(isMobileDevice){
+                    $scope.savePlan();
+                //}
             }
 
         };
