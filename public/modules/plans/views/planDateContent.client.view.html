@@ -1,0 +1,26 @@
+<div class="planDetailsSection" style="vertical-align: top;">
+    <div>
+        <div style="display:inline-block;vertical-align: top;position: relative;top: 10px;right:5px" id="prevDay">
+            <a data-ng-href="#!/plans/{{plan.planDateAsConcat}}/previousDay/1">
+                <button type="button" class="btn btn-default btn-sm" >
+                    <span class="glyphicon glyphicon-chevron-left arrowBtn" ></span>
+                </button>
+            </a>
+        </div>
+        <div id="planDateContainer" style="width: 146px;padding-top: 8px;display:inline-block;">
+            <p class="input-group">
+                <input type="text" class="form-control" style="padding: 4px 8px;text-align: center;font-size: 16px;" id="planDate" datepicker-popup="{{format}}" data-ng-change="planInputChange()" ng-model="plan.planDateNonUtc"
+                       is-open="opened" min-date="minDate" max-date="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
+                              <span class="input-group-btn">
+                                <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                              </span>
+            </p>
+        </div>
+        <div style="display:inline-block;vertical-align: top;position: relative;top: 10px;left:5px" id="nextDay">
+            <a data-ng-href="#!/plans/{{plan.planDateAsConcat}}/nextDay/1">
+                <button type="button" class="btn btn-default btn-sm" >
+                    <span class="glyphicon glyphicon-chevron-right arrowBtn" />
+                </button>
+        </div>
+    </div>
+</div>
