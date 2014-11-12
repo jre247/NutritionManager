@@ -414,6 +414,8 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
 
                 $timeout(function(){$scope.setSorting();}, 100);
 
+                $scope.editBtnTxt = "Edit";
+
 			}, function(errorResponse) {
 				$scope.error = errorResponse.data.message;
 			});
@@ -556,6 +558,8 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
 
             $scope.isLoading = false;
 
+            //check for bootstrap tour continue event
+            //todo: don't need to specify go to step; just go to whatever tour_current_step is, similar to how i do on dashboard pg
             if(localStorage.tour_current_step =="14") {
                 tour.goTo(14);
             }
