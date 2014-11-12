@@ -116,7 +116,7 @@
                                     <span style="width: 80px;" data-ng-show="meal.isEditable == false" data-ng-bind="getMealTypeName(meal.type)"></span>
 
 
-                                    <select  ng-model="meal.type" data-ng-change="savePlan(true)" data-ng-click="mealTypeClicked(meal)" data-ng-show="meal.isEditable" ng-options="t.id as t.name for t in mealTypes" style="font-size: 16px;vertical-align: top;"></select>
+                                    <select  ng-model="meal.type"  data-ng-click="mealTypeClicked(meal)" data-ng-show="meal.isEditable"  ng-options="t.id as t.name for t in mealTypes" style="font-size: 16px;vertical-align: top;"></select>
 
                                     <!--<div style="margin-left: 10px;cursor:pointer;" data-ng-click="editMeal(meal);" type="button" data-ng-show="meal.isEditable"  >-->
                                         <!--<span  class="glyphicon glyphicon-pencil"></span>-->
@@ -126,7 +126,7 @@
                                         <!--<span  class="glyphicon glyphicon-trash"></span>-->
                                     <!--</div>-->
                                 </div>
-                                <div style="float:right;display:inline-block" class="glyphicon glyphicon-move" data-ng-show="meal.isEditable"></div>
+                                <div style="float:right;display:inline-block" class="glyphicon glyphicon-move" ng-mousedown="enableSorting()" ng-mouseup="disableSorting()" data-ng-show="meal.isEditable"></div>
                             </div>
                         </accordion-heading>
 

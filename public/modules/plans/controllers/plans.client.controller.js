@@ -58,7 +58,6 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
 
         $scope.toggleEditing = function(){
             if (!isEditingEnabled){
-                $('.panel-group').find('.panel-default').removeClass('disabled');
                 isEditingEnabled = true;
                 $scope.editBtnTxt = "Done";
 
@@ -67,7 +66,6 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
                 }
             }
             else{
-                $('.panel-group').find('.panel-default').addClass('disabled');
                 isEditingEnabled = false;
                 $scope.editBtnTxt = "Edit";
 
@@ -77,6 +75,14 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
 
                 $scope.savePlan();
             }
+        };
+
+        $scope.enableSorting = function(){
+            $('.panel-group').find('.panel-default').removeClass('disabled');
+        };
+
+        $scope.disableSorting = function(){
+            $('.panel-group').find('.panel-default').addClass('disabled');
         };
 
         $scope.open = function($event) {
