@@ -44,7 +44,7 @@
                 <div style="margin-top: 9px;margin-bottom: 15px;display:inline-block; float:left">
                     <a data-ng-href="#!/dashboard/{{plan.planDateAsConcat}}">
                         <button type="button" class="btn btn-primary btn-m">
-                            <span class="glyphicon glyphicon-circle-arrow-left" ></span><span> Dashboard</span>
+                            <span class="glyphicon glyphicon-home" ></span><span> Dashboard</span>
                         </button>
                     </a>
                 </div>
@@ -60,12 +60,12 @@
                             <span class="glyphicon glyphicon-edit" ></span><span class="hidden-xs"> Notes</span>
                         </button>
 
-                        <button  type="button" class="btn btn-primary btn-m  hidden-xs"  data-ng-click="collapseAllMeals(plan);">
-                            <span class="glyphicon glyphicon" ></span><span >Collapse All</span>
-                        </button>
+                        <!--<button  type="button" class="btn btn-primary btn-m  hidden-xs"  data-ng-click="collapseAllMeals(plan);">-->
+                            <!--<span class="glyphicon glyphicon" ></span><span >Collapse All</span>-->
+                        <!--</button>-->
 
-                        <button type="button" class="btn btn-primary btn-m hidden-sm hidden-xs"  data-ng-click="toggleSorting();">
-                            <span class="glyphicon glyphicon" ></span>{{sortingBtnTxt}}
+                        <button type="button" class="btn btn-primary btn-m hidden-sm hidden-xs"  data-ng-click="toggleEditing();">
+                            <span class="glyphicon glyphicon-wrench" ></span> {{editBtnTxt}}
                         </button>
 
                         <div style="display:inline-block" id="copyPlanBtn">
@@ -74,7 +74,7 @@
                             </button>
                         </div>
                         <button  type="button" class="btn btn-primary btn-m btn-danger hidden-sm hidden-xs"  data-ng-click="deletePlan(plan)">
-                            <span class="glyphicon glyphicon" ></span><span>Delete Plan</span>
+                            <span class="glyphicon glyphicon-remove-circle" ></span><span> Delete Plan</span>
                         </button>
 
 
@@ -98,35 +98,35 @@
 
 
         <fieldset id="wrapper" >
-            <!--<div data-ng-show="(!plan.meals || plan.meals.length == 0) && !isLoading" class="emptyPlanMealsTxt">-->
-                <!--Press the plus button above to create your first meal.-->
-            <!--</div>-->
-
-
             <div data-ng-show="isLoading" style="height: 336px;">
                 <img width="25" height="25" src="/modules/core/img/loaders/loader.gif">
             </div>
-
 
             <div data-ng-show="!isLoading" id="content" class="form-group planContent" style="overflow-y: auto;overflow-x:hidden; margin-bottom: 3px;">
                 <accordion sortable="sortableOptions" disableallelementsbydefault="true" updateCallback="sortableUpdateCallback" startCallback="sortableStartCallback" rootSortableElement=".panel-group" ng-show="plan.meals.length > 0"  class="plansAccordion" style="..." close-others="oneAtATime">
                     <accordion-group data-ng-repeat="meal in plan.meals" is-open="meal.isVisible">
                         <accordion-heading>
-                            <div data-ng-mouseover="meal.showEditIcon = true" data-ng-mouseleave="meal.showEditIcon = false"
-                               class="accordionHeadingRegion">
 
-                                <span style="width: 80px;" data-ng-show="meal.isEditable == false" data-ng-bind="getMealTypeName(meal.type)"></span>
+                            <div class="accordionHeadingRegion">
+                                <div style="display:inline-block">
+                                    <div style="padding-right: 10px;cursor:pointer;display: inline-block;" data-ng-click="deleteMeal(meal, true);" type="button" data-ng-show="meal.isEditable">
+                                        <span  class="glyphicon glyphicon-trash"></span>
+                                    </div>
+
+                                    <span style="width: 80px;" data-ng-show="meal.isEditable == false" data-ng-bind="getMealTypeName(meal.type)"></span>
 
 
-                                <select  ng-model="meal.type" data-ng-change="savePlan(true)" data-ng-click="meal.isVisible = !meal.isVisible" data-ng-show="meal.isEditable" ng-options="t.id as t.name for t in mealTypes" style="font-size: 16px;vertical-align: top;"></select>
+                                    <select  ng-model="meal.type" data-ng-change="savePlan(true)" data-ng-click="mealTypeClicked(meal)" data-ng-show="meal.isEditable" ng-options="t.id as t.name for t in mealTypes" style="font-size: 16px;vertical-align: top;"></select>
 
-                                <div style="margin-left: 10px;cursor:pointer;" data-ng-click="editMeal(meal);" type="button" data-ng-class="{editRowShow: meal.showEditIcon && !meal.isEditable}"  class="editRowHide">
-                                    <span  class="glyphicon glyphicon-pencil"></span>
+                                    <!--<div style="margin-left: 10px;cursor:pointer;" data-ng-click="editMeal(meal);" type="button" data-ng-show="meal.isEditable"  >-->
+                                        <!--<span  class="glyphicon glyphicon-pencil"></span>-->
+                                    <!--</div>-->
+
+                                    <!--<div style="margin-left: 10px;cursor:pointer;float:right;" data-ng-click="deleteMeal(meal, true);" type="button" data-ng-class="{editRowShow: meal.showEditIcon && !meal.isEditable}"  class="editRowHide">-->
+                                        <!--<span  class="glyphicon glyphicon-trash"></span>-->
+                                    <!--</div>-->
                                 </div>
-
-                                <div style="margin-left: 10px;cursor:pointer;float:right;" data-ng-click="deleteMeal(meal, true);" type="button" data-ng-class="{editRowShow: meal.showEditIcon && !meal.isEditable}"  class="editRowHide">
-                                    <span  class="glyphicon glyphicon-trash"></span>
-                                </div>
+                                <div style="float:right;display:inline-block" class="glyphicon glyphicon-move" data-ng-show="meal.isEditable"></div>
                             </div>
                         </accordion-heading>
 

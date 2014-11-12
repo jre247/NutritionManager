@@ -6,10 +6,9 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
         window.plans = $scope.plans;
         $scope.showPlanEditableErrorMsg = false;
         $scope.showTotalsAsPercent = true;
-        $scope.isSortingEnabled = false;
-        var sortingBtnTxtOptions = ['Enable Sorting', 'Disable Sorting'];
-        $scope.sortingBtnTxt = sortingBtnTxtOptions[0];
-        var isSortingEnabled = false;
+        //$scope.isEditingEnabled = false;
+        $scope.editBtnTxt = "Edit";
+        var isEditingEnabled = false;
         $scope.isLoading = false;
         $scope.isMoreLoading = false;
 
@@ -53,16 +52,30 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
             {id: 4, name: 'Snack'}
         ];
 
-        $scope.toggleSorting = function(){
-            if (!isSortingEnabled){
+        $scope.mealTypeClicked = function(meal){
+            meal.isVisible = !meal.isVisible;
+        };
+
+        $scope.toggleEditing = function(){
+            if (!isEditingEnabled){
                 $('.panel-group').find('.panel-default').removeClass('disabled');
-                isSortingEnabled = true;
-                $scope.sortingBtnTxt = sortingBtnTxtOptions[1];
+                isEditingEnabled = true;
+                $scope.editBtnTxt = "Done";
+
+                for(var m = 0; m < $scope.plan.meals.length; m++){
+                    $scope.plan.meals[m].isEditable = true;
+                }
             }
             else{
                 $('.panel-group').find('.panel-default').addClass('disabled');
-                isSortingEnabled = false;
-                $scope.sortingBtnTxt = sortingBtnTxtOptions[0];
+                isEditingEnabled = false;
+                $scope.editBtnTxt = "Edit";
+
+                for(var m = 0; m < $scope.plan.meals.length; m++){
+                    $scope.plan.meals[m].isEditable = false;
+                }
+
+                $scope.savePlan();
             }
         };
 
@@ -92,7 +105,7 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
 
             $scope.$apply();
 
-            $scope.savePlan();
+           // $scope.savePlan();
         };
 
         $scope.sortableOptions = {
@@ -199,15 +212,16 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
             $("#content").animate({ scrollTop: $('#content').height() + 700 }, 1000);
         };
 
-        $scope.editMeal = function(meal){
-            meal.isEditable = true;
-            meal.isVisible = !meal.isVisible;
-        };
-
-        $scope.saveMeal = function(meal){
-            meal.isEditable = false;
-            meal.isVisible = !meal.isVisible;
-        };
+//        $scope.editMeal = function(meal){
+//           // meal.isEditable = true;
+//            meal.isVisible = !meal.isVisible;
+//            meal.isMealTypeEditable = true;
+//        };
+//
+//        $scope.saveMeal = function(meal){
+//            meal.isMealTypeEditable = false;
+//            meal.isVisible = !meal.isVisible;
+//        };
 
 
 
@@ -817,9 +831,9 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
         scope.plansCollection = [];
 
         $scope.setSorting = function(){
-            if (!isSortingEnabled){
+            if (!isEditingEnabled){
                 $('.panel-group').find('.panel-default').addClass('disabled');
-                isSortingEnabled = false;
+                isEditingEnabled = false;
             }
         };
 
