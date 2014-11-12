@@ -3,13 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="99afd44b-0014-4bff-855e-4d01f0b1305f" name="Default" comment="create plan page is close to finished. Now trying to wire up view/edit plan page. Trying to make it all common html.">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/dist/application.min.js" afterPath="$PROJECT_DIR$/public/dist/application.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/modules/core/config/core.client.routes.js" afterPath="$PROJECT_DIR$/public/modules/core/config/core.client.routes.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/modules/core/services/core.utilities.service.js" afterPath="$PROJECT_DIR$/public/modules/core/services/core.utilities.service.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/modules/core/controllers/home.client.controller.js" afterPath="$PROJECT_DIR$/public/modules/core/controllers/home.client.controller.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/modules/core/views/home.client.view.html" afterPath="$PROJECT_DIR$/public/modules/core/views/home.client.view.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/modules/plans/controllers/plans.client.controller.js" afterPath="$PROJECT_DIR$/public/modules/plans/controllers/plans.client.controller.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/progress.server.controller.js" afterPath="$PROJECT_DIR$/app/controllers/progress.server.controller.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/modules/plans/views/view-plan.client.view.html" afterPath="$PROJECT_DIR$/public/modules/plans/views/view-plan.client.view.html" />
     </list>
     <ignored path="NutritionManager.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -35,10 +28,10 @@
       <file leaf-file-name="application.min.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/public/dist/application.min.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.09715407" vertical-offset="20001" max-vertical-offset="100185">
-              <caret line="1340" column="43" selection-start-line="1340" selection-start-column="43" selection-end-line="1340" selection-end-column="43" />
+            <state vertical-scroll-proportion="0.36211973" vertical-offset="11226" max-vertical-offset="106890">
+              <caret line="1060" column="2" selection-start-line="1060" selection-start-column="2" selection-end-line="1060" selection-end-column="2" />
               <folding>
-                <element signature="e#44529#74235#0" expanded="false" />
+                <element signature="e#24234#33687#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -100,6 +93,16 @@
                 <element signature="e#23441#27138#0" expanded="false" />
                 <element signature="e#27231#27696#0" expanded="false" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="core.utilities.service.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/modules/core/services/core.utilities.service.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="4500">
+              <caret line="255" column="103" selection-start-line="255" selection-start-column="103" selection-end-line="255" selection-end-column="103" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -1394,18 +1397,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/public/modules/core/services/core.utilities.service.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.12209302" vertical-offset="3204" max-vertical-offset="4500">
-          <caret line="222" column="40" selection-start-line="222" selection-start-column="40" selection-end-line="222" selection-end-column="40" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="4500">
+          <caret line="255" column="103" selection-start-line="255" selection-start-column="103" selection-end-line="255" selection-end-column="103" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/public/dist/application.min.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.09715407" vertical-offset="20001" max-vertical-offset="100185">
-          <caret line="1340" column="43" selection-start-line="1340" selection-start-column="43" selection-end-line="1340" selection-end-column="43" />
+        <state vertical-scroll-proportion="0.36211973" vertical-offset="11226" max-vertical-offset="106890">
+          <caret line="1060" column="2" selection-start-line="1060" selection-start-column="2" selection-end-line="1060" selection-end-column="2" />
           <folding>
-            <element signature="e#44529#74235#0" expanded="false" />
+            <element signature="e#24234#33687#0" expanded="false" />
           </folding>
         </state>
       </provider>
