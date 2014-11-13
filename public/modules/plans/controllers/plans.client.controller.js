@@ -576,6 +576,8 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
             var planDateAsConcat = getPlanDateAsConcat(year, month, day);
 
             getPlanFromDb(year, month, day, planDateAsConcat);
+
+            $scope.opened = false;
         };
 
         var getPlanFromDb = function(year, month, day, planDateAsConcat){
