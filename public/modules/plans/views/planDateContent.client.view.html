@@ -1,11 +1,11 @@
 <div class="planDetailsSection" style="vertical-align: top;">
     <div>
         <div style="display:inline-block;vertical-align: top;position: relative;top: 10px;right:5px" id="prevDay">
-            <a data-ng-href="#!/plans/{{plan.planDateAsConcat}}/previousDay/1">
-                <button type="button" class="btn btn-default btn-sm" >
+            <!--<a data-ng-href="#!/plans/{{plan.planDateAsConcat}}/previousDay/1">-->
+                <button type="button" class="btn btn-default btn-sm" data-ng-click="toggleDayClick('previousDay')">
                     <span class="glyphicon glyphicon-chevron-left arrowBtn" ></span>
                 </button>
-            </a>
+            <!--</a>-->
         </div>
         <div id="planDateContainer" style="width: 146px;padding-top: 8px;display:inline-block;">
             <p class="input-group">
@@ -17,10 +17,14 @@
             </p>
         </div>
         <div style="display:inline-block;vertical-align: top;position: relative;top: 10px;left:5px" id="nextDay">
-            <a data-ng-href="#!/plans/{{plan.planDateAsConcat}}/nextDay/1">
-                <button type="button" class="btn btn-default btn-sm" >
-                    <span class="glyphicon glyphicon-chevron-right arrowBtn" />
-                </button>
+            <!--<a data-ng-href="#!/plans/{{plan.planDateAsConcat}}/nextDay/1">-->
+                <!--<button type="button" class="btn btn-default btn-sm" >-->
+                    <!--<span class="glyphicon glyphicon-chevron-right arrowBtn" />-->
+                <!--</button>-->
+            <!--</a>-->
+            <button type="button" class="btn btn-default btn-sm" data-ng-click="toggleDayClick('nextDay')">
+                <span class="glyphicon glyphicon-chevron-right arrowBtn" />
+            </button>
         </div>
     </div>
 </div>

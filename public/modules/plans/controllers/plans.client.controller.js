@@ -6,9 +6,8 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
         window.plans = $scope.plans;
         $scope.showPlanEditableErrorMsg = false;
         $scope.showTotalsAsPercent = true;
-        //$scope.isEditingEnabled = false;
         $scope.editBtnTxt = "Edit";
-        var isEditingEnabled = false;
+        $scope.isEditingEnabled = false;
         $scope.isLoading = false;
         $scope.isMoreLoading = false;
 
@@ -57,8 +56,8 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
         };
 
         $scope.toggleEditing = function(){
-            if (!isEditingEnabled){
-                isEditingEnabled = true;
+            if (!$scope.isEditingEnabled){
+                $scope.isEditingEnabled = true;
                 $scope.editBtnTxt = "Done";
 
                 for(var m = 0; m < $scope.plan.meals.length; m++){
@@ -66,7 +65,7 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
                 }
             }
             else{
-                isEditingEnabled = false;
+                $scope.isEditingEnabled = false;
                 $scope.editBtnTxt = "Edit";
 
                 for(var m = 0; m < $scope.plan.meals.length; m++){
@@ -610,6 +609,31 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
             });
         };
 
+        $scope.toggleDayClick = function(direction){
+            var year = $scope.plan.planDateNonUtc.getFullYear();
+            var month = $scope.plan.planDateNonUtc.getMonth();
+            var day = $scope.plan.planDateNonUtc.getDate();
+
+            var planDate = new Date(year, month, day);
+
+            if(direction == 'nextDay'){
+                planDate = new Date(planDate.setDate(planDate.getDate() + 1));
+            }
+            else{
+                planDate = new Date(planDate.setDate(planDate.getDate() - 1));
+            }
+
+            year = planDate.getFullYear();
+            month = planDate.getMonth();
+            day = planDate.getDate();
+
+            $scope.plan.planDateNonUtc = new Date(year, month, day);
+
+            var planDateAsConcat = getPlanDateAsConcat(year, month, day);
+
+            getPlanFromDb(year, month, day, planDateAsConcat);
+        };
+
         $scope.findOne = function() {
             $scope.isLoading = true;
             var planDateAsConcat;
@@ -624,13 +648,6 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
                 day = sDateParam.substr(6, 2);
 
                 planDateAsConcat = new Date(year, month, day);
-
-                if ($stateParams.planDateChangeDirection === 'nextDay') {
-                    planDateAsConcat = new Date(planDateAsConcat.setDate(planDateAsConcat.getDate() + 1));
-                }
-                else if($stateParams.planDateChangeDirection === 'previousDay'){
-                    planDateAsConcat = new Date(planDateAsConcat.setDate(planDateAsConcat.getDate() - 1));
-                }
 
                 year = planDateAsConcat.getFullYear();
                 month = planDateAsConcat.getMonth();
@@ -843,9 +860,9 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
         scope.plansCollection = [];
 
         $scope.setSorting = function(){
-            if (!isEditingEnabled){
+            if (!$scope.isEditingEnabled){
                 $('.panel-group').find('.panel-default').addClass('disabled');
-                isEditingEnabled = false;
+                $scope.isEditingEnabled = false;
             }
         };
 

@@ -44,7 +44,7 @@
                             <!--<span class="glyphicon glyphicon" ></span><span >Collapse All</span>-->
                         <!--</button>-->
 
-                        <button type="button" class="btn btn-primary btn-m hidden-sm hidden-xs"  data-ng-click="toggleEditing();">
+                        <button type="button" class="btn btn-primary btn-m hidden-sm hidden-xs" data-ng-class="{'btn-warning': isEditingEnabled}"  data-ng-click="toggleEditing();">
                             <span class="glyphicon glyphicon-wrench" ></span> {{editBtnTxt}}
                         </button>
 
@@ -90,7 +90,7 @@
                             <div class="accordionHeadingRegion">
                                 <div style="display:inline-block">
                                     <div style="padding-right: 10px;cursor:pointer;display: inline-block;" data-ng-click="deleteMeal(meal);" type="button" data-ng-show="meal.isEditable">
-                                        <span  class="glyphicon glyphicon-trash"></span>
+                                        <span style="color: rgb(228, 19, 19)" class="glyphicon glyphicon-minus-sign"></span>
                                     </div>
 
                                     <span style="width: 80px;" data-ng-show="meal.isEditable == false" data-ng-bind="getMealTypeName(meal.type)"></span>
