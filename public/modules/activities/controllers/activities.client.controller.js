@@ -410,10 +410,6 @@ angular.module('activities').controller('ActivitiesController', ['$scope', '$sta
                  day = planDateForCreate.substr(6, 2);
 
                 $stateParams.planDateForCreate = "";
-                //var planDateAsConcat = new Date(dateYear, dateMonth, dateDay);
-
-                //$scope.plan.planDate = new Date(dateYear, dateMonth, dateDay);
-                //$scope.plan.planDateNonUtc = new Date(dateYear, dateMonth, dateDay);
             }
 
             if(!year && !month && !day){
@@ -431,8 +427,6 @@ angular.module('activities').controller('ActivitiesController', ['$scope', '$sta
             $scope.nutritionProfile = NutritionProfile.get(function () {
                 $scope.calculateTotalCaloriesBurned();
             });
-
-
 
             if(localStorage.tour_current_step && !localStorage.tour_end) {
                 tour.goTo(15);
@@ -454,6 +448,8 @@ angular.module('activities').controller('ActivitiesController', ['$scope', '$sta
         };
 
         var getPlanFromDb = function(year, month, day, planDateAsConcat){
+            $scope.isLoading = true;
+
             $scope.nutritionProfile = NutritionProfile.get(function(){
 
                 if(planDateAsConcat){
@@ -479,6 +475,8 @@ angular.module('activities').controller('ActivitiesController', ['$scope', '$sta
                 else{
                     processNewPlan();
                 }
+
+                $scope.isLoading = false;
             });
         };
 
