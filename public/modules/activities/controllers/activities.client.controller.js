@@ -185,7 +185,15 @@ angular.module('activities').controller('ActivitiesController', ['$scope', '$sta
 
         $scope.dailyStepsChange = function(){
             $scope.calculateTotalCaloriesBurned();
+
+            $scope.saveActivityPlan();
         };
+
+        $scope.$watch("plan.notes", function(){
+            if($scope.plan.notes) {
+                $scope.saveActivityPlan();
+            }
+        });
 
         $scope.create = function() {
             var planDateAsString = new Date($scope.plan.planDateNonUtc);
@@ -245,6 +253,8 @@ angular.module('activities').controller('ActivitiesController', ['$scope', '$sta
                         $scope.plan.activities.splice(i, 1);
                     }
                 }
+
+                $scope.saveActivityPlan();
             }
         };
 
@@ -255,6 +265,8 @@ angular.module('activities').controller('ActivitiesController', ['$scope', '$sta
                         $scope.plan.injuries.splice(i, 1);
                     }
                 }
+
+                $scope.saveActivityPlan();
             }
         };
 
