@@ -28,6 +28,10 @@ angular.module('activities').config(['$stateProvider',
             state('editActivity', {
                 url: '/activities/:activityId/edit',
                 templateUrl: 'modules/activities/views/edit-activity.client.view.html'
-            });
+            }).
+            state('viewActivityForDate', {
+                url: '/activities/:planDate/:planDateChangeDirection/:dayRange',
+                templateUrl: 'modules/activities/views/view-activity.client.view.html'
+            });;
     }
 ]);

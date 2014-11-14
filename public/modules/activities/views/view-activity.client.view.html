@@ -5,20 +5,23 @@
 <div class="col-md-12">
     <form class="form-horizontal" data-ng-init="findOne()" novalidate>
         <fieldset>
+            <div class="planDetailsSection visible-sm visible-xs" style="vertical-align: top;text-align: center">
+                <ng-include  src="'/modules/plans/views/planDateContent.client.view.html'"></ng-include>
+            </div>
+
             <div class="form-group" style="margin-bottom: 1px;">
-                <div class="planDetailsSection" style="display:inline-block;vertical-align: top;">
-                    <div class="row">
-                        <div class="col-md-6" style="width: 153px;padding-top: 8px;">
-                            <p class="input-group" id="planDateContainer">
-                              <input type="text" class="form-control" style="padding: 4px 8px;" id="planDate" datepicker-popup="{{format}}" ng-model="plan.planDateNonUtc" is-open="opened" min-date="minDate" max-date="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
-                              <span class="input-group-btn">
-                                <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
-                              </span>
-                            </p>
-                        </div>
-                    </div>
+                <div style="margin-top: 9px;margin-bottom: 15px;display:inline-block; float:left">
+                    <a data-ng-href="#!/dashboard/{{plan.planDateAsConcat}}">
+                        <button type="button" class="btn btn-primary btn-m">
+                            <span class="glyphicon glyphicon-home" ></span><span class="hidden-xs"> Dashboard</span>
+                        </button>
+                    </a>
                 </div>
-                <span style="color:red; font-weight: bold;position:relative; top: 13px; left: 10px;" data-ng-show="planExistsInDb">There is already an existing plan for this date.</span>
+
+                <div class="planDetailsSection hidden-sm hidden-xs" style="display:inline-block;vertical-align: top;padding-left: 30%;">
+                    <ng-include  src="'/modules/plans/views/planDateContent.client.view.html'"></ng-include>
+                </div>
+
 
 
                 <div class="planDetailsSection" style="display: inline-block; margin-top: 9px;float: right;">
@@ -156,7 +159,7 @@
                             </div>
                         </accordion-heading>
 
-                        <textarea id="planNotes" style="width: 100%;height: 100px;" name="planNotes" class="form-control" data-ng-model="plan.notes" placeholder="Notes">
+                        <textarea id="planNotes" style="width: 100%;height: 100px;" name="planNotes" data-ng-change="saveActivityPlan();" class="form-control" data-ng-model="plan.notes" placeholder="Notes">
                         </textarea>
 
                     </accordion-group>

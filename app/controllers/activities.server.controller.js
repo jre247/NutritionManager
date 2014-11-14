@@ -224,13 +224,54 @@ exports.list = function(req, res) {
 /**
  * Activity middleware
  */
-exports.activityByID = function(req, res, next, id) {
-    Activity.findById(id).populate('user', 'displayName').exec(function(err, activity) {
+var getPlanByDate = function(req, res, planDate){
+    var nPlanDate = parseInt(planDate);
+
+    Activity.findOne({'planDateAsConcat': nPlanDate, 'user': req.user.id}).populate('user', 'displayName').exec(function(err, activity) {
         if (err) return next(err);
-        if (!activity) return next(new Error('Failed to load activity ' + id));
-        req.activity = activity;
-        next();
+        //if (!plan) return next(new Error('Failed to load plan ' + id));
+
+        if(activity) {
+            activity.userRoles = req.user.roles;
+        }
+        else
+        {
+            activity = {};
+        }
+        // req.plan = plan;
+
+
+
+        res.jsonp(activity);
     });
+};
+
+exports.activityByID = function(req, res, next, id) {
+//    Activity.findById(id).populate('user', 'displayName').exec(function(err, activity) {
+//        if (err) return next(err);
+//        if (!activity) return next(new Error('Failed to load activity ' + id));
+//        req.activity = activity;
+//        next();
+//    });
+//
+//
+
+    if (id.length === 8){
+        return getPlanByDate(req, res, id);
+
+    }
+    else {
+        Activity.findById(id).populate('user', 'displayName').exec(function (err, activity) {
+            if (err) return next(err);
+            if (!activity) return next(new Error('Failed to load activity ' + id));
+
+            activity.userRoles = req.user.roles;
+            req.activity = activity;
+            next();
+
+
+        });
+    }
 };
 
 exports.activityByDate = function(req, res, next, activityDate) {
