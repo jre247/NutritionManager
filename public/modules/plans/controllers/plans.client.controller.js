@@ -606,6 +606,8 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
                 else{
                     processNewPlan();
                 }
+
+                $timeout(function(){$scope.setSorting();}, 100);
             });
         };
 
