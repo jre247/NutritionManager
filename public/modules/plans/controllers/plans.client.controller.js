@@ -119,6 +119,10 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
         };
 
         var getPlanDateAsConcat = function(planDateYear, planDateMonth, planDateDay){
+            planDateYear = parseInt(planDateYear);
+            planDateMonth = parseInt(planDateMonth);
+            planDateDay = parseInt(planDateDay);
+
             return parseInt(planDateYear + '' + (planDateMonth < 10 ? '0' + planDateMonth : planDateMonth) + '' + (planDateDay < 10 ? '0' + planDateDay : planDateDay));
         };
 

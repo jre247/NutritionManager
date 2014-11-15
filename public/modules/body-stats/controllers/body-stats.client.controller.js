@@ -151,6 +151,10 @@ angular.module('bodyStats').controller('BodyStatsController', ['$scope', '$state
         };
 
         var getPlanDateAsConcat = function(planDateYear, planDateMonth, planDateDay){
+            planDateYear = parseInt(planDateYear);
+            planDateMonth = parseInt(planDateMonth);
+            planDateDay = parseInt(planDateDay);
+
             return parseInt(planDateYear + '' + (planDateMonth < 10 ? '0' + planDateMonth : planDateMonth) + '' + (planDateDay < 10 ? '0' + planDateDay : planDateDay));
         };
 
@@ -160,7 +164,7 @@ angular.module('bodyStats').controller('BodyStatsController', ['$scope', '$state
             $scope.isUserAdmin = $scope.plan.userRoles && $scope.plan.userRoles.indexOf('admin') !== -1 ? true : false;
         };
 
-        var processNewPlan = function(dateYear, dateMonth, dateDay){
+        var processNewPlan = function(dateYear, dateMonth, dateDay, suppressAutoSave){
             if($stateParams.planDateForCreate) {
                 var planDateForCreate = $stateParams.planDateForCreate;
 
@@ -177,22 +181,23 @@ angular.module('bodyStats').controller('BodyStatsController', ['$scope', '$state
 
             $scope.plan =  {weight: null, bodyFatPercentage: null, planDate: new Date(dateYear, dateMonth, dateDay), planDateNonUtc: new Date(dateYear, dateMonth, dateDay), planDateYear: dateYear, planDateMonth: dateMonth, planDateDay: dateDay, planDateAsConcat: getPlanDateAsConcat(dateYear, dateMonth, dateDay)};
 
-            $scope.saveBodyStatPlan();
+            if(!suppressAutoSave) {
+                $scope.saveBodyStatPlan();
+            }
             //if(localStorage.tour_current_step && !localStorage.tour_end) {
             //    tour.goTo(15);
             //}
         };
 
-        var getPlanFromDb = function(year, month, day, planDateAsConcat){
+        var getPlanFromDb = function(year, month, day, planDateAsConcat, suppressAutoSave){
             $scope.isLoading = true;
-
 
             if(planDateAsConcat){
                 $scope.plan = BodyStats.get({
                     bodyStatId: planDateAsConcat
                 },function(plan){
                     if(!plan || (plan && !plan.planDateYear)) {
-                        processNewPlan(year, month, day);
+                        processNewPlan(year, month, day, suppressAutoSave);
                     }
                     processReturnedPlan();
                 });
@@ -222,7 +227,7 @@ angular.module('bodyStats').controller('BodyStatsController', ['$scope', '$state
 
             var planDateAsConcat = getPlanDateAsConcat(year, month, day);
 
-            getPlanFromDb(year, month, day, planDateAsConcat);
+            getPlanFromDb(year, month, day, planDateAsConcat, true);
 
             $scope.opened = false;
         };
@@ -250,7 +255,7 @@ angular.module('bodyStats').controller('BodyStatsController', ['$scope', '$state
             //todo: put this in service
             var planDateAsConcat = getPlanDateAsConcat(year, month, day);
 
-            getPlanFromDb(year, month, day, planDateAsConcat);
+            getPlanFromDb(year, month, day, planDateAsConcat, true);
         };
 
         $scope.findOne = function() {

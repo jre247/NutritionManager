@@ -397,11 +397,16 @@ angular.module('activities').controller('ActivitiesController', ['$scope', '$sta
             $("#content").animate({ scrollTop: $('#content').height() + 700 }, 1000);
         };
 
+        //todo: put in service
         var getPlanDateAsConcat = function(planDateYear, planDateMonth, planDateDay){
+            planDateYear = parseInt(planDateYear);
+            planDateMonth = parseInt(planDateMonth);
+            planDateDay = parseInt(planDateDay);
+
             return parseInt(planDateYear + '' + (planDateMonth < 10 ? '0' + planDateMonth : planDateMonth) + '' + (planDateDay < 10 ? '0' + planDateDay : planDateDay));
         };
 
-        var processNewPlan = function(year, month, day){
+        var processNewPlan = function(year, month, day, suppressAutoSave){
             if($stateParams.planDateForCreate) {
                 var planDateForCreate = $stateParams.planDateForCreate;
 
@@ -427,7 +432,9 @@ angular.module('activities').controller('ActivitiesController', ['$scope', '$sta
             $scope.nutritionProfile = NutritionProfile.get(function () {
                 $scope.calculateTotalCaloriesBurned();
 
-                $scope.saveActivityPlan();
+                if(!suppressAutoSave) {
+                    $scope.saveActivityPlan();
+                }
             });
 
             if(localStorage.tour_current_step && !localStorage.tour_end) {
@@ -449,7 +456,7 @@ angular.module('activities').controller('ActivitiesController', ['$scope', '$sta
             $scope.calculateTotalCaloriesBurned();
         };
 
-        var getPlanFromDb = function(year, month, day, planDateAsConcat){
+        var getPlanFromDb = function(year, month, day, planDateAsConcat, suppressAutoSave){
             $scope.isLoading = true;
 
             $scope.nutritionProfile = NutritionProfile.get(function(){
@@ -459,7 +466,7 @@ angular.module('activities').controller('ActivitiesController', ['$scope', '$sta
                         activityId: planDateAsConcat
                     },function(plan){
                         if(!plan || (plan && !plan.planDateYear)) {
-                            processNewPlan(year, month, day);
+                            processNewPlan(year, month, day, suppressAutoSave);
                         }
                         processReturnedPlan();
                     });
@@ -489,7 +496,7 @@ angular.module('activities').controller('ActivitiesController', ['$scope', '$sta
 
             var planDateAsConcat = getPlanDateAsConcat(year, month, day);
 
-            getPlanFromDb(year, month, day, planDateAsConcat);
+            getPlanFromDb(year, month, day, planDateAsConcat, true);
 
             $scope.opened = false;
         };
@@ -516,7 +523,7 @@ angular.module('activities').controller('ActivitiesController', ['$scope', '$sta
 
             var planDateAsConcat = getPlanDateAsConcat(year, month, day);
 
-            getPlanFromDb(year, month, day, planDateAsConcat);
+            getPlanFromDb(year, month, day, planDateAsConcat, true);
         };
 
         $scope.findOne = function() {
