@@ -10,11 +10,7 @@
 
     <select data-ng-model="selectedDirection" ng-options="t for t in directionList" data-ng-change="reverseSort = selectedDirection === 'Descending'" style="font-size: 16px;vertical-align: top;"></select>
 
-    <a data-ng-href="#!/activities/create" style="float:right;position: relative;bottom: 10px;">
-        <button type="button" class="btn btn-primary btn-m" style="padding: 6px 10px;">
-            <span class="glyphicon glyphicon-plus" ></span> <span class="hidden-xs">Create Activity</span>
-        </button>
-    </a>
+
 
     <div data-ng-show="isLoading" style="height: 336px;">
         <img width="25" height="25" src="/modules/core/img/loaders/loader.gif">

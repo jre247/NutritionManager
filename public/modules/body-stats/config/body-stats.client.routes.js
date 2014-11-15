@@ -27,6 +27,10 @@ angular.module('bodyStats').config(['$stateProvider',
             state('editBodyStat', {
                 url: '/body-stats/:bodyStatId/edit',
                 templateUrl: 'modules/body-stats/views/edit-body-stat.client.view.html'
+            }).
+            state('viewBodyStatForDate', {
+                url: '/body-stats/:planDate/:planDateChangeDirection/:dayRange',
+                templateUrl: 'modules/body-stats/views/view-body-stat.client.view.html'
             });
     }
 ]);

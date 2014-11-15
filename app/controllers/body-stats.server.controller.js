@@ -101,34 +101,6 @@ exports.create = function(req, res) {
 
 exports.bodyStatsByDate = function(req, res, next, activityDate) {
     if(req.user) {
-//        var startDate = req.param("startDate");
-//        var split = startDate.split('_');
-//        var startDateMonth = parseInt(split[1]);
-//        var startDateDay = parseInt(split[2]);
-//        var startDateYear = parseInt(split[0]);
-//
-//        var endDate = req.param("endDate");
-//        var split2 = endDate.split('_');
-//        var endDateMonth = parseInt(split2[1]);
-//        var endDateDay = parseInt(split2[2]);
-//        var endDateYear = parseInt(split2[0]);
-//
-//        BodyStats.find({'planDateYear': {$lte: endDateYear, $gte: startDateYear}, 'planDateMonth': {$lte: endDateMonth, $gte: startDateMonth}, 'planDateDay': {$lte: endDateDay, $gte: startDateDay}, 'user': req.user.id})
-//            .sort({
-//                planDateMili: 1
-//
-//            })
-//            .exec(function (err, bodyStats) {
-//                if (err) return next(err);
-//
-//                res.jsonp(bodyStats);
-//
-//            });
-
-
-
-
-
         var activityDate = req.param("startDate");
         var split = activityDate.split('_');
         var month = parseInt(split[0]);
@@ -211,13 +183,55 @@ exports.list = function(req, res) {
  * bodyStat middleware
  */
 exports.bodyStatByID = function(req, res, next, id) {
-    BodyStats.findById(id).populate('user', 'displayName').exec(function(err, bodyStat) {
+//    BodyStats.findById(id).populate('user', 'displayName').exec(function(err, bodyStat) {
+//        if (err) return next(err);
+//        if (!bodyStat) return next(new Error('Failed to load body stat ' + id));
+//        req.bodyStat = bodyStat;
+//        next();
+//    });
+//
+
+    if (id.length === 8){
+        return getPlanByDate(req, res, id);
+
+    }
+    else {
+        BodyStats.findById(id).populate('user', 'displayName').exec(function (err, bodyStat) {
+            if (err) return next(err);
+            if (!bodyStat) return next(new Error('Failed to load bodyStat ' + id));
+
+            bodyStat.userRoles = req.user.roles;
+            req.bodyStat = bodyStat;
+            next();
+
+
+        });
+    }
+};
+
+var getPlanByDate = function(req, res, planDate){
+    var nPlanDate = parseInt(planDate);
+
+    BodyStats.findOne({'planDateAsConcat': nPlanDate, 'user': req.user.id}).populate('user', 'displayName').exec(function(err, bodyStat) {
         if (err) return next(err);
-        if (!bodyStat) return next(new Error('Failed to load body stat ' + id));
-        req.bodyStat = bodyStat;
-        next();
+        //if (!plan) return next(new Error('Failed to load plan ' + id));
+
+        if(bodyStat) {
+            bodyStat.userRoles = req.user.roles;
+        }
+        else
+        {
+            bodyStat = {};
+        }
+        // req.plan = plan;
+
+
+
+        res.jsonp(bodyStat);
     });
 };
+
+
 
 
 exports.hasAuthorization = function(req, res, next) {

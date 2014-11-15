@@ -247,15 +247,6 @@ var getPlanByDate = function(req, res, planDate){
 };
 
 exports.activityByID = function(req, res, next, id) {
-//    Activity.findById(id).populate('user', 'displayName').exec(function(err, activity) {
-//        if (err) return next(err);
-//        if (!activity) return next(new Error('Failed to load activity ' + id));
-//        req.activity = activity;
-//        next();
-//    });
-//
-//
-
     if (id.length === 8){
         return getPlanByDate(req, res, id);
 

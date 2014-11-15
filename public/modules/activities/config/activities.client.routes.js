@@ -32,6 +32,6 @@ angular.module('activities').config(['$stateProvider',
             state('viewActivityForDate', {
                 url: '/activities/:planDate/:planDateChangeDirection/:dayRange',
                 templateUrl: 'modules/activities/views/view-activity.client.view.html'
-            });;
+            });
     }
 ]);
