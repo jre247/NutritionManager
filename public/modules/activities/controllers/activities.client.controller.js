@@ -426,6 +426,8 @@ angular.module('activities').controller('ActivitiesController', ['$scope', '$sta
 
             $scope.nutritionProfile = NutritionProfile.get(function () {
                 $scope.calculateTotalCaloriesBurned();
+
+                $scope.saveActivityPlan();
             });
 
             if(localStorage.tour_current_step && !localStorage.tour_end) {

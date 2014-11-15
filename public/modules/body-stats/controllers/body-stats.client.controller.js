@@ -177,6 +177,7 @@ angular.module('bodyStats').controller('BodyStatsController', ['$scope', '$state
 
             $scope.plan =  {weight: null, bodyFatPercentage: null, planDate: new Date(dateYear, dateMonth, dateDay), planDateNonUtc: new Date(dateYear, dateMonth, dateDay), planDateYear: dateYear, planDateMonth: dateMonth, planDateDay: dateDay, planDateAsConcat: getPlanDateAsConcat(dateYear, dateMonth, dateDay)};
 
+            $scope.saveBodyStatPlan();
             //if(localStorage.tour_current_step && !localStorage.tour_end) {
             //    tour.goTo(15);
             //}

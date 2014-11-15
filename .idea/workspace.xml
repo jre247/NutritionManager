@@ -2,18 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="99afd44b-0014-4bff-855e-4d01f0b1305f" name="Default" comment="create plan page is close to finished. Now trying to wire up view/edit plan page. Trying to make it all common html.">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/modules/activities/config/activities.client.routes.js" afterPath="$PROJECT_DIR$/public/modules/activities/config/activities.client.routes.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/activities.server.controller.js" afterPath="$PROJECT_DIR$/app/controllers/activities.server.controller.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/modules/activities/controllers/activities.client.controller.js" afterPath="$PROJECT_DIR$/public/modules/activities/controllers/activities.client.controller.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/dist/application.min.js" afterPath="$PROJECT_DIR$/public/dist/application.min.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/modules/body-stats/controllers/body-stats.client.controller.js" afterPath="$PROJECT_DIR$/public/modules/body-stats/controllers/body-stats.client.controller.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/modules/body-stats/config/body-stats.client.routes.js" afterPath="$PROJECT_DIR$/public/modules/body-stats/config/body-stats.client.routes.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/body-stats.server.controller.js" afterPath="$PROJECT_DIR$/app/controllers/body-stats.server.controller.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/modules/core/views/home.client.view.html" afterPath="$PROJECT_DIR$/public/modules/core/views/home.client.view.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/modules/activities/views/list-activities.client.view.html" afterPath="$PROJECT_DIR$/public/modules/activities/views/list-activities.client.view.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/modules/body-stats/views/list-body-stats.client.view.html" afterPath="$PROJECT_DIR$/public/modules/body-stats/views/list-body-stats.client.view.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/modules/plans/views/list-plans.client.view.html" afterPath="$PROJECT_DIR$/public/modules/plans/views/list-plans.client.view.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/modules/activities/views/view-activity.client.view.html" afterPath="$PROJECT_DIR$/public/modules/activities/views/view-activity.client.view.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/modules/body-stats/views/view-body-stat.client.view.html" afterPath="$PROJECT_DIR$/public/modules/body-stats/views/view-body-stat.client.view.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="NutritionManager.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -39,11 +31,10 @@
       <file leaf-file-name="application.min.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/public/dist/application.min.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.3326791" vertical-offset="91566" max-vertical-offset="100650">
-              <caret line="6766" column="3" selection-start-line="6766" selection-start-column="3" selection-end-line="6766" selection-end-column="3" />
+            <state vertical-scroll-proportion="0.3326791" vertical-offset="102426" max-vertical-offset="110265">
+              <caret line="7125" column="3" selection-start-line="7125" selection-start-column="3" selection-end-line="7125" selection-end-column="3" />
               <folding>
-                <element signature="e#221820#245044#0" expanded="false" />
-                <element signature="e#247699#257638#0" expanded="false" />
+                <element signature="e#247743#257721#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -52,8 +43,18 @@
       <file leaf-file-name="activities.client.controller.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/modules/activities/controllers/activities.client.controller.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-4.3846154" vertical-offset="5706" max-vertical-offset="9765">
-              <caret line="388" column="62" selection-start-line="0" selection-start-column="0" selection-end-line="645" selection-end-column="3" />
+            <state vertical-scroll-proportion="-3.2307692" vertical-offset="5706" max-vertical-offset="9795">
+              <caret line="386" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="647" selection-end-column="3" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="plans.client.controller.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/modules/plans/controllers/plans.client.controller.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-9.576923" vertical-offset="7536" max-vertical-offset="18030">
+              <caret line="519" column="31" selection-start-line="0" selection-start-column="0" selection-end-line="1196" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -62,8 +63,8 @@
       <file leaf-file-name="body-stats.client.controller.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/modules/body-stats/controllers/body-stats.client.controller.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-5.5384617" vertical-offset="876" max-vertical-offset="4260">
-              <caret line="68" column="46" selection-start-line="0" selection-start-column="0" selection-end-line="278" selection-end-column="3" />
+            <state vertical-scroll-proportion="-5.5384617" vertical-offset="2076" max-vertical-offset="4275">
+              <caret line="148" column="17" selection-start-line="0" selection-start-column="0" selection-end-line="279" selection-end-column="3" />
               <folding />
             </state>
           </provider>
@@ -128,8 +129,6 @@
         <option value="$PROJECT_DIR$/public/modules/core/services/core.utilities.service.js" />
         <option value="$PROJECT_DIR$/public/modules/plans/services/plans.client.sharedService.js" />
         <option value="$PROJECT_DIR$/public/modules/plans/views/planDateContent.client.view.html" />
-        <option value="$PROJECT_DIR$/public/modules/plans/controllers/plans.client.controller.js" />
-        <option value="$PROJECT_DIR$/public/modules/activities/controllers/activities.client.controller.js" />
         <option value="$PROJECT_DIR$/public/modules/plans/views/view-plan.client.view.html" />
         <option value="$PROJECT_DIR$/public/modules/plans/views/list-plans.client.view.html" />
         <option value="$PROJECT_DIR$/public/modules/body-stats/views/list-body-stats.client.view.html" />
@@ -139,9 +138,11 @@
         <option value="$PROJECT_DIR$/app/controllers/body-stats.server.controller.js" />
         <option value="$PROJECT_DIR$/public/modules/activities/config/activities.client.routes.js" />
         <option value="$PROJECT_DIR$/public/modules/body-stats/config/body-stats.client.routes.js" />
-        <option value="$PROJECT_DIR$/public/modules/body-stats/controllers/body-stats.client.controller.js" />
         <option value="$PROJECT_DIR$/public/modules/core/views/home.client.view.html" />
         <option value="$PROJECT_DIR$/public/modules/body-stats/views/view-body-stat.client.view.html" />
+        <option value="$PROJECT_DIR$/public/modules/body-stats/controllers/body-stats.client.controller.js" />
+        <option value="$PROJECT_DIR$/public/modules/activities/controllers/activities.client.controller.js" />
+        <option value="$PROJECT_DIR$/public/modules/plans/controllers/plans.client.controller.js" />
         <option value="$PROJECT_DIR$/public/dist/application.min.js" />
       </list>
     </option>
@@ -1471,14 +1472,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/modules/plans/controllers/plans.client.controller.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-2.3846154" vertical-offset="9313" max-vertical-offset="18030">
-          <caret line="625" column="13" selection-start-line="0" selection-start-column="0" selection-end-line="1196" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/modules/plans/config/plans.client.routes.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.4395085" vertical-offset="0" max-vertical-offset="1058">
@@ -1606,29 +1599,36 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/modules/body-stats/controllers/body-stats.client.controller.js">
+    <entry file="file://$PROJECT_DIR$/public/modules/plans/controllers/plans.client.controller.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.5384617" vertical-offset="876" max-vertical-offset="4260">
-          <caret line="68" column="46" selection-start-line="0" selection-start-column="0" selection-end-line="278" selection-end-column="3" />
+        <state vertical-scroll-proportion="-9.576923" vertical-offset="7536" max-vertical-offset="18030">
+          <caret line="519" column="31" selection-start-line="0" selection-start-column="0" selection-end-line="1196" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/public/modules/activities/controllers/activities.client.controller.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-4.3846154" vertical-offset="5706" max-vertical-offset="9765">
-          <caret line="388" column="62" selection-start-line="0" selection-start-column="0" selection-end-line="645" selection-end-column="3" />
+        <state vertical-scroll-proportion="-3.2307692" vertical-offset="5706" max-vertical-offset="9795">
+          <caret line="386" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="647" selection-end-column="3" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/modules/body-stats/controllers/body-stats.client.controller.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-5.5384617" vertical-offset="2076" max-vertical-offset="4275">
+          <caret line="148" column="17" selection-start-line="0" selection-start-column="0" selection-end-line="279" selection-end-column="3" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/public/dist/application.min.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3326791" vertical-offset="91566" max-vertical-offset="100650">
-          <caret line="6766" column="3" selection-start-line="6766" selection-start-column="3" selection-end-line="6766" selection-end-column="3" />
+        <state vertical-scroll-proportion="0.3326791" vertical-offset="102426" max-vertical-offset="110265">
+          <caret line="7125" column="3" selection-start-line="7125" selection-start-column="3" selection-end-line="7125" selection-end-column="3" />
           <folding>
-            <element signature="e#221820#245044#0" expanded="false" />
-            <element signature="e#247699#257638#0" expanded="false" />
+            <element signature="e#247743#257721#0" expanded="false" />
           </folding>
         </state>
       </provider>
