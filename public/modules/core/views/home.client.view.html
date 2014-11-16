@@ -1,218 +1,263 @@
 <section data-ng-controller="HomeController">
 
-    <div data-ng-show="nutritionProfile._id">
-        <div class="dailyDashboard" style="width: 300px;display:inline-block;">
-            <div style="padding-top: 6px;">
+    <div data-ng-if="nutritionProfile._id">
 
-                <div style="display:inline-block;float: left;margin-top: 3px;margin-right: 8px;" id="prevDay">
+
+        <div class="visible-xs" style="display:inline-block">
+            <div style="text-align: center;height: 60px;">
+                <div style="display:inline-block;float: left;margin-top: 3px;" id="prevDay">
                     <button type="button" class="btn btn-default btn-sm" data-ng-click="prevDayClick();">
                         <span class="glyphicon glyphicon-chevron-left arrowBtn" ></span>
                     </button>
                 </div>
 
-                <p class="input-group" style="width:139px;" id="planDateForDay">
-                    <input type="text" class="form-control" data-ng-change="planDateChanged()" style="padding: 4px 8px;" id="startDate" datepicker-popup="{{format}}" ng-model="planDate" is-open="planDateOpened" min-date="minDate" max-date="'2100-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
-                      <span class="input-group-btn">
-                        <button type="button" class="btn btn-default" ng-click="openPlanDate($event)"><i class="glyphicon glyphicon-calendar"></i></button>
-                      </span>
-                </p>
+                <span style="font-weight: bold; font-size: 16px;position: relative;top: 5px;" data-ng-bind="planDate | date:long"></span>
 
-                <div style="display:inline-block;margin-top: 3px;position: relative;bottom: 45px;right: 77px;float: right;" id="nextDay">
+                <div style="display:inline-block;margin-top: 3px;float: right;" id="nextDay">
 
                     <button type="button" class="btn btn-default btn-sm" data-ng-click="nextDayClick();">
                         <span class="glyphicon glyphicon-chevron-right arrowBtn" />
                     </button>
                 </div>
-
-                <!--<div >-->
-                    <!--<input type="button" data-ng-click="openTourDialog();" value="test tour"/>-->
-                <!--</div>-->
-
-                <div style="border-bottom: 1px solid #eee;width:300px;">
-                    <a data-ng-show="activityPlan" data-ng-href="#!/activities/{{activityPlan._id}}">
-                        <h3 data-ng-show="planDayOfWeek">
-
-                            <span data-ng-bind="planDayOfWeek"></span>'s Activities:
-
-                        </h3>
-                    </a>
-
-                    <div data-ng-show="!activityPlan && planDayOfWeek">
-                        <h3>
-                            <span data-ng-bind="planDayOfWeek"></span>'s Activities:
-                        </h3>
-                    </div>
-
-                </div>
-                <ul data-ng-show="activityPlan" data-ng-repeat="activity in activityPlan.activities" style="margin-top: 10px;">
-                    <li>
-                        <span style="font-weight:bold;" data-ng-bind="activityTypesDictionary[activity.activityType].name"></span>:
-                        <div style=display:inline-block;" data-ng-show="activity.steps > 0">
-                            <span data-ng-bind="activity.steps | number:0"></span> Steps,
-                        </div>
-
-                        <span data-ng-bind="activity.caloriesBurned | number:0"></span> Calories Burned,
-
-                        <div style=display:inline-block;" data-ng-show="activity.duration > 0">
-                            <span data-ng-bind="activity.duration | number:0"></span> Minutes
-                        </div>
-                    </li>
-                </ul>
-                <div id="createActivityForDay" data-ng-show="!activityPlan" style="color: rgb(66, 66, 207);margin-top: 20px;margin-left: 9px;font-weight: bold;">
-                    <!--There are no Activities entered for today yet.-->
-                    <a href="/#!/activities/create/{{planDateForCreate}}" title="New Activity" class="ng-binding">Create New Activity for Day</a>
-                </div>
             </div>
 
-
-            <div style="margin-top: 30px;" >
-
-                <div  style="border-bottom: 1px solid #eee;width:300px;">
-
-                    <a data-ng-show="nutritionPlan && planDayOfWeek" data-ng-href="#!/plans/{{nutritionPlan._id}}">
-                        <h3>
-                            <span data-ng-bind="planDayOfWeek"></span>'s Nutrition:
-                        </h3>
-                    </a>
-                    <div data-ng-show="!nutritionPlan && planDayOfWeek">
-                        <h3>
-                            <span data-ng-bind="planDayOfWeek"></span>'s Nutrition:
-                        </h3>
-                    </div>
-                </div>
-                <div id="createNutritionPlanForDay" data-ng-show="!nutritionPlan" style="margin-top: 20px;margin-left: 9px;font-weight: bold;color: rgb(66, 66, 207);">
-                    <!--There is no nutrition plan entered for today yet.-->
-                    <a href="/#!/plans/create/{{planDateForCreate}}" title="New Plan" class="ng-binding">Create New Plan for Day</a>
-
-                </div>
-
-
-
-                <div data-ng-show="nutritionPlan">
-                    <div style="padding-top: 10px;color:gray;">
-
-                        <div style="display:inline-block">
-                            <input name="showDailyChartsList" id="dailyCharts" type="radio" value="dailyCharts"  data-ng-model="dailyDashboardView"> <label style="font-weight: normal;" for="dailyCharts">Show as Charts</label> <br/>
-                        </div>
-
-                        <div style="display:inline-block;margin-left: 10px;">
-                            <input name="showDailyChartsList" id="dailyList" type="radio" value="dailyList" data-ng-model="dailyDashboardView" > <label style="font-weight: normal;" for="dailyList">Show as List</label> <br/>
-                        </div>
+            <div class="list-group">
+                <a data-ng-if="!nutritionPlan" data-ng-href="/#!/plans/create/{{planDateForCreate}}" class="list-group-item">
+                    <div>
+                        <div style="font-weight:bold; font-size: 16px;display:inline-block;width:150px;">Track Food</div>
+                        <span style="float:right;" class="glyphicon glyphicon-chevron-right"></span>
                     </div>
 
-                    <div data-ng-show="dailyDashboardView == 'dailyList'" style="padding-left: 10px;padding-top: 10px;">
-                        <div style="display:inline-block;font-weight:bold;">
-                            <div style="margin-top:10px;">
-                                 Calories In:
-                            </div>
-                            <div style="margin-top:10px;">
-                                 Calories Out:
-                            </div>
-                            <div style="margin-top:10px;">
-                                 BMR:
-                            </div>
-                            <div style="margin-top:10px;">
-                                <div style="font-weight: bold;display:inline-block; width: 70px;">
-                                    <span data-ng-show="deficit < 0">Surplus:</span>
-                                    <span data-ng-show="deficit > 0">Deficit:</span>
-
-                                </div>
-
-                            </div>
-                        </div>
-
-
-                        <div style="display:inline-block;margin-left: 5px;">
-                            <div>
-                                <div style="margin-top:10px; width: 80px; text-align: right;display:inline-block;padding-right: 15px;">
-                                    <span data-ng-bind="nutritionPlan.totalPlanCalories | number:0"></span>
-                                </div>
-                                <span>Calories</span>
-                            </div>
-
-                            <div>
-                                <div style="margin-top:10px; width: 80px; text-align: right;display:inline-block;padding-right: 15px;">
-                                    <span style="margin-top:10px;padding-right: 17px;">-</span>
-                                    <span data-ng-bind="totalCaloriesBurned | number:0"></span>
-                                </div>
-                                <span>Calories</span>
-                            </div>
-
-                            <div>
-                                <div style="margin-top:10px; width: 80px; text-align: right;display:inline-block;padding-right: 15px;">
-                                    <span style="margin-top:10px;margin-right: 5px;">-</span>
-                                    <span data-ng-bind="bmr | number:0"></span>
-                                </div>
-                                <span>Calories</span>
-                            </div>
-                            <div style="color: rgb(33, 51, 184);font-weight: bold;">
-                                <div style="border-top: 1px solid black; padding-top:10px; width: 80px; text-align: right;padding-right: 15px;display:inline-block;">
-
-                                    <span data-ng-show="deficit < 0" data-ng-bind="-(deficit) | number:0"></span>
-                                    <span data-ng-show="deficit > 0" data-ng-bind="deficit | number:0"></span>
-
-                                </div>
-                                <span>Calories</span>
-                            </div>
-                        </div>
-                        <div style="padding-top:30px">
-                            <h4>Macros:</h4>
-                            <div style="padding-left: 5px;">
-                                <div>
-                                    <label style="width: 60px;">Protein:</label>
-                                    <span>{{nutritionPlan.totalPlanProteinAsPercent | number: 1}}</span>%
-                                </div>
-                                <div>
-                                    <label style="width: 60px;">Carbs:</label>
-                                    <span>{{nutritionPlan.totalPlanCarbsAsPercent | number: 1}}</span>%
-                                </div>
-                                <div>
-                                    <label style="width: 60px;">Fat:</label>
-                                    <span>{{nutritionPlan.totalPlanFatAsPercent | number: 1}}</span>%
-                                </div>
-                            </div>
-                        </div>
+                </a>
+                <a data-ng-if="nutritionPlan" data-ng-href="#!/plans/{{nutritionPlan._id}}" class="list-group-item">
+                    <div>
+                        <div style="font-weight:bold; font-size: 16px;display:inline-block;width:150px;">Calories In:</div>
+                        <span data-ng-bind="nutritionPlan.totalPlanCalories | number:0"></span>
+                        <span style="float:right;" class="glyphicon glyphicon-chevron-right"></span>
                     </div>
 
-                    <div data-ng-show="dailyDashboardView == 'dailyCharts'">
-                        <div  style="position:relative; right: 12px;color:rgb(8, 81, 189)">
-                            <span style="font-size: 16px; font-weight:bold;padding-left: 10px;position: relative;top: 18px;">Daily Calories:</span>
-
-                            <svg style="position:relative; right: 10px;" class="budgetChart"></svg>
-                        </div>
-                        <div data-ng-show="nutritionPlan" style="padding-top: 10px;color:rgb(8, 81, 189);display:inline-block;">
-                            <div>
-                                <span style="font-size: 16px; font-weight:bold;">Daily Macros:</span>
-                                <div id="dailyMacrosChart" style="right: 25px;"></div>
-
-                            </div>
-                        </div>
-                        <div  style="display:inline-block;">
-
-                            <div data-ng-if="showEnterDailyWeight" style="width: 105px;position: relative;bottom: 93px;left: 13px;">
-                                <span style="font-size: 16px; font-weight:bold;color:rgb(8, 81, 189);position: relative;top: 8px;right: 7px;">Daily Weight:</span>
-
-                                <img src="/modules/core/img/brand/weightScale.png" width="90px" alt="Enter Daily Weight" style="right: 6px;top: 2px;position: relative;}"/>
-                                <div>
-                                    <a href="/#!/body-stats/create/{{planDateForCreate}}">Enter Weight</a>
-                                </div>
-                            </div>
-
-                            <div data-ng-if="!showEnterDailyWeight && !nutritionProfile.hideWeightOnHomeScreen" style="width: 100px;">
-                                <span style="font-size: 16px; font-weight:bold;color:rgb(8, 81, 189);bottom: 52px;position: relative;right: 5px;">Daily Weight:</span>
-
-
-                                <span data-ng-bind="dailyBodyStats.weight" style="position: relative;bottom: 28px;left: 40px;font-size: 14px;color: blue;background-color: white;z-index: 20;"></span>lbs
-
-                                <a data-ng-href="#!/body-stats/{{dailyBodyStats._id}}">
-                                    <img src="/modules/core/img/brand/weightScale.png" width="225px" alt="Daily Weight" style="bottom: 125px;right: 59px;;position: relative;}"/>
-                                </a>
-                            </div>
-                        </div>
+                </a>
+                <a data-ng-if="!activityPlan" data-ng-href="/#!/activities/create/{{planDateForCreate}}" class="list-group-item">
+                    <div>
+                        <div style="font-weight:bold; font-size: 16px;display:inline-block;width:150px;">Track Exercise</div>
+                        <span style="float:right;" class="glyphicon glyphicon-chevron-right"></span>
                     </div>
-                </div>
+
+                </a>
+                <a data-ng-if="activityPlan" data-ng-href="#!/activities/{{activityPlan._id}}" class="list-group-item">
+                    <div>
+                        <div style="font-weight:bold; font-size: 16px;display:inline-block;width:150px;">Calories Burned:</div>
+                        <span data-ng-bind="totalCaloriesBurned | number:0"></span>
+                        <span style="float:right;" class="glyphicon glyphicon-chevron-right"></span>
+                    </div>
+                </a>
+                <a data-ng-if="!showEnterDailyWeight" data-ng-href="#!/body-stats/{{dailyBodyStats._id}}" class="list-group-item">
+                    <div>
+                        <div style="font-weight:bold; font-size: 16px;display:inline-block;width:150px;">Track Weight</div>
+                    </div>
+                </a>
+                <a data-ng-if="showEnterDailyWeight" href="/#!/body-stats/create/{{planDateForCreate}}" class="list-group-item">
+                    <div>
+                        <div style="font-weight:bold; font-size: 16px;display:inline-block;width:150px;">Track Weight</div>
+                    </div>
+                </a>
+
+
             </div>
+        </div>
 
+        <div class="hidden-xs" style="display:inline-block">
+            <div class="dailyDashboard" style="width: 300px;display:inline-block;">
+                <div style="padding-top: 6px;">
+
+                    <ng-include  src="'/modules/core/views/home.dateToggle.partial.html'"></ng-include>
+
+                    <div style="border-bottom: 1px solid #eee;width:300px;">
+                        <a data-ng-show="activityPlan" data-ng-href="#!/activities/{{activityPlan._id}}">
+                            <h3 data-ng-show="planDayOfWeek">
+
+                                <span data-ng-bind="planDayOfWeek"></span>'s Activities:
+
+                            </h3>
+                        </a>
+
+                        <div data-ng-show="!activityPlan && planDayOfWeek">
+                            <h3>
+                                <span data-ng-bind="planDayOfWeek"></span>'s Activities:
+                            </h3>
+                        </div>
+
+                    </div>
+                    <ul data-ng-show="activityPlan" data-ng-repeat="activity in activityPlan.activities" style="margin-top: 10px;">
+                        <li>
+                            <span style="font-weight:bold;" data-ng-bind="activityTypesDictionary[activity.activityType].name"></span>:
+                            <div style=display:inline-block;" data-ng-show="activity.steps > 0">
+                                <span data-ng-bind="activity.steps | number:0"></span> Steps,
+                            </div>
+
+                            <span data-ng-bind="activity.caloriesBurned | number:0"></span> Calories Burned,
+
+                            <div style=display:inline-block;" data-ng-show="activity.duration > 0">
+                                <span data-ng-bind="activity.duration | number:0"></span> Minutes
+                            </div>
+                        </li>
+                    </ul>
+                    <div id="createActivityForDay" data-ng-show="!activityPlan" style="color: rgb(66, 66, 207);margin-top: 20px;margin-left: 9px;font-weight: bold;">
+                        <!--There are no Activities entered for today yet.-->
+                        <a href="/#!/activities/create/{{planDateForCreate}}" title="New Activity" class="ng-binding">Create New Activity for Day</a>
+                    </div>
+                </div>
+
+
+                <div style="margin-top: 30px;" >
+
+                    <div  style="border-bottom: 1px solid #eee;width:300px;">
+
+                        <a data-ng-show="nutritionPlan && planDayOfWeek" data-ng-href="#!/plans/{{nutritionPlan._id}}">
+                            <h3>
+                                <span data-ng-bind="planDayOfWeek"></span>'s Nutrition:
+                            </h3>
+                        </a>
+                        <div data-ng-show="!nutritionPlan && planDayOfWeek">
+                            <h3>
+                                <span data-ng-bind="planDayOfWeek"></span>'s Nutrition:
+                            </h3>
+                        </div>
+                    </div>
+                    <div id="createNutritionPlanForDay" data-ng-show="!nutritionPlan" style="margin-top: 20px;margin-left: 9px;font-weight: bold;color: rgb(66, 66, 207);">
+                        <!--There is no nutrition plan entered for today yet.-->
+                        <a href="/#!/plans/create/{{planDateForCreate}}" title="New Plan" class="ng-binding">Create New Plan for Day</a>
+
+                    </div>
+
+
+
+                    <div data-ng-show="nutritionPlan">
+                        <div style="padding-top: 10px;color:gray;">
+
+                            <div style="display:inline-block">
+                                <input name="showDailyChartsList" id="dailyCharts" type="radio" value="dailyCharts"  data-ng-model="dailyDashboardView"> <label style="font-weight: normal;" for="dailyCharts">Show as Charts</label> <br/>
+                            </div>
+
+                            <div style="display:inline-block;margin-left: 10px;">
+                                <input name="showDailyChartsList" id="dailyList" type="radio" value="dailyList" data-ng-model="dailyDashboardView" > <label style="font-weight: normal;" for="dailyList">Show as List</label> <br/>
+                            </div>
+                        </div>
+
+                        <div data-ng-show="dailyDashboardView == 'dailyList'" style="padding-left: 10px;padding-top: 10px;">
+                            <div style="display:inline-block;font-weight:bold;">
+                                <div style="margin-top:10px;">
+                                     Calories In:
+                                </div>
+                                <div style="margin-top:10px;">
+                                     Calories Out:
+                                </div>
+                                <div style="margin-top:10px;">
+                                     BMR:
+                                </div>
+                                <div style="margin-top:10px;">
+                                    <div style="font-weight: bold;display:inline-block; width: 70px;">
+                                        <span data-ng-show="deficit < 0">Surplus:</span>
+                                        <span data-ng-show="deficit > 0">Deficit:</span>
+
+                                    </div>
+
+                                </div>
+                            </div>
+
+
+                            <div style="display:inline-block;margin-left: 5px;">
+                                <div>
+                                    <div style="margin-top:10px; width: 80px; text-align: right;display:inline-block;padding-right: 15px;">
+                                        <span data-ng-bind="nutritionPlan.totalPlanCalories | number:0"></span>
+                                    </div>
+                                    <span>Calories</span>
+                                </div>
+
+                                <div>
+                                    <div style="margin-top:10px; width: 80px; text-align: right;display:inline-block;padding-right: 15px;">
+                                        <span style="margin-top:10px;padding-right: 17px;">-</span>
+                                        <span data-ng-bind="totalCaloriesBurned | number:0"></span>
+                                    </div>
+                                    <span>Calories</span>
+                                </div>
+
+                                <div>
+                                    <div style="margin-top:10px; width: 80px; text-align: right;display:inline-block;padding-right: 15px;">
+                                        <span style="margin-top:10px;margin-right: 5px;">-</span>
+                                        <span data-ng-bind="bmr | number:0"></span>
+                                    </div>
+                                    <span>Calories</span>
+                                </div>
+                                <div style="color: rgb(33, 51, 184);font-weight: bold;">
+                                    <div style="border-top: 1px solid black; padding-top:10px; width: 80px; text-align: right;padding-right: 15px;display:inline-block;">
+
+                                        <span data-ng-show="deficit < 0" data-ng-bind="-(deficit) | number:0"></span>
+                                        <span data-ng-show="deficit > 0" data-ng-bind="deficit | number:0"></span>
+
+                                    </div>
+                                    <span>Calories</span>
+                                </div>
+                            </div>
+                            <div style="padding-top:30px">
+                                <h4>Macros:</h4>
+                                <div style="padding-left: 5px;">
+                                    <div>
+                                        <label style="width: 60px;">Protein:</label>
+                                        <span>{{nutritionPlan.totalPlanProteinAsPercent | number: 1}}</span>%
+                                    </div>
+                                    <div>
+                                        <label style="width: 60px;">Carbs:</label>
+                                        <span>{{nutritionPlan.totalPlanCarbsAsPercent | number: 1}}</span>%
+                                    </div>
+                                    <div>
+                                        <label style="width: 60px;">Fat:</label>
+                                        <span>{{nutritionPlan.totalPlanFatAsPercent | number: 1}}</span>%
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div data-ng-show="dailyDashboardView == 'dailyCharts'">
+                            <div  style="position:relative; right: 12px;color:rgb(8, 81, 189)">
+                                <span style="font-size: 16px; font-weight:bold;padding-left: 10px;position: relative;top: 18px;">Daily Calories:</span>
+
+                                <svg style="position:relative; right: 10px;" class="budgetChart"></svg>
+                            </div>
+                            <div data-ng-show="nutritionPlan" style="padding-top: 10px;color:rgb(8, 81, 189);display:inline-block;">
+                                <div>
+                                    <span style="font-size: 16px; font-weight:bold;">Daily Macros:</span>
+                                    <div id="dailyMacrosChart" style="right: 25px;"></div>
+
+                                </div>
+                            </div>
+                            <div  style="display:inline-block;">
+
+                                <div data-ng-if="showEnterDailyWeight" style="width: 105px;position: relative;bottom: 93px;left: 13px;">
+                                    <span style="font-size: 16px; font-weight:bold;color:rgb(8, 81, 189);position: relative;top: 8px;right: 7px;">Daily Weight:</span>
+
+                                    <img src="/modules/core/img/brand/weightScale.png" width="90px" alt="Enter Daily Weight" style="right: 6px;top: 2px;position: relative;}"/>
+                                    <div>
+                                        <a href="/#!/body-stats/create/{{planDateForCreate}}">Enter Weight</a>
+                                    </div>
+                                </div>
+
+                                <div data-ng-if="!showEnterDailyWeight && !nutritionProfile.hideWeightOnHomeScreen" style="width: 100px;">
+                                    <span style="font-size: 16px; font-weight:bold;color:rgb(8, 81, 189);bottom: 52px;position: relative;right: 5px;">Daily Weight:</span>
+
+
+                                    <span data-ng-bind="dailyBodyStats.weight" style="position: relative;bottom: 28px;left: 40px;font-size: 14px;color: blue;background-color: white;z-index: 20;"></span>lbs
+
+                                    <a data-ng-href="#!/body-stats/{{dailyBodyStats._id}}">
+                                        <img src="/modules/core/img/brand/weightScale.png" width="225px" alt="Daily Weight" style="bottom: 125px;right: 59px;;position: relative;}"/>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
         </div>
 
         <div data-ng-class="{'homepageDashboardSeparatorSmall': weeklyDashboardView == 'charts', 'homepageDashboardSeparatorBig': weeklyDashboardView == 'list' }" style="display:inline-block;">
