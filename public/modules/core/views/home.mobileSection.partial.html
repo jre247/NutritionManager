@@ -18,14 +18,14 @@
 <div class="list-group" style="color: rgb(66, 66, 207)">
     <a data-ng-if="!nutritionPlan" data-ng-href="/#!/plans/create/{{planDateForCreate}}" class="list-group-item" style="height: 60px;">
         <div>
-            <span style="font-size: 20px;" class="glyphicon glyphicon-cutlery"></span>
+            <span style="font-size: 20px;color:rgb(55, 55, 234)" class="glyphicon glyphicon-cutlery"></span>
             <div style="font-weight:bold; font-size: 20px;display:inline-block;width:150px;padding-left: 20px;">Track Food</div>
             <span style="float:right;" class="glyphicon glyphicon-chevron-right"></span>
         </div>
 
     </a>
     <a data-ng-if="nutritionPlan" data-ng-href="#!/plans/{{nutritionPlan._id}}" class="list-group-item" style="height: 60px;">
-        <span style="font-size: 20px;" class="glyphicon glyphicon-cutlery"></span>
+        <span style="font-size: 20px;color:rgb(55, 55, 234)" class="glyphicon glyphicon-cutlery"></span>
 
         <div style="display:inline-block;padding-left: 20px;">
             <div style="display:inline-block;text-align: center">
@@ -40,7 +40,7 @@
 
     </a>
     <a data-ng-if="!activityPlan" data-ng-href="/#!/activities/create/{{planDateForCreate}}" class="list-group-item" style="height: 60px;">
-        <span style="font-size: 20px;" class="glyphicon glyphicon-fire"></span>
+        <span style="font-size: 20px;color: rgb(242, 163, 18);" class="glyphicon glyphicon-fire"></span>
 
         <div style="display:inline-block;padding-left: 20px;">
             <div style="font-weight:bold; font-size: 20px;display:inline-block;width:150px;">Track Exercise</div>
@@ -51,7 +51,7 @@
 
     </a>
     <a data-ng-if="activityPlan" data-ng-href="#!/activities/{{activityPlan._id}}" class="list-group-item" style="height: 60px;">
-        <span style="font-size: 20px;" class="glyphicon glyphicon-fire"></span>
+        <span style="font-size: 20px;color: rgb(242, 163, 18);" class="glyphicon glyphicon-fire"></span>
 
         <div style="display:inline-block;padding-left: 20px;">
             <div style="display:inline-block;text-align: center">
