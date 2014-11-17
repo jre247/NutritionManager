@@ -3,69 +3,8 @@
     <div data-ng-if="nutritionProfile._id">
 
 
-        <div class="visible-xs" style="display:inline-block">
-            <div style="text-align: center;height: 60px;">
-                <div style="display:inline-block;float: left;margin-top: 3px;" id="prevDay">
-                    <button type="button" class="btn btn-default btn-sm" data-ng-click="prevDayClick();">
-                        <span class="glyphicon glyphicon-chevron-left arrowBtn" ></span>
-                    </button>
-                </div>
-
-                <span style="font-weight: bold; font-size: 16px;position: relative;top: 5px;" data-ng-bind="planDate | date:long"></span>
-
-                <div style="display:inline-block;margin-top: 3px;float: right;" id="nextDay">
-
-                    <button type="button" class="btn btn-default btn-sm" data-ng-click="nextDayClick();">
-                        <span class="glyphicon glyphicon-chevron-right arrowBtn" />
-                    </button>
-                </div>
-            </div>
-
-            <div class="list-group">
-                <a data-ng-if="!nutritionPlan" data-ng-href="/#!/plans/create/{{planDateForCreate}}" class="list-group-item">
-                    <div>
-                        <div style="font-weight:bold; font-size: 16px;display:inline-block;width:150px;">Track Food</div>
-                        <span style="float:right;" class="glyphicon glyphicon-chevron-right"></span>
-                    </div>
-
-                </a>
-                <a data-ng-if="nutritionPlan" data-ng-href="#!/plans/{{nutritionPlan._id}}" class="list-group-item">
-                    <div>
-                        <div style="font-weight:bold; font-size: 16px;display:inline-block;width:150px;">Calories In:</div>
-                        <span data-ng-bind="nutritionPlan.totalPlanCalories | number:0"></span>
-                        <span style="float:right;" class="glyphicon glyphicon-chevron-right"></span>
-                    </div>
-
-                </a>
-                <a data-ng-if="!activityPlan" data-ng-href="/#!/activities/create/{{planDateForCreate}}" class="list-group-item">
-                    <div>
-                        <div style="font-weight:bold; font-size: 16px;display:inline-block;width:150px;">Track Exercise</div>
-                        <span style="float:right;" class="glyphicon glyphicon-chevron-right"></span>
-                    </div>
-
-                </a>
-                <a data-ng-if="activityPlan" data-ng-href="#!/activities/{{activityPlan._id}}" class="list-group-item">
-                    <div>
-                        <div style="font-weight:bold; font-size: 16px;display:inline-block;width:150px;">Calories Burned:</div>
-                        <span data-ng-bind="totalCaloriesBurned | number:0"></span>
-                        <span style="float:right;" class="glyphicon glyphicon-chevron-right"></span>
-                    </div>
-                </a>
-                <a data-ng-if="!showEnterDailyWeight" data-ng-href="#!/body-stats/{{dailyBodyStats._id}}" class="list-group-item">
-                    <div>
-                        <div style="font-weight:bold; font-size: 16px;display:inline-block;width:150px;">Track Weight</div>
-                        <span style="float:right;" class="glyphicon glyphicon-chevron-right"></span>
-                    </div>
-                </a>
-                <a data-ng-if="showEnterDailyWeight" href="/#!/body-stats/create/{{planDateForCreate}}" class="list-group-item">
-                    <div>
-                        <div style="font-weight:bold; font-size: 16px;display:inline-block;width:150px;">Track Weight</div>
-                        <span style="float:right;" class="glyphicon glyphicon-chevron-right"></span>
-                    </div>
-                </a>
-
-
-            </div>
+        <div class="visible-xs" style="display:inline-block;padding-top: 5px;">
+            <ng-include  src="'/modules/core/views/home.mobileSection.partial.html'"></ng-include>
         </div>
 
         <div class="hidden-xs" style="display:inline-block">
