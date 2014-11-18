@@ -562,7 +562,7 @@ angular.module('core').controller('HomeController', ['$scope', '$stateParams', '
             config.data.json.fat = $scope.nutritionPlan.totalPlanFatAsPercent;
             config.axis = {"y":{"label":{"text":"Daily Macros","position":"outer-middle"}}};
             config.data.types={"protein":"pie", "carbs": "pie", "fat": "pie"};
-            config.size = {width: 160, height: 160};
+            config.size = {width: 180, height: 180};
             // config.size = {width: 220, height: 220};
             $scope.chart = c3.generate(config);
         }
