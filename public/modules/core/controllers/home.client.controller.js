@@ -37,6 +37,23 @@ angular.module('core').controller('HomeController', ['$scope', '$stateParams', '
             });
         };
 
+        $scope.dateFormatOptions = {
+            weekday: "long", year: "numeric", month: "short",
+            day: "numeric"
+        };
+
+        $scope.showTargetsNav = true;
+        $scope.mobileTargetsClick = function(){
+            $scope.showTargetsNav = false;
+            showDailyMacrosChartForMobile();
+            buildThermometerChart(false, '.budgetChartForMobile');
+
+        };
+        $scope.homeNavClick = function(){
+            $scope.showTargetsNav = true;
+
+        };
+
 
         var createNutritionProfileWithDialog = function(){
             var modalInstance = $modal.open({
@@ -263,13 +280,13 @@ angular.module('core').controller('HomeController', ['$scope', '$stateParams', '
             }
         };
 
-        $scope.nextDayClick = function(){
+        $scope.nextDayClick = function(isMobile){
             $scope.planDate = new Date($scope.planDate.setDate($scope.planDate.getDate() + 1));
             $scope.planDateForDb = $scope.planDate.getMonth() + '_' + $scope.planDate.getDate() + '_' + $scope.planDate.getFullYear();
             $scope.planDateForCreate = getPlanDateAsConcat($scope.planDate.getFullYear(), $scope.planDate.getMonth(), $scope.planDate.getDate());
             $scope.planDateDisplay = ($scope.planDate.getMonth() + 1) + '/' + $scope.planDate.getDate() + '/' + $scope.planDate.getFullYear();
 
-            $scope.getDailyDashboardData(true);
+            $scope.getDailyDashboardData(true, isMobile);
 
             var reloadWeeklyData = checkIfChangeWeeklyData();
 
@@ -278,13 +295,13 @@ angular.module('core').controller('HomeController', ['$scope', '$stateParams', '
             }
         };
 
-        $scope.prevDayClick = function(){
+        $scope.prevDayClick = function(isMobile){
             $scope.planDate = new Date($scope.planDate.setDate($scope.planDate.getDate() - 1));
             $scope.planDateForDb = $scope.planDate.getMonth() + '_' + $scope.planDate.getDate() + '_' + $scope.planDate.getFullYear();
             $scope.planDateForCreate = getPlanDateAsConcat($scope.planDate.getFullYear(), $scope.planDate.getMonth(), $scope.planDate.getDate());
             $scope.planDateDisplay = ($scope.planDate.getMonth() + 1) + '/' + $scope.planDate.getDate() + '/' + $scope.planDate.getFullYear();
 
-            $scope.getDailyDashboardData(true);
+            $scope.getDailyDashboardData(true, isMobile);
 
             var reloadWeeklyData = checkIfChangeWeeklyData();
 
@@ -364,19 +381,28 @@ angular.module('core').controller('HomeController', ['$scope', '$stateParams', '
             );
         };
 
-        var buildThermometerChart = function(isUpdate){
+        var buildThermometerChart = function(isUpdate, isMobile){
+            var chartElement;
+
+            if(isMobile){
+                chartElement = '.budgetChartForMobile';
+            }
+            else{
+                chartElement = '.budgetChart';
+            }
+
             var caloriesIn = parseFloat($scope.nutritionPlan.totalPlanCalories.toFixed(0));
             var deficitTarget = $scope.nutritionProfile.deficitTarget;
 
             $scope.deficit = CoreUtilities.calculateDeficit($scope.nutritionPlan, $scope.activityPlan, $scope.nutritionProfile);
 
             var goalCalories = parseFloat((($scope.deficit - deficitTarget) + caloriesIn).toFixed(0));
-            ThermometerChartService.buildThermometerChart(caloriesIn, goalCalories, '.budgetChart', isUpdate);
+            ThermometerChartService.buildThermometerChart(caloriesIn, goalCalories, chartElement, isUpdate);
         };
 
 
 
-        $scope.getDailyDashboardData = function(isUpdate) {
+        $scope.getDailyDashboardData = function(isUpdate, isMobile) {
 
 
             CoreService.getDailyDashboardData($scope.planDateForDb).then(function(data){
@@ -438,9 +464,18 @@ angular.module('core').controller('HomeController', ['$scope', '$stateParams', '
 
 
                 if($scope.nutritionPlan) {
-                    showDailyMacrosChart();
+                    if(isMobile){
+                        showDailyMacrosChartForMobile();
 
-                    buildThermometerChart(isUpdate);
+
+                    }
+                    else{
+                        showDailyMacrosChart();
+                    }
+
+
+
+                    buildThermometerChart(isUpdate, isMobile);
                 }
 
                 if(!data.dailyBodyStats){
@@ -515,6 +550,22 @@ angular.module('core').controller('HomeController', ['$scope', '$stateParams', '
            // config.size = {width: 220, height: 220};
             $scope.chart = c3.generate(config);
         };
+
+        var showDailyMacrosChartForMobile = function(){
+            //todo: don't duplicate this code here - it's basically the same as above
+            var config = {};
+            config.bindto = '#dailyMacrosChartForMobile';
+            config.data = {};
+            config.data.json = {};
+            config.data.json.protein = $scope.nutritionPlan.totalPlanProteinAsPercent;
+            config.data.json.carbs = $scope.nutritionPlan.totalPlanCarbsAsPercent;
+            config.data.json.fat = $scope.nutritionPlan.totalPlanFatAsPercent;
+            config.axis = {"y":{"label":{"text":"Daily Macros","position":"outer-middle"}}};
+            config.data.types={"protein":"pie", "carbs": "pie", "fat": "pie"};
+            config.size = {width: 160, height: 160};
+            // config.size = {width: 220, height: 220};
+            $scope.chart = c3.generate(config);
+        }
 
         var showAverageWeeklyMacrosChart = function() {
             var config = {};
