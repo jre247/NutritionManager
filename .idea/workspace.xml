@@ -3,8 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="99afd44b-0014-4bff-855e-4d01f0b1305f" name="Default" comment="create plan page is close to finished. Now trying to wire up view/edit plan page. Trying to make it all common html.">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/dist/application.min.js" afterPath="$PROJECT_DIR$/public/dist/application.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/modules/core/controllers/home.client.controller.js" afterPath="$PROJECT_DIR$/public/modules/core/controllers/home.client.controller.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/modules/core/views/home.mobileSection.partial.html" afterPath="$PROJECT_DIR$/public/modules/core/views/home.mobileSection.partial.html" />
     </list>
     <ignored path="NutritionManager.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -27,13 +25,13 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="application.min.js" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="application.min.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/public/dist/application.min.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-6.8846154" vertical-offset="59236" max-vertical-offset="104655">
-              <caret line="3961" column="33" selection-start-line="3961" selection-start-column="33" selection-end-line="3961" selection-end-column="33" />
+            <state vertical-scroll-proportion="0.97055936" vertical-offset="59236" max-vertical-offset="104685">
+              <caret line="4755" column="0" selection-start-line="4755" selection-start-column="0" selection-end-line="4755" selection-end-column="0" />
               <folding>
-                <element signature="e#143526#173322#0" expanded="false" />
+                <element signature="e#143526#174266#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -59,8 +57,8 @@
       <file leaf-file-name="home.client.controller.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/modules/core/controllers/home.client.controller.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-18.807692" vertical-offset="4776" max-vertical-offset="8205">
-              <caret line="394" column="90" selection-start-line="394" selection-start-column="29" selection-end-line="394" selection-end-column="90" />
+            <state vertical-scroll-proportion="-6.6923075" vertical-offset="246" max-vertical-offset="8205">
+              <caret line="28" column="38" selection-start-line="0" selection-start-column="0" selection-end-line="745" selection-end-column="0" />
               <folding>
                 <element signature="e#8246#8490#0" expanded="false" />
                 <element signature="e#9298#10632#0" expanded="false" />
@@ -76,11 +74,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="home.mobileSection.partial.html" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="home.mobileSection.partial.html" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/modules/core/views/home.mobileSection.partial.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.44940478" vertical-offset="1542" max-vertical-offset="3360">
-              <caret line="133" column="22" selection-start-line="133" selection-start-column="22" selection-end-line="133" selection-end-column="22" />
+            <state vertical-scroll-proportion="-6.06" vertical-offset="1542" max-vertical-offset="3360">
+              <caret line="123" column="39" selection-start-line="123" selection-start-column="39" selection-end-line="123" selection-end-column="39" />
               <folding>
                 <element signature="n#style#0;n#span#0;n#div#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#div#1;n#!!top" expanded="true" />
@@ -220,9 +218,9 @@
         <option value="$PROJECT_DIR$/public/modules/core/views/home.client.view.html" />
         <option value="$PROJECT_DIR$/public/modules/core/css/core.css" />
         <option value="$PROJECT_DIR$/public/dist/application.min.css" />
-        <option value="$PROJECT_DIR$/public/dist/application.min.js" />
         <option value="$PROJECT_DIR$/public/modules/core/controllers/home.client.controller.js" />
         <option value="$PROJECT_DIR$/public/modules/core/views/home.mobileSection.partial.html" />
+        <option value="$PROJECT_DIR$/public/dist/application.min.js" />
       </list>
     </option>
   </component>
@@ -1341,38 +1339,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/dist/application.min.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-6.8846154" vertical-offset="59236" max-vertical-offset="104655">
-          <caret line="3961" column="33" selection-start-line="3961" selection-start-column="33" selection-end-line="3961" selection-end-column="33" />
-          <folding>
-            <element signature="e#143526#173322#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/modules/core/controllers/home.client.controller.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-18.807692" vertical-offset="4776" max-vertical-offset="8205">
-          <caret line="394" column="90" selection-start-line="394" selection-start-column="29" selection-end-line="394" selection-end-column="90" />
-          <folding>
-            <element signature="e#8246#8490#0" expanded="false" />
-            <element signature="e#9298#10632#0" expanded="false" />
-            <element signature="e#10679#11016#0" expanded="false" />
-            <element signature="e#20669#22097#0" expanded="false" />
-            <element signature="e#24749#25407#0" expanded="false" />
-            <element signature="e#25460#27007#0" expanded="false" />
-            <element signature="e#27599#28323#0" expanded="false" />
-            <element signature="e#28413#29350#0" expanded="false" />
-            <element signature="e#29361#29448#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/modules/core/views/home.mobileSection.partial.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.44940478" vertical-offset="1542" max-vertical-offset="3360">
-          <caret line="133" column="22" selection-start-line="133" selection-start-column="22" selection-end-line="133" selection-end-column="22" />
+        <state vertical-scroll-proportion="-6.06" vertical-offset="1542" max-vertical-offset="3360">
+          <caret line="123" column="39" selection-start-line="123" selection-start-column="39" selection-end-line="123" selection-end-column="39" />
           <folding>
             <element signature="n#style#0;n#span#0;n#div#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#1;n#!!top" expanded="true" />
@@ -1426,6 +1396,34 @@
             <element signature="n#style#0;n#div#1;n#div#1;n#div#1;n#div#2;n#!!top" expanded="true" />
             <element signature="n#style#0;n#span#0;n#div#1;n#div#1;n#div#1;n#div#2;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#0;n#div#1;n#div#1;n#div#1;n#div#2;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/modules/core/controllers/home.client.controller.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-6.6923075" vertical-offset="246" max-vertical-offset="8205">
+          <caret line="28" column="38" selection-start-line="0" selection-start-column="0" selection-end-line="745" selection-end-column="0" />
+          <folding>
+            <element signature="e#8246#8490#0" expanded="false" />
+            <element signature="e#9298#10632#0" expanded="false" />
+            <element signature="e#10679#11016#0" expanded="false" />
+            <element signature="e#20669#22097#0" expanded="false" />
+            <element signature="e#24749#25407#0" expanded="false" />
+            <element signature="e#25460#27007#0" expanded="false" />
+            <element signature="e#27599#28323#0" expanded="false" />
+            <element signature="e#28413#29350#0" expanded="false" />
+            <element signature="e#29361#29448#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/dist/application.min.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.97055936" vertical-offset="70321" max-vertical-offset="115770">
+          <caret line="4755" column="0" selection-start-line="4755" selection-start-column="0" selection-end-line="4755" selection-end-column="0" />
+          <folding>
+            <element signature="e#143526#174266#0" expanded="false" />
           </folding>
         </state>
       </provider>
