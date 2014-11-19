@@ -125,12 +125,12 @@
         <div>
             <span style="font-size: 16px; color:rgb(8, 81, 189); font-weight:bold;">Daily Calories:</span>
 
-            <svg style="position:relative; right: 22px;" class="budgetChartForMobile"></svg>
+            <svg style="position:relative; right: 22px;bottom: 15px;" class="budgetChartForMobile"></svg>
 
-            <div style="position: relative;bottom: 20px;">
+            <div style="position: relative;bottom: 44px;">
                 <div>
-                    <label for="goalCaloriesTarget">Goal:</label>
-                    <span class="text-muted"><span  id="goalCaloriesTarget" data-ng-bind="goalCalories | number:0"></span> calories</span>
+                    <label style="padding-right: 27px;" for="goalCaloriesTarget">Target:</label>
+                    <span  class="text-muted"><span  id="goalCaloriesTarget" data-ng-bind="goalCalories | number:0"></span> calories</span>
                 </div>
                 <div>
                     <label for="remainingCaloriesTarget">Remaining:</label>
@@ -147,62 +147,72 @@
 
             </div>
         </div>
-        <div style="margin-top: 20px;">
-            <span style="font-size: 16px; font-weight:bold;color:rgb(8, 81, 189);">Daily Macros:</span>
-            <br/>
-            <div id="dailyMacrosChartForMobile" style="right: 25px;display:inline-block"></div>
-
-            <div style="display:inline-block;vertical-align: top;position: relative;right: 39px;top: 11px;">
-                <table>
-                    <thead>
-
-                        <tr>
-                            <th style="width: 60px;">
-                                <div style="text-decoration: underline; position: relative;left: 14px;">
-                                    <span style="font-weight: bold">Targets</span>
-                                </div>
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>
-                                <div>
-                                    <label>Carbs:</label>
-
-                                </div>
-                            </td>
-                            <td class="text-muted">
-                                <span  data-ng-bind="nutritionProfile.carbohydratesPercentageTarget"></span>%
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div>
-                                    <label>Protein:</label>
-
-                                </div>
-                            </td>
-                            <td class="text-muted">
-                                <span  data-ng-bind="nutritionProfile.proteinPercentageTarget"></span>%
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div>
-                                    <label>Fat:</label>
-
-                                </div>
-                            </td>
-                            <td class="text-muted">
-                                <span  data-ng-bind="nutritionProfile.fatPercentageTarget"></span>%
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-
-
+        <div >
+            <div style="display:inline-block">
+                <span style="font-size: 16px; font-weight:bold;color:rgb(8, 81, 189);">Daily Macros:</span>
+                <br/>
+                <div id="dailyMacrosChartForMobile" style="right: 25px;"></div>
             </div>
+
+            <div style="display:inline-block">
+                <span style="font-size: 16px; font-weight:bold;color:rgb(8, 81, 189);position:relative; right:12px">Target Macros:</span>
+                <br/>
+                <div id="targetMacrosChartForMobile" style="right: 38px;"></div>
+            </div>
+
+
+
+            <!--<div style="display:inline-block;vertical-align: top;position: relative;right: 26px;top: 11px;">-->
+                <!--<table>-->
+                    <!--<thead>-->
+
+                        <!--<tr>-->
+                            <!--<th style="width: 60px;">-->
+                                <!--<div style="text-decoration: underline; position: relative;left: 14px;">-->
+                                    <!--<span style="font-weight: bold">Targets</span>-->
+                                <!--</div>-->
+                            <!--</th>-->
+                        <!--</tr>-->
+                    <!--</thead>-->
+                    <!--<tbody>-->
+                        <!--<tr>-->
+                            <!--<td>-->
+                                <!--<div>-->
+                                    <!--<label>Carbs:</label>-->
+
+                                <!--</div>-->
+                            <!--</td>-->
+                            <!--<td class="text-muted">-->
+                                <!--<span  data-ng-bind="nutritionProfile.carbohydratesPercentageTarget"></span>%-->
+                            <!--</td>-->
+                        <!--</tr>-->
+                        <!--<tr>-->
+                            <!--<td>-->
+                                <!--<div>-->
+                                    <!--<label>Protein:</label>-->
+
+                                <!--</div>-->
+                            <!--</td>-->
+                            <!--<td class="text-muted">-->
+                                <!--<span  data-ng-bind="nutritionProfile.proteinPercentageTarget"></span>%-->
+                            <!--</td>-->
+                        <!--</tr>-->
+                        <!--<tr>-->
+                            <!--<td>-->
+                                <!--<div>-->
+                                    <!--<label>Fat:</label>-->
+
+                                <!--</div>-->
+                            <!--</td>-->
+                            <!--<td class="text-muted">-->
+                                <!--<span  data-ng-bind="nutritionProfile.fatPercentageTarget"></span>%-->
+                            <!--</td>-->
+                        <!--</tr>-->
+                    <!--</tbody>-->
+                <!--</table>-->
+
+
+            <!--</div>-->
 
         </div>
     </div>

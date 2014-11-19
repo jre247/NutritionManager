@@ -46,6 +46,7 @@ angular.module('core').controller('HomeController', ['$scope', '$stateParams', '
         $scope.mobileTargetsClick = function(){
             $scope.showTargetsNav = false;
             showDailyMacrosChartForMobile();
+            showTargetMacrosChartForMobile();
             buildThermometerChart(false, '.budgetChartForMobile');
 
         };
@@ -566,7 +567,23 @@ angular.module('core').controller('HomeController', ['$scope', '$stateParams', '
             config.size = {width: 180, height: 180};
             // config.size = {width: 220, height: 220};
             $scope.chart = c3.generate(config);
-        }
+        };
+
+        var showTargetMacrosChartForMobile = function(){
+            //todo: don't duplicate this code here - it's basically the same as above
+            var config = {};
+            config.bindto = '#targetMacrosChartForMobile';
+            config.data = {};
+            config.data.json = {};
+            config.data.json.protein = $scope.nutritionProfile.proteinPercentageTarget;
+            config.data.json.carbs = $scope.nutritionProfile.carbohydratesPercentageTarget;
+            config.data.json.fat = $scope.nutritionProfile.fatPercentageTarget;
+            config.axis = {"y":{"label":{"text":"Daily Macros","position":"outer-middle"}}};
+            config.data.types={"protein":"pie", "carbs": "pie", "fat": "pie"};
+            config.size = {width: 180, height: 180};
+            // config.size = {width: 220, height: 220};
+            $scope.chart = c3.generate(config);
+        };
 
         var showAverageWeeklyMacrosChart = function() {
             var config = {};
