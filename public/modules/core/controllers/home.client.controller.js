@@ -397,6 +397,7 @@ angular.module('core').controller('HomeController', ['$scope', '$stateParams', '
             $scope.deficit = CoreUtilities.calculateDeficit($scope.nutritionPlan, $scope.activityPlan, $scope.nutritionProfile);
 
             var goalCalories = parseFloat((($scope.deficit - deficitTarget) + caloriesIn).toFixed(0));
+            $scope.goalCalories = goalCalories;
             ThermometerChartService.buildThermometerChart(caloriesIn, goalCalories, chartElement, isUpdate);
         };
 

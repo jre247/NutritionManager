@@ -1,4 +1,4 @@
-<div style="text-align: center;height: 60px;">
+<div style="text-align: center;height: 60px;" data-ng-show="showTargetsNav">
     <div style="display:inline-block;float: left;margin-top: 3px;" id="prevDay">
         <button type="button" class="btn btn-default btn-sm" data-ng-click="prevDayClick(true);">
             <span class="glyphicon glyphicon-chevron-left arrowBtn" ></span>
@@ -109,23 +109,100 @@
 </div>
 
 <div data-ng-show="!showTargetsNav">
-    <div style="margin-top: 9px;margin-bottom: 15px; ">
-        <a ng-click="homeNavClick()">
+    <div style="margin-top: 5px;margin-bottom: 40px;">
+        <a ng-click="homeNavClick()" style="float: left;margin-right: 20px;margin-top:3px">
             <button type="button" class="btn btn-primary btn-m">
-                <span class="glyphicon glyphicon-home" ></span><span class="hidden-xs"> Dashboard</span>
+                <span class="glyphicon glyphicon-arrow-left" ></span><span> Back</span>
             </button>
         </a>
+
+        <span style="font-weight: bold; font-size: 19px;position: relative;top: 5px;" data-ng-bind="planDate.toLocaleDateString('en-us', dateFormatOptions) | date:long"></span>
     </div>
 
-    <div data-ng-show="nutritionPlan" style="padding-top: 10px;color:rgb(8, 81, 189);">
-        <div style="color:rgb(8, 81, 189)">
-            <span style="font-size: 16px; font-weight:bold;">Daily Calories:</span>
+
+
+    <div data-ng-show="nutritionPlan" >
+        <div>
+            <span style="font-size: 16px; color:rgb(8, 81, 189); font-weight:bold;">Daily Calories:</span>
 
             <svg style="position:relative; right: 22px;" class="budgetChartForMobile"></svg>
+
+            <div style="position: relative;bottom: 20px;">
+                <div>
+                    <label for="goalCaloriesTarget">Goal:</label>
+                    <span class="text-muted"><span  id="goalCaloriesTarget" data-ng-bind="goalCalories | number:0"></span> calories</span>
+                </div>
+                <div>
+                    <label for="remainingCaloriesTarget">Remaining:</label>
+                    <span class="text-muted"><span  id="remainingCaloriesTarget" data-ng-bind="deficit - nutritionProfile.deficitTarget | number:0"></span> calories</span>
+                </div>
+                <!--<div>-->
+                    <!--<label for="currentTarget">Total Deficit:</label>-->
+                    <!--<span id="currentTarget" data-ng-bind="deficit | number:0"></span> calories-->
+                <!--</div>-->
+                <!--<div>-->
+                    <!--<label for="deficitTarget">Target Deficit:</label>-->
+                    <!--<span id="deficitTarget" data-ng-bind="nutritionProfile.deficitTarget | number:0"></span> calories-->
+                <!--</div>-->
+
+            </div>
         </div>
-        <div>
-            <span style="font-size: 16px; font-weight:bold;">Daily Macros:</span>
-            <div id="dailyMacrosChartForMobile" style="right: 25px;"></div>
+        <div style="margin-top: 20px;">
+            <span style="font-size: 16px; font-weight:bold;color:rgb(8, 81, 189);">Daily Macros:</span>
+            <br/>
+            <div id="dailyMacrosChartForMobile" style="right: 25px;display:inline-block"></div>
+
+            <div style="display:inline-block;vertical-align: top;position: relative;right: 39px;top: 11px;">
+                <table>
+                    <thead>
+
+                        <tr>
+                            <th style="width: 60px;">
+                                <div style="text-decoration: underline; position: relative;left: 14px;">
+                                    <span style="font-weight: bold">Targets</span>
+                                </div>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <div>
+                                    <label>Carbs:</label>
+
+                                </div>
+                            </td>
+                            <td class="text-muted">
+                                <span  data-ng-bind="nutritionProfile.carbohydratesPercentageTarget"></span>%
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div>
+                                    <label>Protein:</label>
+
+                                </div>
+                            </td>
+                            <td class="text-muted">
+                                <span  data-ng-bind="nutritionProfile.proteinPercentageTarget"></span>%
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div>
+                                    <label>Fat:</label>
+
+                                </div>
+                            </td>
+                            <td class="text-muted">
+                                <span  data-ng-bind="nutritionProfile.fatPercentageTarget"></span>%
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+
+            </div>
 
         </div>
     </div>
