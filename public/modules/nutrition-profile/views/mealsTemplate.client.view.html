@@ -1,0 +1,57 @@
+<div data-ng-controller="NutritionProfileController" data-ng-init="findOne()">
+
+    <div data-ng-show="success" class="successMsgFixed" >
+        <strong>Your changes have been saved!</strong>
+    </div>
+
+
+
+    <div>
+        <div class="row" style="padding-bottom: 27px;">
+            <div class="col-md-4" style="margin-top:17px">
+                <a href="/#!/nutritionProfile" >
+                    <button type="button" class="btn btn-primary btn-m">
+                        <span class="glyphicon glyphicon-arrow-left" ></span><span> Back</span>
+                    </button>
+                </a>
+            </div>
+            <div class="col-md-4">
+                <div class="text-center">
+                    <h2>Meals Template</h2>
+                </div>
+            </div>
+            <div class="col-md-4">
+                &nbsp;
+            </div>
+        </div>
+
+    </div>
+
+    <div style="margin-top: 30px;" >
+
+        <button type="button" class="btn btn-primary btn-m hidden-xs" style="padding: 6px 10px;margin-top: 10px;margin-left: 15px;" data-ng-click="addMealToTemplateWithDialog()">
+            <span class="glyphicon glyphicon-plus" ></span> <span class="hidden-xs">Add Meal</span>
+        </button>
+
+        <div sortable="sortableOptions"  updateCallback="sortableUpdateCallback" startCallback="sortableStartCallback" rootSortableElement=".mealsTemplateContainer">
+            <div class="form-group mealsTemplateContainer" style="margin-left: 15px;" >
+                <div   data-ng-repeat="templateMeal in nutritionProfile.templateMeals"
+                       data-ng-mouseover="templateMeal.showEditIcon = true" data-ng-mouseleave="templateMeal.showEditIcon = false">
+
+                    <div class="templateMealItem" style="display:inline-block;">
+                        <span data-ng-bind="templateMeal.name"></span>
+                    </div>
+
+
+
+                    <div style="display:inline-block;width: 20px;padding-left: 10px;">
+                        <div style="cursor:pointer;height: 14px !important;" data-ng-click="deleteTemplateMeal(templateMeal);" type="button" data-ng-class="{editRowShow: templateMeal.showEditIcon}"  class="editRowHide">
+                            <span  class="glyphicon glyphicon-trash"></span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

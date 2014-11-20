@@ -1,0 +1,39 @@
+
+<div data-ng-controller="NutritionProfileController" data-ng-init="findOne()">
+
+    <div data-ng-show="success" class="successMsgFixed" >
+        <strong>Your changes have been saved!</strong>
+    </div>
+
+
+
+    <div>
+        <div class="row" style="padding-bottom: 27px;">
+            <div class="col-md-4" style="margin-top:17px">
+                <a href="/#!/nutritionProfile" >
+                    <button type="button" class="btn btn-primary btn-m">
+                        <span class="glyphicon glyphicon-arrow-left" ></span><span> Back</span>
+                    </button>
+                </a>
+            </div>
+            <div class="col-md-4">
+                <div class="text-center">
+                    <h2>Customizations</h2>
+                </div>
+            </div>
+            <div class="col-md-4">
+                &nbsp;
+            </div>
+        </div>
+
+        <div style="margin-top: 5px;">
+
+        </div>
+
+    </div>
+
+    <div>
+        <label for="hideWeightOnHomeScreen"> Hide Weight on Home Screen:</label>
+        <input id="hideWeightOnHomeScreen" type="checkbox" ng-change="update()" data-ng-model="nutritionProfile.hideWeightOnHomeScreen" />
+    </div>
+</div>

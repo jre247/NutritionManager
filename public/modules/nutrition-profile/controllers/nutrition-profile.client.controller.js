@@ -75,6 +75,8 @@ angular.module('nutritionProfile').controller('NutritionProfileController', ['$s
 
                 $scope.validateNutritionTargets(false, true);
             }
+
+            $scope.update();
         };
 
         $scope.macrosRatioChange = function(macrosRatioSelected){
@@ -103,6 +105,16 @@ angular.module('nutritionProfile').controller('NutritionProfileController', ['$s
                     $scope.nutritionProfile.carbohydratesPercentageTarget = 40;
                     $scope.nutritionProfile.fatPercentageTarget = 30;
                     break;
+            }
+
+            $scope.update();
+        };
+
+        $scope.macroChange = function(){
+            var isValid = $scope.validateNutritionTargets();
+
+            if(isValid) {
+                $scope.update();
             }
         };
 
@@ -256,6 +268,8 @@ angular.module('nutritionProfile').controller('NutritionProfileController', ['$s
                         $scope.nutritionProfile.templateMeals.splice(i, 1);
                     }
                 }
+
+                $scope.update();
             }
         };
 
@@ -292,6 +306,8 @@ angular.module('nutritionProfile').controller('NutritionProfileController', ['$s
                 $scope.nutritionProfile.templateMeals.splice(start, 1)[0]);
 
             $scope.$apply();
+
+            $scope.update();
         };
 
         $scope.sortableOptions = {
