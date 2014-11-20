@@ -1,0 +1,63 @@
+<div class="col-md-12">
+    <form class="form-horizontal" data-ng-submit="update()" novalidate>
+        <div data-ng-show="success" class="successMsgFixed" >
+            <strong>Your changes have been saved!</strong>
+        </div>
+
+        <div style="display:inline-block;" data-ng-show="error" class="text-danger">
+            <strong data-ng-bind="error"></strong>
+        </div>
+
+
+
+
+        <div class="list-group" style="color: rgb(66, 66, 207)" >
+            <a data-ng-href="/#!/nutritionProfile/nutrientTargets" class="list-group-item" style="height: 60px;">
+                <div>
+                    <span style="font-size: 20px;color:rgb(55, 55, 234)" class="glyphicon glyphicon-heart-empty"></span>
+                    <div style="font-weight:bold; font-size: 20px;display:inline-block;padding-left: 20px;">Nutrient Targets</div>
+                    <span style="float:right;position: relative;top: 10px;" class="glyphicon glyphicon-chevron-right navigationRightArrow"></span>
+                </div>
+
+            </a>
+            <a data-ng-href="/#!/nutritionProfile/bodyInfo" class="list-group-item" style="height: 60px;">
+                <div>
+                    <span style="font-size: 20px;color:rgb(18, 191, 242)" class="glyphicon glyphicon-user"></span>
+                    <div style="font-weight:bold; font-size: 20px;display:inline-block;padding-left: 20px;">Body Info</div>
+                    <span style="float:right;position: relative;top: 10px;" class="glyphicon glyphicon-chevron-right navigationRightArrow"></span>
+                </div>
+            </a>
+            <a data-ng-href="/#!/nutritionProfile/mealsTemplate" class="list-group-item" style="height: 60px;">
+                <div>
+                    <span style="font-size: 20px;color:rgb(242, 163, 18)" class="glyphicon glyphicon-cutlery"></span>
+                    <div style="font-weight:bold; font-size: 20px;display:inline-block;padding-left: 20px;">Meals Template</div>
+                    <span style="float:right;position: relative;top: 10px;" class="glyphicon glyphicon-chevron-right navigationRightArrow"></span>
+                </div>
+            </a>
+            <a data-ng-href="/#!/nutritionProfile/customizations" class="list-group-item" style="height: 60px;">
+                <div>
+                    <span style="font-size: 20px;color:rgb(88, 211, 62)" class="glyphicon glyphicon-list-alt"></span>
+                    <div style="font-weight:bold; font-size: 20px;display:inline-block;padding-left: 20px;">Customizations</div>
+                    <span style="float:right;position: relative;top: 10px;" class="glyphicon glyphicon-chevron-right navigationRightArrow"></span>
+                </div>
+            </a>
+        </div>
+
+    </form>
+</div>
+
+<script type="text/ng-template" id="addMealToTemplateModalContent.html">
+    <div class="modal-header" style="font-family: segui;">
+        <h3 class="modal-title" data-ng-show="!showActivityDetails">Select Meal To Add To Template</h3>
+    </div>
+    <div style="font-family: segui;padding: 20px;" >
+        <select id="templateMeals" style="width: 30%;font-size: 18px;" name="templateMeals" data-ng-options="t.id as t.name for t in mealsDict" data-ng-model="selected.selectedMealForTemplate"></select>
+
+    </div>
+
+
+    <div class="modal-footer">
+        <button class="btn btn-primary"  ng-click="ok()">OK</button>
+        <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+    </div>
+</script>
