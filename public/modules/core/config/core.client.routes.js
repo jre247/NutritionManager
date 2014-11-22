@@ -8,14 +8,14 @@ angular.module('core').config(['$stateProvider', '$urlRouterProvider',
 
 		// Home state routing
 		$stateProvider.
-        state('dashboard', {
-            url: '/dashboard',
-            templateUrl: 'modules/core/views/home.client.view.html'
-        }).
-		state('dashboardForDate', {
-			url: '/dashboard/:dashboardDate',
-			templateUrl: 'modules/core/views/home.client.view.html'
-		}).
+//        state('dashboard', {
+//            url: '/dashboard',
+//            templateUrl: 'modules/core/views/home.client.view.html'
+//        }).
+//		state('dashboardForDate', {
+//			url: '/dashboard/:dashboardDate',
+//			templateUrl: 'modules/core/views/home.client.view.html'
+//		}).
         state('home', {
             url: '/',
             templateUrl: 'modules/core/views/home.client.view.html'

@@ -1,10 +1,10 @@
 'use strict';
 
 
-angular.module('core').controller('HomeController', ['$scope', '$stateParams', 'Authentication', 'Activities', 'CoreService', 'NutritionProfile', 'Progress', 'ThermometerChartService', '$modal', 'CoreDialogsService', '$location', 'CoreUtilities',
-	function($scope, $stateParams, Authentication, Activities, CoreService, NutritionProfile, Progress, ThermometerChartService, $modal, CoreDialogsService, $location, CoreUtilities) {
-		// This provides Authentication context.
-		$scope.authentication = Authentication;
+angular.module('dashboard').controller('DashboardController', ['$scope', '$stateParams', 'Authentication', 'Activities', 'CoreService', 'NutritionProfile', 'Progress', 'ThermometerChartService', '$modal', 'CoreDialogsService', '$location', 'CoreUtilities',
+    function($scope, $stateParams, Authentication, Activities, CoreService, NutritionProfile, Progress, ThermometerChartService, $modal, CoreDialogsService, $location, CoreUtilities) {
+        // This provides Authentication context.
+        $scope.authentication = Authentication;
         window.scope = $scope;
         $scope.plan = {};
 
@@ -285,7 +285,7 @@ angular.module('core').controller('HomeController', ['$scope', '$stateParams', '
 //        });
 
         $scope.planInputChange = function(newValue){
-           // $scope.plan.planDateNonUtc = newValue;
+            // $scope.plan.planDateNonUtc = newValue;
             $scope.planDateForDb = $scope.plan.planDateNonUtc.getMonth() + '_' + $scope.plan.planDateNonUtc.getDate() + '_' + $scope.plan.planDateNonUtc.getFullYear();
             $scope.planDateDisplay = ($scope.plan.planDateNonUtc.getMonth() + 1) + '/' + $scope.plan.planDateNonUtc.getDate() + '/' + $scope.plan.planDateNonUtc.getFullYear();
             $scope.planDateForCreate = getPlanDateAsConcat($scope.plan.planDateNonUtc.getFullYear(), $scope.plan.planDateNonUtc.getMonth(), $scope.plan.planDateNonUtc.getDate());
@@ -444,15 +444,15 @@ angular.module('core').controller('HomeController', ['$scope', '$stateParams', '
 
                 if (data.nutritionPlan){
                     var plan = data.nutritionPlan;
-                   for (var nMeal = 0; nMeal < plan.meals.length; nMeal++){
+                    for (var nMeal = 0; nMeal < plan.meals.length; nMeal++){
                         doMealTotaling(plan.meals[nMeal]);
-                   }
+                    }
 
-                   calculatePlanTotalMacros(plan);
+                    calculatePlanTotalMacros(plan);
 
-                   $scope.nutritionPlan = plan;
+                    $scope.nutritionPlan = plan;
 
-                   $scope.isUserAdmin = $scope.nutritionPlan.userRoles && $scope.nutritionPlan.userRoles.indexOf('admin') !== -1 ? true : false;
+                    $scope.isUserAdmin = $scope.nutritionPlan.userRoles && $scope.nutritionPlan.userRoles.indexOf('admin') !== -1 ? true : false;
 
                 }
                 else{
@@ -548,18 +548,18 @@ angular.module('core').controller('HomeController', ['$scope', '$stateParams', '
             config.data.json.deficit = deficitList;
             config.axis = {
                 "x":
-                    {
-                        type: 'category',
-                        categories: datesList
-                    },
+                {
+                    type: 'category',
+                    categories: datesList
+                },
                 "y":
+                {
+                    "label":
                     {
-                        "label":
-                            {
-                                "text":"",
-                                "position":"outer-middle"
-                            }
+                        "text":"",
+                        "position":"outer-middle"
                     }
+                }
             };
             config.data.types={"calories":"bar", "deficit": "bar"};
             config.size = {width: 450, height: 220};
@@ -578,7 +578,7 @@ angular.module('core').controller('HomeController', ['$scope', '$stateParams', '
             config.axis = {"y":{"label":{"text":"Daily Macros","position":"outer-middle"}}};
             config.data.types={"protein":"pie", "carbs": "pie", "fat": "pie"};
             config.size = {width: 190, height: 190};
-           // config.size = {width: 220, height: 220};
+            // config.size = {width: 220, height: 220};
             $scope.chart = c3.generate(config);
         };
 
@@ -767,7 +767,7 @@ angular.module('core').controller('HomeController', ['$scope', '$stateParams', '
 
 
 
-	}
+    }
 
 
 ]);
