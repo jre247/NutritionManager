@@ -1,18 +1,46 @@
 <section data-ng-controller="HomeController">
 
+
+
+
     <div data-ng-if="nutritionProfile._id">
 
 
         <div class="visible-xs" style="display:inline-block;padding-top: 5px;">
-            <ng-include  src="'/modules/core/views/home.mobileSection.partial.html'"></ng-include>
+            <div>
+                <ng-include src="'/modules/core/views/home.mobileSection.partial.html'"></ng-include>
+                <!---->
+                <!--<div style="display:inline-block;float: left;margin-top: 3px;margin-right: 8px;" id="prevDay">-->
+                    <!--<button type="button" class="btn btn-default btn-sm" data-ng-click="prevDayClick();">-->
+                        <!--<span class="glyphicon glyphicon-chevron-left arrowBtn" ></span>-->
+                    <!--</button>-->
+                <!--</div>-->
+
+                <!--<p class="input-group" style="width:139px;" id="planDateForDay">-->
+                    <!--<input type="text" class="form-control" style="padding: 4px 8px;text-align: center;" id="planDate" datepicker-popup="{{format}}" data-ng-change="planInputChange(planDate)"  ng-model="inputModel.planDate"-->
+                           <!--is-open="opened" min-date="minDate" max-date="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />-->
+                              <!--<span class="input-group-btn">-->
+                                <!--<button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>-->
+                              <!--</span>-->
+                <!--</p>-->
+
+                <!--<div style="display:inline-block;margin-top: 3px;position: relative;bottom: 45px;right: 77px;float: right;" id="nextDay">-->
+
+                    <!--<button type="button" class="btn btn-default btn-sm" data-ng-click="nextDayClick();">-->
+                        <!--<span class="glyphicon glyphicon-chevron-right arrowBtn" />-->
+                    <!--</button>-->
+                <!--</div>-->
+            </div>
         </div>
+
+
 
         <div class="hidden-xs" style="display:inline-block">
             <div class="dailyDashboard" style="width: 300px;display:inline-block;">
                 <div style="padding-top: 6px;">
 
-                    <ng-include  src="'/modules/core/views/home.dateToggle.partial.html'"></ng-include>
-
+                    <!--<ng-include  src="'/modules/core/views/home.dateToggle.partial.html'"></ng-include>-->
+                    <ng-include  src="'/modules/plans/views/planDateContent.client.view.html'"></ng-include>
                     <div style="border-bottom: 1px solid #eee;width:300px;">
                         <a data-ng-show="activityPlan" data-ng-href="#!/activities/{{activityPlan._id}}">
                             <h3 data-ng-show="planDayOfWeek">

@@ -6,6 +6,7 @@ angular.module('core').controller('HomeController', ['$scope', '$stateParams', '
 		// This provides Authentication context.
 		$scope.authentication = Authentication;
         window.scope = $scope;
+        $scope.plan = {};
 
         var additionalCaloriesExpended = 300;
         $scope.activityPlan = null;
@@ -164,11 +165,11 @@ angular.module('core').controller('HomeController', ['$scope', '$stateParams', '
             var year = sDateParam.substr(0, 4);
             var month = sDateParam.substr(4, 2);
             var day = sDateParam.substr(6, 2);
-            $scope.planDate = new Date(year, month, day);
+            $scope.plan.planDateNonUtc = new Date(year, month, day);
             $scope.planDateForDb = month + '_' + day + '_' + year;
             $scope.planDateForCreate = getPlanDateAsConcat(year, month, day);
             //$scope.planDateForDb = getPlanDateAsConcat(planDateYear, planDateMonth, planDateDay);
-            $scope.planDateDisplay = ($scope.planDate.getMonth() + 1) + '/' + $scope.planDate.getDate() + '/' + $scope.planDate.getFullYear();
+            $scope.planDateDisplay = ($scope.plan.planDateNonUtc.getMonth() + 1) + '/' + $scope.plan.planDateNonUtc.getDate() + '/' + $scope.plan.planDateNonUtc.getFullYear();
         };
 
         var initializePlanDate = function(){
@@ -182,7 +183,7 @@ angular.module('core').controller('HomeController', ['$scope', '$stateParams', '
                 var month = dt.getMonth();
                 var day = dt.getDate();
 
-                $scope.planDate = new Date(todaysDate);
+                $scope.plan.planDateNonUtc = new Date(todaysDate);
                 $scope.planDateForDb = month + '_' + day + '_' + year;
                 $scope.planDateForCreate = getPlanDateAsConcat(year, month, day);
                 $scope.planDateDisplay = (month + 1) + '/' + day + '/' + year;
@@ -202,11 +203,11 @@ angular.module('core').controller('HomeController', ['$scope', '$stateParams', '
             $scope.activityTypesDictionary.push(activityTypeDictModel);
         }
 
-        $scope.openPlanDate = function($event) {
+        $scope.open = function($event) {
             $event.preventDefault();
             $event.stopPropagation();
 
-            $scope.planDateOpened = true;
+            $scope.opened = true;
         };
 
 
@@ -238,9 +239,9 @@ angular.module('core').controller('HomeController', ['$scope', '$stateParams', '
             var startWeeklyDay = startWeeklyDt.getDate();
             var startWeeklyDateMili = (new Date(startWeeklyYear, startWeeklyMonth, startWeeklyDay)).getTime();
 
-            var currentWeeklyYear = $scope.planDate.getFullYear();
-            var currentWeeklyMonth = $scope.planDate.getMonth();
-            var currentWeeklyDay = $scope.planDate.getDate();
+            var currentWeeklyYear = $scope.plan.planDateNonUtc.getFullYear();
+            var currentWeeklyMonth = $scope.plan.planDateNonUtc.getMonth();
+            var currentWeeklyDay = $scope.plan.planDateNonUtc.getDate();
 
             var currentWeeklyDateMili = (new Date(currentWeeklyYear, currentWeeklyMonth, currentWeeklyDay)).getTime();
 
@@ -259,33 +260,61 @@ angular.module('core').controller('HomeController', ['$scope', '$stateParams', '
         };
 
         var setNewWeeklyStartDt = function(){
-            var dayOfWeek = $scope.planDate.getDay();
-            var year = $scope.planDate.getFullYear();
-            var month = $scope.planDate.getMonth();
-            var day = $scope.planDate.getDate();
+            var dayOfWeek = $scope.plan.planDateNonUtc.getDay();
+            var year = $scope.plan.planDateNonUtc.getFullYear();
+            var month = $scope.plan.planDateNonUtc.getMonth();
+            var day = $scope.plan.planDateNonUtc.getDate();
             day = day - dayOfWeek;
             startWeeklyDt = new Date((new Date(year, month, day)).toUTCString());
         };
 
-        $scope.planDateChanged = function(){
-            $scope.planDateForDb = $scope.planDate.getMonth() + '_' + $scope.planDate.getDate() + '_' + $scope.planDate.getFullYear();
-            $scope.planDateDisplay = ($scope.planDate.getMonth() + 1) + '/' + $scope.planDate.getDate() + '/' + $scope.planDate.getFullYear();
-            $scope.planDateForCreate = getPlanDateAsConcat($scope.planDate.getFullYear(), $scope.planDate.getMonth(), $scope.planDate.getDate());
+//        $scope.$watch("planDate", function(newValue) {
+//            if(newValue !== $scope.plan.planDateNonUtc) {
+//                $scope.planDateForDb = $scope.plan.planDateNonUtc.getMonth() + '_' + $scope.plan.planDateNonUtc.getDate() + '_' + $scope.plan.planDateNonUtc.getFullYear();
+//                $scope.planDateDisplay = ($scope.plan.planDateNonUtc.getMonth() + 1) + '/' + $scope.plan.planDateNonUtc.getDate() + '/' + $scope.plan.planDateNonUtc.getFullYear();
+//                $scope.planDateForCreate = getPlanDateAsConcat($scope.plan.planDateNonUtc.getFullYear(), $scope.plan.planDateNonUtc.getMonth(), $scope.plan.planDateNonUtc.getDate());
+//
+//                $scope.getDailyDashboardData(true, false);
+//
+//                var reloadWeeklyData = checkIfChangeWeeklyData();
+//
+//                if (reloadWeeklyData) {
+//                    $scope.getWeeklyDashboardData();
+//                }
+//            }
+//        });
 
-            $scope.getDailyDashboardData(true);
+        $scope.planInputChange = function(newValue){
+           // $scope.plan.planDateNonUtc = newValue;
+            $scope.planDateForDb = $scope.plan.planDateNonUtc.getMonth() + '_' + $scope.plan.planDateNonUtc.getDate() + '_' + $scope.plan.planDateNonUtc.getFullYear();
+            $scope.planDateDisplay = ($scope.plan.planDateNonUtc.getMonth() + 1) + '/' + $scope.plan.planDateNonUtc.getDate() + '/' + $scope.plan.planDateNonUtc.getFullYear();
+            $scope.planDateForCreate = getPlanDateAsConcat($scope.plan.planDateNonUtc.getFullYear(), $scope.plan.planDateNonUtc.getMonth(), $scope.plan.planDateNonUtc.getDate());
+
+            $scope.getDailyDashboardData(true, false);
 
             var reloadWeeklyData = checkIfChangeWeeklyData();
 
             if(reloadWeeklyData){
                 $scope.getWeeklyDashboardData();
             }
+
+            $scope.opened = false;
         };
 
+        $scope.toggleDayClick = function(direction, isMobile){
+            if(direction == 'nextDay'){
+                scope.nextDayClick(isMobile);
+            }
+            else{
+                scope.prevDayClick(isMobile);
+            }
+        }
+
         $scope.nextDayClick = function(isMobile){
-            $scope.planDate = new Date($scope.planDate.setDate($scope.planDate.getDate() + 1));
-            $scope.planDateForDb = $scope.planDate.getMonth() + '_' + $scope.planDate.getDate() + '_' + $scope.planDate.getFullYear();
-            $scope.planDateForCreate = getPlanDateAsConcat($scope.planDate.getFullYear(), $scope.planDate.getMonth(), $scope.planDate.getDate());
-            $scope.planDateDisplay = ($scope.planDate.getMonth() + 1) + '/' + $scope.planDate.getDate() + '/' + $scope.planDate.getFullYear();
+            $scope.plan.planDateNonUtc = new Date($scope.plan.planDateNonUtc.setDate($scope.plan.planDateNonUtc.getDate() + 1));
+            $scope.planDateForDb = $scope.plan.planDateNonUtc.getMonth() + '_' + $scope.plan.planDateNonUtc.getDate() + '_' + $scope.plan.planDateNonUtc.getFullYear();
+            $scope.planDateForCreate = getPlanDateAsConcat($scope.plan.planDateNonUtc.getFullYear(), $scope.plan.planDateNonUtc.getMonth(), $scope.plan.planDateNonUtc.getDate());
+            $scope.planDateDisplay = ($scope.plan.planDateNonUtc.getMonth() + 1) + '/' + $scope.plan.planDateNonUtc.getDate() + '/' + $scope.plan.planDateNonUtc.getFullYear();
 
             $scope.getDailyDashboardData(true, isMobile);
 
@@ -297,10 +326,10 @@ angular.module('core').controller('HomeController', ['$scope', '$stateParams', '
         };
 
         $scope.prevDayClick = function(isMobile){
-            $scope.planDate = new Date($scope.planDate.setDate($scope.planDate.getDate() - 1));
-            $scope.planDateForDb = $scope.planDate.getMonth() + '_' + $scope.planDate.getDate() + '_' + $scope.planDate.getFullYear();
-            $scope.planDateForCreate = getPlanDateAsConcat($scope.planDate.getFullYear(), $scope.planDate.getMonth(), $scope.planDate.getDate());
-            $scope.planDateDisplay = ($scope.planDate.getMonth() + 1) + '/' + $scope.planDate.getDate() + '/' + $scope.planDate.getFullYear();
+            $scope.plan.planDateNonUtc = new Date($scope.plan.planDateNonUtc.setDate($scope.plan.planDateNonUtc.getDate() - 1));
+            $scope.planDateForDb = $scope.plan.planDateNonUtc.getMonth() + '_' + $scope.plan.planDateNonUtc.getDate() + '_' + $scope.plan.planDateNonUtc.getFullYear();
+            $scope.planDateForCreate = getPlanDateAsConcat($scope.plan.planDateNonUtc.getFullYear(), $scope.plan.planDateNonUtc.getMonth(), $scope.plan.planDateNonUtc.getDate());
+            $scope.planDateDisplay = ($scope.plan.planDateNonUtc.getMonth() + 1) + '/' + $scope.plan.planDateNonUtc.getDate() + '/' + $scope.plan.planDateNonUtc.getFullYear();
 
             $scope.getDailyDashboardData(true, isMobile);
 
@@ -409,7 +438,7 @@ angular.module('core').controller('HomeController', ['$scope', '$stateParams', '
 
             CoreService.getDailyDashboardData($scope.planDateForDb).then(function(data){
 
-                var dPlanDate = new Date($scope.planDate.getFullYear(), $scope.planDate.getMonth(), $scope.planDate.getDate());
+                var dPlanDate = new Date($scope.plan.planDateNonUtc.getFullYear(), $scope.plan.planDateNonUtc.getMonth(), $scope.plan.planDateNonUtc.getDate());
                 var planDateDayOfWeek = days[dPlanDate.getDay()];
                 $scope.planDayOfWeek = planDateDayOfWeek;
 
