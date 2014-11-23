@@ -501,17 +501,6 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
             );
         };
 
-
-
-        var checkIfNewUser = function(){
-            if ($stateParams.isNewUser && $stateParams.isNewUser == 'true'){
-                // Instance the tour
-               //startTour();
-               // tour.
-               // $scope.openTourDialog();
-            }
-        };
-
         var processReturnedPlan = function(){
             $scope.plan.planDateNonUtc = new Date($scope.plan.planDateYear, $scope.plan.planDateMonth, $scope.plan.planDateDay);
 
@@ -584,35 +573,36 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
         };
 
         var getPlanFromDb = function(year, month, day, planDateAsConcat){
-            $scope.nutritionProfile = NutritionProfile.get(function(){
-                if($stateParams.planDateForCreate){
-                    processNewPlan(year, month, day);
-                }
-                else if(planDateAsConcat){
-                    $scope.plan = Plans.get({
-                        planId: planDateAsConcat
-                    },function(plan){
-                        if(!plan || (plan && !plan.planDateYear)) {
-                            processNewPlan(year, month, day);
-                        }
-                        processReturnedPlan();
+            $scope.nutritionProfile = window.user.nutritionProfile;
 
-                        //$scope.isLoading = false;
-                    });
-                }
-                else if ($stateParams.planId) {
-                    $scope.plan = Plans.get({
-                        planId: $stateParams.planId
-                    }, function () {
-                        processReturnedPlan();
-                    });
-                }
-                else{
-                    processNewPlan();
-                }
+            if($stateParams.planDateForCreate){
+                processNewPlan(year, month, day);
+            }
+            else if(planDateAsConcat){
+                $scope.plan = Plans.get({
+                    planId: planDateAsConcat
+                },function(plan){
+                    if(!plan || (plan && !plan.planDateYear)) {
+                        processNewPlan(year, month, day);
+                    }
+                    processReturnedPlan();
 
-                $timeout(function(){$scope.setSorting();}, 100);
-            });
+                    //$scope.isLoading = false;
+                });
+            }
+            else if ($stateParams.planId) {
+                $scope.plan = Plans.get({
+                    planId: $stateParams.planId
+                }, function () {
+                    processReturnedPlan();
+                });
+            }
+            else{
+                processNewPlan();
+            }
+
+            $timeout(function(){$scope.setSorting();}, 100);
+
         };
 
         $scope.toggleDayClick = function(direction){

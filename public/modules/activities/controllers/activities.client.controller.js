@@ -429,13 +429,21 @@ angular.module('activities').controller('ActivitiesController', ['$scope', '$sta
             $scope.plan.notesVisible = false;
             $scope.plan.injuriesVisible = false;
 
-            $scope.nutritionProfile = NutritionProfile.get(function () {
-                $scope.calculateTotalCaloriesBurned();
+            $scope.nutritionProfile = window.user.nutritionProfile;
 
-                if(!suppressAutoSave) {
-                    $scope.saveActivityPlan();
-                }
-            });
+            //$scope.nutritionProfile = NutritionProfile.get(function () {
+//                $scope.calculateTotalCaloriesBurned();
+//
+//                if(!suppressAutoSave) {
+//                    $scope.saveActivityPlan();
+//                }
+            //});
+
+            $scope.calculateTotalCaloriesBurned();
+
+            if(!suppressAutoSave) {
+                $scope.saveActivityPlan();
+            }
 
             if(localStorage.tour_current_step && !localStorage.tour_end) {
                 tour.goTo(15);
@@ -459,34 +467,33 @@ angular.module('activities').controller('ActivitiesController', ['$scope', '$sta
         var getPlanFromDb = function(year, month, day, planDateAsConcat, suppressAutoSave){
             $scope.isLoading = true;
 
-            $scope.nutritionProfile = NutritionProfile.get(function(){
+            $scope.nutritionProfile = window.user.nutritionProfile;
 
-                if(planDateAsConcat){
-                    $scope.plan = Activities.get({
-                        activityId: planDateAsConcat
-                    },function(plan){
-                        if(!plan || (plan && !plan.planDateYear)) {
-                            processNewPlan(year, month, day, suppressAutoSave);
-                        }
-                        processReturnedPlan();
-                    });
-                }
-                else if ($stateParams.activityId) {
-                    $scope.plan = Activities.get({
-                        activityId: $stateParams.activityId
-                    }, function () {
-                        processReturnedPlan();
-                    });
-                }
-                else if($stateParams.planDateForCreate){
-                    processNewPlan(year, month, day);
-                }
-                else{
-                    processNewPlan();
-                }
+            if(planDateAsConcat){
+                $scope.plan = Activities.get({
+                    activityId: planDateAsConcat
+                },function(plan){
+                    if(!plan || (plan && !plan.planDateYear)) {
+                        processNewPlan(year, month, day, suppressAutoSave);
+                    }
+                    processReturnedPlan();
+                });
+            }
+            else if ($stateParams.activityId) {
+                $scope.plan = Activities.get({
+                    activityId: $stateParams.activityId
+                }, function () {
+                    processReturnedPlan();
+                });
+            }
+            else if($stateParams.planDateForCreate){
+                processNewPlan(year, month, day);
+            }
+            else{
+                processNewPlan();
+            }
 
-                $scope.isLoading = false;
-            });
+            $scope.isLoading = false;
         };
 
         $scope.planInputChange = function(){

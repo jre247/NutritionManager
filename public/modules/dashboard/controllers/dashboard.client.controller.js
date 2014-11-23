@@ -1,8 +1,8 @@
 'use strict';
 
 
-angular.module('dashboard').controller('DashboardController', ['$scope', '$stateParams', 'Authentication', 'Activities', 'CoreService', 'NutritionProfile', 'Progress', 'ThermometerChartService', '$modal', 'CoreDialogsService', '$location', 'CoreUtilities',
-    function($scope, $stateParams, Authentication, Activities, CoreService, NutritionProfile, Progress, ThermometerChartService, $modal, CoreDialogsService, $location, CoreUtilities) {
+angular.module('dashboard').controller('DashboardController', ['$scope', '$stateParams', 'Authentication', 'Activities', 'CoreService', 'NutritionProfile', 'Progress', 'ThermometerChartService', '$modal', 'CoreDialogsService', '$location', 'CoreUtilities', 'Users',
+    function($scope, $stateParams, Authentication, Activities, CoreService, NutritionProfile, Progress, ThermometerChartService, $modal, CoreDialogsService, $location, CoreUtilities, Users) {
         // This provides Authentication context.
         $scope.authentication = Authentication;
         window.scope = $scope;
@@ -11,6 +11,9 @@ angular.module('dashboard').controller('DashboardController', ['$scope', '$state
         var additionalCaloriesExpended = 300;
         $scope.activityPlan = null;
         $scope.nutritionPlan = null;
+
+        //$scope.nutritionProfile = UserDataFactory.getNutritionProfile();
+        $scope.nutritionProfile = window.user.nutritionProfile;
 
         $scope.nutritionProfileParameters = {
             showSubmitButton: false
@@ -69,44 +72,68 @@ angular.module('dashboard').controller('DashboardController', ['$scope', '$state
             });
 
             modalInstance.result.then(function (selected) {
-                var nutritionProfile = new NutritionProfile({
-                    proteinPercentageTarget: selected.nutritionProfile.proteinPercentageTarget,
-                    carbohydratesPercentageTarget: selected.nutritionProfile.carbohydratesPercentageTarget,
-                    fatPercentageTarget: selected.nutritionProfile.fatPercentageTarget,
-                    deficitTarget: selected.nutritionProfile.deficitTarget,
-                    age: selected.nutritionProfile.age,
-                    sex: selected.nutritionProfile.sex,
-                    weight: selected.nutritionProfile.weight,
-                    heightFeet: selected.nutritionProfile.heightFeet,
-                    heightInches: selected.nutritionProfile.heightInches,
-                    restingHeartRate: selected.nutritionProfile.restingHeartRate,
-                    bodyFatPercentage: selected.nutritionProfile.bodyFatPercentage
-                });
-                nutritionProfile.$save(function(response) {
-                    $scope.nutritionProfile = response;
-                    startTour();
-                }, function(errorResponse) {
-                    $scope.error = errorResponse.data.message;
-                });
+                if(window.user) {
+                    var userToSave = new Users(window.user);
+
+                    var nutritionProfile = {
+                        proteinPercentageTarget: selected.nutritionProfile.proteinPercentageTarget,
+                        carbohydratesPercentageTarget: selected.nutritionProfile.carbohydratesPercentageTarget,
+                        fatPercentageTarget: selected.nutritionProfile.fatPercentageTarget,
+                        deficitTarget: selected.nutritionProfile.deficitTarget,
+                        age: selected.nutritionProfile.age,
+                        sex: selected.nutritionProfile.sex,
+                        weight: selected.nutritionProfile.weight,
+                        heightFeet: selected.nutritionProfile.heightFeet,
+                        heightInches: selected.nutritionProfile.heightInches,
+                        restingHeartRate: selected.nutritionProfile.restingHeartRate,
+                        bodyFatPercentage: selected.nutritionProfile.bodyFatPercentage
+                    };
+
+                    userToSave.nutritionProfile = nutritionProfile;
+
+                    userToSave.$update(function (data) {
+                        $scope.nutritionProfile = data.nutritionProfile;
+                        Authentication.user = user;
+                        Authentication.user.nutritionProfile.isCreate = false;
+                        $scope.nutritionProfile.isCreate = false;
+                        window.user = user;
+                        $scope.success = true;
+
+                        startTour();
+
+                        $timeout(function () {
+                            $scope.success = false;
+                        }, 3000);
+                    }, function (errorResponse) {
+                        $scope.error = errorResponse.data.message;
+                    });
+                }
+
+
+
+//                var nutritionProfile = new NutritionProfile({
+//                    proteinPercentageTarget: selected.nutritionProfile.proteinPercentageTarget,
+//                    carbohydratesPercentageTarget: selected.nutritionProfile.carbohydratesPercentageTarget,
+//                    fatPercentageTarget: selected.nutritionProfile.fatPercentageTarget,
+//                    deficitTarget: selected.nutritionProfile.deficitTarget,
+//                    age: selected.nutritionProfile.age,
+//                    sex: selected.nutritionProfile.sex,
+//                    weight: selected.nutritionProfile.weight,
+//                    heightFeet: selected.nutritionProfile.heightFeet,
+//                    heightInches: selected.nutritionProfile.heightInches,
+//                    restingHeartRate: selected.nutritionProfile.restingHeartRate,
+//                    bodyFatPercentage: selected.nutritionProfile.bodyFatPercentage
+//                });
+//                nutritionProfile.$save(function(response) {
+//                    $scope.nutritionProfile = response;
+//                    startTour();
+//                }, function(errorResponse) {
+//                    $scope.error = errorResponse.data.message;
+//                });
             }, function () {
                 //$log.info('Modal dismissed at: ' + new Date());
             });
         };
-
-
-        $scope.nutritionProfile = NutritionProfile.get(function (data) {
-            if(data.age && data.heightFeet && data.sex) {
-                $scope.bmr = CoreUtilities.calculateBmr($scope.nutritionProfile);
-
-                $scope.getDailyDashboardData();
-
-                $scope.getWeeklyDashboardData();
-            }
-            else{
-                createNutritionProfileWithDialog();
-            }
-        });
-
 
         $scope.weeklyDashboardView = 'charts';
         $scope.dailyDashboardView = 'dailyCharts';
@@ -268,22 +295,6 @@ angular.module('dashboard').controller('DashboardController', ['$scope', '$state
             startWeeklyDt = new Date((new Date(year, month, day)).toUTCString());
         };
 
-//        $scope.$watch("planDate", function(newValue) {
-//            if(newValue !== $scope.plan.planDateNonUtc) {
-//                $scope.planDateForDb = $scope.plan.planDateNonUtc.getMonth() + '_' + $scope.plan.planDateNonUtc.getDate() + '_' + $scope.plan.planDateNonUtc.getFullYear();
-//                $scope.planDateDisplay = ($scope.plan.planDateNonUtc.getMonth() + 1) + '/' + $scope.plan.planDateNonUtc.getDate() + '/' + $scope.plan.planDateNonUtc.getFullYear();
-//                $scope.planDateForCreate = getPlanDateAsConcat($scope.plan.planDateNonUtc.getFullYear(), $scope.plan.planDateNonUtc.getMonth(), $scope.plan.planDateNonUtc.getDate());
-//
-//                $scope.getDailyDashboardData(true, false);
-//
-//                var reloadWeeklyData = checkIfChangeWeeklyData();
-//
-//                if (reloadWeeklyData) {
-//                    $scope.getWeeklyDashboardData();
-//                }
-//            }
-//        });
-
         $scope.planInputChange = function(newValue){
             // $scope.plan.planDateNonUtc = newValue;
             $scope.planDateForDb = $scope.plan.planDateNonUtc.getMonth() + '_' + $scope.plan.planDateNonUtc.getDate() + '_' + $scope.plan.planDateNonUtc.getFullYear();
@@ -308,7 +319,7 @@ angular.module('dashboard').controller('DashboardController', ['$scope', '$state
             else{
                 scope.prevDayClick(isMobile);
             }
-        }
+        };
 
         $scope.nextDayClick = function(isMobile){
             $scope.plan.planDateNonUtc = new Date($scope.plan.planDateNonUtc.setDate($scope.plan.planDateNonUtc.getDate() + 1));
@@ -434,10 +445,7 @@ angular.module('dashboard').controller('DashboardController', ['$scope', '$state
 
 
         $scope.getDailyDashboardData = function(isUpdate, isMobile) {
-
-
             CoreService.getDailyDashboardData($scope.planDateForDb).then(function(data){
-
                 var dPlanDate = new Date($scope.plan.planDateNonUtc.getFullYear(), $scope.plan.planDateNonUtc.getMonth(), $scope.plan.planDateNonUtc.getDate());
                 var planDateDayOfWeek = days[dPlanDate.getDay()];
                 $scope.planDayOfWeek = planDateDayOfWeek;
@@ -523,6 +531,19 @@ angular.module('dashboard').controller('DashboardController', ['$scope', '$state
                     tour.goTo(tourStep);
                 }
             });
+        };
+
+        $scope.initializeDashboardData = function(){
+            if(!$scope.nutritionProfile.isCreate && $scope.nutritionProfile.age && $scope.nutritionProfile.heightFeet && $scope.nutritionProfile.sex) {
+                $scope.bmr = CoreUtilities.calculateBmr($scope.nutritionProfile);
+
+                $scope.getDailyDashboardData();
+
+                $scope.getWeeklyDashboardData();
+            }
+            else{
+                createNutritionProfileWithDialog();
+            }
         };
 
         var showWeeklyCaloriesDeficitChart = function() {
@@ -673,22 +694,6 @@ angular.module('dashboard').controller('DashboardController', ['$scope', '$state
         };
 
         //TODO: move into service
-//        $scope.calculateDeficit = function(nutritionPlan, activityPlan){
-//            if(nutritionPlan) {
-//                var caloriesOut = additionalCaloriesExpended + $scope.bmr;
-//
-//                if (activityPlan){
-//                    caloriesOut += activityPlan.totalCaloriesBurned;
-//
-//                }
-//
-//                var caloriesIn = nutritionPlan.totalPlanCalories;
-//
-//                return -(caloriesIn - caloriesOut);
-//            }
-//        };
-
-        //TODO: move into service
         var doMealTotaling = function(meal){
             var carbsTotal = 0, fatTotal = 0, proteinTotal = 0, caloriesTotal = 0, sodiumTotal = 0;
 
@@ -731,42 +736,6 @@ angular.module('dashboard').controller('DashboardController', ['$scope', '$state
             plan.totalPlanFatAsPercent = (fatTotal / macroTotals) * 100;
             plan.totalPlanProteinAsPercent = (proteinTotal / macroTotals) * 100;
         };
-
-        //BMR for Men = 66 + (13.8 x weight in kg.) + (5 x height in cm) - (6.8 x age in years)
-        //BMR for Women = 655 + (9.6 x weight in kg.) + (1.8 x height in cm) - (4.7 x age in years).
-//        var calculateBmr = function(){
-//            var age = $scope.nutritionProfile.age;
-//            var weightInLbs = $scope.nutritionProfile.weight;
-//            var heightFeet = $scope.nutritionProfile.heightFeet;
-//            var heightInches = $scope.nutritionProfile.heightInches;
-//            var totalHeight = (heightFeet * 12) + heightInches;
-//            var gender = $scope.nutritionProfile.sex;
-//
-//            //convert weight from lbs to kg:
-//            // kg = (weight in lbs) * .454
-//            var weightInKg = weightInLbs * .454;
-//
-//            //convert height from inches to cms
-//            //height in cms = (height in inches * 2.54)
-//            var heightInCms = totalHeight * 2.54
-//
-//            var bmr = 0;
-//
-//            //BMR for Men = 66.47 + (13.75 x weight in kg.) + (5 x height in cm) - (6.75 x age in years)
-//            if(gender == "Male"){
-//                bmr = 66.47 + (13.75 * weightInKg) + (5 * heightInCms) - (6.75 * age);
-//            }
-//            //BMR for Women = 655 + (9.6 x weight in kg.) + (1.8 x height in cm) - (4.7 x age in years).
-//            else{
-//                bmr = 655.09 + (9.56 * weightInKg) + (1.84 * heightInCms) - (4.67 * age);
-//            }
-//
-//            return bmr;
-//        };
-
-
-
-
     }
 
 

@@ -6,6 +6,7 @@
 var mongoose = require('mongoose'),
 	passport = require('passport'),
 	User = mongoose.model('User'),
+    BodyStats = mongoose.model('BodyStats'),
 	_ = require('lodash');
 
 /**
@@ -92,6 +93,45 @@ exports.signin = function(req, res, next) {
 	})(req, res, next);
 };
 
+var createDefaultBodyStat = function(user, res){
+    var nutritionProfile = user._doc.nutritionProfile;
+
+    //create new Body Stat for today (so user has at least one by default)
+    var planDateAsString = (new Date()).toUTCString();
+    var planDate = new Date(planDateAsString);
+
+    var planSplit = planDate.toISOString().substr(0, 10).split('-');
+    var planDateYear = parseInt(planSplit[0]);
+    var planDateMonth = parseInt(planSplit[1]) - 1;
+    var planDateDay = parseInt(planSplit[2]);
+
+    var plan = new BodyStats({
+        planDateForDB: planDateAsString,
+        planDateNonUtc: planDateAsString,
+        planDateYear: planDateYear,
+        planDateMonth: planDateMonth,
+        planDateDay: planDateDay,
+        planDateAsMili: planDate.getTime(),
+        planDateAsConcat: parseInt(planDateYear + '' + (planDateMonth < 10 ? '0' + planDateMonth : planDateMonth) + '' + (planDateDay < 10 ? '0' + planDateDay : planDateDay)),
+        weight: nutritionProfile.weight,
+        bodyFatPercentage: nutritionProfile.bodyFatPercentage,
+        user: user,
+        userRoles: user.roles
+       // templateMeals: req.templateMeals,
+        //hideWeightOnHomeScreen: req.hideWeightOnHomeScreen,
+        //activityLevel: req.activityLevel
+    });
+
+    plan.save(function(err) {
+        if (err) {
+            return res.send(400, {
+                message: getErrorMessage(err)
+            });
+        } else {
+            res.jsonp(user);
+        }
+    });
+};
 /**
  * Update user details
  */
@@ -119,7 +159,13 @@ exports.update = function(req, res) {
 					if (err) {
 						res.send(400, err);
 					} else {
-						res.jsonp(user);
+                        if(user.nutritionProfile.isCreate == false) {
+                            res.jsonp(user);
+                        }
+                        else {
+                            createDefaultBodyStat(user, res);
+                        }
+
 					}
 				});
 			}

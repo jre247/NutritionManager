@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('users').controller('AuthenticationController', ['$scope', '$http', '$location', 'Authentication',
-	function($scope, $http, $location, Authentication) {
+angular.module('users').controller('AuthenticationController', ['$scope', '$http', '$location', 'Authentication', 'UserDataFactory', 'NutritionProfile',
+	function($scope, $http, $location, Authentication, UserDataFactory, NutritionProfile) {
 		$scope.authentication = Authentication;
 
 		//If user is signed in then redirect back home
@@ -11,10 +11,20 @@ angular.module('users').controller('AuthenticationController', ['$scope', '$http
 			$http.post('/auth/signup', $scope.credentials).success(function(response) {
 				//If successful we assign the response to the global user model
 				$scope.authentication.user = response;
-                user = response;
-				//And redirect to the index page
-				$location.path('/dashboard');
-                //location.reload();
+                window.user = response;
+
+                //$scope.nutritionProfile = NutritionProfile.get(function (data) {
+                    //UserDataFactory.setNutritionProfile = data;
+                 //   window.nutritionProfile = data;
+                //    $scope.authentication.nutritionProfile = data;
+
+                    //And redirect to the index page
+                //    $location.path('/dashboard');
+                //});
+
+                $location.path('/dashboard');
+
+
 			}).error(function(response) {
 				$scope.error = response.message;
 			});
@@ -24,10 +34,19 @@ angular.module('users').controller('AuthenticationController', ['$scope', '$http
 			$http.post('/auth/signin', $scope.credentials).success(function(response) {
 				//If successful we assign the response to the global user model
 				$scope.authentication.user = response;
-                user = response;
-				//And redirect to the index page
+                window.user = response;
+
+//                $scope.nutritionProfile = NutritionProfile.get(function (data) {
+//                    //UserDataFactory.setNutritionProfile(data);
+//                    window.nutritionProfile = data;
+//                    $scope.authentication.nutritionProfile = data;
+//
+//                    //And redirect to the index page
+//                    $location.path('/dashboard');
+//                });
+
                 $location.path('/dashboard');
-                //location.reload();
+
 			}).error(function(response) {
 				$scope.error = response.message;
 			});

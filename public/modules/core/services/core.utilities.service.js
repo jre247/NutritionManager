@@ -17,7 +17,6 @@ angular.module(ApplicationConfiguration.applicationModuleName).service(
             filterMyFoods: filterMyFoods,
             calculateBmr: calculateBmr,
             calculateCaloriesOut: calculateCaloriesOut
-
         });
 
 
@@ -238,10 +237,10 @@ angular.module(ApplicationConfiguration.applicationModuleName).service(
             var carbsTotal = 0, fatTotal = 0, proteinTotal = 0, caloriesTotal = 0;
 
             for (var i = 0; i < plan.meals.length; i++){
-                carbsTotal += plan.meals[i].totalCarbohydrates;
-                fatTotal += plan.meals[i].totalFat;
-                proteinTotal += plan.meals[i].totalProtein;
-                caloriesTotal += plan.meals[i].totalCalories;
+                carbsTotal += plan.meals[i].totalCarbohydrates || 0;
+                fatTotal += plan.meals[i].totalFat || 0;
+                proteinTotal += plan.meals[i].totalProtein || 0;
+                caloriesTotal += plan.meals[i].totalCalories || 0;
             }
 
             plan.totalPlanCarbs = carbsTotal;

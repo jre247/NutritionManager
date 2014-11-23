@@ -45,64 +45,54 @@ exports.progressByID = function(req, res){
     var planDateDay = parseInt(split[2]);
     var planDateYear = parseInt(split[0]);
 
-    NutritionProfile.findOne({
-        user: req.user.id // Search Filters
-    }).exec(function (err, nutritionProfile) {
-        if (err) {
-            return res.send(400, {
-                message: getErrorMessage(err)
-            });
-        }
-        else {
-            if(nutritionProfile) {
-                Plan.findOne({
-                        'user': req.user.id,
-                        'planDateYear': planDateYear,
-                        'planDateMonth': planDateMonth,
-                        'planDateDay': planDateDay
-                       // 'planDateAsConcat':
-                    }
-                )
-                    .exec(function (err, plan) {
-                        if (err) return next(err);
+    var nutritionProfile = req.user.nutritionProfile;
 
-                        else {
-                            var bmr = calculateBmr(nutritionProfile);
-
-                            var singlePlan = plan;
-
-                            if(singlePlan) {
-                                for (var nMeal = 0; nMeal < singlePlan.meals.length; nMeal++) {
-                                    doMealTotaling(singlePlan.meals[nMeal]);
-                                }
-
-                                calculatePlanTotalMacros(singlePlan);
-
-                                Activity.findOne({
-                                    'user': req.user.id,
-                                    'planDateYear': planDateYear,
-                                    'planDateMonth': planDateMonth,
-                                    'planDateDay': planDateDay})
-                                    .exec(function (err, activity) {
-                                        if (err) return next(err);
-
-                                        else {
-                                            var deficit = calculateDeficit(singlePlan, activity, nutritionProfile, bmr);
-                                            plan.deficit = deficit;
-
-                                            res.jsonp(plan);
-                                        }
-
-                                    });
-                            }
-                            else{
-                                res.jsonp({});
-                            }
-                        }
-                    });
+    if(nutritionProfile) {
+        Plan.findOne({
+                'user': req.user.id,
+                'planDateYear': planDateYear,
+                'planDateMonth': planDateMonth,
+                'planDateDay': planDateDay
             }
-        }
-    });
+        )
+            .exec(function (err, plan) {
+                if (err) return next(err);
+
+                else {
+                    var bmr = calculateBmr(nutritionProfile);
+
+                    var singlePlan = plan;
+
+                    if(singlePlan) {
+                        for (var nMeal = 0; nMeal < singlePlan.meals.length; nMeal++) {
+                            doMealTotaling(singlePlan.meals[nMeal]);
+                        }
+
+                        calculatePlanTotalMacros(singlePlan);
+
+                        Activity.findOne({
+                            'user': req.user.id,
+                            'planDateYear': planDateYear,
+                            'planDateMonth': planDateMonth,
+                            'planDateDay': planDateDay})
+                            .exec(function (err, activity) {
+                                if (err) return next(err);
+
+                                else {
+                                    var deficit = calculateDeficit(singlePlan, activity, nutritionProfile, bmr);
+                                    plan.deficit = deficit;
+
+                                    res.jsonp(plan);
+                                }
+                            });
+                    }
+                    else{
+                        res.jsonp({});
+                    }
+                }
+            });
+    }
+
 };
 
 exports.list = function(req, res){

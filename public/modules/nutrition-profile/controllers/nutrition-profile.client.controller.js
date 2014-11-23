@@ -6,9 +6,11 @@
  */
 'use strict';
 
-angular.module('nutritionProfile').controller('NutritionProfileController', ['$scope', '$stateParams', '$location', 'Authentication', 'NutritionProfile', '$timeout', '$modal', 'NutritionProfileDialogService',
-    function($scope, $stateParams, $location, Authentication, NutritionProfile, $timeout, $modal, NutritionProfileDialogService) {
+angular.module('nutritionProfile').controller('NutritionProfileController', ['$scope', '$stateParams', '$location', 'Authentication', 'NutritionProfile', '$timeout', '$modal', 'NutritionProfileDialogService', 'Users',
+    function($scope, $stateParams, $location, Authentication, NutritionProfile, $timeout, $modal, NutritionProfileDialogService, Users) {
         window.scope = $scope;
+
+        var isNutritionProfileCreate;
 
         $scope.isAdvancedNutrientTargets = false;
         $scope.macrosRatioSelected = 0;
@@ -139,42 +141,42 @@ angular.module('nutritionProfile').controller('NutritionProfileController', ['$s
             return true;
         };
 
-        $scope.create = function() {
-            $scope.isMacrosValid = $scope.validateNutritionTargets();
-
-            if($scope.isMacrosValid) {
-                var nutritionProfile = new NutritionProfile({
-                    proteinPercentageTarget: $scope.nutritionProfile.proteinPercentageTarget,
-                    carbohydratesPercentageTarget: $scope.nutritionProfile.carbohydratesPercentageTarget,
-                    fatPercentageTarget: $scope.nutritionProfile.fatPercentageTarget,
-                    deficitTarget: $scope.nutritionProfile.deficitTarget,
-                    age: $scope.nutritionProfile.age,
-                    sex: $scope.nutritionProfile.sex,
-                    weight: $scope.nutritionProfile.weight,
-                    heightFeet: $scope.nutritionProfile.heightFeet,
-                    heightInches: $scope.nutritionProfile.heightInches,
-                    restingHeartRate: $scope.nutritionProfile.restingHeartRate,
-                    bodyFatPercentage: $scope.nutritionProfile.bodyFatPercentage,
-                    templateMeals: $scope.nutritionProfile.templateMeals,
-                    hideWeightOnHomeScreen: $scope.hideWeightOnHomeScreen,
-                    isAdvancedNutrientTargets: $scope.nutritionProfile.isAdvancedNutrientTargets,
-                    activityLevel: $scope.nutritionProfile.activityLevel
-                });
-                nutritionProfile.$save(function (response) {
-
-                    $scope.nutritionProfile = response;
-
-                    $scope.success = true;
-
-                    $timeout(function () {
-                        $scope.success = false;
-                    }, 3000);
-                }, function (errorResponse) {
-                    $scope.error = errorResponse.data.message;
-                });
-            }
-
-        };
+//        $scope.create = function() {
+//            $scope.isMacrosValid = $scope.validateNutritionTargets();
+//
+//            if($scope.isMacrosValid) {
+//                var nutritionProfile = new NutritionProfile({
+//                    proteinPercentageTarget: $scope.nutritionProfile.proteinPercentageTarget,
+//                    carbohydratesPercentageTarget: $scope.nutritionProfile.carbohydratesPercentageTarget,
+//                    fatPercentageTarget: $scope.nutritionProfile.fatPercentageTarget,
+//                    deficitTarget: $scope.nutritionProfile.deficitTarget,
+//                    age: $scope.nutritionProfile.age,
+//                    sex: $scope.nutritionProfile.sex,
+//                    weight: $scope.nutritionProfile.weight,
+//                    heightFeet: $scope.nutritionProfile.heightFeet,
+//                    heightInches: $scope.nutritionProfile.heightInches,
+//                    restingHeartRate: $scope.nutritionProfile.restingHeartRate,
+//                    bodyFatPercentage: $scope.nutritionProfile.bodyFatPercentage,
+//                    templateMeals: $scope.nutritionProfile.templateMeals,
+//                    hideWeightOnHomeScreen: $scope.hideWeightOnHomeScreen,
+//                    isAdvancedNutrientTargets: $scope.nutritionProfile.isAdvancedNutrientTargets,
+//                    activityLevel: $scope.nutritionProfile.activityLevel
+//                });
+//                nutritionProfile.$save(function (response) {
+//
+//                    $scope.nutritionProfile = response;
+//
+//                    $scope.success = true;
+//
+//                    $timeout(function () {
+//                        $scope.success = false;
+//                    }, 3000);
+//                }, function (errorResponse) {
+//                    $scope.error = errorResponse.data.message;
+//                });
+//            }
+//
+//        };
 
         $scope.update = function() {
             $scope.isMacrosValid = $scope.validateNutritionTargets(true);
@@ -182,11 +184,17 @@ angular.module('nutritionProfile').controller('NutritionProfileController', ['$s
             if($scope.isMacrosValid) {
                 var nutritionProfile = $scope.nutritionProfile;
 
-                if (!nutritionProfile._id) {
-                    $scope.create();
-                }
-                else {
-                    nutritionProfile.$update(function () {
+                if(window.user) {
+                    var userToSave = new Users(window.user);
+
+                    userToSave.nutritionProfile = nutritionProfile;
+
+                    userToSave.$update(function (data) {
+                        $scope.nutritionProfile = data.nutritionProfile;
+                        Authentication.user = user;
+                        Authentication.user.nutritionProfile.isCreate = false;
+                        $scope.nutritionProfile.isCreate = false;
+                        window.user = user;
                         $scope.success = true;
 
                         $timeout(function () {
@@ -196,6 +204,7 @@ angular.module('nutritionProfile').controller('NutritionProfileController', ['$s
                         $scope.error = errorResponse.data.message;
                     });
                 }
+
             }
 
         };
@@ -222,43 +231,40 @@ angular.module('nutritionProfile').controller('NutritionProfileController', ['$s
         };
 
         $scope.findOne = function () {
-            $scope.nutritionProfile = NutritionProfile.get({
-                userId: user ? user._id : null
-            }, function () {
-                if(!$scope.nutritionProfile){
-                    $scope.nutritionProfile = {};
-                    initializeBasicNutritionSettings();
+            $scope.nutritionProfile = window.user.nutritionProfile;
 
+            //if(!$scope.nutritionProfile){
+                //$scope.nutritionProfile = {};
+                //initializeBasicNutritionSettings();
+            //}
+
+
+            if(!$scope.nutritionProfile.templateMeals || $scope.nutritionProfile.templateMeals.length == 0){
+                $scope.nutritionProfile.templateMeals = [];
+
+                for(var m = 0; m < $scope.templateMeals.length; m++){
+                    $scope.nutritionProfile.templateMeals.push($scope.templateMeals[m]);
+                }
+            }
+
+            if(!$scope.nutritionProfile.isAdvancedNutrientTargets){
+                $scope.nutritionProfile.isAdvancedNutrientTargets = false;
+                $scope.nutrientTargetSettings = 'basic';
+
+                if(!$scope.nutritionProfile.activityLevel && $scope.nutritionProfile.activityLevel !== 0){
+                    $scope.nutritionProfile.activityLevel = 0;
                 }
 
-                if(!$scope.nutritionProfile.templateMeals || $scope.nutritionProfile.templateMeals.length == 0){
-                    $scope.nutritionProfile.templateMeals = [];
-
-                    for(var m = 0; m < $scope.templateMeals.length; m++){
-                        $scope.nutritionProfile.templateMeals.push($scope.templateMeals[m]);
-                    }
+                if(!$scope.nutritionProfile.deficitTarget){
+                    $scope.nutritionProfile.deficitTarget = 500;
                 }
 
-                if(!$scope.nutritionProfile.isAdvancedNutrientTargets){
-                    $scope.nutritionProfile.isAdvancedNutrientTargets = false;
-                    $scope.nutrientTargetSettings = 'basic';
-
-                    if(!$scope.nutritionProfile.activityLevel && $scope.nutritionProfile.activityLevel !== 0){
-                        $scope.nutritionProfile.activityLevel = 0;
-                    }
-
-                    if(!$scope.nutritionProfile.deficitTarget){
-                        $scope.nutritionProfile.deficitTarget = 500;
-                    }
-
-                    //initialize macros select list selection
-                    initializeMacrosSelectList();
-                }
-                else{
-                    $scope.nutrientTargetSettings = 'advanced';
-                }
-
-            });
+                //initialize macros select list selection
+                initializeMacrosSelectList();
+            }
+            else{
+                $scope.nutrientTargetSettings = 'advanced';
+            }
         };
 
         $scope.deleteTemplateMeal = function(templateMeal){
