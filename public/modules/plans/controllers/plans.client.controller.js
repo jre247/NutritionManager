@@ -540,7 +540,8 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
             //todo use ngRouter instead of this horrible method for extracting url param
             //setPlanDateFromUrlParam();
 
-            checkIfNewUser();
+            //checkIfNewUser();
+            $stateParams.planDateForCreate = "";
 
             createDefaultMealsTemplate();
 

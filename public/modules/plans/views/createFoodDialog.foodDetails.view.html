@@ -2,9 +2,11 @@
 
     <div>
         <div style="display:inline-block">
-            <button class="btn btn-primary" ng-click="searchFoodsNavClick()">Search Foods</button>
+            <button class="btn btn-primary" ng-click="searchFoodsNavClick()">
+                <span class="glyphicon glyphicon-arrow-left" ></span><span> Search Foods</span>
+            </button>
         </div>
-        <div style="display:inline-block;padding-left: 14%">
+        <div style="display:inline-block;padding-left: 14%;padding-top: 10px;">
             <h3 class="modal-title" >
                 <span style="font-weight: bold;" data-ng-bind="selected.foodToAdd.name"></span>
 
@@ -12,7 +14,7 @@
         </div>
     </div>
 </div>
-<div style="font-family: segui;padding-left: 10px;padding-bottom:10px;" >
+<div style="font-family: segui;padding-left: 10px;padding-bottom:10px;display: inline-block;" >
     <div style="display:inline-block">
         <div class="row">
             <div class="col-md-4" style="padding-top:15px;">

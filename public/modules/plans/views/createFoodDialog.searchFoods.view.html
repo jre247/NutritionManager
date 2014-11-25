@@ -1,6 +1,8 @@
 <div class="modal-header" style="font-family: segui;">
     <div style="display:inline-block">
-        <button class="btn btn-primary" ng-click="categoriesNavClick()">Add Food</button>
+        <button class="btn btn-primary" ng-click="categoriesNavClick()">
+            <span class="glyphicon glyphicon-arrow-left" ></span><span> Add Food</span>
+        </button>
     </div>
     <div style="display:inline-block; padding-left: 14%;" ng-show="searchFoodsCategorySelected !== 'suggestFoods'">
         <h3 class="modal-title">Search {{searchFoodsCategorySelected == 'myFoods' ? 'My' : 'All'}} Foods</h3>
