@@ -1,0 +1,29 @@
+<script type="text/ng-template" id="createFoodModalContent.html">
+    <div data-ng-show="foodDialogDisplaySection == 'categories'" class="modal-header" style="font-family: segui;">
+        <h3 class="modal-title">Add Food</h3>
+    </div>
+
+    <div data-ng-show="foodDialogDisplaySection == 'categories'" style="margin-top: 10px;">
+        <ng-include  src="'/modules/plans/views/createFoodDialog.categories.view.html'"></ng-include>
+    </div>
+    <div data-ng-show="foodDialogDisplaySection == 'searchFoods'" style="margin-top: 10px;">
+        <ng-include  src="'/modules/plans/views/createFoodDialog.searchFoods.view.html'"></ng-include>
+    </div>
+    <div data-ng-show="foodDialogDisplaySection == 'foodDetails'">
+        <ng-include  src="'/modules/plans/views/createFoodDialog.foodDetails.view.html'"></ng-include>
+    </div>
+    <div data-ng-show="foodDialogDisplaySection == 'suggestFoods'">
+        <ng-include  src="'/modules/plans/views/createFoodDialog.suggestFoods.view.html'"></ng-include>
+    </div>
+
+
+
+
+
+
+    <div class="modal-footer">
+        <button class="btn btn-primary" data-ng-show="!showCreateMealSection" ng-click="ok()">OK</button>
+        <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+    </div>
+</script>
+

@@ -862,82 +862,7 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
             }
         };
 
-        var getSuggestedFoods = function(){
-            var proteinTarget = $scope.nutritionProfile.proteinPercentageTarget;
-            var carbsTarget = $scope.nutritionProfile.carbohydratesPercentageTarget;
-            var fatTarget = $scope.nutritionProfile.fatPercentageTarget;
-            var planTotalCalories = $scope.plan.totalPlanCalories;
 
-            var currentDeficit = $scope.currentDeficit;
-            var deficitTarget = $scope.nutritionProfile.deficitTarget;
-            var currentCaloriesIn = $scope.plan.totalPlanCalories;
-
-            var caloriesTarget = (currentDeficit - deficitTarget) + currentCaloriesIn;
-
-            var suggestedFoodsAry = [];
-
-            for (var i = 0; i < $scope.allFoods.length; i++) {
-                var foodToCheck = $scope.allFoods[i];
-                var score = 0;
-
-                if(foodToCheck.type !== '12' &&
-                  foodToCheck.type !== '6') {
-                    var macrosTotal = ($scope.plan.totalPlanFat + foodToCheck.fat) +
-                        ($scope.plan.totalPlanProtein + foodToCheck.protein) +
-                        ($scope.plan.totalPlanCarbs + foodToCheck.carbohydrates);
-
-                    var newProteinTarget = (($scope.plan.totalPlanProtein + foodToCheck.protein) / macrosTotal) * 100;
-                    var newCarbsTarget = (($scope.plan.totalPlanCarbs + foodToCheck.carbohydrates) / macrosTotal) * 100;
-                    var newFatTarget = (($scope.plan.totalPlanFat + foodToCheck.fat) / macrosTotal) * 100;
-                    var newCaloriesTarget = planTotalCalories + foodToCheck.calories;
-
-                    var caloriesTargetDiff = (caloriesTarget - newCaloriesTarget) / caloriesTarget;
-                    var proteinTargetDiff = (proteinTarget - newProteinTarget) / proteinTarget;
-                    var carbsTargetDiff = (carbsTarget - newCarbsTarget) / carbsTarget;
-                    var fatTargetDiff = (fatTarget - newFatTarget) / fatTarget;
-
-                    if (caloriesTargetDiff < 0) {
-                        caloriesTargetDiff = -caloriesTargetDiff;
-                    }
-                    if (proteinTargetDiff < 0) {
-                        proteinTargetDiff = -proteinTargetDiff;
-                    }
-                    if (carbsTargetDiff < 0) {
-                        carbsTargetDiff = -carbsTargetDiff;
-                    }
-                    if (fatTargetDiff < 0) {
-                        fatTargetDiff = -fatTargetDiff;
-                    }
-
-                    score = (caloriesTargetDiff * 3) + proteinTargetDiff + carbsTargetDiff + fatTargetDiff;
-
-                    foodToCheck.score = score;
-
-                    suggestedFoodsAry.push(foodToCheck);
-                }
-            }
-
-            suggestedFoodsAry.sort(function compare(a,b) {
-                if (a.score < b.score)
-                    return -1;
-                if (a.score > b.score)
-                    return 1;
-                return 0;
-            });
-
-            var suggestedFoodsTop5 = [];
-
-            var length = suggestedFoodsAry.length > 5 ? 5 : suggestedFoodsAry.length;
-            for(i = 0; i < length; i++){
-                var suggestedFood = suggestedFoodsAry[i];
-
-                suggestedFoodsTop5.push(suggestedFood);
-            }
-
-            return suggestedFoodsTop5;
-
-
-        };
 
         $scope.nextPlans =function(){
             $scope.isMoreLoading = true;
@@ -1068,6 +993,9 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
                     },
                     userFoods: function(){
                         return $scope.allFoods;
+                    },
+                    nutritionPlan: function(){
+                        return $scope.plan;
                     }
                 }
             });

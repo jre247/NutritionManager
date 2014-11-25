@@ -1,0 +1,103 @@
+<div class="modal-header" style="font-family: segui;">
+    <div style="display:inline-block">
+        <button class="btn btn-primary" ng-click="categoriesNavClick()">Add Food</button>
+    </div>
+    <div style="display:inline-block; padding-left: 14%;" ng-show="searchFoodsCategorySelected !== 'suggestFoods'">
+        <h3 class="modal-title">Search {{searchFoodsCategorySelected == 'myFoods' ? 'My' : 'All'}} Foods</h3>
+    </div>
+    <div style="display:inline-block; padding-left: 14%;" ng-show="searchFoodsCategorySelected === 'suggestFoods'">
+        <h3 class="modal-title">Suggested Foods</h3>
+    </div>
+</div>
+
+<div>
+    <div ng-show="searchFoodsCategorySelected !== 'suggestFoods'" style="margin-bottom: 10px;">
+
+        <div style="vertical-align: top;display:inline-block; padding-left: 10px;padding-top: 10px;">
+            <input placeholder="Enter Food Name" style="width: 140px;" type="text" data-ng-change="foodInputChange()" data-ng-model="selected.foodSearchTxt"  />
+            <a class="ActionLink clearInputLink" data-ng-click="clearFoodInput()">Clear</a>
+        </div>
+
+    </div>
+
+
+    <div ng-show="searchFoodsCategorySelected !== 'suggestFoods'" class="searchLetters hidden-xs" style="padding-left: 10px;padding-top: 10px;">
+        <span data-ng-click="findFoodsByLetter('a')">A</span>
+        <span data-ng-click="findFoodsByLetter('b')">B</span>
+        <span data-ng-click="findFoodsByLetter('c')">C</span>
+        <span data-ng-click="findFoodsByLetter('d')">D</span>
+        <span data-ng-click="findFoodsByLetter('e')">E</span>
+        <span data-ng-click="findFoodsByLetter('f')">F</span>
+        <span data-ng-click="findFoodsByLetter('g')">G</span>
+        <span data-ng-click="findFoodsByLetter('h')">H</span>
+        <span data-ng-click="findFoodsByLetter('i')">I</span>
+        <span data-ng-click="findFoodsByLetter('j')">J</span>
+        <span data-ng-click="findFoodsByLetter('k')">K</span>
+        <span data-ng-click="findFoodsByLetter('l')">L</span>
+        <span data-ng-click="findFoodsByLetter('m')">M</span>
+        <span data-ng-click="findFoodsByLetter('n')">N</span>
+        <span data-ng-click="findFoodsByLetter('o')">O</span>
+        <span data-ng-click="findFoodsByLetter('p')">P</span>
+        <span data-ng-click="findFoodsByLetter('q')">Q</span>
+        <span data-ng-click="findFoodsByLetter('r')">R</span>
+        <span data-ng-click="findFoodsByLetter('s')">S</span>
+        <span data-ng-click="findFoodsByLetter('t')">T</span>
+        <span data-ng-click="findFoodsByLetter('u')">U</span>
+        <span data-ng-click="findFoodsByLetter('v')">V</span>
+        <span data-ng-click="findFoodsByLetter('w')">W</span>
+        <span data-ng-click="findFoodsByLetter('x')">X</span>
+        <span data-ng-click="findFoodsByLetter('y')">Y</span>
+        <span data-ng-click="findFoodsByLetter('z')">Z</span>
+    </div>
+
+    <div ng-show="searchFoodsCategorySelected !== 'suggestFoods'" class="searchLetters visible-xs mobileSearchLetters" style="padding-left: 10px;padding-top: 10px;">
+        <span data-ng-click="findFoodsByLetter('a')">A</span>
+        <span data-ng-click="findFoodsByLetter('b')">B</span>
+        <span data-ng-click="findFoodsByLetter('c')">C</span>
+        <span data-ng-click="findFoodsByLetter('d')">D</span>
+        <span data-ng-click="findFoodsByLetter('e')">E</span>
+        <span data-ng-click="findFoodsByLetter('f')">F</span>
+        <span data-ng-click="findFoodsByLetter('g')">G</span>
+        <span data-ng-click="findFoodsByLetter('h')">H</span>
+        <span data-ng-click="findFoodsByLetter('i')">I</span>
+        <span data-ng-click="findFoodsByLetter('j')">J</span>
+        <span data-ng-click="findFoodsByLetter('k')">K</span>
+        <span data-ng-click="findFoodsByLetter('l')">L</span>
+        <span data-ng-click="findFoodsByLetter('m')">M</span>
+        <span data-ng-click="findFoodsByLetter('n')">N</span>
+        <span data-ng-click="findFoodsByLetter('o')">O</span>
+        <span data-ng-click="findFoodsByLetter('p')">P</span>
+        <span data-ng-click="findFoodsByLetter('q')">Q</span>
+        <span data-ng-click="findFoodsByLetter('r')">R</span>
+        <span data-ng-click="findFoodsByLetter('s')">S</span>
+        <span data-ng-click="findFoodsByLetter('t')">T</span>
+        <span data-ng-click="findFoodsByLetter('u')">U</span>
+        <span data-ng-click="findFoodsByLetter('v')">V</span>
+        <span data-ng-click="findFoodsByLetter('w')">W</span>
+        <span data-ng-click="findFoodsByLetter('x')">X</span>
+        <span data-ng-click="findFoodsByLetter('y')">Y</span>
+        <span data-ng-click="findFoodsByLetter('z')">Z</span>
+    </div>
+
+    <div data-ng-show="!isLoading" class="list-group" style="margin-bottom: 0px; !important;" data-ng-repeat="food in foods">
+        <a class="list-group-item actionRow" data-ng-click="foodSelectionChange(food)">
+            <span data-ng-bind="food.name"></span>
+
+        </a>
+    </div>
+
+    <div data-ng-show="isLoading" style="height: 336px;">
+        <img width="25" height="25" src="/modules/core/img/loaders/loader.gif">
+    </div>
+
+    <div>
+        <span style="color:blue;padding-left:5px;" data-ng-show="!foods || foods.length == 0">There are no foods returned</span>
+    </div>
+
+    <div style="margin-top: 10px;display:inline-block;margin-right: 5px;" data-ng-show="foods && skipFoods > 0">
+        <a class="ActionLink" data-ng-click="prevFoods();">Previous</a>
+    </div>
+    <div style="margin-top: 10px;display:inline-block" data-ng-show="foods && foods.length == 8">
+        <a class="ActionLink" data-ng-click="nextFoods();">Next</a>
+    </div>
+</div>

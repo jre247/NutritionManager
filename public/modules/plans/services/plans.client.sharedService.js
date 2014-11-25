@@ -11,9 +11,7 @@ angular.module('plans').service(
         // Return public API.
         return({
             getActivityByDate: getActivityByDate,
-            //getPlanByDate: getPlanByDate,
             NotesModalInstanceCtrl: NotesModalInstanceCtrl,
-            SuggestionsModalInstanceCtrl: SuggestionsModalInstanceCtrl,
             CreateFoodModalInstanceCtrl: CreateFoodModalInstanceCtrl,
             ModalInstanceCtrl: ModalInstanceCtrl,
             fillFoodNutrients: fillFoodNutrients
@@ -145,14 +143,16 @@ angular.module('plans').service(
             return foodToFill;
         };
 
-        function CreateFoodModalInstanceCtrl($scope, $modalInstance, parentScope, meal, food, CoreUtilities, isCreateMeal, mealTypes, userFoods) {
+        function CreateFoodModalInstanceCtrl($scope, $modalInstance, parentScope, meal, food, CoreUtilities, isCreateMeal, mealTypes, userFoods, nutritionPlan) {
             $scope.foodToAdd = food;
             $scope.parentScope = parentScope;
-            $scope.meal = meal;
+            $scope.plan = nutritionPlan;
+            //$scope.meal = meal;
             $scope.isUpdate = food !== 'undefined' && food !== null && food !== 'null' && food !== undefined;
             $scope.servings = 1;
             window.scopeCreateFoodDialog = $scope;
-            $scope.showFoodDetails = $scope.isUpdate ? true : false;
+            $scope.foodDialogDisplaySection = $scope.isUpdate ? 'foodDetails' : 'categories';
+            $scope.searchFoodCategory = 'myFoods';
             $scope.foods = [];
             $scope.foodSearchTxt = null;
             $scope.CoreUtilities = CoreUtilities;
@@ -161,13 +161,43 @@ angular.module('plans').service(
             $scope.mealTypes = mealTypes;
             $scope.showCreateMealSection = isCreateMeal;
             $scope.userFoods = userFoods;
-            $scope.myFoodsChecked = false;
-            $scope.allFoodsChecked = true;
-            $scope.foodsRadioBtn = userFoods && userFoods.length > 0 ? 'myFoods' : 'allFoods';
+            //$scope.myFoodsChecked = false;
+            //$scope.allFoodsChecked = true;
+           // $scope.foodsRadioBtn = userFoods && userFoods.length > 0 ? 'myFoods' : 'allFoods';
+
             $scope.servingType = food ? food.servingType : 0;
             $scope.isLoading = false;
 
 
+            $scope.categoriesNavClick = function(){
+                $scope.foodDialogDisplaySection = 'categories';
+            };
+
+            $scope.myFoodsCategorySelected = function(){
+                $scope.searchFoodsCategorySelected = 'myFoods';
+                $scope.foodDialogDisplaySection = 'searchFoods';
+
+                $scope.getFoodsList('myFoods');
+            };
+
+            $scope.allFoodsCategorySelected = function(){
+                $scope.searchFoodsCategorySelected = 'allFoods';
+                $scope.foodDialogDisplaySection = 'searchFoods';
+
+                $scope.getFoodsList('allFoods');
+            };
+
+            $scope.suggestedFoodsCategorySelected = function(){
+                //$scope.foodDialogDisplaySection = 'suggestFoods';
+                $scope.searchFoodsCategorySelected = 'suggestFoods';
+                $scope.foodDialogDisplaySection = 'searchFoods';
+
+                $scope.getFoodsList('suggestFoods');
+            };
+
+            $scope.searchFoodsNavClick = function(){
+                $scope.foodDialogDisplaySection = 'searchFoods';
+            };
 
             $scope.servingTypeChange = function(){
                 $scope.selected.servings = 1;
@@ -380,7 +410,7 @@ angular.module('plans').service(
 
 
                 $scope.selected.foodToAdd = food;
-                $scope.showFoodDetails = true;
+                $scope.foodDialogDisplaySection = 'foodDetails';
 
                 $scope.skipFoods = 0;
                 $scope.findFoodsByFirstLetter = false;
@@ -416,7 +446,7 @@ angular.module('plans').service(
                 $scope.skipFoods = 0;
                 $scope.findFoodsByFirstLetter = false;
 
-                if($scope.foodsRadioBtn == 'myFoods'){
+                if($scope.searchFoodsCategorySelected == 'myFoods'){
                     $scope.foods = CoreUtilities.filterMyFoods($scope.findFoodsByFirstLetter, $scope.userFoods, $scope.selected.foodSearchTxt, $scope.skipFoods);
                 }
                 else{
@@ -428,18 +458,98 @@ angular.module('plans').service(
 
 
 
-            $scope.radioBtnCheckedChange = function(radioBtnValue){
+            $scope.getFoodsList = function(radioBtnValue){
                 $scope.skipFoods = 0;
                 $scope.findFoodsByFirstLetter = false;
-                $scope.foodsRadioBtn = radioBtnValue;
+               // $scope.foodsRadioBtn = radioBtnValue;
 
                 //TODO: put myFoods find in core utility
                 if(radioBtnValue == 'myFoods'){
                     $scope.foods = CoreUtilities.filterMyFoods($scope.findFoodsByFirstLetter, $scope.userFoods, $scope.selected.foodSearchTxt, $scope.skipFoods);
                 }
-                else{
+                else if(radioBtnValue == 'allFoods'){
                     $scope.updateFoodList();
                 }
+                else{
+                    $scope.foods = getSuggestedFoods();
+                }
+            };
+
+            var getSuggestedFoods = function(){
+                var proteinTarget = window.user.nutritionProfile.proteinPercentageTarget;
+                var carbsTarget = window.user.nutritionProfile.carbohydratesPercentageTarget;
+                var fatTarget = window.user.nutritionProfile.fatPercentageTarget;
+                var planTotalCalories = $scope.plan.totalPlanCalories;
+
+                var currentDeficit = $scope.currentDeficit;
+                var deficitTarget = window.user.nutritionProfile.deficitTarget;
+                var currentCaloriesIn = $scope.plan.totalPlanCalories;
+
+                var caloriesTarget = (currentDeficit - deficitTarget) + currentCaloriesIn;
+
+                var suggestedFoodsAry = [];
+
+                for (var i = 0; i < $scope.foods.length; i++) {
+                    var foodToCheck = $scope.foods[i];
+                    var score = 0;
+
+                    if(foodToCheck.type !== '12' &&
+                        foodToCheck.type !== '6') {
+                        var macrosTotal = ($scope.plan.totalPlanFat + foodToCheck.fat) +
+                            ($scope.plan.totalPlanProtein + foodToCheck.protein) +
+                            ($scope.plan.totalPlanCarbs + foodToCheck.carbohydrates);
+
+                        var newProteinTarget = (($scope.plan.totalPlanProtein + foodToCheck.protein) / macrosTotal) * 100;
+                        var newCarbsTarget = (($scope.plan.totalPlanCarbs + foodToCheck.carbohydrates) / macrosTotal) * 100;
+                        var newFatTarget = (($scope.plan.totalPlanFat + foodToCheck.fat) / macrosTotal) * 100;
+                        var newCaloriesTarget = planTotalCalories + foodToCheck.calories;
+
+                        var caloriesTargetDiff = (caloriesTarget - newCaloriesTarget) / caloriesTarget;
+                        var proteinTargetDiff = (proteinTarget - newProteinTarget) / proteinTarget;
+                        var carbsTargetDiff = (carbsTarget - newCarbsTarget) / carbsTarget;
+                        var fatTargetDiff = (fatTarget - newFatTarget) / fatTarget;
+
+                        if (caloriesTargetDiff < 0) {
+                            caloriesTargetDiff = -caloriesTargetDiff;
+                        }
+                        if (proteinTargetDiff < 0) {
+                            proteinTargetDiff = -proteinTargetDiff;
+                        }
+                        if (carbsTargetDiff < 0) {
+                            carbsTargetDiff = -carbsTargetDiff;
+                        }
+                        if (fatTargetDiff < 0) {
+                            fatTargetDiff = -fatTargetDiff;
+                        }
+
+                        score = (caloriesTargetDiff * 3) + proteinTargetDiff + carbsTargetDiff + fatTargetDiff;
+
+                        foodToCheck.score = score;
+
+                        suggestedFoodsAry.push(foodToCheck);
+                    }
+                }
+
+                suggestedFoodsAry.sort(function compare(a,b) {
+                    if (a.score < b.score)
+                        return -1;
+                    if (a.score > b.score)
+                        return 1;
+                    return 0;
+                });
+
+                var suggestedFoodsTop5 = [];
+
+                var length = suggestedFoodsAry.length > 5 ? 5 : suggestedFoodsAry.length;
+                for(i = 0; i < length; i++){
+                    var suggestedFood = suggestedFoodsAry[i];
+
+                    suggestedFoodsTop5.push(suggestedFood);
+                }
+
+                return suggestedFoodsTop5;
+
+
             };
 
 
@@ -546,93 +656,6 @@ angular.module('plans').service(
                 }, 100);
             }
         };
-
-
-        function SuggestionsModalInstanceCtrl($scope, $modalInstance, parentScope, $timeout, suggestedFoods, mealForSuggestion, CoreUtilities) {
-            $scope.parentScope = parentScope;
-            $scope.suggestedFoods = suggestedFoods;
-            $scope.mealForSuggestion = mealForSuggestion;
-            $scope.selectedFood = $scope.suggestedFoods[0];
-            $scope.CoreUtilities = CoreUtilities;
-
-
-
-            $scope.selectedFoodClick = function(suggestedFood){
-                $scope.selectedFood = suggestedFood;
-            };
-
-            $scope.ok = function () {
-                $scope.selectedFood.IsSuggested = true;
-                $scope.selectedFood.servings = 1;
-                $scope.selectedFood.isEditable = false;
-                $scope.selectedFood.foodId = $scope.selectedFood._id;
-
-                for(var j = 0; j < $scope.parentScope.allFoods.length; j++){
-                    if($scope.parentScope.allFoods[j]._id === $scope.selectedFood.foodId){
-                        var newSelectedFood = $scope.parentScope.allFoods[j];
-
-                        $scope.selectedFood.selectedFood =
-                        {
-                            calcium: newSelectedFood.calcium,
-                            calories: newSelectedFood.calories,
-                            carbohydrates: newSelectedFood.carbohydrates,
-                            cholesterol: newSelectedFood.cholesterol,
-                            fat: newSelectedFood.fat,
-                            fiber: newSelectedFood.fiber,
-                            foodId: newSelectedFood._id,
-                            grams: newSelectedFood.grams,
-                            iron: newSelectedFood.iron,
-                            name: newSelectedFood.name,
-                            protein: newSelectedFood.protein,
-                            saturatedFat: newSelectedFood.saturatedFat,
-                            sodium: newSelectedFood.sodium,
-                            sugar: newSelectedFood.sugar,
-                            transfat: newSelectedFood.transfat,
-                            type: newSelectedFood.type,
-                            vitaminA: newSelectedFood.vitaminA,
-                            vitaminC: newSelectedFood.vitaminC,
-                            servingGrams1: newSelectedFood.servingGrams1,
-                            servingGrams2: newSelectedFood.servingGrams2,
-                            servingDescription1: newSelectedFood.servingDescription1,
-                            servingDescription2: newSelectedFood.servingDescription2,
-                        };
-                    }
-                }
-
-                var isFoodFoundInMeal = false;
-
-                for(var m = 0; m < mealForSuggestion.foods.length; m++){
-                    var foodId = mealForSuggestion.foods[m]._id;
-
-                    if(foodId === $scope.selectedFood._id){
-                        isFoodFoundInMeal = true;
-                        mealForSuggestion.foods[m].servings += 1;
-                        mealForSuggestion.foods[m].calories += mealForSuggestion.foods[m].calories;
-                        mealForSuggestion.foods[m].IsSuggested = true;
-
-                        $timeout(function(){mealForSuggestion.foods[m].IsSuggested = false;}, 2000);
-                        break;
-                    }
-                }
-
-                if(!isFoodFoundInMeal) {
-                    mealForSuggestion.foods.push($scope.selectedFood);
-                }
-
-
-                $timeout(function(){$scope.selectedFood.IsSuggested = false;}, 2000);
-
-                $timeout(function(){$scope.parentScope.savePlan();}, 2000);
-
-                $modalInstance.close(mealForSuggestion);
-            };
-
-            $scope.cancel = function () {
-                $modalInstance.dismiss('cancel');
-            };
-        };
-
-
 
         function NotesModalInstanceCtrl($scope, $modalInstance, parentScope, planNotes) {
             $scope.notesToSave = null;
