@@ -585,7 +585,7 @@ angular.module('plans').service(
                     $scope.skipFoods = 0;
                 }
 
-                if($scope.foodsRadioBtn == 'myFoods'){
+                if($scope.searchFoodsCategorySelected == 'myFoods'){
                     $scope.foods = CoreUtilities.filterMyFoods($scope.findFoodsByFirstLetter, $scope.userFoods, $scope.selected.foodSearchTxt, $scope.skipFoods);
                 }
                 else{
