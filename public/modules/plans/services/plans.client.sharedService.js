@@ -272,7 +272,7 @@ angular.module('plans').service(
             $scope.nextFoods = function(){
                 $scope.skipFoods += 8;
 
-                if($scope.foodsRadioBtn == 'myFoods'){
+                if($scope.searchFoodsCategorySelected == 'myFoods'){
                     $scope.foods = CoreUtilities.filterMyFoods($scope.findFoodsByFirstLetter, $scope.userFoods, $scope.selected.foodSearchTxt, $scope.skipFoods);
                 }
                 else{
@@ -283,7 +283,7 @@ angular.module('plans').service(
             $scope.prevFoods = function(){
                 $scope.skipFoods -= 8;
 
-                if($scope.foodsRadioBtn == 'myFoods'){
+                if($scope.searchFoodsCategorySelected == 'myFoods'){
                     $scope.foods = CoreUtilities.filterMyFoods($scope.findFoodsByFirstLetter, $scope.userFoods, $scope.selected.foodSearchTxt, $scope.skipFoods);
                 }
                 else{
