@@ -141,43 +141,6 @@ angular.module('nutritionProfile').controller('NutritionProfileController', ['$s
             return true;
         };
 
-//        $scope.create = function() {
-//            $scope.isMacrosValid = $scope.validateNutritionTargets();
-//
-//            if($scope.isMacrosValid) {
-//                var nutritionProfile = new NutritionProfile({
-//                    proteinPercentageTarget: $scope.nutritionProfile.proteinPercentageTarget,
-//                    carbohydratesPercentageTarget: $scope.nutritionProfile.carbohydratesPercentageTarget,
-//                    fatPercentageTarget: $scope.nutritionProfile.fatPercentageTarget,
-//                    deficitTarget: $scope.nutritionProfile.deficitTarget,
-//                    age: $scope.nutritionProfile.age,
-//                    sex: $scope.nutritionProfile.sex,
-//                    weight: $scope.nutritionProfile.weight,
-//                    heightFeet: $scope.nutritionProfile.heightFeet,
-//                    heightInches: $scope.nutritionProfile.heightInches,
-//                    restingHeartRate: $scope.nutritionProfile.restingHeartRate,
-//                    bodyFatPercentage: $scope.nutritionProfile.bodyFatPercentage,
-//                    templateMeals: $scope.nutritionProfile.templateMeals,
-//                    hideWeightOnHomeScreen: $scope.hideWeightOnHomeScreen,
-//                    isAdvancedNutrientTargets: $scope.nutritionProfile.isAdvancedNutrientTargets,
-//                    activityLevel: $scope.nutritionProfile.activityLevel
-//                });
-//                nutritionProfile.$save(function (response) {
-//
-//                    $scope.nutritionProfile = response;
-//
-//                    $scope.success = true;
-//
-//                    $timeout(function () {
-//                        $scope.success = false;
-//                    }, 3000);
-//                }, function (errorResponse) {
-//                    $scope.error = errorResponse.data.message;
-//                });
-//            }
-//
-//        };
-
         $scope.update = function() {
             $scope.isMacrosValid = $scope.validateNutritionTargets(true);
 
@@ -192,8 +155,7 @@ angular.module('nutritionProfile').controller('NutritionProfileController', ['$s
                     userToSave.$update(function (data) {
                         $scope.nutritionProfile = data.nutritionProfile;
                         Authentication.user = user;
-                        Authentication.user.nutritionProfile.isCreate = false;
-                        $scope.nutritionProfile.isCreate = false;
+                        Authentication.user.nutritionProfile = data.nutritionProfile;
                         window.user = user;
                         $scope.success = true;
 

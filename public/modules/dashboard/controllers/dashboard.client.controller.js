@@ -94,8 +94,9 @@ angular.module('dashboard').controller('DashboardController', ['$scope', '$state
                     userToSave.$update(function (data) {
                         $scope.nutritionProfile = data.nutritionProfile;
                         Authentication.user = user;
-                        Authentication.user.nutritionProfile.isCreate = false;
-                        $scope.nutritionProfile.isCreate = false;
+                        Authentication.nutritionProfile = data.nutritionProfile;
+                        //Authentication.user.nutritionProfile.isCreate = false;
+                        //$scope.nutritionProfile.isCreate = false;
                         window.user = user;
                         $scope.success = true;
 
@@ -534,7 +535,7 @@ angular.module('dashboard').controller('DashboardController', ['$scope', '$state
         };
 
         $scope.initializeDashboardData = function(){
-            if(!$scope.nutritionProfile.isCreate && $scope.nutritionProfile.age && $scope.nutritionProfile.heightFeet && $scope.nutritionProfile.sex) {
+            if($scope.nutritionProfile.age && $scope.nutritionProfile.heightFeet && $scope.nutritionProfile.sex) {
                 $scope.bmr = CoreUtilities.calculateBmr($scope.nutritionProfile);
 
                 $scope.getDailyDashboardData();

@@ -57,10 +57,6 @@ var UserSchema = new Schema({
             type: Number,
             default: 500
         },
-        isCreate: {
-            type: Boolean,
-            default: true
-        },
         isAdvancedNutrientTargets:{
             type: Boolean,
             default: false
@@ -74,24 +70,19 @@ var UserSchema = new Schema({
             ref: 'User'
         },
         age: {
-            type: Number,
-            default: 30
+            type: Number
         },
         sex: {
-            type: String,
-            default: 'Female'
+            type: String
         },
         weight: {
-            type: Number,
-            default: 130
+            type: Number
         },
         heightFeet: {
-            type: Number,
-            default: 5
+            type: Number
         },
         heightInches: {
-            type: Number,
-            default: 1
+            type: Number
         },
         restingHeartRate: {
             type: Number,

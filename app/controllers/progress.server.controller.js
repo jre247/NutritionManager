@@ -9,9 +9,10 @@
 var mongoose = require('mongoose'),
     Plan = mongoose.model('Plan'),
     Food = mongoose.model('Food'),
+    User = mongoose.model('User'),
     Activity = mongoose.model('Activity'),
     BodyStats = mongoose.model('BodyStats'),
-    NutritionProfile = mongoose.model('NutritionProfile'),
+    //NutritionProfile = mongoose.model('NutritionProfile'),
     _ = require('lodash');
 
 /**
@@ -118,16 +119,19 @@ exports.list = function(req, res){
         //var startDateAsMili = new Date(new Date(startDateYear,startDateMonth,startDateDay).toUTCString()).getTime();
         //planDate
 
-        NutritionProfile.findOne({
-            user: req.user.id // Search Filters
-        }).exec(function (err, nutritionProfile) {
+        User.findById(
+            req.user.id
+        ).exec(function (err, user) {
             if (err) {
                 return res.send(400, {
                     message: getErrorMessage(err)
                 });
             }
             else {
-                if(nutritionProfile) {
+
+                if(user._doc.nutritionProfile) {
+                    var nutritionProfile = user._doc.nutritionProfile;
+
                     Plan.find({
                             'user': req.user.id,
                             'planDateAsConcat': {$gte: startDateAsConcat, $lte: endDateAsConcat}
@@ -304,15 +308,15 @@ exports.delete = function(req, res){
  * Show the current profile
  */
 exports.read = function(req, res) {
-    NutritionProfile.findOne({
-        user:req.user.id // Search Filters
-    }).exec(function(err, nutritionProfile) {
+    User.findById(
+        req.user.id
+    ).exec(function(err, user) {
         if (err) {
             return res.send(400, {
                 message: getErrorMessage(err)
             });
         } else {
-            res.jsonp(nutritionProfile);
+            res.jsonp(user.nutritionProfile);
         }
     });
 };
