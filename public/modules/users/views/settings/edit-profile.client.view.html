@@ -1,5 +1,19 @@
 <section class="row" data-ng-controller="SettingsController">
-	<h3 class="col-md-12 text-center">Edit your profile</h3>
+
+    <div class="row" style="padding-bottom: 27px;" >
+        <div class="col-md-4 col-xs-2" style="margin-top:17px">
+            <a href="/#!/nutritionProfile" >
+                <button type="button" class="btn btn-primary btn-m">
+                    <span class="glyphicon glyphicon-arrow-left" ></span><span> Back</span>
+                </button>
+            </a>
+        </div>
+
+        <h3 class="col-md-12 text-center">Edit your profile</h3>
+
+    </div>
+
+
 	<div class="col-xs-offset-2 col-xs-8 col-md-offset-5 col-md-2">
 		<form data-ng-submit="updateUserProfile()" class="signin form-horizontal" autocomplete="off">
 			<fieldset>
