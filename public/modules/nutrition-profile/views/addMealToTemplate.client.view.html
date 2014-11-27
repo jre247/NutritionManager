@@ -1,0 +1,15 @@
+<script type="text/ng-template" id="addMealToTemplateModalContent.html">
+    <div class="modal-header" style="font-family: segui;">
+        <h3 class="modal-title" data-ng-show="!showActivityDetails">Select Meal To Add To Template</h3>
+    </div>
+    <div style="font-family: segui;padding: 20px;" >
+        <select id="templateMeals" style="width: 30%;font-size: 18px;" name="templateMeals" data-ng-options="t.id as t.name for t in mealsDict" data-ng-model="selected.selectedMealForTemplate"></select>
+
+    </div>
+
+
+    <div class="modal-footer">
+        <button class="btn btn-primary"  ng-click="ok()">OK</button>
+        <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+    </div>
+</script>

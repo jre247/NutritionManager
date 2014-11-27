@@ -1,23 +1,101 @@
 'use strict';
 
-angular.module('users').controller('AuthenticationController', ['$scope', '$http', '$location', 'Authentication', 'UserDataFactory', 'NutritionProfile', 'NutritionProfileUtilities',
-	function($scope, $http, $location, Authentication, UserDataFactory, NutritionProfile, NutritionProfileUtilities) {
+angular.module('users').controller('AuthenticationController', ['$scope', '$http', '$location', 'Authentication', 'UserDataFactory', 'NutritionProfile', 'NutritionProfileUtilities', 'NutritionProfileDialogService', '$modal',
+	function($scope, $http, $location, Authentication, UserDataFactory, NutritionProfile, NutritionProfileUtilities, NutritionProfileDialogService, $modal) {
+        window.scope = $scope;
 		$scope.authentication = Authentication;
 
-        $scope.nutritionProfile = {isAdvancedNutrientTargets: false};
+        $scope.nutritionProfile = {
+            isAdvancedNutrientTargets: false,
+            activityLevel: 0,
+            deficitTarget: 500,
+            templateMeals: [
+                {id: 1, name: 'Breakfast'},
+                {id: 2, name: 'Lunch'},
+                {id: 3, name: 'Dinner'}
+            ]
+        };
 
         $scope.isAdvancedNutrientTargets = false;
         $scope.macrosRatioSelected = 0;
         $scope.nutrientTargetSettings = 'basic';
         $scope.isMacrosValid = true;
 
+        $scope.credentials = {};
+
         $scope.userAuthenticated = true;
+
+        $scope.macrosRatioChange = function(macrosRatioSelected){
+            NutritionProfileUtilities.macrosRatioChange(macrosRatioSelected, $scope);
+        };
+
+        var initializeMacrosSelectList = function(){
+            NutritionProfileUtilities.initializeMacrosSelectList($scope);
+        };
+
+        $scope.deleteTemplateMeal = function(templateMeal){
+            if (confirm("Are you sure you want to delete this Meal?")) {
+                for (var i in $scope.nutritionProfile.templateMeals) {
+                    if ($scope.nutritionProfile.templateMeals[i] === templateMeal) {
+                        $scope.nutritionProfile.templateMeals.splice(i, 1);
+                    }
+                }
+
+                $scope.update();
+            }
+        };
+
+        $scope.addMealToTemplateWithDialog = function(){
+            var modalInstance = $modal.open({
+                templateUrl: 'addMealToTemplateModalContent.html',
+                controller: NutritionProfileDialogService.AddMealToTemplateInstanceCtrl,
+                //size: size,
+                resolve: {
+                    parentScope: function () {
+                        return $scope;
+                    }
+                }
+            });
+
+            modalInstance.result.then(function (mealToAddToTemplate) {
+                $scope.nutritionProfile.templateMeals.push(mealToAddToTemplate);
+
+                $scope.update();
+
+            }, function () {
+                //$log.info('Modal dismissed at: ' + new Date());
+            });
+        };
+
+        $scope.sortableStartCallback = function(e, ui) {
+            ui.item.data('start', ui.item.index());
+        };
+        $scope.sortableUpdateCallback = function(e, ui) {
+            var start = ui.item.data('start'),
+                end = ui.item.index();
+
+            $scope.nutritionProfile.templateMeals.splice(end, 0,
+                $scope.nutritionProfile.templateMeals.splice(start, 1)[0]);
+
+            $scope.$apply();
+
+            $scope.update();
+        };
+
+        $scope.sortableOptions = {
+            start: $scope.sortableStartCallback,
+            update: $scope.sortableUpdateCallback
+        };
+
+
 
         $scope.templateMeals = [
             {id: 1, name: 'Breakfast'},
             {id: 2, name: 'Lunch'},
             {id: 3, name: 'Dinner'}
         ];
+
+
 
         $scope.activityLevels = [
             {id: 0, name: 'Sedentary'},
@@ -47,6 +125,8 @@ angular.module('users').controller('AuthenticationController', ['$scope', '$http
 
         $scope.heightFeetOptions = [ 1, 2, 3, 4, 5, 6, 7, 8];
         $scope.heightInchesOptions = [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
+
+
 
 
         $scope.nutrientTargetSettingsChange = function(nutritionTargetSettings){
@@ -99,6 +179,8 @@ angular.module('users').controller('AuthenticationController', ['$scope', '$http
         };
 
 		$scope.signup = function() {
+            $scope.credentials.nutritionProfile = $scope.nutritionProfile;
+
 			$http.post('/auth/signup', $scope.credentials).success(function(response) {
 				//If successful we assign the response to the global user model
 				$scope.authentication.user = response;
@@ -142,5 +224,7 @@ angular.module('users').controller('AuthenticationController', ['$scope', '$http
 				$scope.error = response.message;
 			});
 		};
+
+        initializeMacrosSelectList();
 	}
 ]);

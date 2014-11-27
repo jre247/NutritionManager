@@ -10,13 +10,65 @@ angular.module(ApplicationConfiguration.applicationModuleName).service(
         return({
 
             nutrientTargetSettingsChange: nutrientTargetSettingsChange,
-            validateNutritionTargets: validateNutritionTargets
+            validateNutritionTargets: validateNutritionTargets,
+            macrosRatioChange: macrosRatioChange,
+            initializeMacrosSelectList: initializeMacrosSelectList
         });
 
 
         // ---
         // PUBLIC METHODS.
         // ---
+
+        function macrosRatioChange(macrosRatioSelected, $scope){
+            switch(macrosRatioSelected){
+                //20/40/40 - Protein, Carbs, Fat
+                case 0:
+                    $scope.nutritionProfile.proteinPercentageTarget = 20;
+                    $scope.nutritionProfile.carbohydratesPercentageTarget = 40;
+                    $scope.nutritionProfile.fatPercentageTarget = 40;
+                    break;
+                //20/30/50 - Protein, Carbs, Fat
+                case 1:
+                    $scope.nutritionProfile.proteinPercentageTarget = 20;
+                    $scope.nutritionProfile.carbohydratesPercentageTarget = 30;
+                    $scope.nutritionProfile.fatPercentageTarget = 50;
+                    break;
+                //Atkins Diet
+                case 2:
+                    $scope.nutritionProfile.proteinPercentageTarget = 42;
+                    $scope.nutritionProfile.carbohydratesPercentageTarget = 15;
+                    $scope.nutritionProfile.fatPercentageTarget = 43;
+                    break;
+                //South Beach Diet
+                case 3:
+                    $scope.nutritionProfile.proteinPercentageTarget = 30;
+                    $scope.nutritionProfile.carbohydratesPercentageTarget = 40;
+                    $scope.nutritionProfile.fatPercentageTarget = 30;
+                    break;
+            }
+        };
+
+        function initializeMacrosSelectList($scope){
+            if($scope.nutritionProfile.proteinPercentageTarget == 20 &&
+                $scope.nutritionProfile.carbohydratesPercentageTarget == 40 &&
+                $scope.nutritionProfile.fatPercentageTarget == 40){
+                $scope.macrosRatioSelected = 0;
+            }
+            else if($scope.nutritionProfile.proteinPercentageTarget == 20 &&
+                $scope.nutritionProfile.carbohydratesPercentageTarget == 30 &&
+                $scope.nutritionProfile.fatPercentageTarget == 50){
+                $scope.macrosRatioSelected = 1;
+            }
+            else if($scope.nutritionProfile.proteinPercentageTarget == 42 &&
+                $scope.nutritionProfile.carbohydratesPercentageTarget == 15 &&
+                $scope.nutritionProfile.fatPercentageTarget == 43){
+                $scope.macrosRatioSelected = 2;
+            }
+            else{
+                $scope.macrosRatioSelected = 3;
+            }
+        };
 
 
         function initializeBasicNutritionSettings($scope){
