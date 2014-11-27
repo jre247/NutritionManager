@@ -9,6 +9,9 @@ angular.module('users').controller('AuthenticationController', ['$scope', '$http
             isAdvancedNutrientTargets: false,
             activityLevel: 0,
             deficitTarget: 500,
+            proteinPercentageTarget: 20,
+            carbohydratesPercentageTarget: 40,
+            fatPercentageTarget: 40,
             templateMeals: [
                 {id: 1, name: 'Breakfast'},
                 {id: 2, name: 'Lunch'},
