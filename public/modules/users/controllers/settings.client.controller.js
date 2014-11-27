@@ -46,6 +46,7 @@ angular.module('users').controller('SettingsController', ['$scope', '$http', '$l
 			user.$update(function(response) {
 				$scope.success = true;
 				Authentication.user = response;
+                window.user = response;
 			}, function(response) {
 				$scope.error = response.data.message;
 			});

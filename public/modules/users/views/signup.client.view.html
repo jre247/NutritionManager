@@ -21,7 +21,9 @@
 		<form data-ng-submit="signup()" class="signin form-horizontal" novalidate autocomplete="off">
             <div ng-show="displaySection == 'userInfo'">
                 <h2 class="col-md-12 text-center">Step 1: User Info</h2>
-
+                <div data-ng-show="error" class="text-center text-danger" style="font-size: 18px;">
+                    *<strong data-ng-bind="error"></strong>
+                </div>
                 <div class="col-xs-offset-2 col-xs-8 col-md-offset-5 col-md-2" style="padding-top: 20px">
                     <ng-include  src="'/modules/users/views/signup.userInfo.client.view.html'"></ng-include>
 
@@ -30,6 +32,9 @@
             </div>
             <div ng-show="displaySection == 'bodyInfo'">
                 <h2 class="col-md-12 text-center">Step 2: Body Info</h2>
+                <div data-ng-show="error" class="text-center text-danger" style="font-size: 18px;">
+                    *<strong data-ng-bind="error"></strong>
+                </div>
                 <div class="col-xs-offset-2 col-xs-8 col-md-offset-5 col-md-9" style="padding-top: 20px">
 
                     <ng-include  src="'/modules/nutrition-profile/views/nutritionProfileContent/bodyInfo.content.client.view.html'"></ng-include>
@@ -40,6 +45,9 @@
             </div>
             <div ng-show="displaySection == 'targets'">
                 <h2 class="col-md-12 text-center">Step 3: Targets</h2>
+                <div data-ng-show="error" class="text-center text-danger" style="font-size: 18px;">
+                   *<strong data-ng-bind="error"></strong>
+                </div>
                 <div class="col-xs-offset-2 col-xs-8 col-md-offset-2 col-md-8" style="padding-top: 20px">
 
                     <ng-include  src="'/modules/nutrition-profile/views/nutritionProfileContent/nutritionTargets.client.view.html'"></ng-include>
@@ -52,6 +60,9 @@
             </div>
             <div ng-show="displaySection == 'mealsTemplate'">
                 <h2 class="col-md-12 text-center">Step 4: Meals Template</h2>
+                <div data-ng-show="error" class="text-center text-danger" style="font-size: 18px;">
+                    *<strong data-ng-bind="error"></strong>
+                </div>
                 <div class="col-xs-offset-2 col-xs-8 col-md-offset-4 col-md-8" style="padding-top: 20px">
 
                     <ng-include  src="'/modules/nutrition-profile/views/nutritionProfileContent/mealsTemplate.content.client.view.html'"></ng-include>
