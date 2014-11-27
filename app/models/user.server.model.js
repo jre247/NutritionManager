@@ -70,19 +70,24 @@ var UserSchema = new Schema({
             ref: 'User'
         },
         age: {
-            type: Number
+            type: Number,
+            required: 'Please fill in Age'
         },
         sex: {
-            type: String
+            type: String,
+            required: 'Please fill in Gender'
         },
         weight: {
-            type: Number
+            type: Number,
+            required: 'Please fill in Weight'
         },
         heightFeet: {
-            type: Number
+            type: Number,
+            required: 'Please fill in Height Feet'
         },
         heightInches: {
-            type: Number
+            type: Number,
+            required: 'Please fill in Height Inches'
         },
         restingHeartRate: {
             type: Number,
