@@ -393,7 +393,6 @@ angular.module('plans').service(
 
                 servingType: $scope.servingType,
 
-                mealTypes: $scope.mealTypes,
                 mealSelected: $scope.mealSelected
 
 
