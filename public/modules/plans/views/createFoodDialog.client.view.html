@@ -1,6 +1,9 @@
 <script type="text/ng-template" id="createFoodModalContent.html">
 
 
+    <div data-ng-show="foodDialogDisplaySection == 'addMeal'" style="margin-top: 10px;">
+        <ng-include  src="'/modules/plans/views/createFoodDialog.addMeal.view.html'"></ng-include>
+    </div>
     <div data-ng-show="foodDialogDisplaySection == 'selectMeal'" style="margin-top: 10px;">
         <ng-include  src="'/modules/plans/views/createFoodDialog.meals.view.html'"></ng-include>
     </div>
@@ -23,7 +26,7 @@
 
 
     <div class="modal-footer">
-        <button class="btn btn-primary" data-ng-show="!showCreateMealSection" ng-click="ok()">OK</button>
+        <button data-ng-show="foodDialogDisplaySection == 'foodDetails'" class="btn btn-primary" ng-click="ok()">OK</button>
         <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
     </div>
 </script>

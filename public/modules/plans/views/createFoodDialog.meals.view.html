@@ -7,6 +7,15 @@
 <div class="foodDialogMealsContainer">
 
     <div class="foodDialogSelectMeal {{getMealCss(meal)}}" ng-repeat="meal in meals"  ng-click="mealSelectClick(meal)">
-        <span ng-bind="getMealTypeName(meal.type)"></span>
+        <span ng-bind="getMealTypeName(meal.type) || meal.name"></span>
     </div>
+
+    <div  >
+
+
+        <button  type="button" class="btn btn-primary btn-m addMealBtn" data-ng-click="newMealClick();">
+            <span class="glyphicon glyphicon-plus" ></span><span class="hidden-xs"> Add Meal</span>
+        </button>
+    </div>
+
 </div>

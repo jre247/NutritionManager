@@ -93,7 +93,7 @@
                                         <span style="color: rgb(228, 19, 19)" class="glyphicon glyphicon-minus-sign"></span>
                                     </div>
 
-                                    <span style="width: 80px;" data-ng-show="meal.isEditable == false" data-ng-bind="getMealTypeName(meal.type)"></span>
+                                    <span style="width: 80px;" data-ng-show="meal.isEditable == false" data-ng-bind="getMealTypeName(meal.type) || meal.name"></span>
 
 
                                     <select  ng-model="meal.type"  data-ng-click="mealTypeClicked(meal)" data-ng-show="meal.isEditable"  ng-options="t.id as t.name for t in mealTypes" style="font-size: 16px;vertical-align: top;"></select>

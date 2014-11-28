@@ -4,7 +4,7 @@
     </button>
 </div>
 
-<h3 style="text-align: center" class="modal-title">{{getMealTypeName(selected.mealSelected.type)}}</h3>
+<h3 style="text-align: center" class="modal-title">{{getMealTypeName(selected.mealSelected.type || selected.mealTypeSelected) || selected.customMealInput || selected.mealSelected.name}}</h3>
 
 <div class="list-group" style="color: rgb(66, 66, 207); padding: 10px;">
     <a class="list-group-item" style="height: 60px;" ng-click="myFoodsCategorySelected()">

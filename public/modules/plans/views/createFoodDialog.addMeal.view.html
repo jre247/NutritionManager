@@ -1,0 +1,31 @@
+<div class="modal-header" style="font-family: segui;">
+    <div style="display:inline-block">
+        <button class="btn btn-primary" ng-click="selectMealNavClick()">
+            <span class="glyphicon glyphicon-arrow-left" ></span><span> Select Meal</span>
+        </button>
+    </div>
+    <div style="display:inline-block; padding-left: 14%;">
+        <h3 class="modal-title">Add Meal</h3>
+    </div>
+</div>
+
+<div class="foodDialogMealsContainer">
+
+    <select id="mealTypes" ng-model="selected.mealTypeSelected"
+            ng-options="t.id as t.name for t in selected.mealTypes" style="font-size: 16px;vertical-align: top;"></select>
+
+    <div>
+        <span>Or:</span>
+    </div>
+
+    <div>
+        <label for="customMealInput">Custom Meal:</label>
+        <input type="text" id="customMealInput" ng-model="selected.customMealInput"/>
+    </div>
+
+    <div>
+        <button class="btn btn-primary addMealContinueBtn" ng-click="addMealContinue()">
+            <span class="glyphicon glyphicon-arrow-right" ></span><span> Continue</span>
+        </button>
+    </div>
+</div>

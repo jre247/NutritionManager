@@ -159,6 +159,10 @@ angular.module('plans').service(
             $scope.skipFoods = 0;
             $scope.findFoodsByFirstLetter = false;
             $scope.mealTypes = mealTypes;
+            $scope.mealTypeSelected;
+            $scope.customMealInput = null;
+            $scope.customMeal = null;
+
 
             $scope.userFoods = userFoods;
             $scope.meals = meals;
@@ -184,9 +188,39 @@ angular.module('plans').service(
                     case 4:
                         mealClass = 'foodDialogSnack';
                         break;
+                    case 5:
+                        mealClass = 'foodDialogCustom';
+                        break;
                 }
 
                 return mealClass;
+            };
+
+            $scope.addMealContinue = function(){
+                $scope.foodDialogDisplaySection = 'categories';
+                $scope.selected.mealSelected = null;
+
+                if($scope.selected.mealTypeSelected){
+
+                }
+               // $scope.selected.mealSelected = $scope.selected.customMealInput;
+
+
+               // if($scope.selected.customMealInput) {
+               //     $scope.selected.mealSelected.type = 5;
+               // }
+
+              //  if($scope.selected.mealTypeSelected) {
+              //      $scope.selected.mealSelected =
+              //  }
+            };
+
+
+
+
+
+            $scope.newMealClick = function(){
+                $scope.foodDialogDisplaySection = 'addMeal';
             };
 
             $scope.selectMealNavClick = function(){
@@ -332,6 +366,10 @@ angular.module('plans').service(
                 isUpdate: $scope.isUpdate,
                 servings: $scope.servings,
                 foodSearchTxt: $scope.foodSearchTxt,
+                mealTypes: $scope.mealTypes,
+                mealTypeSelected: $scope.mealTypeSelected,
+                customMeal: $scope.customMeal,
+                customMealInput: $scope.customMealInput,
 
                 caloriesDisplay: $scope.caloriesDisplay,
                 proteinDisplay: $scope.proteinDisplay,
@@ -648,6 +686,28 @@ angular.module('plans').service(
 
 
             $scope.ok = function () {
+                if($scope.selected.mealTypeSelected || $scope.selected.customMealInput){
+                    var model = {
+                        name: $scope.selected.customMealInput || '',
+                        type: $scope.selected.mealTypeSelected || 5,
+                        foods: [],
+                        totalCalories: 0,
+                        totalCarbohydrates: 0,
+                        totalFat: 0,
+                        totalProtein: 0,
+                        isEditable: false,
+                        isVisible: true
+                    };
+
+                    $scope.meals.push(model);
+
+                    $scope.selected.mealSelected = model;
+
+//                    if($scope.customMealInput){
+//                        $scope.selected.customMeal = model;
+//                    }
+                }
+
                 $modalInstance.close($scope.selected);
             };
 

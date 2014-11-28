@@ -284,6 +284,10 @@ var PlanSchema = new Schema({
                 isEditable: {
                     type: Boolean,
                     default: true
+                },
+                name: {
+                    type: String
+
                 }
             }
         ]

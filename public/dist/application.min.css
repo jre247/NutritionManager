@@ -423,7 +423,7 @@ div.tooltip {
     background-color: rgba(255, 219, 179, 1);
 }
 .foodDialogLunch:hover{
-    background-color: rgba(249, 201, 148, 1);
+    background-color: rgba(255, 164, 24, 1);
 }
 .foodDialogDinner{
     background-color: rgba(180, 244, 184, 0.47);
@@ -437,5 +437,22 @@ div.tooltip {
 
 .foodDialogSnack:hover{
     background-color: rgba(240, 244, 57, 1);
+}
+
+.foodDialogCustom{
+    background-color: rgb(230, 247, 246);
+}
+
+.foodDialogCustom:hover{
+    background-color: rgb(153, 242, 237);
+}
+
+.addMealContinueBtn{
+    margin-left: 14px;
+    margin-top: 28px;
+}
+.addMealBtn{
+    margin-top: 10px;
+    margin-left: 54px;
 }
 /* End Nutrition Plan */

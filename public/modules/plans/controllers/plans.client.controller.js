@@ -48,7 +48,8 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
             {id: 1, name: 'Breakfast'},
             {id: 2, name: 'Lunch'},
             {id: 3, name: 'Dinner'},
-            {id: 4, name: 'Snack'}
+            {id: 4, name: 'Snack'},
+            {id: 5, name: null}
         ];
 
         $scope.mealTypeClicked = function(meal){
@@ -795,16 +796,24 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
         };
 
         $scope.getMealTypeName = function(type){
+
             var mealTypeName;
 
-            for (var i = 0; i < $scope.mealTypes.length; i++){
-                var mealType = $scope.mealTypes[i];
+            if(type) {
+                for (var i = 0; i < $scope.mealTypes.length; i++) {
+                    var mealType = $scope.mealTypes[i];
 
-                if (mealType.id == type){
-                    mealTypeName = mealType.name;
-                    break;
+                    if (mealType.id == type) {
+                        mealTypeName = mealType.name;
+                        break;
+                    }
                 }
             }
+
+            //handle custom meal type - name already defined in meal model then
+           // if(type === 5){
+           //     mealTypeName =
+           // }
 
             return mealTypeName;
         };
@@ -1021,6 +1030,13 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
 
                     if(!isServingsUpdated) {
                         selected.mealSelected.foods.push(food);
+
+//                        window.setTimeout(function(){
+//                            food.IsSuggested = true;
+//                        }, 2000);
+//                        window.setTimeout(function(){
+//                            food.IsSuggested = false;
+//                        }, 3000);
                     }
                 }
 
