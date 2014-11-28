@@ -26,7 +26,10 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
         $scope.allFoodsInitial = [];
         var plansToGet = 14;
 
-
+        $scope.dateFormatOptions = {
+            year: "numeric", month: "short",
+            day: "numeric"
+        };
 
         $scope.foodTypes = [
             {id: 1, type: 'Fruit'},
