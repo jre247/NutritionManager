@@ -16,7 +16,7 @@
                         <ng-include  src="'/modules/plans/views/planDateContentMobile.client.view.html'"></ng-include>
                     </div>
 
-                    <div style="position:fixed;margin-top: 7px;">
+                    <div style="position:fixed;margin-top: 7px;margin-left: 5px;">
                         <a data-ng-href="#!/dashboard/{{plan.planDateAsConcat}}">
                             <button type="button" class="btn btn-primary btn-m">
                                 <span class="glyphicon glyphicon-home" ></span>
@@ -89,7 +89,7 @@
                 <img width="25" height="25" src="/modules/core/img/loaders/loader.gif">
             </div>
 
-            <div data-ng-show="!isLoading" id="content" class="form-group planContent" style="overflow-y: auto;overflow-x:hidden; margin-bottom: 3px; margin-top: 46px;">
+            <div data-ng-show="!isLoading" id="content" class="form-group planContent" style="overflow-y: auto;overflow-x:hidden; margin-bottom: 3px; margin-top: 5px;">
                 <accordion sortable="sortableOptions" disableallelementsbydefault="true" updateCallback="sortableUpdateCallback" startCallback="sortableStartCallback" rootSortableElement=".panel-group" ng-show="plan.meals.length > 0"  class="plansAccordion" style="..." close-others="oneAtATime">
                     <accordion-group data-ng-repeat="meal in plan.meals" is-open="meal.isVisible">
                         <accordion-heading>
