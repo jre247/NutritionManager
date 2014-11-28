@@ -11,16 +11,21 @@
 
 <div class="foodDialogMealsContainer">
 
-    <select id="mealTypes" ng-model="selected.mealTypeSelected"
-            ng-options="t.id as t.name for t in selected.mealTypes" style="font-size: 16px;vertical-align: top;"></select>
-
+    <label for="mealTypes">Meal Types:</label>
     <div>
+        <select id="mealTypes" ng-model="selected.mealTypeSelected" ng-change="mealTypesSelectChange()"
+            ng-options="t.id as t.name for t in selected.mealTypes" style="font-size: 16px;vertical-align: top;"></select>
+    </div>
+
+    <div class="orSeparator">
         <span>Or:</span>
     </div>
 
     <div>
         <label for="customMealInput">Custom Meal:</label>
-        <input type="text" id="customMealInput" ng-model="selected.customMealInput"/>
+        <div>
+            <input type="text" id="customMealInput" ng-change="customMealInputChange()" ng-model="selected.customMealInput"/>
+        </div>
     </div>
 
     <div>

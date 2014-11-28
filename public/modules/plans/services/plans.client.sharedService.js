@@ -164,6 +164,7 @@ angular.module('plans').service(
             $scope.customMeal = null;
 
 
+
             $scope.userFoods = userFoods;
             $scope.meals = meals;
 
@@ -194,6 +195,14 @@ angular.module('plans').service(
                 }
 
                 return mealClass;
+            };
+
+            $scope.mealTypesSelectChange = function(){
+                $scope.selected.customMealInput = null;
+            };
+
+            $scope.customMealInputChange = function(){
+                $scope.selected.mealTypeSelected = 0;
             };
 
             $scope.addMealContinue = function(){

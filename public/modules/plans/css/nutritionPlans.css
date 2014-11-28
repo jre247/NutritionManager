@@ -10,8 +10,14 @@
     font-size: 19px;
 }
 
+.orSeparator{
+    padding: 10px;
+    font-weight:bold;
+}
+
 .foodDialogMealsContainer{
     margin-bottom: 11px;
+    padding: 10px;
 }
 
 .foodDialogSelectMeal:hover{
