@@ -30,11 +30,12 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
             "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" ];
         var dayNames = [ "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
         $scope.getMobilePlanDateFormat = function(){
-
-            var month = monthNames[$scope.plan.planDateNonUtc.getMonth()];
-            var day = $scope.plan.planDateNonUtc.getDate();
-            var dayOfWeek = dayNames[$scope.plan.planDateNonUtc.getDay()];
-            return dayOfWeek + ', ' + month + ' ' + day;
+            if($scope.plan && $scope.plan.planDateNonUtc) {
+                var month = monthNames[$scope.plan.planDateNonUtc.getMonth()];
+                var day = $scope.plan.planDateNonUtc.getDate();
+                var dayOfWeek = dayNames[$scope.plan.planDateNonUtc.getDay() - 1];
+                return dayOfWeek + ', ' + month + ' ' + day;
+            }
         };
 
         $scope.foodTypes = [
