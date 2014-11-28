@@ -682,26 +682,6 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
             }
         };
 
-        var interval;
-        $scope.$watch('plan.meals.length', function(){
-            if($scope.plan && $scope.plan.meals) {
-                if ($scope.plan.meals.length == 0) {
-
-                    interval = window.setInterval(function () {
-                        $scope.$apply(function(){
-                            $scope.plan.moveArrowImgLeft = !$scope.plan.moveArrowImgLeft;
-                        });
-
-                    }, 500);
-
-
-                }
-                else {
-                    clearInterval(interval);
-                }
-            }
-        });
-
         var setPlanMealsTotals = function(){
             for (var i = 0; i < $scope.plan.meals.length; i++) {
                 var carbsTotal = 0, proteinTotal = 0, caloriesTotal = 0, fatTotal = 0, sodiumTotal = 0;
@@ -928,47 +908,8 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
             }
         };
 
-        $scope.openSuggestionsDialog = function (meal) {
-            var modalInstance = $modal.open({
-                templateUrl: 'suggestionsModalContent.html',
-                controller: PlansService.SuggestionsModalInstanceCtrl,
-                //size: size,
-                resolve: {
 
-                    suggestedFoods: function () {
-                        //figure out which foods to add to suggested foods based on nutrition profile targets
-                        return getSuggestedFoods();
-                    },
-                    mealForSuggestion: function(){
-                        return meal;
-                    },
-                    parentScope: function () {
-                        return $scope;
-                    },
-                    CoreUtilities: function(){
-                        return CoreUtilities;
-                    }
-                }
-            });
-
-            modalInstance.result.then(function (mealForSuggestion) {
-                //$scope.dialogSelectedMealType = selectedItem;
-                // $scope.copyPlan(planCopyModel);
-                meal = mealForSuggestion;
-
-                CoreUtilities.doMealTotaling(meal);
-
-                CoreUtilities.calculatePlanTotalMacros($scope.plan);
-
-                //calculate changed deficit
-                $scope.currentDeficit = CoreUtilities.calculateDeficit($scope.plan, $scope.activityPlan, $scope.nutritionProfile);
-
-            }, function () {
-                $log.info('Modal dismissed at: ' + new Date());
-            });
-        };
-
-        $scope.createFoodWithDialog = function(meal, food, isCreateMeal, isMobileDevice){
+        $scope.createFoodWithDialog = function(mealToUpdate, food){
             var modalInstance = $modal.open({
                 templateUrl: 'createFoodModalContent.html',
                 controller: PlansService.CreateFoodModalInstanceCtrl,
@@ -978,7 +919,10 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
                         return $scope;
                     },
                     meal: function(){
-                        return meal
+                        return mealToUpdate;
+                    },
+                    meals: function(){
+                        return $scope.plan.meals;
                     },
                     food: function(){
                         return food;
@@ -986,8 +930,8 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
                     CoreUtilities: function(){
                         return CoreUtilities;
                     },
-                    isCreateMeal: function(){
-                        return isCreateMeal;
+                    getMealTypeName: function(){
+                        return $scope.getMealTypeName;
                     },
                     mealTypes: function(){
                         return $scope.mealTypes;
@@ -1004,12 +948,14 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
             var checkIfIncrementingServings = function(meal, food){
                 var isServingsUpdated = false;
 
-                //check if just incrementing servings of food since list already has this food
-                for(var m = 0; m < meal.foods.length; m++){
-                    if (meal.foods[m]._id === food._id){
-                        meal.foods[m].servings += meal.foods[m].servings;
-                        isServingsUpdated = true;
-                        break;
+                if(meal.foods && meal.foods.length > 0) {
+                    //check if just incrementing servings of food since list already has this food
+                    for (var m = 0; m < meal.foods.length; m++) {
+                        if (meal.foods[m]._id === food._id) {
+                            meal.foods[m].servings += meal.foods[m].servings;
+                            isServingsUpdated = true;
+                            break;
+                        }
                     }
                 }
 
@@ -1043,7 +989,8 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
             };
 
             modalInstance.result.then(function (selected) {
-                meal.isEditable = false;
+               // meal.isEditable = false;
+                var meal = selected.mealSelected;
                 var foodDetails = selected.foodToAdd;
                 var isUpdate = selected.isUpdate;
 
@@ -1073,20 +1020,14 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
                     var isServingsUpdated = checkIfIncrementingServings(meal, food);
 
                     if(!isServingsUpdated) {
-                        meal.foods.push(food);
+                        selected.mealSelected.foods.push(food);
                     }
                 }
 
                 $scope.foodServingsChange(food, meal);
 
-                if(isCreateMeal) {
-                    meal.type = selected.mealType;
-                    scrollToBottom();
-                }
+                $scope.savePlan();
 
-                //if(isMobileDevice){
-                    $scope.savePlan();
-                //}
             }, function () {
                 $log.info('Modal dismissed at: ' + new Date());
             });

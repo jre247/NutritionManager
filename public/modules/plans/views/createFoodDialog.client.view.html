@@ -1,8 +1,9 @@
 <script type="text/ng-template" id="createFoodModalContent.html">
-    <div data-ng-show="foodDialogDisplaySection == 'categories'" class="modal-header" style="font-family: segui;">
-        <h3 class="modal-title">Add Food</h3>
-    </div>
 
+
+    <div data-ng-show="foodDialogDisplaySection == 'selectMeal'" style="margin-top: 10px;">
+        <ng-include  src="'/modules/plans/views/createFoodDialog.meals.view.html'"></ng-include>
+    </div>
     <div data-ng-show="foodDialogDisplaySection == 'categories'" style="margin-top: 10px;">
         <ng-include  src="'/modules/plans/views/createFoodDialog.categories.view.html'"></ng-include>
     </div>

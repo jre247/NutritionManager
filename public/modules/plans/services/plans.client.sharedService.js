@@ -143,15 +143,15 @@ angular.module('plans').service(
             return foodToFill;
         };
 
-        function CreateFoodModalInstanceCtrl($scope, $modalInstance, parentScope, meal, food, CoreUtilities, isCreateMeal, mealTypes, userFoods, nutritionPlan) {
+        function CreateFoodModalInstanceCtrl($scope, $modalInstance, parentScope, meal, meals, food, CoreUtilities, mealTypes, userFoods, nutritionPlan, getMealTypeName) {
             $scope.foodToAdd = food;
             $scope.parentScope = parentScope;
             $scope.plan = nutritionPlan;
-            //$scope.meal = meal;
+            $scope.mealSelected = meal;
             $scope.isUpdate = food !== 'undefined' && food !== null && food !== 'null' && food !== undefined;
             $scope.servings = 1;
             window.scopeCreateFoodDialog = $scope;
-            $scope.foodDialogDisplaySection = $scope.isUpdate ? 'foodDetails' : 'categories';
+            $scope.foodDialogDisplaySection = $scope.isUpdate ? 'foodDetails' : 'selectMeal';
             $scope.searchFoodCategory = 'myFoods';
             $scope.foods = [];
             $scope.foodSearchTxt = null;
@@ -159,18 +159,47 @@ angular.module('plans').service(
             $scope.skipFoods = 0;
             $scope.findFoodsByFirstLetter = false;
             $scope.mealTypes = mealTypes;
-            $scope.showCreateMealSection = isCreateMeal;
+
             $scope.userFoods = userFoods;
-            //$scope.myFoodsChecked = false;
-            //$scope.allFoodsChecked = true;
-           // $scope.foodsRadioBtn = userFoods && userFoods.length > 0 ? 'myFoods' : 'allFoods';
+            $scope.meals = meals;
 
             $scope.servingType = food ? food.servingType : 0;
             $scope.isLoading = false;
 
+            $scope.getMealTypeName = getMealTypeName;
+
+            $scope.getMealCss = function(meal){
+                var mealClass;
+
+                switch(meal.type){
+                    case 1:
+                        mealClass = 'foodDialogBreakfast';
+                        break;
+                    case 2:
+                        mealClass = 'foodDialogLunch';
+                        break;
+                    case 3:
+                        mealClass = 'foodDialogDinner';
+                        break;
+                    case 4:
+                        mealClass = 'foodDialogSnack';
+                        break;
+                }
+
+                return mealClass;
+            };
+
+            $scope.selectMealNavClick = function(){
+                $scope.foodDialogDisplaySection = 'selectMeal';
+            };
 
             $scope.categoriesNavClick = function(){
                 $scope.foodDialogDisplaySection = 'categories';
+            };
+
+            $scope.mealSelectClick = function(meal){
+                $scope.foodDialogDisplaySection = 'categories';
+                $scope.selected.mealSelected = meal;
             };
 
             $scope.myFoodsCategorySelected = function(){
@@ -317,7 +346,8 @@ angular.module('plans').service(
 
                 servingType: $scope.servingType,
 
-                mealTypes: $scope.mealTypes
+                mealTypes: $scope.mealTypes,
+                mealSelected: $scope.mealSelected
 
 
             };
@@ -650,7 +680,7 @@ angular.module('plans').service(
 
 
 
-            if(!isCreateMeal && food) {
+            if(food) {
                 window.setTimeout(function () {
                     showMacrosChart()
                 }, 100);

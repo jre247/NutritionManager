@@ -1,0 +1,12 @@
+<div class="modal-header" style="font-family: segui;">
+    <div style="display:inline-block; padding-left: 14%;">
+        <h3 class="modal-title">Select Meal</h3>
+    </div>
+</div>
+
+<div class="foodDialogMealsContainer">
+
+    <div class="foodDialogSelectMeal {{getMealCss(meal)}}" ng-repeat="meal in meals"  ng-click="mealSelectClick(meal)">
+        <span ng-bind="getMealTypeName(meal.type)"></span>
+    </div>
+</div>

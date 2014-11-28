@@ -1,3 +1,11 @@
+<div style="display:inline-block">
+    <button style="margin-left:14%" class="btn btn-primary" ng-click="selectMealNavClick()">
+        <span class="glyphicon glyphicon-arrow-left" ></span><span> Change Meal</span>
+    </button>
+</div>
+
+<h3 style="text-align: center" class="modal-title">{{getMealTypeName(selected.mealSelected.type)}}</h3>
+
 <div class="list-group" style="color: rgb(66, 66, 207); padding: 10px;">
     <a class="list-group-item" style="height: 60px;" ng-click="myFoodsCategorySelected()">
         <div>

@@ -1,0 +1,29 @@
+.foodDialogSelectMeal{
+    padding: 10px;
+    border: 1px solid lightgray;
+    margin-top: 10px;
+    margin-left: 17px;
+    margin-right: 5px;
+    border-radius: 8px;
+    width: 21%;
+    text-align: center;
+    font-size: 19px;
+}
+
+.foodDialogMealsContainer{
+    margin-bottom: 11px;
+}
+
+.foodDialogSelectMeal:hover{
+    cursor: pointer;
+}
+
+.foodDialogBreakfast{
+    background-color: rgba(231, 215, 57, 0.51);
+}
+.foodDialogLunch{
+    background-color: rgba(255, 126, 0, 0.12);
+}
+.foodDialogDinner{
+    background-color: rgba(180, 244, 184, 0.47);
+}

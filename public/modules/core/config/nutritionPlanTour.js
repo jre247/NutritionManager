@@ -23,7 +23,7 @@
 
 
                 {
-                    path: "/#!/",
+                    path: "/#!/dashboard",
                     // element: "#demo",
                     placement: "bottom",
                     title: "Welcome to Fit2Create!",
@@ -32,25 +32,25 @@
                     orphan: true
                 },
                 {
-                    path: "/#!/",
+                    path: "/#!/dashboard",
                     element: ".weeklyDashboard",
-                    placement: "bottom",
+                    placement: "left",
                     title: "Weekly Dashboard",
                     content: "This is where you can see nutrition and activity data for a selected week.",
                     //+ "<br/><br/>Right now this is empty because there are currently no plans entered. However, you'll see some fancy charts here once you have at least one plan created.",
                     backdrop: true
                 },
                 {
-                    path: "/#!/",
+                    path: "/#!/dashboard",
                     element: ".dailyDashboard",
-                    placement: "bottom",
+                    placement: "right",
                     title: "Daily Dashboard",
                     content: "This is where you can see nutrition and activity data for a select day.",
                     //+ "<br/><br/>Right now this is empty because there is currently no plan entered for today. After you create a plan for today you'll see some super helpful charts displayed for today!",
                     backdrop: true
                 },
                 {
-                    path: "/#!/",
+                    path: "/#!/dashboard",
                     element: "#planDateForDay",
                     placement: "bottom",
                     title: "Plan for Date",
@@ -58,7 +58,7 @@
                     //backdrop: true
                 },
                 {
-                    path: "/#!/",
+                    path: "/#!/dashboard",
                     element: "#createActivityForDay",
                     placement: "bottom",
                     title: "Create Day Activity",
@@ -66,7 +66,7 @@
                     // backdrop: true
                 },
                 {
-                    path: "/#!/",
+                    path: "/#!/dashboard",
                     element: "#createNutritionPlanForDay",
                     placement: "bottom",
                     title: "Create Day Nutrition",
