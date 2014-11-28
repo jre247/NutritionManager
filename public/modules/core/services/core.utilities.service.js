@@ -197,7 +197,7 @@ angular.module(ApplicationConfiguration.applicationModuleName).service(
 
             //convert height from inches to cms
             //height in cms = (height in inches * 2.54)
-            var heightInCms = totalHeight * 2.54
+            var heightInCms = totalHeight * 2.54;
 
             var bmr = 0;
 

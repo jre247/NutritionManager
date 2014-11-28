@@ -371,28 +371,6 @@ div.tooltip {
 
 
 /* Nutrition Profile */
-.mealsTemplateContainer{
-    margin-left: 10px;
-    margin-top: 30px;
-    border: 1px solid lightgray;
-    padding: 15px;
-    width: 155px;
-    border-radius: 5px;
-}
-
-.templateMealItem{
-    height: 30px;
-    padding: 3px;
-    width: 90px;
-    text-align: center;
-    border: 1px solid lightgray;
-    border-radius: 5px;
-    margin-bottom: 5px;
-    cursor: pointer;
-}
-/* End Nutrition Profile */
-
-/* Nutrition Plan Start */
 .foodDialogSelectMeal{
     padding: 10px;
     border: 1px solid lightgray;
@@ -458,7 +436,7 @@ div.tooltip {
     margin-top: 28px;
 }
 .addMealBtn{
-    margin-top: 10px;
-    margin-left: 54px;
+    margin-top: 14px;
+    margin-left: 65px;
 }
 /* End Nutrition Plan */
