@@ -9,7 +9,7 @@
         </div>
         <div id="planDateContainer" style="width: 146px;padding-top: 8px;display:inline-block;">
 
-            <span style="font-weight: bold; font-size: 19px;position: relative;top: 5px;" data-ng-bind="plan.planDateNonUtc.toLocaleDateString('en-us', dateFormatOptions) | date:long"></span>
+            <span style="font-weight: bold; font-size: 19px;position: relative;top: 5px;" data-ng-bind="getMobilePlanDateFormat(plan.planDateNonUtc)"></span>
         </div>
         <div style="display:inline-block;vertical-align: top;position: relative;top: 15px;left:5px" id="nextDay">
             <div data-ng-click="toggleDayClick('nextDay')">
