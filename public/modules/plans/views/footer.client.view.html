@@ -1,0 +1,82 @@
+<div class="planFooter" style="margin-right: -15px;margin-left: -15px;">
+    <table style="border-top: 1px solid lightgray;display: inline-block;" id="footer">
+        <thead>
+        <tr>
+            <th class="plansDesktopInlineGrid" width="316px">&nbsp;</th>
+
+            <th id="totalDeficit" data-ng-show="currentDeficit >= 0" width="90px">Deficit </th>
+            <th  data-ng-show="currentDeficit < 0" width="90px">Surplus </th>
+            <th id="totalCalories" width="90px">Calories </th>
+
+
+            <th class="hidden-xs" width="40px" style="border-left: 1px solid lightgray;">&nbsp;</th>
+
+            <th id="totalCarbs" class="carbsColorLbl" width="90px">Carbs</th>
+            <th class=proteinColorLbl" width="90px">Protein</th>
+            <th class="fatColorLbl" width="130px">Fat</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        <tr style="font-weight:bold;" data-ng-show="showTotalsAsPercent == false">
+            <td class="plansDesktopInlineGrid" style="padding-right: 15px;">
+                <span style="font-weight:bold;">Totals:</span>
+            </td>
+            <td style="color: rgb(33, 51, 184);" >
+                <span data-ng-show="currentDeficit >= 0" data-ng-bind="(currentDeficit || 0) | number:0"></span>
+                <span data-ng-show="currentDeficit < 0" data-ng-bind="-(currentDeficit || 0) | number:0"></span>
+            </td>
+
+            <td style="color: rgb(33, 51, 184);" id=totalCaloriesData>
+                <span data-ng-bind="plan.totalPlanCalories | number:0"></span>
+            </td>
+            <td  style="color: rgb(33, 51, 184);border-left: 1px solid lightgray;">
+                <span >&nbsp;</span>
+            </td>
+            <td class="carbsColor" >
+                <span data-ng-bind="plan.totalPlanCarbs | number:1"></span>g
+            </td>
+            <td class="proteinColor" id="totalProtein">
+                <span data-ng-bind="plan.totalPlanProtein | number:1"></span>g
+            </td>
+            <td class="fatColor" id="totalFat">
+                <span data-ng-bind="plan.totalPlanFat | number:1"></span>g
+            </td>
+
+        </tr>
+        <tr style="font-weight:bold;" data-ng-show="showTotalsAsPercent">
+            <td class="plansDesktopInlineGrid">
+                <span style="font-weight:bold;">Totals:</span>
+            </td>
+            <td style="color: rgb(33, 51, 184);">
+                <span data-ng-show="currentDeficit >= 0" data-ng-bind="(currentDeficit) | number:0"></span>
+                <span data-ng-show="currentDeficit < 0" data-ng-bind="-(currentDeficit) | number:0"></span>
+            </td>
+            <td style="color: rgb(33, 51, 184);">
+                <span data-ng-bind="plan.totalPlanCalories | number:0"></span>
+            </td>
+            <td class="hidden-xs" style="color: rgb(33, 51, 184);">
+                <span style="border-left: 1px solid lightgray;">&nbsp;</span>
+            </td>
+            <td class="carbsColor">
+                <span data-ng-bind="plan.totalPlanCarbsAsPercent | number:1"></span>%
+            </td>
+            <td class="proteinColor">
+                <span data-ng-bind="plan.totalPlanProteinAsPercent | number:1"></span>%
+            </td>
+            <td class="fatColor">
+                <span data-ng-bind="plan.totalPlanFatAsPercent | number:1"></span>%
+            </td>
+
+        </tr>
+        </tbody>
+    </table>
+
+    <div class="hidden-xs" style="display:inline-block; position:relative; bottom:6px;margin-top:10px">
+        <label for="radioBtnShowPercent">%</label>
+        <input type="radio" id="radioBtnShowPercent" name="totalsRadioBtn" style="margin-right: 20px;" data-ng-click="toggleTotalsAsPercent()" checked="checked"/>
+
+        <label for="radioBtnHidePercent">Grams</label>
+        <input type="radio" id="radioBtnHidePercent" name="totalsRadioBtn" data-ng-click="toggleTotalsAsPercent()" />
+    </div>
+</div>

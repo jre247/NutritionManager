@@ -440,6 +440,30 @@ div.tooltip {
     margin-left: 65px;
 }
 
+
+
+@media (max-height: 499px) {
+    .planFooter{
+        margin-bottom: 31px;
+    }
+    #wrapper{
+        margin-top: 44px;
+
+    }
+}
+
+.mobileStatsHeader{
+    position: fixed;
+    height: 40px;
+    background-color: rgb(242, 245, 245);
+    text-align: center;
+    border-bottom: 1px solid lightgray;
+}
+
+.mobileStatsHeader th{
+    text-align:center;
+}
+
 .mobilePlanHeader{
     /*width: 300px !important;*/
     color: white !important;
@@ -486,11 +510,6 @@ div.tooltip {
     z-index: 1030;
 }
 
-@media (max-height: 499px) {
-    .planFooter{
-        margin-bottom: 31px;
-    }
-}
 
 /*.mobilePlanHeader{*/
 /*background-image: linear-gradient(to bottom,#2C7EE0 0,rgba(104, 144, 210, 0.72) 100%);*/
@@ -498,13 +517,11 @@ div.tooltip {
 /*left:0;*/
 /*top:0;*/
 /*}*/
-/*.mobilePlanHeader{*/
-/*background-image: linear-gradient(to bottom,#2C7EE0 0,rgba(104, 144, 210, 0.72) 100%);*/
-/*right:0;*/
-/*left:0;*/
-/*top:0;*/
-/*}*/
+
 /* End Nutrition Plan */
+
+
+
 
 
 /*Mobile Footer*/

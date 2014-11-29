@@ -1,0 +1,70 @@
+<script type="text/ng-template" id="myModalContent.html">
+    <div class="modal-header" style="font-family: segui;">
+        <h3 class="modal-title">Choose options to copy</h3>
+    </div>
+    <div class="modal-body" style="font-family: segui;">
+
+        <div style="font-weight: bold;">
+            Select Meals:
+        </div>
+        <div style="border: 1px solid lightgray;width: 49%;">
+            <div class="plansMobileGrid" style="max-height: 140px; overflow:auto;">
+                <div data-ng-repeat="mealType in dialogMealsShort" >
+                    <input type="checkbox" checklist-model="selected.meals" checklist-value="mealType.id"> {{mealType.type}}
+                </div>
+            </div>
+
+            <div class="plansDesktopGrid">
+                <select data-ng-model="selected.meals" multiple="multiple" ng-options="t.id as t.type for t in dialogMealsShort" style="font-size: 16px;vertical-align: top;width: 170px;"></select>
+            </div>
+
+        </div>
+
+
+        <div style="margin-top: 30px;padding-top: 8px;">
+
+            <!--<div style="display:inline-block; width: 100px;vertical-align: top;padding-top:5px;">-->
+            <!--Plan Date:-->
+            <!--</div>-->
+            <span style="font-weight: bold;"> Plan Date:</span>
+            <div style="width: 170px;">
+                <p class="input-group">
+                    <input type="text" class="form-control" id="copyPlanDate" datepicker-popup="{{format}}" data-ng-model="selected.planDate" data-ng-change="copyPlanDateChange" is-open="dialogPlanDateOpened" min-date="minDate" max-date="'2015-06-22'" datepicker-options="copyPlanDateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
+                      <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="dialogOpenCopyPlanDate($event, 'dialogPlanDateOpened')"><i class="glyphicon glyphicon-calendar"></i></button>
+                      </span>
+                </p>
+            </div>
+        </div>
+
+
+    </div>
+    <div class="modal-footer">
+        <button style="float: left;" class="btn btn-primary" ng-click="selectAllMeals()">All Meals</button>
+        <button class="btn btn-primary" ng-click="ok()">OK</button>
+        <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+    </div>
+</script>
+
+
+
+<script type="text/ng-template" id="notesModalContent.html">
+    <div class="modal-header" style="font-family: segui;">
+        <h3 class="modal-title">Edit Plan Notes</h3>
+    </div>
+    <div class="modal-body" style="font-family: segui;">
+
+        <div style="font-weight: bold;">
+            Notes:
+        </div>
+        <div>
+            <textarea style="width: 100%;height: 100px;" data-ng-model="selected.notesToSave">
+
+            </textarea>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" ng-click="ok()">OK</button>
+        <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+    </div>
+</script>
