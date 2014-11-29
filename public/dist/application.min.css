@@ -441,6 +441,7 @@ div.tooltip {
 }
 
 .mobilePlanHeader{
+    width: 300px !important;
     color: white !important;
     -webkit-transform: matrix(1, 0, 0, 1, 0, 0);
     background-color: rgb(34, 34, 34);
@@ -484,6 +485,12 @@ div.tooltip {
     width: 385px;
     z-index: 1030;
 }
+/*.mobilePlanHeader{*/
+/*background-image: linear-gradient(to bottom,#2C7EE0 0,rgba(104, 144, 210, 0.72) 100%);*/
+/*right:0;*/
+/*left:0;*/
+/*top:0;*/
+/*}*/
 /*.mobilePlanHeader{*/
 /*background-image: linear-gradient(to bottom,#2C7EE0 0,rgba(104, 144, 210, 0.72) 100%);*/
 /*right:0;*/
