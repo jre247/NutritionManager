@@ -445,6 +445,7 @@ div.tooltip {
 @media (max-height: 499px) {
     .planFooter{
         margin-bottom: 31px;
+        background-color: rgb(236, 241, 255);
     }
     #wrapper{
         margin-top: 44px;
@@ -455,7 +456,7 @@ div.tooltip {
 .mobileStatsHeader{
     position: fixed;
     height: 40px;
-    background-color: rgb(213, 223, 247);
+
     text-align: center;
     border-bottom: 1px solid lightgray;
 }
