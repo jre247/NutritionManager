@@ -82,7 +82,7 @@
 .mobileStatsHeader{
     position: fixed;
     height: 40px;
-    background-color: rgb(242, 245, 245);
+    background-color: rgb(249, 249, 250);
     text-align: center;
     border-bottom: 1px solid lightgray;
 }
