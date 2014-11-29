@@ -67,8 +67,12 @@
     margin-left: 65px;
 }
 
-.planFooter{
-    margin-bottom: 31px;
+
+
+@media (max-height: 499px) {
+    .planFooter{
+        margin-bottom: 31px;
+    }
 }
 
 .mobilePlanHeader{
