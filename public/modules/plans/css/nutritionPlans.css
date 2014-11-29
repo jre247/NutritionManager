@@ -74,6 +74,7 @@
         margin-bottom: 31px;
         background-color: rgb(236, 241, 255);
         border-bottom:1px solid lightgray;
+        height: 40px;
     }
     #wrapper{
         margin-top: 44px;
