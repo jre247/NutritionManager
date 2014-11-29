@@ -5,12 +5,25 @@
 <div class="col-md-12">
     <form class="form-horizontal" data-ng-init="findOne()" novalidate>
         <fieldset>
-            <div class="planDetailsSection visible-sm visible-xs" style="vertical-align: top;text-align: center;background-color: rgba(172, 231, 242, 0.32);border-radius: 8px;">
-                <ng-include  src="'/modules/plans/views/planDateContent.client.view.html'"></ng-include>
+            <!--<div class="planDetailsSection visible-sm visible-xs" style="vertical-align: top;text-align: center;background-color: rgba(172, 231, 242, 0.32);border-radius: 8px;">-->
+                <!--<ng-include  src="'/modules/plans/views/planDateContent.client.view.html'"></ng-include>-->
+            <!--</div>-->
+            <div class="visible-xs mobilePlanHeader" >
+                <div  style="text-align: center;position:fixed; left: 58px">
+                    <ng-include  src="'/modules/plans/views/planDateContentMobile.client.view.html'"></ng-include>
+                </div>
+
+                <div style="position:fixed;margin-top: 7px;margin-left: 5px;border: 1px solid white;border-radius: 5px;">
+                    <a data-ng-href="#!/dashboard/{{plan.planDateAsConcat}}">
+                        <button type="button" class="btn btn-primary btn-m">
+                            <span class="glyphicon glyphicon-arrow-left" ></span>
+                        </button>
+                    </a>
+                </div>
             </div>
 
             <div class="form-group" style="margin-bottom: 1px;">
-                <div style="margin-top: 9px;margin-bottom: 15px;display:inline-block; float:left">
+                <div class="hidden-xs" style="margin-top: 9px;margin-bottom: 15px;display:inline-block; float:left">
                     <a data-ng-href="#!/dashboard/{{plan.planDateAsConcat}}">
                         <button type="button" class="btn btn-primary btn-m">
                             <span class="glyphicon glyphicon-arrow-left" ></span><span class="hidden-xs"> Dashboard</span>
@@ -24,7 +37,7 @@
 
 
 
-                <div class="planDetailsSection" style="display: inline-block; margin-top: 9px;float: right;">
+                <div class="planDetailsSection hidden-xs" style="display: inline-block; margin-top: 9px;float: right;">
                     <div id="addNotes" style="display:inline-block">
                         <button data-ng-show="plan && !plan.notesVisible" type="button" class="btn btn-primary btn-m " style="margin-bottom: 15px;" data-ng-click="createNotes();">
                             <span class="glyphicon glyphicon-edit" ></span> <span class="hidden-xs">Add Notes</span>

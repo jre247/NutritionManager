@@ -8,17 +8,29 @@
 
             <fieldset>
                 <div class="form-group" style="margin-bottom: 1px;">
-                    <div style="margin-top: 9px;margin-bottom: 15px;display:inline-block; float:left">
+                    <div class="hidden-xs" style="margin-top: 9px;margin-bottom: 15px;display:inline-block; float:left">
                         <a data-ng-href="#!/dashboard/{{plan.planDateAsConcat}}">
                             <button type="button" class="btn btn-primary btn-m">
-                                <span class="glyphicon glyphicon-home" ></span><span class="hidden-xs"> Dashboard</span>
+                                <span class="glyphicon glyphicon-arrow-left" ></span><span > Dashboard</span>
                             </button>
                         </a>
                     </div>
 
-                    <div class="planDetailsSection visible-xs" style="display:inline-block;vertical-align: top;position: relative;left: 25px;">
-                        <ng-include  src="'/modules/plans/views/planDateContent.client.view.html'"></ng-include>
+                    <div class="visible-xs mobilePlanHeader" >
+                        <div  style="text-align: center;position:fixed; left: 58px">
+                            <ng-include  src="'/modules/plans/views/planDateContentMobile.client.view.html'"></ng-include>
+                        </div>
+
+                        <div style="position:fixed;margin-top: 7px;margin-left: 5px;border: 1px solid white;border-radius: 5px;">
+                            <a data-ng-href="#!/dashboard/{{plan.planDateAsConcat}}">
+                                <button type="button" class="btn btn-primary btn-m">
+                                    <span class="glyphicon glyphicon-arrow-left" ></span>
+                                </button>
+                            </a>
+                        </div>
+
                     </div>
+
                     <div class="planDetailsSection hidden-xs" style="display:inline-block;vertical-align: top;padding-left: 30%;">
                         <ng-include  src="'/modules/plans/views/planDateContent.client.view.html'"></ng-include>
                     </div>
@@ -74,3 +86,5 @@
     </script>
 
 </section>
+
+<ng-include class="visible-xs"  src="'/modules/core/views/mobileFooter.client.view.html'"></ng-include>

@@ -16,7 +16,8 @@ angular.module(ApplicationConfiguration.applicationModuleName).service(
             importFoodsFromExcel: importFoodsFromExcel,
             filterMyFoods: filterMyFoods,
             calculateBmr: calculateBmr,
-            calculateCaloriesOut: calculateCaloriesOut
+            calculateCaloriesOut: calculateCaloriesOut,
+            getMobilePlanDateFormat: getMobilePlanDateFormat
         });
 
 
@@ -24,6 +25,19 @@ angular.module(ApplicationConfiguration.applicationModuleName).service(
         // PUBLIC METHODS.
         // ---
 
+        function getMobilePlanDateFormat($scope){
+            var monthNames = [ "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+                "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" ];
+            var dayNames = [ "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+
+            if($scope.plan && $scope.plan.planDateNonUtc) {
+                var month = monthNames[$scope.plan.planDateNonUtc.getMonth()];
+                var day = $scope.plan.planDateNonUtc.getDate();
+                var dayOfWeek = dayNames[$scope.plan.planDateNonUtc.getDay()];
+                return dayOfWeek + ', ' + month + ' ' + day;
+            }
+
+        }
 
         function getFoods(typed, skip, searchByFirstLetterOnly) {
             var request = $http({

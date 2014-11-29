@@ -3,8 +3,8 @@
  */
 'use strict';
 
-angular.module('bodyStats').controller('BodyStatsController', ['$scope', '$stateParams', '$timeout', '$location', 'Authentication', 'BodyStats',
-    function($scope, $stateParams, $timeout, $location, Authentication, BodyStats) {
+angular.module('bodyStats').controller('BodyStatsController', ['$scope', '$stateParams', '$timeout', '$location', 'Authentication', 'BodyStats', 'CoreUtilities',
+    function($scope, $stateParams, $timeout, $location, Authentication, BodyStats, CoreUtilities) {
         window.scope = $scope;
         $scope.showPlanEditableErrorMsg = false;
 
@@ -14,6 +14,10 @@ angular.module('bodyStats').controller('BodyStatsController', ['$scope', '$state
 
         $scope.directionList = ['Ascending', 'Descending'];
         $scope.selectedDirection = 'Descending';
+
+        $scope.getMobilePlanDateFormat = function(){
+            return CoreUtilities.getMobilePlanDateFormat($scope);
+        };
 
         $scope.open = function($event) {
             $event.preventDefault();

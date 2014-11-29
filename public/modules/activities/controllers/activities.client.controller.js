@@ -4,8 +4,8 @@
 
 'use strict';
 
-angular.module('activities').controller('ActivitiesController', ['$scope', '$stateParams', '$timeout', '$location', 'Authentication', 'Activities', 'NutritionProfile', '$modal', 'ActivitiesDialogService',
-    function($scope, $stateParams, $timeout, $location, Authentication, Activities, NutritionProfile, $modal, ActivitiesDialogService) {
+angular.module('activities').controller('ActivitiesController', ['$scope', '$stateParams', '$timeout', '$location', 'Authentication', 'Activities', 'NutritionProfile', '$modal', 'ActivitiesDialogService', 'CoreUtilities',
+    function($scope, $stateParams, $timeout, $location, Authentication, Activities, NutritionProfile, $modal, ActivitiesDialogService, CoreUtilities) {
         window.scope = $scope;
         $scope.showPlanEditableErrorMsg = false;
         $scope.isSortingEnabled = false;
@@ -26,7 +26,9 @@ angular.module('activities').controller('ActivitiesController', ['$scope', '$sta
           'Endurance', 'Strength', 'Balance', 'Flexibility', 'DailySteps'
         ];
 
-
+        $scope.getMobilePlanDateFormat = function(){
+            return CoreUtilities.getMobilePlanDateFormat($scope);
+        };
 
         $scope.planExistsInDb = false;
        // $scope.planDateParam = $routeParams.planDateForCreate;
