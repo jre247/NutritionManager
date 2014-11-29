@@ -485,6 +485,10 @@ div.tooltip {
     width: 385px;
     z-index: 1030;
 }
+
+.planFooter{
+    margin-bottom: 31px;
+}
 /*.mobilePlanHeader{*/
 /*background-image: linear-gradient(to bottom,#2C7EE0 0,rgba(104, 144, 210, 0.72) 100%);*/
 /*right:0;*/

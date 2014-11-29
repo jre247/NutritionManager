@@ -67,6 +67,10 @@
     margin-left: 65px;
 }
 
+.planFooter{
+    margin-bottom: 31px;
+}
+
 .mobilePlanHeader{
     /*width: 300px !important;*/
     color: white !important;
