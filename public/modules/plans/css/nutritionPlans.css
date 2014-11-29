@@ -73,6 +73,7 @@
     .planFooter{
         margin-bottom: 31px;
         background-color: rgb(236, 241, 255);
+        border-bottom:1px solid lightgray;
     }
     #wrapper{
         margin-top: 44px;
