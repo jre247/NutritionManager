@@ -441,7 +441,7 @@ div.tooltip {
 }
 
 .mobilePlanHeader{
-    width: 300px !important;
+    /*width: 300px !important;*/
     color: white !important;
     -webkit-transform: matrix(1, 0, 0, 1, 0, 0);
     background-color: rgb(34, 34, 34);

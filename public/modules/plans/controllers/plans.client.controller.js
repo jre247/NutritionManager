@@ -28,12 +28,12 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
 
         var monthNames = [ "Jan", "Feb", "Mar", "Apr", "May", "Jun",
             "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" ];
-        var dayNames = [ "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+        var dayNames = [ "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
         $scope.getMobilePlanDateFormat = function(){
             if($scope.plan && $scope.plan.planDateNonUtc) {
                 var month = monthNames[$scope.plan.planDateNonUtc.getMonth()];
                 var day = $scope.plan.planDateNonUtc.getDate();
-                var dayOfWeek = dayNames[$scope.plan.planDateNonUtc.getDay() - 1];
+                var dayOfWeek = dayNames[$scope.plan.planDateNonUtc.getDay()];
                 return dayOfWeek + ', ' + month + ' ' + day;
             }
         };
