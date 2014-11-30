@@ -458,7 +458,7 @@ div.tooltip {
 .mobileStatsHeader{
     position: fixed;
     height: 40px;
-
+    z-index: 1000;
     text-align: center;
     border-bottom: 1px solid lightgray;
 }
@@ -558,16 +558,24 @@ div.tooltip {
 }
 
 .mealFoodServing{
-    font-size: 12.5px;
+    font-size: 13.5px;
     position: relative;
-    bottom: 8px;
+    bottom: 4px;
+    padding-left: 7px;
+
+
 }
 
 .mealFoodName{
-    max-width: 292px;
+    max-width: 270px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    padding-left: 4px;
+    font-weight: bold;
+    font-size: 15px;
+    display:inline-block
+
 }
 
 .mealsContainer{
