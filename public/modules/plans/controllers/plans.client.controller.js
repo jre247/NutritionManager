@@ -592,6 +592,8 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
 
             if($stateParams.planDateForCreate){
                 processNewPlan(year, month, day);
+
+                $scope.isLoading = false;
             }
             else if(planDateAsConcat){
                 $scope.plan = Plans.get({
@@ -602,7 +604,7 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
                     }
                     processReturnedPlan();
 
-                    //$scope.isLoading = false;
+                    $scope.isLoading = false;
                 });
             }
             else if ($stateParams.planId) {
@@ -621,6 +623,8 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
         };
 
         $scope.toggleDayClick = function(direction){
+            $scope.isLoading = true;
+
             var year = $scope.plan.planDateNonUtc.getFullYear();
             var month = $scope.plan.planDateNonUtc.getMonth();
             var day = $scope.plan.planDateNonUtc.getDate();

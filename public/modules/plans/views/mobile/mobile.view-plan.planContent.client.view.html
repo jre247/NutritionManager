@@ -1,0 +1,34 @@
+<accordion sortable="sortableOptions" disableallelementsbydefault="true" updateCallback="sortableUpdateCallback" startCallback="sortableStartCallback" rootSortableElement=".panel-group" ng-show="plan.meals.length > 0"  class="plansAccordion" style="..." close-others="oneAtATime">
+    <accordion-group data-ng-repeat="meal in plan.meals" is-open="meal.isVisible">
+        <accordion-heading>
+            <div class="accordionHeadingRegion">
+                <div style="display:inline-block">
+                    <div style="padding-right: 10px;cursor:pointer;display: inline-block;" data-ng-click="deleteMeal(meal);" type="button" data-ng-show="meal.isEditable">
+                        <span style="color: rgb(228, 19, 19)" class="glyphicon glyphicon-minus-sign"></span>
+                    </div>
+
+                    <span style="width: 80px;" data-ng-show="meal.isEditable == false" data-ng-bind="getMealTypeName(meal.type) || meal.name"></span>
+
+
+                    <select  ng-model="meal.type"  data-ng-click="mealTypeClicked(meal)" data-ng-show="meal.isEditable"  ng-options="t.id as t.name for t in mealTypes" style="font-size: 16px;vertical-align: top;"></select>
+
+                </div>
+                <div style="float:right;display:inline-block" class="glyphicon glyphicon-move" ng-mousedown="enableSorting()" ng-mouseup="disableSorting()" data-ng-show="meal.isEditable"></div>
+            </div>
+        </accordion-heading>
+
+        <div>
+            <div style="margin-top: 5px;">
+                <ng-include  src="'/modules/plans/views/mobile/mobile.mealContent.client.view.html'"></ng-include>
+            </div>
+
+            <div class="emptyDataTxt" data-ng-show="!meal.foods || meal.foods.length == 0">
+                No food logged for meal
+            </div>
+
+        </div>
+    </accordion-group>
+</accordion>
+
+
+

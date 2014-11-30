@@ -25,10 +25,10 @@ angular.module('plans').config(['$stateProvider',
 			url: '/plans/:planId',
             templateUrl: 'modules/plans/views/view-plan.client.view.html'
 		}).
-        state('editPlan', {
-            url: '/plans/:planId/edit',
-            templateUrl: 'modules/plans/views/create-plan.client.view.html'
-        }).
+//        state('editPlan', {
+//            url: '/plans/:planId/edit',
+//            templateUrl: 'modules/plans/views/create-plan.client.view.html'
+//        }).
         state('viewPlanForDate', {
             url: '/plans/:planDate/:planDateChangeDirection/:dayRange',
             templateUrl: 'modules/plans/views/view-plan.client.view.html'

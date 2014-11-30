@@ -1,0 +1,53 @@
+<section data-ng-controller="PlansController" style="font-family: segui;">
+    <div class="col-md-12">
+        <form class="form-horizontal" data-ng-init="findOne(null, true)" novalidate>
+            <fieldset>
+                <div class="form-group" style="margin-bottom: 1px;">
+                    <div class="planDetailsSection">
+                        <ng-include  src="'/modules/plans/views/desktop/desktop.buttonsArea.client.view.html'"></ng-include>
+                    </div>
+
+                    <div data-ng-show="success" class="successMsgFixed" >
+                        <strong>Your changes have been saved!</strong>
+                    </div>
+
+                    <div data-ng-show="showPlanEditableErrorMsg" style="color: red; font-weight: bold; margin-bottom: 10px;">
+                        <strong>Please save the plan before copying it.</strong>
+                    </div>
+                </div>
+            </fieldset>
+
+            <fieldset id="wrapper" >
+                <div data-ng-show="isLoading" style="height: 336px;">
+                    <img width="25" height="25" src="/modules/core/img/loaders/loader.gif">
+                </div>
+
+                <div data-ng-show="!isLoading" id="content" class="form-group planContent" style="overflow-y: auto;overflow-x:hidden; margin-bottom: 3px; margin-top: 5px;">
+                    <ng-include  src="'/modules/plans/views/desktop/desktop.planContent.client.view.html'"></ng-include>
+                </div>
+            </fieldset>
+
+            <div data-ng-show="error" class="text-danger">
+                <strong data-ng-bind="error"></strong>
+            </div>
+
+        </form>
+
+        <ng-include src="'/modules/plans/views/shared/shared.planTotalStats.client.view.html'"></ng-include>
+    </div>
+
+    <ng-include src="'/modules/plans/views/shared/createFoodDialog/shared.createFoodDialog.client.view.html'"></ng-include>
+
+    <ng-include src="'/modules/plans/views/shared/shared.planDialogs.client.view.html'"></ng-include>
+
+    <script>
+        jQuery(document).ready(function(){
+
+            window.setTimeout(function(){
+                jQuery('.panel-group').find('.panel-default').addClass('disabled');
+            }, 1000)
+
+        });
+    </script>
+</section>
+

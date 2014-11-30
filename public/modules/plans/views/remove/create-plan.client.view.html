@@ -1,0 +1,163 @@
+<!--<section data-ng-controller="PlansController">-->
+	<!--&lt;!&ndash;<div class="page-header">&ndash;&gt;-->
+		<!--&lt;!&ndash;<h1>New Plan</h1>&ndash;&gt;-->
+	<!--&lt;!&ndash;</div>&ndash;&gt;-->
+	<!--<div class="col-md-12">-->
+		<!--<form class="form-horizontal" data-ng-submit="create()" novalidate>-->
+			<!--<fieldset>-->
+				<!--<div class="form-group">-->
+                    <!--<div class="planDetailsSection" style="display:inline-block;vertical-align: top;">-->
+                        <!--<label class="control-label" for="planDate">Plan Date</label>-->
+
+                        <!--<div class="row">-->
+                            <!--<div class="col-md-6" style="width: 180px;">-->
+                                <!--<p class="input-group">-->
+                                    <!--<input type="text" class="form-control" id="planDate" datepicker-popup="{{format}}" ng-model="planDate" is-open="opened" min-date="minDate" max-date="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />-->
+                                      <!--<span class="input-group-btn">-->
+                                        <!--<button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>-->
+                                      <!--</span>-->
+                                <!--</p>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+
+
+                    <!--<div class=" planDetailsSection" style="display: inline-block; margin-top: 20px;float:right;">-->
+                        <!--<input type="button" class="btn btn-default" style="margin-right: 30px;" data-ng-click="createMeal();" value="Create Meal"/>-->
+
+                        <!--<input type="submit"  class="btn btn-default">-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</fieldset>-->
+
+            <!--<fieldset style="padding-top: 15px;">-->
+                <!--<div class="form-group">-->
+
+
+                    <!--<div ng-show="meals.length > 0" style="...">-->
+                        <!--<div data-ng-repeat="meal in meals" style="border: 1px solid lightgray; margin-bottom: 30px; padding: 10px; border-radius: 5px;">-->
+                            <!--<select ng-model="meal.type" ng-options="t.id as t.name for t in mealTypes"></select>-->
+                            <!--<input style="margin-left: 15px;float:right;" type="button" value="Delete" data-ng-click="deleteMeal(meal);"/>-->
+
+                            <!--<div style="margin-top: 15px;">-->
+                                <!--<input type="button" data-ng-click="createFood(meal);" value="Create Food"/>-->
+                            <!--</div>-->
+
+                            <!--<table data-ng-show="meal.foods.length > 0">-->
+                                <!--<thead>-->
+                                    <!--<tr>-->
+                                        <!--<th width="200px">Name</th>-->
+                                        <!--<th width="100px">Type</th>-->
+                                        <!--<th width="90">Servings</th>-->
+                                        <!--<th width="90">Carbs</th>-->
+                                        <!--<th width="90">Protein</th>-->
+                                        <!--<th width="90">Fat</th>-->
+                                        <!--<th width="90">Grams</th>-->
+                                        <!--<th>&nbsp;</th>-->
+                                    <!--</tr>-->
+                                <!--</thead>-->
+                                <!--<tbody>-->
+                                    <!--<tr data-ng-show="food.isEditable == false" height="35px"-->
+                                        <!--data-ng-repeat="food in meal.foods">-->
+                                        <!--<td>-->
+                                            <!--<div class="controls">-->
+                                                <!--<span data-ng-bind="food.name"></span>-->
+                                            <!--</div>-->
+                                        <!--</td>-->
+                                        <!--<td>-->
+                                            <!--<div class="controls">-->
+                                                <!--<span data-ng-bind="food.type"></span>-->
+                                            <!--</div>-->
+                                        <!--</td>-->
+                                        <!--<td>-->
+                                            <!--<div class="controls">-->
+                                                <!--<span data-ng-bind="food.servings"></span>-->
+                                            <!--</div>-->
+                                       <!--</td>-->
+                                        <!--<td>-->
+                                            <!--<div class="controls">-->
+                                                <!--<span data-ng-bind="food.calories"></span>-->
+                                            <!--</div>-->
+                                        <!--</td>-->
+                                        <!--<td>-->
+                                            <!--<div class="controls">-->
+                                                <!--<span data-ng-bind="food.protein"></span>-->
+                                            <!--</div>-->
+                                        <!--</td>-->
+                                        <!--<td>-->
+                                            <!--<div class="controls">-->
+                                                <!--<span data-ng-bind="food.fat"></span>-->
+                                            <!--</div>-->
+                                        <!--</td>-->
+                                        <!--<td>-->
+                                            <!--<div class="controls">-->
+                                                <!--<span data-ng-bind="food.grams"></span>-->
+                                            <!--</div>-->
+                                        <!--</td>-->
+                                       <!--<td width="15px">-->
+                                           <!--<input style="margin-left: 15px;" type="button" value="Edit" data-ng-click="editFood(food);"/>-->
+                                       <!--</td>-->
+                                        <!--<td>-->
+                                            <!--<input style="margin-left: 15px;" type="button" value="Delete" data-ng-click="deleteFood(food, meal);"/>-->
+                                        <!--</td>-->
+                                    <!--</tr>-->
+
+                                    <!--<tr data-ng-show="food.isEditable" height="35px"-->
+                                        <!--data-ng-repeat="food in meal.foods">-->
+                                        <!--<td>-->
+                                            <!--<div class="controls">-->
+                                                <!--<select data-ng-model="food.selectedFood" data-ng-change="foodSelectionChange(food)" ng-options="f as f.name for f in allFoods"></select>-->
+                                            <!--</div>-->
+                                        <!--</td>-->
+                                        <!--<td>-->
+                                            <!--<div class="controls">-->
+                                                <!--<span data-ng-bind="food.type" id="foodType"  />-->
+                                            <!--</div>-->
+                                        <!--</td>-->
+                                        <!--<td>-->
+                                            <!--<div class="controls">-->
+                                                <!--<input data-ng-change="foodServingsChange(food)" data-ng-model="food.servings" id="servings" class="form-control" cols="3" rows="3"/>-->
+                                            <!--</div>-->
+                                        <!--</td>-->
+                                        <!--<td>-->
+                                            <!--<div class="controls">-->
+                                                <!--<span data-ng-bind="food.calories"></span>-->
+                                            <!--</div>-->
+                                        <!--</td>-->
+                                        <!--<td>-->
+                                            <!--<div class="controls">-->
+                                                <!--<span data-ng-bind="food.protein"></span>-->
+                                            <!--</div>-->
+                                        <!--</td>-->
+                                        <!--<td>-->
+                                            <!--<div class="controls">-->
+                                                <!--<span data-ng-bind="food.fat"></span>-->
+                                            <!--</div>-->
+                                        <!--</td>-->
+                                        <!--<td>-->
+                                            <!--<div class="controls">-->
+                                                <!--<span data-ng-bind="food.grams"></span>-->
+                                            <!--</div>-->
+                                        <!--</td>-->
+                                        <!--<td width="15px">-->
+                                            <!--<input type="button" style="margin-left: 15px;" value="Save" data-ng-click="saveFood(food);"/>-->
+                                        <!--</td>-->
+                                        <!--<td>-->
+                                            <!--<input style="margin-left: 15px;" type="button" value="Delete" data-ng-click="deleteFood(food, meal);"/>-->
+                                        <!--</td>-->
+                                    <!--</tr>-->
+                                <!--</tbody>-->
+                            <!--</table>-->
+                        <!--</div>-->
+                    <!--</div>-->
+
+                <!--</div>-->
+            <!--</fieldset>-->
+
+            <!--<div data-ng-show="error" class="text-danger">-->
+                <!--<strong data-ng-bind="error"></strong>-->
+            <!--</div>-->
+
+		<!--</form>-->
+	<!--</div>-->
+<!--</section>-->
