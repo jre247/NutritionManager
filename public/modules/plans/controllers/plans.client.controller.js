@@ -622,6 +622,10 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
 
         };
 
+        $scope.toggleMealVisibility = function(meal){
+            meal.isVisible = !meal.isVisible;
+        };
+
         $scope.toggleDayClick = function(direction){
             $scope.isLoading = true;
 

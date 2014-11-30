@@ -141,9 +141,69 @@
 }
 
 
-/*.mobilePlanHeader{*/
-    /*background-image: linear-gradient(to bottom,#2C7EE0 0,rgba(104, 144, 210, 0.72) 100%);*/
-    /*right:0;*/
-    /*left:0;*/
-    /*top:0;*/
-/*}*/
+
+.planMealContent{
+    border: 1px solid lightgray;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+.planMealContainer{
+
+    margin-bottom: 5px;
+}
+.planMealHeader{
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    font-size: 16px;
+    padding-left: 7px;
+    color: white !important;
+    background-color: rgb(34, 34, 34);
+    background-image: linear-gradient(rgb(44, 126, 224) 0px, rgba(104, 144, 210, 0.721569) 100%);
+    background-repeat: repeat-x;
+    border-bottom-color: rgb(16, 153, 232);
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    border-image-outset: 0px;
+    border-image-repeat: stretch;
+    border-image-slice: 100%;
+    border-image-source: none;
+    border-image-width: 1;
+    border-left-color: rgb(16, 153, 232);
+    border-left-style: solid;
+    border-left-width: 0px;
+    border-right-color: rgb(16, 153, 232);
+    border-right-style: solid;
+    border-right-width: 0px;
+    border-top-color: rgb(16, 153, 232);
+
+    border-top-style: solid;
+    border-top-width: 0px;
+    box-sizing: border-box;
+
+}
+
+.mealFoodServing{
+    font-size: 12.5px;
+    position: relative;
+    bottom: 8px;
+}
+
+.mealFoodName{
+    max-width: 292px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.mealsContainer{
+    margin-bottom:42px;
+}
+
+.mealTotalCalories{
+    float:right;
+    display:inline-block;
+    font-size: 14px;
+    padding: 2px;
+}
