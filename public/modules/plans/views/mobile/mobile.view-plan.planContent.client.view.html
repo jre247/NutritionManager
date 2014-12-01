@@ -9,7 +9,7 @@
                 <span style="width: 80px;" data-ng-show="meal.isEditable == false"
                       data-ng-bind="getMealTypeName(meal.type) || meal.name"></span>:
 
-                <span style="font-size: 15px;" ng-show="!meal.isEditable" data-ng-bind="meal.totalCalories | number:0"></span> cal
+                <!--<span style="font-size: 15px;" ng-show="!meal.isEditable" data-ng-bind="meal.totalCalories | number:0"></span> cal-->
 
 
                 <select  ng-model="meal.type"  data-ng-click="mealTypeClicked(meal)" data-ng-show="meal.isEditable"  ng-options="t.id as t.name for t in mealTypes" style="font-size: 16px;vertical-align: top;"></select>
@@ -18,9 +18,9 @@
             <div style="float:right;display:inline-block" class="glyphicon glyphicon-move"
                  ng-mousedown="enableSorting()" ng-mouseup="disableSorting()" data-ng-show="meal.isEditable"></div>
 
-            <!--<div class="mealTotalCalories">-->
-                <!--<span ng-show="!meal.isEditable" data-ng-bind="meal.totalCalories | number:0"></span> cal-->
-            <!--</div>-->
+            <div class="mealTotalCalories">
+                <span ng-show="!meal.isEditable" data-ng-bind="meal.totalCalories | number:0"></span> cal
+            </div>
         </div>
 
         <div class="planMealContent" ng-show="meal.isVisible">
