@@ -544,7 +544,7 @@ div.tooltip {
 .planMealHeaderLeftRegion{
     display: inline-block;
     position: relative;
-    top: 2px;
+    top: 4px;
 }
 .planMealHeader{
     height: 27px;
@@ -625,7 +625,7 @@ div.tooltip {
     display:inline-block;
     font-size: 14px;
     padding: 2px;
-
+    margin-top: 3px;
 }
 /* End Nutrition Plan */
 
