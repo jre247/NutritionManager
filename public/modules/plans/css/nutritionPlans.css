@@ -67,18 +67,25 @@
     margin-left: 65px;
 }
 
+.mobileNotesBtn{
+    margin-left: 13px;
+    margin-top: 6px;
+}
+
 
 
 @media (max-height: 499px) {
     .planFooter{
         margin-bottom: 31px;
-        background-color: rgb(236, 241, 255);
+        background-color: rgba(236, 241, 255, 1);
         border-bottom:1px solid lightgray;
         height: 40px;
     }
     #wrapper{
-        margin-top: 44px;
-
+        margin-top: 40px;
+        margin-right: -17px;
+        margin-left: -17px;
+        background-color:rgba(128, 128, 128, 0.18);
     }
 }
 
@@ -140,18 +147,34 @@
     z-index: 1030;
 }
 
+.mobilePlanContent{
+    overflow-y: auto;
+    overflow-x:hidden;
+    margin-bottom: 3px;
+
+}
+
 
 
 .planMealContent{
     border: 1px solid lightgray;
-    border-bottom-right-radius: 5px;
-    border-bottom-left-radius: 5px;
+    background-color: white;
+
+
 }
 .planMealContainer{
 
-    margin-bottom: 5px;
+    margin-bottom: 13px;
+
+}
+
+.planMealHeaderLeftRegion{
+    display: inline-block;
+    position: relative;
+    top: 2px;
 }
 .planMealHeader{
+    height: 27px;
     border-top-left-radius: 3px;
     border-top-right-radius: 3px;
     font-size: 16px;
@@ -184,6 +207,18 @@
 
 }
 
+.mealFood{
+    border-bottom: 1px solid lightgray;
+}
+
+.foodCalories{
+    color: rgb(12, 67, 211);
+    padding-top: 3px;
+    display: inline-block;
+    float: right;
+    padding-right: 6px;
+}
+
 .mealFoodServing{
     font-size: 13.5px;
     position: relative;
@@ -207,11 +242,15 @@
 
 .mealsContainer{
     margin-bottom:42px;
+    margin-right: 12px;
+    margin-left: 14px;
 }
 
 .mealTotalCalories{
+    margin-right: 8px;
     float:right;
     display:inline-block;
     font-size: 14px;
     padding: 2px;
+
 }

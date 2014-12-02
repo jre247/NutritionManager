@@ -1,7 +1,7 @@
 <div class="mealsContainer">
     <div ng-show="plan.meals.length > 0 && meal.foods && meal.foods.length > 0" data-ng-repeat="meal in plan.meals" class="planMealContainer">
         <div class="planMealHeader" ng-click="toggleMealVisibility(meal)">
-            <div style="display:inline-block">
+            <div class="planMealHeaderLeftRegion">
                 <div style="padding-right: 10px;cursor:pointer;display: inline-block;" data-ng-click="deleteMeal(meal);" type="button" data-ng-show="meal.isEditable">
                     <span style="color: rgb(228, 19, 19)" class="glyphicon glyphicon-minus-sign"></span>
                 </div>
@@ -34,6 +34,11 @@
 
         </div>
     </div>
+
+
+    <button  type="button" class="btn btn-primary btn-lg mobileNotesBtn" style="padding: 6px 10px;"  data-ng-click="openNotesDialog();">
+        <span class="glyphicon glyphicon-edit" ></span><span > Notes</span>
+    </button>
 </div>
 
 <!--<accordion sortable="sortableOptions" disableallelementsbydefault="true" updateCallback="sortableUpdateCallback" startCallback="sortableStartCallback" rootSortableElement=".panel-group" ng-show="plan.meals.length > 0"  class="plansAccordion" style="..." close-others="oneAtATime">-->

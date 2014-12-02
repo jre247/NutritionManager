@@ -31,7 +31,7 @@
 
 <div style="padding: 3px;">
     <div data-ng-repeat="food in meal.foods" data-ng-click="createFoodWithDialog(meal, food, null, true);"
-         data-ng-class="{mealSuggestedHighlight: food.IsSuggested}">
+         data-ng-class="{mealSuggestedHighlight: food.IsSuggested, mealFood: meal.foods.length > 1 && $index < meal.foods.length - 1}" >
 
         <div>
             <div class="controls mealFoodName">
@@ -39,7 +39,7 @@
 
                 <!--<span class="deleteBtn" style="font-size: 16px;width: 15px;text-align: center;" data-ng-click="deleteFood(food, meal, true);">x</span>-->
             </div>
-            <div class="controls"  style="color: rgb(211, 139, 12);padding-top: 3px;display:inline-block;float:right">
+            <div class="controls foodCalories">
 
                 <span data-ng-bind="food.calories | number:0"></span> cal
             </div>
