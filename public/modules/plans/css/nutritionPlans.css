@@ -1,13 +1,56 @@
 .foodDialogSelectMeal{
+
+}
+
+@media (min-width: 499px) {
+    .modalHeaderSection {
+        text-align: center;
+    }
+}
+
+.modalHeaderSection{
     padding: 10px;
-    border: 1px solid lightgray;
-    margin-top: 10px;
-    margin-left: 17px;
-    margin-right: 5px;
-    border-radius: 8px;
-    width: 200px;
-    text-align: center;
+}
+
+.foodDetailsHeaderTxt{
     font-size: 19px;
+    margin-top: 6px;
+
+}
+
+.servingType{
+    padding-top: 15px;
+    display: inline-block;
+    padding-left: 25px;
+}
+
+.foodDetailsHeader{
+    padding-left: 0;
+}
+
+.addFoodTxt{
+    color: blue;
+    display:inline-block;
+    float: right;
+    margin-right: 8px;
+}
+
+.modal-header{
+    padding: 5px;
+}
+.dialogNavBackContainer{
+    color: rgb(48, 48, 215);
+    padding-left: 6px;
+}
+.dialogNavBackTxt{
+    position:relative;
+    right: 2px;
+    bottom: 1px;
+}
+
+.searchByLetterLink{
+    margin-bottom: 4px;
+    margin-left: 7px;
 }
 
 .orSeparator{
@@ -15,56 +58,57 @@
     font-weight:bold;
 }
 
+.dialogNavBackBtn{
+    margin-left:14%;
+    margin-bottom: 12px;
+    margin-top: 10px;
+}
+
+.cancelTxt{
+    color: orange;
+    font-size: 18px;
+    display:inline-block;
+}
+
+.cancelTxtFloatRight{
+    float:right;
+    margin-right: 11px;
+    margin-top: 5px;
+
+}
+
+.dialogSectionHeader{
+    display:inline-block;
+    padding-left: 15%;
+}
+
+@media (max-width: 599px) {
+    .dialogSectionHeader {
+        display: inline-block;
+        padding-left: 23px;
+    }
+}
+
+
 .foodDialogMealsContainer{
-    margin-bottom: 11px;
-    padding: 10px;
+
+    padding: 4px;
+    margin-top: -5px;
 }
 
 .foodDialogSelectMeal:hover{
     cursor: pointer;
 }
 
-.foodDialogBreakfast{
-    background-color: rgba(200, 215, 253, 0.51);
-}
-.foodDialogBreakfast:hover{
-    background-color: rgba(200, 215, 253, 1);
-}
-.foodDialogLunch{
-    background-color: rgba(255, 219, 179, 1);
-}
-.foodDialogLunch:hover{
-    background-color: rgba(255, 164, 24, 1);
-}
-.foodDialogDinner{
-    background-color: rgba(180, 244, 184, 0.47);
-}
-.foodDialogDinner:hover{
-    background-color: rgba(140, 236, 146, 1);
-}
-.foodDialogSnack{
-    background-color: rgba(254, 255, 197, 1);
-}
 
-.foodDialogSnack:hover{
-    background-color: rgba(240, 244, 57, 1);
-}
-
-.foodDialogCustom{
-    background-color: rgb(230, 247, 246);
-}
-
-.foodDialogCustom:hover{
-    background-color: rgb(153, 242, 237);
-}
 
 .addMealContinueBtn{
     margin-left: 14px;
     margin-top: 28px;
 }
 .addMealBtn{
-    margin-top: 14px;
-    margin-left: 65px;
+    float: right;
+    display:inline-block;
 }
 
 .mobileNotesBtn{

@@ -162,39 +162,15 @@ angular.module('plans').service(
             $scope.mealTypeSelected;
             $scope.customMealInput = null;
             $scope.customMeal = null;
-
-
-
             $scope.userFoods = userFoods;
             $scope.meals = meals;
-
             $scope.servingType = food ? food.servingType : 0;
             $scope.isLoading = false;
-
             $scope.getMealTypeName = getMealTypeName;
+            $scope.searchByLetter = false;
 
-            $scope.getMealCss = function(meal){
-                var mealClass;
-
-                switch(meal.type){
-                    case 1:
-                        mealClass = 'foodDialogBreakfast';
-                        break;
-                    case 2:
-                        mealClass = 'foodDialogLunch';
-                        break;
-                    case 3:
-                        mealClass = 'foodDialogDinner';
-                        break;
-                    case 4:
-                        mealClass = 'foodDialogSnack';
-                        break;
-                    case 5:
-                        mealClass = 'foodDialogCustom';
-                        break;
-                }
-
-                return mealClass;
+            $scope.toggleSearchByLetter = function(){
+                $scope.searchByLetter = !$scope.searchByLetter;
             };
 
             $scope.mealTypesSelectChange = function(){
@@ -208,25 +184,7 @@ angular.module('plans').service(
             $scope.addMealContinue = function(){
                 $scope.foodDialogDisplaySection = 'categories';
                 $scope.selected.mealSelected = null;
-
-                if($scope.selected.mealTypeSelected){
-
-                }
-               // $scope.selected.mealSelected = $scope.selected.customMealInput;
-
-
-               // if($scope.selected.customMealInput) {
-               //     $scope.selected.mealSelected.type = 5;
-               // }
-
-              //  if($scope.selected.mealTypeSelected) {
-              //      $scope.selected.mealSelected =
-              //  }
             };
-
-
-
-
 
             $scope.newMealClick = function(){
                 $scope.foodDialogDisplaySection = 'addMeal';
@@ -453,65 +411,67 @@ angular.module('plans').service(
             };
 
             var initializeServingTypes = function(food){
-                var foodServingsGrams1 = food.servingGrams1;
-                var foodServingsGrams2 = food.servingGrams2;
+                if(food) {
+                    var foodServingsGrams1 = food.servingGrams1;
+                    var foodServingsGrams2 = food.servingGrams2;
 
-                $scope.foodServingTypes = [];
+                    $scope.foodServingTypes = [];
 
-                if(!foodServingsGrams1){
-                    foodServingsGrams1 = food.grams;
-                    food.servingDescription1 = '1 Serving';
-                }
+                    if (!foodServingsGrams1) {
+                        foodServingsGrams1 = food.grams;
+                        food.servingDescription1 = '1 Serving';
+                    }
 
-                $scope.foodServingTypes.push({
-                    id: 0,
-                    grams: foodServingsGrams1,
-                    description: food.servingDescription1
-                });
-
-                if(foodServingsGrams2) {
                     $scope.foodServingTypes.push({
-                        id: 1,
-                        grams: foodServingsGrams2,
-                        description: food.servingDescription2
+                        id: 0,
+                        grams: foodServingsGrams1,
+                        description: food.servingDescription1
                     });
+
+                    if (foodServingsGrams2) {
+                        $scope.foodServingTypes.push({
+                            id: 1,
+                            grams: foodServingsGrams2,
+                            description: food.servingDescription2
+                        });
+                    }
+
+                    setUpGramsDisplay();
                 }
-
-                setUpGramsDisplay();
-
 
             };
 
             $scope.foodSelectionChange = function(food){
 
-
-                $scope.selected.foodToAdd = food;
-                $scope.foodDialogDisplaySection = 'foodDetails';
-
-                $scope.skipFoods = 0;
-                $scope.findFoodsByFirstLetter = false;
-
-                $scope.calculateCaloriesDisplay();
-
-                showMacrosChart();
-
-                //reset food to 1 size of servingType1
-                var oneServingGrams, servingsDelta;
-
-                initializeServingTypes(food);
-
-                if(food.servingType == 1){
-                    oneServingGrams = $scope.foodServingTypes[0].grams;
-                    servingsDelta = (oneServingGrams / $scope.foodServingTypes[1].grams);
-
-                    food = fillFoodNutrients(food, food, oneServingGrams, 0, servingsDelta);
+                if(food) {
                     $scope.selected.foodToAdd = food;
+                    $scope.foodDialogDisplaySection = 'foodDetails';
+
+                    $scope.skipFoods = 0;
+                    $scope.findFoodsByFirstLetter = false;
 
                     $scope.calculateCaloriesDisplay();
-                }
 
-                food.servingType = 0;
-                $scope.selected.servingType = 0;
+                    showMacrosChart();
+
+                    //reset food to 1 size of servingType1
+                    var oneServingGrams, servingsDelta;
+
+                    initializeServingTypes(food);
+
+                    if (food.servingType == 1) {
+                        oneServingGrams = $scope.foodServingTypes[0].grams;
+                        servingsDelta = (oneServingGrams / $scope.foodServingTypes[1].grams);
+
+                        food = fillFoodNutrients(food, food, oneServingGrams, 0, servingsDelta);
+                        $scope.selected.foodToAdd = food;
+
+                        $scope.calculateCaloriesDisplay();
+                    }
+
+                    food.servingType = 0;
+                    $scope.selected.servingType = 0;
+                }
             };
 
             if(food){

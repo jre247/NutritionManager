@@ -1,16 +1,16 @@
 <script type="text/ng-template" id="createFoodModalContent.html">
 
 
-    <div data-ng-show="foodDialogDisplaySection == 'addMeal'" style="margin-top: 10px;">
+    <div data-ng-show="foodDialogDisplaySection == 'addMeal'" >
         <ng-include  src="'/modules/plans/views/shared/createFoodDialog/shared.createFoodDialog.addMeal.view.html'"></ng-include>
     </div>
-    <div data-ng-show="foodDialogDisplaySection == 'selectMeal'" style="margin-top: 10px;">
+    <div data-ng-show="foodDialogDisplaySection == 'selectMeal'" >
         <ng-include  src="'/modules/plans/views/shared/createFoodDialog/shared.createFoodDialog.meals.view.html'"></ng-include>
     </div>
-    <div data-ng-show="foodDialogDisplaySection == 'categories'" style="margin-top: 10px;">
+    <div data-ng-show="foodDialogDisplaySection == 'categories'" >
         <ng-include  src="'/modules/plans/views/shared/createFoodDialog/shared.createFoodDialog.categories.view.html'"></ng-include>
     </div>
-    <div data-ng-show="foodDialogDisplaySection == 'searchFoods'" style="margin-top: 10px;">
+    <div data-ng-show="foodDialogDisplaySection == 'searchFoods'" >
         <ng-include  src="'/modules/plans/views/shared/createFoodDialog/shared.createFoodDialog.searchFoods.view.html'"></ng-include>
     </div>
     <div data-ng-show="foodDialogDisplaySection == 'foodDetails'">
@@ -25,7 +25,7 @@
 
 
 
-    <div class="modal-footer">
+    <div class="modal-footer hidden-xs">
         <button data-ng-show="foodDialogDisplaySection == 'foodDetails'" class="btn btn-primary" ng-click="ok()">OK</button>
         <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
     </div>
