@@ -66,14 +66,14 @@
 
 .cancelTxt{
     color: orange;
-    font-size: 18px;
+    font-size: 17px;
     display:inline-block;
 }
 
 .cancelTxtFloatRight{
     float:right;
     margin-right: 11px;
-    margin-top: 5px;
+    margin-top: 1px;
 
 }
 
@@ -212,6 +212,11 @@
 
     margin-bottom: 17px;
 
+}
+
+.mealHeaderTxt{
+    text-align: center;
+    font-size: 18px;
 }
 
 .planMealHeaderLeftRegion{

@@ -12,7 +12,7 @@
 
     <div class="dialogSectionHeader">
         <div  ng-show="searchFoodsCategorySelected !== 'suggestFoods'">
-            <h3 class="modal-title">{{searchFoodsCategorySelected == 'myFoods' ? 'My' : 'All'}} Foods</h3>
+            <span class="mealHeaderTxt">{{searchFoodsCategorySelected == 'myFoods' ? 'My' : 'All'}} Foods</span>
         </div>
         <div  ng-show="searchFoodsCategorySelected === 'suggestFoods'">
             <h3 class="modal-title">Top 5 Suggested Foods</h3>

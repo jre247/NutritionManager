@@ -10,12 +10,12 @@
 </div>
 
 <div class="dialogSectionHeader">
-    <h3 style="text-align: center" class="modal-title">
+    <div class="mealHeaderTxt">
         {{getMealTypeName(selected.mealSelected.type || selected.mealTypeSelected) || selected.customMealInput || selected.mealSelected.name}}
-    </h3>
+    </div>
 </div>
 
-<div class="cancelTxt cancelTxtFloatRight">
+<div class="cancelTxt cancelTxtFloatRight" >
     <span class="visible-xs" ng-click="cancel()">Cancel</span>
 </div>
 
