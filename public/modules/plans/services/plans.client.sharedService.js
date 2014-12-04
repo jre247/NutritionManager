@@ -169,6 +169,20 @@ angular.module('plans').service(
             $scope.getMealTypeName = getMealTypeName;
             $scope.searchByLetter = false;
 
+            $scope.deleteMealFood = function(){
+                var food = $scope.selected.foodToAdd;
+
+                for(var f = 0; f < $scope.mealSelected.foods.length; f++){
+                    if($scope.mealSelected.foods[f]._id == food._id){
+                        $scope.mealSelected.foods.splice(f, 1);
+
+                        $scope.selected.isFoodDelete = true;
+
+                        $scope.ok();
+                    }
+                }
+            };
+
             $scope.updateFoodList = function(concatFoods){
                 $scope.isLoading = true;
                 if($scope.findFoodsByFirstLetter){
@@ -726,10 +740,13 @@ angular.module('plans').service(
 
                     $scope.selected.mealSelected = model;
 
+
 //                    if($scope.customMealInput){
 //                        $scope.selected.customMeal = model;
 //                    }
                 }
+
+
 
                 $modalInstance.close($scope.selected);
             };

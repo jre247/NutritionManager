@@ -35,6 +35,13 @@
     margin-right: 8px;
 }
 
+.foodDelete{
+    display: inline-block;
+    font-size: 21px;
+    float: left;
+    color:rgb(187, 46, 46);
+}
+
 .modal-header{
     padding: 5px;
     padding-bottom: 11px;
