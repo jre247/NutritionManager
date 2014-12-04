@@ -410,10 +410,12 @@ div.tooltip {
 
 .modal-header{
     padding: 5px;
+    padding-bottom: 11px;
 }
 .dialogNavBackContainer{
     color: rgb(48, 48, 215);
     padding-left: 6px;
+    font-size: 15px;
 }
 .dialogNavBackTxt{
     position:relative;
@@ -436,6 +438,18 @@ div.tooltip {
     margin-bottom: 12px;
     margin-top: 10px;
 }
+
+.foodsContainer{
+    overflow-y: auto;
+    height: 300px;
+}
+/*.foodsContainer{*/
+/*margin-top: 40px;*/
+/*}*/
+
+/*.searchHeader{*/
+/*position:fixed;*/
+/*}*/
 
 .cancelTxt{
     color: orange;

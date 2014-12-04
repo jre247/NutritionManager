@@ -2,7 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="99afd44b-0014-4bff-855e-4d01f0b1305f" name="Default" comment="create plan page is close to finished. Now trying to wire up view/edit plan page. Trying to make it all common html.">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/modules/plans/views/shared/createFoodDialog/shared.createFoodDialog.categories.view.html" afterPath="$PROJECT_DIR$/public/modules/plans/views/shared/createFoodDialog/shared.createFoodDialog.categories.view.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/dist/application.min.css" afterPath="$PROJECT_DIR$/public/dist/application.min.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/dist/application.min.js" afterPath="$PROJECT_DIR$/public/dist/application.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/modules/plans/css/nutritionPlans.css" afterPath="$PROJECT_DIR$/public/modules/plans/css/nutritionPlans.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/modules/plans/services/plans.client.sharedService.js" afterPath="$PROJECT_DIR$/public/modules/plans/services/plans.client.sharedService.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/modules/plans/views/shared/createFoodDialog/shared.createFoodDialog.client.view.html" afterPath="$PROJECT_DIR$/public/modules/plans/views/shared/createFoodDialog/shared.createFoodDialog.client.view.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/modules/plans/views/shared/createFoodDialog/shared.createFoodDialog.foodDetails.view.html" afterPath="$PROJECT_DIR$/public/modules/plans/views/shared/createFoodDialog/shared.createFoodDialog.foodDetails.view.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/modules/plans/views/shared/createFoodDialog/shared.createFoodDialog.searchFoods.view.html" afterPath="$PROJECT_DIR$/public/modules/plans/views/shared/createFoodDialog/shared.createFoodDialog.searchFoods.view.html" />
     </list>
     <ignored path="NutritionManager.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -25,25 +31,13 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="application.min.js" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="application.min.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/public/dist/application.min.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-35.307693" vertical-offset="48672" max-vertical-offset="121320">
-              <caret line="3306" column="0" selection-start-line="3306" selection-start-column="0" selection-end-line="3306" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="shared.createFoodDialog.categories.view.html" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/public/modules/plans/views/shared/createFoodDialog/shared.createFoodDialog.categories.view.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.095744684" vertical-offset="0" max-vertical-offset="940">
-              <caret line="6" column="45" selection-start-line="6" selection-start-column="45" selection-end-line="6" selection-end-column="45" />
+            <state vertical-scroll-proportion="0.36603376" vertical-offset="20533" max-vertical-offset="109095">
+              <caret line="2262" column="2" selection-start-line="2262" selection-start-column="2" selection-end-line="2262" selection-end-column="2" />
               <folding>
-                <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#3;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#a#1;n#div#3;n#!!top" expanded="true" />
+                <element signature="e#45774#80593#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -52,21 +46,23 @@
       <file leaf-file-name="shared.createFoodDialog.searchFoods.view.html" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/modules/plans/views/shared/createFoodDialog/shared.createFoodDialog.searchFoods.view.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-10.625" vertical-offset="0" max-vertical-offset="1980">
-              <caret line="17" column="55" selection-start-line="17" selection-start-column="55" selection-end-line="17" selection-end-column="55" />
+            <state vertical-scroll-proportion="-10.8" vertical-offset="1170" max-vertical-offset="2235">
+              <caret line="114" column="13" selection-start-line="114" selection-start-column="13" selection-end-line="114" selection-end-column="13" />
               <folding>
                 <element signature="n#style#0;n#div#0;n#div#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#div#0;n#div#1;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#div#0;n#div#0;n#div#1;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#input#0;n#div#0;n#div#0;n#div#1;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#a#1;n#div#0;n#div#0;n#div#1;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#1;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#input#0;n#div#0;n#div#0;n#div#0;n#div#1;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#1;n#div#0;n#div#0;n#div#1;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#input#0;n#div#1;n#div#0;n#div#0;n#div#1;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#a#0;n#div#0;n#div#0;n#div#1;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#div#0;n#div#1;n#div#1;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#div#0;n#div#1;n#div#1;n#div#1;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#2;n#div#1;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#3;n#div#1;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#span#0;n#div#4;n#div#1;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#5;n#div#1;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#6;n#div#1;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#div#2;n#div#1;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#1;n#div#2;n#div#1;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#2;n#div#2;n#div#1;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#span#0;n#div#3;n#div#1;n#!!top" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -75,9 +71,12 @@
       <file leaf-file-name="plans.client.sharedService.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/modules/plans/services/plans.client.sharedService.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-15.576923" vertical-offset="0" max-vertical-offset="12420">
-              <caret line="27" column="16" selection-start-line="27" selection-start-column="16" selection-end-line="27" selection-end-column="16" />
-              <folding />
+            <state vertical-scroll-proportion="-3.7692308" vertical-offset="652" max-vertical-offset="11655">
+              <caret line="156" column="40" selection-start-line="0" selection-start-column="0" selection-end-line="877" selection-end-column="2" />
+              <folding>
+                <element signature="e#1018#3917#0" expanded="false" />
+                <element signature="e#4022#5259#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -85,18 +84,8 @@
       <file leaf-file-name="nutritionPlans.css" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/modules/plans/css/nutritionPlans.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-3.9230769" vertical-offset="678" max-vertical-offset="4680">
-              <caret line="52" column="21" selection-start-line="0" selection-start-column="0" selection-end-line="306" selection-end-column="1" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="shared.createFoodDialog.client.view.html" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/modules/plans/views/shared/createFoodDialog/shared.createFoodDialog.client.view.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-18.125" vertical-offset="0" max-vertical-offset="585">
-              <caret line="29" column="8" selection-start-line="29" selection-start-column="8" selection-end-line="29" selection-end-column="75" />
+            <state vertical-scroll-proportion="-5.6538463" vertical-offset="243" max-vertical-offset="4890">
+              <caret line="26" column="19" selection-start-line="0" selection-start-column="0" selection-end-line="320" selection-end-column="1" />
               <folding />
             </state>
           </provider>
@@ -105,20 +94,8 @@
       <file leaf-file-name="application.min.css" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/dist/application.min.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-24.807692" vertical-offset="9540" max-vertical-offset="11085">
-              <caret line="679" column="1" selection-start-line="679" selection-start-column="1" selection-end-line="679" selection-end-column="1" />
-              <folding>
-                <marker date="1417572634000" expanded="true" signature="7809:7846" placeholder="{...}" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="plans.client.controller.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/modules/plans/controllers/plans.client.controller.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="9305" max-vertical-offset="16545">
-              <caret line="634" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="1097" selection-end-column="0" />
+            <state vertical-scroll-proportion="-35.307693" vertical-offset="9477" max-vertical-offset="11295">
+              <caret line="693" column="1" selection-start-line="693" selection-start-column="1" selection-end-line="693" selection-end-column="1" />
               <folding />
             </state>
           </provider>
@@ -179,15 +156,15 @@
         <option value="$PROJECT_DIR$/public/modules/plans/views/mobile/mobile.mealContent.client.view.html" />
         <option value="$PROJECT_DIR$/public/modules/plans/views/mobile/mobile.view-plan.client.view.html" />
         <option value="$PROJECT_DIR$/public/modules/plans/views/mobile/mobile.view-plan.planContent.client.view.html" />
-        <option value="$PROJECT_DIR$/public/modules/plans/services/plans.client.sharedService.js" />
-        <option value="$PROJECT_DIR$/public/modules/plans/views/shared/createFoodDialog/shared.createFoodDialog.client.view.html" />
         <option value="$PROJECT_DIR$/public/modules/plans/views/shared/createFoodDialog/shared.createFoodDialog.meals.view.html" />
-        <option value="$PROJECT_DIR$/public/modules/plans/views/shared/createFoodDialog/shared.createFoodDialog.foodDetails.view.html" />
-        <option value="$PROJECT_DIR$/public/dist/application.min.js" />
-        <option value="$PROJECT_DIR$/public/modules/plans/views/shared/createFoodDialog/shared.createFoodDialog.searchFoods.view.html" />
-        <option value="$PROJECT_DIR$/public/modules/plans/css/nutritionPlans.css" />
-        <option value="$PROJECT_DIR$/public/dist/application.min.css" />
         <option value="$PROJECT_DIR$/public/modules/plans/views/shared/createFoodDialog/shared.createFoodDialog.categories.view.html" />
+        <option value="$PROJECT_DIR$/public/modules/plans/services/plans.client.sharedService.js" />
+        <option value="$PROJECT_DIR$/public/modules/plans/views/shared/createFoodDialog/shared.createFoodDialog.foodDetails.view.html" />
+        <option value="$PROJECT_DIR$/public/modules/plans/views/shared/createFoodDialog/shared.createFoodDialog.client.view.html" />
+        <option value="$PROJECT_DIR$/public/modules/plans/css/nutritionPlans.css" />
+        <option value="$PROJECT_DIR$/public/modules/plans/views/shared/createFoodDialog/shared.createFoodDialog.searchFoods.view.html" />
+        <option value="$PROJECT_DIR$/public/dist/application.min.css" />
+        <option value="$PROJECT_DIR$/public/dist/application.min.js" />
       </list>
     </option>
   </component>
@@ -201,7 +178,7 @@
   </component>
   <component name="ProjectFrameBounds">
     <option name="x" value="-1926" />
-    <option name="y" value="72" />
+    <option name="y" value="71" />
     <option name="width" value="1920" />
     <option name="height" value="1105" />
   </component>
@@ -390,66 +367,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="createFoodDialog" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="NutritionManager" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="NutritionManager" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="public" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="modules" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="plans" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="mobile" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="NutritionManager" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="NutritionManager" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="public" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="modules" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="plans" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="desktop" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -733,7 +650,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-1926" y="72" width="1920" height="1105" extended-state="6" />
+    <frame x="-1926" y="71" width="1920" height="1105" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Grunt" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
@@ -1065,20 +982,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/public/modules/users/controllers/settings.client.controller.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1095">
-          <caret line="7" column="46" selection-start-line="0" selection-start-column="0" selection-end-line="67" selection-end-column="3" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/modules/core/views/header.client.view.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.56771797" vertical-offset="384" max-vertical-offset="1125">
-          <caret line="46" column="55" selection-start-line="46" selection-start-column="55" selection-end-line="46" selection-end-column="55" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/modules/nutrition-profile/views/edit-nutritionProfile-container.client.view.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-11.833333" vertical-offset="46" max-vertical-offset="1005">
@@ -1450,10 +1353,48 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/public/modules/plans/controllers/plans.client.controller.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="9305" max-vertical-offset="16545">
+          <caret line="634" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="1097" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/modules/foods/views/list-foods.client.view.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-26.666666" vertical-offset="755" max-vertical-offset="1710">
+          <caret line="93" column="20" selection-start-line="93" selection-start-column="20" selection-end-line="95" selection-end-column="26" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#!!top" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/modules/foods/controllers/foods.client.controller.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-18.923077" vertical-offset="618" max-vertical-offset="4275">
+          <caret line="74" column="10" selection-start-line="62" selection-start-column="8" selection-end-line="74" selection-end-column="10" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/modules/plans/views/shared/createFoodDialog/shared.createFoodDialog.categories.view.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-3.75" vertical-offset="0" max-vertical-offset="795">
+          <caret line="6" column="45" selection-start-line="6" selection-start-column="45" selection-end-line="6" selection-end-column="45" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#div#3;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#a#1;n#div#3;n#!!top" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/public/modules/plans/views/shared/createFoodDialog/shared.createFoodDialog.foodDetails.view.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.78" vertical-offset="416" max-vertical-offset="2025">
-          <caret line="47" column="60" selection-start-line="47" selection-start-column="60" selection-end-line="47" selection-end-column="60" />
+        <state vertical-scroll-proportion="-5.7" vertical-offset="0" max-vertical-offset="2055">
+          <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
           <folding>
             <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
@@ -1463,6 +1404,7 @@
             <element signature="n#style#0;n#div#0;n#div#1;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#1;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#select#0;n#div#1;n#div#0;n#div#0;n#div#1;n#!!top" expanded="true" />
             <element signature="n#style#0;n#span#1;n#div#0;n#div#2;n#div#0;n#div#0;n#div#1;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#1;n#div#0;n#div#1;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#0;n#div#1;n#div#0;n#div#1;n#!!top" expanded="true" />
@@ -1479,83 +1421,68 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/public/modules/plans/views/shared/createFoodDialog/shared.createFoodDialog.client.view.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-18.125" vertical-offset="0" max-vertical-offset="585">
-          <caret line="29" column="8" selection-start-line="29" selection-start-column="8" selection-end-line="29" selection-end-column="75" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/modules/plans/services/plans.client.sharedService.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-15.576923" vertical-offset="0" max-vertical-offset="12420">
-          <caret line="27" column="16" selection-start-line="27" selection-start-column="16" selection-end-line="27" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/modules/plans/controllers/plans.client.controller.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="9305" max-vertical-offset="16545">
-          <caret line="634" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="1097" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/dist/application.min.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-35.307693" vertical-offset="48672" max-vertical-offset="121320">
-          <caret line="3306" column="0" selection-start-line="3306" selection-start-column="0" selection-end-line="3306" selection-end-column="0" />
+        <state vertical-scroll-proportion="-3.75" vertical-offset="0" max-vertical-offset="585">
+          <caret line="6" column="49" selection-start-line="6" selection-start-column="49" selection-end-line="6" selection-end-column="49" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/public/modules/plans/views/shared/createFoodDialog/shared.createFoodDialog.searchFoods.view.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-10.625" vertical-offset="0" max-vertical-offset="1980">
-          <caret line="17" column="55" selection-start-line="17" selection-start-column="55" selection-end-line="17" selection-end-column="55" />
+        <state vertical-scroll-proportion="-10.8" vertical-offset="1170" max-vertical-offset="2235">
+          <caret line="114" column="13" selection-start-line="114" selection-start-column="13" selection-end-line="114" selection-end-column="13" />
           <folding>
             <element signature="n#style#0;n#div#0;n#div#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#0;n#div#1;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#0;n#div#0;n#div#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#input#0;n#div#0;n#div#0;n#div#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#a#1;n#div#0;n#div#0;n#div#1;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#1;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#input#0;n#div#0;n#div#0;n#div#0;n#div#1;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#1;n#div#0;n#div#0;n#div#1;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#input#0;n#div#1;n#div#0;n#div#0;n#div#1;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#a#0;n#div#0;n#div#0;n#div#1;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#0;n#div#1;n#div#1;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#0;n#div#1;n#div#1;n#div#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#2;n#div#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#3;n#div#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#0;n#div#4;n#div#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#5;n#div#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#6;n#div#1;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#2;n#div#1;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#1;n#div#2;n#div#1;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#2;n#div#2;n#div#1;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#0;n#div#3;n#div#1;n#!!top" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/public/modules/plans/css/nutritionPlans.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-3.9230769" vertical-offset="678" max-vertical-offset="4680">
-          <caret line="52" column="21" selection-start-line="0" selection-start-column="0" selection-end-line="306" selection-end-column="1" />
+        <state vertical-scroll-proportion="-5.6538463" vertical-offset="243" max-vertical-offset="4890">
+          <caret line="26" column="19" selection-start-line="0" selection-start-column="0" selection-end-line="320" selection-end-column="1" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/public/dist/application.min.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-24.807692" vertical-offset="9540" max-vertical-offset="11085">
-          <caret line="679" column="1" selection-start-line="679" selection-start-column="1" selection-end-line="679" selection-end-column="1" />
+        <state vertical-scroll-proportion="-35.307693" vertical-offset="9477" max-vertical-offset="11295">
+          <caret line="693" column="1" selection-start-line="693" selection-start-column="1" selection-end-line="693" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/modules/plans/services/plans.client.sharedService.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-3.7692308" vertical-offset="652" max-vertical-offset="11655">
+          <caret line="156" column="40" selection-start-line="0" selection-start-column="0" selection-end-line="877" selection-end-column="2" />
           <folding>
-            <marker date="1417572634000" expanded="true" signature="7809:7846" placeholder="{...}" />
+            <element signature="e#1018#3917#0" expanded="false" />
+            <element signature="e#4022#5259#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/modules/plans/views/shared/createFoodDialog/shared.createFoodDialog.categories.view.html">
+    <entry file="file://$PROJECT_DIR$/public/dist/application.min.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.095744684" vertical-offset="0" max-vertical-offset="940">
-          <caret line="6" column="45" selection-start-line="6" selection-start-column="45" selection-end-line="6" selection-end-column="45" />
+        <state vertical-scroll-proportion="0.36603376" vertical-offset="20533" max-vertical-offset="109095">
+          <caret line="2262" column="2" selection-start-line="2262" selection-start-column="2" selection-end-line="2262" selection-end-column="2" />
           <folding>
-            <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#3;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#a#1;n#div#3;n#!!top" expanded="true" />
+            <element signature="e#45774#80593#0" expanded="false" />
           </folding>
         </state>
       </provider>
