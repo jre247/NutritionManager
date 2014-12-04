@@ -652,6 +652,11 @@ div.tooltip {
 
 }
 
+.suggestedFoodsHeaderTxt{
+    position: relative;
+    right: 10px;
+}
+
 .mealFood{
     border-bottom: 1px solid lightgray;
 }
