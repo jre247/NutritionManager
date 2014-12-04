@@ -27,10 +27,11 @@
 
     <div class="modal-footer">
         <div class="visible-xs" data-ng-show="foodDialogDisplaySection == 'foodDetails'">
-            <div class="foodDelete visible-xs" ng-show="isUpdate" ng-click="deleteMealFood()">
-                <span class="glyphicon glyphicon-trash danger"></span>
+            <div class=" visible-xs">
+                <div class="foodDelete" ng-show="isUpdate" ng-click="deleteMealFood()">
+                    <span class="glyphicon glyphicon-trash danger"></span>
+                </div>
             </div>
-
             <button  class="btn btn-primary" ng-click="ok()">Save</button>
 
         </div>
