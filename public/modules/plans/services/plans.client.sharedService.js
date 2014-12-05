@@ -696,18 +696,19 @@ angular.module('plans').service(
                     $scope.selected.mealSelected = model;
                 }
 
-                //set final nutrient values to foodToAdd
-                $scope.selected.foodToAdd.calories = parseFloat($scope.selected.caloriesDisplay);
-                $scope.selected.foodToAdd.protein = parseFloat($scope.selected.proteinDisplay);
-                $scope.selected.foodToAdd.sodium = parseFloat($scope.selected.sodiumDisplay);
-                $scope.selected.foodToAdd.carbohydrates = parseFloat($scope.selected.carbsDisplay);
-                $scope.selected.foodToAdd.saturatedFat = parseFloat($scope.selected.saturatedFatDisplay);
-                $scope.selected.foodToAdd.cholesterol = parseFloat($scope.selected.cholesterolDisplay);
-                $scope.selected.foodToAdd.fiber = parseFloat($scope.selected.fiberDisplay);
-                $scope.selected.foodToAdd.sugar = parseFloat($scope.selected.sugarDisplay);
-                $scope.selected.foodToAdd.grams = parseFloat($scope.selected.gramsDisplay);
-                $scope.selected.foodToAdd.fat = parseFloat($scope.selected.fatDisplay);
-
+                if($scope.selected.isUpdate) {
+                    //set final nutrient values to foodToAdd
+                    $scope.selected.foodToAdd.calories = parseFloat($scope.selected.caloriesDisplay);
+                    $scope.selected.foodToAdd.protein = parseFloat($scope.selected.proteinDisplay);
+                    $scope.selected.foodToAdd.sodium = parseFloat($scope.selected.sodiumDisplay);
+                    $scope.selected.foodToAdd.carbohydrates = parseFloat($scope.selected.carbsDisplay);
+                    $scope.selected.foodToAdd.saturatedFat = parseFloat($scope.selected.saturatedFatDisplay);
+                    $scope.selected.foodToAdd.cholesterol = parseFloat($scope.selected.cholesterolDisplay);
+                    $scope.selected.foodToAdd.fiber = parseFloat($scope.selected.fiberDisplay);
+                    $scope.selected.foodToAdd.sugar = parseFloat($scope.selected.sugarDisplay);
+                    $scope.selected.foodToAdd.grams = parseFloat($scope.selected.gramsDisplay);
+                    $scope.selected.foodToAdd.fat = parseFloat($scope.selected.fatDisplay);
+                }
                 $modalInstance.close($scope.selected);
             };
 
