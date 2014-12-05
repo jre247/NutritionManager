@@ -280,7 +280,7 @@ angular.module('plans').service(
 
                 window.setTimeout(function () {
                     $('#allFoodsSearchInput').focus();
-                }, 100);
+                }, 500);
             };
 
 
