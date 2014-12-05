@@ -29,11 +29,9 @@
       <file leaf-file-name="application.min.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/public/dist/application.min.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.6993671" vertical-offset="20217" max-vertical-offset="109095">
-              <caret line="2227" column="2" selection-start-line="2227" selection-start-column="2" selection-end-line="2227" selection-end-column="2" />
-              <folding>
-                <element signature="e#45793#79119#0" expanded="false" />
-              </folding>
+            <state vertical-scroll-proportion="0.3491561" vertical-offset="24674" max-vertical-offset="121620">
+              <caret line="1667" column="21" selection-start-line="1667" selection-start-column="21" selection-end-line="1667" selection-end-column="21" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -41,8 +39,8 @@
       <file leaf-file-name="plans.client.sharedService.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/modules/plans/services/plans.client.sharedService.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-16.76923" vertical-offset="3569" max-vertical-offset="12405">
-              <caret line="288" column="14" selection-start-line="0" selection-start-column="0" selection-end-line="842" selection-end-column="2" />
+            <state vertical-scroll-proportion="-12.730769" vertical-offset="3569" max-vertical-offset="12405">
+              <caret line="281" column="54" selection-start-line="281" selection-start-column="20" selection-end-line="281" selection-end-column="54" />
               <folding>
                 <element signature="e#4022#5259#0" expanded="false" />
               </folding>
@@ -1523,8 +1521,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/public/modules/plans/services/plans.client.sharedService.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-16.76923" vertical-offset="3569" max-vertical-offset="12405">
-          <caret line="288" column="14" selection-start-line="0" selection-start-column="0" selection-end-line="842" selection-end-column="2" />
+        <state vertical-scroll-proportion="-12.730769" vertical-offset="3569" max-vertical-offset="12405">
+          <caret line="281" column="54" selection-start-line="281" selection-start-column="20" selection-end-line="281" selection-end-column="54" />
           <folding>
             <element signature="e#4022#5259#0" expanded="false" />
           </folding>
@@ -1533,11 +1531,9 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/public/dist/application.min.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6993671" vertical-offset="20217" max-vertical-offset="109095">
-          <caret line="2227" column="2" selection-start-line="2227" selection-start-column="2" selection-end-line="2227" selection-end-column="2" />
-          <folding>
-            <element signature="e#45793#79119#0" expanded="false" />
-          </folding>
+        <state vertical-scroll-proportion="0.3491561" vertical-offset="24674" max-vertical-offset="121620">
+          <caret line="1667" column="21" selection-start-line="1667" selection-start-column="21" selection-end-line="1667" selection-end-column="21" />
+          <folding />
         </state>
       </provider>
     </entry>
