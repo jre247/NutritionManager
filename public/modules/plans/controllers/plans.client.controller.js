@@ -787,10 +787,10 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
             $scope.currentDeficit = CoreUtilities.calculateDeficit($scope.plan, $scope.activityPlan, $scope.nutritionProfile);
         };
 
-        $scope.foodServingsChange = function(food, meal){
+        $scope.foodServingsChange = function(food, meal, newServings){
 
             if(food.servings !== "" && food.servings !== undefined && food.servings !== "undefined") {
-                var servings = parseFloat(food.servings);
+                var servings = parseFloat(newServings || food.servings);
 
                 food.calories = servings * food.selectedFood.calories;
                 food.fat = servings * food.selectedFood.fat;
@@ -798,6 +798,16 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
                 food.carbohydrates = servings * food.selectedFood.carbohydrates;
                 food.sodium = servings * food.selectedFood.sodium;
                 food.grams = servings * food.selectedFood.grams;
+
+                if(newServings) {
+                    for (var m = 0; m < meal.foods.length; m++) {
+                        if (meal.foods[m]._id === food._id) {
+                            meal.foods[m] = food;
+                            meal.foods[m].servings = newServings;
+                            break;
+                        }
+                    }
+                }
 
                 CoreUtilities.doMealTotaling(meal);
 
@@ -976,20 +986,22 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
             });
 
             var checkIfIncrementingServings = function(meal, food){
-                var isServingsUpdated = false;
+                //var isServingsUpdated = false;
+                var newServings;
 
                 if(meal.foods && meal.foods.length > 0) {
                     //check if just incrementing servings of food since list already has this food
                     for (var m = 0; m < meal.foods.length; m++) {
                         if (meal.foods[m]._id === food._id) {
-                            meal.foods[m].servings += meal.foods[m].servings;
-                            isServingsUpdated = true;
+                            //meal.foods[m].servings += meal.foods[m].servings;
+                            meal.foods[m].servings += parseFloat(food.servings);
+                            newServings = meal.foods[m].servings;
                             break;
                         }
                     }
                 }
 
-                return isServingsUpdated;
+                return newServings;
             };
 
             var instantiateNewFood = function(foodDetails, servingType, servings){
@@ -1047,10 +1059,12 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
                         }
                     }
                     else {
-                        var isServingsUpdated = checkIfIncrementingServings(meal, food);
+                        var newServings = checkIfIncrementingServings(meal, food);
 
-                        if(!isServingsUpdated) {
+                        if(!newServings) {
                             selected.mealSelected.foods.push(food);
+
+                            $scope.foodServingsChange(food, meal);
 
     //                        window.setTimeout(function(){
     //                            food.IsSuggested = true;
@@ -1059,9 +1073,12 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
     //                            food.IsSuggested = false;
     //                        }, 3000);
                         }
+                        else{
+                            $scope.foodServingsChange(food, meal, newServings);
+                        }
                     }
 
-                    $scope.foodServingsChange(food, meal);
+
                 }
 
                 $scope.savePlan();
