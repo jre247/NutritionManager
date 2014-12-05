@@ -220,31 +220,7 @@ angular.module('plans').service(
                 $scope.isMoreLoading = true;
                 $scope.skipFoods += 8;
 
-                if($scope.searchFoodsCategorySelected == 'myFoods'){
-                    var newFoods = CoreUtilities.filterMyFoods($scope.findFoodsByFirstLetter, $scope.userFoods, $scope.selected.foodSearchTxt, $scope.skipFoods);
-
-                    for(var f = 0; f < newFoods.length; f++){
-                        $scope.foods.push(newFoods[f]);
-                    }
-
-                    if(newFoods.length == 0){
-                        $scope.hideMoreFoodsLink = true;
-                    }
-
-                    $scope.isMoreLoading = false;
-                }
-                else{
-                    $scope.updateFoodList(true);
-                }
-
-
-//
-//                CoreUtilities.getFoods(filterTxt, $scope.skipFoods, false).then(function (data) {
-//                    for(var f = 0; f < data.length; f++){
-//                        $scope.foods.push(data[f]);
-//                    }
-//                    $scope.isMoreLoading = false;
-//                });
+                $scope.updateFoodList(true);
             };
 
             $scope.toggleSearchByLetter = function(){
@@ -285,24 +261,34 @@ angular.module('plans').service(
                 $scope.searchFoodsCategorySelected = 'myFoods';
                 $scope.foodDialogDisplaySection = 'searchFoods';
 
-                $scope.getFoodsList('myFoods');
+                $scope.foods = [];
 
-                $scope.hideMoreFoodsLink = false;
+                initializeUserFoods($scope.userFoods);
+
+                $scope.hideMoreFoodsLink = true;
             };
 
-            $scope.allFoodsCategorySelected = function(){
+            $scope.allFoodsCategorySelected = function() {
                 $scope.searchFoodsCategorySelected = 'allFoods';
                 $scope.foodDialogDisplaySection = 'searchFoods';
 
-                $scope.getFoodsList('allFoods');
+                $scope.foods = [];
+
+                $scope.allFoodsInInitialState = true;
 
                 $scope.hideMoreFoodsLink = false;
+
+                window.setTimeout(function () {
+                    $('#allFoodsSearchInput').focus();
+                }, 100);
             };
 
+
             $scope.suggestedFoodsCategorySelected = function(){
-                //$scope.foodDialogDisplaySection = 'suggestFoods';
                 $scope.searchFoodsCategorySelected = 'suggestFoods';
                 $scope.foodDialogDisplaySection = 'searchFoods';
+
+                initializeUserFoods($scope.userFoods);
 
                 $scope.getFoodsList('suggestFoods');
             };
@@ -362,15 +348,8 @@ angular.module('plans').service(
                         return 1;
                     return 0;
                 });
-                var userFoodsLength;
-                if(userFoods.length > 8){
-                    userFoodsLength = 8;
-                }
-                else{
-                    userFoodsLength = userFoods.length;
-                }
 
-                for(var f = 0 ; f < userFoodsLength; f++){
+                for(var f = 0 ; f < userFoods.length; f++){
                     $scope.foods.push(userFoods[f]);
                 }
             };
@@ -380,28 +359,6 @@ angular.module('plans').service(
             if($scope.foodToAdd) {
                 $scope.caloriesDisplay = $scope.foodToAdd.selectedFood ? $scope.foodToAdd.selectedFood.calories : $scope.foodToAdd.calories;
             }
-
-//            $scope.nextFoods = function(){
-//                $scope.skipFoods += 8;
-//
-//                if($scope.searchFoodsCategorySelected == 'myFoods'){
-//                    $scope.foods = CoreUtilities.filterMyFoods($scope.findFoodsByFirstLetter, $scope.userFoods, $scope.selected.foodSearchTxt, $scope.skipFoods);
-//                }
-//                else{
-//                    $scope.updateFoodList();
-//                }
-//            };
-//
-//            $scope.prevFoods = function(){
-//                $scope.skipFoods -= 8;
-//
-//                if($scope.searchFoodsCategorySelected == 'myFoods'){
-//                    $scope.foods = CoreUtilities.filterMyFoods($scope.findFoodsByFirstLetter, $scope.userFoods, $scope.selected.foodSearchTxt, $scope.skipFoods);
-//                }
-//                else{
-//                    $scope.updateFoodList();
-//                }
-//            };
 
             $scope.clearFoodInput = function(){
                 $scope.selected.foodSearchTxt = '';
@@ -563,11 +520,12 @@ angular.module('plans').service(
             }
 
             $scope.foodInputChange = function(){
+                $scope.allFoodsInInitialState = false;
                 $scope.skipFoods = 0;
                 $scope.findFoodsByFirstLetter = false;
 
                 if($scope.searchFoodsCategorySelected == 'myFoods'){
-                    $scope.foods = CoreUtilities.filterMyFoods($scope.findFoodsByFirstLetter, $scope.userFoods, $scope.selected.foodSearchTxt, $scope.skipFoods);
+                    $scope.foods = CoreUtilities.filterMyFoods($scope.findFoodsByFirstLetter, $scope.userFoods, $scope.selected.foodSearchTxt, 0, 1000);
                 }
                 else{
                     $scope.updateFoodList();
@@ -704,7 +662,6 @@ angular.module('plans').service(
 
             };
 
-
             $scope.servingsChange = function(){
                 $scope.calculateCaloriesDisplay();
 
@@ -719,8 +676,6 @@ angular.module('plans').service(
                 setUpGramsDisplay();
 
             };
-
-
 
             $scope.ok = function () {
                 if($scope.selected.mealTypeSelected || $scope.selected.customMealInput){
@@ -739,14 +694,7 @@ angular.module('plans').service(
                     $scope.meals.push(model);
 
                     $scope.selected.mealSelected = model;
-
-
-//                    if($scope.customMealInput){
-//                        $scope.selected.customMeal = model;
-//                    }
                 }
-
-
 
                 $modalInstance.close($scope.selected);
             };

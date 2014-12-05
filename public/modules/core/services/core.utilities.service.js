@@ -53,7 +53,7 @@ angular.module(ApplicationConfiguration.applicationModuleName).service(
             return( request.then( handleSuccess, handleError ) );
         }
 
-        function filterMyFoods(findFoodsByFirstLetter, userFoods, foodSearchTxt, skipFoods){
+        function filterMyFoods(findFoodsByFirstLetter, userFoods, foodSearchTxt, skipFoods, takeFoods){
             var foods = [];
 
             if(!userFoods || userFoods.length == 0){
@@ -66,7 +66,7 @@ angular.module(ApplicationConfiguration.applicationModuleName).service(
             }
 
             for(var f = skipFoods; f < userFoods.length; f++){
-                if(nFoodAdded >= 8){
+                if(nFoodAdded >= takeFoods){
                     break;
                 }
 

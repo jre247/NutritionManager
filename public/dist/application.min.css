@@ -371,8 +371,9 @@ div.tooltip {
 
 
 /* Nutrition Profile */
-.foodDialogSelectMeal{
-
+.suggestedFoodsHeaderTxt{
+    position: relative;
+    right: 10px;
 }
 
 @media (min-width: 499px) {
@@ -610,7 +611,7 @@ div.tooltip {
 
 .mealHeaderTxt{
     text-align: center;
-    font-size: 18px;
+    font-size: 19px;
 }
 
 .planMealHeaderLeftRegion{
@@ -650,11 +651,6 @@ div.tooltip {
     border-top-width: 0px;
     box-sizing: border-box;
 
-}
-
-.suggestedFoodsHeaderTxt{
-    position: relative;
-    right: 10px;
 }
 
 .mealFood{
@@ -704,7 +700,21 @@ div.tooltip {
     padding: 2px;
     margin-top: 3px;
 }
+
+.emptyFoodsTxt{
+    color: blue;
+    padding-left: 12px;
+    margin-top: 10px;
+}
+
+.searchTxt{
+    font-size: 15px;
+    margin-left: 3px;
+}
 /* End Nutrition Plan */
+
+
+
 
 
 

@@ -238,7 +238,7 @@
 
 .mealHeaderTxt{
     text-align: center;
-    font-size: 18px;
+    font-size: 19px;
 }
 
 .planMealHeaderLeftRegion{
@@ -326,4 +326,15 @@
     font-size: 14px;
     padding: 2px;
     margin-top: 3px;
+}
+
+.emptyFoodsTxt{
+    color: blue;
+    padding-left: 12px;
+    margin-top: 10px;
+}
+
+.searchTxt{
+    font-size: 15px;
+    margin-left: 3px;
 }
