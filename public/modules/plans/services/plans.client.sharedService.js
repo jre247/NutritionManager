@@ -185,7 +185,8 @@ angular.module('plans').service(
             };
 
             $scope.updateFoodList = function(concatFoods){
-                $scope.isLoading = true;
+                $scope.foods = [];
+                $scope.isMoreLoading = true;
                 if($scope.findFoodsByFirstLetter){
                     $scope.findFoodsByLetter();
                 }
@@ -201,13 +202,13 @@ angular.module('plans').service(
                             for (var f = 0; f < data.length; f++) {
                                 $scope.foods.push(data[f]);
                             }
-                            $scope.isMoreLoading = false;
+                            //$scope.isMoreLoading = false;
                         }
                         else {
                             $scope.foods = data;
                         }
 
-                        $scope.isLoading = false;
+                        $scope.isMoreLoading = false;
 
                         if(data.length == 0){
                             $scope.hideMoreFoodsLink = true;
