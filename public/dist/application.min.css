@@ -711,6 +711,11 @@ div.tooltip {
     font-size: 15px;
     margin-left: 3px;
 }
+.mobileCopyPlanBtn{
+    display:inline-block;
+    margin-left: 20px;
+    margin-top: 6px;
+}
 /* End Nutrition Plan */
 
 
