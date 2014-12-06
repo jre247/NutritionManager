@@ -219,6 +219,8 @@ exports.getFoodByPartialText = function(req, res, callback, typedText, foodsRang
         typedText = '';
     }
 
+    typedText = typedText.toLowerCase().trim();
+
     if(getFoodByFirstLetterOnly !== 'true'){
         if(typedText){
             Food.find({'name' : new RegExp(typedText, 'i')}).skip(nSkip).limit(limit).exec(function(err, foods) {
