@@ -78,7 +78,7 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
                     var finalServings = nFirstElement * food.servings;
 
                     var lastElement = servingDesc.slice(-1);
-                    var plural = finalServings > 1 && lastElement !== ')' && servingDesc.indexOf(',') && lastElement !== 'z' === -1 ? 's' : '';
+                    var plural = finalServings > 1 && lastElement !== ')' && servingDesc.indexOf(',') === -1 && lastElement !== 'z' ? 's' : '';
 
                     finalServingDesc = finalServings + servingDesc.substr(1, servingDesc.length) + plural;
                 }
