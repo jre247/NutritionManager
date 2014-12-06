@@ -67,15 +67,18 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
             if(servingDesc.toLowerCase().trim() !== '1 serving'){
                 //transform serving size text to represent number of servings
                 // (i.e. 3 servings would be "3 slices", not "1 slice")
-                var firstElement = servingDesc.substr(0, 1);
-                var nFirstElement = parseInt(firstElement);
+                var splitTxt = servingDesc.split(' ');
+                var firstSplitItem = splitTxt[0];
+
+                var nFirstElement = parseInt(firstSplitItem);
 
                 var finalServingDesc;
 
                 if(nFirstElement){
                     var finalServings = nFirstElement * food.servings;
 
-                    var plural = finalServings > 1 ? 's' : '';
+                    var lastElement = servingDesc.slice(-1);
+                    var plural = finalServings > 1 && lastElement !== ')' && servingDesc.indexOf(',') && lastElement !== 'z' === -1 ? 's' : '';
 
                     finalServingDesc = finalServings + servingDesc.substr(1, servingDesc.length) + plural;
                 }
