@@ -185,7 +185,10 @@ angular.module('plans').service(
             };
 
             $scope.updateFoodList = function(concatFoods){
-                $scope.foods = [];
+                if(!concatFoods) {
+                    $scope.foods = [];
+                }
+
                 $scope.isMoreLoading = true;
                 if($scope.findFoodsByFirstLetter){
                     $scope.findFoodsByLetter();
