@@ -213,6 +213,8 @@ angular.module('plans').service(
                             $scope.hideMoreFoodsLink = true;
                         }
 
+                        $scope.allFoodsInInitialState = false;
+
                     });
                 }
             };
@@ -517,7 +519,7 @@ angular.module('plans').service(
             }
 
             $scope.foodInputChange = function(){
-                $scope.allFoodsInInitialState = false;
+
                 $scope.skipFoods = 0;
                 $scope.findFoodsByFirstLetter = false;
 
