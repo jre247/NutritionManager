@@ -206,6 +206,7 @@ exports.getUserFoodsByPartialText = function(req, res, callback) {
 
 
 exports.getFoodByPartialText = function(req, res, callback, typedText, foodsRange) {
+    var limit = 80;
     var getFoodByFirstLetterOnly = req.param('foodsRange');
     var skip = req.param('skip');
 
@@ -219,18 +220,52 @@ exports.getFoodByPartialText = function(req, res, callback, typedText, foodsRang
     }
 
     if(getFoodByFirstLetterOnly !== 'true'){
-        Food.find({'name' : new RegExp(typedText, 'i')}).sort('name').skip(nSkip).limit(8).exec(function(err, foods) {
-            if (err) {
-                return res.send(400, {
-                    message: getErrorMessage(err)
-                });
-            } else {
-                res.jsonp(foods);
-            }
-        });
+        if(typedText){
+            Food.find({'name' : new RegExp(typedText, 'i')}).skip(nSkip).limit(limit).exec(function(err, foods) {
+                if (err) {
+                    return res.send(400, {
+                        message: getErrorMessage(err)
+                    });
+                } else {
+                    var userTxt = typedText.toLowerCase().trim();
+
+                    //sort foods by relevance
+                    var sortedList = [];
+                    var nonSortedList = [];
+
+                    for(var f = 0; f < foods.length; f++){
+                        var foodCompare = foods[f];
+
+                        if(foodCompare._doc.name.toLowerCase().trim().indexOf(typedText) == 0){
+                            sortedList.push(foodCompare);
+                        }
+                        else{
+                            nonSortedList.push(foodCompare);
+                        }
+                    }
+
+                    var finalFoodsList = sortedList.concat(nonSortedList);
+
+                    res.jsonp(finalFoodsList);
+                }
+            });
+        }
+        else{
+            Food.find({'name' : new RegExp(typedText, 'i')}).skip(nSkip).sort('name').limit(limit).exec(function(err, foods) {
+                if (err) {
+                    return res.send(400, {
+                        message: getErrorMessage(err)
+                    });
+                } else {
+                    res.jsonp(foods);
+                }
+            });
+        }
+
+
     }
     else{
-        Food.find({'name' : new RegExp('^' + typedText, 'i')}).sort('name').skip(nSkip).limit(8).exec(function(err, foods) {
+        Food.find({'name' : new RegExp('^' + typedText, 'i')}).skip(nSkip).limit(limit).exec(function(err, foods) {
             if (err) {
                 return res.send(400, {
                     message: getErrorMessage(err)

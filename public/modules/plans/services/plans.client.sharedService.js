@@ -168,6 +168,7 @@ angular.module('plans').service(
             $scope.isLoading = false;
             $scope.getMealTypeName = getMealTypeName;
             $scope.searchByLetter = false;
+            var limit = 80;
 
             $scope.deleteMealFood = function(){
                 var food = $scope.selected.foodToAdd;
@@ -218,7 +219,7 @@ angular.module('plans').service(
 
             $scope.moreFoods = function(){
                 $scope.isMoreLoading = true;
-                $scope.skipFoods += 8;
+                $scope.skipFoods += limit;
 
                 $scope.updateFoodList(true);
             };
@@ -277,10 +278,6 @@ angular.module('plans').service(
                 $scope.allFoodsInInitialState = true;
 
                 $scope.hideMoreFoodsLink = false;
-
-               // window.setTimeout(function () {
-                   // $('#allFoodsSearchInput').focus();
-               // }, 1000);
             };
 
 
