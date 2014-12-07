@@ -1,21 +1,23 @@
 <div class="visible-xs mobilePlanHeader" >
-    <div  style="text-align: center;position:fixed; left: 58px">
-        <ng-include  src="'/modules/plans/views/mobile/mobile.planDateContentMobile.client.view.html'"></ng-include>
-    </div>
+    <!--<div  style="text-align: center;position:fixed; left: 58px">-->
+        <!--<ng-include  src="'/modules/plans/views/mobile/mobile.planDateContentMobile.client.view.html'"></ng-include>-->
+    <!--</div>-->
 
-    <div style="position:fixed;margin-top: 7px;margin-left: 5px;border: 1px solid white;border-radius: 5px;">
-        <a data-ng-href="#!/dashboard/{{plan.planDateAsConcat}}">
-            <button type="button" class="btn btn-primary btn-m">
-                <span class="glyphicon glyphicon-arrow-left" ></span>
-            </button>
+    <div class="dashboardNavTxt">
+        <a style="color: white;" data-ng-href="#!/dashboard/{{plan.planDateAsConcat}}">
+            <span class="glyphicon glyphicon-chevron-left" ></span> Dashboard
         </a>
     </div>
 
+    <div class="pageTitle">
+        Food
+    </div>
+
     <div>
-        <div style="position:fixed;left: 256px;margin-top: 7px;border: 1px solid white;border-radius: 5px;" id="createMeal">
-            <button  type="button" class="btn btn-primary btn-m" style="padding: 6px 10px;"  data-ng-click="createFoodWithDialog();">
+        <div class="plusBtn" id="createMeal">
+            <div  data-ng-click="createFoodWithDialog();">
                 <span class="glyphicon glyphicon-plus" ></span>
-            </button>
+            </div>
         </div>
     </div>
 </div>
