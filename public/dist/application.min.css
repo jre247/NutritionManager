@@ -801,7 +801,7 @@ div.tooltip {
     position: fixed;
     left: 256px;
     font-size: 19px;
-    margin-top: 13px;
+    margin-top: -21px;
 
 }
 /* End Nutrition Plan */
