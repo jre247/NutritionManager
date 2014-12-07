@@ -17,18 +17,19 @@
                     </div>
 
                     <div class="visible-xs mobilePlanHeader" >
-                        <div  style="text-align: center;position:fixed; left: 58px">
+                        <div>
                             <ng-include  src="'/modules/plans/views/mobile/mobile.planDateContentMobile.client.view.html'"></ng-include>
                         </div>
 
-                        <div style="position:fixed;margin-top: 7px;margin-left: 5px;border: 1px solid white;border-radius: 5px;">
-                            <a data-ng-href="#!/dashboard/{{plan.planDateAsConcat}}">
-                                <button type="button" class="btn btn-primary btn-m">
-                                    <span class="glyphicon glyphicon-arrow-left" ></span>
-                                </button>
+                        <div class="dashboardNavTxt">
+                            <a style="color: white;" data-ng-href="#!/dashboard/{{plan.planDateAsConcat}}">
+                                <span class="glyphicon glyphicon-chevron-left" ></span> Dashboard
                             </a>
                         </div>
 
+                        <div class="pageTitle">
+                            <span>Body Stats</span>
+                        </div>
                     </div>
 
                     <div class="planDetailsSection hidden-xs" style="display:inline-block;vertical-align: top;padding-left: 30%;">
@@ -43,7 +44,7 @@
                 </div>
             </fieldset>
 
-            <fieldset>
+            <fieldset style="margin-top: 32px;">
                 <div class="form-group">
                     <label class="control-label" for="weight">Weight</label>
                     <div class="controls">

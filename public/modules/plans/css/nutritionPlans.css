@@ -356,15 +356,18 @@
 .mobilePlanDateContainer{
     text-align: center;
     position:fixed;
-    top: 38px;
+    top: 53px;
     width: 100%;
+    border-bottom: 1px solid lightgray;
 }
 
 .mobileDateContainerTxt{
     width: 146px;
-    padding-top: 8px;
-    display:inline-block;
-    color:blue;
+    padding-top: 0px;
+    position: relative;
+    bottom: 5px;
+    display: inline-block;
+    color: blue;
 }
 
 .dashboardNavTxt{
@@ -377,7 +380,7 @@
 .mobileDateLeftArrow{
     display: inline-block;
     position: relative;
-    top: 16px;
+    top: 3px;
     left: 5px;
     float: left;
     color:rgba(128, 128, 128, 0.95);
@@ -387,7 +390,7 @@
     display: inline-block;
     vertical-align: top;
     position: relative;
-    top: 15px;
+    top: 3px;
     float: right;
     right: 11px;
     color:rgba(128, 128, 128, 0.95);
@@ -400,14 +403,6 @@
     top: 5px;
 }
 
-.pageTitle{
-    display: inline-block;
-    text-align: center;
-    position: fixed;
-    margin-top: 14px;
-    margin-left: 124px;
-    font-size: 18px;
-}
 
 .plusBtn{
     position: fixed;
