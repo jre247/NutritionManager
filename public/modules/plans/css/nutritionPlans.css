@@ -344,3 +344,10 @@
     margin-left: 20px;
     margin-top: 6px;
 }
+
+.emptyPlanTxt{
+    color: blue;
+    padding-top: 35px;
+    font-weight: bold;
+    text-align: center;
+}

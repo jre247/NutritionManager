@@ -54,38 +54,55 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
             {id: 5, name: null}
         ];
 
-        $scope.getFoodServingTxt = function(food){
-            var servingDesc;
+        $scope.checkIfEmptyPlan = function(){
+            if($scope.plan) {
+                var isEmptyPlan = true;
 
-            if(food.servingType == 0){
-                servingDesc = food.servingDescription1;
-            }
-            else{
-                servingDesc = food.servingDescription2;
-            }
+                for (var p = 0; p < $scope.plan.meals.length; p++) {
+                    var mealCompare = $scope.plan.meals[p];
 
-            if(servingDesc.toLowerCase().trim() !== '1 serving'){
-                //transform serving size text to represent number of servings
-                // (i.e. 3 servings would be "3 slices", not "1 slice")
-                var splitTxt = servingDesc.split(' ');
-                var firstSplitItem = splitTxt[0];
-
-                var nFirstElement = parseInt(firstSplitItem);
-
-                var finalServingDesc;
-
-                if(nFirstElement){
-                    var finalServings = nFirstElement * food.servings;
-
-                    var lastElement = servingDesc.slice(-1);
-                    var plural = finalServings > 1 && lastElement !== ')' && servingDesc.indexOf(',') === -1 && lastElement !== 'z' ? 's' : '';
-
-                    finalServingDesc = finalServings + servingDesc.substr(1, servingDesc.length) + plural;
+                    if (mealCompare.foods.length > 0) {
+                        isEmptyPlan = false;
+                        break;
+                    }
                 }
 
-                return finalServingDesc;
+                return isEmptyPlan;
             }
         };
+
+//        $scope.getFoodServingTxt = function(food){
+//            var servingDesc;
+//
+//            if(food.servingType == 0){
+//                servingDesc = food.servingDescription1;
+//            }
+//            else{
+//                servingDesc = food.servingDescription2;
+//            }
+//
+//            if(servingDesc.toLowerCase().trim() !== '1 serving'){
+//                //transform serving size text to represent number of servings
+//                // (i.e. 3 servings would be "3 slices", not "1 slice")
+//                var splitTxt = servingDesc.split(' ');
+//                var firstSplitItem = splitTxt[0];
+//
+//                var nFirstElement = parseInt(firstSplitItem);
+//
+//                var finalServingDesc;
+//
+//                if(nFirstElement){
+//                    var finalServings = nFirstElement * food.servings;
+//
+//                    var lastElement = servingDesc.slice(-1);
+//                    var plural = finalServings > 1 && lastElement !== ')' && servingDesc.indexOf(',') === -1 && lastElement !== 'z' ? 's' : '';
+//
+//                    finalServingDesc = finalServings + servingDesc.substr(1, servingDesc.length) + plural;
+//                }
+//
+//                return finalServingDesc;
+//            }
+//        };
 
         $scope.mealTypeClicked = function(meal){
             meal.isVisible = !meal.isVisible;

@@ -9,9 +9,6 @@
                 <span style="width: 80px;" data-ng-show="meal.isEditable == false"
                       data-ng-bind="getMealTypeName(meal.type) || meal.name"></span>:
 
-                <!--<span style="font-size: 15px;" ng-show="!meal.isEditable" data-ng-bind="meal.totalCalories | number:0"></span> cal-->
-
-
                 <select  ng-model="meal.type"  data-ng-click="mealTypeClicked(meal)" data-ng-show="meal.isEditable"  ng-options="t.id as t.name for t in mealTypes" style="font-size: 16px;vertical-align: top;"></select>
 
             </div>
@@ -37,14 +34,20 @@
     </div>
 
 
-    <button  type="button" class="btn btn-primary btn-lg mobileNotesBtn"   data-ng-click="openNotesDialog();">
-        <span class="glyphicon glyphicon-edit" ></span><span > Notes</span>
-    </button>
+    <div ng-show="!checkIfEmptyPlan()">
+        <button  type="button" class="btn btn-primary btn-lg mobileNotesBtn"   data-ng-click="openNotesDialog();">
+            <span class="glyphicon glyphicon-edit" ></span><span > Notes</span>
+        </button>
 
 
-    <button  type="button" class="btn btn-primary btn-lg mobileCopyPlanBtn"   data-ng-click="openCopyPlanDialog()">
-        <span class="glyphicon glyphicon-share" ></span>Copy
-    </button>
+        <button  type="button" class="btn btn-primary btn-lg mobileCopyPlanBtn"   data-ng-click="openCopyPlanDialog()">
+            <span class="glyphicon glyphicon-share" ></span>Copy
+        </button>
+    </div>
+
+    <div class="emptyPlanTxt" ng-show="checkIfEmptyPlan()">
+        There are currently no foods logged for this day.
+    </div>
 </div>
 
 
