@@ -73,11 +73,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="nutritionPlans.css" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="nutritionPlans.css" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/modules/plans/css/nutritionPlans.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.9419729" vertical-offset="5251" max-vertical-offset="6315">
-              <caret line="415" column="1" selection-start-line="415" selection-start-column="1" selection-end-line="415" selection-end-column="1" />
+            <state vertical-scroll-proportion="-9.192307" vertical-offset="5281" max-vertical-offset="6315">
+              <caret line="368" column="17" selection-start-line="0" selection-start-column="0" selection-end-line="415" selection-end-column="1" />
               <folding />
             </state>
           </provider>
@@ -93,11 +93,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="application.min.css" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="application.min.css" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/public/dist/application.min.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-34.384617" vertical-offset="5001" max-vertical-offset="13125">
-              <caret line="393" column="0" selection-start-line="393" selection-start-column="0" selection-end-line="808" selection-end-column="1" />
+            <state vertical-scroll-proportion="0.97061706" vertical-offset="11129" max-vertical-offset="13125">
+              <caret line="808" column="1" selection-start-line="808" selection-start-column="1" selection-end-line="808" selection-end-column="1" />
               <folding />
             </state>
           </provider>
@@ -165,8 +165,8 @@
         <option value="$PROJECT_DIR$/public/modules/body-stats/views/view-body-stat.client.view.html" />
         <option value="$PROJECT_DIR$/public/modules/activities/views/view-activity.client.view.html" />
         <option value="$PROJECT_DIR$/public/modules/plans/views/mobile/mobile.mobilePlanHeader.client.view.html" />
-        <option value="$PROJECT_DIR$/public/dist/application.min.css" />
         <option value="$PROJECT_DIR$/public/modules/plans/css/nutritionPlans.css" />
+        <option value="$PROJECT_DIR$/public/dist/application.min.css" />
       </list>
     </option>
   </component>
@@ -179,8 +179,8 @@
     <initial>false</initial>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="3175" />
-    <option name="y" value="-145" />
+    <option name="x" value="3177" />
+    <option name="y" value="-67" />
     <option name="width" value="1920" />
     <option name="height" value="1178" />
   </component>
@@ -618,7 +618,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="3175" y="-145" width="1920" height="1178" extended-state="6" />
+    <frame x="3177" y="-67" width="1920" height="1178" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Grunt" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
@@ -1388,18 +1388,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/dist/application.min.css">
+    <entry file="file://$PROJECT_DIR$/public/modules/plans/css/nutritionPlans.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-34.384617" vertical-offset="5001" max-vertical-offset="13125">
-          <caret line="393" column="0" selection-start-line="393" selection-start-column="0" selection-end-line="808" selection-end-column="1" />
+        <state vertical-scroll-proportion="-9.192307" vertical-offset="5281" max-vertical-offset="6315">
+          <caret line="368" column="17" selection-start-line="0" selection-start-column="0" selection-end-line="415" selection-end-column="1" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/modules/plans/css/nutritionPlans.css">
+    <entry file="file://$PROJECT_DIR$/public/dist/application.min.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.9419729" vertical-offset="5251" max-vertical-offset="6315">
-          <caret line="415" column="1" selection-start-line="415" selection-start-column="1" selection-end-line="415" selection-end-column="1" />
+        <state vertical-scroll-proportion="0.97061706" vertical-offset="11129" max-vertical-offset="13125">
+          <caret line="808" column="1" selection-start-line="808" selection-start-column="1" selection-end-line="808" selection-end-column="1" />
           <folding />
         </state>
       </provider>

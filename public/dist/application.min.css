@@ -541,7 +541,7 @@ div.tooltip {
         height: 40px;
     }
     #wrapper{
-        margin-top: 64px;
+        margin-top: 71px;
 
         margin-left: -17px;
 
@@ -552,7 +552,7 @@ div.tooltip {
     position: fixed;
     height: 40px;
     z-index: 1000;
-    top: 78px;
+    top: 82px;
     text-align: center;
     border-bottom: 1px solid lightgray;
 }
@@ -748,7 +748,7 @@ div.tooltip {
 }
 
 .mobilePlanDateContainer{
-    padding-bottom: 4px;
+    padding-bottom: 8px;
     z-index: 1000;
     text-align: center;
     position:fixed;
@@ -762,7 +762,7 @@ div.tooltip {
     width: 146px;
     padding-top: 0px;
     position: relative;
-    bottom: 5px;
+    bottom: 3px;
     display: inline-block;
     color: blue;
 }
@@ -787,7 +787,7 @@ div.tooltip {
     display: inline-block;
     vertical-align: top;
     position: relative;
-    top: 5px;
+    top: 6px;
     float: right;
     right: 11px;
     color:rgba(128, 128, 128, 0.95);
@@ -797,7 +797,7 @@ div.tooltip {
     font-weight: bold;
     font-size: 16px;
     position: relative;
-    top: 5px;
+    top: 6px;
 }
 
 
