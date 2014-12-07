@@ -79,11 +79,11 @@
     height: 300px;
 }
 /*.foodsContainer{*/
-    /*margin-top: 40px;*/
+/*margin-top: 40px;*/
 /*}*/
 
 /*.searchHeader{*/
-    /*position:fixed;*/
+/*position:fixed;*/
 /*}*/
 
 .cancelTxt{
@@ -159,7 +159,7 @@
     position: fixed;
     height: 40px;
     z-index: 1000;
-    top: 75px;
+    top: 78px;
     text-align: center;
     border-bottom: 1px solid lightgray;
 }
@@ -355,6 +355,8 @@
 }
 
 .mobilePlanDateContainer{
+    padding-bottom: 4px;
+    z-index: 1000;
     text-align: center;
     position:fixed;
     top: 52px;
@@ -382,7 +384,7 @@
 .mobileDateLeftArrow{
     display: inline-block;
     position: relative;
-    top: 1px;
+    top: 5px;
     left: 5px;
     float: left;
     color:rgba(128, 128, 128, 0.95);
@@ -392,7 +394,7 @@
     display: inline-block;
     vertical-align: top;
     position: relative;
-    top: 1px;
+    top: 5px;
     float: right;
     right: 11px;
     color:rgba(128, 128, 128, 0.95);
