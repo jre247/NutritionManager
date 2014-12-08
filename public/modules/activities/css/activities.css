@@ -1,0 +1,20 @@
+.mobileActivitiesTotals{
+    font-weight: bold;
+    position: fixed;
+    top: 82px;
+
+    width: 100%;
+    color:blue;
+    border-bottom: 1px solid lightgray;
+    background-color:rgba(236, 241, 255, 1);
+}
+
+.mobileTotalsContent{
+    display:inline-block;
+
+
+}
+
+.totalsLbl{
+    float: left;
+}

@@ -8,13 +8,9 @@ angular.module('activities').controller('ActivitiesController', ['$scope', '$sta
     function($scope, $stateParams, $timeout, $location, Authentication, Activities, NutritionProfile, $modal, ActivitiesDialogService, CoreUtilities) {
         window.scope = $scope;
         $scope.showPlanEditableErrorMsg = false;
-        $scope.isSortingEnabled = false;
-        var sortingBtnTxtOptions = ['Enable Sorting', 'Disable Sorting'];
-        $scope.sortingBtnTxt = sortingBtnTxtOptions[0];
-        var isSortingEnabled = false;
 
         $scope.showInjuriesSection = false;
-        $scope.showNotesSection = true;
+       // $scope.showNotesSection = true;
         $scope.dailyStepsEntered = false;
         $scope.injuriesVisible = false;
         $scope.isLoading = false;
@@ -644,12 +640,51 @@ angular.module('activities').controller('ActivitiesController', ['$scope', '$sta
             $scope.createInjuryWithDialog();
         };
 
-        $scope.createNotes = function(){
-            $scope.showNotesSection = true;
+        $scope.openNotesDialog = function () {
+            var modalInstance = $modal.open({
+                templateUrl: 'notesModalContent.html',
+                controller: ActivitiesDialogService.NotesModalInstanceCtrl,
 
-            $scope.plan.notesVisible = true;
+                resolve: {
+                    parentScope: function () {
+                        return $scope;
+                    },
+                    planNotes: function(){
+                        return $scope.plan.notes
+                    }
+                }
+            });
 
-            scrollToBottom();
+            modalInstance.result.then(function (notesToSave) {
+                $scope.plan.notes = notesToSave;
+                $scope.saveActivityPlan();
+            }, function () {
+                //$log.info('Modal dismissed at: ' + new Date());
+            });
+        };
+
+        $scope.openStepsDialog = function () {
+            var modalInstance = $modal.open({
+                templateUrl: 'stepsModalContent.html',
+                controller: ActivitiesDialogService.StepsModalInstanceCtrl,
+
+                resolve: {
+                    parentScope: function () {
+                        return $scope;
+                    },
+                    dailySteps: function(){
+                        return $scope.plan.dailySteps
+                    }
+                }
+            });
+
+            modalInstance.result.then(function (dailySteps) {
+                $scope.plan.dailySteps = dailySteps;
+                $scope.calculateTotalCaloriesBurned();
+                $scope.saveActivityPlan();
+            }, function () {
+                //$log.info('Modal dismissed at: ' + new Date());
+            });
         };
 
         //sorting code

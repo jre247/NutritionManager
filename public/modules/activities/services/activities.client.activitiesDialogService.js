@@ -9,13 +9,51 @@ angular.module('plans').service(
         // Return public API.
         return({
             CreateExerciseInstanceCtrl: CreateExerciseInstanceCtrl,
-            CreateInjuriesInstanceCtrl: CreateInjuriesInstanceCtrl
+            CreateInjuriesInstanceCtrl: CreateInjuriesInstanceCtrl,
+            NotesModalInstanceCtrl: NotesModalInstanceCtrl,
+            StepsModalInstanceCtrl: StepsModalInstanceCtrl
         });
 
 
         // ---
         // PUBLIC METHODS.
         // ---
+
+        function StepsModalInstanceCtrl($scope, $modalInstance, parentScope, dailySteps) {
+            $scope.notesToSave = null;
+            $scope.parentScope = parentScope;
+            $scope.dailySteps = dailySteps;
+
+            $scope.selected = {
+                dailySteps: $scope.dailySteps
+            };
+
+            $scope.ok = function () {
+                $modalInstance.close($scope.selected.dailySteps);
+            };
+
+            $scope.cancel = function () {
+                $modalInstance.dismiss('cancel');
+            };
+        };
+
+        function NotesModalInstanceCtrl($scope, $modalInstance, parentScope, planNotes) {
+            $scope.notesToSave = null;
+            $scope.parentScope = parentScope;
+            $scope.notesToSave = planNotes;
+
+            $scope.selected = {
+                notesToSave: $scope.notesToSave
+            };
+
+            $scope.ok = function () {
+                $modalInstance.close($scope.selected.notesToSave);
+            };
+
+            $scope.cancel = function () {
+                $modalInstance.dismiss('cancel');
+            };
+        };
 
         function CreateInjuriesInstanceCtrl($scope, $modalInstance, injury){
             $scope.painLevelList = [
