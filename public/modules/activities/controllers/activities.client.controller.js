@@ -542,46 +542,47 @@ angular.module('activities').controller('ActivitiesController', ['$scope', '$sta
             $scope.isExercisesOpen = true;
         };
 
-        $scope.createActivityWithDialog = function(activity){
-            var modalInstance = $modal.open({
-                templateUrl: 'createExerciseModalContent.html',
-                controller: ActivitiesDialogService.CreateExerciseInstanceCtrl,
-                //size: size,
-                resolve: {
-                    activity: function(){
-                        return activity
-                    },
-                    activityTypes: function () {
-                        return $scope.activityTypes;
-                    },
-                    activityTypesDictionary: function () {
-                        return $scope.activityTypesDictionary;
-                    },
-                    parentScope: function () {
-                        return $scope;
-                    }
-                }
-            });
 
-            modalInstance.result.then(function (newActivityModel) {
-                if(newActivityModel.isUpdate){
-                    for(var i = 0; i < $scope.plan.activities.length; i++){
-                        if($scope.plan.activities[i]._id == newActivityModel._id){
-                            $scope.plan.activities[i] = newActivityModel;
-                        }
-                    }
-                }
-                else {
-                    $scope.plan.activities.push(newActivityModel);
-                }
-
-                $scope.calculateCalories(newActivityModel);
-
-                $scope.saveActivityPlan();
-            }, function () {
-                //$log.info('Modal dismissed at: ' + new Date());
-            });
-        };
+//        $scope.createActivityWithDialog = function(activity){
+//            var modalInstance = $modal.open({
+//                templateUrl: 'createExerciseModalContent.html',
+//                controller: ActivitiesDialogService.CreateExerciseInstanceCtrl,
+//                //size: size,
+//                resolve: {
+//                    activity: function(){
+//                        return activity
+//                    },
+//                    activityTypes: function () {
+//                        return $scope.activityTypes;
+//                    },
+//                    activityTypesDictionary: function () {
+//                        return $scope.activityTypesDictionary;
+//                    },
+//                    parentScope: function () {
+//                        return $scope;
+//                    }
+//                }
+//            });
+//
+//            modalInstance.result.then(function (newActivityModel) {
+//                if(newActivityModel.isUpdate){
+//                    for(var i = 0; i < $scope.plan.activities.length; i++){
+//                        if($scope.plan.activities[i]._id == newActivityModel._id){
+//                            $scope.plan.activities[i] = newActivityModel;
+//                        }
+//                    }
+//                }
+//                else {
+//                    $scope.plan.activities.push(newActivityModel);
+//                }
+//
+//                $scope.calculateCalories(newActivityModel);
+//
+//                $scope.saveActivityPlan();
+//            }, function () {
+//                //$log.info('Modal dismissed at: ' + new Date());
+//            });
+//        };
 
         $scope.createInjuryWithDialog = function(injury){
 
@@ -662,6 +663,65 @@ angular.module('activities').controller('ActivitiesController', ['$scope', '$sta
                 //$log.info('Modal dismissed at: ' + new Date());
             });
         };
+
+        $scope.createActivityWithDialog = function(activity, dailySteps, showExerciseDetailsImmediately){
+            var modalInstance = $modal.open({
+                templateUrl: 'createExerciseModalContent.html',
+                controller: ActivitiesDialogService.CreateExerciseInstanceCtrl,
+                //size: size,
+                resolve: {
+                    activity: function(){
+                        return activity
+                    },
+                    activityTypes: function () {
+                        return $scope.activityTypes;
+                    },
+                    activityTypesDictionary: function () {
+                        return $scope.activityTypesDictionary;
+                    },
+                    dailySteps: function () {
+                        return dailySteps;
+                    },
+                    parentScope: function () {
+                        return $scope;
+                    },
+                    showExerciseDetailsImmediately: function(){
+                        return showExerciseDetailsImmediately;
+                    },
+                    hideDailyStepsSection: function(){
+                        return $scope.plan.dailySteps > 0;
+                    }
+                }
+            });
+
+            modalInstance.result.then(function (selected) {
+                if(selected.dailySteps){
+                    $scope.plan.dailySteps = selected.dailySteps;
+                    $scope.calculateTotalCaloriesBurned();
+                    $scope.saveActivityPlan();
+                }
+                else{
+                    var newActivityModel = selected.activity;
+                    if(newActivityModel.isUpdate){
+                        for(var i = 0; i < $scope.plan.activities.length; i++){
+                            if($scope.plan.activities[i]._id == newActivityModel._id){
+                                $scope.plan.activities[i] = newActivityModel;
+                            }
+                        }
+                    }
+                    else {
+                        $scope.plan.activities.push(newActivityModel);
+                    }
+
+                    $scope.calculateCalories(newActivityModel);
+
+                    $scope.saveActivityPlan();
+                }
+            }, function () {
+                //$log.info('Modal dismissed at: ' + new Date());
+            });
+        };
+
 
         $scope.openStepsDialog = function () {
             var modalInstance = $modal.open({

@@ -88,7 +88,7 @@ angular.module('plans').service(
             };
         };
 
-        function CreateExerciseInstanceCtrl($scope, $modalInstance, parentScope, activityTypes, activityTypesDictionary, activity) {
+        function CreateExerciseInstanceCtrl($scope, $modalInstance, parentScope, activityTypes, activityTypesDictionary, activity, dailySteps, showExerciseDetailsImmediately, hideDailyStepsSection) {
             $scope.intensityList = [
                 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
             ];
@@ -99,11 +99,9 @@ angular.module('plans').service(
             $scope.selectedActivityType = activityTypes[0];
             $scope.newActivity = activity ? activity : {};
             $scope.activitySearchTxt = '';
-
-            $scope.selected = {
-                activity: $scope.newActivity,
-                activitySearchTxt: $scope.activitySearchTxt
-            };
+            $scope.dailySteps = dailySteps ? dailySteps : null;
+            $scope.hideDailyStepsSection = hideDailyStepsSection;
+            $scope.sectionToDisplay = dailySteps ? 'dailySteps' : false;
 
             $scope.isActivityEndurance = function(activity){
                 if(activity) {
@@ -115,18 +113,70 @@ angular.module('plans').service(
                 }
             };
 
-            if(activity){
-                $scope.showActivityDetails = true;
+            $scope.selected = {
+                activity: $scope.newActivity,
+                dailySteps: $scope.dailySteps,
+                activitySearchTxt: $scope.activitySearchTxt,
+                sectionToSave: $scope.sectionToDisplay
+            };
+
+            if(dailySteps){
+                $scope.sectionToDisplay = 'dailySteps';
+                $scope.selected.activity.isUpdate = false;
+            }
+            else if(activity){
+                $scope.sectionToDisplay = 'exerciseDetails';
                 $scope.newActivity.isUpdate = true;
                 $scope.selectedActivityType = activityTypesDictionary[activity.activityType];
                 $scope.selected.activity.isCardio = $scope.isActivityEndurance(activity);
             }
+            else if (showExerciseDetailsImmediately){
+                $scope.sectionToDisplay = 'exercises';
+                $scope.newActivity.isUpdate = false;
+
+            }
             else{
-                $scope.showActivityDetails = false;
+                $scope.sectionToDisplay = 'categories';
                 $scope.selected.activity.isUpdate = false;
             }
 
 
+
+
+
+            $scope.activitiesNav = function(){
+                $scope.sectionToDisplay = 'categories';
+            };
+
+            $scope.dailyStepsSelected = function(){
+                $scope.sectionToDisplay = 'dailySteps';
+            };
+
+            $scope.exercisesSelected = function(){
+                $scope.sectionToDisplay = 'exercises';
+            };
+
+//            $scope.changeActivity = function(activity){
+//                if(activity) {
+//                    $scope.sectionToDisplay = 'exercises';
+//                }
+//                else{
+//                    $scope.sectionToDisplay = 'categories';
+//                }
+//            };
+
+
+
+//            if(activity){
+//                $scope.showActivityDetails = true;
+//                $scope.newActivity.isUpdate = true;
+//                $scope.selectedActivityType = activityTypesDictionary[activity.activityType];
+//                $scope.selected.activity.isCardio = $scope.isActivityEndurance(activity);
+//            }
+//            else{
+//                $scope.showActivityDetails = false;
+//                $scope.selected.activity.isUpdate = false;
+//            }
 
             $scope.isActivityDistanceRelated = function(activity){
                 var activityTypeId = activity.activityType;
@@ -144,20 +194,22 @@ angular.module('plans').service(
                 $scope.selected.activity.id = activity.id;
                 $scope.selected.activity.activityType = activity.id;
                 $scope.selectedActivityType = activity;
-                $scope.showActivityDetails = true;
+                $scope.sectionToDisplay = 'exerciseDetails';
 
                 $scope.selected.activity.isCardio = $scope.isActivityEndurance(activity);
             };
 
-            $scope.changeActivity = function(){
-                $scope.showActivityDetails = false
-            };
 
 
             $scope.ok = function () {
+//                if($scope.sectionToDisplay == 'dailySteps'){
+//                    $modalInstance.close($scope.selected.dailySteps);
+//                }
+//                else if($scope.sectionToDisplay == 'exerciseDetails'){
+//                    $modalInstance.close($scope.selected.activity);
+//                }
 
-
-                $modalInstance.close($scope.selected.activity);
+                $modalInstance.close($scope.selected);
             };
 
             $scope.cancel = function () {

@@ -5,9 +5,6 @@
 <div class="col-md-12">
     <form class="form-horizontal" data-ng-init="findOne()" novalidate>
         <fieldset>
-            <!--<div class="planDetailsSection visible-sm visible-xs" style="vertical-align: top;text-align: center;background-color: rgba(172, 231, 242, 0.32);border-radius: 8px;">-->
-                <!--<ng-include  src="'/modules/plans/views/planDateContent.client.view.html'"></ng-include>-->
-            <!--</div>-->
             <div class="visible-xs mobilePlanHeader" >
                 <div>
                     <ng-include  src="'/modules/plans/views/mobile/mobile.planDateContentMobile.client.view.html'"></ng-include>
@@ -30,6 +27,12 @@
 
                 <div class="pageTitle">
                     <span>Activities</span>
+                </div>
+
+                <div class="plusBtn" id="createActivity">
+                    <div data-ng-click="createActivityWithDialog();">
+                        <span class="glyphicon glyphicon-plus" ></span>
+                    </div>
                 </div>
             </div>
 
@@ -87,23 +90,59 @@
                            data-ng-model="plan.dailySteps" placeholder="Daily Steps">
                 </div>
 
+
+
                 <div class="visible-xs" style="margin: 10px;">
-                    <button  style="margin-bottom: 20px;" type="button" class="btn btn-primary btn-sm" ng-show="!plan.dailySteps" data-ng-click="openStepsDialog();">
-                        <span class="glyphicon glyphicon-plus" ></span> Enter Daily Steps
-                    </button>
+                    <!--<button  style="margin-bottom: 20px;" type="button" class="btn btn-primary btn-sm" ng-show="!plan.dailySteps" data-ng-click="openStepsDialog();">-->
+                        <!--<span class="glyphicon glyphicon-plus" ></span> Enter Daily Steps-->
+                    <!--</button>-->
 
-                    <div ng-show="plan.dailySteps">
-                        <div class="list-group" style="color: rgb(66, 66, 207)" >
-                            <a class="list-group-item" style="height: 60px;" data-ng-click="openStepsDialog();">
-                                <div >
-                                    <label for="dailySteps">Daily Steps:</label>
-                                    <span  id="dailyStepsTxt" name="dailyStepsTxt"
-                                           data-ng-bind="plan.dailySteps | number:0" placeholder="Daily Steps"/> steps
-                                </div>
+                    <div style="color:blue; text-align: center;font-weight: bold;padding-top: 30px;" ng-show="!plan.dailySteps && plan.activities.length == 0">
+                        There are no activities entered for this day.
+                    </div>
 
-                            </a>
+                    <div style="margin-top: 10px;">
+                        <div class="list-group">
+                            <div ng-show="plan.dailySteps">
+                                <a class="list-group-item" style="height: 60px;" data-ng-click="createActivityWithDialog(null, plan.dailySteps);">
+                                    <div >
+                                        <label for="dailySteps">Daily Steps:</label>
+                                                <span  id="dailyStepsTxt" name="dailyStepsTxt"
+                                                       data-ng-bind="plan.dailySteps | number:0" placeholder="Daily Steps"/> steps
+                                    </div>
+                                </a>
+
+                            </div>
+
+                            <div data-ng-repeat="activity in plan.activities"  style="margin-bottom: 0px;">
+                                <a class="list-group-item actionRow" data-ng-click="createActivityWithDialog(activity)" style="height: 60px;"
+                                   data-ng-mouseover="activity.showEditIcon = true" data-ng-mouseleave="activity.showEditIcon = false">
+                                    <div style="display:inline-block; font-weight:bold;color:rgb(105, 97, 97)" >
+                                        <span data-ng-bind="activityTypesDictionary[activity.activityType].name"></span>:
+                                    </div>
+
+                                    <div class="list-group-item-text text-muted" style="display:inline-block;padding-left: 10px;">
+                                        <div data-ng-show="activity.steps > 0">
+                                            <span  data-ng-bind="activity.steps | number:0"></span> Steps,
+                                        </div>
+
+                                    </div>
+
+                                    <div style="display:inline-block;color:gray" >
+                                        <div style="display:inline-block" data-ng-show="activity.duration > 0">
+                                            <span   data-ng-bind="activity.duration | number:0"></span> Minutes,
+                                        </div>
+                                        <span  data-ng-bind="activity.caloriesBurned | number:0"></span> Calories
+                                    </div>
+
+                                    <div style="display:inline-block;width:40px;float:right" data-ng-if="isUserAdmin">
+                                        <div style="cursor:pointer;padding-top:1px;" data-ng-click="deleteActivity(activity);"   type="button" data-ng-class="{editRowShow: activity.showEditIcon && !activity.isEditable}"  class="editRowHide">
+                                            <span  class="glyphicon glyphicon-trash"></span>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
                         </div>
-
                     </div>
                 </div>
 
@@ -111,7 +150,7 @@
                     Total Calories Burned: <span data-ng-bind="(plan.totalCaloriesBurned) | number:0"></span>
                 </div>
 
-                <accordion  class="plansAccordion" style="..." close-others="oneAtATime">
+                <accordion  class="plansAccordion hidden-xs" style="..." close-others="oneAtATime">
                     <accordion-group is-open="isExercisesOpen">
                         <accordion-heading>
                             <div class="accordionHeadingRegion">
@@ -121,7 +160,7 @@
                         </accordion-heading>
 
                         <div id="addExercise" style="width: 103px;height: 31px;">
-                            <button type="button" class="btn btn-primary btn-sm" style="margin-bottom: 15px;" data-ng-click="createActivityWithDialog();">
+                            <button type="button" class="btn btn-primary btn-sm" style="margin-bottom: 15px;" data-ng-click="createActivityWithDialog(null, null, true);">
                                 <span class="glyphicon glyphicon-plus" ></span> Add Exercise
                             </button>
                         </div>
@@ -157,7 +196,7 @@
                         </div>
                     </accordion-group>
 
-                    <accordion-group data-ng-show="injuriesVisible" is-open="showInjuriesSection" style="margin-top: 20px;">
+                    <accordion-group class="hidden-xs" data-ng-show="injuriesVisible" is-open="showInjuriesSection" style="margin-top: 20px;">
                         <accordion-heading>
                             <div class="accordionHeadingRegion">
                                 <span>Injuries</span>
@@ -194,17 +233,17 @@
                         <!--<textarea style="width: 100%;height: 100px;" data-ng-model="plan.notes"></textarea>-->
                     </accordion-group>
 
-                    <accordion-group data-ng-show="plan.notesVisible" is-open="showNotesSection" style="margin-top: 20px;">
-                        <accordion-heading>
-                            <div class="accordionHeadingRegion">
-                                <span>Notes</span>
-                            </div>
-                        </accordion-heading>
+                    <!--<accordion-group data-ng-show="plan.notesVisible" is-open="showNotesSection" style="margin-top: 20px;">-->
+                        <!--<accordion-heading>-->
+                            <!--<div class="accordionHeadingRegion">-->
+                                <!--<span>Notes</span>-->
+                            <!--</div>-->
+                        <!--</accordion-heading>-->
 
-                        <textarea id="planNotes" style="width: 100%;height: 100px;" name="planNotes" data-ng-change="saveActivityPlan();" class="form-control" data-ng-model="plan.notes" placeholder="Notes">
-                        </textarea>
+                        <!--<textarea id="planNotes" style="width: 100%;height: 100px;" name="planNotes" data-ng-change="saveActivityPlan();" class="form-control" data-ng-model="plan.notes" placeholder="Notes">-->
+                        <!--</textarea>-->
 
-                    </accordion-group>
+                    <!--</accordion-group>-->
                 </accordion>
             </div>
         </fieldset>
@@ -222,98 +261,7 @@
 
 
 
-<script type="text/ng-template" id="createExerciseModalContent.html">
-    <div class="modal-header" style="font-family: segui;">
-        <h3 class="modal-title" data-ng-show="!showActivityDetails">Select Exercise To Add</h3>
-        <div data-ng-show="showActivityDetails" >
-            <h3 class="modal-title" >
-                <span style="font-weight: bold;" data-ng-bind="selectedActivityType.name"></span>
-
-            </h3>
-        </div>
-        <div style="position: relative;top: 5px;">
-            <a class="ActionLink" data-ng-show="showActivityDetails" data-ng-click="changeActivity();">Change Activity</a>
-        </div>
-    </div>
-    <div style="font-family: segui;padding-left: 10px;padding-bottom:10px;" >
-        <div style="display:inline-block;">
-            <div>
-                <div data-ng-show="!showActivityDetails" style="margin-top: 10px;width: 580px;">
-                    <div style="margin-bottom: 20px;">
-
-                        <div style="vertical-align: top;display:inline-block;">
-                            <input placeholder="Enter Activity Name" style="width: 80%;" type="text" data-ng-change="activityInputChange()" data-ng-model="selected.activitySearchTxt"  />
-                            <a class="ActionLink clearInputLink" data-ng-click="selected.activitySearchTxt = ''">Clear</a>
-                        </div>
-                    </div>
-
-                    <div style="overflow-y: auto;max-height: 400px;" class="hidden-xs">
-                        <div data-ng-show="!isLoading" class="list-group" style="margin-bottom: 0px; !important;" data-ng-repeat="activity in activityTypes | filter: selected.activitySearchTxt">
-                            <a class="list-group-item actionRow" data-ng-click="activitySelectionChange(activity)">
-                                <span data-ng-bind="activity.name"></span>
-
-                            </a>
-                        </div>
-                    </div>
-
-                    <div style="overflow-y: auto;max-height: 270px;width: 47%;" class="visible-xs">
-                        <div data-ng-show="!isLoading" class="list-group" style="margin-bottom: 0px; !important;" data-ng-repeat="activity in activityTypes | filter: selected.activitySearchTxt">
-                            <a class="list-group-item actionRow"  data-ng-click="activitySelectionChange(activity)">
-                                <span data-ng-bind="activity.name"></span>
-
-                            </a>
-                        </div>
-                    </div>
-
-
-                    <div data-ng-show="isLoading" style="height: 336px;">
-                        <img width="25" height="25" src="/modules/core/img/loaders/loader.gif">
-                    </div>
-
-                    <div>
-                        <span style="color:blue;padding-left:5px;" data-ng-show="!activityTypes || activityTypes.length == 0">There are no activities returned</span>
-                    </div>
-
-                </div>
-                <div data-ng-show="showActivityDetails">
-                    <div >
-                        <form  class="form-horizontal" style="margin-left: 50px;margin-top: 7px;" autocomplete="off">
-                            <fieldset>
-                                <div class="form-group">
-                                    <label for="duration">Duration (minutes)</label>
-                                    <input type="text" id="duration" name="duration" class="form-control" data-ng-model="selected.activity.duration" placeholder="Duration">
-                                </div>
-                                <div class="form-group">
-                                    <label for="averageHeartRate">Average Heart Rate (bpm)</label>
-                                    <input type="text" id="averageHeartRate" name="duration" class="form-control" data-ng-model="selected.activity.averageHeartRate" placeholder="Average Heartrate">
-                                </div>
-
-                                <div class="form-group" data-ng-show="selected.activity.isCardio">
-                                    <label for="distance">Distance (miles)</label>
-                                    <input type="text" id="distance" name="distance" class="form-control" data-ng-model="selected.activity.distance" placeholder="Distance">
-                                </div>
-                                <div class="form-group" data-ng-show="selected.activity.isCardio">
-                                    <label for="averageSpeed">Average Speed (mph)</label>
-                                    <input type="text" id="averageSpeed" name="averageSpeed" class="form-control" data-ng-model="selected.activity.averageSpeed" placeholder="Average Speed">
-                                </div>
-
-
-                            </fieldset>
-                        </form>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-
-    </div>
-
-
-    <div class="modal-footer">
-        <button class="btn btn-primary"  ng-click="ok()">OK</button>
-        <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
-    </div>
-</script>
+<ng-include  src="'/modules/activities/views/activities.dialog.client.view.html'"></ng-include>
 
 
 <script type="text/ng-template" id="createInjuriesModalContent.html">
@@ -376,15 +324,15 @@
     </div>
 </script>
 
-<script type="text/ng-template" id="stepsModalContent.html">
-    <div class="modal-header" style="font-family: segui;">
-        <h3 class="modal-title">Edit Steps</h3>
-    </div>
-    <div class="modal-body" style="font-family: segui;">
-        <input type="text" ng-model="selected.dailySteps"/>
-    </div>
-    <div class="modal-footer">
-        <button class="btn btn-primary" ng-click="ok()">OK</button>
-        <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
-    </div>
-</script>
+<!--<script type="text/ng-template" id="stepsModalContent.html">-->
+    <!--<div class="modal-header" style="font-family: segui;">-->
+        <!--<h3 class="modal-title">Edit Steps</h3>-->
+    <!--</div>-->
+    <!--<div class="modal-body" style="font-family: segui;">-->
+        <!--<input type="text" ng-model="selected.dailySteps"/>-->
+    <!--</div>-->
+    <!--<div class="modal-footer">-->
+        <!--<button class="btn btn-primary" ng-click="ok()">OK</button>-->
+        <!--<button class="btn btn-warning" ng-click="cancel()">Cancel</button>-->
+    <!--</div>-->
+<!--</script>-->

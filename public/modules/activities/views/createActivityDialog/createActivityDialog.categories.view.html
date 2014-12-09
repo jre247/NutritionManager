@@ -1,0 +1,44 @@
+<!--<div style="display:inline-block">-->
+    <!--<button class="btn btn-primary hidden-xs dialogNavBackBtn" ng-click="activitiesNav()">-->
+        <!--<span class="glyphicon glyphicon-arrow-left" ></span><span> Activities</span>-->
+    <!--</button>-->
+    <!--<div class="visible-xs dialogNavBackContainer" ng-click="activitiesNav()">-->
+        <!--<span class="glyphicon glyphicon-chevron-left"></span>-->
+        <!--<span class="dialogNavBackTxt"> Activities</span>-->
+    <!--</div>-->
+
+<!--</div>-->
+
+<div class="dialogSectionHeader">
+    <div class="mealHeaderTxt">
+        Activities
+    </div>
+</div>
+
+<div class="cancelTxt cancelTxtFloatRight" >
+    <span class="visible-xs" ng-click="cancel()">Cancel</span>
+</div>
+
+<div class="list-group" style="color: rgb(66, 66, 207); padding: 10px;">
+    <!--<a ng-show="hideDailyStepsSection" class="list-group-item" style="height: 60px;">-->
+
+        <!--<span style="font-size: 20px;color:rgb(55, 55, 234)" class="glyphicon glyphicon-user"></span>-->
+        <!--<div style="font-weight:bold; font-size: 20px;display:inline-block;padding-left: 20px;">Daily Steps</div>-->
+        <!--<span style="float:right;" class="glyphicon glyphicon-chevron-right navigationRightArrow"></span>-->
+    <!--</a>-->
+
+    <a ng-show="!hideDailyStepsSection" class="list-group-item" style="height: 60px;" ng-click="dailyStepsSelected()">
+
+        <span style="font-size: 20px;color:rgb(55, 55, 234)" class="glyphicon glyphicon-user"></span>
+        <div style="font-weight:bold; font-size: 20px;display:inline-block;padding-left: 20px;">Daily Steps</div>
+        <span style="float:right;" class="glyphicon glyphicon-chevron-right navigationRightArrow"></span>
+    </a>
+    <a class="list-group-item" style="height: 60px;" ng-click="exercisesSelected()">
+        <div>
+            <span style="font-size: 20px;color: rgb(244, 191, 77)" class="glyphicon glyphicon-cutlery"></span>
+            <div style="font-weight:bold; font-size: 20px;display:inline-block;padding-left: 20px;">Exercises</div>
+            <span style="float:right;" class="glyphicon glyphicon-chevron-right navigationRightArrow"></span>
+        </div>
+
+    </a>
+</div>
