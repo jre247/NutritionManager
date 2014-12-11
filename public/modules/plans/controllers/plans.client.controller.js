@@ -55,7 +55,7 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
         ];
 
         $scope.checkIfEmptyPlan = function(){
-            if($scope.plan) {
+            if($scope.plan && $scope.plan.meals) {
                 var isEmptyPlan = true;
 
                 for (var p = 0; p < $scope.plan.meals.length; p++) {
