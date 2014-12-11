@@ -49,7 +49,11 @@ angular.module('dashboard').controller('DashboardController', ['$scope', '$state
         $scope.showTargetsNav = true;
         $scope.mobileTargetsClick = function(){
             $scope.showTargetsNav = false;
-            showDailyMacrosChartForMobile();
+
+            if($scope.nutritionPlan) {
+                showDailyMacrosChartForMobile();
+            }
+
             showTargetMacrosChartForMobile();
             buildThermometerChart(false, '.budgetChartForMobile');
 
@@ -433,9 +437,13 @@ angular.module('dashboard').controller('DashboardController', ['$scope', '$state
                 chartElement = '.budgetChart';
             }
 
-            var caloriesIn = parseFloat($scope.nutritionPlan.totalPlanCalories.toFixed(0));
-            var deficitTarget = $scope.nutritionProfile.deficitTarget;
+            var caloriesIn = 0;
 
+            if($scope.nutritionPlan){
+                caloriesIn = parseFloat($scope.nutritionPlan.totalPlanCalories.toFixed(0));
+            }
+
+            var deficitTarget = $scope.nutritionProfile.deficitTarget;
             $scope.deficit = CoreUtilities.calculateDeficit($scope.nutritionPlan, $scope.activityPlan, $scope.nutritionProfile);
 
             var goalCalories = parseFloat((($scope.deficit - deficitTarget) + caloriesIn).toFixed(0));
@@ -515,8 +523,10 @@ angular.module('dashboard').controller('DashboardController', ['$scope', '$state
 
 
 
-                    buildThermometerChart(isUpdate, isMobile);
+                    //buildThermometerChart(isUpdate, isMobile);
                 }
+
+                buildThermometerChart(isUpdate, isMobile);
 
                 if(!data.dailyBodyStats){
                     $scope.showEnterDailyWeight = true;

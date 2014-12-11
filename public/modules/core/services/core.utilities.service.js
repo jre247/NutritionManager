@@ -132,7 +132,7 @@ angular.module(ApplicationConfiguration.applicationModuleName).service(
 
             }
 
-            var caloriesIn = nutritionPlan.totalPlanCalories;
+            var caloriesIn = nutritionPlan ? nutritionPlan.totalPlanCalories : 0;
 
             var deficit = -(caloriesIn - caloriesOut) || 0;
 
@@ -171,7 +171,7 @@ angular.module(ApplicationConfiguration.applicationModuleName).service(
         function calculateDeficitForBasicTargets(nutritionPlan, nutritionProfile, bmr){
             var caloriesOut = calculateCaloriesOut(nutritionProfile, bmr);
 
-            var caloriesIn = nutritionPlan.totalPlanCalories;
+            var caloriesIn = nutritionPlan ? nutritionPlan.totalPlanCalories : 0;
 
             var deficit = -(caloriesIn - caloriesOut) || 0;
 
