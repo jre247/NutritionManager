@@ -7,6 +7,8 @@ angular.module('dashboard').controller('DashboardController', ['$scope', '$state
         $scope.authentication = Authentication;
         window.scope = $scope;
         $scope.plan = {};
+        $scope.isDailyDashboardLoading = false;
+        $scope.isWeeklyDashboardLoading = false;
 
         var additionalCaloriesExpended = 300;
         $scope.activityPlan = null;
@@ -362,6 +364,7 @@ angular.module('dashboard').controller('DashboardController', ['$scope', '$state
 
         $scope.getWeeklyDashboardData = function()
         {
+            $scope.isWeeklyDashboardLoading = true;
 
             var startWeeklyYear = startWeeklyDt.getFullYear();
             var startWeeklyMonth = startWeeklyDt.getMonth();
@@ -423,6 +426,8 @@ angular.module('dashboard').controller('DashboardController', ['$scope', '$state
                     else{
                         $scope.weeklyNutritionPlanList = null;
                     }
+
+                    $scope.isWeeklyDashboardLoading = false;
                 }
             );
         };
@@ -451,79 +456,80 @@ angular.module('dashboard').controller('DashboardController', ['$scope', '$state
             ThermometerChartService.buildThermometerChart(caloriesIn, goalCalories, chartElement, isUpdate);
         };
 
+        var setupActivitiesForDailyDashboard = function(data){
+            if(data.activityPlan){
+                $scope.activityPlan = data.activityPlan;
 
+                if($scope.activityPlan.dailySteps > 0){
+                    var dailyStepsModel = {
+                        name: 'Daily Steps',
+                        steps: $scope.activityPlan.dailySteps,
+                        activityType: 33,
+                        caloriesBurned: $scope.activityPlan.dailyStepsCaloriesBurned
+                    };
+
+                    $scope.activityPlan.activities.push(dailyStepsModel);
+                }
+
+                if($scope.nutritionProfile.isAdvancedNutrientTargets) {
+                    $scope.totalCaloriesBurned = $scope.activityPlan.totalCaloriesBurned + additionalCaloriesExpended;
+                }
+                else{
+                    var bmr = CoreUtilities.calculateBmr($scope.nutritionProfile);
+                    $scope.totalCaloriesBurned = CoreUtilities.calculateCaloriesOut($scope.nutritionProfile, bmr) - bmr;
+                }
+            }
+            else{
+                $scope.activityPlan = null;
+
+                if($scope.nutritionProfile.isAdvancedNutrientTargets) {
+                    $scope.totalCaloriesBurned = additionalCaloriesExpended;
+                }
+                else{
+                    var bmr = CoreUtilities.calculateBmr($scope.nutritionProfile);
+                    $scope.totalCaloriesBurned = CoreUtilities.calculateCaloriesOut($scope.nutritionProfile, bmr) - bmr;
+                }
+            }
+        };
+
+        var setupNutritionPlanForDailyDashboard = function(data){
+            if (data.nutritionPlan){
+                var plan = data.nutritionPlan;
+                for (var nMeal = 0; nMeal < plan.meals.length; nMeal++){
+                    doMealTotaling(plan.meals[nMeal]);
+                }
+
+                calculatePlanTotalMacros(plan);
+
+                $scope.nutritionPlan = plan;
+
+                $scope.isUserAdmin = $scope.nutritionPlan.userRoles && $scope.nutritionPlan.userRoles.indexOf('admin') !== -1 ? true : false;
+
+            }
+            else{
+                $scope.nutritionPlan = null;
+            }
+        };
 
         $scope.getDailyDashboardData = function(isUpdate, isMobile) {
+            $scope.isDailyDashboardLoading = true;
+
             CoreService.getDailyDashboardData($scope.planDateForDb).then(function(data){
                 var dPlanDate = new Date($scope.plan.planDateNonUtc.getFullYear(), $scope.plan.planDateNonUtc.getMonth(), $scope.plan.planDateNonUtc.getDate());
                 var planDateDayOfWeek = days[dPlanDate.getDay()];
                 $scope.planDayOfWeek = planDateDayOfWeek;
 
-                if (data.nutritionPlan){
-                    var plan = data.nutritionPlan;
-                    for (var nMeal = 0; nMeal < plan.meals.length; nMeal++){
-                        doMealTotaling(plan.meals[nMeal]);
-                    }
+                setupNutritionPlanForDailyDashboard(data);
 
-                    calculatePlanTotalMacros(plan);
-
-                    $scope.nutritionPlan = plan;
-
-                    $scope.isUserAdmin = $scope.nutritionPlan.userRoles && $scope.nutritionPlan.userRoles.indexOf('admin') !== -1 ? true : false;
-
-                }
-                else{
-                    $scope.nutritionPlan = null;
-                }
-
-                if(data.activityPlan){
-                    $scope.activityPlan = data.activityPlan;
-
-                    if($scope.activityPlan.dailySteps > 0){
-                        var dailyStepsModel = {
-                            name: 'Daily Steps',
-                            steps: $scope.activityPlan.dailySteps,
-                            activityType: 33,
-                            caloriesBurned: $scope.activityPlan.dailyStepsCaloriesBurned
-                        };
-
-                        $scope.activityPlan.activities.push(dailyStepsModel);
-                    }
-
-                    if($scope.nutritionProfile.isAdvancedNutrientTargets) {
-                        $scope.totalCaloriesBurned = $scope.activityPlan.totalCaloriesBurned + additionalCaloriesExpended;
-                    }
-                    else{
-                        var bmr = CoreUtilities.calculateBmr($scope.nutritionProfile);
-                        $scope.totalCaloriesBurned = CoreUtilities.calculateCaloriesOut($scope.nutritionProfile, bmr) - bmr;
-                    }
-                }
-                else{
-                    $scope.activityPlan = null;
-
-                    if($scope.nutritionProfile.isAdvancedNutrientTargets) {
-                        $scope.totalCaloriesBurned = additionalCaloriesExpended;
-                    }
-                    else{
-                        var bmr = CoreUtilities.calculateBmr($scope.nutritionProfile);
-                        $scope.totalCaloriesBurned = CoreUtilities.calculateCaloriesOut($scope.nutritionProfile, bmr) - bmr;
-                    }
-                }
-
+                setupActivitiesForDailyDashboard(data);
 
                 if($scope.nutritionPlan) {
                     if(isMobile){
                         showDailyMacrosChartForMobile();
-
-
                     }
                     else{
                         showDailyMacrosChart();
                     }
-
-
-
-                    //buildThermometerChart(isUpdate, isMobile);
                 }
 
                 buildThermometerChart(isUpdate, isMobile);
@@ -541,6 +547,8 @@ angular.module('dashboard').controller('DashboardController', ['$scope', '$state
                     var tourStep = parseInt(localStorage.tour_current_step);
                     tour.goTo(tourStep);
                 }
+
+                $scope.isDailyDashboardLoading = false;
             });
         };
 

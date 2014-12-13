@@ -972,4 +972,16 @@ div.tooltip {
 
 }
 
+.caloriesDetails{
+    font-size: 16px;
+    position: relative;
+    bottom: 19px;
+}
+
+.weeklyDashboardLoader{
+    height: 336px;
+    margin-left: 80px;
+    margin-top: 10px;
+}
+
 /* End Dashboard */
