@@ -983,5 +983,8 @@ div.tooltip {
     margin-left: 80px;
     margin-top: 10px;
 }
+.viewFoodsTxt{
+    padding-left: 6px;
+}
 
 /* End Dashboard */

@@ -14,7 +14,6 @@ angular.module('dashboard').controller('DashboardController', ['$scope', '$state
         $scope.activityPlan = null;
         $scope.nutritionPlan = null;
 
-        //$scope.nutritionProfile = UserDataFactory.getNutritionProfile();
         $scope.nutritionProfile = window.user.nutritionProfile;
 
         $scope.nutritionProfileParameters = {
@@ -293,6 +292,8 @@ angular.module('dashboard').controller('DashboardController', ['$scope', '$state
             return currentExceedsEndDt || currentBelowStartDt;
         };
 
+
+
         var setNewWeeklyStartDt = function(){
             var dayOfWeek = $scope.plan.planDateNonUtc.getDay();
             var year = $scope.plan.planDateNonUtc.getFullYear();
@@ -555,6 +556,8 @@ angular.module('dashboard').controller('DashboardController', ['$scope', '$state
         $scope.initializeDashboardData = function(){
             if($scope.nutritionProfile.age && $scope.nutritionProfile.heightFeet && $scope.nutritionProfile.sex) {
                 $scope.bmr = CoreUtilities.calculateBmr($scope.nutritionProfile);
+
+                setNewWeeklyStartDt();
 
                 $scope.getDailyDashboardData();
 
