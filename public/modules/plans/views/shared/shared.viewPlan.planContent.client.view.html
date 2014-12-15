@@ -1,7 +1,7 @@
 <form class="form-horizontal" novalidate>
     <fieldset>
         <div class="form-group" style="margin-bottom: 1px;">
-            <div class="planDetailsSection">
+            <div class="planDetailsSection" style="text-align: center;">
                 <div  style="margin-top: 9px;margin-bottom: 15px;display:inline-block; float:left">
                     <a data-ng-href="#!/dashboard/{{plan.planDateAsConcat}}">
                         <button type="button" class="btn btn-primary btn-m">
@@ -9,6 +9,10 @@
                         </button>
                     </a>
                 </div>
+
+                <span ng-show="navPillSelected =='history' && plan.planDateNonUtc" class="planDateTxt">
+                    {{(plan.planDateNonUtc.getMonth() + 1)}}/{{plan.planDateNonUtc.getDate()}}/{{plan.planDateNonUtc.getFullYear()}}
+                </span>
 
                 <!--<div  style="display:inline-block;text-align: center;padding-left: 29%;">-->
                 <!--<ng-include  src="'/modules/plans/views/desktop/desktop.planDateContent.client.view.html'"></ng-include>-->

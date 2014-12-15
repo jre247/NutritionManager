@@ -419,3 +419,12 @@
     padding-top: 10px;
     font-size: 18px;
 }
+
+.planDateTxt{
+    text-align: center;
+    /* margin-top: 10px; */
+    position: relative;
+    top: 12px;
+    font-size: 21px;
+    color: rgb(16, 16, 211);
+}
