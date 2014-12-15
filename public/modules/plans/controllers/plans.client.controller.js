@@ -571,6 +571,15 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
 
             fillActivityPlan();
 
+            var now = new Date();
+            var year = now.getFullYear();
+            var month = now.getMonth();
+            var day = now.getDate();
+
+            if(year == $scope.plan.planDateYear && month == $scope.plan.planDateMonth && day == $scope.plan.planDateDay){
+                $scope.navPillSelected = 'today';
+            }
+
             $scope.isLoading = false;
         };
 
@@ -719,14 +728,6 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
 
             $scope.isLoading = true;
 
-            if($stateParams.isHistory) {
-                $scope.navPillSelected = 'history';
-
-            }
-            else {
-                $scope.navPillSelected = 'today';
-            }
-
             var planDateAsConcat;
 
             //extract year, month, day from date parameter
@@ -748,6 +749,9 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
 
                 if(year === now.getFullYear() && month === now.getMonth() && day === now.getDate()){
                     $scope.navPillSelected = 'today';
+                }
+                else{
+                    $scope.navPillSelected = 'history';
                 }
             }
 
