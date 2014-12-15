@@ -1,0 +1,26 @@
+<section data-ng-controller="PlansController" style="font-family: segui;">
+    <div class="col-md-12">
+
+        <ng-include  src="'/modules/plans/views/shared/shared.planNavPills.client.view.html'"></ng-include>
+
+        <div data-ng-init="findOneForNav()">
+            <ng-include src="'/modules/plans/views/shared/shared.viewPlan.planContent.client.view.html'"></ng-include>
+
+        </div>
+
+        <ng-include src="'/modules/plans/views/shared/createFoodDialog/shared.createFoodDialog.client.view.html'"></ng-include>
+
+        <ng-include src="'/modules/plans/views/shared/shared.planDialogs.client.view.html'"></ng-include>
+
+        <script>
+            jQuery(document).ready(function(){
+
+                window.setTimeout(function(){
+                    jQuery('.panel-group').find('.panel-default').addClass('disabled');
+                }, 1000)
+
+            });
+        </script>
+    </div>
+</section>
+

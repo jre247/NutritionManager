@@ -16,6 +16,8 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
         $scope.meals = [];
         $scope.skipPlans = 0;
         $scope.hideMorePlansLink = false;
+        $scope.navPillSelected = 'today';
+        $scope.planDateInput = '';
 
         //$scope.allFoods = Foods.query();
         //TODO: put this in server controller and attach to req obj
@@ -478,6 +480,10 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
 		};
 
 		$scope.find = function(getMorePlans) {
+            $scope.navPillSelected = 'history';
+            var now = new Date();
+            $scope.todayDateAsConcat = getPlanDateAsConcat(now.getFullYear(), now.getMonth(), now.getDate());
+
             if(!getMorePlans) {
                 $scope.isLoading = true;
             }
@@ -614,17 +620,32 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
             }
         };
 
-        $scope.planInputChange = function(){
-            var year = $scope.plan.planDateNonUtc.getFullYear();
-            var month = $scope.plan.planDateNonUtc.getMonth();
-            var day = $scope.plan.planDateNonUtc.getDate();
+        $scope.planInputChange = function(planDateInput){
+
+
+            var year = planDateInput.getFullYear();
+            var month = planDateInput.getMonth();
+            var day = planDateInput.getDate();
 
             var planDateAsConcat = getPlanDateAsConcat(year, month, day);
 
-            getPlanFromDb(year, month, day, planDateAsConcat);
+            window.location = '#!/plans/nav/' + planDateAsConcat + '/true';
+           // getPlanFromDb(year, month, day, planDateAsConcat);
 
             $scope.opened = false;
         };
+
+//        $scope.planInputChange = function(){
+//            var year = $scope.plan.planDateNonUtc.getFullYear();
+//            var month = $scope.plan.planDateNonUtc.getMonth();
+//            var day = $scope.plan.planDateNonUtc.getDate();
+//
+//            var planDateAsConcat = getPlanDateAsConcat(year, month, day);
+//
+//            getPlanFromDb(year, month, day, planDateAsConcat);
+//
+//            $scope.opened = false;
+//        };
 
         var getPlanFromDb = function(year, month, day, planDateAsConcat){
             $scope.nutritionProfile = window.user.nutritionProfile;
@@ -692,8 +713,51 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
             getPlanFromDb(year, month, day, planDateAsConcat);
         };
 
-        $scope.findOne = function() {
+        $scope.findOneForNav = function(){
+            var now = new Date();
+            $scope.todayDateAsConcat = getPlanDateAsConcat(now.getFullYear(), now.getMonth(), now.getDate());
+
             $scope.isLoading = true;
+
+            if($stateParams.isHistory) {
+                $scope.navPillSelected = 'history';
+
+            }
+            else {
+                $scope.navPillSelected = 'today';
+            }
+
+            var planDateAsConcat;
+
+            //extract year, month, day from date parameter
+            if($stateParams.planNavDate) {
+                var year, month, day;
+
+                var sDateParam = $stateParams.planNavDate.toString();
+                year = sDateParam.substr(0, 4);
+                month = sDateParam.substr(4, 2);
+                day = sDateParam.substr(6, 2);
+
+                planDateAsConcat = new Date(year, month, day);
+
+                year = planDateAsConcat.getFullYear();
+                month = planDateAsConcat.getMonth();
+                day = planDateAsConcat.getDate();
+
+                planDateAsConcat = getPlanDateAsConcat(year, month, day);
+            }
+
+            getPlanFromDb(year, month, day, planDateAsConcat);
+        };
+
+        $scope.findOne = function() {
+            var now = new Date();
+            $scope.todayDateAsConcat = getPlanDateAsConcat(now.getFullYear(), now.getMonth(), now.getDate());
+
+            $scope.isLoading = true;
+
+            $scope.navPillSelected = 'history';
+
             var planDateAsConcat;
 
             //extract year, month, day from date parameter

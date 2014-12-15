@@ -414,3 +414,8 @@
     float: right;
     padding-right: 9px;
 }
+
+.planNavPills{
+    padding-top: 10px;
+    font-size: 18px;
+}

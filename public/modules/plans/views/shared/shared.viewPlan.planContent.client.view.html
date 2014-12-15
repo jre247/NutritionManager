@@ -1,0 +1,278 @@
+<form class="form-horizontal" novalidate>
+    <fieldset>
+        <div class="form-group" style="margin-bottom: 1px;">
+            <div class="planDetailsSection">
+                <div  style="margin-top: 9px;margin-bottom: 15px;display:inline-block; float:left">
+                    <a data-ng-href="#!/dashboard/{{plan.planDateAsConcat}}">
+                        <button type="button" class="btn btn-primary btn-m">
+                            <span class="glyphicon glyphicon-home" ></span><span class="hidden-xs"> Dashboard</span>
+                        </button>
+                    </a>
+                </div>
+
+                <!--<div  style="display:inline-block;text-align: center;padding-left: 29%;">-->
+                <!--<ng-include  src="'/modules/plans/views/desktop/desktop.planDateContent.client.view.html'"></ng-include>-->
+                <!--</div>-->
+                <div style="display: inline-block; margin-top: 9px;float: right;">
+                    <div style="display:inline-block" id="createMeal">
+                        <button  type="button" class="btn btn-primary btn-m" style="padding: 6px 10px;"  data-ng-click="createFoodWithDialog();">
+                            <span class="glyphicon glyphicon-plus" ></span><span class="hidden-xs"> Add Food</span>
+                        </button>
+                    </div>
+
+                    <div style="display:inline-block;vertical-align: top;">
+                        <button  type="button" class="btn btn-primary btn-m" style="padding: 6px 10px;"  data-ng-click="openNotesDialog();">
+                            <span class="glyphicon glyphicon-edit" ></span><span class="hidden-xs"> Notes</span>
+                        </button>
+
+                        <button type="button" class="btn btn-primary btn-m hidden-sm hidden-xs" data-ng-class="{'btn-warning': isEditingEnabled}"  data-ng-click="toggleEditing();">
+                            <span class="glyphicon glyphicon-wrench" ></span> {{editBtnTxt}}
+                        </button>
+
+                        <div style="display:inline-block" id="copyPlanBtn">
+                            <button  type="button" class="btn btn-primary btn-m" style="padding: 6px 10px;" data-ng-click="openCopyPlanDialog()">
+                                <span class="glyphicon glyphicon-share" ></span><span class="hidden-xs"> Copy</span>
+                            </button>
+                        </div>
+                        <button title="Delete Plan" type="button" class="btn btn-primary btn-m btn-danger hidden-sm hidden-xs"  data-ng-click="deletePlan(plan)">
+                            <span class="glyphicon glyphicon-trash" ></span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div data-ng-show="success" class="successMsgFixed" >
+                <strong>Your changes have been saved!</strong>
+            </div>
+
+            <div data-ng-show="showPlanEditableErrorMsg" style="color: red; font-weight: bold; margin-bottom: 10px;">
+                <strong>Please save the plan before copying it.</strong>
+            </div>
+        </div>
+    </fieldset>
+
+    <fieldset id="wrapper" >
+        <div data-ng-show="isLoading" style="height: 336px;">
+            <img width="25" height="25" src="/modules/core/img/loaders/loader.gif">
+        </div>
+
+        <div data-ng-show="!isLoading" id="content" class="form-group planContent" style="overflow-y: auto;overflow-x:hidden; margin-bottom: 3px; margin-top: 5px;">
+            <accordion sortable="sortableOptions" disableallelementsbydefault="true" updateCallback="sortableUpdateCallback" startCallback="sortableStartCallback" rootSortableElement=".panel-group" ng-show="plan.meals.length > 0"  class="plansAccordion" style="..." close-others="oneAtATime">
+                <accordion-group data-ng-repeat="meal in plan.meals" is-open="meal.isVisible">
+                    <accordion-heading>
+                        <div class="accordionHeadingRegion">
+                            <div style="display:inline-block">
+                                <div style="padding-right: 10px;cursor:pointer;display: inline-block;" data-ng-click="deleteMeal(meal);" type="button" data-ng-show="meal.isEditable">
+                                    <span style="color: rgb(228, 19, 19)" class="glyphicon glyphicon-minus-sign"></span>
+                                </div>
+
+                                <span style="width: 80px;" data-ng-show="meal.isEditable == false" data-ng-bind="getMealTypeName(meal.type) || meal.name"></span>
+
+
+                                <select  ng-model="meal.type"  data-ng-click="mealTypeClicked(meal)" data-ng-show="meal.isEditable"  ng-options="t.id as t.name for t in mealTypes" style="font-size: 16px;vertical-align: top;"></select>
+
+                            </div>
+                            <div style="float:right;display:inline-block" class="glyphicon glyphicon-move" ng-mousedown="enableSorting()" ng-mouseup="disableSorting()" data-ng-show="meal.isEditable"></div>
+                        </div>
+                    </accordion-heading>
+
+                    <div>
+                        <div class="emptyDataTxt" data-ng-show="!meal.foods || meal.foods.length == 0">
+                            No food logged for meal
+                        </div>
+
+                        <table id="foodTable" class="table" data-ng-show="meal.foods.length > 0"  style="margin-top: 6px;width:100%;">
+                            <thead>
+                            <tr>
+                                <th width="30%">Name</th>
+                                <!--<th width="7%">Type</th>-->
+                                <th style="min-width: 40px;width: 10%;"> Servings</th>
+                                <th style="min-width: 40px;width: 10%;">Calories</th>
+                                <th style="min-width: 40px;width: 10%;">Carbs</th>
+                                <th style="min-width: 40px;width: 10%;">Protein</th>
+                                <th style="min-width: 40px;width: 10%;">Fat</th>
+                                <th style="min-width: 40px;width: 10%;">Sodium</th>
+                                <th style="min-width: 40px;width: 10%;">Grams</th>
+                                <th>&nbsp;</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+
+                            <tr class="planGridRow"   data-ng-repeat="food in meal.foods" data-ng-class="{mealSuggestedHighlight: food.IsSuggested}"
+                                data-ng-click="createFoodWithDialog(meal, food);" data-ng-mouseover="food.showEditIcon = true" data-ng-mouseleave="food.showEditIcon = false">
+                                <td style="padding-right: 10px;padding-left:5px;">
+
+                                    <div class="controls">
+                                        <span data-ng-bind="food.selectedFood.name"></span>
+
+                                    </div>
+                                </td>
+
+                                <td>
+
+                                    <div class="controls" style="width: 70px;" >
+                                        <span data-ng-bind="food.servings"></span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="controls" style="width: 60px;">
+                                        <span data-ng-bind="food.calories | number:0"></span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="controls" style="width: 60px;">
+                                        <span data-ng-bind="food.carbohydrates | number:1"></span>g
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="controls" style="width: 60px;">
+                                        <span data-ng-bind="food.protein | number:1"></span>g
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="controls" style="width: 60px;">
+                                        <span data-ng-bind="food.fat | number:1"></span>g
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="controls" style="width: 60px;">
+                                        <span data-ng-bind="food.sodium | number:0"></span>mg
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="controls" style="width: 60px;">
+                                        <span data-ng-bind="food.grams | number:1"></span>g
+                                    </div>
+                                </td>
+
+                                <td>
+                                    <div style="display:inline-block;width:40px;">
+                                        <div style="padding-right:5px;cursor:pointer;float:right;height: 14px !important;" data-ng-click="deleteFood(food, meal);" type="button" data-ng-class="{editRowShow: food.showEditIcon && !food.isEditable}"  class="editRowHide">
+                                            <span  class="glyphicon glyphicon-trash"></span>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <tr style="font-weight: bold;color: rgb(33, 51, 184);border-top: 1px solid lightgray;">
+                                <td>
+                                    Totals:
+                                </td>
+                                <td>
+                                    &nbsp;
+                                </td>
+                                <td>
+                                    <span data-ng-bind="meal.totalCalories | number:0"></span>
+                                </td>
+                                <td>
+                                    <span data-ng-bind="meal.totalCarbohydrates | number:1"></span>g
+                                </td>
+                                <td>
+                                    <span data-ng-bind="meal.totalProtein | number:1"></span>g
+                                </td>
+                                <td>
+                                    <span data-ng-bind="meal.totalFat | number:1"></span>g
+                                </td>
+                                <td>
+                                    <span data-ng-bind="meal.totalSodium | number:0"></span>mg
+                                </td>
+                                <td>
+                                    &nbsp;
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </accordion-group>
+            </accordion>
+        </div>
+    </fieldset>
+
+    <div data-ng-show="error" class="text-danger">
+        <strong data-ng-bind="error"></strong>
+    </div>
+
+</form>
+
+<div class="planFooter" style="margin-right: -15px;margin-left: -11px;border-top: 1px solid lightgray;">
+    <table style="display: inline-block; margin-right: 34px;" id="footer">
+        <thead>
+        <tr>
+            <th class="plansDesktopInlineGrid" width="316px">&nbsp;</th>
+
+            <th id="totalDeficit" data-ng-show="currentDeficit >= 0" width="90px">Deficit </th>
+            <th  data-ng-show="currentDeficit < 0" width="90px">Surplus </th>
+            <th id="totalCalories" width="90px">Calories </th>
+
+
+            <th class="hidden-xs" width="40px" style="border-left: 1px solid lightgray;">&nbsp;</th>
+
+            <th id="totalCarbs" class="carbsColorLbl" width="70px">Carbs</th>
+            <th class=proteinColorLbl" width="70px">Protein</th>
+            <th class="fatColorLbl" >Fat</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        <tr style="font-weight:bold;" data-ng-show="showTotalsAsPercent == false">
+            <td class="plansDesktopInlineGrid" style="padding-right: 15px;">
+                <span style="font-weight:bold;">Totals:</span>
+            </td>
+            <td style="color: rgb(33, 51, 184);" >
+                <span data-ng-show="currentDeficit >= 0" data-ng-bind="(currentDeficit || 0) | number:0"></span>
+                <span data-ng-show="currentDeficit < 0" data-ng-bind="-(currentDeficit || 0) | number:0"></span>
+            </td>
+
+            <td style="color: rgb(33, 51, 184);" id=totalCaloriesData>
+                <span data-ng-bind="plan.totalPlanCalories | number:0"></span>
+            </td>
+            <td  style="color: rgb(33, 51, 184);border-left: 1px solid lightgray;">
+                <span >&nbsp;</span>
+            </td>
+            <td class="carbsColor" >
+                <span data-ng-bind="plan.totalPlanCarbs | number:1"></span>g
+            </td>
+            <td class="proteinColor" id="totalProtein">
+                <span data-ng-bind="plan.totalPlanProtein | number:1"></span>g
+            </td>
+            <td class="fatColor" id="totalFat">
+                <span data-ng-bind="plan.totalPlanFat | number:1"></span>g
+            </td>
+
+        </tr>
+        <tr style="font-weight:bold;" data-ng-show="showTotalsAsPercent">
+            <td class="plansDesktopInlineGrid">
+                <span style="font-weight:bold;">Totals:</span>
+            </td>
+            <td style="color: rgb(33, 51, 184);">
+                <span data-ng-show="currentDeficit >= 0" data-ng-bind="(currentDeficit) | number:0"></span>
+                <span data-ng-show="currentDeficit < 0" data-ng-bind="-(currentDeficit) | number:0"></span>
+            </td>
+            <td style="color: rgb(33, 51, 184);">
+                <span data-ng-bind="plan.totalPlanCalories | number:0"></span>
+            </td>
+            <td class="hidden-xs" style="color: rgb(33, 51, 184);">
+                <span style="border-left: 1px solid lightgray;">&nbsp;</span>
+            </td>
+            <td class="carbsColor">
+                <span data-ng-bind="plan.totalPlanCarbsAsPercent | number:1"></span>%
+            </td>
+            <td class="proteinColor">
+                <span data-ng-bind="plan.totalPlanProteinAsPercent | number:1"></span>%
+            </td>
+            <td class="fatColor">
+                <span data-ng-bind="plan.totalPlanFatAsPercent | number:1"></span>%
+            </td>
+
+        </tr>
+        </tbody>
+    </table>
+
+    <div class="hidden-xs" style="display:inline-block; position:relative; bottom:6px;margin-top:10px">
+        <label for="radioBtnShowPercent">%</label>
+        <input type="radio" id="radioBtnShowPercent" name="totalsRadioBtn" style="margin-right: 20px;" data-ng-click="toggleTotalsAsPercent()" checked="checked"/>
+
+        <label for="radioBtnHidePercent">Grams</label>
+        <input type="radio" id="radioBtnHidePercent" name="totalsRadioBtn" data-ng-click="toggleTotalsAsPercent()" />
+    </div>
+</div>

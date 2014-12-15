@@ -1,8 +1,19 @@
 <section data-ng-controller="PlansController" data-ng-init="find()">
-    <div class="page-header">
-        <h1>Plans</h1>
-    </div>
+    <!--<div class="page-header">-->
+        <!--<h1>Plans</h1>-->
+    <!--</div>-->
 
+    <ng-include  src="'/modules/plans/views/shared/shared.planNavPills.client.view.html'"></ng-include>
+
+    <div id="planDateContainer" style="width: 146px;padding-top: 8px;display:inline-block;">
+        <p class="input-group">
+            <input type="text" class="form-control" style="padding: 4px 8px;text-align: center;font-size: 16px;" id="planDate" datepicker-popup="{{format}}" data-ng-change="planInputChange(planDateInput)" ng-model="planDateInput"
+                   is-open="opened" min-date="minDate" max-date="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
+                              <span class="input-group-btn">
+                                <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                              </span>
+        </p>
+    </div>
 
     <div class="list-group hidden-xs" style="padding-top: 40px;">
         <div style="font-weight: bold;">
