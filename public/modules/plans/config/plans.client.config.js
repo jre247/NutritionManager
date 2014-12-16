@@ -5,7 +5,7 @@ angular.module('plans').run(['Menus',
     function(Menus) {
         // Set top bar menu items
         //Menus.addMenuItem('topbar', 'Plans', 'plans', 'dropdown', '/plans(/create)?');
-        Menus.addMenuItem('topbar', 'Plans', 'plans', '/plans');
+        //Menus.addMenuItem('topbar', 'Plans', 'plans', '/plans');
         //Menus.addSubMenuItem('topbar', 'plans', 'List Plans', 'plans');
         //Menus.addSubMenuItem('topbar', 'plans', 'New Plan', 'plans/create');
     }
