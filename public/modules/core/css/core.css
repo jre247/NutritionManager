@@ -184,4 +184,7 @@ div.tooltip {
 
 .dashboardNav{
     padding-top: 20px;
+    position: relative;
+    right: 17px;
+
 }
