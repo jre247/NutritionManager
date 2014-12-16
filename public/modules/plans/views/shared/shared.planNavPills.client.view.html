@@ -1,5 +1,12 @@
 <div class="row navPillsRow">
-    <div class="col-md-12 col-md-offset-2 logNavPlanPills">
+    <div class="col-md-4 dashboardNav">
+        <a data-ng-href="#!/dashboard/{{plan.planDateAsConcat}}">
+            <button type="button" class="btn btn-primary btn-m">
+                <span class="glyphicon glyphicon-home" ></span><span class="hidden-xs"> Dashboard</span>
+            </button>
+        </a>
+    </div>
+    <div class="col-md-8 logNavPlanPills">
         <ul class="nav nav-pills">
             <li role="presentation" ng-class="{active: logNavPillSelected == 'foods'}"><a href="#!/plans/nav/{{todayDateAsConcat}}">Foods</a></li>
             <li role="presentation" ng-class="{active: logNavPillSelected == 'activities'}"><a href="#!/activities/nav/{{todayDateAsConcat}}">Activities</a></li>
