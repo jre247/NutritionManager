@@ -17,8 +17,11 @@ angular.module(ApplicationConfiguration.applicationModuleName).service(
             filterMyFoods: filterMyFoods,
             calculateBmr: calculateBmr,
             calculateCaloriesOut: calculateCaloriesOut,
-            getMobilePlanDateFormat: getMobilePlanDateFormat
+            getMobilePlanDateFormat: getMobilePlanDateFormat,
+            getDesktopPlanDateFormat: getDesktopPlanDateFormat
         });
+
+
 
 
         // ---
@@ -26,18 +29,30 @@ angular.module(ApplicationConfiguration.applicationModuleName).service(
         // ---
 
         function getMobilePlanDateFormat($scope){
-            var monthNames = [ "Jan", "Feb", "Mar", "Apr", "May", "Jun",
-                "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" ];
-            var dayNames = [ "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-
             if($scope.plan && $scope.plan.planDateNonUtc) {
+                var monthNames = getMonthNames();
+                var dayNames = getDayNames();
+
                 var month = monthNames[$scope.plan.planDateNonUtc.getMonth()];
                 var day = $scope.plan.planDateNonUtc.getDate();
                 var dayOfWeek = dayNames[$scope.plan.planDateNonUtc.getDay()];
                 return dayOfWeek + ', ' + month + ' ' + day;
             }
 
-        }
+        };
+
+        function getDesktopPlanDateFormat($scope){
+            if($scope.plan && $scope.plan.planDateNonUtc) {
+                var monthNames = getMonthNames();
+                var dayNames = getDayNames();
+
+                var month = monthNames[$scope.plan.planDateNonUtc.getMonth()];
+                var day = $scope.plan.planDateNonUtc.getDate();
+                var dayOfWeek = dayNames[$scope.plan.planDateNonUtc.getDay()];
+                var year = $scope.plan.planDateNonUtc.getFullYear();
+                return dayOfWeek + ', ' + month + ' ' + day + ', ' + year;
+            }
+        };
 
         function getFoods(typed, skip, searchByFirstLetterOnly) {
             var request = $http({
@@ -193,6 +208,21 @@ angular.module(ApplicationConfiguration.applicationModuleName).service(
         // ---
         // PRIVATE METHODS.
         // ---
+
+
+
+        function getMonthNames(){
+            var monthNames = [ "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+                "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" ];
+
+            return monthNames;
+        };
+
+        function getDayNames(){
+            var dayNames = [ "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+
+            return dayNames;
+        };
 
 
         //BMR for Men = 66 + (13.8 x weight in kg.) + (5 x height in cm) - (6.8 x age in years)

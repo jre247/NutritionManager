@@ -20,14 +20,20 @@ angular.module('bodyStats').config(['$stateProvider',
                 url: '/body-stats/create/:planDateForCreate',
                 templateUrl: 'modules/body-stats/views/view-body-stat.client.view.html'
             }).
+
             state('viewBodyStat', {
                 url: '/body-stats/:bodyStatId',
                 templateUrl: 'modules/body-stats/views/view-body-stat.client.view.html'
+            }).
+            state('navWeight', {
+                url: '/body-stats/nav/:planDateAsConcat',
+                templateUrl: 'modules/body-stats/views/edit-nav-body-stats.client.view.html'
             }).
             state('editBodyStat', {
                 url: '/body-stats/:bodyStatId/edit',
                 templateUrl: 'modules/body-stats/views/edit-body-stat.client.view.html'
             }).
+
             state('viewBodyStatForDate', {
                 url: '/body-stats/:planDate/:planDateChangeDirection/:dayRange',
                 templateUrl: 'modules/body-stats/views/view-body-stat.client.view.html'

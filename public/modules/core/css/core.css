@@ -168,3 +168,16 @@ div.tooltip {
     font-size: 16px;
 }
 
+.planNavPills{
+
+    font-size: 17px;
+}
+
+.logNavPlanPills{
+    padding-top: 10px;
+    font-size: 22px;
+}
+
+.navPillsRow{
+    margin-bottom: 28px;
+}

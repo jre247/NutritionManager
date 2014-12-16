@@ -14,6 +14,7 @@ angular.module('activities').controller('ActivitiesController', ['$scope', '$sta
         $scope.dailyStepsEntered = false;
         $scope.injuriesVisible = false;
         $scope.isLoading = false;
+        $scope.logNavPillSelected = 'activities';
 
         $scope.authentication = Authentication;
 
@@ -542,47 +543,23 @@ angular.module('activities').controller('ActivitiesController', ['$scope', '$sta
             $scope.isExercisesOpen = true;
         };
 
+        $scope.findOneForNav = function(){
+            var now = new Date();
+            $scope.todayDateAsConcat = getPlanDateAsConcat(now.getFullYear(), now.getMonth(), now.getDate());
 
-//        $scope.createActivityWithDialog = function(activity){
-//            var modalInstance = $modal.open({
-//                templateUrl: 'createExerciseModalContent.html',
-//                controller: ActivitiesDialogService.CreateExerciseInstanceCtrl,
-//                //size: size,
-//                resolve: {
-//                    activity: function(){
-//                        return activity
-//                    },
-//                    activityTypes: function () {
-//                        return $scope.activityTypes;
-//                    },
-//                    activityTypesDictionary: function () {
-//                        return $scope.activityTypesDictionary;
-//                    },
-//                    parentScope: function () {
-//                        return $scope;
-//                    }
-//                }
-//            });
-//
-//            modalInstance.result.then(function (newActivityModel) {
-//                if(newActivityModel.isUpdate){
-//                    for(var i = 0; i < $scope.plan.activities.length; i++){
-//                        if($scope.plan.activities[i]._id == newActivityModel._id){
-//                            $scope.plan.activities[i] = newActivityModel;
-//                        }
-//                    }
-//                }
-//                else {
-//                    $scope.plan.activities.push(newActivityModel);
-//                }
-//
-//                $scope.calculateCalories(newActivityModel);
-//
-//                $scope.saveActivityPlan();
-//            }, function () {
-//                //$log.info('Modal dismissed at: ' + new Date());
-//            });
-//        };
+            if ($stateParams.planDateAsConcat) {
+                var planDateAsConcat = $stateParams.planDateAsConcat;
+                var planDate = new Date(planDateAsConcat);
+
+                var year = planDate.getFullYear();
+                var month = planDate.getMonth();
+                var day = planDate.getDate();
+
+                getPlanFromDb(year, month, day, planDateAsConcat, true);
+            }
+
+            $scope.isExercisesOpen = true;
+        };
 
         $scope.createInjuryWithDialog = function(injury){
 

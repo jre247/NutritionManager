@@ -380,6 +380,19 @@ div.tooltip {
     font-size: 16px;
 }
 
+.planNavPills{
+
+    font-size: 17px;
+}
+
+.logNavPlanPills{
+    padding-top: 10px;
+    font-size: 22px;
+}
+
+.navPillsRow{
+    margin-bottom: 28px;
+}
 
 /* End Core */
 
@@ -808,10 +821,7 @@ div.tooltip {
     padding-right: 9px;
 }
 
-.planNavPills{
-    padding-top: 10px;
-    font-size: 18px;
-}
+
 
 .planDateTxt{
     text-align: center;
@@ -820,6 +830,21 @@ div.tooltip {
     top: 12px;
     font-size: 21px;
     color: rgb(16, 16, 211);
+}
+
+.planDateSection{
+    text-align: center;
+    display:inline-block;
+    padding-left: 17%;
+}
+
+.planDateContainerLbl{
+    color: rgb(52, 52, 210);
+}
+
+.foodsTodayHistoryPills{
+    position: relative;
+    top: 21px;
 }
 /* End Nutrition Plan */
 

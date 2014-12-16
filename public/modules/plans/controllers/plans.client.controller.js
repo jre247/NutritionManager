@@ -19,6 +19,8 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
         $scope.navPillSelected = 'today';
         $scope.planDateInput = '';
 
+        $scope.logNavPillSelected = 'foods';
+
         //$scope.allFoods = Foods.query();
         //TODO: put this in server controller and attach to req obj
         CoreUtilities.getUserFoods(user._id, 'null', 0, false).then(function(data){
@@ -30,6 +32,10 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
 
         $scope.getMobilePlanDateFormat = function(){
             return CoreUtilities.getMobilePlanDateFormat($scope);
+        };
+
+        $scope.getDesktopPlanDateFormat = function(){
+            return CoreUtilities.getDesktopPlanDateFormat($scope);
         };
 
         $scope.foodTypes = [

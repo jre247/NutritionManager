@@ -1,0 +1,319 @@
+<div class="col-md-12">
+<form class="form-horizontal"  novalidate>
+<fieldset>
+    <div class="visible-xs mobilePlanHeader" >
+        <div>
+            <ng-include  src="'/modules/plans/views/mobile/mobile.planDateContentMobile.client.view.html'"></ng-include>
+        </div>
+
+        <div class="mobileActivitiesTotals">
+            <span class="totalsLbl">Totals:</span>
+
+            <span data-ng-bind="(plan.totalCaloriesBurned || 0) | number:0"></span> calories burned,
+            <span data-ng-bind="(plan.dailySteps || 0) | number:0"></span> steps
+
+
+        </div>
+
+        <div class="dashboardNavTxt">
+            <a style="color: white;" data-ng-href="#!/dashboard/{{plan.planDateAsConcat}}">
+                <span class="glyphicon glyphicon-chevron-left" ></span> Dashboard
+            </a>
+        </div>
+
+        <div class="pageTitle">
+            <span>Activities</span>
+        </div>
+
+        <div class="plusBtn" id="createActivity">
+            <div data-ng-click="createActivityWithDialog();">
+                <span class="glyphicon glyphicon-plus" ></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group" style="margin-bottom: 1px;">
+        <div class="hidden-xs" style="margin-top: 9px;margin-bottom: 15px;display:inline-block; float:left">
+            <a data-ng-href="#!/dashboard/{{plan.planDateAsConcat}}">
+                <button type="button" class="btn btn-primary btn-m">
+                    <span class="glyphicon glyphicon-arrow-left" ></span><span class="hidden-xs"> Dashboard</span>
+                </button>
+            </a>
+        </div>
+
+        <div class="planDetailsSection hidden-sm hidden-xs" style="display:inline-block;vertical-align: top;padding-left: 30%;">
+            <ng-include  src="'/modules/plans/views/desktop/desktop.planDateContent.client.view.html'"></ng-include>
+        </div>
+
+
+
+        <div class="planDetailsSection hidden-xs" style="display: inline-block; margin-top: 9px;float: right;">
+            <div id="addNotes" style="display:inline-block">
+                <button type="button" class="btn btn-primary btn-m " style="margin-bottom: 15px;" data-ng-click="openNotesDialog();">
+                    <span class="glyphicon glyphicon-edit" ></span> <span class="hidden-xs">Notes</span>
+                </button>
+            </div>
+            <div id="addInjuries" style="display:inline-block">
+                <button data-ng-show="!showInjuriesSection" type="button" class="btn btn-primary btn-m" style="margin-bottom: 15px;" data-ng-click="createInjuries();">
+                    <span class="glyphicon glyphicon-star-empty" ></span> <span class="hidden-xs">Add Injuries</span>
+                </button>
+            </div>
+
+            <button title="Delete Plan" style="margin-bottom: 15px;" type="button" class="btn btn-primary btn-m btn-danger hidden-sm hidden-xs"  data-ng-click="deletePlan(plan)">
+                <span class="glyphicon glyphicon-trash" ></span>
+            </button>
+        </div>
+    </div>
+
+    <div data-ng-show="success" class="successMsgFixed" >
+        <strong>Your changes have been saved!</strong>
+    </div>
+
+    <div data-ng-show="showPlanEditableErrorMsg" style="color: red; font-weight: bold; margin-bottom: 10px;">
+        <strong>Please save the plan before copying it.</strong>
+    </div>
+</fieldset>
+
+<div data-ng-show="isLoading" style="height: 336px;">
+    <img width="25" height="25" src="/modules/core/img/loaders/loader.gif">
+</div>
+
+<fieldset data-ng-show="!isLoading" id="wrapper" >
+    <div id="content" class="form-group planContent" style="overflow-y: auto;overflow-x:hidden; margin-bottom: 3px;margin-right: -30px;">
+        <div class="hidden-xs"  style="margin-bottom: 30px;margin-top: 10px;display: inline-block;">
+            <label for="dailySteps">Daily Steps:</label>
+            <input style="width: 100px;display:inline-block;" type="text" data-ng-change="dailyStepsChange();" id="dailySteps" name="dailySteps" class="form-control"
+                   data-ng-model="plan.dailySteps" placeholder="Daily Steps">
+        </div>
+
+
+
+        <div class="visible-xs" style="margin: 10px;">
+            <!--<button  style="margin-bottom: 20px;" type="button" class="btn btn-primary btn-sm" ng-show="!plan.dailySteps" data-ng-click="openStepsDialog();">-->
+            <!--<span class="glyphicon glyphicon-plus" ></span> Enter Daily Steps-->
+            <!--</button>-->
+
+            <div style="color:blue; text-align: center;font-weight: bold;padding-top: 30px;" ng-show="!plan.dailySteps && plan.activities.length == 0">
+                There are no activities entered for this day.
+            </div>
+
+            <div style="margin-top: 10px;">
+                <div class="list-group">
+                    <div ng-show="plan.dailySteps">
+                        <a class="list-group-item" style="height: 60px;" data-ng-click="createActivityWithDialog(null, plan.dailySteps);">
+                            <div >
+                                <label for="dailySteps">Daily Steps:</label>
+                                                    <span  id="dailyStepsTxt" name="dailyStepsTxt"
+                                                           data-ng-bind="plan.dailySteps | number:0" placeholder="Daily Steps"/> steps
+                            </div>
+                        </a>
+
+                    </div>
+
+                    <div data-ng-repeat="activity in plan.activities"  style="margin-bottom: 0px;">
+                        <a class="list-group-item actionRow" data-ng-click="createActivityWithDialog(activity)" style="height: 60px;"
+                           data-ng-mouseover="activity.showEditIcon = true" data-ng-mouseleave="activity.showEditIcon = false">
+                            <div style="display:inline-block; font-weight:bold;color:rgb(105, 97, 97)" >
+                                <span data-ng-bind="activityTypesDictionary[activity.activityType].name"></span>:
+                            </div>
+
+                            <div class="list-group-item-text text-muted" style="display:inline-block;padding-left: 10px;">
+                                <div data-ng-show="activity.steps > 0">
+                                    <span  data-ng-bind="activity.steps | number:0"></span> Steps,
+                                </div>
+
+                            </div>
+
+                            <div style="display:inline-block;color:gray" >
+                                <div style="display:inline-block" data-ng-show="activity.duration > 0">
+                                    <span   data-ng-bind="activity.duration | number:0"></span> Minutes,
+                                </div>
+                                <span  data-ng-bind="activity.caloriesBurned | number:0"></span> Calories
+                            </div>
+
+                            <div style="display:inline-block;width:40px;float:right" data-ng-if="isUserAdmin">
+                                <div style="cursor:pointer;padding-top:1px;" data-ng-click="deleteActivity(activity);"   type="button" data-ng-class="{editRowShow: activity.showEditIcon && !activity.isEditable}"  class="editRowHide">
+                                    <span  class="glyphicon glyphicon-trash"></span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="hidden-xs" style="float:right; color: rgb(66, 66, 207);font-weight: bold;border: 1px solid rgb(221, 221, 221); display: inline-block;padding: 10px;margin-top: 10px;border-radius: 5px;}">
+            Total Calories Burned: <span data-ng-bind="(plan.totalCaloriesBurned) | number:0"></span>
+        </div>
+
+        <accordion  class="plansAccordion hidden-xs" style="..." close-others="oneAtATime">
+            <accordion-group is-open="isExercisesOpen">
+                <accordion-heading>
+                    <div class="accordionHeadingRegion">
+                        <span>Exercises</span>
+                    </div>
+
+                </accordion-heading>
+
+                <div id="addExercise" style="width: 103px;height: 31px;">
+                    <button type="button" class="btn btn-primary btn-sm" style="margin-bottom: 15px;" data-ng-click="createActivityWithDialog(null, null, true);">
+                        <span class="glyphicon glyphicon-plus" ></span> Add Exercise
+                    </button>
+                </div>
+                <div style="margin-top: 10px;">
+                    <div data-ng-repeat="activity in plan.activities" class="list-group" style="margin-bottom: 0px;">
+                        <a class="list-group-item actionRow" data-ng-click="createActivityWithDialog(activity)"
+                           data-ng-mouseover="activity.showEditIcon = true" data-ng-mouseleave="activity.showEditIcon = false">
+                            <div style="display:inline-block; font-weight:bold;color:rgb(105, 97, 97)" >
+                                <span data-ng-bind="activityTypesDictionary[activity.activityType].name"></span>:
+                            </div>
+
+                            <div class="list-group-item-text text-muted" style="display:inline-block;padding-left: 10px;">
+                                <div data-ng-show="activity.steps > 0">
+                                    <span  data-ng-bind="activity.steps | number:0"></span> Steps,
+                                </div>
+
+                            </div>
+
+                            <div style="display:inline-block;color:gray" >
+                                <div style="display:inline-block" data-ng-show="activity.duration > 0">
+                                    <span   data-ng-bind="activity.duration | number:0"></span> Minutes,
+                                </div>
+                                <span  data-ng-bind="activity.caloriesBurned | number:0"></span> Calories
+                            </div>
+
+                            <div style="display:inline-block;width:40px;float:right" data-ng-if="isUserAdmin">
+                                <div style="cursor:pointer;padding-top:1px;" data-ng-click="deleteActivity(activity);"   type="button" data-ng-class="{editRowShow: activity.showEditIcon && !activity.isEditable}"  class="editRowHide">
+                                    <span  class="glyphicon glyphicon-trash"></span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </accordion-group>
+
+            <accordion-group class="hidden-xs" data-ng-show="injuriesVisible" is-open="showInjuriesSection" style="margin-top: 20px;">
+                <accordion-heading>
+                    <div class="accordionHeadingRegion">
+                        <span>Injuries</span>
+                    </div>
+                </accordion-heading>
+
+                <button type="button" class="btn btn-primary btn-sm" style="margin-bottom: 15px;" data-ng-click="createInjuryWithDialog();">
+                    <span class="glyphicon glyphicon-plus" ></span> Add Injury
+                </button>
+
+                <div data-ng-repeat="injury in plan.injuries" data-ng-click="updateInjury(injury);" class="list-group" style="margin-bottom: 10px;"
+                     data-ng-mouseover="injury.showEditIcon = true" data-ng-mouseleave="injury.showEditIcon = false">
+                    <a class="list-group-item actionRow" >
+                        <div>
+                            <label>Pain Location:</label>
+                            <span data-ng-bind="injury.injuryLocation"></span>
+                        </div>
+                        <div>
+                            <label>Pain Level:</label>
+                            <span data-ng-bind="injury.painLevel"></span>
+                        </div>
+                        <div>
+                            <label>Notes:</label>
+                            <span data-ng-bind="injury.injuryNotes"></span>
+                        </div>
+
+                        <div style="display:inline-block;width:40px;float:right; position:relative; bottom: 80px;">
+                            <div style="padding-right:5px;cursor:pointer;padding-top:5px;" data-ng-click="deleteInjury(injury);" type="button" data-ng-class="{editRowShow: injury.showEditIcon}"  class="editRowHide">
+                                <span  class="glyphicon glyphicon-trash"></span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <!--<textarea style="width: 100%;height: 100px;" data-ng-model="plan.notes"></textarea>-->
+            </accordion-group>
+
+            <!--<accordion-group data-ng-show="plan.notesVisible" is-open="showNotesSection" style="margin-top: 20px;">-->
+            <!--<accordion-heading>-->
+            <!--<div class="accordionHeadingRegion">-->
+            <!--<span>Notes</span>-->
+            <!--</div>-->
+            <!--</accordion-heading>-->
+
+            <!--<textarea id="planNotes" style="width: 100%;height: 100px;" name="planNotes" data-ng-change="saveActivityPlan();" class="form-control" data-ng-model="plan.notes" placeholder="Notes">-->
+            <!--</textarea>-->
+
+            <!--</accordion-group>-->
+        </accordion>
+    </div>
+</fieldset>
+
+
+<div data-ng-show="error" class="text-danger">
+    <strong data-ng-bind="error"></strong>
+</div>
+</form>
+
+
+</div>
+
+
+
+<ng-include  src="'/modules/activities/views/activities.dialog.client.view.html'"></ng-include>
+
+
+<script type="text/ng-template" id="createInjuriesModalContent.html">
+    <div class="modal-header" style="font-family: segui;">
+        <h3 class="modal-title">Edit Injury</h3>
+    </div>
+    <div style="font-family: segui;padding-left: 10px;padding-bottom:10px;" >
+        <form  class="form-horizontal" style="margin-left: 50px;margin-top: 20px;" autocomplete="off">
+            <fieldset>
+                <div class="form-group">
+                    <label for="painLevel">Pain Level:</label>
+                    <br/>
+                    <select id="painLevel" style="width: 30%;font-size: 18px;" name="painLevel" data-ng-options="t for t in painLevelList" data-ng-model="selected.painLevel"></select>
+                </div>
+                <div class="form-group">
+                    <label for="injuryLocation">Injury Location:</label>
+                    <input type="text" style="width: 80%;" id="injuryLocation" name="injuryLocation" class="form-control" data-ng-model="selected.injuryLocation" placeholder="Injury Location">
+                </div>
+
+                <div class="form-group">
+                    <label for="notes">Notes:</label>
+                    <textarea id="notes" style="width: 80%;height: 100px;" name="notes" class="form-control" data-ng-model="selected.injuryNotes" placeholder="Notes">
+                    </textarea>
+                </div>
+            </fieldset>
+        </form>
+
+    </div>
+
+
+    <div class="modal-footer">
+        <button class="btn btn-primary"  ng-click="ok()">OK</button>
+        <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+    </div>
+</script>
+
+
+</section>
+
+<ng-include class="visible-xs"  src="'/modules/core/views/mobileFooter.client.view.html'"></ng-include>
+
+<script type="text/ng-template" id="notesModalContent.html">
+    <div class="modal-header" style="font-family: segui;">
+        <h3 class="modal-title">Edit Plan Notes</h3>
+    </div>
+    <div class="modal-body" style="font-family: segui;">
+
+        <div style="font-weight: bold;">
+            Notes:
+        </div>
+        <div>
+            <textarea style="width: 100%;height: 100px;" data-ng-model="selected.notesToSave">
+
+            </textarea>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" ng-click="ok()">OK</button>
+        <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+    </div>
+</script>

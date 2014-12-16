@@ -7,7 +7,7 @@ angular.module('bodyStats').controller('BodyStatsController', ['$scope', '$state
     function($scope, $stateParams, $timeout, $location, Authentication, BodyStats, CoreUtilities) {
         window.scope = $scope;
         $scope.showPlanEditableErrorMsg = false;
-
+        $scope.logNavPillSelected = 'weight';
 
         $scope.authentication = Authentication;
 
@@ -273,6 +273,28 @@ angular.module('bodyStats').controller('BodyStatsController', ['$scope', '$state
             else{
                 processNewPlan();
             }
+        };
+
+        $scope.findNavOne = function(){
+            var now = new Date();
+            $scope.todayDateAsConcat = getPlanDateAsConcat(now.getFullYear(), now.getMonth(), now.getDate());
+
+            var planDateAsConcat = $stateParams.planDateAsConcat;
+            var planDate = new Date(planDateAsConcat);
+
+            var year = planDate.getFullYear();
+            var month = planDate.getMonth();
+            var day = planDate.getDate();
+
+            //var planDateAsConcat = getPlanDateAsConcat(year, month, day);
+            $scope.plan = BodyStats.get({
+                bodyStatId: planDateAsConcat
+            },function(plan){
+                if(!plan || (plan && !plan.planDateYear)) {
+                    processNewPlan(year, month, day, true);
+                }
+                processReturnedPlan();
+            });
         };
 
 

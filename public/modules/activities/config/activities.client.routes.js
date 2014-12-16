@@ -29,6 +29,10 @@ angular.module('activities').config(['$stateProvider',
                 url: '/activities/:activityId/edit',
                 templateUrl: 'modules/activities/views/edit-activity.client.view.html'
             }).
+            state('navActivity', {
+                url: '/activities/nav/:planDateAsConcat',
+                templateUrl: 'modules/activities/views/edit-nav-activity.client.view.html'
+            }).
             state('viewActivityForDate', {
                 url: '/activities/:planDate/:planDateChangeDirection/:dayRange',
                 templateUrl: 'modules/activities/views/view-activity.client.view.html'

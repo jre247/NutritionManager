@@ -1,90 +1,9 @@
-<section data-ng-controller="BodyStatsController" style="font-family: segui;">
+<section data-ng-controller="BodyStatsController" data-ng-init="findOne()" style="font-family: segui;">
     <!--<div class="page-header">-->
     <!--<h1>New Plan</h1>-->
     <!--</div>-->
-    <div class="col-md-12">
-        <form class="form-horizontal" data-ng-init="findOne()" novalidate>
+    <ng-include   src="'/modules/body-stats/views/view-body-stats.content.client.view.html'"></ng-include>
 
-
-            <fieldset>
-                <div class="form-group" style="margin-bottom: 1px;">
-                    <div class="hidden-xs" style="margin-top: 9px;margin-bottom: 15px;display:inline-block; float:left">
-                        <a data-ng-href="#!/dashboard/{{plan.planDateAsConcat}}">
-                            <button type="button" class="btn btn-primary btn-m">
-                                <span class="glyphicon glyphicon-arrow-left" ></span><span > Dashboard</span>
-                            </button>
-                        </a>
-                    </div>
-
-                    <div class="visible-xs mobilePlanHeader" >
-                        <div>
-                            <ng-include  src="'/modules/plans/views/mobile/mobile.planDateContentMobile.client.view.html'"></ng-include>
-                        </div>
-
-                        <div class="dashboardNavTxt">
-                            <a style="color: white;" data-ng-href="#!/dashboard/{{plan.planDateAsConcat}}">
-                                <span class="glyphicon glyphicon-chevron-left" ></span> Dashboard
-                            </a>
-                        </div>
-
-                        <div class="pageTitle">
-                            <span>Body Stats</span>
-                        </div>
-                    </div>
-
-                    <div class="planDetailsSection hidden-xs" style="display:inline-block;vertical-align: top;padding-left: 30%;">
-                        <ng-include  src="'/modules/plans/views/desktop/desktop.planDateContent.client.view.html'"></ng-include>
-                    </div>
-
-                    <div class="planDetailsSection" style="display: inline-block; margin-top: 9px;float: right;">
-                        <button title="Delete Plan" style="margin-bottom: 15px;" type="button" class="btn btn-primary btn-m btn-danger hidden-sm hidden-xs"  data-ng-click="deletePlan(plan)">
-                            <span class="glyphicon glyphicon-trash" ></span>
-                        </button>
-                    </div>
-                </div>
-            </fieldset>
-
-            <fieldset style="margin-top: 32px;">
-                <div class="form-group">
-                    <label class="control-label" for="weight">Weight</label>
-                    <div class="controls">
-                        <input type="text" style="width: 140px;" data-ng-model="plan.weight" data-ng-change="saveBodyStatPlan()" id="weight" class="form-control"  required>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="control-label" for="bodyFatPercentage">Body Fat %</label>
-                    <div class="controls">
-                        <input style="width: 140px;"  data-ng-model="plan.bodyFatPercentage" data-ng-change="saveBodyStatPlan()" id="bodyFatPercentage" class="form-control" cols="30" rows="10" />
-                    </div>
-                </div>
-                <!--<div class="form-group">-->
-                    <!--<input type="submit" value="Save" style="padding: 4px 9px;" data-ng-click="saveBodyStatPlan();"  class="btn btn-default">-->
-                <!--</div>-->
-                <div data-ng-show="success" style="color: green; font-weight: bold; margin-bottom: 10px;opacity: 1;transition: opacity .25s ease-in-out;-moz-transition: opacity .25s ease-in-out;-webkit-transition: opacity .25s ease-in-out;" >
-                    <strong>Your changes have been saved!</strong>
-                </div>
-
-                <div data-ng-show="error" class="text-danger">
-                    <strong data-ng-bind="error"></strong>
-                </div>
-            </fieldset>
-
-
-        </form>
-
-
-    </div>
-
-
-    <script>
-        jQuery(document).ready(function(){
-
-            window.setTimeout(function(){
-                jQuery('.panel-group').find('.panel-default').addClass('disabled');
-            }, 1000)
-
-        });
-    </script>
 
 </section>
 
