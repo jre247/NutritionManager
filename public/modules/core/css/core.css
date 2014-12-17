@@ -236,3 +236,27 @@ div.tooltip {
     padding-top: 20px;
     text-align: right;
 }
+
+.triangleDownFood{
+    height: 50px;
+    width: 44px;
+    position: relative;
+    right: 357px;
+    top: 39px;
+}
+
+.triangleDownActivities{
+    height: 50px;
+    width: 44px;
+    position: relative;
+    right: 263px;
+    top: 39px;
+}
+
+.triangleDownWeight{
+    height: 50px;
+    width: 44px;
+    position: relative;
+    right: 143px;
+    top: 39px;
+}

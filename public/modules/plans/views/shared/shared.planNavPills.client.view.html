@@ -1,10 +1,11 @@
 <div class="row navPillsRow hidden-xs">
 
-    <div class="col-md-10 logNavPlanPills">
+    <div class="col-md-4 logNavPlanPills">
         <a ng-class="{activePill: logNavPillSelected == 'foods', inactivePill: logNavPillSelected != 'foods'}" href="#!/plans/nav/{{todayDateAsConcat}}">
             <div >
                 Foods
             </div>
+
 
         </a>
 
@@ -21,7 +22,15 @@
                 Weight
             </div>
         </a>
+
+
     </div>
+
+    <div class="col-md-4 ">
+        <img ng-class="{triangleDownActivities: logNavPillSelected == 'activities', triangleDownFood: logNavPillSelected == 'foods', triangleDownWeight: logNavPillSelected == 'weight'}""
+             src="/modules/core/img/brand/triangle_down.png"/>
+    </div>
+
 
     <div class="col-md-2 dashboardNav">
         <a data-ng-href="#!/dashboard/{{plan.planDateAsConcat}}">
@@ -31,3 +40,4 @@
         </a>
     </div>
 </div>
+
