@@ -1,6 +1,24 @@
+<!--<div class="planNavPills">-->
+    <!--<ul class="nav nav-pills">-->
+        <!--<li role="presentation" ng-class="{active: navPillSelected == 'today'}"><a href="#!/plans/nav/{{todayDateAsConcat}}">Today</a></li>-->
+        <!--<li role="presentation" ng-class="{active: navPillSelected == 'history'}"><a href="#!/plans">History</a></li>-->
+    <!--</ul>-->
+
+
+<!--</div>-->
+
 <div class="planNavPills">
-    <ul class="nav nav-pills">
-        <li role="presentation" ng-class="{active: navPillSelected == 'today'}"><a href="#!/plans/nav/{{todayDateAsConcat}}">Today</a></li>
-        <li role="presentation" ng-class="{active: navPillSelected == 'history'}"><a href="#!/plans">History</a></li>
-    </ul>
+    <a ng-class="{activePill: navPillSelected == 'today', inactivePill: navPillSelected != 'today'}" href="#!/plans/nav/{{todayDateAsConcat}}">
+        <div >
+            Today
+        </div>
+    </a>
+
+    <a ng-class="{activePill: navPillSelected == 'history', inactivePill: navPillSelected != 'history'}" href="#!/plans">
+        <div >
+            History
+        </div>
+    </a>
+
+
 </div>

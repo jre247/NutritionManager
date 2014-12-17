@@ -161,6 +161,8 @@ div.tooltip {
     }
 }
 
+
+
 .pageTitle{
     width: 100%;
     text-align: center;
@@ -168,23 +170,68 @@ div.tooltip {
     font-size: 16px;
 }
 
-.planNavPills{
 
-    font-size: 17px;
-}
 
 .logNavPlanPills{
     padding-top: 10px;
     font-size: 22px;
 }
 
+.logNavPlanPills > a{
+    display:inline-block;
+    border: 1px solid lightgray;
+    border-radius: 5px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 14px;
+    padding-right: 14px;
+}
+
+.logNavPlanPills > a,
+.planNavPills > a{
+
+    text-decoration: none;
+}
+
+.logNavPlanPills > a:hover,
+.planNavPills > a:hover{
+    background-color: #428bca;
+    cursor: pointer;
+    color:white;
+}
+
+.activePill{
+    background-color: #428bca;
+    color:white;
+}
+
+.inactivePill{
+    background-color: rgb(189, 208, 228);
+    color: #5097D5;
+}
+
 .navPillsRow{
     margin-bottom: 28px;
 }
 
+
+.planNavPills{
+
+    font-size: 17px;
+}
+
+.planNavPills > a{
+    display:inline-block;
+    border: 1px solid lightgray;
+    border-radius: 5px;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    padding-left: 11px;
+    padding-right: 11px;
+}
+
+
 .dashboardNav{
     padding-top: 20px;
-    position: relative;
-    right: 17px;
 
 }

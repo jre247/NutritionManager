@@ -7,12 +7,22 @@
         </a>
     </div>
     <div class="col-md-8 logNavPlanPills">
-        <ul class="nav nav-pills">
-            <li role="presentation" ng-class="{active: logNavPillSelected == 'foods'}"><a href="#!/plans/nav/{{todayDateAsConcat}}">Foods</a></li>
-            <li role="presentation" ng-class="{active: logNavPillSelected == 'activities'}"><a href="#!/activities/nav/{{todayDateAsConcat}}">Activities</a></li>
-            <li role="presentation" ng-class="{active: logNavPillSelected == 'weight'}"><a href="#!/body-stats/nav/{{todayDateAsConcat}}">Weight</a></li>
-        </ul>
+        <a ng-class="{activePill: logNavPillSelected == 'foods', inactivePill: logNavPillSelected != 'foods'}" href="#!/plans/nav/{{todayDateAsConcat}}">
+            <div >
+                Foods
+            </div>
+        </a>
+
+        <a ng-class="{activePill: logNavPillSelected == 'activities', inactivePill: logNavPillSelected != 'activities'}" href="#!/activities/nav/{{todayDateAsConcat}}">
+            <div >
+                Activities
+            </div>
+        </a>
+
+        <a ng-class="{activePill: logNavPillSelected == 'weight', inactivePill: logNavPillSelected != 'weight'}" href="#!/body-stats/nav/{{todayDateAsConcat}}">
+            <div  >
+                Weight
+            </div>
+        </a>
     </div>
-
-
 </div>
