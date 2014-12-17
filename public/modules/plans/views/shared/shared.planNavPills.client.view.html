@@ -1,17 +1,14 @@
 <div class="row navPillsRow">
-    <div class="col-md-4 dashboardNav">
-        <a data-ng-href="#!/dashboard/{{plan.planDateAsConcat}}">
-            <button type="button" class="btn btn-primary btn-m">
-                <span class="glyphicon glyphicon-home" ></span><span class="hidden-xs"> Dashboard</span>
-            </button>
-        </a>
-    </div>
-    <div class="col-md-8 logNavPlanPills">
+
+    <div class="col-md-10 logNavPlanPills">
         <a ng-class="{activePill: logNavPillSelected == 'foods', inactivePill: logNavPillSelected != 'foods'}" href="#!/plans/nav/{{todayDateAsConcat}}">
             <div >
                 Foods
             </div>
+
         </a>
+
+
 
         <a ng-class="{activePill: logNavPillSelected == 'activities', inactivePill: logNavPillSelected != 'activities'}" href="#!/activities/nav/{{todayDateAsConcat}}">
             <div >
@@ -23,6 +20,14 @@
             <div  >
                 Weight
             </div>
+        </a>
+    </div>
+
+    <div class="col-md-2 dashboardNav">
+        <a data-ng-href="#!/dashboard/{{plan.planDateAsConcat}}">
+            <button type="button" class="btn btn-primary btn-m">
+                <span class="glyphicon glyphicon-home" ></span><span class="hidden-xs"> Dashboard</span>
+            </button>
         </a>
     </div>
 </div>

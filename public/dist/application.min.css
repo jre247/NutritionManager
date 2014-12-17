@@ -417,7 +417,7 @@ div.tooltip {
 }
 
 .inactivePill{
-    background-color: rgb(189, 208, 228);
+    background-color: rgb(218, 229, 240);
     color: #5097D5;
 }
 
@@ -444,7 +444,7 @@ div.tooltip {
 
 .dashboardNav{
     padding-top: 20px;
-
+    text-align: right;
 }
 
 /* End Core */
