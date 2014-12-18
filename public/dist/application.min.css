@@ -664,6 +664,10 @@ div.tooltip {
 
 
 /* Nutrition Plan */
+.mealContainer{
+    margin-bottom: 19px !important;
+}
+
 .suggestedFoodsHeaderTxt{
     position: relative;
     right: 10px;
