@@ -8,13 +8,13 @@
 <!--</div>-->
 
 <div class="planNavPills  hidden-xs">
-    <a ng-class="{activePill: navPillSelected == 'today', inactivePill: navPillSelected != 'today'}" href="#!/plans/nav/{{todayDateAsConcat}}">
+    <a ng-class="{activeSubPill: navPillSelected == 'today', inactivePill: navPillSelected != 'today'}" href="#!/plans/nav/{{todayDateAsConcat}}">
         <div >
             Today
         </div>
     </a>
 
-    <a ng-class="{activePill: navPillSelected == 'history', inactivePill: navPillSelected != 'history'}" href="#!/plans">
+    <a ng-class="{activeSubPill: navPillSelected == 'history', inactivePill: navPillSelected != 'history'}" href="#!/plans">
         <div >
             History
         </div>

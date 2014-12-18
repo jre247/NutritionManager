@@ -193,15 +193,25 @@ div.tooltip {
     text-decoration: none;
 }
 
-.logNavPlanPills > a:hover,
-.planNavPills > a:hover{
+.logNavPlanPills > a:hover{
     background-color: #428bca;
+    cursor: pointer;
+    color:white;
+}
+
+.planNavPills > a:hover{
+    background-color: #42ABCA;
     cursor: pointer;
     color:white;
 }
 
 .activePill{
     background-color: #428bca;
+    color:white;
+}
+
+.activeSubPill{
+    background-color: #42ABCA;
     color:white;
 }
 
@@ -241,7 +251,7 @@ div.tooltip {
     height: 50px;
     width: 44px;
     position: relative;
-    right: 357px;
+    right: 360px;
     top: 39px;
 }
 

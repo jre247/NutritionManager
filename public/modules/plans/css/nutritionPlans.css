@@ -442,10 +442,8 @@
 }
 
 .foodPgForm{
-    padding: 10px;
-    border-top: 1px solid lightgray;
-    border-left: 1px solid lightgray;
-    border-right: 1px solid lightgray;
+
+    box-shadow: 0 1px 1px 0 #9098B6;
     border-radius-top: 8px;
     border-top-left-radius: 8px;
     border-top-right-radius: 8px;
@@ -453,10 +451,33 @@
 }
 
 .foodPgContainer{
-    background: rgb(244, 244, 244);
+    background: rgba(244, 244, 244, 0.53);
 }
 
 .panel-default > .panel-heading{
-    background-image: linear-gradient(to bottom, rgba(83, 137, 223, 0.84) 0%, rgba(110, 151, 219, 0.74) 100%) !important;
+    background-image: linear-gradient(to bottom, rgba(102, 156, 218, 1) 0%, rgba(65, 113, 194, 0.78) 100%) !important;
     color: white !important;
+
+}
+
+.actionRegion{
+    display: inline-block;
+    margin-top: 9px;
+    float: right;
+
+}
+
+.planContentArea{
+    padding: 10px;
+}
+
+.actionHeader{
+    margin-bottom: 1px;
+    padding: 10px;
+}
+
+.headerContainer{
+    background-color: rgba(128, 128, 128, 0.11);
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
 }
