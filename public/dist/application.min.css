@@ -536,6 +536,9 @@ div.tooltip {
 }
 
 
+.panel-primary{
+    border-color: rgba(66, 139, 202, 0.2) !important;
+}
 
 
 .pageTitle{
