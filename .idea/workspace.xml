@@ -5,8 +5,6 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/dist/application.min.css" afterPath="$PROJECT_DIR$/public/dist/application.min.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/modules/core/css/core.css" afterPath="$PROJECT_DIR$/public/modules/core/css/core.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/modules/plans/css/nutritionPlans.css" afterPath="$PROJECT_DIR$/public/modules/plans/css/nutritionPlans.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/modules/plans/views/shared/shared.planNavPills.client.view.html" afterPath="$PROJECT_DIR$/public/modules/plans/views/shared/shared.planNavPills.client.view.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/modules/plans/views/shared/shared.todayHistoryPills.client.view.html" afterPath="$PROJECT_DIR$/public/modules/plans/views/shared/shared.todayHistoryPills.client.view.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/modules/plans/views/shared/shared.viewPlan.planContent.client.view.html" afterPath="$PROJECT_DIR$/public/modules/plans/views/shared/shared.viewPlan.planContent.client.view.html" />
     </list>
     <ignored path="NutritionManager.iws" />
@@ -45,8 +43,8 @@
       <file leaf-file-name="core.css" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/modules/core/css/core.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="1925" max-vertical-offset="4170">
-              <caret line="163" column="0" selection-start-line="163" selection-start-column="0" selection-end-line="272" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="3140" max-vertical-offset="4200">
+              <caret line="274" column="0" selection-start-line="166" selection-start-column="0" selection-end-line="274" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -65,7 +63,7 @@
       <file leaf-file-name="application.min.css" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/public/dist/application.min.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.97061706" vertical-offset="8714" max-vertical-offset="20385">
+            <state vertical-scroll-proportion="0.97061706" vertical-offset="8714" max-vertical-offset="20325">
               <caret line="647" column="0" selection-start-line="647" selection-start-column="0" selection-end-line="647" selection-end-column="0" />
               <folding />
             </state>
@@ -75,8 +73,8 @@
       <file leaf-file-name="shared.viewPlan.planContent.client.view.html" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/modules/plans/views/shared/shared.viewPlan.planContent.client.view.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-3.125" vertical-offset="0" max-vertical-offset="4365">
-              <caret line="5" column="84" selection-start-line="5" selection-start-column="84" selection-end-line="5" selection-end-column="84" />
+            <state vertical-scroll-proportion="-3.64" vertical-offset="673" max-vertical-offset="4365">
+              <caret line="57" column="18" selection-start-line="57" selection-start-column="18" selection-end-line="57" selection-end-column="18" />
               <folding>
                 <element signature="n#style#0;n#div#0;n#div#0;n#fieldset#0;n#form#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#fieldset#0;n#form#0;n#!!top" expanded="true" />
@@ -146,10 +144,10 @@
         <option value="$PROJECT_DIR$/public/modules/activities/views/view-activity.client.view.html" />
         <option value="$PROJECT_DIR$/public/dist/application.min.js" />
         <option value="$PROJECT_DIR$/public/modules/plans/views/shared/shared.planNavPills.client.view.html" />
-        <option value="$PROJECT_DIR$/public/modules/plans/views/shared/shared.viewPlan.planContent.client.view.html" />
-        <option value="$PROJECT_DIR$/public/modules/plans/css/nutritionPlans.css" />
         <option value="$PROJECT_DIR$/public/modules/plans/views/shared/shared.todayHistoryPills.client.view.html" />
+        <option value="$PROJECT_DIR$/public/modules/plans/views/shared/shared.viewPlan.planContent.client.view.html" />
         <option value="$PROJECT_DIR$/public/modules/core/css/core.css" />
+        <option value="$PROJECT_DIR$/public/modules/plans/css/nutritionPlans.css" />
         <option value="$PROJECT_DIR$/public/dist/application.min.css" />
       </list>
     </option>
@@ -163,7 +161,7 @@
     <initial>false</initial>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="3202" />
+    <option name="x" value="3201" />
     <option name="y" value="-112" />
     <option name="width" value="1920" />
     <option name="height" value="1178" />
@@ -732,7 +730,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="3202" y="-112" width="1920" height="1178" extended-state="6" />
+    <frame x="3201" y="-112" width="1920" height="1178" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Grunt" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
@@ -1461,16 +1459,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/dist/application.min.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-17.115385" vertical-offset="85520" max-vertical-offset="127395">
-          <caret line="5773" column="30" selection-start-line="5773" selection-start-column="30" selection-end-line="5773" selection-end-column="30" />
-          <folding>
-            <element signature="e#44758#46541#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/modules/activities/views/view-activity.client.view.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-2.5" vertical-offset="0" max-vertical-offset="225">
@@ -1500,9 +1488,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/public/modules/plans/views/shared/shared.todayHistoryPills.client.view.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-5.625" vertical-offset="0" max-vertical-offset="435">
+          <caret line="9" column="19" selection-start-line="9" selection-start-column="19" selection-end-line="9" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/public/modules/plans/views/desktop/view-nav-plan.client.view.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.625" vertical-offset="0" max-vertical-offset="495">
+        <state vertical-scroll-proportion="0.0144787645" vertical-offset="0" max-vertical-offset="1036">
           <caret line="1" column="41" selection-start-line="1" selection-start-column="26" selection-end-line="1" selection-end-column="41" />
           <folding>
             <element signature="n#style#0;n#section#0;n#!!top" expanded="true" />
@@ -1512,8 +1508,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/public/modules/plans/views/shared/shared.viewPlan.planContent.client.view.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-3.125" vertical-offset="0" max-vertical-offset="4365">
-          <caret line="5" column="84" selection-start-line="5" selection-start-column="84" selection-end-line="5" selection-end-column="84" />
+        <state vertical-scroll-proportion="-3.64" vertical-offset="673" max-vertical-offset="4365">
+          <caret line="57" column="18" selection-start-line="57" selection-start-column="18" selection-end-line="57" selection-end-column="18" />
           <folding>
             <element signature="n#style#0;n#div#0;n#div#0;n#fieldset#0;n#form#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#fieldset#0;n#form#0;n#!!top" expanded="true" />
@@ -1523,33 +1519,35 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/modules/plans/views/shared/shared.todayHistoryPills.client.view.html">
+    <entry file="file://$PROJECT_DIR$/public/modules/plans/css/nutritionPlans.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.625" vertical-offset="0" max-vertical-offset="435">
-          <caret line="9" column="19" selection-start-line="9" selection-start-column="19" selection-end-line="9" selection-end-column="19" />
+        <state vertical-scroll-proportion="0.3490566" vertical-offset="6200" max-vertical-offset="7260">
+          <caret line="438" column="24" selection-start-line="0" selection-start-column="0" selection-end-line="478" selection-end-column="1" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/modules/plans/css/nutritionPlans.css">
+    <entry file="file://$PROJECT_DIR$/public/dist/application.min.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.730769" vertical-offset="6271" max-vertical-offset="7320">
-          <caret line="428" column="17" selection-start-line="428" selection-start-column="17" selection-end-line="428" selection-end-column="17" />
-          <folding />
+        <state vertical-scroll-proportion="-17.115385" vertical-offset="85520" max-vertical-offset="127395">
+          <caret line="5773" column="30" selection-start-line="5773" selection-start-column="30" selection-end-line="5773" selection-end-column="30" />
+          <folding>
+            <element signature="e#44758#46541#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/public/modules/core/css/core.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1925" max-vertical-offset="4170">
-          <caret line="163" column="0" selection-start-line="163" selection-start-column="0" selection-end-line="272" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="3140" max-vertical-offset="4200">
+          <caret line="274" column="0" selection-start-line="166" selection-start-column="0" selection-end-line="274" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/public/dist/application.min.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.97061706" vertical-offset="8714" max-vertical-offset="20385">
+        <state vertical-scroll-proportion="0.97061706" vertical-offset="8714" max-vertical-offset="20325">
           <caret line="647" column="0" selection-start-line="647" selection-start-column="0" selection-end-line="647" selection-end-column="0" />
           <folding />
         </state>
