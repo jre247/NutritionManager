@@ -457,7 +457,7 @@ div.tooltip {
 
 
 
-/* Bootstrap overrides */
+/* Core */
 .popover-title{
     background-color: rgb(161, 228, 174);
 }
@@ -539,7 +539,6 @@ div.tooltip {
 .panel-primary{
     border-color: rgba(66, 139, 202, 0.2) !important;
 }
-
 
 .pageTitle{
     width: 100%;
@@ -649,8 +648,56 @@ div.tooltip {
     top: 39px;
 }
 
+.foodsTodayHistoryPills{
+    position: relative;
+    top: 21px;
+}
+
+.pgForm{
+
+    box-shadow: 0 1px 1px 0 #9098B6;
+    border-radius-top: 8px;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    background-color: white;
+}
+
+.pgContainer{
+    background: rgba(244, 244, 244, 0.53);
+}
 
 
+
+.actionRegion{
+    display: inline-block;
+
+    float: right;
+
+}
+
+.planContentArea{
+    padding: 10px;
+}
+
+.actionHeader{
+
+    padding: 10px;
+}
+
+.headerContainer{
+    background-color: rgba(128, 128, 128, 0.11);
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    padding: 2px;
+
+}
+
+.dashboardNavTxt{
+    position: fixed;
+    margin-top: 14px;
+    margin-left: 5px;
+    font-size: 14px;
+}
 /* End Core */
 
 
@@ -664,10 +711,6 @@ div.tooltip {
 
 
 /* Nutrition Plan */
-.mealContainer{
-    margin-bottom: 19px !important;
-}
-
 .suggestedFoodsHeaderTxt{
     position: relative;
     right: 10px;
@@ -1044,12 +1087,7 @@ div.tooltip {
     color: blue;
 }
 
-.dashboardNavTxt{
-    position: fixed;
-    margin-top: 14px;
-    margin-left: 5px;
-    font-size: 14px;
-}
+
 
 .mobileDateLeftArrow{
     display: inline-block;
@@ -1090,8 +1128,7 @@ div.tooltip {
 .planDateTxt{
     text-align: center;
     /* margin-top: 10px; */
-    position: relative;
-    top: 12px;
+
     font-size: 21px;
     color: rgb(16, 16, 211);
 }
@@ -1106,252 +1143,17 @@ div.tooltip {
     color: rgb(52, 52, 210);
 }
 
-.foodsTodayHistoryPills{
-    position: relative;
-    top: 21px;
+
+.foodsHeader{
+    padding-bottom: 5px;
 }
 
-.foodPgForm{
-
-    box-shadow: 0 1px 1px 0 #9098B6;
-    border-radius-top: 8px;
-    border-top-left-radius: 8px;
-    border-top-right-radius: 8px;
-    background-color: white;
+.mealContainer{
+    margin-bottom: 19px !important;
 }
 
-.foodPgContainer{
-    background: rgba(244, 244, 244, 0.53);
-}
-
-
-
-.actionRegion{
-    display: inline-block;
-    margin-top: 9px;
-    float: right;
-
-}
-
-.planContentArea{
-    padding: 10px;
-}
-
-.actionHeader{
-    margin-bottom: 1px;
-    padding: 10px;
-}
-
-.headerContainer{
-    background-color: rgba(128, 128, 128, 0.11);
-    border-top-left-radius: 8px;
-    border-top-right-radius: 8px;
-}
-/* End Nutrition Plan */
-
-
-
-
-
-
-
-
-
-
-
-
-/*Mobile Footer*/
-.mobileFooterAnchor{
-    color:white
-}
-
-#mobileFooter {
-    width: 100%;
-    height: 34px;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-
-    color:white !important;
-
-    background-color: rgb(34, 34, 34);
-    background-image: linear-gradient(rgb(44, 126, 224) 0px, rgba(104, 144, 210, 0.721569) 100%);
-    background-repeat: repeat-x;
-    border-bottom-color: rgb(16, 153, 232);
-    border-bottom-left-radius: 0px;
-    border-bottom-right-radius: 0px;
-    border-bottom-style: solid;
-    border-bottom-width: 1px;
-    border-image-outset: 0px;
-    border-image-repeat: stretch;
-    border-image-slice: 100%;
-    border-image-source: none;
-    border-image-width: 1;
-    border-left-color: rgb(16, 153, 232);
-    border-left-style: solid;
-    border-left-width: 0px;
-    border-right-color: rgb(16, 153, 232);
-    border-right-style: solid;
-    border-right-width: 0px;
-    border-top-color: rgb(16, 153, 232);
-    border-top-left-radius: 0px;
-    border-top-right-radius: 0px;
-    border-top-style: solid;
-    border-top-width: 0px;
-    box-sizing: border-box;
-}
-
-.mobileFooterElement{
-    display: inline-block;
-    border-right: 1px solid lightgray;
-    padding: 6px;
-
-}
-/* End Mobile Footer*/
-
-
-
-
-
-
-/* Activities */
-
-.mobileActivitiesTotals{
-    font-weight: bold;
-    position: fixed;
-    top: 82px;
-    padding: 7px;
-    width: 100%;
-    color:blue;
-    border-bottom: 1px solid lightgray;
-    background-color:rgba(236, 241, 255, 1);
-}
-
-.mobileTotalsContent{
-    display:inline-block;
-
-
-}
-
-.totalsLbl{
-    float: left;
-}
-
-/* End Activities */
-
-
-
-
-/* Dashboard */
-
-.createWeightRegion{
-    margin-top: 34px;
-}
-
-.navWeightRegion{
-    position: relative;
-    right: 50px;
-    bottom: 34px;
-}
-
-.weightTxt{
-    position: relative;
-    top: 80px;
-    left: 93px;
-    color: blue;
-    z-index: 1000;
-    background-color: white;
-}
-
-.dateSection{
-
-    margin-top: 9px;
-}
-
-.buttonsArea{
-    margin-top: 7px;
-}
-
-.dailySectionLastRow{
-    margin-top: 35px;
-}
-
-.weightHeaderTxt{
-    position: relative;
-    top: 46px;
-    left: 45px;
-    color: rgb(8, 81, 189);
-}
-
-.emptyWeightHeaderTxt{
-    bottom: 22px;
-    position: relative;
-    color: rgb(8, 81, 189);
-}
-
-.weightIcon{
-    position: relative;
-    bottom: 19px;
-}
-
-.emptyWeightIcon{
-    position: relative;
-    bottom: 20px;
-
-}
-
-.emptyWeightCreateTxt{
-    position: relative;
-    bottom: 29px;
-    left: 6px;
-}
-
-.activitiesBtn{
-    position: relative;
-    right: 20px;
-
-}
-
-.caloriesDetails{
-    font-size: 16px;
-    position: relative;
-    bottom: 19px;
-}
-
-.weeklyDashboardLoader{
-    height: 336px;
-    margin-left: 80px;
-    margin-top: 10px;
-}
-.viewFoodsTxt{
-    padding-left: 6px;
-}
-
-/* End Dashboard */
-
-
-
-
-/* Nutrition Profile */
-
-.mealsTemplateContainer{
-    margin-left: 10px;
-    margin-top: 30px;
-    border: 1px solid lightgray;
-    padding: 15px;
-    width: 155px;
-    border-radius: 5px;
-}
-
-.templateMealItem{
-    height: 30px;
-    padding: 3px;
-    width: 90px;
-    text-align: center;
-    border: 1px solid lightgray;
-    border-radius: 5px;
-    margin-bottom: 5px;
-    cursor: pointer;
+.listPlansContentArea{
+    padding: 20px;
 }
 
 /* End Nutrition Profile */

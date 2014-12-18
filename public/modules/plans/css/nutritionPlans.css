@@ -374,12 +374,7 @@
     color: blue;
 }
 
-.dashboardNavTxt{
-    position: fixed;
-    margin-top: 14px;
-    margin-left: 5px;
-    font-size: 14px;
-}
+
 
 .mobileDateLeftArrow{
     display: inline-block;
@@ -420,8 +415,7 @@
 .planDateTxt{
     text-align: center;
     /* margin-top: 10px; */
-    position: relative;
-    top: 12px;
+
     font-size: 21px;
     color: rgb(16, 16, 211);
 }
@@ -436,48 +430,15 @@
     color: rgb(52, 52, 210);
 }
 
-.foodsTodayHistoryPills{
-    position: relative;
-    top: 21px;
-}
 
-.foodPgForm{
-
-    box-shadow: 0 1px 1px 0 #9098B6;
-    border-radius-top: 8px;
-    border-top-left-radius: 8px;
-    border-top-right-radius: 8px;
-    background-color: white;
-}
-
-.foodPgContainer{
-    background: rgba(244, 244, 244, 0.53);
-}
-
-
-
-.actionRegion{
-    display: inline-block;
-    margin-top: 9px;
-    float: right;
-
-}
-
-.planContentArea{
-    padding: 10px;
-}
-
-.actionHeader{
-    margin-bottom: 1px;
-    padding: 10px;
-}
-
-.headerContainer{
-    background-color: rgba(128, 128, 128, 0.11);
-    border-top-left-radius: 8px;
-    border-top-right-radius: 8px;
+.foodsHeader{
+    padding-bottom: 5px;
 }
 
 .mealContainer{
     margin-bottom: 19px !important;
+}
+
+.listPlansContentArea{
+    padding: 20px;
 }

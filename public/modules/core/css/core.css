@@ -274,3 +274,54 @@ div.tooltip {
     right: 143px;
     top: 39px;
 }
+
+.foodsTodayHistoryPills{
+    position: relative;
+    top: 21px;
+}
+
+.pgForm{
+
+    box-shadow: 0 1px 1px 0 #9098B6;
+    border-radius-top: 8px;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    background-color: white;
+}
+
+.pgContainer{
+    background: rgba(244, 244, 244, 0.53);
+}
+
+
+
+.actionRegion{
+    display: inline-block;
+
+    float: right;
+
+}
+
+.planContentArea{
+    padding: 10px;
+}
+
+.actionHeader{
+
+    padding: 10px;
+}
+
+.headerContainer{
+    background-color: rgba(128, 128, 128, 0.11);
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    padding: 2px;
+
+}
+
+.dashboardNavTxt{
+    position: fixed;
+    margin-top: 14px;
+    margin-left: 5px;
+    font-size: 14px;
+}
