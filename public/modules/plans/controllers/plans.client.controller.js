@@ -38,6 +38,8 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
             return CoreUtilities.getDesktopPlanDateFormat($scope);
         };
 
+
+
         $scope.foodTypes = [
             {id: 1, type: 'Fruit'},
             {id: 2, type: 'Starch'},
@@ -490,6 +492,7 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
             var now = new Date();
             $scope.todayDateAsConcat = getPlanDateAsConcat(now.getFullYear(), now.getMonth(), now.getDate());
 
+
             if(!getMorePlans) {
                 $scope.isLoading = true;
             }
@@ -732,6 +735,7 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
             var now = new Date();
             $scope.todayDateAsConcat = getPlanDateAsConcat(now.getFullYear(), now.getMonth(), now.getDate());
 
+
             $scope.isLoading = true;
 
             var planDateAsConcat;
@@ -767,6 +771,7 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
         $scope.findOne = function() {
             var now = new Date();
             $scope.todayDateAsConcat = getPlanDateAsConcat(now.getFullYear(), now.getMonth(), now.getDate());
+
 
             $scope.isLoading = true;
 

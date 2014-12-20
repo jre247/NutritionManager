@@ -2,13 +2,7 @@
     <fieldset class="headerContainer foodsHeader">
         <div  class="actionHeader">
             <div class="planDetailsSection" style="text-align: center;">
-                <div  style="display:inline-block; float:left;">
-                    <!--<a data-ng-href="#!/dashboard/{{plan.planDateAsConcat}}">-->
-                        <!--<button type="button" class="btn btn-primary btn-m">-->
-                            <!--<span class="glyphicon glyphicon-home" ></span><span class="hidden-xs"> Dashboard</span>-->
-                        <!--</button>-->
-                    <!--</a>-->
-
+                <div style="display:inline-block; float:left;">
                     <ng-include  src="'/modules/plans/views/shared/shared.todayHistoryPills.client.view.html'"></ng-include>
                 </div>
 
@@ -18,9 +12,7 @@
                         {{getDesktopPlanDateFormat(plan.planDateNonUtc)}}
                     </span>
                  </div>
-                <!--<div  style="display:inline-block;text-align: center;padding-left: 29%;">-->
-                <!--<ng-include  src="'/modules/plans/views/desktop/desktop.planDateContent.client.view.html'"></ng-include>-->
-                <!--</div>-->
+
                 <div class="actionRegion">
                     <div style="display:inline-block" id="createMeal">
                         <button  type="button" class="btn btn-primary btn-m" style="padding: 6px 10px;"  data-ng-click="createFoodWithDialog();">

@@ -27,6 +27,8 @@ angular.module('activities').controller('ActivitiesController', ['$scope', '$sta
             return CoreUtilities.getMobilePlanDateFormat($scope);
         };
 
+
+
         $scope.planExistsInDb = false;
        // $scope.planDateParam = $routeParams.planDateForCreate;
 
@@ -353,6 +355,9 @@ angular.module('activities').controller('ActivitiesController', ['$scope', '$sta
 
         $scope.find = function() {
             $scope.isLoading = true;
+            var now = new Date();
+            $scope.todayDateAsConcat = getPlanDateAsConcat(now.getFullYear(), now.getMonth(), now.getDate());
+            $scope.navPillSelected = 'history';
 
             $scope.activities = Activities.query(
                 function(u, getResponseHeaders)
@@ -452,6 +457,19 @@ angular.module('activities').controller('ActivitiesController', ['$scope', '$sta
         var processReturnedPlan = function(){
             $scope.plan.planDateNonUtc = new Date($scope.plan.planDateYear, $scope.plan.planDateMonth, $scope.plan.planDateDay);
 
+            var year = $scope.plan.planDateNonUtc.getFullYear();
+            var month = $scope.plan.planDateNonUtc.getMonth();
+            var day = $scope.plan.planDateNonUtc.getDate();
+
+            var now = new Date();
+
+            if(year === now.getFullYear() && month === now.getMonth() && day === now.getDate()){
+                $scope.navPillSelected = 'today';
+            }
+            else{
+                $scope.navPillSelected = 'history';
+            }
+
 
             $scope.isUserAdmin = $scope.plan.userRoles && $scope.plan.userRoles.indexOf('admin') !== -1 ? true : false;
 
@@ -495,14 +513,28 @@ angular.module('activities').controller('ActivitiesController', ['$scope', '$sta
             $scope.isLoading = false;
         };
 
-        $scope.planInputChange = function(){
-            var year = $scope.plan.planDateNonUtc.getFullYear();
-            var month = $scope.plan.planDateNonUtc.getMonth();
-            var day = $scope.plan.planDateNonUtc.getDate();
+        $scope.planInputChange = function(planDateInput){
+//            var year = $scope.plan.planDateNonUtc.getFullYear();
+//            var month = $scope.plan.planDateNonUtc.getMonth();
+//            var day = $scope.plan.planDateNonUtc.getDate();
+//
+//            var planDateAsConcat = getPlanDateAsConcat(year, month, day);
+//
+//            getPlanFromDb(year, month, day, planDateAsConcat, true);
+//
+//            $scope.opened = false;
+//
+
+
+
+            var year = planDateInput.getFullYear();
+            var month = planDateInput.getMonth();
+            var day = planDateInput.getDate();
 
             var planDateAsConcat = getPlanDateAsConcat(year, month, day);
 
-            getPlanFromDb(year, month, day, planDateAsConcat, true);
+            window.location = '#!/activities/nav/' + planDateAsConcat + '/true';
+            // getPlanFromDb(year, month, day, planDateAsConcat);
 
             $scope.opened = false;
         };
@@ -532,7 +564,12 @@ angular.module('activities').controller('ActivitiesController', ['$scope', '$sta
             getPlanFromDb(year, month, day, planDateAsConcat, true);
         };
 
+
+
         $scope.findOne = function() {
+            var now = new Date();
+            $scope.todayDateAsConcat = getPlanDateAsConcat(now.getFullYear(), now.getMonth(), now.getDate());
+
             if ($stateParams.activityId) {
                 getPlanFromDb();
             }
@@ -543,17 +580,32 @@ angular.module('activities').controller('ActivitiesController', ['$scope', '$sta
             $scope.isExercisesOpen = true;
         };
 
+        $scope.getDesktopPlanDateFormat = function(){
+            return CoreUtilities.getDesktopPlanDateFormat($scope);
+        };
+
         $scope.findOneForNav = function(){
             var now = new Date();
             $scope.todayDateAsConcat = getPlanDateAsConcat(now.getFullYear(), now.getMonth(), now.getDate());
 
             if ($stateParams.planDateAsConcat) {
                 var planDateAsConcat = $stateParams.planDateAsConcat;
-                var planDate = new Date(planDateAsConcat);
+                var year = planDateAsConcat.substr(0, 4);
+                var month = planDateAsConcat.substr(4, 2);
+                var day = planDateAsConcat.substr(6, 2);
 
-                var year = planDate.getFullYear();
-                var month = planDate.getMonth();
-                var day = planDate.getDate();
+                var planDate = new Date(year, month, day);
+
+                 year = planDate.getFullYear();
+                 month = planDate.getMonth();
+                 day = planDate.getDate();
+
+                if(year === now.getFullYear() && month === now.getMonth() && day === now.getDate()){
+                    $scope.navPillSelected = 'today';
+                }
+                else{
+                    $scope.navPillSelected = 'history';
+                }
 
                 getPlanFromDb(year, month, day, planDateAsConcat, true);
             }

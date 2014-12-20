@@ -25,12 +25,16 @@ angular.module('activities').config(['$stateProvider',
                 url: '/activities/:activityId',
                 templateUrl: 'modules/activities/views/view-activity.client.view.html'
             }).
-            state('editActivity', {
-                url: '/activities/:activityId/edit',
-                templateUrl: 'modules/activities/views/edit-activity.client.view.html'
-            }).
+//            state('editActivity', {
+//                url: '/activities/:activityId/edit',
+//                templateUrl: 'modules/activities/views/edit-activity.client.view.html'
+//            }).
             state('navActivity', {
                 url: '/activities/nav/:planDateAsConcat',
+                templateUrl: 'modules/activities/views/edit-nav-activity.client.view.html'
+            }).
+            state('viewActivityWithHistory', {
+                url: '/activities/nav/:planDateAsConcat/:isHistory',
                 templateUrl: 'modules/activities/views/edit-nav-activity.client.view.html'
             }).
             state('viewActivityForDate', {

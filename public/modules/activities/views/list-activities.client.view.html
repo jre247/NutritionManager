@@ -1,85 +1,132 @@
 <section data-ng-controller="ActivitiesController" data-ng-init="find()">
-    <div class="page-header">
-        <h1>Activities</h1>
+    <div class="row ">
+        <div class="pgContainer col-md-12">
+            <ng-include  src="'/modules/plans/views/shared/shared.planNavPills.client.view.html'"></ng-include>
 
+            <div class="pgForm">
+                <div class="hidden-xs headerContainer">
+                    <div class="row actionHeader">
+                        <div class="col-md-8 ">
+                            <div style="display:inline-block; float:left;">
+                                <div class="planNavPills  hidden-xs">
+                                    <a ng-class="{activeSubPill: navPillSelected == 'today', inactivePill: navPillSelected != 'today'}" href="#!/activities/nav/{{todayDateAsConcat}}">
+                                        <div >
+                                            Today
+                                        </div>
+                                    </a>
 
-    </div>
-
-
-    Order Dates By:
-
-    <select data-ng-model="selectedDirection" ng-options="t for t in directionList" data-ng-change="reverseSort = selectedDirection === 'Descending'" style="font-size: 16px;vertical-align: top;"></select>
-
-
-
-    <div data-ng-show="isLoading" style="height: 336px;">
-        <img width="25" height="25" src="/modules/core/img/loaders/loader.gif">
-    </div>
-
-    <div data-ng-show="!isLoading" class="list-group" style="margin-top: 20px;">
-        <div>
-            <a data-ng-repeat="plan in activities | orderBy:orderByField:reverseSort" data-ng-href="#!/activities/{{plan._id}}" class="list-group-item">
-                <div>
-
-                    <h4 class="list-group-item-heading" >
-                        <span data-ng-bind="(plan.planDateMonth + 1) + '/' + plan.planDateDay + '/' + plan.planDateYear"></span>
-                        <div style="display: inline-block; font-weight: bold; color: red;padding-left:20px;" data-ng-if="plan.injuries && plan.injuries.length > 0">
-                            <span class="glyphicon glyphicon-star-empty"></span> Injured
-                            <span data-ng-bind="getLocationsForInjuries(plan)"></span>
-                        </div>
-                    </h4>
-
-                    <div >
-                        <div data-ng-repeat="activity in plan.activities" style="display:inline-block;">
-                            <div style="display:inline-block; margin-left: 40px;">
-                                <div style="display:inline-block; font-weight:bold;color:rgb(105, 97, 97)" >
-                                    <span data-ng-bind="activityTypesDictionary[activity.activityType].name"></span>:
-                                </div>
-
-                                <div class="list-group-item-text text-muted" style="display:inline-block;padding-left: 10px;">
-                                    <div data-ng-show="activity.steps > 0">
-                                        <span  data-ng-bind="activity.steps | number:0"></span> Steps,
-                                    </div>
-
-                                </div>
-
-                                <div style="display:inline-block;color:gray">
-                                    <div style="display:inline-block" data-ng-show="activity.duration > 0">
-                                        <span   data-ng-bind="activity.duration | number:0"></span> Minutes,
-                                    </div>
-                                    <span  data-ng-bind="activity.caloriesBurned | number:0"></span> Calories
+                                    <a ng-class="{activeSubPill: navPillSelected == 'history', inactivePill: navPillSelected != 'history'}" href="#!/activities">
+                                        <div >
+                                            History
+                                        </div>
+                                    </a>
                                 </div>
                             </div>
                         </div>
+                        <div class="col-md-4">
+                            <div style="text-align: center">
+                                <!--<label class="planDateContainerLbl" for="planDateContainer">Choose Plan Date:</label>-->
 
-                        <div data-ng-if="plan.dailySteps > 0">
-                            <div style="display:inline-block; margin-left: 40px;">
-                                <div style="display:inline-block; font-weight:bold;color:rgb(105, 97, 97)" >
-                                    <span>Daily Steps</span>:
-                                </div>
-
-                                <div class="list-group-item-text text-muted" style="display:inline-block;padding-left: 10px;">
-                                    <div>
-                                        <span data-ng-bind="plan.dailySteps | number: 0"></span> Steps,
+                                <div id="planDateContainer" style="width: 146px;display:inline-block;">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" style="padding: 4px 8px;text-align: center;font-size: 16px;" id="planDate" datepicker-popup="{{format}}" data-ng-change="planInputChange(planDateInput)" ng-model="planDateInput"
+                                               is-open="opened" min-date="minDate" max-date="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
+                                                  <span class="input-group-btn">
+                                                    <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                                                  </span>
                                     </div>
-
-                                </div>
-
-                                <div style="display:inline-block;color:gray">
-                                    <span data-ng-bind="plan.dailyStepsCaloriesBurned | number: 0"></span> Calories
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div style="color: rgb(33, 51, 184);font-weight:bold;margin-left: 40px;margin-top: 18px;">
-                        Total Calories Burned: <span data-ng-bind="plan.totalCaloriesBurned | number:0"></span>
-                    </div>
-
                 </div>
-            </a>
+
+                <div class="list-group hidden-xs listPlansContentArea">
+                    Order Dates By:
+
+                    <select data-ng-model="selectedDirection" ng-options="t for t in directionList" data-ng-change="reverseSort = selectedDirection === 'Descending'" style="font-size: 16px;vertical-align: top;"></select>
+
+
+
+                    <div data-ng-show="isLoading" style="height: 336px;">
+                        <img width="25" height="25" src="/modules/core/img/loaders/loader.gif">
+                    </div>
+
+                    <div data-ng-show="!isLoading" class="list-group" style="margin-top: 20px;">
+                        <div>
+                            <a data-ng-repeat="plan in activities | orderBy:orderByField:reverseSort" data-ng-href="#!/activities/{{plan._id}}" class="list-group-item">
+                                <div>
+
+                                    <h4 class="list-group-item-heading" >
+                                        <span data-ng-bind="(plan.planDateMonth + 1) + '/' + plan.planDateDay + '/' + plan.planDateYear"></span>
+                                        <div style="display: inline-block; font-weight: bold; color: red;padding-left:20px;" data-ng-if="plan.injuries && plan.injuries.length > 0">
+                                            <span class="glyphicon glyphicon-star-empty"></span> Injured
+                                            <span data-ng-bind="getLocationsForInjuries(plan)"></span>
+                                        </div>
+                                    </h4>
+
+                                    <div >
+                                        <div data-ng-repeat="activity in plan.activities" style="display:inline-block;">
+                                            <div style="display:inline-block; margin-left: 40px;">
+                                                <div style="display:inline-block; font-weight:bold;color:rgb(105, 97, 97)" >
+                                                    <span data-ng-bind="activityTypesDictionary[activity.activityType].name"></span>:
+                                                </div>
+
+                                                <div class="list-group-item-text text-muted" style="display:inline-block;padding-left: 10px;">
+                                                    <div data-ng-show="activity.steps > 0">
+                                                        <span  data-ng-bind="activity.steps | number:0"></span> Steps,
+                                                    </div>
+
+                                                </div>
+
+                                                <div style="display:inline-block;color:gray">
+                                                    <div style="display:inline-block" data-ng-show="activity.duration > 0">
+                                                        <span   data-ng-bind="activity.duration | number:0"></span> Minutes,
+                                                    </div>
+                                                    <span  data-ng-bind="activity.caloriesBurned | number:0"></span> Calories
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div data-ng-if="plan.dailySteps > 0">
+                                            <div style="display:inline-block; margin-left: 40px;">
+                                                <div style="display:inline-block; font-weight:bold;color:rgb(105, 97, 97)" >
+                                                    <span>Daily Steps</span>:
+                                                </div>
+
+                                                <div class="list-group-item-text text-muted" style="display:inline-block;padding-left: 10px;">
+                                                    <div>
+                                                        <span data-ng-bind="plan.dailySteps | number: 0"></span> Steps,
+                                                    </div>
+
+                                                </div>
+
+                                                <div style="display:inline-block;color:gray">
+                                                    <span data-ng-bind="plan.dailyStepsCaloriesBurned | number: 0"></span> Calories
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div style="color: rgb(33, 51, 184);font-weight:bold;margin-left: 40px;margin-top: 18px;">
+                                        Total Calories Burned: <span data-ng-bind="plan.totalCaloriesBurned | number:0"></span>
+                                    </div>
+
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="alert alert-warning text-center" data-ng-if="activities.$resolved && !activities.length">
+                        No Activities yet, why don't you <a href="/#!/activities/create">create one</a>?
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-    <div class="alert alert-warning text-center" data-ng-if="activities.$resolved && !activities.length">
-        No Activities yet, why don't you <a href="/#!/activities/create">create one</a>?
-    </div>
+
+
+
+
+
+
+
 </section>
