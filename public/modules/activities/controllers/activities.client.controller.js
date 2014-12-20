@@ -514,19 +514,6 @@ angular.module('activities').controller('ActivitiesController', ['$scope', '$sta
         };
 
         $scope.planInputChange = function(planDateInput){
-//            var year = $scope.plan.planDateNonUtc.getFullYear();
-//            var month = $scope.plan.planDateNonUtc.getMonth();
-//            var day = $scope.plan.planDateNonUtc.getDate();
-//
-//            var planDateAsConcat = getPlanDateAsConcat(year, month, day);
-//
-//            getPlanFromDb(year, month, day, planDateAsConcat, true);
-//
-//            $scope.opened = false;
-//
-
-
-
             var year = planDateInput.getFullYear();
             var month = planDateInput.getMonth();
             var day = planDateInput.getDate();
@@ -534,7 +521,6 @@ angular.module('activities').controller('ActivitiesController', ['$scope', '$sta
             var planDateAsConcat = getPlanDateAsConcat(year, month, day);
 
             window.location = '#!/activities/nav/' + planDateAsConcat + '/true';
-            // getPlanFromDb(year, month, day, planDateAsConcat);
 
             $scope.opened = false;
         };
@@ -596,9 +582,9 @@ angular.module('activities').controller('ActivitiesController', ['$scope', '$sta
 
                 var planDate = new Date(year, month, day);
 
-                 year = planDate.getFullYear();
-                 month = planDate.getMonth();
-                 day = planDate.getDate();
+                year = planDate.getFullYear();
+                month = planDate.getMonth();
+                day = planDate.getDate();
 
                 if(year === now.getFullYear() && month === now.getMonth() && day === now.getDate()){
                     $scope.navPillSelected = 'today';

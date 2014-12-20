@@ -3,17 +3,13 @@
   <component name="ChangeListManager">
     <list default="true" id="99afd44b-0014-4bff-855e-4d01f0b1305f" name="Default" comment="create plan page is close to finished. Now trying to wire up view/edit plan page. Trying to make it all common html.">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/modules/activities/controllers/activities.client.controller.js" afterPath="$PROJECT_DIR$/public/modules/activities/controllers/activities.client.controller.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/modules/activities/config/activities.client.routes.js" afterPath="$PROJECT_DIR$/public/modules/activities/config/activities.client.routes.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/modules/activities/css/activities.css" afterPath="$PROJECT_DIR$/public/modules/activities/css/activities.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/dist/application.min.css" afterPath="$PROJECT_DIR$/public/dist/application.min.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/dist/application.min.js" afterPath="$PROJECT_DIR$/public/dist/application.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/modules/activities/views/list-activities.client.view.html" afterPath="$PROJECT_DIR$/public/modules/activities/views/list-activities.client.view.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/modules/plans/views/list-plans.client.view.html" afterPath="$PROJECT_DIR$/public/modules/plans/views/list-plans.client.view.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/modules/plans/controllers/plans.client.controller.js" afterPath="$PROJECT_DIR$/public/modules/plans/controllers/plans.client.controller.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/modules/plans/views/shared/shared.todayHistoryPills.client.view.html" afterPath="$PROJECT_DIR$/public/modules/plans/views/shared/shared.todayHistoryPills.client.view.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/modules/plans/views/shared/shared.viewPlan.planContent.client.view.html" afterPath="$PROJECT_DIR$/public/modules/plans/views/shared/shared.viewPlan.planContent.client.view.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/modules/activities/views/view-activity.content.client.view.html" afterPath="$PROJECT_DIR$/public/modules/activities/views/view-activity.content.client.view.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/modules/body-stats/controllers/body-stats.client.controller.js" afterPath="$PROJECT_DIR$/public/modules/body-stats/controllers/body-stats.client.controller.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/modules/body-stats/config/body-stats.client.routes.js" afterPath="$PROJECT_DIR$/public/modules/body-stats/config/body-stats.client.routes.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/modules/body-stats/views/edit-nav-body-stats.client.view.html" afterPath="$PROJECT_DIR$/public/modules/body-stats/views/edit-nav-body-stats.client.view.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/modules/body-stats/views/list-body-stats.client.view.html" afterPath="$PROJECT_DIR$/public/modules/body-stats/views/list-body-stats.client.view.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/modules/body-stats/views/view-body-stat.client.view.html" afterPath="$PROJECT_DIR$/public/modules/body-stats/views/view-body-stat.client.view.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/modules/body-stats/views/view-body-stats.content.client.view.html" afterPath="$PROJECT_DIR$/public/modules/body-stats/views/view-body-stats.content.client.view.html" />
     </list>
     <ignored path="NutritionManager.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -36,41 +32,24 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="application.min.js" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="application.min.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/public/dist/application.min.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-30.961538" vertical-offset="86540" max-vertical-offset="128970">
-              <caret line="5823" column="3" selection-start-line="5823" selection-start-column="3" selection-end-line="5823" selection-end-column="3" />
-              <folding />
+            <state vertical-scroll-proportion="0.33202744" vertical-offset="91386" max-vertical-offset="112665">
+              <caret line="6882" column="3" selection-start-line="6882" selection-start-column="3" selection-end-line="6882" selection-end-column="3" />
+              <folding>
+                <element signature="e#215256#243259#0" expanded="false" />
+                <element signature="e#246147#258710#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="application.min.css" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="application.min.css" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/dist/application.min.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.4417238" vertical-offset="18764" max-vertical-offset="20145">
-              <caret line="1281" column="1" selection-start-line="1281" selection-start-column="1" selection-end-line="1281" selection-end-column="1" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="activities.client.controller.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/modules/activities/controllers/activities.client.controller.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-11.038462" vertical-offset="8188" max-vertical-offset="11895">
-              <caret line="565" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="787" selection-end-column="3" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="activities.client.routes.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/modules/activities/config/activities.client.routes.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="750">
-              <caret line="6" column="19" selection-start-line="0" selection-start-column="0" selection-end-line="44" selection-end-column="3" />
+            <state vertical-scroll-proportion="-12.730769" vertical-offset="18764" max-vertical-offset="20145">
+              <caret line="1273" column="1" selection-start-line="1273" selection-start-column="1" selection-end-line="1273" selection-end-column="1" />
               <folding />
             </state>
           </provider>
@@ -89,7 +68,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/public/modules/plans/services/plans.client.sharedService.js" />
         <option value="$PROJECT_DIR$/app/controllers/foods.server.controller.js" />
         <option value="$PROJECT_DIR$/public/modules/plans/views/shared/createFoodDialog/shared.createFoodDialog.client.view.html" />
         <option value="$PROJECT_DIR$/public/modules/plans/views/mobile/mobile.mealContent.client.view.html" />
@@ -111,11 +89,6 @@
         <option value="$PROJECT_DIR$/public/modules/dashboard/views/dashboard.client.view.html" />
         <option value="$PROJECT_DIR$/public/modules/core/services/core.utilities.service.js" />
         <option value="$PROJECT_DIR$/public/modules/activities/views/edit-nav-activity.client.view.html" />
-        <option value="$PROJECT_DIR$/public/modules/body-stats/config/body-stats.client.routes.js" />
-        <option value="$PROJECT_DIR$/public/modules/body-stats/views/edit-nav-body-stats.client.view.html" />
-        <option value="$PROJECT_DIR$/public/modules/body-stats/views/view-body-stat.client.view.html" />
-        <option value="$PROJECT_DIR$/public/modules/body-stats/controllers/body-stats.client.controller.js" />
-        <option value="$PROJECT_DIR$/public/modules/body-stats/views/view-body-stats.content.client.view.html" />
         <option value="$PROJECT_DIR$/public/modules/plans/config/plans.client.routes.js" />
         <option value="$PROJECT_DIR$/public/modules/plans/config/plans.client.config.js" />
         <option value="$PROJECT_DIR$/public/modules/activities/config/activities.client.config.js" />
@@ -138,7 +111,13 @@
         <option value="$PROJECT_DIR$/public/dist/application.min.css" />
         <option value="$PROJECT_DIR$/public/modules/activities/views/list-activities.client.view.html" />
         <option value="$PROJECT_DIR$/public/modules/activities/config/activities.client.routes.js" />
+        <option value="$PROJECT_DIR$/public/modules/body-stats/views/view-body-stat.client.view.html" />
+        <option value="$PROJECT_DIR$/public/modules/body-stats/views/edit-nav-body-stats.client.view.html" />
+        <option value="$PROJECT_DIR$/public/modules/body-stats/views/view-body-stats.content.client.view.html" />
+        <option value="$PROJECT_DIR$/public/modules/body-stats/views/list-body-stats.client.view.html" />
         <option value="$PROJECT_DIR$/public/modules/activities/controllers/activities.client.controller.js" />
+        <option value="$PROJECT_DIR$/public/modules/body-stats/controllers/body-stats.client.controller.js" />
+        <option value="$PROJECT_DIR$/public/modules/body-stats/config/body-stats.client.routes.js" />
         <option value="$PROJECT_DIR$/public/dist/application.min.js" />
       </list>
     </option>
@@ -325,6 +304,106 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="body-stats" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="NutritionManager" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="NutritionManager" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="public" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="modules" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="body-stats" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="NutritionManager" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="NutritionManager" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="public" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="modules" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="body-stats" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="controllers" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="NutritionManager" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="NutritionManager" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="public" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="modules" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="body-stats" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="config" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="NutritionManager" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="NutritionManager" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="public" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="modules" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="activities" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -352,84 +431,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="NutritionManager" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="NutritionManager" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="public" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="modules" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="activities" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="css" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="NutritionManager" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="NutritionManager" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="public" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="modules" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="activities" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="controllers" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="NutritionManager" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="NutritionManager" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="public" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="modules" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="activities" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="config" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -942,68 +943,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/public/modules/dashboard/views/dashboard.deprecated.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-54.458332" vertical-offset="3988" max-vertical-offset="5385">
-          <caret line="353" column="10" selection-start-line="353" selection-start-column="10" selection-end-line="353" selection-end-column="10" />
-          <folding>
-            <element signature="n#style#0;n#div#0;n#div#0;n#section#0;n#!!top" expanded="false" />
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#1;n#div#0;n#section#0;n#!!top" expanded="false" />
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#section#0;n#!!top" expanded="false" />
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#section#0;n#!!top" expanded="false" />
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#section#0;n#!!top" expanded="false" />
-            <element signature="n#style#0;n#label#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#section#0;n#!!top" expanded="false" />
-            <element signature="n#style#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#section#0;n#!!top" expanded="false" />
-            <element signature="n#style#0;n#label#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#section#0;n#!!top" expanded="false" />
-            <element signature="n#style#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#section#0;n#!!top" expanded="false" />
-            <element signature="n#style#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#section#0;n#!!top" expanded="false" />
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#section#0;n#!!top" expanded="false" />
-            <element signature="n#style#0;n#div#1;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#section#0;n#!!top" expanded="false" />
-            <element signature="n#style#0;n#div#2;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#section#0;n#!!top" expanded="false" />
-            <element signature="n#style#0;n#div#3;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#section#0;n#!!top" expanded="false" />
-            <element signature="n#style#0;n#div#0;n#div#3;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#section#0;n#!!top" expanded="false" />
-            <element signature="n#style#0;n#div#1;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#section#0;n#!!top" expanded="false" />
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#1;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#section#0;n#!!top" expanded="false" />
-            <element signature="n#style#0;n#div#0;n#div#1;n#div#1;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#section#0;n#!!top" expanded="false" />
-            <element signature="n#style#0;n#span#0;n#div#0;n#div#1;n#div#1;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#section#0;n#!!top" expanded="false" />
-            <element signature="n#style#0;n#div#0;n#div#2;n#div#1;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#section#0;n#!!top" expanded="false" />
-            <element signature="n#style#0;n#span#0;n#div#0;n#div#2;n#div#1;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#section#0;n#!!top" expanded="false" />
-            <element signature="n#style#0;n#div#3;n#div#1;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#section#0;n#!!top" expanded="false" />
-            <element signature="n#style#0;n#div#0;n#div#3;n#div#1;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#section#0;n#!!top" expanded="false" />
-            <element signature="n#style#0;n#div#2;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#section#0;n#!!top" expanded="false" />
-            <element signature="n#style#0;n#div#0;n#div#2;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#section#0;n#!!top" expanded="false" />
-            <element signature="n#style#0;n#label#0;n#div#0;n#div#0;n#div#2;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#section#0;n#!!top" expanded="false" />
-            <element signature="n#style#0;n#label#0;n#div#1;n#div#0;n#div#2;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#section#0;n#!!top" expanded="false" />
-            <element signature="n#style#0;n#label#0;n#div#2;n#div#0;n#div#2;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#section#0;n#!!top" expanded="false" />
-            <element signature="n#style#0;n#div#0;n#div#2;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#section#0;n#!!top" expanded="false" />
-            <element signature="n#style#0;n#span#0;n#div#0;n#div#2;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#section#0;n#!!top" expanded="false" />
-            <element signature="n#style#0;n#svg#0;n#div#0;n#div#2;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#section#0;n#!!top" expanded="false" />
-            <element signature="n#style#0;n#div#1;n#div#2;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#section#0;n#!!top" expanded="false" />
-            <element signature="n#style#0;n#span#0;n#div#0;n#div#1;n#div#2;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#section#0;n#!!top" expanded="false" />
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#1;n#div#2;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#section#0;n#!!top" expanded="false" />
-            <element signature="n#style#0;n#div#0;n#div#2;n#div#0;n#section#0;n#!!top" expanded="false" />
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#2;n#div#0;n#section#0;n#!!top" expanded="false" />
-            <element signature="n#style#0;n#div#1;n#div#0;n#div#2;n#div#0;n#section#0;n#!!top" expanded="false" />
-            <element signature="n#style#0;n#div#0;n#div#1;n#div#0;n#div#2;n#div#0;n#section#0;n#!!top" expanded="false" />
-            <element signature="n#style#0;n#div#1;n#div#1;n#div#0;n#div#2;n#div#0;n#section#0;n#!!top" expanded="false" />
-            <element signature="n#style#0;n#div#2;n#div#0;n#div#2;n#div#0;n#section#0;n#!!top" expanded="false" />
-            <element signature="n#style#0;n#div#0;n#div#2;n#div#0;n#div#2;n#div#0;n#section#0;n#!!top" expanded="false" />
-            <element signature="n#style#0;n#div#1;n#div#2;n#div#0;n#div#2;n#div#0;n#section#0;n#!!top" expanded="false" />
-            <element signature="n#style#0;n#div#3;n#div#0;n#div#2;n#div#0;n#section#0;n#!!top" expanded="false" />
-            <element signature="n#style#0;n#div#4;n#div#0;n#div#2;n#div#0;n#section#0;n#!!top" expanded="false" />
-            <element signature="n#style#0;n#div#0;n#div#4;n#div#0;n#div#2;n#div#0;n#section#0;n#!!top" expanded="false" />
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#4;n#div#0;n#div#2;n#div#0;n#section#0;n#!!top" expanded="false" />
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#4;n#div#0;n#div#2;n#div#0;n#section#0;n#!!top" expanded="false" />
-            <element signature="n#style#0;n#span#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#4;n#div#0;n#div#2;n#div#0;n#section#0;n#!!top" expanded="false" />
-            <element signature="n#style#0;n#span#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#4;n#div#0;n#div#2;n#div#0;n#section#0;n#!!top" expanded="false" />
-            <element signature="n#style#0;n#div#1;n#div#0;n#div#0;n#div#4;n#div#0;n#div#2;n#div#0;n#section#0;n#!!top" expanded="false" />
-            <element signature="n#style#0;n#span#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#4;n#div#0;n#div#2;n#div#0;n#section#0;n#!!top" expanded="false" />
-            <element signature="n#style#0;n#span#0;n#div#1;n#div#1;n#div#0;n#div#0;n#div#4;n#div#0;n#div#2;n#div#0;n#section#0;n#!!top" expanded="false" />
-            <element signature="n#style#0;n#span#0;n#div#2;n#div#0;n#div#0;n#div#4;n#div#0;n#div#2;n#div#0;n#section#0;n#!!top" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/modules/plans/views/mobile/mobile.mealContent.client.view.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.2027027" vertical-offset="0" max-vertical-offset="1036">
@@ -1106,47 +1045,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/modules/body-stats/views/edit-nav-body-stats.client.view.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-2.5" vertical-offset="0" max-vertical-offset="225">
-          <caret line="4" column="16" selection-start-line="4" selection-start-column="16" selection-end-line="4" selection-end-column="16" />
-          <folding>
-            <element signature="n#style#0;n#section#0;n#!!top" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/modules/body-stats/views/view-body-stat.client.view.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-2.5" vertical-offset="0" max-vertical-offset="240">
-          <caret line="4" column="16" selection-start-line="4" selection-start-column="16" selection-end-line="4" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/modules/body-stats/controllers/body-stats.client.controller.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.44126076" vertical-offset="3693" max-vertical-offset="4740">
-          <caret line="277" column="39" selection-start-line="0" selection-start-column="0" selection-end-line="310" selection-end-column="3" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/modules/core/services/core.utilities.service.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="5145">
           <caret line="36" column="49" selection-start-line="0" selection-start-column="0" selection-end-line="337" selection-end-column="2" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/modules/body-stats/views/view-body-stats.content.client.view.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-4.8" vertical-offset="0" max-vertical-offset="1110">
-          <caret line="30" column="122" selection-start-line="30" selection-start-column="122" selection-end-line="30" selection-end-column="122" />
-          <folding>
-            <element signature="tag#div#0;tag#div#0;tag#fieldset#0;tag#form#0;tag#div#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1162,14 +1065,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="285">
           <caret line="9" column="8" selection-start-line="9" selection-start-column="8" selection-end-line="9" selection-end-column="70" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/modules/body-stats/config/body-stats.client.routes.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="705">
-          <caret line="6" column="53" selection-start-line="0" selection-start-column="0" selection-end-line="41" selection-end-column="3" />
           <folding />
         </state>
       </provider>
@@ -1341,66 +1236,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/modules/activities/views/view-activity.content.client.view.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-6.64" vertical-offset="583" max-vertical-offset="5400">
-          <caret line="61" column="27" selection-start-line="61" selection-start-column="25" selection-end-line="61" selection-end-column="27" />
-          <folding>
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#form#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#form#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#2;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#form#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#2;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#form#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#button#0;n#div#0;n#div#0;n#div#2;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#form#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#1;n#div#0;n#div#2;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#form#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#button#0;n#div#1;n#div#0;n#div#2;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#form#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#button#0;n#div#0;n#div#2;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#form#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#fieldset#0;n#div#1;n#div#0;n#div#0;n#div#0;n#form#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#0;n#fieldset#0;n#div#1;n#div#0;n#div#0;n#div#0;n#form#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#input#0;n#div#0;n#div#0;n#fieldset#0;n#div#1;n#div#0;n#div#0;n#div#0;n#form#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#1;n#div#0;n#fieldset#0;n#div#1;n#div#0;n#div#0;n#div#0;n#form#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#accordion-group#0;n#accordion#0;n#div#0;n#fieldset#0;n#div#1;n#div#0;n#div#0;n#div#0;n#form#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#button#0;n#div#0;n#accordion-group#0;n#accordion#0;n#div#0;n#fieldset#0;n#div#1;n#div#0;n#div#0;n#div#0;n#form#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#1;n#accordion-group#0;n#accordion#0;n#div#0;n#fieldset#0;n#div#1;n#div#0;n#div#0;n#div#0;n#form#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#1;n#accordion-group#0;n#accordion#0;n#div#0;n#fieldset#0;n#div#1;n#div#0;n#div#0;n#div#0;n#form#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#a#0;n#div#0;n#div#1;n#accordion-group#0;n#accordion#0;n#div#0;n#fieldset#0;n#div#1;n#div#0;n#div#0;n#div#0;n#form#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#1;n#a#0;n#div#0;n#div#1;n#accordion-group#0;n#accordion#0;n#div#0;n#fieldset#0;n#div#1;n#div#0;n#div#0;n#div#0;n#form#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#2;n#a#0;n#div#0;n#div#1;n#accordion-group#0;n#accordion#0;n#div#0;n#fieldset#0;n#div#1;n#div#0;n#div#0;n#div#0;n#form#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#2;n#a#0;n#div#0;n#div#1;n#accordion-group#0;n#accordion#0;n#div#0;n#fieldset#0;n#div#1;n#div#0;n#div#0;n#div#0;n#form#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#3;n#a#0;n#div#0;n#div#1;n#accordion-group#0;n#accordion#0;n#div#0;n#fieldset#0;n#div#1;n#div#0;n#div#0;n#div#0;n#form#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#3;n#a#0;n#div#0;n#div#1;n#accordion-group#0;n#accordion#0;n#div#0;n#fieldset#0;n#div#1;n#div#0;n#div#0;n#div#0;n#form#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#accordion-group#1;n#accordion#0;n#div#0;n#fieldset#0;n#div#1;n#div#0;n#div#0;n#div#0;n#form#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#button#0;n#accordion-group#1;n#accordion#0;n#div#0;n#fieldset#0;n#div#1;n#div#0;n#div#0;n#div#0;n#form#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#accordion-group#1;n#accordion#0;n#div#0;n#fieldset#0;n#div#1;n#div#0;n#div#0;n#div#0;n#form#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#3;n#a#0;n#div#0;n#accordion-group#1;n#accordion#0;n#div#0;n#fieldset#0;n#div#1;n#div#0;n#div#0;n#div#0;n#form#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#3;n#a#0;n#div#0;n#accordion-group#1;n#accordion#0;n#div#0;n#fieldset#0;n#div#1;n#div#0;n#div#0;n#div#0;n#form#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#a#0;n#div#2;n#div#0;n#fieldset#0;n#div#1;n#form#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#fieldset#1;n#div#1;n#form#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#0;n#fieldset#1;n#div#1;n#form#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#fieldset#1;n#div#1;n#form#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#1;n#div#0;n#div#0;n#fieldset#1;n#div#1;n#form#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#a#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#fieldset#1;n#div#1;n#form#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#1;n#div#0;n#div#1;n#div#0;n#div#0;n#fieldset#1;n#div#1;n#form#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#a#0;n#div#1;n#div#0;n#div#1;n#div#0;n#div#0;n#fieldset#1;n#div#1;n#form#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#a#0;n#div#1;n#div#0;n#div#1;n#div#0;n#div#0;n#fieldset#1;n#div#1;n#form#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#1;n#a#0;n#div#1;n#div#0;n#div#1;n#div#0;n#div#0;n#fieldset#1;n#div#1;n#form#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#2;n#a#0;n#div#1;n#div#0;n#div#1;n#div#0;n#div#0;n#fieldset#1;n#div#1;n#form#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#2;n#a#0;n#div#1;n#div#0;n#div#1;n#div#0;n#div#0;n#fieldset#1;n#div#1;n#form#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#3;n#a#0;n#div#1;n#div#0;n#div#1;n#div#0;n#div#0;n#fieldset#1;n#div#1;n#form#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#3;n#a#0;n#div#1;n#div#0;n#div#1;n#div#0;n#div#0;n#fieldset#1;n#div#1;n#form#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#3;n#form#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#4;n#form#0;n#div#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/modules/activities/views/view-activity.client.view.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-2.5" vertical-offset="0" max-vertical-offset="225">
-          <caret line="4" column="0" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/modules/activities/views/edit-nav-activity.client.view.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-1.25" vertical-offset="0" max-vertical-offset="255">
@@ -1409,10 +1244,97 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/public/modules/plans/config/plans.client.routes.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="765">
+          <caret line="38" column="11" selection-start-line="35" selection-start-column="8" selection-end-line="38" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/modules/plans/controllers/plans.client.controller.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.11263467" vertical-offset="9485" max-vertical-offset="18735">
+          <caret line="640" column="55" selection-start-line="640" selection-start-column="42" selection-end-line="640" selection-end-column="55" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/dist/application.min.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-12.730769" vertical-offset="18764" max-vertical-offset="20145">
+          <caret line="1273" column="1" selection-start-line="1273" selection-start-column="1" selection-end-line="1273" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/modules/activities/views/view-activity.content.client.view.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-4.375" vertical-offset="0" max-vertical-offset="3990">
+          <caret line="7" column="51" selection-start-line="7" selection-start-column="51" selection-end-line="7" selection-end-column="51" />
+          <folding>
+            <element signature="tag#div#1;tag#form#0;tag#div#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/modules/body-stats/views/view-body-stat.client.view.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.088845015" vertical-offset="0" max-vertical-offset="1013">
+          <caret line="6" column="4" selection-start-line="6" selection-start-column="4" selection-end-line="6" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/modules/activities/views/view-activity.client.view.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-1.875" vertical-offset="0" max-vertical-offset="225">
+          <caret line="3" column="107" selection-start-line="3" selection-start-column="8" selection-end-line="3" selection-end-column="107" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/modules/body-stats/views/edit-nav-body-stats.client.view.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.044422507" vertical-offset="0" max-vertical-offset="1013">
+          <caret line="3" column="4" selection-start-line="3" selection-start-column="4" selection-end-line="3" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/modules/activities/config/activities.client.routes.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="750">
+          <caret line="31" column="1" selection-start-line="31" selection-start-column="1" selection-end-line="38" selection-end-column="15" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/modules/body-stats/views/view-body-stats.content.client.view.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-20.0" vertical-offset="120" max-vertical-offset="2280">
+          <caret line="40" column="26" selection-start-line="40" selection-start-column="26" selection-end-line="40" selection-end-column="26" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#form#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#form#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#form#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#2;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#form#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#button#0;n#div#0;n#div#2;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#form#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#input#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#form#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#input#0;n#div#0;n#div#1;n#div#1;n#div#0;n#div#0;n#form#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#2;n#div#1;n#div#0;n#div#0;n#form#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#fieldset#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#a#0;n#div#1;n#div#0;n#div#0;n#fieldset#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#1;n#div#0;n#fieldset#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#button#0;n#div#1;n#div#0;n#fieldset#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/public/modules/activities/views/list-activities.client.view.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-6.875" vertical-offset="0" max-vertical-offset="2070">
-          <caret line="11" column="179" selection-start-line="11" selection-start-column="162" selection-end-line="11" selection-end-column="179" />
+        <state vertical-scroll-proportion="-26.875" vertical-offset="0" max-vertical-offset="2070">
+          <caret line="43" column="71" selection-start-line="1" selection-start-column="4" selection-end-line="43" selection-end-column="71" />
           <folding>
             <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#section#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#section#0;n#!!top" expanded="true" />
@@ -1437,51 +1359,58 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/modules/plans/config/plans.client.routes.js">
+    <entry file="file://$PROJECT_DIR$/public/modules/body-stats/views/list-body-stats.client.view.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="765">
-          <caret line="38" column="11" selection-start-line="35" selection-start-column="8" selection-end-line="38" selection-end-column="11" />
+        <state vertical-scroll-proportion="-6.875" vertical-offset="0" max-vertical-offset="1500">
+          <caret line="11" column="122" selection-start-line="11" selection-start-column="107" selection-end-line="11" selection-end-column="122" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#section#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#section#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#section#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#input#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#section#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#select#0;n#div#1;n#div#0;n#div#0;n#div#0;n#section#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#section#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#li#0;n#ul#0;n#div#0;n#a#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#section#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#1;n#li#0;n#ul#0;n#div#0;n#a#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#section#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#li#1;n#ul#0;n#div#0;n#a#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#section#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#1;n#li#1;n#ul#0;n#div#0;n#a#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#section#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#1;n#li#1;n#ul#0;n#div#0;n#a#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#section#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/modules/body-stats/config/body-stats.client.routes.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="690">
+          <caret line="12" column="58" selection-start-line="12" selection-start-column="58" selection-end-line="12" selection-end-column="58" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/modules/body-stats/controllers/body-stats.client.controller.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-1.8076923" vertical-offset="3403" max-vertical-offset="5310">
+          <caret line="230" column="13" selection-start-line="0" selection-start-column="0" selection-end-line="348" selection-end-column="3" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/public/modules/activities/controllers/activities.client.controller.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-11.038462" vertical-offset="8188" max-vertical-offset="11895">
-          <caret line="565" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="787" selection-end-column="3" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/modules/activities/config/activities.client.routes.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="750">
-          <caret line="6" column="19" selection-start-line="0" selection-start-column="0" selection-end-line="44" selection-end-column="3" />
+        <state vertical-scroll-proportion="-4.1153846" vertical-offset="7363" max-vertical-offset="11685">
+          <caret line="498" column="47" selection-start-line="0" selection-start-column="0" selection-end-line="773" selection-end-column="3" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/public/dist/application.min.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-30.961538" vertical-offset="86540" max-vertical-offset="128970">
-          <caret line="5823" column="3" selection-start-line="5823" selection-start-column="3" selection-end-line="5823" selection-end-column="3" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/modules/plans/controllers/plans.client.controller.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.11263467" vertical-offset="9485" max-vertical-offset="18735">
-          <caret line="640" column="55" selection-start-line="640" selection-start-column="42" selection-end-line="640" selection-end-column="55" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/dist/application.min.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.4417238" vertical-offset="18764" max-vertical-offset="20145">
-          <caret line="1281" column="1" selection-start-line="1281" selection-start-column="1" selection-end-line="1281" selection-end-column="1" />
-          <folding />
+        <state vertical-scroll-proportion="0.33202744" vertical-offset="91386" max-vertical-offset="112665">
+          <caret line="6882" column="3" selection-start-line="6882" selection-start-column="3" selection-end-line="6882" selection-end-column="3" />
+          <folding>
+            <element signature="e#215256#243259#0" expanded="false" />
+            <element signature="e#246147#258710#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>

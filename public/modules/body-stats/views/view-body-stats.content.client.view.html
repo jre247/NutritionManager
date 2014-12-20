@@ -1,16 +1,87 @@
 <div class="col-md-12">
     <form class="form-horizontal"  novalidate>
-        <ng-include  src="'/modules/plans/views/shared/shared.planNavPills.client.view.html'"></ng-include>
+        <div class="row ">
+            <div class="pgForm">
+                <div class="headerContainer foodsHeader">
+                    <div class="actionHeader" >
+                        <div class="planDetailsSection" style="text-align: center;">
+                            <div style="display:inline-block; float:left;">
+                                <div class="planNavPills  hidden-xs">
+                                    <a ng-class="{activeSubPill: navPillSelected == 'today', inactivePill: navPillSelected != 'today'}" href="#!/body-stats/nav/{{todayDateAsConcat}}">
+                                        <div >
+                                            Today
+                                        </div>
+                                    </a>
 
+                                    <a ng-class="{activeSubPill: navPillSelected == 'history', inactivePill: navPillSelected != 'history'}" href="#!/body-stats">
+                                        <div >
+                                            History
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div style="display: inline-block;">
+                                    <span ng-show="plan.planDateNonUtc" class="planDateTxt">
+
+                                        {{getDesktopPlanDateFormat(plan.planDateNonUtc)}}
+                                    </span>
+                            </div>
+
+                            <div class="actionRegion">
+
+                                <div style="display:inline-block;vertical-align: top;">
+                                    <button title="Delete Plan" style="margin-bottom: 15px;" type="button" class="btn btn-primary btn-m btn-danger hidden-sm hidden-xs"  data-ng-click="deletePlan(plan)">
+                                        <span class="glyphicon glyphicon-trash" ></span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="list-group listPlansContentArea">
+                    <div>
+                        <label class="control-label" for="weight">Weight</label>
+                        <div class="controls">
+                            <input type="text" style="width: 140px;" data-ng-model="plan.weight" data-ng-change="saveBodyStatPlan()" id="weight" class="form-control"  required>
+                        </div>
+                    </div>
+                    <div >
+                        <label class="control-label" for="bodyFatPercentage">Body Fat %</label>
+                        <div class="controls">
+                            <input style="width: 140px;"  data-ng-model="plan.bodyFatPercentage" data-ng-change="saveBodyStatPlan()" id="bodyFatPercentage" class="form-control" cols="30" rows="10" />
+                        </div>
+                    </div>
+                    <!--<div class="form-group">-->
+                    <!--<input type="submit" value="Save" style="padding: 4px 9px;" data-ng-click="saveBodyStatPlan();"  class="btn btn-default">-->
+                    <!--</div>-->
+                    <div data-ng-show="success" style="color: green; font-weight: bold; margin-bottom: 10px;opacity: 1;transition: opacity .25s ease-in-out;-moz-transition: opacity .25s ease-in-out;-webkit-transition: opacity .25s ease-in-out;" >
+                        <strong>Your changes have been saved!</strong>
+                    </div>
+
+                    <div data-ng-show="error" class="text-danger">
+                        <strong data-ng-bind="error"></strong>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </form>
+
+
+    <div class="visible-xs">
         <fieldset>
             <div class="form-group" style="margin-bottom: 1px;">
                 <!--<div class="hidden-xs" style="margin-top: 9px;margin-bottom: 15px;display:inline-block; float:left">-->
-                    <!--<a data-ng-href="#!/dashboard/{{plan.planDateAsConcat}}">-->
-                        <!--<button type="button" class="btn btn-primary btn-m">-->
-                            <!--<span class="glyphicon glyphicon-arrow-left" ></span><span > Dashboard</span>-->
-                        <!--</button>-->
-                    <!--</a>-->
+                <!--<a data-ng-href="#!/dashboard/{{plan.planDateAsConcat}}">-->
+                <!--<button type="button" class="btn btn-primary btn-m">-->
+                <!--<span class="glyphicon glyphicon-arrow-left" ></span><span > Dashboard</span>-->
+                <!--</button>-->
+                <!--</a>-->
                 <!--</div>-->
+
 
                 <div class="visible-xs mobilePlanHeader" >
                     <div>
@@ -28,9 +99,9 @@
                     </div>
                 </div>
 
-                <div class="planDetailsSection hidden-xs" style="display:inline-block;vertical-align: top;padding-left: 38%;">
-                    <ng-include  src="'/modules/plans/views/desktop/desktop.planDateContent.client.view.html'"></ng-include>
-                </div>
+                <!--<div class="planDetailsSection hidden-xs" style="display:inline-block;vertical-align: top;padding-left: 38%;">-->
+                <!--<ng-include  src="'/modules/plans/views/desktop/desktop.planDateContent.client.view.html'"></ng-include>-->
+                <!--</div>-->
 
                 <div class="planDetailsSection" style="display: inline-block; margin-top: 9px;float: right;">
                     <button title="Delete Plan" style="margin-bottom: 15px;" type="button" class="btn btn-primary btn-m btn-danger hidden-sm hidden-xs"  data-ng-click="deletePlan(plan)">
@@ -39,31 +110,24 @@
                 </div>
             </div>
         </fieldset>
+    </div>
 
-        <fieldset style="margin-top: 32px;">
-            <div class="form-group">
-                <label class="control-label" for="weight">Weight</label>
-                <div class="controls">
-                    <input type="text" style="width: 140px;" data-ng-model="plan.weight" data-ng-change="saveBodyStatPlan()" id="weight" class="form-control"  required>
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="control-label" for="bodyFatPercentage">Body Fat %</label>
-                <div class="controls">
-                    <input style="width: 140px;"  data-ng-model="plan.bodyFatPercentage" data-ng-change="saveBodyStatPlan()" id="bodyFatPercentage" class="form-control" cols="30" rows="10" />
-                </div>
-            </div>
-            <!--<div class="form-group">-->
-            <!--<input type="submit" value="Save" style="padding: 4px 9px;" data-ng-click="saveBodyStatPlan();"  class="btn btn-default">-->
-            <!--</div>-->
-            <div data-ng-show="success" style="color: green; font-weight: bold; margin-bottom: 10px;opacity: 1;transition: opacity .25s ease-in-out;-moz-transition: opacity .25s ease-in-out;-webkit-transition: opacity .25s ease-in-out;" >
-                <strong>Your changes have been saved!</strong>
-            </div>
 
-            <div data-ng-show="error" class="text-danger">
-                <strong data-ng-bind="error"></strong>
-            </div>
-        </fieldset>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     </form>

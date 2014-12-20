@@ -33,6 +33,10 @@ angular.module('bodyStats').controller('BodyStatsController', ['$scope', '$state
 
         $scope.initDate = new Date('2016-15-20');
 
+        $scope.getDesktopPlanDateFormat = function(){
+            return CoreUtilities.getDesktopPlanDateFormat($scope);
+        };
+
         $scope.create = function() {
 //            var planDateAsString = $scope.plan.planDateNonUtc.toUTCString();
 //            var planDate = new Date(planDateAsString);
@@ -146,6 +150,12 @@ angular.module('bodyStats').controller('BodyStatsController', ['$scope', '$state
         };
 
         $scope.find = function() {
+            var now = new Date();
+
+            $scope.navPillSelected = 'history';
+
+            $scope.todayDateAsConcat = getPlanDateAsConcat(now.getFullYear(), now.getMonth(), now.getDate());
+
             $scope.bodyStats = BodyStats.query(
                 function(u, getResponseHeaders)
                 {
@@ -163,9 +173,22 @@ angular.module('bodyStats').controller('BodyStatsController', ['$scope', '$state
         };
 
         var processReturnedPlan = function(){
+            var now = new Date();
+
             $scope.plan.planDateNonUtc = new Date($scope.plan.planDateYear, $scope.plan.planDateMonth, $scope.plan.planDateDay);
 
             $scope.isUserAdmin = $scope.plan.userRoles && $scope.plan.userRoles.indexOf('admin') !== -1 ? true : false;
+
+            var year = $scope.plan.planDateNonUtc.getFullYear();
+            var month = $scope.plan.planDateNonUtc.getMonth();
+            var day = $scope.plan.planDateNonUtc.getDate();
+
+            if(year === now.getFullYear() && month === now.getMonth() && day === now.getDate()){
+                $scope.navPillSelected = 'today';
+            }
+            else{
+                $scope.navPillSelected = 'history';
+            }
         };
 
         var processNewPlan = function(dateYear, dateMonth, dateDay, suppressAutoSave){
@@ -224,14 +247,14 @@ angular.module('bodyStats').controller('BodyStatsController', ['$scope', '$state
 
         };
 
-        $scope.planInputChange = function(){
-            var year = $scope.plan.planDateNonUtc.getFullYear();
-            var month = $scope.plan.planDateNonUtc.getMonth();
-            var day = $scope.plan.planDateNonUtc.getDate();
+        $scope.planInputChange = function(planDateInput){
+            var year = planDateInput.getFullYear();
+            var month = planDateInput.getMonth();
+            var day = planDateInput.getDate();
 
             var planDateAsConcat = getPlanDateAsConcat(year, month, day);
 
-            getPlanFromDb(year, month, day, planDateAsConcat, true);
+            window.location = '#!/body-stats/nav/' + planDateAsConcat + '/true';
 
             $scope.opened = false;
         };
@@ -263,6 +286,10 @@ angular.module('bodyStats').controller('BodyStatsController', ['$scope', '$state
         };
 
         $scope.findOne = function() {
+            var now = new Date();
+
+            $scope.todayDateAsConcat = getPlanDateAsConcat(now.getFullYear(), now.getMonth(), now.getDate());
+
             if ($stateParams.bodyStatId) {
                 $scope.plan = BodyStats.get({
                     bodyStatId: $stateParams.bodyStatId
@@ -275,18 +302,29 @@ angular.module('bodyStats').controller('BodyStatsController', ['$scope', '$state
             }
         };
 
+
         $scope.findNavOne = function(){
             var now = new Date();
             $scope.todayDateAsConcat = getPlanDateAsConcat(now.getFullYear(), now.getMonth(), now.getDate());
 
             var planDateAsConcat = $stateParams.planDateAsConcat;
-            var planDate = new Date(planDateAsConcat);
+            var year = planDateAsConcat.substr(0, 4);
+            var month = planDateAsConcat.substr(4, 2);
+            var day = planDateAsConcat.substr(6, 2);
+
+            var planDate = new Date(year, month, day);
 
             var year = planDate.getFullYear();
             var month = planDate.getMonth();
             var day = planDate.getDate();
 
-            //var planDateAsConcat = getPlanDateAsConcat(year, month, day);
+            if(year === now.getFullYear() && month === now.getMonth() && day === now.getDate()){
+                $scope.navPillSelected = 'today';
+            }
+            else{
+                $scope.navPillSelected = 'history';
+            }
+
             $scope.plan = BodyStats.get({
                 bodyStatId: planDateAsConcat
             },function(plan){
