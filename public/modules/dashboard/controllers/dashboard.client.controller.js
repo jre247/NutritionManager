@@ -6,6 +6,13 @@ angular.module('dashboard').controller('DashboardController', ['$scope', '$state
         // This provides Authentication context.
         $scope.authentication = Authentication;
         window.scope = $scope;
+
+        $scope.user = Authentication.user;
+
+        $scope.user = user;
+        // If user is not signed in then redirect back home
+        if (!$scope.user) $location.path('/');
+
         $scope.plan = {};
         $scope.isDailyDashboardLoading = false;
         $scope.isWeeklyDashboardLoading = false;

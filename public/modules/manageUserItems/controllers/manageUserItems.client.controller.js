@@ -9,6 +9,13 @@
 angular.module('manageUserItems').controller('ManageUserItemsController', ['$scope', '$stateParams', 'Authentication', '$timeout', 'CoreUtilities', 'ManageUserItems', '$location',
     function($scope, $stateParams, Authentication, $timeout, CoreUtilities, ManageUserItems, $location) {
         window.scope = $scope;
+
+        $scope.user = Authentication.user;
+
+        $scope.user = user;
+        // If user is not signed in then redirect back home
+        if (!$scope.user) $location.path('/');
+
         $scope.isLoading = false;
         $scope.skipFoods = 0;
         $scope.foodSearchTxt = '';

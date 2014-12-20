@@ -7,6 +7,13 @@
 angular.module('activities').controller('ActivitiesController', ['$scope', '$stateParams', '$timeout', '$location', 'Authentication', 'Activities', 'NutritionProfile', '$modal', 'ActivitiesDialogService', 'CoreUtilities',
     function($scope, $stateParams, $timeout, $location, Authentication, Activities, NutritionProfile, $modal, ActivitiesDialogService, CoreUtilities) {
         window.scope = $scope;
+
+        $scope.user = Authentication.user;
+
+        $scope.user = user;
+        // If user is not signed in then redirect back home
+        if (!$scope.user) $location.path('/');
+
         $scope.showPlanEditableErrorMsg = false;
 
         $scope.showInjuriesSection = false;

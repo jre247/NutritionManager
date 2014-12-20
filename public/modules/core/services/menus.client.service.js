@@ -4,7 +4,7 @@
 angular.module('core').service('Menus', [
 	function() {
 		// Define a set of default roles
-		this.defaultRoles = ['user'];
+		this.defaultRoles = ['user', 'admin'];
 
 		// Define the menus object
 		this.menus = {};

@@ -7,6 +7,12 @@ angular.module('foods').controller('FoodsController', ['$scope', '$stateParams',
     function($scope, $stateParams, $location, Authentication, Foods, CoreUtilities) {
         window.scope = $scope;
 
+        $scope.user = Authentication.user;
+
+        $scope.user = user;
+        // If user is not signed in then redirect back home
+        if (!$scope.user) $location.path('/');
+
        // $scope.authentication = Authentication;
         $scope.servings = 1;
 

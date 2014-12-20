@@ -10,6 +10,12 @@ angular.module('nutritionProfile').controller('NutritionProfileController', ['$s
     function($scope, $stateParams, $location, Authentication, NutritionProfile, $timeout, $modal, NutritionProfileDialogService, Users, NutritionProfileUtilities) {
         window.scope = $scope;
 
+        $scope.user = Authentication.user;
+
+        $scope.user = user;
+        // If user is not signed in then redirect back home
+        if (!$scope.user) $location.path('/');
+
         $scope.isAdvancedNutrientTargets = false;
         $scope.macrosRatioSelected = 0;
         $scope.nutrientTargetSettings = 'basic';

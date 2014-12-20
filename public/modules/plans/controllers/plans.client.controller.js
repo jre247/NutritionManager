@@ -2,7 +2,12 @@
 
 angular.module('plans').controller('PlansController', ['$scope', '$stateParams', '$location', '$timeout', 'Authentication', '$modal', '$log', 'Plans', 'Foods', 'NutritionProfile', 'Progress', 'PlansService', 'CoreUtilities', '$routeParams',
 	function($scope, $stateParams, $location, $timeout, Authentication, $modal, $log, Plans, Foods, NutritionProfile, Progress, PlansService, CoreUtilities, $routeParams) {
-		window.scope = $scope;
+        $scope.user = Authentication.user;
+
+        $scope.user = user;
+        // If user is not signed in then redirect back home
+        if (!$scope.user) $location.path('/');
+
         window.plans = $scope.plans;
         $scope.showPlanEditableErrorMsg = false;
         $scope.showTotalsAsPercent = true;
@@ -1002,7 +1007,7 @@ angular.module('plans').controller('PlansController', ['$scope', '$stateParams',
         // data
         $scope.orderByField = 'planDateAsConcat';
         $scope.reverseSort = true;
-        scope.plansCollection = [];
+        $scope.plansCollection = [];
 
         $scope.setSorting = function(){
             if (!$scope.isEditingEnabled){

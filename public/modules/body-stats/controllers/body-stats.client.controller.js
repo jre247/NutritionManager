@@ -6,6 +6,13 @@
 angular.module('bodyStats').controller('BodyStatsController', ['$scope', '$stateParams', '$timeout', '$location', 'Authentication', 'BodyStats', 'CoreUtilities',
     function($scope, $stateParams, $timeout, $location, Authentication, BodyStats, CoreUtilities) {
         window.scope = $scope;
+
+        $scope.user = Authentication.user;
+
+        $scope.user = user;
+        // If user is not signed in then redirect back home
+        if (!$scope.user) $location.path('/');
+
         $scope.showPlanEditableErrorMsg = false;
         $scope.logNavPillSelected = 'weight';
 

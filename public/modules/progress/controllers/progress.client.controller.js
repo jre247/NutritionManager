@@ -6,6 +6,13 @@ angular.module('progress').controller('ProgressController', ['$scope', '$statePa
         window.scope = $scope;
 
         $scope.authentication = Authentication;
+
+        $scope.user = Authentication.user;
+
+        $scope.user = user;
+        // If user is not signed in then redirect back home
+        if (!$scope.user) $location.path('/');
+
         $scope.isLoading = false;
 
         $scope.durationList = [
