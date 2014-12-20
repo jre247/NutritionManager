@@ -1,10 +1,13 @@
-<section data-ng-controller="ActivitiesController" style="font-family: segui;">
 
-    <div data-ng-init="findOne()">
-        <ng-include  src="'/modules/plans/views/shared/shared.planNavPills.client.view.html'"></ng-include>
+<div class="col-md-12 pgContainer">
+    <section data-ng-controller="ActivitiesController" style="font-family: segui;">
 
-        <ng-include  src="'/modules/activities/views/view-activity.content.client.view.html'"></ng-include>
+        <div data-ng-init="findOne()">
+            <ng-include  src="'/modules/plans/views/shared/shared.planNavPills.client.view.html'"></ng-include>
 
-    </div>
+            <ng-include  src="'/modules/activities/views/view-activity.content.client.view.html'"></ng-include>
 
-</section>
+        </div>
+
+    </section>
+</div>

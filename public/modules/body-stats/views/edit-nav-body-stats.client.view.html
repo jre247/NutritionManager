@@ -1,10 +1,14 @@
-<section data-ng-controller="BodyStatsController" data-ng-init="findNavOne()" style="font-family: segui;">
+<div class="col-md-12 pgContainer">
 
-    <ng-include  src="'/modules/plans/views/shared/shared.planNavPills.client.view.html'"></ng-include>
+    <section data-ng-controller="BodyStatsController" data-ng-init="findNavOne()" style="font-family: segui;">
 
-    <ng-include   src="'/modules/body-stats/views/view-body-stats.content.client.view.html'"></ng-include>
+        <ng-include  src="'/modules/plans/views/shared/shared.planNavPills.client.view.html'"></ng-include>
+
+        <ng-include   src="'/modules/body-stats/views/view-body-stats.content.client.view.html'"></ng-include>
 
 
-</section>
+    </section>
+
+</div>
 
 <ng-include class="visible-xs"  src="'/modules/core/views/mobileFooter.client.view.html'"></ng-include>
