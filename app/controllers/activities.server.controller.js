@@ -8,6 +8,7 @@
  */
 var mongoose = require('mongoose'),
     Activity = mongoose.model('Activity'),
+    User = mongoose.model('User'),
     _ = require('lodash');
 
 /**
@@ -34,9 +35,53 @@ var getErrorMessage = function(err) {
     return message;
 };
 
-var createDateAsUTC = function(date) {
-    return new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate(), date.getHours(), date.getMinutes(), date.getSeconds()));
-}
+var addActivityToUserActivitiesList = function(planToSave, req, res){
+    User.findOne({
+        _id: req.user.id
+    }).exec(function(err, user) {
+        if (err) return next(err);
+        if (!user) return next(new Error('Failed to load User ' + id));
+
+        var userActivitiesList = user._doc.nutritionProfile.userActivities;
+
+        if(!userActivitiesList){
+            userActivitiesList = [];
+        }
+
+        for(var e = 0; e < planToSave.activities.length; e++) {
+            var activityExistsInProfile = false;
+
+            var planActivity = planToSave.activities[e]._doc.activityType.toString();
+
+            for (var a = 0; a < userActivitiesList.length; a++) {
+                var nutritionProfileActivity = userActivitiesList[a];
+
+                if (nutritionProfileActivity === planActivity) {
+                    activityExistsInProfile = true;
+                    break;
+                }
+            }
+            if (!activityExistsInProfile) {
+                userActivitiesList.push(planActivity);
+                //req.user._doc.nutritionProfile.userActivities.push(planActivity);
+                //req.user.nutritionProfile.userActivities.push(planActivity);
+            }
+        }
+
+        //req.user._doc.nutritionProfile.userActivities = userActivitiesList;
+
+        user.save(function(err) {
+            if (err) {
+                return res.send(400, {
+                    message: getErrorMessage(err)
+                });
+            } else {
+                res.jsonp(planToSave);
+            }
+        });
+    });
+};
+
 
 /**
  * Create an Activity
@@ -100,7 +145,7 @@ exports.create = function(req, res) {
                         message: getErrorMessage(err)
                     });
                 } else {
-                    res.jsonp(planToSave);
+                    addActivityToUserActivitiesList(planToSave, req, res);
                 }
             });
         }
@@ -130,7 +175,9 @@ exports.update = function(req, res) {
                 message: getErrorMessage(err)
             });
         } else {
-            res.jsonp(activity);
+           // res.jsonp(activity);
+
+            addActivityToUserActivitiesList(activity, req, res);
         }
     });
 

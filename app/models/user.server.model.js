@@ -114,7 +114,13 @@ var UserSchema = new Schema({
         hideWeightOnHomeScreen:{
             type: Boolean,
             default: false
-        }
+        },
+        userActivities: [
+            {
+                type: String
+            }
+
+        ]
     },
 	displayName: {
 		type: String,

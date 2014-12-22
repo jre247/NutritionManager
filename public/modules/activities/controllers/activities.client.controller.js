@@ -192,7 +192,7 @@ angular.module('activities').controller('ActivitiesController', ['$scope', '$sta
         $scope.initDate = new Date('2016-15-20');
 
         $scope.dailyStepsChange = function(){
-            $scope.calculateTotalCaloriesBurned();
+            //$scope.calculateTotalCaloriesBurned();
 
             $scope.saveActivityPlan();
         };
@@ -290,6 +290,25 @@ angular.module('activities').controller('ActivitiesController', ['$scope', '$sta
             }
         };
 
+        var addActivityToUserActivitiesList = function(activity){
+//            if(!$scope.nutritionProfile.userActivities){
+//                $scope.nutritionProfile.userActivities = [];
+//            }
+//
+//            var activityExistsInProfile = false;
+//            for(var a = 0; a < $scope.nutritionProfile.userActivities; a++){
+//                var nutritionProfileActivity = $scope.nutritionProfile.userActivities[a];
+//
+//                if(nutritionProfileActivity._id === activity._id){
+//                    activityExistsInProfile = true;
+//                    break;
+//                }
+//            }
+//            if(!activityExistsInProfile){
+//                $scope.nutritionProfile.userActivities.push(activity._id);
+//            }
+        };
+
         $scope.saveActivityPlan = function(){
             $scope.showPlanEditableErrorMsg = false;
 
@@ -305,6 +324,9 @@ angular.module('activities').controller('ActivitiesController', ['$scope', '$sta
                     activity.averageSpeed = 0;
                     activity.distance = 0;
                 }
+
+                //check if need to add activity to user activities list
+                addActivityToUserActivitiesList(activity);
             }
 
             if (!$scope.plan._id){
@@ -313,6 +335,8 @@ angular.module('activities').controller('ActivitiesController', ['$scope', '$sta
             else{
                 $scope.update();
             }
+
+            $scope.calculateTotalCaloriesBurned();
 
         };
 
@@ -719,7 +743,7 @@ angular.module('activities').controller('ActivitiesController', ['$scope', '$sta
             modalInstance.result.then(function (selected) {
                 if(selected.dailySteps){
                     $scope.plan.dailySteps = selected.dailySteps;
-                    $scope.calculateTotalCaloriesBurned();
+                   // $scope.calculateTotalCaloriesBurned();
                     $scope.saveActivityPlan();
                 }
                 else{
@@ -762,7 +786,7 @@ angular.module('activities').controller('ActivitiesController', ['$scope', '$sta
 
             modalInstance.result.then(function (dailySteps) {
                 $scope.plan.dailySteps = dailySteps;
-                $scope.calculateTotalCaloriesBurned();
+                //$scope.calculateTotalCaloriesBurned();
                 $scope.saveActivityPlan();
             }, function () {
                 //$log.info('Modal dismissed at: ' + new Date());

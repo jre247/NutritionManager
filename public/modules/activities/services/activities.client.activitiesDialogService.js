@@ -105,7 +105,7 @@ angular.module('plans').service(
 
             $scope.isActivityEndurance = function(activity){
                 if(activity) {
-                    var activityTypeId = activity.activityType || activity.id;
+                    var activityTypeId = activity.activityType >= 0 ? activity.activityType : activity.id;
 
                     var type = $scope.activityTypesDictionary[activityTypeId].type;
 
