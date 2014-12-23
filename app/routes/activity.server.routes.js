@@ -27,7 +27,8 @@ module.exports = function(app) {
         .get(activities.activityByDate);
 
 
-
+    app.route('/myActivities')
+        .get(activities.getMyExercises);
 
     // Finish by binding the article middleware
     app.param('activityId', activities.activityByID);

@@ -3,13 +3,21 @@
         <ng-include  src="'/modules/activities/views/createActivityDialog/createActivityDialog.categories.view.html'"></ng-include>
     </div>
 
-    <div data-ng-show="sectionToDisplay == 'exercises' || sectionToDisplay == 'exerciseDetails'" >
+    <div data-ng-show="sectionToDisplay == 'exercises'" >
         <ng-include  src="'/modules/activities/views/createActivityDialog/createActivityDialog.exercises.view.html'"></ng-include>
+    </div>
+    <div data-ng-show="sectionToDisplay == 'myExercises'" >
+        <ng-include  src="'/modules/activities/views/createActivityDialog/createActivityDialog.myExercises.view.html'"></ng-include>
     </div>
     <div data-ng-show="sectionToDisplay == 'dailySteps'" >
         <ng-include  src="'/modules/activities/views/createActivityDialog/createActivityDialog.dailySteps.view.html'"></ng-include>
     </div>
-
+    <div data-ng-show="sectionToDisplay == 'exerciseCategories'" >
+        <ng-include  src="'/modules/activities/views/createActivityDialog/createActivityDialog.exerciseCategories.view.html'"></ng-include>
+    </div>
+    <div data-ng-show="sectionToDisplay == 'exerciseDetails'" >
+        <ng-include  src="'/modules/activities/views/createActivityDialog/createActivityDialog.exerciseDetails.view.html'"></ng-include>
+    </div>
 
     <div class="modal-footer">
         <button class="btn btn-primary"  ng-click="ok()">OK</button>

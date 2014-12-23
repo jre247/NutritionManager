@@ -82,6 +82,78 @@ var addActivityToUserActivitiesList = function(planToSave, req, res){
     });
 };
 
+var getAllExercises = function(){
+    var activityTypes = [
+        {id: 0, type: 0, name: 'Ballet'},
+        {id: 1, type: 0, name: 'Baseball'},
+        {id: 2, type: 0, name: 'Basketball'},
+        {id: 3, type: 0, name: 'Biking'},
+        {id: 4, type: 0, name: 'Boxing'},
+        {id: 5, type: 0, name: 'Canoeing, Kayaking, or other Rowing'},
+        {id: 6, type: 0, name: 'Crossfit'},
+        {id: 7, type: 0, name: 'Diving'},
+        {id: 8, type: 0, name: 'Football'},
+        {id: 9, type: 0, name: 'Hiking'},
+        {id: 10, type: 0, name: 'Hockey'},
+        {id: 11, type: 0, name: 'Jumping rope'},
+        {id: 12, type: 0, name: 'Martial Arts'},
+        {id: 13, type: 2, name: 'Meditation'},
+        {id: 14, type: 1, name: 'Powerlifting'},
+        {id: 15, type: 1, name: 'Rock Climbing'},
+        {id: 16, type: 0, name: 'Running'},
+        {id: 17, type: 0, name: 'Skateboarding'},
+        {id: 18, type: 0, name: 'Skating (Ice or Roller)'},
+        {id: 19, type: 0, name: 'Skiing or Snowboarding'},
+        {id: 20, type: 0, name: 'Soccer'},
+        {id: 21, type: 0, name: 'Stairmaster'},
+        {id: 22, type: 3, name: 'Stretching'},
+        {id: 23, type: 0, name: 'Surfing'},
+        {id: 24, type: 0, name: 'Swimming'},
+        {id: 25, type: 0, name: 'Tai Chi'},
+        {id: 26, type: 0, name: 'Tennis or other Racket sport'},
+        {id: 27, type: 0, name: 'Volleyball'},
+        {id: 28, type: 0, name: 'Walking'},
+        {id: 29, type: 0, name: 'Water Aerobics'},
+        {id: 30, type: 1, name: 'Weight Lifting'},
+        {id: 31, type: 0, name: 'Wrestling'},
+        {id: 32, type: 3, name: 'Yoga'},
+        {id: 33, type: 4, name: 'Daily Steps'}
+
+    ];
+
+    return activityTypes;
+};
+
+
+exports.getMyExercises = function(req, res){
+    User.findOne({
+        _id: req.user.id
+    }).exec(function(err, user) {
+        if (err) return next(err);
+        if (!user) return next(new Error('Failed to load User ' + id));
+
+        var userActivitiesList = user._doc.nutritionProfile.userActivities;
+
+        var allExercises = getAllExercises();
+
+        var myExercises = [];
+
+        for(var e = 0; e < allExercises.length; e++){
+            var exerciseCompare = allExercises[e];
+
+            for(var t = 0; t < userActivitiesList.length; t++){
+                var myExerciseIdCompare = parseInt(userActivitiesList[t]);
+
+                if(exerciseCompare.id === myExerciseIdCompare){
+                    myExercises.push(exerciseCompare);
+                    break;
+                }
+            }
+        }
+
+        res.jsonp(myExercises);
+    });
+};
 
 /**
  * Create an Activity

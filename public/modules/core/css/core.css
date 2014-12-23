@@ -32,6 +32,10 @@ div.tooltip {
     font-size: 12.5px;
 }
 
+.ActionLink{
+    color: blue;
+}
+
 .toolTipLbl
 {
     display:inline-block;

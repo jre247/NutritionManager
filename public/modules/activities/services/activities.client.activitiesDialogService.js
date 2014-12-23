@@ -93,6 +93,8 @@ angular.module('plans').service(
                 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
             ];
 
+            window.exerciseDialogScope = $scope;
+
             $scope.parentScope = parentScope;
             $scope.activityTypes = activityTypes;
             $scope.activityTypesDictionary = activityTypesDictionary;
@@ -102,6 +104,11 @@ angular.module('plans').service(
             $scope.dailySteps = dailySteps ? dailySteps : null;
             $scope.hideDailyStepsSection = hideDailyStepsSection;
             $scope.sectionToDisplay = dailySteps ? 'dailySteps' : false;
+            $scope.exerciseCategorySelected = 'myExercises';
+
+            getMyExercises().then(function(data){
+                 $scope.myExercises = data;
+            });
 
             $scope.isActivityEndurance = function(activity){
                 if(activity) {
@@ -131,7 +138,7 @@ angular.module('plans').service(
                 $scope.selected.activity.isCardio = $scope.isActivityEndurance(activity);
             }
             else if (showExerciseDetailsImmediately){
-                $scope.sectionToDisplay = 'exercises';
+                $scope.sectionToDisplay = 'exerciseCategories';
                 $scope.newActivity.isUpdate = false;
 
             }
@@ -140,9 +147,16 @@ angular.module('plans').service(
                 $scope.selected.activity.isUpdate = false;
             }
 
+            $scope.myExercisesClick = function(){
+                $scope.sectionToDisplay = 'myExercises';
+                $scope.exerciseCategorySelected = 'myExercises';
 
 
-
+            };
+            $scope.allExercisesClick = function(){
+                $scope.sectionToDisplay = 'exercises';
+                $scope.exerciseCategorySelected = 'allExercises';
+            };
 
             $scope.activitiesNav = function(){
                 $scope.sectionToDisplay = 'categories';
@@ -153,30 +167,20 @@ angular.module('plans').service(
             };
 
             $scope.exercisesSelected = function(){
-                $scope.sectionToDisplay = 'exercises';
+                if($scope.exerciseCategorySelected == 'myExercises'){
+                    $scope.sectionToDisplay = 'myExercises';
+                }
+                else{
+                    $scope.sectionToDisplay = 'exercises';
+                }
+
             };
 
-//            $scope.changeActivity = function(activity){
-//                if(activity) {
-//                    $scope.sectionToDisplay = 'exercises';
-//                }
-//                else{
-//                    $scope.sectionToDisplay = 'categories';
-//                }
-//            };
+            $scope.exercisesCategorySelected = function(){
+                $scope.sectionToDisplay = 'exerciseCategories';
+            };
 
 
-
-//            if(activity){
-//                $scope.showActivityDetails = true;
-//                $scope.newActivity.isUpdate = true;
-//                $scope.selectedActivityType = activityTypesDictionary[activity.activityType];
-//                $scope.selected.activity.isCardio = $scope.isActivityEndurance(activity);
-//            }
-//            else{
-//                $scope.showActivityDetails = false;
-//                $scope.selected.activity.isUpdate = false;
-//            }
 
             $scope.isActivityDistanceRelated = function(activity){
                 var activityTypeId = activity.activityType;
@@ -202,13 +206,6 @@ angular.module('plans').service(
 
 
             $scope.ok = function () {
-//                if($scope.sectionToDisplay == 'dailySteps'){
-//                    $modalInstance.close($scope.selected.dailySteps);
-//                }
-//                else if($scope.sectionToDisplay == 'exerciseDetails'){
-//                    $modalInstance.close($scope.selected.activity);
-//                }
-
                 $modalInstance.close($scope.selected);
             };
 
@@ -229,7 +226,22 @@ angular.module('plans').service(
 
         // I transform the successful response, unwrapping the application data
         // from the API response payload.
-        function handleActivityByDateSuccess( response ) {
+        function getMyExercises(){
+            var request = $http({
+                method: "get",
+                url: "/myActivities",
+                params: {
+                    action: "get"
+                }
+
+
+            });
+
+            return( request.then( handleSuccess, handleError ) );
+        }
+
+
+        function handleSuccess( response ) {
 
             return response.data;
         }

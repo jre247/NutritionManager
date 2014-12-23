@@ -1,5 +1,5 @@
 <div class="modal-header" style="font-family: segui;">
-    <h3 class="modal-title text-center">All Exercises</h3>
+    <h3 class="modal-title text-center">My Exercises</h3>
 
     <div class="ActionLink" ng-click="exercisesCategorySelected()">
         <span >Back</span>
@@ -13,13 +13,13 @@
                 <div style="margin-bottom: 20px;">
 
                     <div style="vertical-align: top;display:inline-block;">
-                        <input placeholder="Enter Activity Name" style="width: 80%;" type="text" data-ng-change="activityInputChange()" data-ng-model="selected.activitySearchTxt"  />
+                        <input placeholder="Enter Activity Name" style="width: 80%;" type="text" data-ng-model="selected.activitySearchTxt"  />
                         <a class="ActionLink clearInputLink" data-ng-click="selected.activitySearchTxt = ''">Clear</a>
                     </div>
                 </div>
 
                 <div style="overflow-y: auto;max-height: 400px;" class="hidden-xs">
-                    <div data-ng-show="!isLoading" class="list-group" style="margin-bottom: 0px; !important;" data-ng-repeat="activity in activityTypes | filter: selected.activitySearchTxt">
+                    <div data-ng-show="!isLoading" class="list-group" style="margin-bottom: 0px; !important;" data-ng-repeat="activity in myExercises | filter: selected.activitySearchTxt">
                         <a class="list-group-item actionRow" data-ng-click="activitySelectionChange(activity)">
                             <span data-ng-bind="activity.name"></span>
 
@@ -28,7 +28,7 @@
                 </div>
 
                 <div style="overflow-y: auto;max-height: 270px;width: 47%;" class="visible-xs">
-                    <div data-ng-show="!isLoading" class="list-group" style="margin-bottom: 0px; !important;" data-ng-repeat="activity in activityTypes | filter: selected.activitySearchTxt">
+                    <div data-ng-show="!isLoading" class="list-group" style="margin-bottom: 0px; !important;" data-ng-repeat="activity in myExercises | filter: selected.activitySearchTxt">
                         <a class="list-group-item actionRow"  data-ng-click="activitySelectionChange(activity)">
                             <span data-ng-bind="activity.name"></span>
 
