@@ -177,6 +177,39 @@ exports.update = function(req, res) {
 	}
 };
 
+exports.forgotPassword = function(req, res, next){
+    var passwordDetails = req.body;
+
+    User.findOne({'username': passwordDetails.username}, function(err, user) {
+        if (!err && user) {
+            user.password = passwordDetails.newPassword;
+
+            user.save(function(err) {
+                if (err) {
+                    return res.send(400, {
+                        message: getErrorMessage(err)
+                    });
+                } else {
+                    req.login(user, function(err) {
+                        if (err) {
+                            res.send(400, err);
+                        } else {
+                            res.send({
+                                message: 'Password changed successfully'
+                            });
+                        }
+                    });
+                }
+            });
+        } else {
+            res.send(400, {
+                message: 'UserName not found'
+            });
+        }
+
+    });
+};
+
 /**
  * Change Password
  */

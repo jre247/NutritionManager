@@ -4,6 +4,7 @@ angular.module('users').controller('SettingsController', ['$scope', '$http', '$l
 	function($scope, $http, $location, Users, Authentication) {
 		$scope.user = Authentication.user;
 
+
 		// If user is not signed in then redirect back home
 		if (!$scope.user) $location.path('/');
 
@@ -64,5 +65,7 @@ angular.module('users').controller('SettingsController', ['$scope', '$http', '$l
 				$scope.error = response.message;
 			});
 		};
+
+
 	}
 ]);
