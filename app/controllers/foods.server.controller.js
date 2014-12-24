@@ -232,6 +232,7 @@ exports.getFoodByPartialText = function(req, res, callback, typedText, foodsRang
                     var userTxt = typedText.toLowerCase().trim();
 
                     //sort foods by relevance
+                    //TODO: put this sorting in client so as not to block main thread on server
                     var sortedList = [];
                     var nonSortedList = [];
 
@@ -396,6 +397,8 @@ var fillFoodWithData = function(food, rowData){
     food.servingGrams2 = rowData[50].columnData;
     food.servingDescription2 = rowData[51].columnData;
     food.servingGrams1 = oneServingGrams;
+    food.categoryId = rowData[53].columnData;
+    food.categoryDesc = rowData[54].columnData;
 
     return food;
 };
@@ -496,7 +499,7 @@ var findFoodForRow = function(workbook, currentRow, isDone, columns, res){
 };
 
 exports.importFoodDataFromExcel = function(req, res){
-    var workbook = XLS.readFile('usda_foods/usda_food_list_2014_10_9.xls');
+    var workbook = XLS.readFile('usda_foods/usda_food_list_2014_12_24.xls');
 
     var columns = getColumns(workbook);
 

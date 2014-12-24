@@ -184,6 +184,15 @@ var FoodSchema = new Schema({
     },
     servingDescription2: {
         type: String
+    },
+    categoryId: {
+        type: String,
+        default: ''
+    },
+    categoryDesc: {
+        type: String,
+        default: '',
+        trim: true
     }
 
 
