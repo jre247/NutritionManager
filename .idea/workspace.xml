@@ -30,13 +30,13 @@
       <file leaf-file-name="application.min.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/public/dist/application.min.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.94708997" vertical-offset="95358" max-vertical-offset="108225">
-              <caret line="8109" column="3" selection-start-line="8109" selection-start-column="3" selection-end-line="8109" selection-end-column="3" />
+            <state vertical-scroll-proportion="0.94708997" vertical-offset="95373" max-vertical-offset="108240">
+              <caret line="8324" column="3" selection-start-line="8324" selection-start-column="3" selection-end-line="8324" selection-end-column="3" />
               <folding>
                 <element signature="e#168257#170681#0" expanded="false" />
                 <element signature="e#209754#218325#0" expanded="false" />
                 <element signature="e#218449#247593#0" expanded="false" />
-                <element signature="e#265352#283842#0" expanded="false" />
+                <element signature="e#265353#289920#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -45,8 +45,8 @@
       <file leaf-file-name="progress.client.controller.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/modules/progress/controllers/progress.client.controller.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-12.576923" vertical-offset="7503" max-vertical-offset="8910">
-              <caret line="522" column="48" selection-start-line="0" selection-start-column="0" selection-end-line="588" selection-end-column="3" />
+            <state vertical-scroll-proportion="-2.7692308" vertical-offset="10653" max-vertical-offset="12120">
+              <caret line="715" column="23" selection-start-line="0" selection-start-column="0" selection-end-line="802" selection-end-column="3" />
               <folding />
             </state>
           </provider>
@@ -55,8 +55,8 @@
       <file leaf-file-name="view-progress.client.view.html" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/modules/progress/views/view-progress.client.view.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-7.56" vertical-offset="462" max-vertical-offset="1410">
-              <caret line="87" column="59" selection-start-line="87" selection-start-column="59" selection-end-line="87" selection-end-column="59" />
+            <state vertical-scroll-proportion="-3.62" vertical-offset="374" max-vertical-offset="1860">
+              <caret line="68" column="40" selection-start-line="68" selection-start-column="40" selection-end-line="68" selection-end-column="40" />
               <folding>
                 <element signature="tag#div#0;tag#div#0;tag#section#0" expanded="false" />
                 <element signature="tag#div#1;tag#div#0;tag#section#0" expanded="false" />
@@ -128,8 +128,8 @@
         <option value="$PROJECT_DIR$/app/controllers/foods.server.controller.js" />
         <option value="$PROJECT_DIR$/public/modules/plans/services/plans.client.sharedService.js" />
         <option value="$PROJECT_DIR$/app/views/layout.server.view.html" />
-        <option value="$PROJECT_DIR$/public/modules/progress/views/view-progress.client.view.html" />
         <option value="$PROJECT_DIR$/public/modules/progress/controllers/progress.client.controller.js" />
+        <option value="$PROJECT_DIR$/public/modules/progress/views/view-progress.client.view.html" />
         <option value="$PROJECT_DIR$/public/dist/application.min.js" />
       </list>
     </option>
@@ -143,7 +143,7 @@
     <initial>false</initial>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-2" />
+    <option name="x" value="-10" />
     <option name="y" value="22" />
     <option name="width" value="1280" />
     <option name="height" value="724" />
@@ -468,7 +468,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-2" y="22" width="1280" height="724" extended-state="6" />
+    <frame x="-10" y="22" width="1280" height="724" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Grunt" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
@@ -1153,8 +1153,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/public/modules/progress/views/view-progress.client.view.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-7.56" vertical-offset="462" max-vertical-offset="1410">
-          <caret line="87" column="59" selection-start-line="87" selection-start-column="59" selection-end-line="87" selection-end-column="59" />
+        <state vertical-scroll-proportion="-3.62" vertical-offset="374" max-vertical-offset="1860">
+          <caret line="68" column="40" selection-start-line="68" selection-start-column="40" selection-end-line="68" selection-end-column="40" />
           <folding>
             <element signature="tag#div#0;tag#div#0;tag#section#0" expanded="false" />
             <element signature="tag#div#1;tag#div#0;tag#section#0" expanded="false" />
@@ -1166,21 +1166,21 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/public/modules/progress/controllers/progress.client.controller.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-12.576923" vertical-offset="7503" max-vertical-offset="8910">
-          <caret line="522" column="48" selection-start-line="0" selection-start-column="0" selection-end-line="588" selection-end-column="3" />
+        <state vertical-scroll-proportion="-2.7692308" vertical-offset="10653" max-vertical-offset="12120">
+          <caret line="715" column="23" selection-start-line="0" selection-start-column="0" selection-end-line="802" selection-end-column="3" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/public/dist/application.min.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.94708997" vertical-offset="104133" max-vertical-offset="117000">
-          <caret line="8109" column="3" selection-start-line="8109" selection-start-column="3" selection-end-line="8109" selection-end-column="3" />
+        <state vertical-scroll-proportion="0.94708997" vertical-offset="106488" max-vertical-offset="119355">
+          <caret line="8324" column="3" selection-start-line="8324" selection-start-column="3" selection-end-line="8324" selection-end-column="3" />
           <folding>
             <element signature="e#168257#170681#0" expanded="false" />
             <element signature="e#209754#218325#0" expanded="false" />
             <element signature="e#218449#247593#0" expanded="false" />
-            <element signature="e#265352#283842#0" expanded="false" />
+            <element signature="e#265353#289920#0" expanded="false" />
           </folding>
         </state>
       </provider>
