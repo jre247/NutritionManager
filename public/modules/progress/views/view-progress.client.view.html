@@ -51,18 +51,38 @@
     </div>
 
     <div class="row">
-        <div class="col-md-2">
+        <div style="margin-top: 10px;" class="col-md-2">
             <ul class="nav nav-pills nav-stacked">
-                <li role="presentation" ng-class="{'active': sectionShow =='weight'}" ng-click="weightNavClick()"><a>Weight</a></li>
-                <li role="presentation" ng-class="{'active': sectionShow =='steps'}" ng-click="stepsNavClick()"><a>Steps</a></li>
-                <li role="presentation" ng-class="{'active': sectionShow =='carbs'}" ng-click="carbsNavClick()"><a>Carbohydrates</a></li>
-                <li role="presentation" ng-class="{'active': sectionShow =='protein'}" ng-click="proteinNavClick()"><a>Protein</a></li>
-                <li role="presentation" ng-class="{'active': sectionShow =='fat'}" ng-click="fatNavClick()"><a>Fat</a></li>
-                <li role="presentation" ng-class="{'active': sectionShow =='advancedWeight'}" ng-click="advancedWeightNavClick()"><a>Against Weight</a></li>
+                <li role="presentation" ng-class="{'active': sectionShow =='weight'}" ng-click="weightNavClick()">
+                    <a>Weight</a>
+                </li>
+                <li role="presentation" ng-class="{'active': sectionShow =='steps'}" ng-click="stepsNavClick()">
+                    <a>Steps</a>
+                </li>
+                <li role="presentation" ng-class="{'active': sectionShow =='exerciseCalories'}" ng-click="exerciseCaloriesNavClick()">
+                    <a>Exercise Calories</a>
+                </li>
+
+                <li role="presentation" ng-class="{'active': sectionShow =='caloriesIn'}" ng-click="caloriesInNavClick()">
+                    <a>Food Calories</a>
+                </li>
+
+                <li role="presentation" ng-class="{'active': sectionShow =='carbs'}" ng-click="carbsNavClick()">
+                    <a>Carbohydrates</a>
+                </li>
+
+                <li role="presentation" ng-class="{'active': sectionShow =='protein'}" ng-click="proteinNavClick()">
+                    <a>Protein</a>
+                </li>
+
+                <li role="presentation" ng-class="{'active': sectionShow =='fat'}" ng-click="fatNavClick()">
+                    <a>Fat</a>
+                </li>
+                <!--<li role="presentation" ng-class="{'active': sectionShow =='advancedWeight'}" ng-click="advancedWeightNavClick()"><a>Against Weight</a></li>-->
 
             </ul>
         </div>
-        <div class="col-md-10">
+        <div style="margin-top: 10px;" class="col-md-10">
             <div ng-if="sectionShow == 'weight'">
                 <div ng-init="getWeight()">
                     <div ng-show="!isWeightLoading" >
@@ -75,19 +95,28 @@
                 </div>
             </div>
 
-            <div ng-if="sectionShow == 'steps'">
-                <div ng-init="getSteps()">
-                    <div ng-show="!isStepsLoading" >
-                        <h4>Steps:</h4>
-                        <div id="stepsChart"></div>
+            <div ng-if="sectionShow == 'steps' || sectionShow == 'exerciseCalories'">
+                <div ng-init="getActivities()">
+                    <div ng-show="sectionShow == 'steps'">
+                        <div ng-show="!isActvitiesLoading" >
+                            <h4>Steps:</h4>
+                            <div id="stepsChart"></div>
+                        </div>
                     </div>
-                    <div data-ng-show="isStepsLoading">
+                    <div ng-show="sectionShow == 'exerciseCalories'">
+                        <div ng-show="!isStepsLoading" >
+                            <h4>Exercise Calories:</h4>
+                            <div id="exerciseCaloriesChart"></div>
+                        </div>
+                        </div>
+                    </div>
+                    <div data-ng-show="isActvitiesLoading">
                         <img width="25" height="25" src="/modules/core/img/loaders/loader.gif">
                     </div>
                 </div>
-            </div>
 
-            <div ng-if="sectionShow == 'carbs' || sectionShow == 'protein' || sectionShow == 'fat'">
+
+            <div ng-if="sectionShow == 'carbs' || sectionShow == 'protein' || sectionShow == 'fat' || sectionShow == 'caloriesIn'">
                 <div ng-init="getMacros()">
                     <div ng-show="sectionShow == 'carbs'">
                         <div ng-show="!isMacrosLoading" >
@@ -107,35 +136,41 @@
                             <div id="fatChart"></div>
                         </div>
                     </div>
+                    <div ng-show="sectionShow == 'caloriesIn'">
+                        <div ng-show="!isMacrosLoading" >
+                            <h4>Food Calories:</h4>
+                            <div id="caloriesInChart"></div>
+                        </div>
+                    </div>
                     <div data-ng-show="isMacrosLoading">
                         <img width="25" height="25" src="/modules/core/img/loaders/loader.gif">
                     </div>
                 </div>
             </div>
 
-            <div ng-if="sectionShow == 'advancedWeight'">
-                <div ng-init="getAdvancedWeight()">
-                    <div ng-show="!isAdvancedWeightLoading" >
-                        <div>
-                            <h4>Calories:</h4>
-                            <div id="caloriesChart"></div>
-                        </div>
+            <!--<div ng-if="sectionShow == 'advancedWeight'">-->
+                <!--<div ng-init="getAdvancedWeight()">-->
+                    <!--<div ng-show="!isAdvancedWeightLoading" >-->
+                        <!--<div>-->
+                            <!--<h4>Calories:</h4>-->
+                            <!--<div id="caloriesChart"></div>-->
+                        <!--</div>-->
 
-                        <div>
-                            <h4>Deficit:</h4>
-                            <div id="deficitChart"></div>
-                        </div>
+                        <!--<div>-->
+                            <!--<h4>Deficit:</h4>-->
+                            <!--<div id="deficitChart"></div>-->
+                        <!--</div>-->
 
-                        <div>
-                            <h4>Macros:</h4>
-                            <div id="macrosChart"></div>
-                        </div>
-                    </div>
-                    <div data-ng-show="isAdvancedWeightLoading">
-                        <img width="25" height="25" src="/modules/core/img/loaders/loader.gif">
-                    </div>
-                </div>
-            </div>
+                        <!--<div>-->
+                            <!--<h4>Macros:</h4>-->
+                            <!--<div id="macrosChart"></div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                    <!--<div data-ng-show="isAdvancedWeightLoading">-->
+                        <!--<img width="25" height="25" src="/modules/core/img/loaders/loader.gif">-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
 
 
             <div data-ng-show="isLoading">
